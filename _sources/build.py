@@ -10,6 +10,7 @@ DESTS = [
     {"file": "nepalbhutan-trip.html", "suf": "np", "flag": "🇳🇵🇧🇹", "name": "Nepal & Bhutan"},
     {"file": "uzbekistankyrgyzstan-trip.html", "suf": "uk", "flag": "🇺🇿🇰🇬", "name": "Uzbekistan & Kirghizistan"},
     {"file": "greenland-trip.html", "suf": "gl", "flag": "🇬🇱", "name": "Groenlandia"},
+    {"file": "georgia-trip.html", "suf": "ge", "flag": "🇬🇪", "name": "Georgia"},
 ]
 
 def extract(tag, content):
@@ -258,6 +259,17 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               </div>
             </a>
 
+            <a class="trip-card" href="javascript:void(0)" onclick="showDest('ge')">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/Narikala_fortress%2C_Tbilisi%2C_Georgia.jpg" alt="Narikala Fortress, Tbilisi, Georgia" loading="lazy">
+              <div class="overlay"></div>
+              <div class="content">
+                <div class="flag">🇬🇪</div>
+                <div class="title">Georgia</div>
+                <div class="meta">2-7 gennaio 2027 · 6 giorni</div>
+                <p class="tagline">Tbilisi, bagni di zolfo, vino nel qvevri e un weekend sulla neve a Gudauri.</p>
+              </div>
+            </a>
+
           </div>
         </div>
       </section>
@@ -345,7 +357,8 @@ var FLAG_BARS = {{
   za: 'linear-gradient(90deg,#DE3831 0 16.6%, #ffffff 16.6% 33.3%, #002395 33.3% 50%, #007A4D 50% 66.6%, #FFB612 66.6% 83.3%, #000000 83.3% 100%)',
   np: 'linear-gradient(90deg,#DC143C 0 25%, #003893 25% 50%, #FF9933 50% 75%, #FFB612 75% 100%)',
   uk: 'linear-gradient(90deg,#0099B5 0 50%, #1EB53A 50% 100%)',
-  gl: 'linear-gradient(90deg,#ffffff 0 50%, #C60C30 50% 100%)'
+  gl: 'linear-gradient(90deg,#ffffff 0 50%, #C60C30 50% 100%)',
+  ge: 'linear-gradient(90deg,#ffffff 0 20%, #DA291C 20% 40%, #ffffff 40% 60%, #DA291C 60% 80%, #ffffff 80% 100%)'
 }};
 function showDest(name){{
   document.querySelectorAll('.destination').forEach(function(el){{ el.classList.remove('active'); }});
