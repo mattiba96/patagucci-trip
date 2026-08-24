@@ -144,6 +144,102 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
                 <img src="foto/group-notte-ande.jpeg" alt="Il gruppo di notte tra le nuvole, Ande" loading="lazy">
                 <div class="crew-caption">Notte in quota, Ande</div>
               </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_0283.jpeg" alt="Selfie di gruppo sul bus notturno" loading="lazy">
+                <div class="crew-caption">Notte in bus, on the road</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_0300.JPG" alt="Sul relitto di un treno al cimitero dei treni di Uyuni, Bolivia" loading="lazy">
+                <div class="crew-caption">Cimitero dei treni, Uyuni, Bolivia</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_0343.jpeg" alt="Il gruppo davanti al fuoristrada sul Salar de Uyuni, Bolivia" loading="lazy">
+                <div class="crew-caption">Il fuoristrada sul Salar de Uyuni, Bolivia</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_0420.jpeg" alt="Effetto prospettiva con il cappello, Salar de Uyuni" loading="lazy">
+                <div class="crew-caption">Giochi di prospettiva, Salar de Uyuni</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_0422.jpeg" alt="Altro effetto prospettiva, Salar de Uyuni" loading="lazy">
+                <div class="crew-caption">Ancora prospettiva, Salar de Uyuni</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_0589.jpeg" alt="Il gruppo davanti a una laguna colorata, altopiano boliviano" loading="lazy">
+                <div class="crew-caption">Lagune colorate dell'altopiano, Bolivia</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_0683.jpeg" alt="Shopping di souvenir a San Pedro de Atacama, Cile" loading="lazy">
+                <div class="crew-caption">Shopping a San Pedro de Atacama, Cile</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_0821.jpeg" alt="Trekking in alta quota tra le montagne, Perù" loading="lazy">
+                <div class="crew-caption">Trekking in alta quota, Perù</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_1169.jpeg" alt="Cena di gruppo in un ristorante, Lima, Perù" loading="lazy">
+                <div class="crew-caption">Cena gourmet, Lima, Perù</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_2748.JPG" alt="Tra le guglie di roccia della Valle de las Ánimas, La Paz, Bolivia" loading="lazy">
+                <div class="crew-caption">Valle de las Ánimas, La Paz, Bolivia</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_3185.JPG" alt="Tramonto accanto al fuoristrada, Salar de Uyuni, Bolivia" loading="lazy">
+                <div class="crew-caption">Tramonto sul Salar de Uyuni, Bolivia</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_3759.JPG" alt="Una sera tra amici al ristorante" loading="lazy">
+                <div class="crew-caption">Una sera tra amici</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_3979.JPG" alt="Pausa fast food in centro commerciale, Cile" loading="lazy">
+                <div class="crew-caption">Pausa fast food, Cile</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_4070.JPG" alt="All'ingresso del Santuario Storico di Machu Picchu, Perù" loading="lazy">
+                <div class="crew-caption">Ingresso a Machu Picchu, Perù</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_4089.JPG" alt="Lungo la ferrovia verso Aguas Calientes, Perù" loading="lazy">
+                <div class="crew-caption">Lungo i binari di Aguas Calientes, Perù</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_4173.JPG" alt="Il gruppo con la vista classica su Machu Picchu, Perù" loading="lazy">
+                <div class="crew-caption">Machu Picchu, la vista classica</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_4746.JPG" alt="Il gruppo alle terrazze saline di Maras, Perù" loading="lazy">
+                <div class="crew-caption">Salinas de Maras, Perù</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_4786.JPG" alt="Pausa pranzo in un centro commerciale" loading="lazy">
+                <div class="crew-caption">Pausa pranzo in centro commerciale</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_6903.JPG" alt="In viaggio in auto con un cane a bordo" loading="lazy">
+                <div class="crew-caption">In viaggio con il cane</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_6970.JPG" alt="Una serata di gruppo a un evento" loading="lazy">
+                <div class="crew-caption">Serata a un evento</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_7186.JPG" alt="Verso la ferrovia del Salar de Uyuni, Bolivia" loading="lazy">
+                <div class="crew-caption">Ferrovia di Uyuni, Bolivia</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/group-barbiere.jpeg" alt="Dal barbiere durante il viaggio" loading="lazy">
+                <div class="crew-caption">Un taglio di capelli</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/group-notte-strada.jpeg" alt="Passeggiata notturna vicino a un distributore" loading="lazy">
+                <div class="crew-caption">Passeggiata notturna, on the road</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/group-relax-maschere.jpeg" alt="Relax con maschera viso dopo il trekking" loading="lazy">
+                <div class="crew-caption">Relax dopo il trek</div>
+              </div>
               <div class="group-marquee-item" aria-hidden="true">
                 <img src="foto/dd148649-09ef-45bd-8b5e-313dff562db8.jpeg" alt="" loading="lazy">
                 <div class="crew-caption">Machu Picchu, Perù</div>
@@ -179,6 +275,102 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               <div class="group-marquee-item" aria-hidden="true">
                 <img src="foto/group-notte-ande.jpeg" alt="" loading="lazy">
                 <div class="crew-caption">Notte in quota, Ande</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_0283.jpeg" alt="" loading="lazy">
+                <div class="crew-caption">Notte in bus, on the road</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_0300.JPG" alt="" loading="lazy">
+                <div class="crew-caption">Cimitero dei treni, Uyuni, Bolivia</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_0343.jpeg" alt="" loading="lazy">
+                <div class="crew-caption">Il fuoristrada sul Salar de Uyuni, Bolivia</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_0420.jpeg" alt="" loading="lazy">
+                <div class="crew-caption">Giochi di prospettiva, Salar de Uyuni</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_0422.jpeg" alt="" loading="lazy">
+                <div class="crew-caption">Ancora prospettiva, Salar de Uyuni</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_0589.jpeg" alt="" loading="lazy">
+                <div class="crew-caption">Lagune colorate dell'altopiano, Bolivia</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_0683.jpeg" alt="" loading="lazy">
+                <div class="crew-caption">Shopping a San Pedro de Atacama, Cile</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_0821.jpeg" alt="" loading="lazy">
+                <div class="crew-caption">Trekking in alta quota, Perù</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_1169.jpeg" alt="" loading="lazy">
+                <div class="crew-caption">Cena gourmet, Lima, Perù</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_2748.JPG" alt="" loading="lazy">
+                <div class="crew-caption">Valle de las Ánimas, La Paz, Bolivia</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_3185.JPG" alt="" loading="lazy">
+                <div class="crew-caption">Tramonto sul Salar de Uyuni, Bolivia</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_3759.JPG" alt="" loading="lazy">
+                <div class="crew-caption">Una sera tra amici</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_3979.JPG" alt="" loading="lazy">
+                <div class="crew-caption">Pausa fast food, Cile</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_4070.JPG" alt="" loading="lazy">
+                <div class="crew-caption">Ingresso a Machu Picchu, Perù</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_4089.JPG" alt="" loading="lazy">
+                <div class="crew-caption">Lungo i binari di Aguas Calientes, Perù</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_4173.JPG" alt="" loading="lazy">
+                <div class="crew-caption">Machu Picchu, la vista classica</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_4746.JPG" alt="" loading="lazy">
+                <div class="crew-caption">Salinas de Maras, Perù</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_4786.JPG" alt="" loading="lazy">
+                <div class="crew-caption">Pausa pranzo in centro commerciale</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_6903.JPG" alt="" loading="lazy">
+                <div class="crew-caption">In viaggio con il cane</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_6970.JPG" alt="" loading="lazy">
+                <div class="crew-caption">Serata a un evento</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_7186.JPG" alt="" loading="lazy">
+                <div class="crew-caption">Ferrovia di Uyuni, Bolivia</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/group-barbiere.jpeg" alt="" loading="lazy">
+                <div class="crew-caption">Un taglio di capelli</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/group-notte-strada.jpeg" alt="" loading="lazy">
+                <div class="crew-caption">Passeggiata notturna, on the road</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/group-relax-maschere.jpeg" alt="" loading="lazy">
+                <div class="crew-caption">Relax dopo il trek</div>
               </div>
             </div>
           </div>
@@ -334,6 +526,7 @@ final_html = f'''<!DOCTYPE html>
   .site-switcher button:hover{{ background:rgba(255,255,255,0.14); transform:translateY(-1px); }}
   .site-switcher button.active{{ background:var(--yellow); color:var(--black); box-shadow:0 4px 14px rgba(255,206,0,0.35); }}
   .site-switcher button.home-btn{{ color:var(--yellow); border-color:rgba(255,206,0,0.35); }}
+  .site-switcher button.home-btn.active{{ color:var(--black); }}
 </style>
 </head>
 <body>

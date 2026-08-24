@@ -69,6 +69,7 @@ nav.tabs a{
 nav.tabs a:hover{ background:rgba(255,255,255,0.08); transform:translateY(-1px); }
 nav.tabs a.active{ background:var(--yellow); color:var(--black); box-shadow:0 4px 14px rgba(255,206,0,0.3); }
 nav.tabs a.home-link{ color:var(--yellow); border-color:rgba(255,206,0,0.35); }
+nav.tabs a.home-link.active{ color:var(--black); }
 
 /* ---------- HERO ---------- */
 header.hero{
@@ -178,7 +179,7 @@ section.panel.dark .card:hover{ border-color:rgba(255,206,0,0.4); box-shadow:0 2
 
 /* ---------- Group photos — auto-scrolling marquee ---------- */
 .group-marquee{ position:relative; overflow:hidden; margin-top:22px; -webkit-mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image:linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
-.group-marquee-track{ display:flex; gap:18px; width:max-content; animation:groupMarquee 28s linear infinite; }
+.group-marquee-track{ display:flex; gap:18px; width:max-content; animation:groupMarquee 75s linear infinite; }
 .group-marquee:hover .group-marquee-track{ animation-play-state:paused; }
 .group-marquee-item{ position:relative; flex:0 0 auto; width:320px; border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow-lg); }
 .group-marquee-item img{ width:320px; height:220px; object-fit:cover; display:block; }
