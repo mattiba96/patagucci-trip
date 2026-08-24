@@ -115,6 +115,34 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
                 <img src="foto/IMG_1590.JPG" alt="Il gruppo sui binari nel deserto di sale, Bolivia/Cile" loading="lazy">
                 <div class="crew-caption">Deserto di sale, Bolivia/Cile</div>
               </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_7193.JPG" alt="Il gruppo sui binari del treno, Salar de Uyuni, Bolivia" loading="lazy">
+                <div class="crew-caption">Salar de Uyuni, Bolivia</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/group-geyser-bolivia.jpeg" alt="Il gruppo tra i fumi dei geyser, Bolivia" loading="lazy">
+                <div class="crew-caption">Geyser Sol de Mañana, Bolivia</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/group-altopiano-boliviano.jpeg" alt="Pranzo di gruppo con vista sulla laguna, altopiano boliviano" loading="lazy">
+                <div class="crew-caption">Altopiano boliviano</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/group-cusco-peru.jpeg" alt="Il gruppo di notte tra i vicoli di Cusco, Perù" loading="lazy">
+                <div class="crew-caption">Cusco, Perù</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/IMG_6840.JPG" alt="Al mercato locale, Perù" loading="lazy">
+                <div class="crew-caption">Mercato locale, Perù</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/group-van-bolivia.jpeg" alt="In viaggio sul van tra un trasferimento e l'altro, Bolivia" loading="lazy">
+                <div class="crew-caption">In viaggio, Bolivia</div>
+              </div>
+              <div class="group-marquee-item">
+                <img src="foto/group-notte-ande.jpeg" alt="Il gruppo di notte tra le nuvole, Ande" loading="lazy">
+                <div class="crew-caption">Notte in quota, Ande</div>
+              </div>
               <div class="group-marquee-item" aria-hidden="true">
                 <img src="foto/dd148649-09ef-45bd-8b5e-313dff562db8.jpeg" alt="" loading="lazy">
                 <div class="crew-caption">Machu Picchu, Perù</div>
@@ -122,6 +150,34 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               <div class="group-marquee-item" aria-hidden="true">
                 <img src="foto/IMG_1590.JPG" alt="" loading="lazy">
                 <div class="crew-caption">Deserto di sale, Bolivia/Cile</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_7193.JPG" alt="" loading="lazy">
+                <div class="crew-caption">Salar de Uyuni, Bolivia</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/group-geyser-bolivia.jpeg" alt="" loading="lazy">
+                <div class="crew-caption">Geyser Sol de Mañana, Bolivia</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/group-altopiano-boliviano.jpeg" alt="" loading="lazy">
+                <div class="crew-caption">Altopiano boliviano</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/group-cusco-peru.jpeg" alt="" loading="lazy">
+                <div class="crew-caption">Cusco, Perù</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/IMG_6840.JPG" alt="" loading="lazy">
+                <div class="crew-caption">Mercato locale, Perù</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/group-van-bolivia.jpeg" alt="" loading="lazy">
+                <div class="crew-caption">In viaggio, Bolivia</div>
+              </div>
+              <div class="group-marquee-item" aria-hidden="true">
+                <img src="foto/group-notte-ande.jpeg" alt="" loading="lazy">
+                <div class="crew-caption">Notte in quota, Ande</div>
               </div>
             </div>
           </div>
