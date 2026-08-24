@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Groenlandia 2027 — Trip Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div class="flagbar"></div>
+
+<header class="hero">
+  <div class="bg" style="background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.55) 55%, rgba(10,14,11,0.92) 100%), url('https://upload.wikimedia.org/wikipedia/commons/3/35/Ilulissat_Kangerlua_iceberg_2024.jpg');"></div>
+  <div class="content">
+    <h1>Groenlandia</h1>
+    <p class="tagline">Iceberg alti come palazzi che si staccano da uno dei ghiacciai più veloci del pianeta, sole che non tramonta mai, e un paese grande quanto un continente ma con appena 56.000 abitanti. Una settimana all'estremo, senza cani da slitta (è estate) ma con tutto il resto.</p>
+    <div class="badge-row">
+      <span class="badge">📅 Periodo target: giugno 2027 <em>(da confermare)</em></span>
+      <span class="badge">🧊 Ilulissat Icefjord — UNESCO</span>
+      <span class="badge">🐋 Whale watching</span>
+      <span class="badge">☀️ Sole di mezzanotte</span>
+    </div>
+    <div class="scroll-cue">↓ scorri per esplorare</div>
+  </div>
+  <div class="photo-credit">Foto: Ekrem Canli, <a href="https://commons.wikimedia.org/wiki/File:Ilulissat_Kangerlua_iceberg_2024.jpg" target="_blank" rel="noopener">CC BY-SA 4.0, Wikimedia Commons</a></div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <a href="javascript:void(0)" class="home-link" onclick="showHub()">🌍 Tutte le mete</a>
+  <a href="#perche">Perché andare</a>
+  <a href="#itinerario">Itinerario</a>
+  <a href="#mappa">Mappa</a>
+  <a href="#guida">Guida pratica</a>
+  <a href="#curiosita">Curiosità</a>
+  <a href="#meteo">Meteo</a>
+  <a href="#valuta">Valuta</a>
+  <a href="#voli">Voli</a>
+  <a href="#budget">Spese stimate</a>
+  <a href="#faq">FAQ</a>
+</nav>
+
+<main>
+
+  <!-- PERCHE ANDARE -->
+  <section id="perche" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">✨ Perché andare proprio ora</h2>
+      <p class="section-sub reveal">Non esiste un'altra settimana di viaggio che assomigli a questa: niente confini interni da attraversare in auto (non ce ne sono), solo ghiaccio, mare e un sole che a giugno non tramonta praticamente mai.</p>
+
+      <div class="why-grid reveal">
+        <div class="photo-banner" style="margin-bottom:0;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/22/Ilulissat_and_Iceberg_Panorama.jpg" alt="Ilulissat e gli iceberg della baia di Disko" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+          <div class="credit">Foto: Buiobuione, <a href="https://commons.wikimedia.org/wiki/File:Ilulissat_and_Iceberg_Panorama.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+          <div class="fallback">🧊</div>
+        </div>
+        <div>
+          <div class="stat-big"><span class="num">~40</span><span class="unit">metri al giorno</span></div>
+          <p class="stat-line">La velocità di scorrimento del ghiacciaio Sermeq Kujalleq (Jakobshavn) — tra i più veloci al mondo, produce da solo circa il 10% di tutti gli iceberg della Groenlandia.</p>
+
+          <div class="stat-big"><span class="num">80%</span><span class="unit">del paese coperto di ghiaccio</span></div>
+          <p class="stat-line">La calotta groenlandese è la seconda massa di ghiaccio al mondo dopo l'Antartide, spessa fino a 1.500m in alcuni punti.</p>
+
+          <div class="stat-big"><span class="num">0</span><span class="unit">strade tra le città</span></div>
+          <p class="stat-line">In Groenlandia non esistono quasi strade tra un centro abitato e l'altro — ci si sposta solo in aereo, elicottero o barca.</p>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Perché ora, e perché giugno:</strong> giugno è pieno sole di mezzanotte a Ilulissat (69°N) — luce continua da fine maggio a fine luglio — e la stagione dei tour in barca tra gli iceberg è nel pieno. Non è invece stagione di cani da slitta (quella è da febbraio ad aprile, quando c'è ancora neve/ghiaccio stabile): un compromesso netto, ma coerente con l'idea di vedere il ghiaccio "vivo" — iceberg che si staccano e galleggiano, non neve sotto gli sci.
+        <div class="source-note">Fonti: whc.unesco.org, visitgreenland.com, hotelicefiord.com — dati verificati ad agosto 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ITINERARIO -->
+  <section id="itinerario" class="panel" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Boat_in_front_of_an_iceberg_in_the_Ilulissat_Icefjord%2C_Greenland_%2854067583959%29.jpg" alt="Barca davanti a un iceberg, Ilulissat Icefjord" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Christoph Strässler, <a href="https://commons.wikimedia.org/wiki/File:Boat_in_front_of_an_iceberg_in_the_Ilulissat_Icefjord,_Greenland_(54067583959).jpg" target="_blank" rel="noopener">CC BY-SA 2.0</a></div>
+        <div class="fallback">🚤</div>
+      </div>
+      <h2 class="section-title reveal">🗺️ Itinerario di massima — 7 giorni</h2>
+      <p class="section-sub reveal">Un'unica base a Ilulissat, sulla baia di Disko — coerente con la realtà logistica della Groenlandia, dove non esistono strade tra le città e ogni spostamento richiede un volo. Periodo target <strong>giugno 2027</strong>, pieno sole di mezzanotte.</p>
+
+      <div class="timeline" id="timeline"></div>
+
+      <div class="callout reveal">
+        <strong>Nota:</strong> i voli interni in Groenlandia sono frequentemente in ritardo o cancellati per meteo — l'itinerario include volutamente un giorno cuscinetto prima del rientro.
+      </div>
+    </div>
+  </section>
+
+  <!-- MAPPA -->
+  <section id="mappa" class="panel" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Kayaks_at_the_Disko_Bay_in_Ilulisaat%2C_Greenland_%2854067500493%29.jpg" alt="Kayak nella baia di Disko, Ilulissat" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Christoph Strässler, <a href="https://commons.wikimedia.org/wiki/File:Kayaks_at_the_Disko_Bay_in_Ilulisaat,_Greenland_(54067500493).jpg" target="_blank" rel="noopener">CC BY-SA 2.0</a></div>
+        <div class="fallback">🛶</div>
+      </div>
+      <h2 class="section-title reveal">📍 Mappa &amp; punti d'interesse</h2>
+      <p class="section-sub reveal">Ilulissat come base, con l'Icefjord e la baia di Disko come teatro di tutte le uscite in barca. Apri la mappa per orientarti, o esporta i punti in un file KML.</p>
+
+      <div class="map-embed reveal">
+        <iframe src="https://www.google.com/maps?q=Ilulissat+Icefjord,+Greenland&z=9&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <div class="map-actions reveal">
+        <a id="link-full-route" href="#" target="_blank" rel="noopener">🗺️ Apri Ilulissat su Google Maps</a>
+        <button class="export" id="btn-export-kml">⬇️ Esporta punti (KML)</button>
+      </div>
+
+      <div class="card reveal" style="overflow-x:auto;">
+        <h3 style="margin-top:0;">Punti d'interesse</h3>
+        <table class="stops-table" id="stops-table">
+          <thead><tr><th>Punto</th><th>Coordinate</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="source-note">Coordinate da countrycoordinate.com, en.wikipedia.org — verificate ad agosto 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUIDA PRATICA -->
+  <section id="guida" class="panel dark" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/SW_Greenland_Fjord_and_Mountain_%285610220981%29.jpg" alt="Fiordo della Groenlandia sud-occidentale" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Michael Studinger / NASA, <a href="https://commons.wikimedia.org/wiki/File:SW_Greenland_Fjord_and_Mountain_(5610220981).jpg" target="_blank" rel="noopener">CC BY 2.0</a></div>
+        <div class="fallback">🏔️</div>
+      </div>
+      <h2 class="section-title reveal">🧭 Guida pratica</h2>
+      <p class="section-sub reveal">Visto, come arrivare, e cosa aspettarsi da un paese senza strade tra le città. Dati verificati ad agosto 2026.</p>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>🛂 Visto</h3><p>Nessuno: la Groenlandia non fa parte di Schengen né dell'UE, ma gli italiani entrano senza visto fino a 90 giorni — un allowance separato da quello Schengen, che non viene intaccato.</p></div>
+        <div class="card reveal"><h3>✈️ Come si arriva</h3><p>Via Copenaghen (Air Greenland, stagionale nov-giu — verificare le date 2027) o via Reykjavik (Icelandair, stagionale giu-set, ~3,5h di volo) fino a Ilulissat.</p></div>
+        <div class="card reveal"><h3>🛣️ Zero strade tra le città</h3><p>Non esistono collegamenti stradali tra i centri abitati groenlandesi (eccetto un tratto di 4,5km altrove nel paese) — ogni spostamento tra città richiede aereo, elicottero o barca.</p></div>
+        <div class="card reveal"><h3>🐕 Niente cani da slitta a giugno</h3><p>La stagione è da febbraio ad aprile, quando neve e ghiaccio sono stabili — a giugno i cani sono a riposo, spesso visibili incatenati vicino al paese.</p></div>
+        <div class="card reveal"><h3>☀️ Sole di mezzanotte</h3><p>A Ilulissat (69°N) il sole non tramonta praticamente mai da fine maggio a fine luglio — tour in barca "di mezzanotte" partono anche alle 22-23 con piena luce.</p></div>
+        <div class="card reveal"><h3>🚁 Rischio meteo</h3><p>Ritardi/cancellazioni dei voli interni per meteo sono comuni — tenete sempre un giorno di margine prima di coincidenze o del rientro in Italia.</p></div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Assicurazione di viaggio:</strong> fortemente consigliata con copertura evacuazione medica — le evacuazioni da zone remote passano spesso per Danimarca o Islanda e possono costare migliaia di dollari; copertura minima raccomandata ~250.000$ per viaggi artici.
+        <div class="source-note">Fonti: visitgreenland.com, en.wikipedia.org (Transport in Greenland, Visa policy of Greenland), gustavthuesen.com, expedition.insure — dati verificati ad agosto 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURIOSITA -->
+  <section id="curiosita" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌍 Stranezze, ghiaccio e sole</h2>
+      <p class="section-sub reveal">Le cose più sorprendenti della Groenlandia — verificate, non da guida turistica riciclata.</p>
+
+      <h3 style="color:#fff; margin-top:0;">☀️ Simulatore del sole — Ilulissat, giugno</h3>
+      <p class="section-sub reveal" style="color:#c7c2b6;">Trascina lo slider: a giugno il sole a Ilulissat non tramonta praticamente mai.</p>
+      <div class="card reveal" style="text-align:center;">
+        <div class="sun-sim-wrap">
+          <svg id="sun-sim" viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="skyGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop id="sky-stop-top" offset="0%" stop-color="#2f6fb0"/>
+                <stop id="sky-stop-bottom" offset="100%" stop-color="#bfe3ff"/>
+              </linearGradient>
+            </defs>
+            <rect x="2" y="4" width="496" height="176" rx="14" fill="url(#skyGradient)"/>
+            <path class="sun-arc" d="M 40,180 Q 250,20 460,180"/>
+            <path class="sun-hills" d="M0,200 Q80,160 160,192 T320,188 T500,200 L500,220 L0,220 Z"/>
+            <line class="sun-horizon" x1="0" y1="180" x2="500" y2="180"/>
+            <text x="40" y="200" text-anchor="middle" class="sun-label">🌅 ~01:00</text>
+            <text x="460" y="200" text-anchor="middle" class="sun-label">🌇 ~23:30</text>
+            <g id="sun-marker"><text x="0" y="0" text-anchor="middle" font-size="30">☀️</text></g>
+          </svg>
+          <div class="sun-slider-row">
+            <input type="range" id="sun-slider" min="60" max="1410" step="5" value="720" aria-label="Ora del giorno">
+            <div class="sun-slider-ticks"><span>01:00</span><span>12:00</span><span>23:30</span></div>
+          </div>
+          <div class="sun-readout" id="sun-readout">Calcolo posizione del sole…</div>
+          <div class="source-note">Simulazione per Ilulissat (69°N, GLT/UTC-2) a giugno: sole di mezzanotte da fine maggio a fine luglio — il sole resta sopra o vicinissimo all'orizzonte quasi 24h su 24. Fonte: en.wikipedia.org (Ilulissat).</div>
+        </div>
+      </div>
+
+      <h3 style="color:#fff;">🤯 Lo sapevi che...</h3>
+      <div class="bigfive-grid" id="facts-grid"></div>
+
+      <h3 style="color:#fff;">🚢 L'iceberg del Titanic</h3>
+      <div class="card reveal">
+        <p style="color:#c7c2b6; font-size:0.92rem; margin:0 0 10px;">Diversi studi di glaciologia (incluso uno del 2014 citato da Forbes) indicano il ghiacciaio Sermeq Kujalleq di Ilulissat come il luogo <strong>più probabile</strong> di origine dell'iceberg che affondò il Titanic nel 1912 — formatosi intorno al 1908-09 durante un periodo insolitamente caldo che causò un picco di distacchi. È un'ipotesi scientifica ben supportata, non una certezza assoluta.</p>
+        <div class="source-note">Fonti: forbes.com, theplanetd.com.</div>
+      </div>
+
+      <h3 style="color:#fff; margin-top:28px;">🧊 La Groenlandia in due parole</h3>
+      <div class="stats-grid">
+        <div class="card reveal"><h3 style="margin-top:0;">Isola più grande del mondo</h3><p style="color:#c7c2b6; font-size:0.88rem; margin:0;">~2.175.600 km² — la più grande isola non continentale del pianeta secondo il Guinness World Records.</p></div>
+        <div class="card reveal"><h3 style="margin-top:0;">~56.000 abitanti</h3><p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Circa un terzo vive a Nuuk, la capitale — una delle capitali più piccole al mondo.</p></div>
+        <div class="card reveal"><h3 style="margin-top:0;">~85%</h3><p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Degli iceberg del Nord Atlantico si staccano dalla costa ovest della Groenlandia — circa 40.000 nuovi iceberg l'anno in quella zona.</p></div>
+        <div class="card reveal"><h3 style="margin-top:0;">1.524m</h3><p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Spessore massimo della calotta glaciale in alcuni punti — quasi 5.000 piedi di ghiaccio.</p></div>
+      </div>
+      <div class="source-note" style="text-align:center;">Fonti: kids.nationalgeographic.com, geofactbook.com, whc.unesco.org.</div>
+    </div>
+  </section>
+
+  <!-- METEO -->
+  <section id="meteo" class="panel" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/59/Midnight_sun_in_the_Disko_Bay%2C_Greenland_%2854067257281%29.jpg" alt="Sole di mezzanotte, baia di Disko" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Christoph Strässler, <a href="https://commons.wikimedia.org/wiki/File:Midnight_sun_in_the_Disko_Bay,_Greenland_(54067257281).jpg" target="_blank" rel="noopener">CC BY-SA 2.0</a></div>
+        <div class="fallback">🌙</div>
+      </div>
+      <h2 class="section-title reveal">🌦️ Meteo storico — Giugno</h2>
+      <p class="section-sub reveal">A giugno l'estate artica è già iniziata, ma resta fresca. <strong>Non è una previsione</strong>, sono medie storiche.</p>
+
+      <div class="weather-cols reveal">
+        <div>
+          <h4>Ilulissat — Giugno</h4>
+          <div class="weather-stats">
+            <div class="card"><div class="wval">2,7-13,5°</div><div class="wlabel">Minima-Massima (varia nel mese)</div></div>
+            <div class="card"><div class="wval">~24h</div><div class="wlabel">Luce diurna</div></div>
+            <div class="card"><div class="wval">~10h</div><div class="wlabel">Sole effettivo/giorno</div></div>
+          </div>
+        </div>
+        <div>
+          <h4>Acqua del mare/fiordo</h4>
+          <div class="weather-stats">
+            <div class="card"><div class="wval">~0°</div><div class="wlabel">Vicina al gelo tutto l'anno</div></div>
+            <div class="card"><div class="wval">🧥</div><div class="wlabel">Muta stagna per kayak</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Nota:</strong> le temperature salgono nel corso del mese (inizio giugno ~10°C di massima, fine giugno ~13-14°C) — vestitevi a strati, il vento in barca abbassa sensibilmente la temperatura percepita anche con sole pieno.
+        <div class="source-note">Fonti: en.climate-data.org, weather-and-climate.com — dati verificati ad agosto 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONVERTITORE VALUTA -->
+  <section id="valuta" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">💱 Convertitore valuta live</h2>
+      <p class="section-sub reveal">Si usa la corona danese (DKK), agganciata all'euro tramite ERM II a un tasso fisso — molto stabile, a differenza di altre valute di questo sito.</p>
+      <div class="card reveal">
+        <div class="currency-form">
+          <div class="field">
+            <label for="cur-amount">Importo</label>
+            <input type="number" id="cur-amount" value="100" min="0">
+          </div>
+          <div class="field">
+            <label for="cur-from">Da</label>
+            <select id="cur-from"><option value="EUR">EUR €</option><option value="USD">USD $</option><option value="DKK">DKK</option></select>
+          </div>
+          <div class="field">
+            <label for="cur-to">A</label>
+            <select id="cur-to"><option value="DKK" selected>DKK</option><option value="USD">USD $</option><option value="EUR">EUR €</option></select>
+          </div>
+        </div>
+        <div id="cur-result" class="cur-result">Caricamento tasso di cambio…</div>
+        <div class="source-note">Fonte: open.er-api.com (tassi aggiornati quotidianamente). Tasso fisso di riferimento: 7,46038 DKK/EUR (banda di oscillazione ±2,25%, stabile dal 1999) — fonte: Danmarks Nationalbank.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RICERCA VOLI -->
+  <section id="voli" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">✈️ Ricerca voli</h2>
+      <p class="section-sub reveal">Non esistono voli diretti dall'Italia alla Groenlandia: si passa sempre da Copenaghen o Reykjavik. È una delle rotte più costose al mondo per distanza — pochi posti, aerei piccoli, stagione breve.</p>
+
+      <div class="card reveal">
+        <table class="hub-table">
+          <thead><tr><th>Compagnia</th><th>Scalo</th><th>Note</th></tr></thead>
+          <tbody>
+            <tr><td>Air Greenland</td><td>Copenaghen</td><td>Rotta stagionale nov-giu — verificare le date esatte 2027</td></tr>
+            <tr><td>Icelandair</td><td>Reykjavik</td><td>Rotta stagionale giu-set, ~3,5h di volo, ideale per il vostro periodo</td></tr>
+          </tbody>
+        </table>
+        <div class="source-note">Nessun volo diretto Italia-Groenlandia. Fonti: icelandair.com, visitgreenland.com, travelocity.com (dati aggregati agosto 2026) — verifica sempre orari e prezzi aggiornati prima di prenotare, i posti sono limitati.</div>
+      </div>
+
+      <div class="card reveal">
+        <div class="flight-form">
+          <div class="field">
+            <label for="flight-origin">Da dove parti</label>
+            <select id="flight-origin">
+              <option value="MXP|Milano Malpensa">Milano Malpensa (MXP)</option>
+              <option value="LIN|Milano Linate">Milano Linate (LIN)</option>
+              <option value="BGY|Milano Bergamo">Milano Bergamo (BGY)</option>
+              <option value="FCO|Roma Fiumicino">Roma Fiumicino (FCO)</option>
+              <option value="BLQ|Bologna">Bologna (BLQ)</option>
+              <option value="VCE|Venezia">Venezia (VCE)</option>
+            </select>
+          </div>
+          <div class="field"><label>Destinazione</label><select disabled><option>Ilulissat (JAV), Groenlandia</option></select></div>
+          <div class="field"><label>Periodo</label><select disabled><option>Giugno 2027 (da confermare)</option></select></div>
+        </div>
+        <div class="flight-links">
+          <button id="btn-google-flights">Cerca su Google Flights</button>
+          <button class="alt" id="btn-skyscanner">Cerca su Skyscanner</button>
+          <button class="alt" id="btn-kayak">Cerca su Kayak</button>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Suggerimento:</strong> prenota il volo Reykjavik-Ilulissat il prima possibile — pochi posti, aerei piccoli, e giugno è tra i mesi più economici della stagione secondo le ricerche di mercato.
+      </div>
+    </div>
+  </section>
+
+  <!-- BUDGET -->
+  <section id="budget" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">💰 Calcolatore budget</h2>
+      <p class="section-sub reveal">La Groenlandia è una delle mete più care di questo sito: tutto è importato, e i voli sono limitati e stagionali. Stima indicativa, non un preventivo.</p>
+
+      <div class="card reveal">
+        <div class="currency-form">
+          <div class="field">
+            <label for="budget-people">Persone</label>
+            <input type="number" id="budget-people" value="4" min="1">
+          </div>
+          <div class="field">
+            <label for="budget-style">Stile viaggio</label>
+            <select id="budget-style">
+              <option value="budget">Budget</option>
+              <option value="standard" selected>Standard</option>
+              <option value="comfort">Comfort</option>
+            </select>
+          </div>
+        </div>
+        <div id="budget-result" class="cur-result">—</div>
+        <div id="budget-breakdown" class="source-note" style="text-align:center; margin-top:10px;"></div>
+      </div>
+
+      <div class="source-note">Include: volo Italia-Ilulissat a/r (via Copenaghen/Reykjavik), alloggio, cibo, 2-3 tour in barca tra gli iceberg/whale watching a persona. Esclude: assicurazione di viaggio, spese personali. Dati reali da: tripadvisor.com/hotelscombined.com/kayak.com (alloggio Ilulissat, forte stagionalità), guidetogreenland.com/dancingpandas.com (tour iceberg, ~107$/tour), numeo.com e recensioni Tripadvisor (cibo), Google Flights/Skyscanner/Expedia (volo, stima giugno) — verificati ad agosto 2026.</div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">❓ Domande frequenti</h2>
+
+      <details class="faq reveal">
+        <summary>Serve il visto per la Groenlandia?</summary>
+        <div class="faq-body">No. La Groenlandia non fa parte né dell'UE né di Schengen, ma gli italiani entrano senza visto fino a 90 giorni — un allowance separato e indipendente da quello Schengen. Serve solo il passaporto (non basta la carta d'identità), valido almeno 3 mesi oltre la data di rientro.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Giugno è un buon periodo?</summary>
+        <div class="faq-body">Sì, è pieno nella breve estate artica (giugno-agosto): tour in barca tra gli iceberg operativi, sole di mezzanotte, giornate lunghissime. L'unico compromesso è che non è stagione di cani da slitta (quella va da febbraio ad aprile, quando c'è ancora neve/ghiaccio stabile) — a giugno i cani sono a riposo.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Come ci si sposta in Groenlandia?</summary>
+        <div class="faq-body">Non esistono strade tra le città — solo aereo, elicottero o barca (d'estate, quando il mare non è ghiacciato). Per questo l'itinerario resta concentrato su un'unica base, Ilulissat, invece di un giro multi-tappa: ogni ulteriore spostamento aggiungerebbe voli interni costosi e soggetti a cancellazione per meteo.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Ci sono orsi polari da temere?</summary>
+        <div class="faq-body">Nella zona di Ilulissat/baia di Disko sono estremamente rari — un avvistamento è un evento eccezionale, diverso dal vero rischio orsi di zone molto più remote del nord/est della Groenlandia o delle Svalbard. Più probabile vedere balene (megattere, minke, pinne) durante i tour in barca.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Che moneta si usa e conviene cambiare prima?</summary>
+        <div class="faq-body">La corona danese (DKK), agganciata all'euro a un tasso fisso di ~7,46 DKK/EUR — molto stabile. Le carte di credito sono ampiamente accettate anche a Ilulissat.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Serve un'assicurazione di viaggio particolare?</summary>
+        <div class="faq-body">Sì, fortemente consigliata con copertura per evacuazione medica: la Groenlandia è estremamente remota, un'evacuazione (spesso verso Danimarca o Islanda) può costare migliaia di dollari. Copertura minima raccomandata per viaggi artici: ~250.000$.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Quanto costa davvero questo viaggio?</summary>
+        <div class="faq-body">La Groenlandia è oggettivamente cara: tutto è importato, i voli sono limitati e stagionali. Un budget indipendente realistico va dai ~140$ al giorno (viaggiatori economici) fino a 600$+ al giorno per pacchetti organizzati — vedi il calcolatore nella sezione Spese stimate per un conteggio più preciso in base a quante persone siete e allo stile scelto.</div>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Groenlandia Trip Planner — file locale, parte del sito <a href="javascript:void(0)" class="home-link" onclick="showHub()">Patagucci Trips</a>. Mappa, cambio valuta e ricerca voli richiedono una connessione internet al momento della visualizzazione/click.
+  <div class="credits">
+    Crediti foto (Wikimedia Commons): Ekrem Canli (Ilulissat Icefjord) CC BY-SA 4.0 · Buiobuione (Ilulissat panorama, dettaglio iceberg) CC BY-SA 4.0 · Christoph Strässler (barca tra iceberg, sole di mezzanotte, kayak) CC BY-SA 2.0 · Giles Laurent (megattera, Disko Bay) CC BY-SA 4.0 · Michael Studinger/NASA (fiordo Groenlandia sud-occidentale) CC BY 2.0. Dati verificati su fonti pubbliche ad agosto 2026 — riverifica sempre voli, meteo e prezzi prima di prenotare.
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ---- Scrollspy nav ----
+  var navLinks = document.querySelectorAll('nav.tabs a[href^="#"]');
+  var sections = document.querySelectorAll('section[data-nav]');
+  var linkBySection = {};
+  navLinks.forEach(function(a){ linkBySection[a.getAttribute('href').slice(1)] = a; });
+
+  var spyObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        navLinks.forEach(function(a){ a.classList.remove('active'); });
+        var link = linkBySection[entry.target.id];
+        if(link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(function(s){ spyObserver.observe(s); });
+
+  // ---- Reveal on scroll ----
+  var revealObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ revealObserver.observe(el); });
+
+  // ---- Coordinates + Google Maps links ----
+  var COORDS = {
+    ilulissat: [69.2198, -51.1000],
+    icefjord: [69.15, -50.4],
+    diskobay: [69.25, -51.5]
+  };
+  function placeLink(key){
+    var p = COORDS[key];
+    return 'https://www.google.com/maps/search/?api=1&query=' + p[0] + ',' + p[1];
+  }
+
+  var ITINERARY = [
+    { d:1, title:'Arrivo a Ilulissat', tags:['Arrivo','Nessun visto'], text:'Sbarco via Copenaghen (Air Greenland) o Reykjavik (Icelandair, ~3,5h di volo) — nessuna pratica di visto. Prima passeggiata nel paese, tra case colorate e iceberg visibili già dal porto.', link: placeLink('ilulissat'), linkLabel:'Vedi Ilulissat su Google Maps' },
+    { d:2, title:'Ilulissat Icefjord — sentieri', tags:['UNESCO','Trekking leggero'], text:'I sentieri sulla passerella dell\'Icefjord (percorsi blu/giallo), patrimonio UNESCO dal 2004 — foce del ghiacciaio Sermeq Kujalleq, tra i più veloci al mondo (~40m/giorno).', link: placeLink('icefjord'), linkLabel:'Vedi Ilulissat Icefjord su Google Maps', highlight:true },
+    { d:3, title:'Tour in barca tra gli iceberg + whale watching', tags:['Il giorno clou'], text:'Uscita in barca nella baia di Disko tra iceberg alti come palazzi, con buone probabilità di avvistare megattere, balenottere minori o pinne.', link: placeLink('diskobay'), linkLabel:'Vedi Disko Bay su Google Maps', highlight:true, photo:'https://upload.wikimedia.org/wikipedia/commons/e/e7/025_Humpback_whale_at_Disko_Bay_%28Greenland%29_Photo_by_Giles_Laurent.jpg', photoCredit:'Foto: Giles Laurent, CC BY-SA 4.0' },
+    { d:4, title:'Tour del sole di mezzanotte', tags:['Sole di mezzanotte'], text:'Uscita serale in barca (partenza verso le 22) per vedere gli iceberg nella luce dorata e bassa del sole che, a giugno, non tramonta mai davvero a questa latitudine.', link: placeLink('diskobay'), linkLabel:'Vedi Disko Bay su Google Maps', photo:'https://upload.wikimedia.org/wikipedia/commons/5/59/Midnight_sun_in_the_Disko_Bay%2C_Greenland_%2854067257281%29.jpg', photoCredit:'Foto: Christoph Strässler, CC BY-SA 2.0' },
+    { d:5, title:'Kayak tra gli iceberg', tags:['Avventura'], text:'Uscita in kayak (con muta stagna, l\'acqua resta vicina allo zero anche d\'estate) tra iceberg più piccoli, in un\'insenatura riparata della baia.', link: placeLink('diskobay'), linkLabel:'Vedi Disko Bay su Google Maps', photo:'https://upload.wikimedia.org/wikipedia/commons/f/fb/Kayaks_at_the_Disko_Bay_in_Ilulisaat%2C_Greenland_%2854067500493%29.jpg', photoCredit:'Foto: Christoph Strässler, CC BY-SA 2.0' },
+    { d:6, title:'Giornata libera / cuscinetto', tags:['Buffer meteo'], text:'Giorno di margine prima del rientro — utile vista la frequenza di ritardi/cancellazioni dei voli in Groenlandia. Tempo per musei locali, shopping, o un\'altra uscita in barca se il meteo lo permette.', link: placeLink('ilulissat'), linkLabel:'Vedi Ilulissat su Google Maps' },
+    { d:7, title:'Ilulissat — Si torna a casa', tags:['Partenza'], text:'Volo di rientro via Reykjavik o Copenaghen, poi collegamento per l\'Italia.', link: placeLink('ilulissat'), linkLabel:'Vedi Ilulissat su Google Maps' }
+  ];
+
+  var timeline = document.getElementById('timeline');
+  ITINERARY.forEach(function(day, idx){
+    var det = document.createElement('details');
+    det.className = 'day reveal';
+    if(idx === 0) det.open = true;
+    var tagsHtml = day.tags.map(function(t){ return '<span class="tag' + (day.highlight ? ' highlight' : '') + '">' + t + '</span>'; }).join('');
+    var photoHtml = day.photo ? ('<div class="mini-photo"><img src="' + day.photo + '" alt="" loading="lazy" onerror="this.parentElement.style.display=\'none\'"></div><div class="source-note">' + day.photoCredit + '</div>') : '';
+    det.innerHTML =
+      '<summary><span class="daynum">' + day.d + '</span><span class="daytitle">' + day.title + '</span><span class="chevron">▸</span></summary>' +
+      '<div class="day-body">' + tagsHtml + '<p>' + day.text + '</p>' + photoHtml +
+      '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
+      '</div>';
+    timeline.appendChild(det);
+    revealObserver.observe(det);
+  });
+
+  // ---- Live currency converter ----
+  var curRates = null;
+  var curAmount = document.getElementById('cur-amount');
+  var curFrom = document.getElementById('cur-from');
+  var curTo = document.getElementById('cur-to');
+  var curResult = document.getElementById('cur-result');
+
+  function updateCurrency(){
+    if(!curRates){ curResult.textContent = 'Tasso non disponibile (serve internet).'; return; }
+    var amount = parseFloat(curAmount.value) || 0;
+    var from = curFrom.value, to = curTo.value;
+    var usdAmount = from === 'USD' ? amount : amount / curRates[from];
+    var converted = to === 'USD' ? usdAmount : usdAmount * curRates[to];
+    curResult.textContent = amount.toLocaleString('it-IT') + ' ' + from + ' = ' + converted.toLocaleString('it-IT', {maximumFractionDigits: 2}) + ' ' + to;
+  }
+
+  fetch('https://open.er-api.com/v6/latest/USD').then(function(r){ return r.json(); }).then(function(data){
+    if(data && data.rates){ curRates = data.rates; updateCurrency(); }
+    else { curResult.textContent = 'Tasso non disponibile in questo momento.'; }
+  }).catch(function(){ curResult.textContent = 'Tasso non disponibile (verifica la connessione internet).'; });
+
+  [curAmount, curFrom, curTo].forEach(function(el){ el.addEventListener('input', updateCurrency); el.addEventListener('change', updateCurrency); });
+
+  // ---- Budget calculator ----
+  var BUDGET = {
+    nights: 6,
+    flight: { budget:1200, standard:1650, comfort:1900 }, // rotta stagionale/limitata: Italia-Copenaghen economico (~150-250€), Copenaghen-Ilulissat molto caro (~1.100-1.500€) e con poca concorrenza
+    lodgingPerNight: { budget:110, standard:200, comfort:350 }, // giugno non è il mese più economico (quello è maggio)
+    foodPerDay: { budget:50, standard:80, comfort:130 }, // tutto importato, prezzi alti anche per pasti semplici
+    toursFixed: { budget:220, standard:340, comfort:500 } // 3 tour in barca/kayak a persona per l'intera settimana
+  };
+  var bgtPeople = document.getElementById('budget-people');
+  var bgtStyle = document.getElementById('budget-style');
+  var bgtResult = document.getElementById('budget-result');
+  var bgtBreakdown = document.getElementById('budget-breakdown');
+  function updateBudget(){
+    if(!bgtPeople) return;
+    var people = Math.max(1, parseInt(bgtPeople.value, 10) || 1);
+    var style = bgtStyle.value;
+    var perPerson = BUDGET.flight[style] + BUDGET.toursFixed[style] + BUDGET.nights * (BUDGET.lodgingPerNight[style] + BUDGET.foodPerDay[style]);
+    var totalGroup = perPerson * people;
+    bgtResult.textContent = '~' + Math.round(perPerson).toLocaleString('it-IT') + ' € a persona';
+    bgtBreakdown.textContent = 'Totale gruppo (' + people + ' persone): ~' + Math.round(totalGroup).toLocaleString('it-IT') + ' € — include volo, alloggio, cibo, tour in barca/kayak.';
+  }
+  if(bgtPeople){
+    [bgtPeople, bgtStyle].forEach(function(el){ el.addEventListener('input', updateBudget); el.addEventListener('change', updateBudget); });
+    updateBudget();
+  }
+
+  // ---- Lo sapevi che... facts ----
+  var FACTS = [
+    { icon:'🏝️', text:'La Groenlandia è la più grande isola non continentale del mondo — circa 2.175.600 km², record Guinness World Records.' },
+    { icon:'🧊', text:'Il ghiacciaio Sermeq Kujalleq (Jakobshavn) produce da solo circa il 10% di tutti gli iceberg della Groenlandia — più di qualsiasi altro ghiacciaio fuori dall\'Antartide.' },
+    { icon:'🚫🛣️', text:'Non esistono strade tra le città groenlandesi: gli unici 4,5km di strada intercittadina del paese collegano due centri lontani da Ilulissat.' },
+    { icon:'🐻‍❄️', text:'Gli orsi polari sono "incredibilmente rari" nella zona di Ilulissat/baia di Disko — un vero avvistamento è un evento eccezionale che porta all\'annullamento precauzionale delle escursioni a terra.' },
+    { icon:'☀️', text:'Il sole di mezzanotte a Ilulissat dura da circa il 20 maggio al 23 luglio — l\'intero vostro viaggio di giugno cade in questa finestra di luce continua.' },
+    { icon:'🚢', text:'Il ghiacciaio di Ilulissat è considerato dagli studi scientifici il luogo più probabile di origine dell\'iceberg che affondò il Titanic nel 1912.' }
+  ];
+  var factsGrid = document.getElementById('facts-grid');
+  if(factsGrid){
+    FACTS.forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'bigfive-card';
+      card.innerHTML = '<div class="bf-icon">' + f.icon + '</div><p class="bf-fact" style="min-height:0;">' + f.text + '</p>';
+      factsGrid.appendChild(card);
+    });
+  }
+
+  // ---- Flight search links ----
+  function currentOrigin(){
+    var v = document.getElementById('flight-origin').value.split('|');
+    return { code: v[0], label: v[1] };
+  }
+  document.getElementById('btn-google-flights').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.google.com/travel/flights?q=' + encodeURIComponent('Voli da ' + o.label + ' a Ilulissat a giugno 2027'), '_blank');
+  });
+  document.getElementById('btn-skyscanner').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.skyscanner.it/trasporti/voli/' + o.code.toLowerCase() + '/jav/', '_blank');
+  });
+  document.getElementById('btn-kayak').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.kayak.it/flights/' + o.code + '-JAV', '_blank');
+  });
+
+  // ---- Map: stops table + KML export ----
+  var STOPS = [
+    { name:'Ilulissat', key:'ilulissat' },
+    { name:'Ilulissat Icefjord', key:'icefjord' },
+    { name:'Baia di Disko', key:'diskobay' }
+  ];
+
+  document.getElementById('link-full-route').href = placeLink('ilulissat');
+
+  var stopsBody = document.querySelector('#stops-table tbody');
+  STOPS.forEach(function(s){
+    var c = COORDS[s.key];
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + s.name + '</td><td class="mono">' + c[0].toFixed(4) + ', ' + c[1].toFixed(4) + '</td><td><a href="' + placeLink(s.key) + '" target="_blank" rel="noopener">Apri ↗</a></td>';
+    stopsBody.appendChild(tr);
+  });
+
+  document.getElementById('btn-export-kml').addEventListener('click', function(){
+    var kmlPlacemarks = STOPS.map(function(s){
+      var c = COORDS[s.key];
+      return '<Placemark><name>' + s.name + '</name><Point><coordinates>' + c[1] + ',' + c[0] + ',0</coordinates></Point></Placemark>';
+    }).join('\\n');
+    var kml = '<?xml version="1.0" encoding="UTF-8"?>\\n' +
+      '<kml xmlns="http://www.opengis.net/kml/2.2"><Document>' +
+      '<name>Groenlandia 2027 - Punti di interesse</name>' +
+      kmlPlacemarks +
+      '</Document></kml>';
+    var blob = new Blob([kml], { type: 'application/vnd.google-earth.kml+xml' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'groenlandia-2027-punti.kml';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  // ---- Sun position simulator (Ilulissat, June — sole di mezzanotte) ----
+  var SUNRISE_MIN = 1 * 60, SUNSET_MIN = 23.5 * 60, TWILIGHT = 40;
+  var sunMarker = document.getElementById('sun-marker');
+  var sunReadout = document.getElementById('sun-readout');
+  var sunSlider = document.getElementById('sun-slider');
+  var skyTop = document.getElementById('sky-stop-top');
+  var skyBottom = document.getElementById('sky-stop-bottom');
+  var NIGHT_TOP = [25,30,55], NIGHT_BOT = [70,80,110]; // "notte" a giugno a Ilulissat è solo un crepuscolo, mai buio pieno
+  var DAWN_TOP = [45,32,74], DAWN_BOT = [255,150,90];
+  var DAY_TOP = [47,111,176], DAY_BOT = [191,227,255];
+  function lerp(a,b,t){ return a + (b - a) * t; }
+  function mixColor(c1,c2,t){ return 'rgb(' + Math.round(lerp(c1[0],c2[0],t)) + ',' + Math.round(lerp(c1[1],c2[1],t)) + ',' + Math.round(lerp(c1[2],c2[2],t)) + ')'; }
+  function rgbStr(c){ return 'rgb(' + c[0] + ',' + c[1] + ',' + c[2] + ')'; }
+  function skyColors(t){
+    var dSunrise = t - SUNRISE_MIN, dSunset = t - SUNSET_MIN;
+    if(Math.abs(dSunrise) <= TWILIGHT){
+      var f = (dSunrise + TWILIGHT) / (2 * TWILIGHT);
+      return f < 0.5
+        ? { top: mixColor(NIGHT_TOP, DAWN_TOP, f / 0.5), bot: mixColor(NIGHT_BOT, DAWN_BOT, f / 0.5) }
+        : { top: mixColor(DAWN_TOP, DAY_TOP, (f - 0.5) / 0.5), bot: mixColor(DAWN_BOT, DAY_BOT, (f - 0.5) / 0.5) };
+    }
+    if(Math.abs(dSunset) <= TWILIGHT){
+      var f2 = (dSunset + TWILIGHT) / (2 * TWILIGHT);
+      return f2 < 0.5
+        ? { top: mixColor(DAY_TOP, DAWN_TOP, f2 / 0.5), bot: mixColor(DAY_BOT, DAWN_BOT, f2 / 0.5) }
+        : { top: mixColor(DAWN_TOP, NIGHT_TOP, (f2 - 0.5) / 0.5), bot: mixColor(DAWN_BOT, NIGHT_BOT, (f2 - 0.5) / 0.5) };
+    }
+    if(t > SUNRISE_MIN && t < SUNSET_MIN) return { top: rgbStr(DAY_TOP), bot: rgbStr(DAY_BOT) };
+    return { top: rgbStr(NIGHT_TOP), bot: rgbStr(NIGHT_BOT) };
+  }
+  function renderSun(totalMinutes){
+    var hh = Math.floor(totalMinutes / 60), mm = Math.round(totalMinutes % 60);
+    var timeLabel = String(hh).padStart(2,'0') + ':' + String(mm).padStart(2,'0');
+    var sky = skyColors(totalMinutes);
+    if(skyTop) skyTop.setAttribute('stop-color', sky.top);
+    if(skyBottom) skyBottom.setAttribute('stop-color', sky.bot);
+
+    if(totalMinutes < SUNRISE_MIN || totalMinutes > SUNSET_MIN){
+      var beforeDawn = totalMinutes < SUNRISE_MIN;
+      sunMarker.style.transform = 'translate(' + (beforeDawn ? 40 : 460) + 'px,176px)';
+      sunMarker.querySelector('text').textContent = '🌇';
+      sunReadout.textContent = timeLabel + ' — crepuscolo basso, il sole è appena sotto l\'orizzonte (non buio pieno)';
+      return;
+    }
+    var frac = (totalMinutes - SUNRISE_MIN) / (SUNSET_MIN - SUNRISE_MIN);
+    var x = 40 + frac * 420;
+    var y = 180 - Math.sin(frac * Math.PI) * 155;
+    sunMarker.querySelector('text').textContent = '☀️';
+    sunMarker.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+    var phase = frac < 0.05 ? 'appena sopra l\'orizzonte — luce dorata bassa, tipica del "sole di mezzanotte"'
+      : frac > 0.95 ? 'appena sopra l\'orizzonte — luce dorata bassa, tipica del "sole di mezzanotte"'
+      : (frac > 0.4 && frac < 0.6) ? 'è a picco, il momento più alto della giornata'
+      : 'è alto in cielo, luce piena';
+    sunReadout.textContent = timeLabel + ' — il sole ' + phase;
+  }
+  if(sunSlider){
+    var nowUtc = new Date();
+    var glNowMin = ((nowUtc.getUTCHours() * 60 + nowUtc.getUTCMinutes()) - 2 * 60 + 1440) % 1440;
+    var initial = Math.min(1410, Math.max(60, Math.round(glNowMin / 5) * 5));
+    sunSlider.value = initial;
+    renderSun(initial);
+    sunSlider.addEventListener('input', function(){ renderSun(Number(sunSlider.value)); });
+  }
+
+})();
+</script>
+
+</body>
+</html>

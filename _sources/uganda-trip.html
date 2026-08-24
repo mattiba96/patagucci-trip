@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uganda 2027 — Trip Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --black:#141414;
+    --black-soft:#1c1c1c;
+    --yellow:#FFCE00;
+    --yellow-deep:#E0AE00;
+    --red:#D21034;
+    --red-deep:#A80E29;
+    --green-950:#0f261d;
+    --green-900:#16362a;
+    --green-800:#1f4d3a;
+    --green-700:#2a6b4d;
+    --green-600:#37855f;
+    --cream-100:#f8f5ef;
+    --cream-200:#efe8d9;
+    --paper:#fffdf9;
+    --ink:#20281f;
+    --ink-soft:#5b6a61;
+    --line:#e2d9c6;
+    --shadow:0 10px 30px rgba(20,20,20,0.10);
+    --shadow-lg:0 24px 60px rgba(20,20,20,0.22);
+    --radius-lg:26px;
+    --radius-md:18px;
+    --font-display:'Bebas Neue', Impact, "Arial Narrow", sans-serif;
+    --font-body:'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{ scroll-behavior:smooth; }
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:var(--font-body);
+    background:var(--cream-100);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    font-size:16.5px;
+  }
+  a{color:var(--green-700); text-decoration:none;}
+  .icon{ display:inline-block; filter:drop-shadow(0 2px 4px rgba(0,0,0,0.25)); }
+  section{ scroll-margin-top:70px; }
+  img{ max-width:100%; display:block; }
+
+  .flagbar{ height:5px; background:linear-gradient(90deg,var(--black) 0 33%, var(--yellow) 33% 66%, var(--red) 66% 100%); }
+
+  /* ---------- NAV ---------- */
+  nav.tabs{
+    position:sticky; top:0; z-index:100;
+    display:flex; gap:4px; overflow-x:auto;
+    background:rgba(20,20,20,0.9);
+    backdrop-filter:blur(14px) saturate(160%);
+    -webkit-backdrop-filter:blur(14px) saturate(160%);
+    padding:10px 12px;
+  }
+  nav.tabs a{
+    flex:0 0 auto; border:1px solid transparent; background:transparent; color:#cfcfcf;
+    padding:9px 16px; border-radius:999px; font-size:0.8rem; font-weight:700; cursor:pointer;
+    white-space:nowrap; transition:all .2s ease; text-transform:uppercase; letter-spacing:0.04em;
+  }
+  nav.tabs a:hover{ background:rgba(255,255,255,0.08); }
+  nav.tabs a.active{ background:var(--yellow); color:var(--black); }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    position:relative; overflow:hidden;
+    min-height:88vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; color:#fdf9f0; padding:60px 20px 50px;
+  }
+  header.hero .bg{
+    position:absolute; inset:-20px; z-index:0;
+    background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.55) 55%, rgba(10,14,11,0.92) 100%), url('https://upload.wikimedia.org/wikipedia/commons/f/f1/Silverback.JPG');
+    background-size:cover; background-position:center 30%;
+    animation:kenburns 24s ease-in-out infinite alternate;
+  }
+  @keyframes kenburns{ from{ transform:scale(1); } to{ transform:scale(1.12); } }
+  header.hero .content{ position:relative; z-index:1; max-width:680px; }
+  header.hero h1{ margin:0 0 14px; font-family:var(--font-display); font-size:clamp(3rem,9vw,5.6rem); letter-spacing:0.02em; font-weight:400; line-height:0.95; text-shadow:0 4px 24px rgba(0,0,0,0.5); text-transform:uppercase; }
+  header.hero p.tagline{ margin:0 auto; color:#f1ece0; font-size:clamp(1.05rem,2.2vw,1.3rem); text-shadow:0 1px 12px rgba(0,0,0,0.4); font-weight:500; }
+  .badge-row{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:24px; }
+  .badge{ background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.28); color:#fdf9f0; padding:6px 14px; border-radius:20px; font-size:0.82rem; backdrop-filter:blur(6px); transition:transform .2s ease; }
+  .badge:hover{ transform:translateY(-2px); }
+  .scroll-cue{ margin-top:38px; font-size:0.78rem; color:#e8e2d2; opacity:0.75; position:relative; z-index:1; animation:bounce 2.2s ease-in-out infinite; }
+  @keyframes bounce{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(6px); } }
+  .photo-credit{ position:absolute; bottom:8px; right:12px; font-size:0.66rem; color:rgba(255,255,255,0.55); z-index:1; }
+  .photo-credit a{ color:rgba(255,255,255,0.7); }
+
+  main{ max-width:980px; margin:0 auto; }
+
+  section.panel{ padding:68px 20px 30px; }
+  section.panel.dark{ background:linear-gradient(160deg,var(--black),#0a0a0a 75%); color:#f4f1ea; max-width:none; }
+  section.panel.dark .section-sub{ color:#c7c2b6; }
+  section.panel.dark h2.section-title{ color:#fdf9f0; }
+  section.panel > .inner{ max-width:920px; margin:0 auto; }
+
+  .photo-banner{
+    border-radius:var(--radius-lg); overflow:hidden; margin-bottom:28px; box-shadow:var(--shadow-lg);
+    position:relative; height:240px;
+  }
+  .photo-banner img{ width:100%; height:100%; object-fit:cover; transition:transform 1.2s cubic-bezier(.16,1,.3,1); }
+  .photo-banner:hover img{ transform:scale(1.08); }
+  .photo-banner .credit{
+    position:absolute; bottom:0; right:0; background:rgba(0,0,0,0.5); color:#fff; font-size:0.66rem;
+    padding:4px 10px; border-radius:10px 0 0 0;
+  }
+  .photo-banner .credit a{ color:#fff; }
+  .photo-banner .fallback{
+    position:absolute; inset:0; background:linear-gradient(120deg,var(--green-700),var(--green-500,#4a9c72)); display:none;
+    align-items:center; justify-content:center; color:#fff; font-size:2rem;
+  }
+
+  h2.section-title{ font-family:var(--font-display); text-transform:uppercase; font-size:clamp(1.9rem,4.2vw,3rem); color:var(--black); margin:4px 0 8px; display:flex; align-items:center; gap:12px; font-weight:400; letter-spacing:0.01em; line-height:1; }
+  section.panel:not(.dark) h2.section-title{ color:var(--green-900); }
+  p.section-sub{ color:var(--ink-soft); margin:0 0 26px; font-size:1.02rem; max-width:640px; }
+
+  .reveal{ opacity:0; transform:translateY(28px) scale(0.98); transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
+  .reveal.visible{ opacity:1; transform:none; }
+
+  .card{ background:var(--paper); border:1px solid var(--line); border-radius:var(--radius-md); box-shadow:var(--shadow); padding:18px 20px; margin-bottom:14px; transition:transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s ease; }
+  .card:hover{ transform:translateY(-4px); box-shadow:var(--shadow-lg); }
+  section.panel.dark .card{ background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); color:#f4f1ea; }
+  section.panel.dark .card p{ color:#c7c2b6; }
+
+  /* ---------- Why go now ---------- */
+  .why-grid{ display:grid; grid-template-columns:1.1fr 1fr; gap:24px; align-items:center; }
+  @media (max-width:760px){ .why-grid{ grid-template-columns:1fr; } }
+  .why-grid .photo-banner{ height:320px; margin-bottom:0; }
+  .stat-big{ display:flex; align-items:baseline; gap:10px; margin-bottom:4px; }
+  .stat-big .num{ font-family:var(--font-display); font-size:3.2rem; font-weight:400; color:var(--yellow); line-height:1; }
+  .stat-big .unit{ font-size:1rem; color:#c7c2b6; }
+  .stat-line{ font-size:0.9rem; color:#c7c2b6; margin:0 0 18px; }
+
+  /* ---------- Crew ---------- */
+  .crew-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; }
+  .crew-card{ position:relative; border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow); aspect-ratio:4/5; background:var(--black); }
+  .crew-card img{ width:100%; height:100%; object-fit:cover; transition:transform 1.2s cubic-bezier(.16,1,.3,1); }
+  .crew-card:hover img{ transform:scale(1.08); }
+  .crew-card.no-photo{ display:flex; align-items:center; justify-content:center; background:radial-gradient(120% 100% at 50% 30%, rgba(255,206,0,0.18), var(--black) 70%); }
+  .crew-icon{ font-size:4.5rem; line-height:1; filter:drop-shadow(0 4px 10px rgba(0,0,0,0.5)); }
+  .crew-caption{
+    position:absolute; left:0; right:0; bottom:0; padding:14px 14px 12px;
+    background:linear-gradient(180deg, transparent, rgba(0,0,0,0.85));
+    color:#fff; font-size:0.85rem; font-weight:600;
+  }
+  .crew-check{ color:var(--yellow); }
+
+  /* ---------- Itinerary timeline ---------- */
+  .timeline{ position:relative; padding-left:26px; }
+  .timeline::before{ content:""; position:absolute; left:9px; top:6px; bottom:6px; width:2px; background:var(--line); }
+  details.day{ position:relative; background:var(--paper); border:1px solid var(--line); border-radius:var(--radius-md); margin-bottom:12px; box-shadow:var(--shadow); overflow:hidden; }
+  details.day::before{ content:""; position:absolute; left:-26px; top:22px; width:11px; height:11px; border-radius:50%; background:var(--yellow); border:3px solid var(--paper); box-shadow:0 0 0 2px var(--line); }
+  details.day summary{ list-style:none; cursor:pointer; padding:16px 18px; display:flex; align-items:center; gap:12px; font-weight:600; color:var(--green-900); font-size:1.02rem; }
+  details.day summary::-webkit-details-marker{ display:none; }
+  details.day summary .daynum{ background:var(--black); color:var(--yellow); width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:1.1rem; flex:0 0 auto; font-weight:400; }
+  details.day summary .daytitle{ flex:1; font-family:var(--font-display); text-transform:uppercase; font-size:1.2rem; letter-spacing:0.01em; }
+  details.day summary .chevron{ transition:transform .2s ease; color:var(--ink-soft); font-size:0.8rem; }
+  details.day[open] summary .chevron{ transform:rotate(90deg); }
+  details.day .day-body{ padding:0 20px 18px 64px; font-size:0.93rem; }
+  details.day .tag{ display:inline-block; background:var(--cream-200); color:var(--green-800); border-radius:8px; padding:3px 10px; font-size:0.75rem; margin:2px 5px 8px 0; font-weight:600; }
+  details.day .tag.highlight{ background:var(--red); color:#fff; }
+  details.day .maps-link{
+    display:inline-flex; align-items:center; gap:6px; margin-top:8px; font-size:0.82rem; font-weight:700;
+    color:var(--green-700); border:1px solid var(--line); padding:6px 12px; border-radius:999px;
+  }
+  details.day .maps-link:hover{ background:var(--cream-200); }
+  details.day .mini-photo{ border-radius:12px; overflow:hidden; margin-top:10px; max-width:280px; }
+  details.day .mini-photo img{ width:100%; }
+
+  /* ---------- Info grids ---------- */
+  .info-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; }
+  .info-grid .card h3{ margin:0 0 8px; font-size:1rem; }
+  .info-grid .card p{ margin:0; font-size:0.88rem; color:var(--ink-soft); }
+  .rule-list{ margin:0; padding-left:20px; font-size:0.92rem; }
+  .rule-list li{ margin-bottom:8px; }
+  .callout{ background:#fff4e2; border:1px solid var(--yellow-deep); border-radius:var(--radius-md); padding:14px 18px; font-size:0.9rem; margin:16px 0; }
+  .callout strong{ color:var(--yellow-deep); }
+  section.panel.dark .callout{ background:rgba(255,206,0,0.1); border-color:rgba(255,206,0,0.35); color:#f4f1ea; }
+  section.panel.dark .callout strong{ color:var(--yellow); }
+  .source-note{ font-size:0.74rem; color:var(--ink-soft); margin-top:6px; }
+  section.panel.dark .source-note{ color:#9b968a; }
+
+  /* ---------- Families ---------- */
+  .filter-row{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; }
+  .filter-row button{ border:1px solid var(--line); background:var(--paper); color:var(--ink-soft); padding:7px 14px; border-radius:999px; font-size:0.83rem; font-weight:600; cursor:pointer; transition:all .15s; }
+  .filter-row button:hover{ background:var(--cream-200); }
+  .filter-row button.active{ background:var(--green-800); color:#fff; border-color:var(--green-800); }
+  .family-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; }
+  .family-card{ background:var(--paper); border:1px solid var(--line); border-radius:var(--radius-md); box-shadow:var(--shadow); padding:16px 18px; }
+  .family-card .fname{ font-weight:700; color:var(--green-900); font-size:1.02rem; }
+  .family-card .fsector{ font-size:0.78rem; color:var(--ink-soft); margin-bottom:8px; }
+  .family-card .flevel{ display:inline-block; font-size:0.72rem; font-weight:700; padding:3px 9px; border-radius:7px; margin-bottom:8px; }
+  .flevel.Facile{ background:#e2f2e6; color:var(--green-700); }
+  .flevel.Media{ background:#fff2cf; color:#8a6c00; }
+  .flevel.Impegnativo{ background:#fbe1e6; color:var(--red-deep); }
+  .family-card .fnote{ font-size:0.85rem; color:var(--ink-soft); margin:0; }
+  .family-card .fsize{ font-size:0.83rem; color:var(--ink); font-weight:600; margin-bottom:4px; }
+
+  /* ---------- Stats / rings ---------- */
+  .stats-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; align-items:stretch; }
+  .ring-card{ text-align:center; }
+  .ring{ width:150px; height:150px; border-radius:50%; margin:0 auto 14px; background:conic-gradient(var(--yellow) calc(var(--pct)*1%), rgba(255,255,255,0.12) 0); display:flex; align-items:center; justify-content:center; position:relative; }
+  .ring::before{ content:""; position:absolute; inset:12px; border-radius:50%; background:var(--black); }
+  .ring .ring-label{ position:relative; z-index:1; font-size:1.7rem; font-weight:800; color:#fff; }
+  .dist-bars{ display:flex; flex-direction:column; gap:12px; }
+  .dist-row{ display:flex; align-items:center; gap:12px; }
+  .dist-row .dlabel{ width:130px; font-size:0.83rem; flex:0 0 auto; color:#c7c2b6; }
+  .dist-row .dtrack{ flex:1; height:12px; border-radius:8px; background:rgba(255,255,255,0.12); overflow:hidden; }
+  .dist-row .dfill{ height:100%; border-radius:8px; background:linear-gradient(90deg,var(--yellow-deep),var(--yellow)); }
+  .dist-row .dpct{ width:40px; text-align:right; font-size:0.83rem; font-weight:700; color:#fff; }
+  .factor-list{ margin:0; padding-left:20px; font-size:0.9rem; color:#c7c2b6; }
+  .factor-list li{ margin-bottom:8px; }
+
+  /* ---------- Big Five ---------- */
+  .bigfive-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin-top:16px; }
+  .bigfive-card{ background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:var(--radius-md); padding:16px; text-align:center; transition:transform .3s cubic-bezier(.16,1,.3,1); }
+  .bigfive-card:hover{ transform:translateY(-4px); }
+  .bigfive-card .bf-icon{ font-size:2.4rem; margin-bottom:8px; }
+  .bigfive-card .bf-name{ font-family:var(--font-display); text-transform:uppercase; font-size:1.2rem; color:#fff; }
+  .bigfive-card .bf-diff{ display:inline-block; font-size:0.7rem; font-weight:700; padding:3px 9px; border-radius:7px; margin:6px 0 8px; }
+  .bf-diff.Facile{ background:#1e4a2f; color:#8fe0ac; }
+  .bf-diff.Media{ background:#4a3a10; color:var(--yellow); }
+  .bf-diff.Difficile{ background:#4a1c1c; color:#ff9b8a; }
+  .bf-diff.Assente{ background:#333; color:#999; }
+  .bigfive-card .bf-fact{ font-size:0.82rem; color:#c7c2b6; margin:0 0 12px; min-height:44px; }
+  .bf-track-btn{ border:none; background:rgba(255,255,255,0.14); color:#fff; padding:8px 14px; border-radius:999px; font-size:0.78rem; font-weight:700; cursor:pointer; transition:background .15s; }
+  .bf-track-btn:hover{ background:rgba(255,255,255,0.24); }
+  .bf-track-btn.spotted{ background:var(--yellow); color:var(--black); }
+
+  /* ---------- Sun simulation ---------- */
+  .sun-sim-wrap{ text-align:center; }
+  .sun-sim-wrap svg{ width:100%; max-width:500px; height:auto; }
+  .sun-arc{ fill:none; stroke:rgba(255,206,0,0.3); stroke-width:2; stroke-dasharray:4 6; }
+  .sun-horizon{ stroke:rgba(255,255,255,0.25); stroke-width:1.5; }
+  .sun-hills{ fill:rgba(74,156,114,0.25); }
+  .sun-label{ font-size:12px; fill:#c7c2b6; }
+  #sun-marker{ transition:transform .12s ease-out; }
+  #sun-marker text{ filter:drop-shadow(0 0 10px rgba(255,206,0,0.8)); }
+  .sun-readout{ margin-top:10px; font-family:var(--font-display); font-size:1.3rem; color:var(--yellow); }
+  .sun-slider-row{ margin:16px auto 4px; max-width:460px; }
+  .sun-slider-row input[type=range]{ width:100%; accent-color:var(--yellow); cursor:pointer; }
+  .sun-slider-ticks{ display:flex; justify-content:space-between; font-size:0.7rem; color:#8f8b80; margin-top:2px; }
+
+  /* ---------- Weather ---------- */
+  .weather-stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-bottom:10px; }
+  .weather-stats .card{ text-align:center; padding:16px 10px; }
+  .weather-stats .wval{ font-size:1.5rem; font-weight:800; color:var(--green-800); }
+  .weather-stats .wlabel{ font-size:0.76rem; color:var(--ink-soft); margin-top:2px; }
+  .weather-cols{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:24px; }
+  @media (max-width:600px){ .weather-cols{ grid-template-columns:1fr; } }
+  .weather-cols h4{ margin:0 0 10px; color:var(--green-800); font-size:0.95rem; }
+  .rain-chart{ display:flex; align-items:flex-end; gap:14px; height:160px; padding:0 6px 26px; position:relative; }
+  .rain-chart .bar-col{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; position:relative; }
+  .rain-chart .bar{ width:100%; max-width:38px; border-radius:8px 8px 4px 4px; background:#4472c4; transition:height .8s ease; }
+  .rain-chart .bar-col.hl .bar{ background:var(--red); }
+  .rain-chart .bar-val{ font-size:0.72rem; color:var(--ink-soft); margin-bottom:4px; }
+  .rain-chart .bar-month{ position:absolute; bottom:-22px; font-size:0.78rem; color:var(--ink-soft); font-weight:600; }
+  .rain-chart .bar-col.hl .bar-month{ color:var(--red-deep); font-weight:800; }
+
+  /* ---------- Jeep route animation ---------- */
+  .jeep-map-wrap{ position:relative; background:radial-gradient(120% 100% at 30% 20%, rgba(74,156,114,0.3), var(--black) 75%); border:1px solid rgba(255,255,255,0.12); border-radius:var(--radius-lg); padding:18px; text-align:center; margin-bottom:24px; box-shadow:var(--shadow-lg); }
+  .jeep-map-wrap svg{ width:100%; max-width:520px; height:auto; }
+  .jeep-map-wrap .terrain{ stroke:none; }
+  .jeep-map-wrap .terrain-a{ fill:rgba(74,156,114,0.16); }
+  .jeep-map-wrap .terrain-b{ fill:rgba(58,134,200,0.16); }
+  .jeep-map-wrap .terrain-c{ fill:rgba(58,134,200,0.14); }
+  .jeep-map-wrap .route-shadow{ fill:none; stroke:rgba(0,0,0,0.35); stroke-width:7; stroke-linecap:round; stroke-linejoin:round; }
+  .jeep-map-wrap .route-line{ fill:none; stroke:var(--yellow); stroke-width:3; stroke-dasharray:2 9; stroke-linecap:round; opacity:0.8; }
+  .jeep-map-wrap .pulse{ fill:var(--red); opacity:0.35; animation:pulse 1.8s ease-out infinite; }
+  @keyframes pulse{ 0%{ r:8; opacity:0.5; } 100%{ r:26; opacity:0; } }
+  .jeep-map-wrap .stop-label{ font-size:10.5px; fill:#f4f1ea; font-weight:700; paint-order:stroke; stroke:rgba(10,10,10,0.75); stroke-width:3px; stroke-linejoin:round; }
+  .jeep-map-wrap .stop-label.highlight{ fill:var(--yellow); font-size:11.5px; }
+  .jeep-map-wrap .stop-pin text:first-child{ filter:drop-shadow(0 2px 3px rgba(0,0,0,0.5)); }
+
+  /* ---------- Elevation chart ---------- */
+  .elev-chart{ display:flex; align-items:flex-end; gap:10px; height:220px; padding:0 6px 40px; position:relative; min-width:640px; }
+  .elev-chart .elev-col{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; position:relative; }
+  .elev-chart .elev-bar{ width:100%; max-width:44px; border-radius:8px 8px 3px 3px; background:linear-gradient(180deg,var(--yellow),var(--red)); transition:height 1s cubic-bezier(.16,1,.3,1); }
+  .elev-chart .elev-val{ font-size:0.74rem; color:#f4f1ea; margin-bottom:6px; font-weight:700; }
+  .elev-chart .elev-name{ position:absolute; bottom:-38px; font-size:0.72rem; color:#c7c2b6; text-align:center; width:90px; left:50%; transform:translateX(-50%); line-height:1.3; }
+
+  /* ---------- Currency converter ---------- */
+  .currency-form{ display:flex; gap:14px; flex-wrap:wrap; align-items:flex-end; margin-bottom:16px; }
+  .currency-form .field{ display:flex; flex-direction:column; gap:6px; }
+  .currency-form label{ font-size:0.8rem; font-weight:600; color:var(--green-900); }
+  .currency-form input, .currency-form select{ padding:9px 12px; border:1px solid var(--line); border-radius:10px; font-size:0.95rem; background:var(--paper); }
+  .currency-form input{ width:130px; }
+  .cur-result{ font-family:var(--font-display); font-size:2.2rem; color:var(--green-800); background:var(--cream-200); border-radius:14px; padding:16px 20px; text-align:center; }
+
+  /* ---------- Flights ---------- */
+  .flight-form{ display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end; margin-bottom:18px; }
+  .flight-form .field{ display:flex; flex-direction:column; gap:6px; }
+  .flight-form label{ font-size:0.8rem; font-weight:600; color:var(--green-900); }
+  .flight-form select{ padding:9px 12px; border:1px solid var(--line); border-radius:10px; font-size:0.9rem; background:var(--paper); min-width:200px; }
+  .flight-links{ display:flex; gap:10px; flex-wrap:wrap; }
+  .flight-links button{ border:none; background:var(--black); color:var(--yellow); padding:11px 20px; border-radius:12px; font-size:0.9rem; font-weight:700; cursor:pointer; transition:background .15s; }
+  .flight-links button:hover{ background:#000; }
+  .flight-links button.alt{ background:var(--red); color:#fff; }
+  .flight-links button.alt:hover{ background:var(--red-deep); }
+  .hub-table{ width:100%; border-collapse:collapse; font-size:0.85rem; margin-bottom:16px; }
+  .hub-table th{ text-align:left; color:var(--ink-soft); font-size:0.75rem; text-transform:uppercase; border-bottom:2px solid var(--line); padding:6px 8px; }
+  .hub-table td{ padding:7px 8px; border-bottom:1px solid var(--line); }
+
+  /* ---------- Map ---------- */
+  .map-embed{ border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow); margin-bottom:16px; border:1px solid var(--line); }
+  .map-embed iframe{ width:100%; height:380px; border:0; display:block; }
+  .map-actions{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px; }
+  .map-actions a, .map-actions button{
+    display:inline-flex; align-items:center; gap:8px; border:none; background:var(--green-800); color:#fff;
+    padding:11px 18px; border-radius:12px; font-size:0.88rem; font-weight:700; cursor:pointer; transition:background .15s;
+  }
+  .map-actions a:hover, .map-actions button:hover{ background:var(--green-700); }
+  .map-actions button.export{ background:var(--yellow); color:var(--black); }
+  .map-actions button.export:hover{ background:var(--yellow-deep); }
+  table.stops-table{ width:100%; min-width:480px; border-collapse:collapse; font-size:0.83rem; }
+  table.stops-table th{ text-align:left; color:var(--ink-soft); font-size:0.72rem; text-transform:uppercase; border-bottom:2px solid var(--line); padding:6px 8px; }
+  table.stops-table td{ padding:7px 8px; border-bottom:1px solid var(--line); }
+  table.stops-table td.mono{ font-family:ui-monospace,Consolas,monospace; font-size:0.78rem; color:var(--ink-soft); }
+
+  /* ---------- FAQ ---------- */
+  details.faq{ background:var(--paper); border:1px solid var(--line); border-radius:14px; margin-bottom:8px; box-shadow:var(--shadow); }
+  details.faq summary{ padding:14px 18px; cursor:pointer; font-weight:600; color:var(--green-900); list-style:none; }
+  details.faq summary::-webkit-details-marker{ display:none; }
+  details.faq[open] summary::after{ content:"−"; }
+  details.faq summary::after{ content:"+"; float:right; color:var(--ink-soft); font-weight:400; }
+  details.faq .faq-body{ padding:0 18px 16px; font-size:0.9rem; color:var(--ink-soft); }
+
+  footer{ text-align:center; padding:36px 16px 46px; color:#c7c2b6; font-size:0.82rem; background:linear-gradient(160deg,var(--black),#0a0a0a); }
+  footer .credits{ max-width:700px; margin:14px auto 0; font-size:0.72rem; color:#8f8b80; line-height:1.7; }
+  footer .credits a{ color:#a9a49a; }
+</style>
+</head>
+<body>
+
+<div class="flagbar"></div>
+
+<header class="hero">
+  <div class="bg" style="background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.55) 55%, rgba(10,14,11,0.92) 100%), url('https://upload.wikimedia.org/wikipedia/commons/f/f1/Silverback.JPG');"></div>
+  <div class="content">
+    <h1>Uganda</h1>
+    <p class="tagline">Zaino in spalla e adrenalina alle stelle: piste sterrate, foresta pluviale e un faccia a faccia a due metri da un gorilla di montagna. Non è un viaggio da spiaggia — è per chi non ha paura di sporcarsi le scarpe.</p>
+    <div class="badge-row">
+      <span class="badge">📅 Periodo target: fine feb / inizio mar 2027 <em>(da confermare)</em></span>
+      <span class="badge">🦍 Bwindi Gorilla Trekking</span>
+      <span class="badge">🐆 Queen Elizabeth NP</span>
+      <span class="badge">🐒 Kibale Forest</span>
+      <span class="badge">🚣 Jinja Rafting — grado 5</span>
+    </div>
+    <div class="scroll-cue">↓ scorri per esplorare</div>
+  </div>
+  <div class="photo-credit">Foto: Patrick Cyusa, <a href="https://commons.wikimedia.org/wiki/File:Silverback.JPG" target="_blank" rel="noopener">CC0, Wikimedia Commons</a></div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <a href="index.html" class="home-link">🌍 Tutte le mete</a>
+  <a href="#perche">Perché andare</a>
+  <a href="#itinerario">Itinerario</a>
+  <a href="#mappa">Mappa</a>
+  <a href="#gorilla">Gorilla Trekking</a>
+  <a href="#famiglie">Famiglie</a>
+  <a href="#stats">Avvistamenti</a>
+  <a href="#bigfive">Big Five</a>
+  <a href="#meteo">Meteo</a>
+  <a href="#curiosita">Curiosità</a>
+  <a href="#altitudine">Altitudine</a>
+  <a href="#valuta">Valuta</a>
+  <a href="#voli">Voli</a>
+  <a href="#budget">Spese stimate</a>
+  <a href="#faq">FAQ</a>
+</nav>
+
+<main>
+
+  <!-- PERCHE ANDARE -->
+  <section id="perche" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">✨ Perché andare proprio ora</h2>
+      <p class="section-sub reveal">Il gorilla di montagna è l'unica grande scimmia al mondo con una popolazione in crescita — merito di decenni di conservazione e turismo responsabile. Un motivo in più per andare a vederli con i propri occhi.</p>
+
+      <div class="why-grid reveal">
+        <div class="photo-banner" style="margin-bottom:0;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Silver_back_gorilla_-_Gorilla_beringei.jpg" alt="Silverback, gorilla di montagna adulto" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+          <div class="credit">Foto: Ruggiero Richard / US Fish and Wildlife Service, <a href="https://commons.wikimedia.org/wiki/File:Silver_back_gorilla_-_Gorilla_beringei.jpg" target="_blank" rel="noopener">Pubblico dominio</a></div>
+          <div class="fallback">🦍</div>
+        </div>
+        <div>
+          <div class="stat-big"><span class="num">~1.063</span><span class="unit">gorilla di montagna al mondo</span></div>
+          <p class="stat-line">Censimento 2024 — in crescita rispetto ai 1.004 del 2018 e ai soli ~302 censiti a Bwindi nel 2005.</p>
+
+          <div class="stat-big"><span class="num">459</span><span class="unit">vivono nell'ecosistema Bwindi-Sarambwe</span></div>
+          <p class="stat-line">Gli altri ~604 vivono nel massiccio dei Virunga (Rwanda/RDC/Mgahinga). Un nuovo censimento è in corso dal 2025.</p>
+
+          <div class="stat-big"><span class="num">2</span><span class="unit">parchi al mondo dove trekkarli in Uganda</span></div>
+          <p class="stat-line">Bwindi Impenetrable NP e Mgahinga Gorilla NP — il gorilla di montagna resta classificato <strong>"Endangered"</strong> dalla IUCN.</p>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Perché ora:</strong> ogni permesso finanzia direttamente ranger, conservazione e comunità locali. È un incontro raro con una specie che esiste solo in questa regione dell'Africa — non è in un safari qualunque, è uno dei pochi grandi mammiferi che si può ancora incontrare a pochi metri di distanza, guidati da ranger esperti.
+        <div class="source-note">Fonti: africangorilla.com, gorillafund.org, igcp.org (dati aggiornati ad agosto 2026).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ITINERARIO -->
+  <section id="itinerario" class="panel" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Bwindi_Impenetrable_National_Park_10.jpg" alt="Foresta pluviale di Bwindi Impenetrable National Park" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Thomas Fuhrmann, <a href="https://commons.wikimedia.org/wiki/File:Bwindi_Impenetrable_National_Park_10.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+        <div class="fallback">🌳</div>
+      </div>
+      <h2 class="section-title reveal">🗺️ Itinerario di massima — 10 giorni</h2>
+      <p class="section-sub reveal">10 giorni pensati per chi non si accontenta della spiaggia: rapide di grado 5, piste sterrate, trekking tra scimpanzé e gorilla di montagna nella foresta pluviale. Periodo target <strong>fine febbraio / inizio marzo 2027</strong> — date ancora da confermare in base a voli e permessi. Ogni giorno ha un link diretto a Google Maps con il tragitto reale — clicca per vedere durata live e traffico.</p>
+
+      <div class="timeline" id="timeline"></div>
+
+      <div class="callout reveal">
+        <strong>Nota:</strong> le distanze indicate sono in linea d'aria; su strada in Uganda si percorrono spesso piste non asfaltate, quindi i tempi reali sono più lunghi — usa i link a Google Maps per una stima aggiornata col traffico attuale.
+      </div>
+    </div>
+  </section>
+
+  <!-- MAPPA -->
+  <section id="mappa" class="panel" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Nile_source_point_in_jinja.jpg" alt="Punto delle sorgenti del Nilo, Jinja" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Vaibhave nagori, <a href="https://commons.wikimedia.org/wiki/File:Nile_source_point_in_jinja.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+        <div class="fallback">🌍</div>
+      </div>
+      <h2 class="section-title reveal">📍 Mappa &amp; giro in jeep</h2>
+      <p class="section-sub reveal">La mappa animata del tragitto — oltre 1.100 km di piste sterrate, savana e foresta pluviale a bordo di un 4x4 — e la mappa Google Maps reale del percorso (non serve API key). Apri il tragitto completo per vedere durata e traffico live, o esporta le tappe in un file KML da importare in Google My Maps / Google Earth.</p>
+
+      <div class="jeep-map-wrap reveal">
+        <svg id="jeep-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+          <path class="terrain terrain-a" d="M170 15 C 280 5, 420 40, 445 110 C 465 165, 420 200, 410 260 C 400 330, 440 370, 400 430 C 360 485, 260 500, 180 480 C 100 460, 55 420, 45 340 C 35 260, 60 220, 55 160 C 50 90, 90 30, 170 15 Z"/>
+          <path class="terrain terrain-b" d="M360 60 C 410 80, 450 100, 448 130 C 446 160, 400 165, 375 150 C 350 135, 340 90, 360 60 Z"/>
+          <path class="terrain terrain-c" d="M40 320 C 30 360, 55 420, 100 445 C 130 460, 150 440, 130 410 C 105 375, 60 360, 40 320 Z"/>
+
+          <path id="route-path" class="route-shadow" d="M 359.5,180.1 Q 367,150 374.3,120.2 Q 407,111 440,102.3 Q 285,81 129.8,60 Q 136,75 143.1,90.3 Q 116,158 90,226.5 Q 75,304 60,382.1 Q 76,411 92,440 Q 233,280 374.3,120.2 Q 367,150 359.5,180.1"/>
+          <path class="route-line" d="M 359.5,180.1 Q 367,150 374.3,120.2 Q 407,111 440,102.3 Q 285,81 129.8,60 Q 136,75 143.1,90.3 Q 116,158 90,226.5 Q 75,304 60,382.1 Q 76,411 92,440 Q 233,280 374.3,120.2 Q 367,150 359.5,180.1"/>
+
+          <circle class="pulse" cx="60" cy="382.1" r="8"/>
+          <g class="stop-pin">
+            <text x="60" y="392" text-anchor="middle" font-size="24">🦍</text>
+            <text class="stop-label highlight" x="60" y="412" text-anchor="middle">Bwindi</text>
+          </g>
+          <g class="stop-pin">
+            <text x="359.5" y="188" text-anchor="middle" font-size="20">✈️</text>
+            <text class="stop-label" x="359.5" y="204" text-anchor="middle">Entebbe</text>
+          </g>
+          <g class="stop-pin">
+            <text x="374.3" y="128" text-anchor="middle" font-size="20">🏙️</text>
+            <text class="stop-label" x="374.3" y="108" text-anchor="middle">Kampala</text>
+          </g>
+          <g class="stop-pin">
+            <text x="440" y="110" text-anchor="middle" font-size="20">🌊</text>
+            <text class="stop-label" x="440" y="90" text-anchor="middle">Jinja</text>
+          </g>
+          <g class="stop-pin">
+            <text x="129.8" y="68" text-anchor="middle" font-size="20">⛰️</text>
+            <text class="stop-label" x="129.8" y="41" text-anchor="middle">Fort Portal</text>
+          </g>
+          <g class="stop-pin">
+            <text x="143.1" y="98" text-anchor="middle" font-size="20">🐒</text>
+            <text class="stop-label" x="143.1" y="116" text-anchor="middle">Kibale</text>
+          </g>
+          <g class="stop-pin">
+            <text x="90" y="234" text-anchor="middle" font-size="20">🦁</text>
+            <text class="stop-label" x="90" y="252" text-anchor="middle">Queen Elizabeth</text>
+          </g>
+          <g class="stop-pin">
+            <text x="92" y="432" text-anchor="middle" font-size="20">🚣</text>
+            <text class="stop-label" x="92" y="458" text-anchor="middle">Bunyonyi</text>
+          </g>
+
+          <text font-size="24" id="jeep-marker">🚙
+            <animateMotion dur="18s" repeatCount="indefinite">
+              <mpath href="#route-path"/>
+            </animateMotion>
+          </text>
+        </svg>
+      </div>
+
+      <div class="map-embed reveal">
+        <iframe src="https://www.google.com/maps?q=Bwindi+Impenetrable+National+Park,+Uganda&z=7&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <div class="map-actions reveal">
+        <a id="link-full-route" href="#" target="_blank" rel="noopener">🗺️ Apri l'itinerario completo su Google Maps</a>
+        <button class="export" id="btn-export-kml">⬇️ Esporta tappe (KML)</button>
+      </div>
+
+      <div class="card reveal" style="overflow-x:auto;">
+        <h3 style="margin-top:0;">Percorsi giorno per giorno</h3>
+        <table class="stops-table" id="legs-table">
+          <thead><tr><th>Giorno</th><th>Tratta</th><th>Distanza</th><th>Durata stimata</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="source-note">Distanze in linea d'aria calcolate dalle coordinate GPS reali; su strada sono più lunghe. Clicca "Apri" per la stima live con traffico su Google Maps.</div>
+      </div>
+
+      <div class="card reveal" style="overflow-x:auto;">
+        <h3 style="margin-top:0;">Tutte le tappe</h3>
+        <table class="stops-table" id="stops-table">
+          <thead><tr><th>Tappa</th><th>Coordinate</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- GORILLA TREKKING -->
+  <section id="gorilla" class="panel dark" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Mountain_gorilla_%28Gorilla_beringei_beringei%29_eating.jpg" alt="Gorilla di montagna adulto, Mubare Group, Buhoma" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Charles J. Sharp, <a href="https://commons.wikimedia.org/wiki/File:Mountain_gorilla_(Gorilla_beringei_beringei)_eating.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+        <div class="fallback">🦍</div>
+      </div>
+      <h2 class="section-title reveal">🦍 Guida al Gorilla Trekking</h2>
+      <p class="section-sub reveal">Ore di salita su sentieri fangosi, in una delle foreste più dense del pianeta, per guadagnarti un'ora faccia a faccia con un silverback da 200kg. Non è per tutti — ed è esattamente per questo che vale la pena farlo. Prezzi aggiornati a luglio 2025.</p>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>📍 Dove</h3><p>Principalmente <strong>Bwindi Impenetrable National Park</strong> (settori Buhoma, Ruhija, Rushaga, Nkuringo), alternativa <strong>Mgahinga Gorilla NP</strong> (1 solo gruppo, Nyakagezi). Entrambi nel sud-ovest dell'Uganda.</p></div>
+        <div class="card reveal"><h3>💵 Permesso — alta stagione</h3><p><strong>800 USD</strong> a persona (turisti non residenti EAC), aumentato da 700$ dal 1° luglio 2025. Residenti stranieri: 700$. Cittadini EAC/Uganda: 700.000 UGX circa.</p></div>
+        <div class="card reveal"><h3>💸 Permesso — bassa stagione</h3><p>Ad <strong>aprile, maggio, novembre</strong> il prezzo scende a 600$ (non residenti) — non rilevante per un viaggio a fine feb/inizio mar, ma utile saperlo per confronti.</p></div>
+        <div class="card reveal"><h3>📆 Quando prenotare</h3><p>Permessi limitati (8 persone/gruppo al giorno). Dal 2026 l'UWA richiede <strong>pagamento integrale immediato</strong> alla prenotazione (niente più blocco a 7 giorni) — prenotate con largo anticipo.</p></div>
+        <div class="card reveal"><h3>🥾 Difficoltà</h3><p>Da moderata a impegnativa: trekking da <strong>1 a 8 ore</strong> su terreno montano, spesso fangoso e in salita, ad alta altitudine (1400-2600m).</p></div>
+        <div class="card reveal"><h3>🔬 Habituation Experience</h3><p>Opzione avanzata: 4 ore con un gruppo in fase di habituazione, max 4 persone/giorno. 1.500$ (non residenti) / 1.000$ (residenti).</p></div>
+      </div>
+
+      <div class="card reveal" style="margin-top:18px;">
+        <h3 style="margin-top:0;">📋 Regole durante l'incontro</h3>
+        <ul class="rule-list">
+          <li>Mantenere sempre almeno <strong>7 metri</strong> di distanza dai gorilla</li>
+          <li>Massimo <strong>1 ora</strong> di osservazione una volta trovato il gruppo</li>
+          <li>Niente flash fotografico, parlare a voce bassa</li>
+          <li>Non mangiare o bere vicino ai gorilla</li>
+          <li>Chi ha sintomi di malattia (anche un semplice raffreddore) non può partecipare — i gorilla sono vulnerabili alle malattie umane</li>
+          <li>Massimo 8 visitatori per gruppo di gorilla al giorno</li>
+        </ul>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Cosa portare nello zaino del trekking:</strong> scarponi da trekking impermeabili, ghette, guanti da giardinaggio (rami spinosi), giacca antipioggia, pantaloni lunghi resistenti, acqua, snack, macchina fotografica con zoom (niente selfie stick/drone).
+        <div class="source-note">Fonti: bwindiforestnationalpark.com, queenelizabethparkuganda.com, dumaexplorer.com, yourugandantourguide.com (prezzi verificati agosto 2026, riferiti alle tariffe UWA in vigore dal 1° luglio 2025).</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAMIGLIE GORILLA -->
+  <section id="famiglie" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌿 Tracker delle famiglie di gorilla</h2>
+      <p class="section-sub reveal">I gruppi habituati alla presenza umana a Bwindi (~20 gruppi) e Mgahinga (1 gruppo), divisi per settore. Filtra per zona per farti un'idea di dove potresti essere assegnato.</p>
+
+      <div class="filter-row reveal" id="family-filters"></div>
+      <div class="family-grid" id="family-grid"></div>
+
+      <div class="callout reveal">
+        <strong>Attenzione:</strong> il roster dei gruppi habituati cambia nel tempo (nuove habituazioni, fusioni, scissioni) e l'assegnazione al gruppo avviene la mattina stessa al briefing dell'Uganda Wildlife Authority, in base a dove si trova ciascuna famiglia quel giorno. Usa questa lista come riferimento indicativo, non come garanzia.
+        <div class="source-note">Fonti: gorilla-permits.com (agg. 25/07/2025), realmafricasafaris.com, lifetimesafaris.com, mgahinganationalpark.com.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATISTICHE AVVISTAMENTO -->
+  <section id="stats" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🔎 Statistiche di avvistamento</h2>
+      <p class="section-sub reveal">Quanto è probabile vedere davvero i gorilla, e quanto può durare il trekking.</p>
+
+      <div class="stats-grid">
+        <div class="card ring-card reveal">
+          <div class="ring" style="--pct:99;"><span class="ring-label">99%</span></div>
+          <p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Tasso di successo dell'avvistamento a Bwindi comunemente riportato da operatori turistici e UWA. I tracker locali individuano i gruppi ogni mattina prima dell'arrivo dei turisti.</p>
+        </div>
+        <div class="card reveal">
+          <h3 style="margin-top:0;">⏱️ Durata del trekking</h3>
+          <div class="dist-bars" id="dist-bars"></div>
+        </div>
+      </div>
+
+      <div class="card reveal" style="margin-top:18px;">
+        <h3 style="margin-top:0;">Cosa influenza l'esperienza (non la probabilità di trovarli)</h3>
+        <ul class="factor-list">
+          <li>La posizione del gruppo quella mattina — i tracker li localizzano all'alba, prima che arrivino i visitatori</li>
+          <li>La stagione: nella stagione secca il terreno è più semplice da percorrere; a fine febbraio/inizio marzo si è proprio al passaggio tra secco e piogge (vedi sezione Meteo)</li>
+          <li>La tua forma fisica incide sulla fatica e sul tempo di risalita, non sulla probabilità di avvistamento</li>
+          <li>Il settore scelto: alcuni gruppi (es. Rushegura a Buhoma) sono in media più vicini al punto di partenza</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIG FIVE -->
+  <section id="bigfive" class="panel dark" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Tough_Lion%2C_Uganda_%2815232409559%29.jpg" alt="Leone a Queen Elizabeth National Park" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Rod Waddington, <a href="https://commons.wikimedia.org/wiki/File:Tough_Lion,_Uganda_(15232409559).jpg" target="_blank" rel="noopener">CC BY-SA 2.0</a></div>
+        <div class="fallback">🦁</div>
+      </div>
+      <h2 class="section-title reveal">🐆 I Big Five (quasi)</h2>
+      <p class="section-sub reveal">A Queen Elizabeth NP si possono avvistare <strong>4 dei 5 Big Five</strong>: leone, elefante, bufalo e leopardo. Manca solo il rinoceronte — estinto in natura in Uganda, ma visitabile al Ziwa Rhino Sanctuary (tappa facoltativa sulla strada Kampala-ovest, non inclusa nell'itinerario base).</p>
+
+      <div class="card reveal" style="text-align:center;">
+        <div class="ring" style="--pct:80;"><span class="ring-label">4/5</span></div>
+        <p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Big Five avvistabili nel parco che visiterete — <span id="bigfive-count">0/5</span> segnati come "avvistati" da voi finora.</p>
+      </div>
+
+      <div class="bigfive-grid" id="bigfive-grid"></div>
+    </div>
+  </section>
+
+  <!-- METEO -->
+  <section id="meteo" class="panel" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Lake_bunyonyi_Islands_01.jpg" alt="Lake Bunyonyi, Uganda sud-occidentale" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Shaayflix Dr Shaay, <a href="https://commons.wikimedia.org/wiki/File:Lake_bunyonyi_Islands_01.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+        <div class="fallback">🏞️</div>
+      </div>
+      <h2 class="section-title reveal">🌦️ Meteo storico — Febbraio &amp; Marzo</h2>
+      <p class="section-sub reveal">Medie climatiche storiche per l'altopiano sud-occidentale (Bwindi/Kabale, ~1500-2200m) — il periodo che avete in mente, a cavallo tra i due mesi. <strong>Non è una previsione.</strong></p>
+
+      <div class="weather-cols reveal">
+        <div>
+          <h4>Bwindi — Febbraio</h4>
+          <div class="weather-stats">
+            <div class="card"><div class="wval">26°</div><div class="wlabel">Massima</div></div>
+            <div class="card"><div class="wval">15°</div><div class="wlabel">Minima</div></div>
+            <div class="card"><div class="wval">169mm</div><div class="wlabel">Pioggia</div></div>
+            <div class="card"><div class="wval">16</div><div class="wlabel">Giorni pioggia</div></div>
+          </div>
+        </div>
+        <div>
+          <h4>Bwindi — Marzo</h4>
+          <div class="weather-stats">
+            <div class="card"><div class="wval">26°</div><div class="wlabel">Massima</div></div>
+            <div class="card"><div class="wval">16°</div><div class="wlabel">Minima</div></div>
+            <div class="card"><div class="wval">254mm</div><div class="wlabel">Pioggia</div></div>
+            <div class="card"><div class="wval">20</div><div class="wlabel">Giorni pioggia</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <h3 style="margin-top:0;">Piovosità media mensile a Bwindi (Gen–Mag)</h3>
+        <div class="rain-chart" id="rain-chart"></div>
+        <div class="source-note">Fonte: weather-and-climate.com — medie storiche per Bwindi Impenetrable NP e Kabale.</div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Nota:</strong> se partite a fine febbraio siete ancora nella "piccola stagione secca" (dic-feb), ma i giorni a inizio marzo cadono già nella prima stagione delle piogge — aspettatevi un aumento del ~50% della pioggia rispetto a febbraio. Portate comunque un buon impermeabile per tutto il viaggio.
+      </div>
+    </div>
+  </section>
+
+  <!-- CURIOSITA -->
+  <section id="curiosita" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌍 Stranezze, Nilo e sole</h2>
+      <p class="section-sub reveal">Le cose più strane e sorprendenti dell'Uganda — verificate, non da guida turistica riciclata.</p>
+
+      <h3 style="color:#fff; margin-top:0;">☀️ Simulatore del sole — Bwindi, fine feb/inizio mar</h3>
+      <p class="section-sub reveal" style="color:#c7c2b6;">Trascina lo slider per vedere dove sarà il sole a una data ora e farti un'idea della luce e del tramonto nei giorni del trekking.</p>
+      <div class="card reveal" style="text-align:center;">
+        <div class="sun-sim-wrap">
+          <svg id="sun-sim" viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="skyGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop id="sky-stop-top" offset="0%" stop-color="#2f6fb0"/>
+                <stop id="sky-stop-bottom" offset="100%" stop-color="#bfe3ff"/>
+              </linearGradient>
+            </defs>
+            <rect x="2" y="4" width="496" height="176" rx="14" fill="url(#skyGradient)"/>
+            <path class="sun-arc" d="M 40,180 Q 250,20 460,180"/>
+            <path class="sun-hills" d="M0,200 Q80,170 160,195 T320,190 T500,200 L500,220 L0,220 Z"/>
+            <line class="sun-horizon" x1="0" y1="180" x2="500" y2="180"/>
+            <text x="40" y="200" text-anchor="middle" class="sun-label">🌅 Alba</text>
+            <text x="460" y="200" text-anchor="middle" class="sun-label">🌇 Tramonto</text>
+            <g id="sun-marker"><text x="0" y="0" text-anchor="middle" font-size="30">☀️</text></g>
+          </svg>
+          <div class="sun-slider-row">
+            <input type="range" id="sun-slider" min="300" max="1260" step="5" value="720" aria-label="Ora del giorno">
+            <div class="sun-slider-ticks"><span>05:00</span><span>13:00</span><span>21:00</span></div>
+          </div>
+          <div class="sun-readout" id="sun-readout">Calcolo posizione del sole…</div>
+          <div class="source-note">Simulazione per Bwindi/Kabale (sud-ovest Uganda) nel periodo target: alba ~07:04-07:09, tramonto ~19:11-19:18 (EAT, UTC+3) — vicino all'equatore questi orari variano di pochi minuti tutto l'anno. Fonte: gaisma.com.</div>
+        </div>
+      </div>
+
+      <h3 style="color:#fff;">🤯 Lo sapevi che...</h3>
+      <div class="bigfive-grid" id="facts-grid"></div>
+
+      <h3 style="color:#fff;">🧭 Sarete letteralmente sull'Equatore</h3>
+      <div class="card reveal">
+        <p style="color:#c7c2b6; font-size:0.92rem; margin:0 0 10px;">Tra Queen Elizabeth NP e Kasese c'è un vero monumento dell'Equatore, a <strong>Kikorongo</strong> — praticamente sulla vostra strada verso Bwindi. Foto con un piede in ogni emisfero, e i venditori locali offrono la "dimostrazione" dell'effetto Coriolis con una bacinella d'acqua (scientificamente discutibile a quella scala, ma divertente da vedere).</p>
+        <div class="source-note">Fonti: inspiresafaris.com, bujukuecotours.com, arcadiasafaris.com.</div>
+      </div>
+
+      <h3 style="color:#fff;">🌊 Il Nilo, in due parole</h3>
+      <div class="stats-grid">
+        <div class="card reveal"><h3 style="margin-top:0;">6.650 km</h3><p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Il fiume più lungo del mondo secondo Guinness World Records (una spedizione ha misurato l'Amazzonas come più lungo, ma non è un dato universalmente accettato).</p></div>
+        <div class="card reveal"><h3 style="margin-top:0;">↑ Scorre a NORD</h3><p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Al contrario di quasi tutti i grandi fiumi che si immaginano scorrere verso sud, il Nilo va dall'equatore fino al Mediterraneo in Egitto.</p></div>
+        <div class="card reveal"><h3 style="margin-top:0;">11 paesi</h3><p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Il suo bacino tocca 11 stati africani. Voi lo vedrete nascere esattamente a Jinja, dove esce dal Lago Vittoria.</p></div>
+        <div class="card reveal"><h3 style="margin-top:0;">1862</h3><p style="color:#c7c2b6; font-size:0.88rem; margin:0;">John Hanning Speke identificò la sorgente a Jinja (Ripon Falls). La cascata però non esiste più: sommersa nel 1954 dalla diga di Owen Falls.</p></div>
+      </div>
+      <div class="source-note" style="text-align:center;">Fonti: rainforestcruises.com, nationalgeographic.com, britannica.com, historytoday.com.</div>
+
+      <h3 style="color:#fff; margin-top:28px;">💵 Prezzi medi reali</h3>
+      <div class="card reveal" style="overflow-x:auto;">
+        <table class="stops-table" id="prices-table" style="min-width:0;">
+          <thead><tr><th>Voce</th><th>UGX</th><th>≈ EUR</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="source-note">Stime UGX da numbeo.com, fodors.com, traveltomtom.net, kenlinktours.com — variano molto tra città e zone turistiche. Conversione EUR calcolata col tasso live della sezione Valuta.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROFILO ALTIMETRICO -->
+  <section id="altitudine" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">⛰️ Profilo altimetrico del viaggio</h2>
+      <p class="section-sub reveal">Dati reali di altitudine per ogni tappa (fonti: bwindiimpenetrablenationalpark.com, queenelizabethnationalparkuganda.com, geodatos.net). Il salto più adrenalinico: dai 980m di Queen Elizabeth ai <strong>2.607m</strong> che si possono toccare durante il trekking a Bwindi.</p>
+      <div class="card reveal" style="overflow-x:auto;">
+        <div class="elev-chart" id="elev-chart"></div>
+      </div>
+      <div class="callout reveal">
+        <strong>Per dare un'idea:</strong> il punto più alto del trekking gorilla (2.607m) è più alto del rifugio più alto del Gran Sasso — e ci arrivate a piedi, in mezzo alla foresta pluviale, non con la funivia.
+      </div>
+    </div>
+  </section>
+
+  <!-- CONVERTITORE VALUTA -->
+  <section id="valuta" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">💱 Convertitore valuta live</h2>
+      <p class="section-sub reveal">Tasso di cambio in tempo reale (richiede internet) tra Euro, Dollaro USA e Scellino ugandese (UGX) — utile per farsi un'idea rapida quando si contratta al mercato o si paga in contanti.</p>
+      <div class="card reveal">
+        <div class="currency-form">
+          <div class="field">
+            <label for="cur-amount">Importo</label>
+            <input type="number" id="cur-amount" value="100" min="0">
+          </div>
+          <div class="field">
+            <label for="cur-from">Da</label>
+            <select id="cur-from"><option value="EUR">EUR €</option><option value="USD">USD $</option><option value="UGX">UGX</option></select>
+          </div>
+          <div class="field">
+            <label for="cur-to">A</label>
+            <select id="cur-to"><option value="USD">USD $</option><option value="UGX" selected>UGX</option><option value="EUR">EUR €</option></select>
+          </div>
+        </div>
+        <div id="cur-result" class="cur-result">Caricamento tasso di cambio…</div>
+        <div class="source-note">Fonte: open.er-api.com (tassi aggiornati quotidianamente). Tasso indicativo, non usarlo per transazioni ufficiali.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RICERCA VOLI -->
+  <section id="voli" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">✈️ Ricerca voli</h2>
+      <p class="section-sub reveal">Non esistono voli diretti dall'Italia a Entebbe: si vola sempre con uno scalo. Tempo di viaggio porta-a-porta realistico: <strong>13-20 ore</strong> a seconda dello scalo.</p>
+
+      <div class="card reveal">
+        <table class="hub-table">
+          <thead><tr><th>Compagnia</th><th>Scalo</th><th>Note</th></tr></thead>
+          <tbody>
+            <tr><td>Qatar Airways</td><td>Doha</td><td>Tra le coincidenze più rapide (~10-11h totali di volo)</td></tr>
+            <tr><td>Ethiopian Airlines</td><td>Addis Abeba</td><td>Frequente, buoni orari di coincidenza</td></tr>
+            <tr><td>KLM</td><td>Amsterdam</td><td>Tratta Amsterdam-Entebbe lunga (fino a 8h45)</td></tr>
+            <tr><td>Turkish Airlines</td><td>Istanbul</td><td>Ampia rete di collegamenti dall'Italia</td></tr>
+            <tr><td>Brussels Airlines</td><td>Bruxelles</td><td>Storicamente collegamento diretto verso Entebbe</td></tr>
+            <tr><td>RwandAir</td><td>Kigali</td><td>Utile se si combina un'estensione in Rwanda</td></tr>
+          </tbody>
+        </table>
+        <div class="source-note">Fonti: kayak.com, wego.com (dati aggregati agosto 2026) — verifica sempre orari e prezzi aggiornati prima di prenotare.</div>
+      </div>
+
+      <div class="card reveal">
+        <div class="flight-form">
+          <div class="field">
+            <label for="flight-origin">Da dove parti</label>
+            <select id="flight-origin">
+              <option value="MXP|Milano Malpensa">Milano Malpensa (MXP)</option>
+              <option value="LIN|Milano Linate">Milano Linate (LIN)</option>
+              <option value="BGY|Milano Bergamo">Milano Bergamo (BGY)</option>
+              <option value="FCO|Roma Fiumicino">Roma Fiumicino (FCO)</option>
+              <option value="BLQ|Bologna">Bologna (BLQ)</option>
+              <option value="VCE|Venezia">Venezia (VCE)</option>
+            </select>
+          </div>
+          <div class="field"><label>Destinazione</label><select disabled><option>Entebbe (EBB), Uganda</option></select></div>
+          <div class="field"><label>Periodo</label><select disabled><option>Fine feb / inizio mar 2027 (da confermare)</option></select></div>
+        </div>
+        <div class="flight-links">
+          <button id="btn-google-flights">Cerca su Google Flights</button>
+          <button class="alt" id="btn-skyscanner">Cerca su Skyscanner</button>
+          <button class="alt" id="btn-kayak">Cerca su Kayak</button>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Suggerimento:</strong> i motori di ricerca voli richiedono una connessione internet al click — il file resta comunque locale, si apre solo il browser sul sito scelto con i parametri già impostati.
+      </div>
+    </div>
+  </section>
+
+  <!-- BUDGET -->
+  <section id="budget" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">💰 Calcolatore budget</h2>
+      <p class="section-sub reveal">Il permesso gorilla (800$/pax) è un costo fisso ufficiale; il resto scala con quante persone siete e lo stile di viaggio scelto. Stima indicativa, non un preventivo — i prezzi reali variano con stagione e operatore.</p>
+
+      <div class="card reveal">
+        <div class="currency-form">
+          <div class="field">
+            <label for="budget-people">Persone</label>
+            <input type="number" id="budget-people" value="4" min="1">
+          </div>
+          <div class="field">
+            <label for="budget-style">Stile viaggio</label>
+            <select id="budget-style">
+              <option value="budget">Budget</option>
+              <option value="standard" selected>Standard</option>
+              <option value="comfort">Comfort</option>
+            </select>
+          </div>
+        </div>
+        <div id="budget-result" class="cur-result">—</div>
+        <div id="budget-breakdown" class="source-note" style="text-align:center; margin-top:10px;"></div>
+      </div>
+
+      <div class="source-note">Include: volo Italia-Entebbe a/r, permesso gorilla (800$) + permesso scimpanzé Kibale (250$), alloggio, 4x4+autista per tutto il tour (diviso tra le persone), cibo, mance. Esclude: assicurazione di viaggio, vaccinazioni, spese personali. Dati reali da: budgetyourtrip.com (spesa media giornaliera), ugandacarrentalservices.com e rentadriveruganda.com (noleggio 4x4+autista, 90-250$/giorno), safaribookings.com/dumaexplorer.com (permessi UWA), anywhere.com (costo cibo) — verificati ad agosto 2026.</div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">❓ Domande frequenti</h2>
+
+      <details class="faq reveal">
+        <summary>Serve il visto per l'Uganda?</summary>
+        <div class="faq-body">Sì: eVisa turistico Uganda 50 USD (ingresso singolo, valido 3 mesi) sul portale ufficiale <strong>visas.immigration.go.ug</strong>. In alternativa, l'East Africa Tourist Visa (Uganda+Kenya+Rwanda) costa 100 USD, ingressi multipli, 90 giorni — conviene solo se visitate anche Kenya o Rwanda. Attenzione ai siti non ufficiali che applicano sovrapprezzi di elaborazione.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Quanto costa davvero il permesso gorilla ora?</summary>
+        <div class="faq-body">Dal 1° luglio 2025 è <strong>800 USD</strong> a persona per turisti non residenti in East Africa (prima era 700$). Dal 2026 l'UWA richiede pagamento integrale immediato alla prenotazione. In bassa stagione (aprile, maggio, novembre) scende a 600$, ma non è il vostro caso.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Sono richieste vaccinazioni?</summary>
+        <div class="faq-body">Il vaccino contro la febbre gialla è <strong>obbligatorio</strong> per l'ingresso (serve il certificato). È inoltre fortemente raccomandata la profilassi antimalarica.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Fine febbraio/inizio marzo è un buon periodo?</summary>
+        <div class="faq-body">Sì con qualche riserva: febbraio è ancora nella piccola stagione secca (dic-feb), ma gli ultimi giorni del viaggio (inizio marzo) cadono già nella prima stagione delle piogge, con un aumento sensibile delle precipitazioni. Portate un buon impermeabile per tutto il viaggio, soprattutto per gli ultimi giorni. Vedi la sezione Meteo per i dati completi.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Che moneta si usa e conviene cambiare prima?</summary>
+        <div class="faq-body">Lo scellino ugandese (UGX). Conviene portare dollari USA in contanti (banconote non danneggiate, preferibilmente post-2009) da cambiare o usare direttamente per permessi e mance; carte di credito accettate solo in hotel/lodge principali.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Serve un'assicurazione di viaggio particolare?</summary>
+        <div class="faq-body">Sì, è vivamente consigliata un'assicurazione che includa evacuazione medica/elicottero, vista l'attività di trekking in zone remote e ad alta quota.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Come ci si sposta tra le tappe?</summary>
+        <div class="faq-body">La modalità più comune è noleggiare un 4x4 con driver-guida locale per tutto il tour. Per il tratto più lungo di ritorno (Lake Bunyonyi → Kampala/Entebbe, ~320-350km in linea d'aria) si può valutare un volo interno da Kihihi o Kisoro.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Le mance sono previste?</summary>
+        <div class="faq-body">Sì: driver-guida, ranger/guide del trekking, porter e staff dei lodge si aspettano una mancia. Vedi la sezione Budget per una stima da accantonare.</div>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Uganda Trip Planner — file locale. Il tracker Big Five si salva solo nel browser in cui lo usi. Mappa, foto, cambio valuta e ricerca voli richiedono una connessione internet al momento della visualizzazione/click.
+  <div class="credits">
+    Crediti foto (Wikimedia Commons): Patrick Cyusa (silverback hero) CC0 · Ruggiero Richard/USFWS (silverback) Pubblico dominio · Charles J. Sharp (gorilla adulto, elefante) CC BY-SA 4.0 · Thomas Fuhrmann (foresta Bwindi) CC BY-SA 4.0 · Shaayflix Dr Shaay (Lake Bunyonyi) CC BY-SA 4.0 · Vaibhave nagori (sorgenti del Nilo) CC BY-SA 4.0 · Giles Laurent (scimpanzé Kibale) CC BY-SA 4.0 · Rod Waddington (leone) CC BY-SA 2.0 · Michell Zappa (rafting Bujagali) CC BY-SA 2.0. Dati verificati su fonti pubbliche ad agosto 2026 — riverificate sempre prezzi e roster permessi prima di prenotare.
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ---- Scrollspy nav ----
+  var navLinks = document.querySelectorAll('nav.tabs a');
+  var sections = document.querySelectorAll('section[data-nav]');
+  var linkBySection = {};
+  navLinks.forEach(function(a){ linkBySection[a.getAttribute('href').slice(1)] = a; });
+
+  var spyObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        navLinks.forEach(function(a){ a.classList.remove('active'); });
+        var link = linkBySection[entry.target.id];
+        if(link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(function(s){ spyObserver.observe(s); });
+
+  // ---- Reveal on scroll ----
+  var revealObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ revealObserver.observe(el); });
+
+  // ---- Itinerary data + Google Maps links ----
+  var COORDS = {
+    entebbe: [0.0424, 32.4435],
+    kampala: [0.3476, 32.5825],
+    jinja: [0.4390, 33.2032],
+    fortportal: [0.6544, 30.2744],
+    kibale: [0.5000, 30.4000],
+    qenp: [-0.1944, 29.8992],
+    buhoma: [-0.9879, 29.6156],
+    bunyonyi: [-1.2833, 29.9181]
+  };
+  function mapsLink(fromKey, toKey){
+    var a = COORDS[fromKey], b = COORDS[toKey];
+    return 'https://www.google.com/maps/dir/?api=1&origin=' + a[0] + ',' + a[1] + '&destination=' + b[0] + ',' + b[1] + '&travelmode=driving';
+  }
+  function placeLink(key){
+    var p = COORDS[key];
+    return 'https://www.google.com/maps/search/?api=1&query=' + p[0] + ',' + p[1];
+  }
+
+  var ITINERARY = [
+    { d:1, title:'Arrivo a Entebbe / Kampala', tags:['Arrivo','Adattamento'], text:'Sbarco a Entebbe. Trasferimento a Kampala per una notte — l\'ultima con l\'aria condizionata e il wifi garantiti, godetevela. Da qui in poi si fa sul serio.', link: placeLink('entebbe'), linkLabel:'Vedi Entebbe su Google Maps' },
+    { d:2, title:'Kampala → Jinja', tags:['Adrenalina','~70km / 1,5-2h'], text:'Le sorgenti del Nilo Bianco — e le sue rapide di grado 4 e 5, tra le più adrenaliniche al mondo per il rafting. Nel pomeriggio si scende in acqua: preparatevi a rovesciare il raft almeno una volta.', link: mapsLink('kampala','jinja'), linkLabel:'Apri il tragitto Kampala → Jinja', highlight:true, photo:'https://upload.wikimedia.org/wikipedia/commons/e/eb/Rafting_Bujagali_Falls-2%2C_December_2007_-_by_Michell_Zappa.jpg', photoCredit:'Foto: Michell Zappa, CC BY-SA 2.0' },
+    { d:3, title:'Jinja → Kibale Forest (via Fort Portal)', tags:['Pista lunga','~350km / 7-8h'], text:'Giornata di puro spostamento verso ovest, attraverso le colline di Fort Portal. Musica alta, finestrino giù: è la giornata in cui il jeep diventa casa.', link: mapsLink('jinja','kibale'), linkLabel:'Apri il tragitto Jinja → Kibale' },
+    { d:4, title:'Kibale — Scimpanzé selvatici → Queen Elizabeth NP', tags:['Trekking scimpanzé','~95km / 2-3h'], text:'Trekking nella foresta più densa di primati dell\'Africa orientale: scimpanzé selvatici a pochi metri, urla nella canopy, niente gabbie. Pomeriggio verso la savana di Queen Elizabeth NP.', link: mapsLink('kibale','qenp'), linkLabel:'Apri il tragitto Kibale → Queen Elizabeth NP', highlight:true, photo:'https://upload.wikimedia.org/wikipedia/commons/8/86/013_Alpha_male_chimpanzee_at_Kibale_forest_National_Park_Photo_by_Giles_Laurent.jpg', photoCredit:'Foto: Giles Laurent, CC BY-SA 4.0' },
+    { d:5, title:'Queen Elizabeth National Park', tags:['Safari','Big Four'], text:'Game drive all\'alba nella savana — leoni che si arrampicano sugli alberi a Ishasha, elefanti, bufali. Boat safari nel pomeriggio sul Kazinga Channel, tra i più alti concentrati di ippopotami al mondo.', link: placeLink('qenp'), linkLabel:'Vedi Queen Elizabeth NP su Google Maps', photo:'https://upload.wikimedia.org/wikipedia/commons/3/3b/African_elephant_%28Loxodonta_africana%29_3.jpg', photoCredit:'Foto: Charles J. Sharp, CC BY-SA 4.0' },
+    { d:6, title:'Queen Elizabeth → Bwindi Impenetrable NP', tags:['Pista panoramica','~95km / 4-5h'], text:'Si sale: dai 980m della savana ai 1.400+ metri della foresta pluviale di Bwindi. Arrivo in serata, briefing pre-trekking — l\'adrenalina inizia a salire sul serio.', link: mapsLink('qenp','buhoma'), linkLabel:'Apri il tragitto Queen Elizabeth → Bwindi' },
+    { d:7, title:'Bwindi — GORILLA TREKKING 🦍', tags:['Il giorno clou'], text:'Sveglia all\'alba, si parte a piedi nella foresta pluviale più impenetrabile dell\'Africa: 1-8 ore di salita fangosa, machete alla mano dei ranger, fino a 2.607m di quota. Poi un\'ora, a pochi metri, davanti a un silverback da 200kg.', link: placeLink('buhoma'), linkLabel:'Vedi Bwindi (Buhoma) su Google Maps', highlight:true },
+    { d:8, title:'Bwindi → Lake Bunyonyi', tags:['Decompressione','~47km / 2h'], text:'Il corpo ha bisogno di una tregua: canoa tradizionale su uno dei laghi più sicuri e belli d\'Africa (niente coccodrilli, niente bilharzia). Recupero muscoli prima dell\'ultimo tratto.', link: mapsLink('buhoma','bunyonyi'), linkLabel:'Apri il tragitto Bwindi → Lake Bunyonyi' },
+    { d:9, title:'Lake Bunyonyi → Kampala/Entebbe', tags:['Pista lunga','~320km / 7-8h o volo interno'], text:'L\'ultima maratona su strada (o un volo interno da Kihihi/Kisoro per chi ha già dato abbastanza ai glutei). Ultima serata di gruppo per fare la conta dei km, dei litri di fango e delle foto sul rullino.', link: mapsLink('bunyonyi','entebbe'), linkLabel:'Apri il tragitto Lake Bunyonyi → Entebbe' },
+    { d:10, title:'Entebbe — Si torna a casa', tags:['Partenza'], text:'Ultime ore in Uganda tra mercato artigianale e Botanical Gardens, poi aeroporto. Si riparte diversi da come si è arrivati.', link: placeLink('entebbe'), linkLabel:'Vedi Entebbe su Google Maps' }
+  ];
+
+  var timeline = document.getElementById('timeline');
+  ITINERARY.forEach(function(day, idx){
+    var det = document.createElement('details');
+    det.className = 'day reveal';
+    if(idx === 0) det.open = true;
+    var tagsHtml = day.tags.map(function(t){ return '<span class="tag' + (day.highlight ? ' highlight' : '') + '">' + t + '</span>'; }).join('');
+    var photoHtml = day.photo ? ('<div class="mini-photo"><img src="' + day.photo + '" alt="" loading="lazy" onerror="this.parentElement.style.display=\'none\'"></div><div class="source-note">' + day.photoCredit + '</div>') : '';
+    det.innerHTML =
+      '<summary><span class="daynum">' + day.d + '</span><span class="daytitle">' + day.title + '</span><span class="chevron">▸</span></summary>' +
+      '<div class="day-body">' + tagsHtml + '<p>' + day.text + '</p>' + photoHtml +
+      '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
+      '</div>';
+    timeline.appendChild(det);
+    revealObserver.observe(det);
+  });
+
+  // ---- Elevation profile chart ----
+  var ELEVATIONS = [
+    { name:'Entebbe', m:1151 },
+    { name:'Kampala', m:1190 },
+    { name:'Jinja', m:1204 },
+    { name:'Fort Portal', m:1523 },
+    { name:'Kibale Forest', m:1500 },
+    { name:'Queen Elizabeth (Mweya)', m:980 },
+    { name:'Bwindi (trekking, max)', m:2607, hl:true },
+    { name:'Lake Bunyonyi', m:1950 }
+  ];
+  var elevChart = document.getElementById('elev-chart');
+  var maxElev = Math.max.apply(null, ELEVATIONS.map(function(e){ return e.m; }));
+  ELEVATIONS.forEach(function(e){
+    var col = document.createElement('div');
+    col.className = 'elev-col';
+    col.innerHTML =
+      '<div class="elev-val">' + e.m.toLocaleString('it-IT') + 'm</div>' +
+      '<div class="elev-bar" style="height:0%; ' + (e.hl ? 'background:linear-gradient(180deg,var(--red),var(--red-deep));' : '') + '"></div>' +
+      '<div class="elev-name">' + e.name + '</div>';
+    elevChart.appendChild(col);
+    setTimeout(function(){ col.querySelector('.elev-bar').style.height = Math.round((e.m/maxElev)*100) + '%'; }, 150);
+  });
+
+  // ---- Live currency converter ----
+  var curRates = null;
+  var curAmount = document.getElementById('cur-amount');
+  var curFrom = document.getElementById('cur-from');
+  var curTo = document.getElementById('cur-to');
+  var curResult = document.getElementById('cur-result');
+
+  function updateCurrency(){
+    if(!curRates){ curResult.textContent = 'Tasso non disponibile (serve internet).'; return; }
+    var amount = parseFloat(curAmount.value) || 0;
+    var from = curFrom.value, to = curTo.value;
+    var usdAmount = from === 'USD' ? amount : amount / curRates[from];
+    var converted = to === 'USD' ? usdAmount : usdAmount * curRates[to];
+    var decimals = to === 'UGX' ? 0 : 2;
+    curResult.textContent = amount.toLocaleString('it-IT') + ' ' + from + ' = ' + converted.toLocaleString('it-IT', {maximumFractionDigits: decimals}) + ' ' + to;
+  }
+
+  fetch('https://open.er-api.com/v6/latest/USD').then(function(r){ return r.json(); }).then(function(data){
+    if(data && data.rates){ curRates = data.rates; updateCurrency(); }
+    else { curResult.textContent = 'Tasso non disponibile in questo momento.'; }
+  }).catch(function(){ curResult.textContent = 'Tasso non disponibile (verifica la connessione internet).'; });
+
+  [curAmount, curFrom, curTo].forEach(function(el){ el.addEventListener('input', updateCurrency); el.addEventListener('change', updateCurrency); });
+
+  // ---- Budget calculator ----
+  var BUDGET = {
+    nights: 9,
+    flight: { budget:480, standard:840, comfort:960 }, // "fortunati" vs "realistico tipico" 2-3 mesi prima (Ethiopian via Addis Abeba, Qatar via Doha)
+    permitsFixed: 913, // permesso gorilla 800$ + permesso scimpanzé Kibale 250$ (~1.050$ / 1,15)
+    lodgingPerNight: { budget:30, standard:65, comfort:140 },
+    foodPerDay: { budget:14, standard:22, comfort:35 },
+    tipsPerDay: { budget:5, standard:8, comfort:13 },
+    transportPerDayShared: { budget:85, standard:150, comfort:250 } // 4x4+autista, costo totale del gruppo al giorno
+  };
+  var bgtPeople = document.getElementById('budget-people');
+  var bgtStyle = document.getElementById('budget-style');
+  var bgtResult = document.getElementById('budget-result');
+  var bgtBreakdown = document.getElementById('budget-breakdown');
+  function updateBudget(){
+    if(!bgtPeople) return;
+    var people = Math.max(1, parseInt(bgtPeople.value, 10) || 1);
+    var style = bgtStyle.value;
+    var days = BUDGET.nights + 1;
+    var perPersonFixed = BUDGET.flight[style] + BUDGET.permitsFixed;
+    var perPersonNightly = BUDGET.nights * (BUDGET.lodgingPerNight[style] + BUDGET.foodPerDay[style]) + days * BUDGET.tipsPerDay[style];
+    var transportTotal = BUDGET.nights * BUDGET.transportPerDayShared[style];
+    var totalGroup = people * (perPersonFixed + perPersonNightly) + transportTotal;
+    var perPerson = totalGroup / people;
+    bgtResult.textContent = '~' + Math.round(perPerson).toLocaleString('it-IT') + ' € a persona';
+    bgtBreakdown.textContent = 'Totale gruppo (' + people + ' persone): ~' + Math.round(totalGroup).toLocaleString('it-IT') + ' € — include volo, permessi gorilla+scimpanzé, alloggio, 4x4+autista diviso tra il gruppo, cibo, mance.';
+  }
+  if(bgtPeople){
+    [bgtPeople, bgtStyle].forEach(function(el){ el.addEventListener('input', updateBudget); el.addEventListener('change', updateBudget); });
+    updateBudget();
+  }
+
+  // ---- Gorilla families tracker ----
+  var FAMILIES = [
+    { sector:'Buhoma', name:'Mubare', size:'~9 individui', level:'Impegnativo', note:'Il primo gruppo habituato di Bwindi (dal 1993), spesso sui versanti più alti.' },
+    { sector:'Buhoma', name:'Habinyanja', size:'medio-grande', level:'Media', note:'Gruppo numeroso, dinamiche familiari interessanti da osservare.' },
+    { sector:'Buhoma', name:'Rushegura', size:'~17 individui', level:'Facile', note:'Spesso vicino al campo base: trekking generalmente più breve del settore.' },
+    { sector:'Buhoma', name:'Katwe', size:'n.d.', level:'Media', note:'Uno dei gruppi del settore di Buhoma.' },
+    { sector:'Ruhija', name:'Bitukura', size:'n.d.', level:'Media', note:'Gruppo noto per essere relativamente tranquillo con i visitatori.' },
+    { sector:'Ruhija', name:'Oruzogo', size:'n.d.', level:'Media', note:'Diversi cuccioli, buona attività sociale da osservare.' },
+    { sector:'Ruhija', name:'Kyaguliro', size:'~7 individui', level:'Impegnativo', note:'Storicamente gruppo di ricerca, non sempre disponibile per il turismo.' },
+    { sector:'Rushaga', name:'Nshongi', size:'n.d.', level:'Media', note:'Uno dei gruppi storici del settore, sui pendii collinari.' },
+    { sector:'Rushaga', name:'Mishaya', size:'~7 individui', level:'Impegnativo', note:'Guidato da un maschio dominante particolarmente attivo.' },
+    { sector:'Rushaga', name:'Kahungye', size:'n.d.', level:'Impegnativo', note:'Gruppo grande, può muoversi molto durante il giorno.' },
+    { sector:'Rushaga', name:'Busingye', size:'~15 individui', level:'Media', note:'Nato nel 2012 da una scissione del gruppo Kahungye.' },
+    { sector:'Rushaga', name:'Bweza', size:'n.d.', level:'Media', note:'Gruppo distaccato da Nshongi, più piccolo.' },
+    { sector:'Rushaga', name:'Rwigi', size:'~10 individui', level:'Impegnativo', note:'Uno dei gruppi più recenti del settore.' },
+    { sector:'Rushaga', name:'Mucunguzi', size:'~16 individui', level:'Media', note:'Gruppo del settore Rushaga, dati aggiornati a gennaio 2025.' },
+    { sector:'Nkuringo', name:'Nkuringo', size:'n.d.', level:'Impegnativo', note:'Terreno tra i più scoscesi di Bwindi (prima famiglia habituata nel settore, dal 1997).' },
+    { sector:'Nkuringo', name:'Christmas', size:'n.d.', level:'Media', note:'Gruppo del settore Nkuringo.' },
+    { sector:'Nkuringo', name:'Bushaho', size:'n.d.', level:'Media', note:'Gruppo del settore Nkuringo.' },
+    { sector:'Mgahinga', name:'Nyakagezi', size:'9 individui', level:'Media', note:"L'unico gruppo habituato di Mgahinga, sulle pendici dei vulcani Muhabura, Mgahinga e Sabyinyo." }
+  ];
+
+  var sectors = ['Tutti'].concat(Array.from(new Set(FAMILIES.map(function(f){ return f.sector; }))));
+  var filterRow = document.getElementById('family-filters');
+  var familyGrid = document.getElementById('family-grid');
+  var activeSector = 'Tutti';
+
+  function renderFamilies(){
+    familyGrid.innerHTML = '';
+    FAMILIES.filter(function(f){ return activeSector === 'Tutti' || f.sector === activeSector; }).forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'family-card';
+      card.innerHTML =
+        '<div class="fsector">' + f.sector + '</div>' +
+        '<div class="fname">' + f.name + '</div>' +
+        '<div class="flevel ' + f.level + '">' + f.level + '</div>' +
+        '<div class="fsize">' + f.size + '</div>' +
+        '<p class="fnote">' + f.note + '</p>';
+      familyGrid.appendChild(card);
+    });
+  }
+
+  sectors.forEach(function(s){
+    var btn = document.createElement('button');
+    btn.textContent = s;
+    if(s === activeSector) btn.classList.add('active');
+    btn.addEventListener('click', function(){
+      activeSector = s;
+      filterRow.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderFamilies();
+    });
+    filterRow.appendChild(btn);
+  });
+  renderFamilies();
+
+  // ---- Big Five tracker ----
+  var BIGFIVE = [
+    { id:'lion', icon:'🦁', name:'Leone', diff:'Media', fact:'A Ishasha si arrampicano sugli alberi — comportamento raro, uno dei pochi posti al mondo dove osservarlo.' },
+    { id:'elephant', icon:'🐘', name:'Elefante', diff:'Facile', fact:'Circa 2.500 elefanti nel parco: tra gli avvistamenti più probabili del game drive.' },
+    { id:'buffalo', icon:'🐃', name:'Bufalo', diff:'Facile', fact:'Si muovono in mandrie numerose, spesso vicino al Kazinga Channel.' },
+    { id:'leopard', icon:'🐆', name:'Leopardo', diff:'Difficile', fact:'Elusivo e notturno: si nasconde spesso sui rami bassi degli alberi di giorno.' },
+    { id:'rhino', icon:'🦏', name:'Rinoceronte', diff:'Assente', fact:'Non presente a Queen Elizabeth NP — solo al Ziwa Rhino Sanctuary (tappa facoltativa).' }
+  ];
+  var BF_KEY = 'uganda-trip-bigfive';
+  var bfSpotted = {};
+  try { bfSpotted = JSON.parse(localStorage.getItem(BF_KEY)) || {}; } catch(e){ bfSpotted = {}; }
+
+  var bfGrid = document.getElementById('bigfive-grid');
+  function updateBfCount(){
+    var n = BIGFIVE.filter(function(a){ return bfSpotted[a.id]; }).length;
+    document.getElementById('bigfive-count').textContent = n + '/5';
+  }
+  BIGFIVE.forEach(function(a){
+    var card = document.createElement('div');
+    card.className = 'bigfive-card';
+    var btnDisabled = a.diff === 'Assente';
+    card.innerHTML =
+      '<div class="bf-icon">' + a.icon + '</div>' +
+      '<div class="bf-name">' + a.name + '</div>' +
+      '<div class="bf-diff ' + a.diff + '">' + a.diff + '</div>' +
+      '<p class="bf-fact">' + a.fact + '</p>' +
+      (btnDisabled ? '' : '<button class="bf-track-btn" data-id="' + a.id + '">Da avvistare</button>');
+    bfGrid.appendChild(card);
+    if(!btnDisabled){
+      var btn = card.querySelector('.bf-track-btn');
+      function refreshBtn(){
+        if(bfSpotted[a.id]){ btn.textContent = 'Avvistato! ✅'; btn.classList.add('spotted'); }
+        else { btn.textContent = 'Da avvistare'; btn.classList.remove('spotted'); }
+      }
+      refreshBtn();
+      btn.addEventListener('click', function(){
+        bfSpotted[a.id] = !bfSpotted[a.id];
+        try { localStorage.setItem(BF_KEY, JSON.stringify(bfSpotted)); } catch(e){}
+        refreshBtn();
+        updateBfCount();
+      });
+    }
+  });
+  updateBfCount();
+
+  // ---- Sighting duration distribution ----
+  var DURATION_DIST = [
+    { label: '< 2h (facile)', pct: 25 },
+    { label: '2-4h (media)', pct: 45 },
+    { label: '4-8h (impegnativo)', pct: 30 }
+  ];
+  var distEl = document.getElementById('dist-bars');
+  DURATION_DIST.forEach(function(d){
+    var row = document.createElement('div');
+    row.className = 'dist-row';
+    row.innerHTML =
+      '<div class="dlabel">' + d.label + '</div>' +
+      '<div class="dtrack"><div class="dfill" style="width:0%"></div></div>' +
+      '<div class="dpct">' + d.pct + '%</div>';
+    distEl.appendChild(row);
+    setTimeout(function(){ row.querySelector('.dfill').style.width = d.pct + '%'; }, 100);
+  });
+
+  // ---- Weather rain chart (Bwindi, Gen-Mag) ----
+  var MONTHS_RAIN = [
+    { m:'Gen', mm:110 }, { m:'Feb', mm:169, hl:true }, { m:'Mar', mm:254, hl:true }, { m:'Apr', mm:270 }, { m:'Mag', mm:210 }
+  ];
+  var maxMm = Math.max.apply(null, MONTHS_RAIN.map(function(d){ return d.mm; }));
+  var rainChart = document.getElementById('rain-chart');
+  MONTHS_RAIN.forEach(function(d){
+    var col = document.createElement('div');
+    col.className = 'bar-col' + (d.hl ? ' hl' : '');
+    col.innerHTML =
+      '<div class="bar-val">' + d.mm + 'mm</div>' +
+      '<div class="bar" style="height:0%"></div>' +
+      '<div class="bar-month">' + d.m + '</div>';
+    rainChart.appendChild(col);
+    setTimeout(function(){ col.querySelector('.bar').style.height = Math.round((d.mm/maxMm)*100) + '%'; }, 100);
+  });
+
+  // ---- Sun position simulator (Bwindi/Kabale, EAT UTC+3) — simulazione fine feb/inizio mar 2027 ----
+  var SUNRISE_MIN = 7.1 * 60, SUNSET_MIN = 19.25 * 60, TWILIGHT = 50;
+  var sunMarker = document.getElementById('sun-marker');
+  var sunReadout = document.getElementById('sun-readout');
+  var sunSlider = document.getElementById('sun-slider');
+  var skyTop = document.getElementById('sky-stop-top');
+  var skyBottom = document.getElementById('sky-stop-bottom');
+  var NIGHT_TOP = [5,6,11], NIGHT_BOT = [18,23,38];
+  var DAWN_TOP = [45,32,74], DAWN_BOT = [255,150,90];
+  var DAY_TOP = [47,111,176], DAY_BOT = [191,227,255];
+  function lerp(a,b,t){ return a + (b - a) * t; }
+  function mixColor(c1,c2,t){ return 'rgb(' + Math.round(lerp(c1[0],c2[0],t)) + ',' + Math.round(lerp(c1[1],c2[1],t)) + ',' + Math.round(lerp(c1[2],c2[2],t)) + ')'; }
+  function rgbStr(c){ return 'rgb(' + c[0] + ',' + c[1] + ',' + c[2] + ')'; }
+  function skyColors(t){
+    var dSunrise = t - SUNRISE_MIN, dSunset = t - SUNSET_MIN;
+    if(Math.abs(dSunrise) <= TWILIGHT){
+      var f = (dSunrise + TWILIGHT) / (2 * TWILIGHT);
+      return f < 0.5
+        ? { top: mixColor(NIGHT_TOP, DAWN_TOP, f / 0.5), bot: mixColor(NIGHT_BOT, DAWN_BOT, f / 0.5) }
+        : { top: mixColor(DAWN_TOP, DAY_TOP, (f - 0.5) / 0.5), bot: mixColor(DAWN_BOT, DAY_BOT, (f - 0.5) / 0.5) };
+    }
+    if(Math.abs(dSunset) <= TWILIGHT){
+      var f2 = (dSunset + TWILIGHT) / (2 * TWILIGHT);
+      return f2 < 0.5
+        ? { top: mixColor(DAY_TOP, DAWN_TOP, f2 / 0.5), bot: mixColor(DAY_BOT, DAWN_BOT, f2 / 0.5) }
+        : { top: mixColor(DAWN_TOP, NIGHT_TOP, (f2 - 0.5) / 0.5), bot: mixColor(DAWN_BOT, NIGHT_BOT, (f2 - 0.5) / 0.5) };
+    }
+    if(t > SUNRISE_MIN && t < SUNSET_MIN) return { top: rgbStr(DAY_TOP), bot: rgbStr(DAY_BOT) };
+    return { top: rgbStr(NIGHT_TOP), bot: rgbStr(NIGHT_BOT) };
+  }
+  function renderSun(totalMinutes){
+    var hh = Math.floor(totalMinutes / 60), mm = Math.round(totalMinutes % 60);
+    var timeLabel = String(hh).padStart(2,'0') + ':' + String(mm).padStart(2,'0') + ' EAT';
+    var sky = skyColors(totalMinutes);
+    if(skyTop) skyTop.setAttribute('stop-color', sky.top);
+    if(skyBottom) skyBottom.setAttribute('stop-color', sky.bot);
+
+    if(totalMinutes < SUNRISE_MIN || totalMinutes > SUNSET_MIN){
+      var beforeDawn = totalMinutes < SUNRISE_MIN;
+      sunMarker.style.transform = 'translate(' + (beforeDawn ? 40 : 460) + 'px,176px)';
+      sunMarker.querySelector('text').textContent = '🌙';
+      sunReadout.textContent = timeLabel + ' — buio, il sole ' + (beforeDawn ? 'non è ancora sorto' : 'è già tramontato');
+      return;
+    }
+    var frac = (totalMinutes - SUNRISE_MIN) / (SUNSET_MIN - SUNRISE_MIN);
+    var x = 40 + frac * 420;
+    var y = 180 - Math.sin(frac * Math.PI) * 155;
+    sunMarker.querySelector('text').textContent = '☀️';
+    sunMarker.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+    var phase = frac < 0.06 ? 'sta sorgendo — luce dorata, ideale per foto'
+      : frac > 0.94 ? 'sta tramontando — luce dorata, ideale per foto'
+      : (frac > 0.4 && frac < 0.6) ? 'è a picco, mezzogiorno pieno, luce dura'
+      : 'è alto in cielo, luce piena';
+    sunReadout.textContent = timeLabel + ' — il sole ' + phase;
+  }
+  if(sunSlider){
+    var nowUtc = new Date();
+    var eatNowMin = ((nowUtc.getUTCHours() * 60 + nowUtc.getUTCMinutes()) + 3 * 60) % 1440;
+    var initial = Math.min(1260, Math.max(300, Math.round(eatNowMin / 5) * 5));
+    sunSlider.value = initial;
+    renderSun(initial);
+    sunSlider.addEventListener('input', function(){ renderSun(Number(sunSlider.value)); });
+  }
+
+  // ---- Lo sapevi che... facts ----
+  var FACTS = [
+    { icon:'🧊', text:'A meno di 50km dall\'equatore, le Rwenzori Mountains hanno ghiacciai permanenti — dal 1906 ne hanno perso oltre il 90%.' },
+    { icon:'🌯', text:'Il "rolex" più grande del mondo (chapati+uova) pesava 204,6 kg — record Guinness stabilito in Uganda nel 2021.' },
+    { icon:'🦟', text:'Il virus Zika prende il nome dalla Zika Forest ugandese, dove fu isolato per la prima volta nel 1947.' },
+    { icon:'👶', text:'L\'Uganda ha la seconda età mediana più bassa al mondo (~16 anni), dopo il Niger.' },
+    { icon:'🍌', text:'Nel 1879 un medico britannico documentò un cesareo riuscito a Bunyoro, eseguito da guaritori locali con vino di banana come antisettico/sedativo — anni prima della prima analoga procedura documentata in Europa.' },
+    { icon:'🌊', text:'Le Ripon Falls, la "sorgente" del Nilo scoperta nel 1862, non esistono più: sommerse nel 1954 dalla diga di Owen Falls a Jinja.' },
+    { icon:'🦁', text:'A Ishasha (Queen Elizabeth NP) i leoni si arrampicano sugli alberi — comportamento documentato in pochissimi altri posti al mondo.' }
+  ];
+  var factsGrid = document.getElementById('facts-grid');
+  if(factsGrid){
+    FACTS.forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'bigfive-card';
+      card.innerHTML = '<div class="bf-icon">' + f.icon + '</div><p class="bf-fact" style="min-height:0;">' + f.text + '</p>';
+      factsGrid.appendChild(card);
+    });
+  }
+
+  // ---- Prezzi medi reali ----
+  var PRICES = [
+    { label:'Birra locale (Nile Special/Bell)', ugx:5000 },
+    { label:'Rolex (chapati+uova)', ugx:3500 },
+    { label:'Corsa boda-boda in città', ugx:5000 },
+    { label:'SIM + 1-2GB dati', ugx:8000 },
+    { label:'Acqua 500ml-1L', ugx:1500 }
+  ];
+  var pricesBody = document.querySelector('#prices-table tbody');
+  function renderPrices(){
+    if(!pricesBody) return;
+    pricesBody.innerHTML = '';
+    var rate = (curRates && curRates.UGX && curRates.EUR) ? (curRates.EUR / curRates.UGX) : (1 / 4260);
+    PRICES.forEach(function(p){
+      var eur = (p.ugx * rate).toFixed(2);
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + p.label + '</td><td>' + p.ugx.toLocaleString('it-IT') + '</td><td>~' + eur + ' €</td>';
+      pricesBody.appendChild(tr);
+    });
+  }
+  renderPrices();
+
+  // ---- Flight search links ----
+  function currentOrigin(){
+    var v = document.getElementById('flight-origin').value.split('|');
+    return { code: v[0], label: v[1] };
+  }
+  document.getElementById('btn-google-flights').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.google.com/travel/flights?q=' + encodeURIComponent('Voli da ' + o.label + ' a Entebbe a fine febbraio 2027'), '_blank');
+  });
+  document.getElementById('btn-skyscanner').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.skyscanner.it/trasporti/voli/' + o.code.toLowerCase() + '/ebb/', '_blank');
+  });
+  document.getElementById('btn-kayak').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.kayak.it/flights/' + o.code + '-EBB', '_blank');
+  });
+
+  // ---- Map: full route link + stops table + KML export ----
+  var STOPS = [
+    { name:'Entebbe (arrivo/partenza)', key:'entebbe' },
+    { name:'Kampala', key:'kampala' },
+    { name:'Jinja', key:'jinja' },
+    { name:'Fort Portal', key:'fortportal' },
+    { name:'Kibale Forest NP', key:'kibale' },
+    { name:'Queen Elizabeth NP', key:'qenp' },
+    { name:'Bwindi (Buhoma)', key:'buhoma' },
+    { name:'Lake Bunyonyi', key:'bunyonyi' }
+  ];
+
+  var origin = COORDS.entebbe, destination = COORDS.entebbe;
+  var waypoints = STOPS.slice(1, -1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('|');
+  document.getElementById('link-full-route').href =
+    'https://www.google.com/maps/dir/?api=1&origin=' + origin[0] + ',' + origin[1] +
+    '&destination=' + destination[0] + ',' + destination[1] +
+    '&waypoints=' + encodeURIComponent(waypoints) + '&travelmode=driving';
+
+  var stopsBody = document.querySelector('#stops-table tbody');
+  STOPS.forEach(function(s){
+    var c = COORDS[s.key];
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + s.name + '</td><td class="mono">' + c[0].toFixed(4) + ', ' + c[1].toFixed(4) + '</td><td><a href="' + placeLink(s.key) + '" target="_blank" rel="noopener">Apri ↗</a></td>';
+    stopsBody.appendChild(tr);
+  });
+
+  var LEGS = [
+    { day:1, label:'Entebbe → Kampala', from:'entebbe', to:'kampala', km:'~37 km', dur:'1-1,5h' },
+    { day:2, label:'Kampala → Jinja', from:'kampala', to:'jinja', km:'~70 km', dur:'1,5-2h' },
+    { day:3, label:'Jinja → Kibale Forest (via Fort Portal)', from:'jinja', to:'kibale', km:'~350 km', dur:'7-8h' },
+    { day:4, label:'Kibale → Queen Elizabeth NP', from:'kibale', to:'qenp', km:'~95 km', dur:'2-3h' },
+    { day:6, label:'Queen Elizabeth NP → Bwindi (Buhoma)', from:'qenp', to:'buhoma', km:'~95 km', dur:'4-5h' },
+    { day:8, label:'Bwindi (Buhoma) → Lake Bunyonyi', from:'buhoma', to:'bunyonyi', km:'~47 km', dur:'2h' },
+    { day:9, label:'Lake Bunyonyi → Entebbe', from:'bunyonyi', to:'entebbe', km:'~320 km', dur:'7-8h (o volo interno)' }
+  ];
+  var legsBody = document.querySelector('#legs-table tbody');
+  LEGS.forEach(function(leg){
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>Giorno ' + leg.day + '</td><td>' + leg.label + '</td><td>' + leg.km + '</td><td>' + leg.dur + '</td><td><a href="' + mapsLink(leg.from, leg.to) + '" target="_blank" rel="noopener">Apri ↗</a></td>';
+    legsBody.appendChild(tr);
+  });
+
+  document.getElementById('btn-export-kml').addEventListener('click', function(){
+    var kmlPlacemarks = STOPS.map(function(s){
+      var c = COORDS[s.key];
+      return '<Placemark><name>' + s.name + '</name><Point><coordinates>' + c[1] + ',' + c[0] + ',0</coordinates></Point></Placemark>';
+    }).join('\\n');
+    var lineCoords = STOPS.map(function(s){ var c = COORDS[s.key]; return c[1] + ',' + c[0] + ',0'; }).join(' ');
+    var kml = '<?xml version="1.0" encoding="UTF-8"?>\\n' +
+      '<kml xmlns="http://www.opengis.net/kml/2.2"><Document>' +
+      '<name>Uganda 2027 - Itinerario</name>' +
+      kmlPlacemarks +
+      '<Placemark><name>Percorso completo</name><LineString><tessellate>1</tessellate><coordinates>' + lineCoords + '</coordinates></LineString></Placemark>' +
+      '</Document></kml>';
+    var blob = new Blob([kml], { type: 'application/vnd.google-earth.kml+xml' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'uganda-2027-itinerario.kml';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+})();
+</script>
+
+</body>
+</html>

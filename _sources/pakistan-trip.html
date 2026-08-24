@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pakistan 2027 — Trip Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  /* Pagina-specifiche: elevazione "chiusa a marzo" */
+  .elev-bar.closed{ background:repeating-linear-gradient(135deg, rgba(255,255,255,0.25) 0 6px, rgba(255,255,255,0.08) 6px 12px) !important; opacity:0.6; }
+  .route-status{ display:grid; grid-template-columns:1fr auto; gap:10px 14px; align-items:center; }
+  .route-status .r-name{ font-weight:600; color:var(--ink); }
+  section.panel.dark .route-status .r-name{ color:#f4f1ea; }
+  .route-status .r-status{ font-size:0.78rem; font-weight:700; padding:4px 10px; border-radius:8px; white-space:nowrap; justify-self:end; }
+  .r-status.open{ background:#1e4a2f; color:#8fe0ac; }
+  .r-status.closed{ background:#4a1c1c; color:#ff9b8a; }
+  .route-note{ grid-column:1 / -1; font-size:0.82rem; color:#c7c2b6; margin:-4px 0 10px; }
+</style>
+</head>
+<body>
+
+<div class="flagbar"></div>
+
+<header class="hero">
+  <div class="bg" style="background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.55) 55%, rgba(10,14,11,0.92) 100%), url('https://upload.wikimedia.org/wikipedia/commons/4/4b/A_land_enclosed_in_Mountains_-_Hunza_Valley.jpg');"></div>
+  <div class="content">
+    <h1>Pakistan</h1>
+    <p class="tagline">Moschee mughal, il confine più teatrale del mondo e la Karakoram Highway che si arrampica tra tre catene montuose. Dalla pianura del Punjab ai 2.500m di Hunza: un paese quasi senza turisti, con alcuni dei panorami più esagerati del pianeta.</p>
+    <div class="badge-row">
+      <span class="badge">📅 Periodo target: marzo 2027 <em>(da confermare)</em></span>
+      <span class="badge">🕌 Lahore &amp; Wagah Border</span>
+      <span class="badge">🏔️ Karakoram Highway</span>
+      <span class="badge">🏞️ Hunza Valley</span>
+      <span class="badge">🗻 Skardu &amp; Baltistan</span>
+    </div>
+    <div class="scroll-cue">↓ scorri per esplorare</div>
+  </div>
+  <div class="photo-credit">Foto: Maqalam97, <a href="https://commons.wikimedia.org/wiki/File:A_land_enclosed_in_Mountains_-_Hunza_Valley.jpg" target="_blank" rel="noopener">CC BY-SA 4.0, Wikimedia Commons</a></div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <a href="index.html" class="home-link">🌍 Tutte le mete</a>
+  <a href="#perche">Perché andare</a>
+  <a href="#itinerario">Itinerario</a>
+  <a href="#mappa">Mappa</a>
+  <a href="#kkh">Guida alla KKH</a>
+  <a href="#siti">Siti da non perdere</a>
+  <a href="#passi">Passi &amp; strade</a>
+  <a href="#giganti">Giganti del Karakoram</a>
+  <a href="#meteo">Meteo</a>
+  <a href="#curiosita">Curiosità</a>
+  <a href="#altitudine">Altitudine</a>
+  <a href="#valuta">Valuta</a>
+  <a href="#voli">Voli</a>
+  <a href="#budget">Spese stimate</a>
+  <a href="#faq">FAQ</a>
+</nav>
+
+<main>
+
+  <!-- PERCHE ANDARE -->
+  <section id="perche" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">✨ Perché andare proprio ora</h2>
+      <p class="section-sub reveal">Il Pakistan settentrionale è probabilmente il paesaggio di montagna più spettacolare e meno affollato del pianeta — dove tre delle grandi catene montuose del mondo si incontrano, letteralmente, a pochi km dalla vostra strada.</p>
+
+      <div class="why-grid reveal">
+        <div class="photo-banner" style="margin-bottom:0;">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Badshahi_Mosque_Lahore_Punjab.jpg" alt="Badshahi Mosque, Lahore" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+          <div class="credit">Foto: Mhtoori, <a href="https://commons.wikimedia.org/wiki/File:Badshahi_Mosque_Lahore_Punjab.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+          <div class="fallback">🕌</div>
+        </div>
+        <div>
+          <div class="stat-big"><span class="num">5</span><span class="unit">delle 14 vette sopra 8.000m del mondo</span></div>
+          <p class="stat-line">Sono in Pakistan, K2 incluso — più di qualunque altro paese eccetto Cina e Nepal. Il K2 non si vede da questo itinerario (serve un trekking dedicato fino a Concordia), ma le altre sono visibili anche dalla strada.</p>
+
+          <div class="stat-big"><span class="num">4.693</span><span class="unit">metri, il Khunjerab Pass</span></div>
+          <p class="stat-line">Il valico di frontiera asfaltato più alto del mondo (Pakistan-Cina) — ma resta chiuso per neve da dicembre a fine aprile, quindi a marzo non è raggiungibile.</p>
+
+          <div class="stat-big"><span class="num">~1.300</span><span class="unit">km di Karakoram Highway</span></div>
+          <p class="stat-line">Soprannominata "l'Ottava Meraviglia del Mondo": collega Hasan Abdal (Pakistan) a Kashgar (Cina) attraversando Karakoram, Himalaya e Hindu Kush.</p>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Perché ora:</strong> il turismo in Pakistan settentrionale è cresciuto molto negli ultimi anni ma resta una frazione di quello nepalese — le valli di Hunza e Skardu sono ancora autentiche, senza la folla di altre destinazioni himalayane, e l'ospitalità locale è un motivo di viaggio a sé. Marzo è un periodo di transizione: le città del sud sono già in clima primaverile, il nord è ancora pienamente invernale — l'itinerario è costruito tenendone conto (vedi sezione Passi &amp; strade).
+        <div class="source-note">Fonti: en.wikipedia.org (Eight-thousander, Khunjerab Pass, Karakoram Highway), dati verificati ad agosto 2026.</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ITINERARIO -->
+  <section id="itinerario" class="panel" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/85/Baltit_Fort_%28Front_Panorama%29.jpg" alt="Baltit Fort, Karimabad, Hunza" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Mrsaeed09, <a href="https://commons.wikimedia.org/wiki/File:Baltit_Fort_(Front_Panorama).jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+        <div class="fallback">🏯</div>
+      </div>
+      <h2 class="section-title reveal">🗺️ Itinerario di massima — 15 giorni</h2>
+      <p class="section-sub reveal">Un mix di città storiche e alta quota: Islamabad e Lahore, poi la Karakoram Highway fino a Hunza e Skardu. Periodo target <strong>marzo 2027</strong> — costruito escludendo i passi e le piste ancora chiusi per neve a quella data (vedi sezione Passi &amp; strade). Ogni giorno ha un link diretto a Google Maps con il tragitto reale.</p>
+
+      <div class="timeline" id="timeline"></div>
+
+      <div class="callout reveal">
+        <strong>Nota:</strong> le distanze indicate sono in linea d'aria o dai dati stradali citati nel testo; su strada in Pakistan settentrionale i tempi reali sono spesso più lunghi per tornanti, checkpoint e possibili frane sulla KKH — usa i link a Google Maps per una stima aggiornata col traffico attuale.
+      </div>
+    </div>
+  </section>
+
+  <!-- MAPPA -->
+  <section id="mappa" class="panel" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/48/Attabad_Lake_Full_View.jpg" alt="Attabad Lake, Hunza Valley" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Sherazyousafzai2018, <a href="https://commons.wikimedia.org/wiki/File:Attabad_Lake_Full_View.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+        <div class="fallback">🏞️</div>
+      </div>
+      <h2 class="section-title reveal">📍 Mappa &amp; percorso lungo la KKH</h2>
+      <p class="section-sub reveal">La mappa animata del tragitto — da Islamabad a Skardu passando per Lahore e tutta la Karakoram Highway — e la mappa Google Maps reale del percorso. Apri il tragitto completo per durata e traffico live, o esporta le tappe in un file KML.</p>
+
+      <div class="jeep-map-wrap reveal">
+        <svg id="jeep-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+          <path class="terrain terrain-a" d="M150 20 C 260 5, 420 35, 455 120 C 475 175, 430 210, 415 270 C 400 340, 360 380, 300 420 C 230 465, 140 470, 90 420 C 50 380, 60 320, 45 250 C 30 180, 60 100, 150 20 Z"/>
+          <path class="terrain terrain-b" d="M370 55 C 420 75, 460 95, 455 128 C 450 158, 402 162, 378 146 C 354 130, 345 85, 370 55 Z"/>
+
+          <path id="route-path" class="route-shadow" d="M 240,430 Q 220,360 205,300 Q 260,270 300,235 Q 320,190 340,150 Q 320,110 300,75 Q 340,70 380,90 Q 400,130 415,170 Q 380,200 360,240 Q 375,290 395,330"/>
+          <path class="route-line" d="M 240,430 Q 220,360 205,300 Q 260,270 300,235 Q 320,190 340,150 Q 320,110 300,75 Q 340,70 380,90 Q 400,130 415,170 Q 380,200 360,240 Q 375,290 395,330"/>
+
+          <circle class="pulse" cx="395" cy="330" r="8"/>
+          <g class="stop-pin">
+            <text x="395" y="338" text-anchor="middle" font-size="22">🗻</text>
+            <text class="stop-label highlight" x="395" y="356" text-anchor="middle">Skardu</text>
+          </g>
+          <g class="stop-pin">
+            <text x="360" y="248" text-anchor="middle" font-size="20">🏔️</text>
+            <text class="stop-label" x="360" y="264" text-anchor="middle">Hunza</text>
+          </g>
+          <g class="stop-pin">
+            <text x="380" y="98" text-anchor="middle" font-size="18">🏙️</text>
+            <text class="stop-label" x="380" y="78" text-anchor="middle">Gilgit</text>
+          </g>
+          <g class="stop-pin">
+            <text x="300" y="83" text-anchor="middle" font-size="18">🚙</text>
+            <text class="stop-label" x="300" y="63" text-anchor="middle">Chilas</text>
+          </g>
+          <g class="stop-pin">
+            <text x="320" y="158" text-anchor="middle" font-size="18">⛰️</text>
+            <text class="stop-label" x="345" y="145" text-anchor="middle">Nanga Parbat</text>
+          </g>
+          <g class="stop-pin">
+            <text x="300" y="243" text-anchor="middle" font-size="18">🛣️</text>
+            <text class="stop-label" x="270" y="230" text-anchor="middle">Abbottabad</text>
+          </g>
+          <g class="stop-pin">
+            <text x="205" y="308" text-anchor="middle" font-size="20">🕌</text>
+            <text class="stop-label" x="205" y="292" text-anchor="middle">Islamabad</text>
+          </g>
+          <g class="stop-pin">
+            <text x="240" y="438" text-anchor="middle" font-size="20">🕌</text>
+            <text class="stop-label" x="240" y="456" text-anchor="middle">Lahore</text>
+          </g>
+
+          <text font-size="22" id="jeep-marker">🚙
+            <animateMotion dur="20s" repeatCount="indefinite">
+              <mpath href="#route-path"/>
+            </animateMotion>
+          </text>
+        </svg>
+      </div>
+
+      <div class="map-embed reveal">
+        <iframe src="https://www.google.com/maps?q=Hunza+Valley,+Gilgit-Baltistan,+Pakistan&z=7&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <div class="map-actions reveal">
+        <a id="link-full-route" href="#" target="_blank" rel="noopener">🗺️ Apri l'itinerario completo su Google Maps</a>
+        <button class="export" id="btn-export-kml">⬇️ Esporta tappe (KML)</button>
+      </div>
+
+      <div class="card reveal" style="overflow-x:auto;">
+        <h3 style="margin-top:0;">Percorsi giorno per giorno</h3>
+        <table class="stops-table" id="legs-table">
+          <thead><tr><th>Giorno</th><th>Tratta</th><th>Distanza</th><th>Durata stimata</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="source-note">Distanze/durate stradali principali da fonti citate nel testo (imrtec.com, mysrztourism.com, northerndiscover.com); i tratti KKH sono spesso soggetti a rallentamenti per frane. Clicca "Apri" per la stima live con traffico su Google Maps.</div>
+      </div>
+
+      <div class="card reveal" style="overflow-x:auto;">
+        <h3 style="margin-top:0;">Tutte le tappe</h3>
+        <table class="stops-table" id="stops-table">
+          <thead><tr><th>Tappa</th><th>Coordinate</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUIDA KKH -->
+  <section id="kkh" class="panel dark" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/7/74/Hussaini_bridge_and_passu_cones.jpg" alt="Ponte sospeso di Hussaini e Passu Cones" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Zulayedf, <a href="https://commons.wikimedia.org/wiki/File:Hussaini_bridge_and_passu_cones.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+        <div class="fallback">🌉</div>
+      </div>
+      <h2 class="section-title reveal">🏔️ Guida alla Karakoram Highway</h2>
+      <p class="section-sub reveal">Visto, permessi, e cosa aspettarsi lungo la strada più spettacolare (e più lunga) dell'itinerario. Dati verificati ad agosto 2026 — da riconfermare sempre prima della partenza.</p>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>📍 Dove</h3><p>La Karakoram Highway (KKH) collega Islamabad a Gilgit e Hunza, proseguendo fino al Khunjerab Pass al confine cinese. Il nostro itinerario si ferma a Hunza/Skardu — il Khunjerab resta chiuso a marzo.</p></div>
+        <div class="card reveal"><h3>🛂 Visto</h3><p>Dal 1° gennaio 2026 l'Italia è tra i paesi per cui è stata sospesa la fast-track "visa on arrival": serve un <strong>e-visa</strong> richiesto in anticipo sul portale ufficiale <strong>visa.nadra.gov.pk</strong>. Costo riportato in modo discordante dalle fonti (~35-100 USD) — verificare sul portale prima di prenotare.</p></div>
+        <div class="card reveal"><h3>📄 Serve un NOC?</h3><p>No, per questo itinerario (Hunza, Karimabad, Skardu, Naltar) basta il visto: nessun No Objection Certificate richiesto. Il NOC serve solo per rotte di trekking ristrette (Baltoro, Concordia, campo base K2) — non incluse nel nostro giro.</p></div>
+        <div class="card reveal"><h3>🥶 Clima nel nord</h3><p>A marzo Gilgit e Skardu hanno ancora temperature diurne intorno o sotto lo zero, con minime fino a -11/-15°C — mentre Lahore e Islamabad sono già in clima primaverile mite. Portate strati pesanti per tutta la parte nord del viaggio.</p></div>
+        <div class="card reveal"><h3>🛣️ Stato della strada</h3><p>La KKH è asfaltata e aperta tutto l'anno, ma soggetta a chiusure temporanee per frane nel tratto Diamer/Chilas — mettete sempre in conto giorni di buffer.</p></div>
+        <div class="card reveal"><h3>✈️ Il volo per Skardu</h3><p>Islamabad-Skardu si vola in 40-75 minuti (PIA/Airblue/AirSial) invece di guidare 13-22h — ma è un volo famoso per le cancellazioni dovute al meteo. Consigliato un giorno di margine prima del rientro.</p></div>
+      </div>
+
+      <div class="card reveal" style="margin-top:18px;">
+        <h3 style="margin-top:0;">🎒 Cosa portare per il tratto nord</h3>
+        <ul class="rule-list">
+          <li>Giacca pesante impermeabile/antivento, pile, guanti e berretto — a Skardu le minime scendono sotto i -10°C</li>
+          <li>Scarponi da trekking con buona suola per neve/ghiaccio residuo</li>
+          <li>Documenti sempre a portata di mano: checkpoint di polizia frequenti lungo la KKH</li>
+          <li>Contanti in rupie pakistane: fuori da Islamabad/Lahore le carte sono poco accettate</li>
+          <li>Un buon powerbank: interruzioni di corrente non rare nelle valli del nord</li>
+        </ul>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Attenzione al periodo:</strong> Fairy Meadows, Deosai National Park, Babusar Pass e il Khunjerab Pass restano chiusi per neve a marzo — non sono inclusi in questo itinerario. Vedi la sezione "Passi &amp; strade" per il dettaglio completo con fonti.
+        <div class="source-note">Fonti: easyvisa.pk, raahiretreats.com, dawn.com, en.wikipedia.org — dati verificati ad agosto 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SITI DA NON PERDERE -->
+  <section id="siti" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌿 Tracker dei siti da non perdere</h2>
+      <p class="section-sub reveal">Le tappe principali dell'itinerario, filtrabili per categoria — così sapete già cosa aspettarvi in ogni città e valle.</p>
+
+      <div class="filter-row reveal" id="family-filters"></div>
+      <div class="family-grid" id="family-grid"></div>
+
+      <div class="callout reveal">
+        <strong>Nota:</strong> orari di apertura e accessibilità (specialmente nel nord) possono cambiare stagionalmente — verifica sempre gli orari aggiornati in loco, specialmente per Naltar e i punti panoramici in quota.
+        <div class="source-note">Fonti: raahiretreats.com, en.wikipedia.org, hunzatourism.com, saiyah.com.pk.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PASSI E STRADE -->
+  <section id="passi" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🚧 Passi &amp; strade — cosa è aperto a marzo</h2>
+      <p class="section-sub reveal">Il dato più critico per pianificare il nord del Pakistan in questo periodo: la maggior parte dei passi di alta quota resta chiusa per neve fino a maggio/giugno.</p>
+
+      <div class="stats-grid">
+        <div class="card ring-card reveal">
+          <div class="ring" style="--pct:33;"><span class="ring-label">2/6</span></div>
+          <p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Percorsi/passi di montagna verificati che risultano aperti a marzo: la Karakoram Highway stessa e la stazione sciistica di Naltar. Tutti gli altri riaprono solo tra maggio e giugno.</p>
+        </div>
+        <div class="card reveal">
+          <h3 style="margin-top:0;">📅 Come si dividono i 15 giorni</h3>
+          <div class="dist-bars" id="dist-bars"></div>
+        </div>
+      </div>
+
+      <div class="card reveal" style="margin-top:18px;">
+        <h3 style="margin-top:0;">Stato dei percorsi a marzo</h3>
+        <div class="route-status" id="route-status"></div>
+        <div class="source-note">Fonti: dawn.com, islamabadscene.com, northonwheels.com, pacific-trips.com, rozefstourism.com, tripadvisor.com, pakistantoday.com.pk, saiyah.com.pk, en.wikipedia.org (Naltar ski resort) — dati verificati ad agosto 2026, da riconfermare più vicino a marzo 2027.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GIGANTI DEL KARAKORAM -->
+  <section id="giganti" class="panel dark" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5d/Morning_Rise_on_Rakaposhi.jpg" alt="Rakaposhi all'alba" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Mhtoori, <a href="https://commons.wikimedia.org/wiki/File:Morning_Rise_on_Rakaposhi.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+        <div class="fallback">🏔️</div>
+      </div>
+      <h2 class="section-title reveal">⛰️ I 5 giganti del Karakoram</h2>
+      <p class="section-sub reveal">Cinque vette leggendarie che potreste avvistare lungo il percorso — tempo permettendo. Il K2 non è tra queste: serve un trekking dedicato per vederlo davvero.</p>
+
+      <div class="card reveal" style="text-align:center;">
+        <div class="ring" style="--pct:80;"><span class="ring-label">4/5</span></div>
+        <p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Vette avvistabili dal nostro itinerario — <span id="bigfive-count">0/5</span> segnate come "avvistate" da voi finora.</p>
+      </div>
+
+      <div class="bigfive-grid" id="bigfive-grid"></div>
+    </div>
+  </section>
+
+  <!-- METEO -->
+  <section id="meteo" class="panel" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Faisal_Mosque_snuggled_in_the_hills_of_Margalla.jpg" alt="Faisal Mosque, Islamabad" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Mshoaibzafar, <a href="https://commons.wikimedia.org/wiki/File:Faisal_Mosque_snuggled_in_the_hills_of_Margalla.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+        <div class="fallback">🕌</div>
+      </div>
+      <h2 class="section-title reveal">🌦️ Meteo storico — Marzo</h2>
+      <p class="section-sub reveal">A marzo il Pakistan vive due climi opposti: sud già primaverile, nord ancora invernale. <strong>Non è una previsione</strong>, sono medie storiche.</p>
+
+      <div class="weather-cols reveal">
+        <div>
+          <h4>Lahore — Marzo</h4>
+          <div class="weather-stats">
+            <div class="card"><div class="wval">24-29°</div><div class="wlabel">Massima</div></div>
+            <div class="card"><div class="wval">11-15°</div><div class="wlabel">Minima</div></div>
+            <div class="card"><div class="wval">Mite</div><div class="wlabel">In rapido riscaldamento</div></div>
+          </div>
+        </div>
+        <div>
+          <h4>Islamabad — Marzo</h4>
+          <div class="weather-stats">
+            <div class="card"><div class="wval">21-26°</div><div class="wlabel">Massima</div></div>
+            <div class="card"><div class="wval">8-14°</div><div class="wlabel">Minima</div></div>
+            <div class="card"><div class="wval">Mite</div><div class="wlabel">Clima da primavera italiana</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="weather-cols reveal">
+        <div>
+          <h4>Gilgit — Marzo</h4>
+          <div class="weather-stats">
+            <div class="card"><div class="wval">-2°</div><div class="wlabel">Massima</div></div>
+            <div class="card"><div class="wval">-11°</div><div class="wlabel">Minima</div></div>
+            <div class="card"><div class="wval">131mm</div><div class="wlabel">Precipitazioni (mese più piovoso)</div></div>
+          </div>
+        </div>
+        <div>
+          <h4>Skardu — Marzo</h4>
+          <div class="weather-stats">
+            <div class="card"><div class="wval">-3/-6°</div><div class="wlabel">Massima</div></div>
+            <div class="card"><div class="wval">-11/-15°</div><div class="wlabel">Minima</div></div>
+            <div class="card"><div class="wval">8-10h</div><div class="wlabel">Sole al giorno</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Nota:</strong> le temperature di Gilgit e Skardu a marzo sono ancora pienamente invernali — sotto lo zero anche di giorno. Non lasciatevi ingannare dal clima mite di Lahore e Islamabad: per il tratto nord serve equipaggiamento da inverno vero.
+        <div class="source-note">Fonti: en.climate-data.org, nomadseason.com, weather-and-climate.com — dati verificati ad agosto 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CURIOSITA -->
+  <section id="curiosita" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌍 Stranezze, montagne e sole</h2>
+      <p class="section-sub reveal">Le cose più sorprendenti del Pakistan — verificate, non da guida turistica riciclata.</p>
+
+      <h3 style="color:#fff; margin-top:0;">☀️ Simulatore del sole — Islamabad/Hunza, marzo</h3>
+      <p class="section-sub reveal" style="color:#c7c2b6;">Trascina lo slider per vedere dove sarà il sole a una data ora e farti un'idea della luce durante il viaggio.</p>
+      <div class="card reveal" style="text-align:center;">
+        <div class="sun-sim-wrap">
+          <svg id="sun-sim" viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="skyGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop id="sky-stop-top" offset="0%" stop-color="#2f6fb0"/>
+                <stop id="sky-stop-bottom" offset="100%" stop-color="#bfe3ff"/>
+              </linearGradient>
+            </defs>
+            <rect x="2" y="4" width="496" height="176" rx="14" fill="url(#skyGradient)"/>
+            <path class="sun-arc" d="M 40,180 Q 250,20 460,180"/>
+            <path class="sun-hills" d="M0,200 Q80,160 160,192 T320,188 T500,200 L500,220 L0,220 Z"/>
+            <line class="sun-horizon" x1="0" y1="180" x2="500" y2="180"/>
+            <text x="40" y="200" text-anchor="middle" class="sun-label">🌅 Alba</text>
+            <text x="460" y="200" text-anchor="middle" class="sun-label">🌇 Tramonto</text>
+            <g id="sun-marker"><text x="0" y="0" text-anchor="middle" font-size="30">☀️</text></g>
+          </svg>
+          <div class="sun-slider-row">
+            <input type="range" id="sun-slider" min="300" max="1260" step="5" value="720" aria-label="Ora del giorno">
+            <div class="sun-slider-ticks"><span>05:00</span><span>13:00</span><span>21:00</span></div>
+          </div>
+          <div class="sun-readout" id="sun-readout">Calcolo posizione del sole…</div>
+          <div class="source-note">Simulazione per Islamabad/Hunza (PST, UTC+5) a marzo: alba ~06:15-06:35, tramonto ~18:00-18:20 — orari medi del mese, variano di giorno in giorno. Fonte: timeanddate.com, geotimedate.org.</div>
+        </div>
+      </div>
+
+      <h3 style="color:#fff;">🤯 Lo sapevi che...</h3>
+      <div class="bigfive-grid" id="facts-grid"></div>
+
+      <h3 style="color:#fff;">🧭 Sarete nel punto d'incontro di tre catene montuose</h3>
+      <div class="card reveal">
+        <p style="color:#c7c2b6; font-size:0.92rem; margin:0 0 10px;">Gilgit-Baltistan è uno dei pochi posti al mondo dove convergono tre grandi sistemi montuosi: <strong>Karakoram, Himalaya e Hindu Kush</strong>. Attraverserete esattamente quella zona lungo la Karakoram Highway tra Chilas e Gilgit — con Nanga Parbat (Himalaya) da un lato e Rakaposhi (Karakoram) dall'altro.</p>
+        <div class="source-note">Fonti: geografia fisica ampiamente documentata (Wikipedia, Encyclopedia Britannica).</div>
+      </div>
+
+      <h3 style="color:#fff;">🛣️ La Karakoram Highway in due parole</h3>
+      <div class="stats-grid">
+        <div class="card reveal"><h3 style="margin-top:0;">~1.300 km</h3><p style="color:#c7c2b6; font-size:0.88rem; margin:0;">La lunghezza totale da Hasan Abdal (Pakistan) a Kashgar (Cina), attraverso il Khunjerab Pass.</p></div>
+        <div class="card reveal"><h3 style="margin-top:0;">4.693 m</h3><p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Il punto più alto — il valico di frontiera asfaltato più alto del mondo. Chiuso a marzo.</p></div>
+        <div class="card reveal"><h3 style="margin-top:0;">1959-1979</h3><p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Vent'anni di costruzione da squadre pakistane e cinesi, tra le più difficili al mondo per geologia e clima.</p></div>
+        <div class="card reveal"><h3 style="margin-top:0;">~810 lavoratori</h3><p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Si stima siano morti durante la costruzione (pakistani, più circa 82 cinesi) — da cui il soprannome "Ottava Meraviglia del Mondo".</p></div>
+      </div>
+      <div class="source-note" style="text-align:center;">Fonte: en.wikipedia.org (Karakoram Highway) — cifre storiche ampiamente citate, variano leggermente tra le fonti.</div>
+    </div>
+  </section>
+
+  <!-- PROFILO ALTIMETRICO -->
+  <section id="altitudine" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">⛰️ Profilo altimetrico del viaggio</h2>
+      <p class="section-sub reveal">Dati reali di altitudine per ogni tappa (fonti: en.wikipedia.org, hunzatourism.com). Il salto più netto: dai 217m di Lahore ai <strong>~2.500m</strong> di Hunza — ma non arriverete mai al Khunjerab Pass, chiuso per neve a marzo.</p>
+      <div class="card reveal" style="overflow-x:auto;">
+        <div class="elev-chart" id="elev-chart"></div>
+      </div>
+      <div class="callout reveal">
+        <strong>Per dare un'idea:</strong> il vostro punto più alto (Hunza, ~2.500m) è comunque più basso del rifugio Vittorio Sella nel gruppo del Monte Rosa (2.584m) — ma la strada per arrivarci è la Karakoram Highway, non una funivia.
+      </div>
+    </div>
+  </section>
+
+  <!-- CONVERTITORE VALUTA -->
+  <section id="valuta" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">💱 Convertitore valuta live</h2>
+      <p class="section-sub reveal">Tasso di cambio in tempo reale (richiede internet) tra Euro, Dollaro USA e Rupia pakistana (PKR).</p>
+      <div class="card reveal">
+        <div class="currency-form">
+          <div class="field">
+            <label for="cur-amount">Importo</label>
+            <input type="number" id="cur-amount" value="100" min="0">
+          </div>
+          <div class="field">
+            <label for="cur-from">Da</label>
+            <select id="cur-from"><option value="EUR">EUR €</option><option value="USD">USD $</option><option value="PKR">PKR</option></select>
+          </div>
+          <div class="field">
+            <label for="cur-to">A</label>
+            <select id="cur-to"><option value="USD">USD $</option><option value="PKR" selected>PKR</option><option value="EUR">EUR €</option></select>
+          </div>
+        </div>
+        <div id="cur-result" class="cur-result">Caricamento tasso di cambio…</div>
+        <div class="source-note">Fonte: open.er-api.com (tassi aggiornati quotidianamente). Ballpark verificato ad agosto 2026: ~317 PKR/EUR, ~277 PKR/USD (exchangerates.org.uk) — tasso indicativo, non usarlo per transazioni ufficiali.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RICERCA VOLI -->
+  <section id="voli" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">✈️ Ricerca voli</h2>
+      <p class="section-sub reveal">Non esistono voli diretti dall'Italia a Islamabad: si vola sempre con uno scalo. Tempo di viaggio porta-a-porta realistico: <strong>15-18 ore</strong> a seconda dello scalo.</p>
+
+      <div class="card reveal">
+        <table class="hub-table">
+          <thead><tr><th>Compagnia</th><th>Scalo</th><th>Note</th></tr></thead>
+          <tbody>
+            <tr><td>Turkish Airlines</td><td>Istanbul</td><td>Ampia rete di collegamenti dall'Italia, tra le opzioni più comode</td></tr>
+            <tr><td>Qatar Airways</td><td>Doha</td><td>Buone coincidenze, hub molto attivo verso il Pakistan</td></tr>
+            <tr><td>Etihad Airways</td><td>Abu Dhabi</td><td>Alternativa frequente via Golfo</td></tr>
+            <tr><td>Emirates / Flydubai</td><td>Dubai</td><td>Ampia scelta di orari</td></tr>
+            <tr><td>Oman Air</td><td>Muscat</td><td>Meno frequente, a volte tariffe competitive</td></tr>
+          </tbody>
+        </table>
+        <div class="source-note">Nessun volo diretto Italia-Pakistan. Tempo totale stimato Milano/Roma-Islamabad: ~15h30-17h20 con uno scalo. Fonti: flightroutes.com (dati aggregati agosto 2026) — verifica sempre orari e prezzi aggiornati prima di prenotare.</div>
+      </div>
+
+      <div class="card reveal">
+        <div class="flight-form">
+          <div class="field">
+            <label for="flight-origin">Da dove parti</label>
+            <select id="flight-origin">
+              <option value="MXP|Milano Malpensa">Milano Malpensa (MXP)</option>
+              <option value="LIN|Milano Linate">Milano Linate (LIN)</option>
+              <option value="BGY|Milano Bergamo">Milano Bergamo (BGY)</option>
+              <option value="FCO|Roma Fiumicino">Roma Fiumicino (FCO)</option>
+              <option value="BLQ|Bologna">Bologna (BLQ)</option>
+              <option value="VCE|Venezia">Venezia (VCE)</option>
+            </select>
+          </div>
+          <div class="field"><label>Destinazione</label><select disabled><option>Islamabad (ISB), Pakistan</option></select></div>
+          <div class="field"><label>Periodo</label><select disabled><option>Marzo 2027 (da confermare)</option></select></div>
+        </div>
+        <div class="flight-links">
+          <button id="btn-google-flights">Cerca su Google Flights</button>
+          <button class="alt" id="btn-skyscanner">Cerca su Skyscanner</button>
+          <button class="alt" id="btn-kayak">Cerca su Kayak</button>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Suggerimento:</strong> i motori di ricerca voli richiedono una connessione internet al click — il file resta comunque locale, si apre solo il browser sul sito scelto con i parametri già impostati.
+      </div>
+    </div>
+  </section>
+
+  <!-- BUDGET -->
+  <section id="budget" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">💰 Calcolatore budget</h2>
+      <p class="section-sub reveal">Il tratto nord (Hunza/Skardu) è molto più caro del resto del Pakistan — il calcolo ne tiene conto. Stima indicativa, non un preventivo.</p>
+
+      <div class="card reveal">
+        <div class="currency-form">
+          <div class="field">
+            <label for="budget-people">Persone</label>
+            <input type="number" id="budget-people" value="4" min="1">
+          </div>
+          <div class="field">
+            <label for="budget-style">Stile viaggio</label>
+            <select id="budget-style">
+              <option value="budget">Budget</option>
+              <option value="standard" selected>Standard</option>
+              <option value="comfort">Comfort</option>
+            </select>
+          </div>
+        </div>
+        <div id="budget-result" class="cur-result">—</div>
+        <div id="budget-breakdown" class="source-note" style="text-align:center; margin-top:10px;"></div>
+      </div>
+
+      <div class="source-note">Include: volo Italia-Islamabad a/r, e-visa, volo interno Skardu-Islamabad, alloggio, auto+autista per tutta la KKH (diviso tra le persone), cibo, mance. Esclude: assicurazione di viaggio, spese personali. Dati reali da: budgetyourtrip.com, violatourspk.com e wego.pk (alloggio Hunza/Skardu), tripadvisor.com e skarducarrental.com (noleggio auto+autista), sastaticket.pk (volo Skardu-Islamabad), hikersbay.com/adventureplanners.net (cibo) — verificati ad agosto 2026.</div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">❓ Domande frequenti</h2>
+
+      <details class="faq reveal">
+        <summary>Serve il visto per il Pakistan?</summary>
+        <div class="faq-body">Sì: dal 1° gennaio 2026 l'Italia è tra i paesi per cui è stata sospesa la "visa on arrival" fast-track, quindi serve un <strong>e-visa</strong> richiesto in anticipo sul portale ufficiale <strong>visa.nadra.gov.pk</strong>. Il costo esatto è riportato in modo discordante dalle fonti (tra 35 e 100 USD) — verificalo direttamente sul portale prima di prenotare, e richiedilo 2-3 settimane prima della partenza.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Serve un permesso speciale (NOC) per Hunza o Skardu?</summary>
+        <div class="faq-body">No. Per il turismo standard a Hunza, Karimabad, Skardu, Shigar, Naltar e per vedere il Khunjerab Pass dalla strada basta il visto — nessun No Objection Certificate richiesto. Il NOC del Ministero dell'Interno serve solo per rotte di trekking ristrette (Baltoro Glacier, Concordia, campo base K2), non incluse in questo itinerario.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Marzo è un buon periodo?</summary>
+        <div class="faq-body">È un periodo di transizione netta: Lahore e Islamabad sono già in clima primaverile mite (~25°C), ma Gilgit e Skardu sono ancora pienamente invernali, con temperature sotto zero anche di giorno. Diversi passi e piste di montagna (Khunjerab, Fairy Meadows, Deosai, Babusar Pass) restano chiusi per neve fino a maggio/giugno — l'itinerario li esclude. Vedi la sezione "Passi &amp; strade" per il dettaglio.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Sono richieste vaccinazioni?</summary>
+        <div class="faq-body">Nessuna vaccinazione è obbligatoria per l'ingresso da un volo diretto dall'Italia (a differenza di altri paesi, non serve il certificato febbre gialla salvo provenienza da area a rischio). È comunque consigliato un controllo di routine con il proprio medico di viaggio, e prestare attenzione al mal di montagna lieve viste le quote di Hunza/Skardu (~2.200-2.600m).</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Che moneta si usa e conviene cambiare prima?</summary>
+        <div class="faq-body">La rupia pakistana (PKR). Tasso indicativo verificato ad agosto 2026: ~317 PKR per 1 EUR (soggetto a fluttuazioni — verifica prima della partenza). Fuori da Islamabad e Lahore le carte di credito sono poco accettate: conviene portare contanti e cambiarli in banca o presso cambiavalute autorizzati.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Serve un'assicurazione di viaggio particolare?</summary>
+        <div class="faq-body">Sì, è consigliata un'assicurazione che includa evacuazione medica/elicottero, viste le zone remote e la quota del nord (fino a ~2.600m), oltre a una buona copertura annullamento vista la possibilità di cancellazione del volo Islamabad-Skardu per meteo.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Come ci si sposta tra le tappe?</summary>
+        <div class="faq-body">Auto privata con autista lungo tutta la Karakoram Highway (Islamabad-Lahore-Islamabad-Hunza). Per Skardu è fortemente consigliato il volo interno da Islamabad (40-75 minuti, PIA/Airblue/AirSial) invece della strada (~630km, 13-22h) — ma è un volo famoso per le cancellazioni dovute al meteo: tenete sempre un giorno di margine prima del rientro in Italia.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Le zone che visitate sono sicure?</summary>
+        <div class="faq-body">Lahore, Islamabad e il Gilgit-Baltistan (Hunza, Skardu) sono considerate le aree turistiche più sicure del Pakistan sia dalle linee guida britanniche (FCDO) che da fonti italiane. Le zone sconsigliate — Belucistan e alcune aree del Khyber Pakhtunkhwa al confine afghano — non fanno parte di questo itinerario. Verifica sempre gov.uk/foreign-travel-advice/pakistan e viaggiaresicuri.it prima della partenza, dato che le indicazioni vengono aggiornate spesso.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Le mance sono previste?</summary>
+        <div class="faq-body">Sì: autista, guide locali e staff di hotel/lodge si aspettano una mancia, soprattutto lungo il tratto nord.</div>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Pakistan Trip Planner — file locale, parte del sito <a href="index.html" class="home-link">Patagucci Trips</a>. Il tracker Giganti del Karakoram si salva solo nel browser in cui lo usi. Mappa, foto, cambio valuta e ricerca voli richiedono una connessione internet al momento della visualizzazione/click.
+  <div class="credits">
+    Crediti foto (Wikimedia Commons): Maqalam97 (Hunza Valley) CC BY-SA 4.0 · Mhtoori (Badshahi Mosque, Rakaposhi) CC BY-SA 4.0 · Mrsaeed09 (Baltit Fort) CC BY-SA 4.0 · Sherazyousafzai2018 (Attabad Lake) CC BY-SA 4.0 · Zulayedf (ponte Hussaini/Passu Cones) CC BY-SA 4.0 · Mshoaibzafar (Faisal Mosque) CC BY-SA 4.0 · Intisar Ali (cerimonia Wagah) CC BY-SA 4.0 · Fassifarooq (Skardu da Kharpocho Fort) CC BY-SA 4.0 · Mudassir005 (Naltar Valley) CC BY-SA 3.0. Dati verificati su fonti pubbliche ad agosto 2026 — riverifica sempre visto, stato delle strade e prezzi prima di prenotare.
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ---- Scrollspy nav ----
+  var navLinks = document.querySelectorAll('nav.tabs a[href^="#"]');
+  var sections = document.querySelectorAll('section[data-nav]');
+  var linkBySection = {};
+  navLinks.forEach(function(a){ linkBySection[a.getAttribute('href').slice(1)] = a; });
+
+  var spyObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        navLinks.forEach(function(a){ a.classList.remove('active'); });
+        var link = linkBySection[entry.target.id];
+        if(link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(function(s){ spyObserver.observe(s); });
+
+  // ---- Reveal on scroll ----
+  var revealObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ revealObserver.observe(el); });
+
+  // ---- Itinerary data + Google Maps links ----
+  var COORDS = {
+    islamabad: [33.6600, 73.2294],
+    lahore: [31.5820, 74.3294],
+    abbottabad: [34.1463, 73.2117],
+    chilas: [35.4230, 74.1010],
+    gilgit: [35.9208, 74.3083],
+    karimabad: [36.3330, 74.6660],
+    attabad: [36.3369, 74.8675],
+    passu: [36.4667, 74.9000],
+    skardu: [35.2903, 75.6444],
+    shigar: [35.4235, 75.7495],
+    naltar: [36.1653, 74.1783],
+    khaplu: [35.1747, 76.3310]
+  };
+  function mapsLink(fromKey, toKey){
+    var a = COORDS[fromKey], b = COORDS[toKey];
+    return 'https://www.google.com/maps/dir/?api=1&origin=' + a[0] + ',' + a[1] + '&destination=' + b[0] + ',' + b[1] + '&travelmode=driving';
+  }
+  function placeLink(key){
+    var p = COORDS[key];
+    return 'https://www.google.com/maps/search/?api=1&query=' + p[0] + ',' + p[1];
+  }
+
+  var ITINERARY = [
+    { d:1, title:'Arrivo a Islamabad', tags:['Arrivo','Adattamento'], text:'Sbarco a Islamabad dopo uno scalo (Istanbul, Doha o Dubai — nessun volo diretto dall\'Italia). Trasferimento in hotel, prima serata per adattarsi al fuso (PST, UTC+5). Da qui parte tutto il resto del viaggio.', link: placeLink('islamabad'), linkLabel:'Vedi Islamabad su Google Maps' },
+    { d:2, title:'Islamabad', tags:['Città','Adattamento'], text:'Giornata piena nella capitale: la Faisal Mosque, a forma di tenda beduina invece della classica cupola mughal, ai piedi delle colline di Margalla; una camminata sul Trail 5; nel pomeriggio il bazar di Raja a Rawalpindi, la città gemella.', link: placeLink('islamabad'), linkLabel:'Vedi Islamabad su Google Maps', photo:'https://upload.wikimedia.org/wikipedia/commons/3/38/Faisal_Mosque_snuggled_in_the_hills_of_Margalla.jpg', photoCredit:'Foto: Mshoaibzafar, CC BY-SA 4.0' },
+    { d:3, title:'Islamabad → Lahore', tags:['Su strada','~377km / 4h20-5h'], text:'Trasferimento verso sud lungo l\'autostrada M2, tra le meglio tenute del Pakistan. Arrivo a Lahore in serata, prima passeggiata nel centro storico.', link: mapsLink('islamabad','lahore'), linkLabel:'Apri il tragitto Islamabad → Lahore' },
+    { d:4, title:'Lahore — Moschee e forti mughal', tags:['Il giorno culturale'], text:'La Badshahi Mosque del 1673, capace di 55.000 fedeli; il Lahore Fort, patrimonio UNESCO con intarsi in marmo e affreschi; la piccola ma preziosa Wazir Khan Mosque nella città vecchia.', link: placeLink('lahore'), linkLabel:'Vedi Lahore su Google Maps', highlight:true },
+    { d:5, title:'Lahore — Giardini e confine di Wagah', tags:['Cultura','Il tramonto teatrale'], text:'Mattina ai Shalimar Gardens, giardino mughal del XVII secolo, e shopping tra le bancarelle di Anarkali Bazaar. Al tramonto, la cerimonia della bandiera al confine di Wagah — parata teatrale tra Pakistan e India, tra le più scenografiche al mondo.', link: placeLink('lahore'), linkLabel:'Vedi Lahore su Google Maps', highlight:true, photo:'https://upload.wikimedia.org/wikipedia/commons/0/07/Flag_ceremony_at_Wahga_border_of_Pak_India.jpg', photoCredit:'Foto: Intisar Ali, CC BY-SA 4.0' },
+    { d:6, title:'Lahore → Islamabad → Abbottabad', tags:['Su strada','~377km + avvio KKH'], text:'Si torna verso nord: Lahore-Islamabad in autostrada, poi si imbocca la Karakoram Highway fino ad Abbottabad, prima tappa del lungo tratto verso Hunza.', link: mapsLink('lahore','islamabad'), linkLabel:'Apri il tragitto Lahore → Islamabad' },
+    { d:7, title:'Abbottabad → Chilas', tags:['KKH','Vista sul Nanga Parbat'], text:'Giornata di puro Karakoram Highway, tra tornanti e canyon. Vicino a Raikot Bridge, tempo permettendo, si vede il Nanga Parbat (8.126m, la "Killer Mountain") — la sua pista d\'accesso a Fairy Meadows resta però chiusa per neve a marzo.', link: mapsLink('abbottabad','chilas'), linkLabel:'Apri il tragitto Abbottabad → Chilas' },
+    { d:8, title:'Chilas → Karimabad, Hunza', tags:['KKH','Arrivo a Hunza'], text:'Ultimo tratto di KKH fino a Hunza, con Rakaposhi (7.788m) che accompagna la strada. Arrivo a Karimabad, passeggiata nel villaggio vecchio ai piedi del Baltit Fort.', link: mapsLink('chilas','karimabad'), linkLabel:'Apri il tragitto Chilas → Hunza', highlight:true, photo:'https://upload.wikimedia.org/wikipedia/commons/8/85/Baltit_Fort_%28Front_Panorama%29.jpg', photoCredit:'Foto: Mrsaeed09, CC BY-SA 4.0' },
+    { d:9, title:'Hunza — Attabad Lake, Baltit Fort', tags:['Il giorno panoramico'], text:'Le acque turchesi di Attabad Lake, nate da una frana che sbarrò il fiume Hunza nel gennaio 2010, e la visita completa al Baltit Fort, per 700 anni sede dei Mir di Hunza.', link: placeLink('attabad'), linkLabel:'Vedi Attabad Lake su Google Maps', highlight:true },
+    { d:10, title:'Hunza — Passu Cones, Altit Fort, Eagle\'s Nest', tags:['Avventura'], text:'Le guglie di Passu Cones e l\'attraversamento del ponte sospeso di Hussaini — uno dei più fotografati (e traballanti) al mondo. Nel pomeriggio l\'Altit Fort, ancora più antico del Baltit, e (se la strada è percorribile) il punto panoramico di Eagle\'s Nest a Duikar.', link: mapsLink('karimabad','passu'), linkLabel:'Apri il tragitto verso Passu', highlight:true, photo:'https://upload.wikimedia.org/wikipedia/commons/7/74/Hussaini_bridge_and_passu_cones.jpg', photoCredit:'Foto: Zulayedf, CC BY-SA 4.0' },
+    { d:11, title:'Naltar Valley — sci sul tetto del Pakistan', tags:['Avventura','Stagione sci dic-mar'], text:'Deviazione da Gilgit verso Naltar, la stazione sciistica più alta del Pakistan (~3.200m) — proprio nel pieno della sua stagione. I laghi superiori (Satrangi) restano innevati e chiusi a marzo, ma le piste sono aperte.', link: mapsLink('gilgit','naltar'), linkLabel:'Apri il tragitto Gilgit → Naltar' },
+    { d:12, title:'Gilgit → Skardu', tags:['Su strada','~280-290km / 5-6h'], text:'Lungo KKH e Skardu Road fino a Skardu, porta del Baltistan. La strada alternativa panoramica via Deosai resta chiusa per neve a marzo.', link: mapsLink('gilgit','skardu'), linkLabel:'Apri il tragitto Gilgit → Skardu' },
+    { d:13, title:'Skardu — Forti e laghi del Baltistan', tags:['Baltistan'], text:'Il Kharpocho Fort ("Re dei Forti") domina la valle di Skardu; poco distante, lo Shigar Fort, oggi museo-hotel Serena. Nel pomeriggio, l\'Upper Kachura Lake vicino al resort di Shangrila.', link: placeLink('skardu'), linkLabel:'Vedi Skardu su Google Maps', photo:'https://upload.wikimedia.org/wikipedia/commons/3/30/Morning_View_of_Skardu_from_Kharpocho_Fort.jpg', photoCredit:'Foto: Fassifarooq, CC BY-SA 4.0' },
+    { d:14, title:'Gita a Khaplu', tags:['Baltistan','~103km / 3h'], text:'Giornata verso est fino a Khaplu, con il suo palazzo reale del XIX secolo (Khaplu Palace, restaurato dall\'Aga Khan Trust for Culture, oggi museo-hotel Serena) — meno turistico di Shigar, stessa atmosfera di corte baltì.', link: mapsLink('skardu','khaplu'), linkLabel:'Apri il tragitto Skardu → Khaplu' },
+    { d:15, title:'Skardu → Islamabad — Si torna a casa', tags:['Partenza'], text:'Volo interno Skardu-Islamabad (40-75 minuti, meteo permettendo — tenete un piano B). Ultime ore in Pakistan, poi aeroporto per il rientro in Italia.', link: mapsLink('skardu','islamabad'), linkLabel:'Apri il tragitto Skardu → Islamabad (volo)' }
+  ];
+
+  var timeline = document.getElementById('timeline');
+  ITINERARY.forEach(function(day, idx){
+    var det = document.createElement('details');
+    det.className = 'day reveal';
+    if(idx === 0) det.open = true;
+    var tagsHtml = day.tags.map(function(t){ return '<span class="tag' + (day.highlight ? ' highlight' : '') + '">' + t + '</span>'; }).join('');
+    var photoHtml = day.photo ? ('<div class="mini-photo"><img src="' + day.photo + '" alt="" loading="lazy" onerror="this.parentElement.style.display=\'none\'"></div><div class="source-note">' + day.photoCredit + '</div>') : '';
+    det.innerHTML =
+      '<summary><span class="daynum">' + day.d + '</span><span class="daytitle">' + day.title + '</span><span class="chevron">▸</span></summary>' +
+      '<div class="day-body">' + tagsHtml + '<p>' + day.text + '</p>' + photoHtml +
+      '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
+      '</div>';
+    timeline.appendChild(det);
+    revealObserver.observe(det);
+  });
+
+  // ---- Elevation profile chart ----
+  var ELEVATIONS = [
+    { name:'Lahore', m:217 },
+    { name:'Islamabad', m:507 },
+    { name:'Gilgit', m:1500 },
+    { name:'Hunza (Karimabad)', m:2500, hl:true },
+    { name:'Passu', m:2440 },
+    { name:'Skardu', m:2228 },
+    { name:'Naltar', m:3200 },
+    { name:'Khunjerab Pass (chiuso a marzo)', m:4693, closed:true }
+  ];
+  var elevChart = document.getElementById('elev-chart');
+  var maxElev = Math.max.apply(null, ELEVATIONS.map(function(e){ return e.m; }));
+  ELEVATIONS.forEach(function(e){
+    var col = document.createElement('div');
+    col.className = 'elev-col';
+    var barClass = 'elev-bar' + (e.closed ? ' closed' : '');
+    var barStyle = e.hl ? 'background:linear-gradient(180deg,var(--red),var(--red-deep));' : '';
+    col.innerHTML =
+      '<div class="elev-val">' + e.m.toLocaleString('it-IT') + 'm</div>' +
+      '<div class="' + barClass + '" style="height:0%; ' + barStyle + '"></div>' +
+      '<div class="elev-name">' + e.name + '</div>';
+    elevChart.appendChild(col);
+    setTimeout(function(){ col.querySelector('.' + barClass.split(' ')[0]).style.height = Math.round((e.m/maxElev)*100) + '%'; }, 150);
+  });
+
+  // ---- Live currency converter ----
+  var curRates = null;
+  var curAmount = document.getElementById('cur-amount');
+  var curFrom = document.getElementById('cur-from');
+  var curTo = document.getElementById('cur-to');
+  var curResult = document.getElementById('cur-result');
+
+  function updateCurrency(){
+    if(!curRates){ curResult.textContent = 'Tasso non disponibile (serve internet).'; return; }
+    var amount = parseFloat(curAmount.value) || 0;
+    var from = curFrom.value, to = curTo.value;
+    var usdAmount = from === 'USD' ? amount : amount / curRates[from];
+    var converted = to === 'USD' ? usdAmount : usdAmount * curRates[to];
+    var decimals = to === 'PKR' ? 0 : 2;
+    curResult.textContent = amount.toLocaleString('it-IT') + ' ' + from + ' = ' + converted.toLocaleString('it-IT', {maximumFractionDigits: decimals}) + ' ' + to;
+  }
+
+  fetch('https://open.er-api.com/v6/latest/USD').then(function(r){ return r.json(); }).then(function(data){
+    if(data && data.rates){ curRates = data.rates; updateCurrency(); }
+    else { curResult.textContent = 'Tasso non disponibile in questo momento.'; }
+  }).catch(function(){ curResult.textContent = 'Tasso non disponibile (verifica la connessione internet).'; });
+
+  [curAmount, curFrom, curTo].forEach(function(el){ el.addEventListener('input', updateCurrency); el.addEventListener('change', updateCurrency); });
+
+  // ---- Budget calculator ----
+  var BUDGET = {
+    nights: 14,
+    flight: { budget:450, standard:715, comfort:830 }, // "fortunati" vs "realistico tipico"; +20-40% se le date cadono vicino al Ramadan 2027
+    permitsFixed: 235, // e-visa (~60$) + volo interno Skardu-Islamabad a/r (~200$) = ~235€
+    lodgingPerNight: { budget:16, standard:35, comfort:70 }, // media pesata Islamabad/Lahore + Hunza/Skardu (più cari)
+    foodPerDay: { budget:10, standard:17, comfort:28 },
+    tipsPerDay: { budget:4, standard:7, comfort:11 },
+    transportPerDayShared: { budget:55, standard:95, comfort:160 } // auto+autista per tutta la KKH, costo totale del gruppo al giorno
+  };
+  var bgtPeople = document.getElementById('budget-people');
+  var bgtStyle = document.getElementById('budget-style');
+  var bgtResult = document.getElementById('budget-result');
+  var bgtBreakdown = document.getElementById('budget-breakdown');
+  function updateBudget(){
+    if(!bgtPeople) return;
+    var people = Math.max(1, parseInt(bgtPeople.value, 10) || 1);
+    var style = bgtStyle.value;
+    var days = BUDGET.nights + 1;
+    var perPersonFixed = BUDGET.flight[style] + BUDGET.permitsFixed;
+    var perPersonNightly = BUDGET.nights * (BUDGET.lodgingPerNight[style] + BUDGET.foodPerDay[style]) + days * BUDGET.tipsPerDay[style];
+    var transportTotal = BUDGET.nights * BUDGET.transportPerDayShared[style];
+    var totalGroup = people * (perPersonFixed + perPersonNightly) + transportTotal;
+    var perPerson = totalGroup / people;
+    bgtResult.textContent = '~' + Math.round(perPerson).toLocaleString('it-IT') + ' € a persona';
+    bgtBreakdown.textContent = 'Totale gruppo (' + people + ' persone): ~' + Math.round(totalGroup).toLocaleString('it-IT') + ' € — include volo, e-visa, volo interno Skardu, alloggio, auto+autista diviso tra il gruppo, cibo, mance.';
+  }
+  if(bgtPeople){
+    [bgtPeople, bgtStyle].forEach(function(el){ el.addEventListener('input', updateBudget); el.addEventListener('change', updateBudget); });
+    updateBudget();
+  }
+
+  // ---- Siti da non perdere (tracker filtrabile) ----
+  var FAMILIES = [
+    { sector:'Culturale', name:'Faisal Mosque', size:'~1h di visita', level:'Facile', note:'Islamabad. Niente cupola: forma a tenda beduina disegnata dall\'architetto turco Vedat Dalokay.' },
+    { sector:'Natura', name:'Margalla Hills — Trail 5', size:'~2-3h', level:'Media', note:'Islamabad. Sentiero panoramico sulle colline che chiudono la città a nord.' },
+    { sector:'Culturale', name:'Badshahi Mosque', size:'~1h', level:'Facile', note:'Lahore. Moschea mughal del 1673, capienza ~55.000 fedeli.' },
+    { sector:'Forti & Storia', name:'Lahore Fort', size:'~2h', level:'Facile', note:'Patrimonio UNESCO: intarsi in marmo, affreschi, cupole dell\'epoca mughal.' },
+    { sector:'Culturale', name:'Cerimonia di Wagah Border', size:'~2h incl. trasferimento', level:'Facile', note:'Parata teatrale al confine Pakistan-India, ogni sera al tramonto.' },
+    { sector:'Culturale', name:'Wazir Khan Mosque', size:'~45min', level:'Facile', note:'Lahore. Moschea del XVII secolo nella città vecchia, celebre per le piastrelle decorate.' },
+    { sector:'Natura', name:'Shalimar Gardens', size:'~1h', level:'Facile', note:'Lahore. Giardino mughal terrazzato del 1642, patrimonio UNESCO insieme al Lahore Fort.' },
+    { sector:'Culturale', name:'Raja Bazaar, Rawalpindi', size:'~1-2h', level:'Facile', note:'Il grande bazar della città gemella di Islamabad — spezie, tessuti, gioiellerie.' },
+    { sector:'Forti & Storia', name:'Baltit Fort, Karimabad', size:'~1,5h', level:'Facile', note:'Hunza. Ex sede dei Mir di Hunza, ~700 anni, restaurato dall\'Aga Khan Trust.' },
+    { sector:'Forti & Storia', name:'Altit Fort', size:'~1h', level:'Facile', note:'Hunza. Ancora più antico del Baltit Fort, affacciato a picco sul fiume Hunza.' },
+    { sector:'Natura', name:'Attabad Lake', size:'~1-2h', level:'Facile', note:'Hunza. Lago turchese nato da una frana che sbarrò il fiume Hunza nel gennaio 2010.' },
+    { sector:'Avventura', name:'Passu Cones & Ponte di Hussaini', size:'~2h', level:'Media', note:'Guglie granitiche e uno dei ponti sospesi più fotografati (e traballanti) al mondo.' },
+    { sector:'Natura', name:'Eagle\'s Nest, Duikar', size:'~2h incl. strada', level:'Media', note:'Punto panoramico sopra Hunza, vista su Rakaposhi e Diran — strada stretta e tornante.' },
+    { sector:'Culturale', name:'Kargah Buddha', size:'~30min', level:'Facile', note:'Gilgit. Bassorilievo buddhista scolpito nella roccia, VII secolo circa.' },
+    { sector:'Avventura', name:'Naltar Valley — piste da sci', size:'Mezza giornata', level:'Media', note:'Stazione sciistica più alta del Pakistan (~3.200m), stagione dic-mar. Laghi superiori chiusi per neve a marzo.' },
+    { sector:'Forti & Storia', name:'Kharpocho Fort', size:'~1h (salita ripida)', level:'Media', note:'Skardu. "Re dei Forti", fine XVII secolo, vista panoramica sulla valle.' },
+    { sector:'Forti & Storia', name:'Shigar Fort', size:'~1h', level:'Facile', note:'Metà XVII secolo, oggi museo-hotel gestito da Serena Hotels.' },
+    { sector:'Natura', name:'Upper Kachura Lake', size:'~1h', level:'Facile', note:'Skardu, vicino al resort di Shangrila e al lago a forma di cuore di Lower Kachura.' }
+  ];
+
+  var sectors = ['Tutti'].concat(Array.from(new Set(FAMILIES.map(function(f){ return f.sector; }))));
+  var filterRow = document.getElementById('family-filters');
+  var familyGrid = document.getElementById('family-grid');
+  var activeSector = 'Tutti';
+
+  function renderFamilies(){
+    familyGrid.innerHTML = '';
+    FAMILIES.filter(function(f){ return activeSector === 'Tutti' || f.sector === activeSector; }).forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'family-card';
+      card.innerHTML =
+        '<div class="fsector">' + f.sector + '</div>' +
+        '<div class="fname">' + f.name + '</div>' +
+        '<div class="flevel ' + f.level + '">' + f.level + '</div>' +
+        '<div class="fsize">' + f.size + '</div>' +
+        '<p class="fnote">' + f.note + '</p>';
+      familyGrid.appendChild(card);
+    });
+  }
+
+  sectors.forEach(function(s){
+    var btn = document.createElement('button');
+    btn.textContent = s;
+    if(s === activeSector) btn.classList.add('active');
+    btn.addEventListener('click', function(){
+      activeSector = s;
+      filterRow.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderFamilies();
+    });
+    filterRow.appendChild(btn);
+  });
+  renderFamilies();
+
+  // ---- Passi & strade: stato a marzo ----
+  var ROUTES = [
+    { name:'Karakoram Highway (Islamabad-Gilgit-Hunza)', open:true, note:'Aperta tutto l\'anno, soggetta a chiusure temporanee per frane nel tratto Diamer/Chilas.' },
+    { name:'Naltar Valley (stazione sci)', open:true, note:'Stagione sci dicembre-marzo; i laghi superiori restano innevati fino a primavera inoltrata.' },
+    { name:'Khunjerab Pass (valico Cina)', open:false, note:'Chiuso 1 dicembre - 31 marzo per accordo Pakistan-Cina; riapertura turistica tipica ~1 maggio.' },
+    { name:'Fairy Meadows (pista jeep Raikot Bridge)', open:false, note:'Innevata da novembre; stagione tipica aprile/maggio-novembre.' },
+    { name:'Deosai National Park', open:false, note:'Chiuso per neve, riapre solo a giugno.' },
+    { name:'Babusar Pass / Naran-Kaghan', open:false, note:'Chiuso novembre-aprile; riapertura tipica fine maggio.' }
+  ];
+  var routeStatus = document.getElementById('route-status');
+  ROUTES.forEach(function(r){
+    var row = document.createElement('div');
+    row.className = 'r-name';
+    row.textContent = r.name;
+    var status = document.createElement('div');
+    status.className = 'r-status ' + (r.open ? 'open' : 'closed');
+    status.textContent = r.open ? 'Aperta a marzo' : 'Chiusa a marzo';
+    var note = document.createElement('div');
+    note.className = 'route-note';
+    note.textContent = r.note;
+    routeStatus.appendChild(row);
+    routeStatus.appendChild(status);
+    routeStatus.appendChild(note);
+  });
+
+  // ---- Giganti del Karakoram tracker ----
+  var BIGFIVE = [
+    { id:'rakaposhi', icon:'🏔️', name:'Rakaposhi', diff:'Facile', fact:'7.788m — una delle poche vette al mondo visibili dalla base alla cima direttamente dalla strada, lungo la KKH vicino a Nagar/Hunza.' },
+    { id:'passu', icon:'⛰️', name:'Passu Cones', diff:'Facile', fact:'~6.106m — le guglie granitiche della "Passu Cathedral", visibili dal villaggio di Passu e dal ponte di Hussaini.' },
+    { id:'ultarsar', icon:'🗻', name:'Ultar Sar', diff:'Media', fact:'7.388m — domina Karimabad e il Baltit Fort; spesso avvolta dalle nuvole nel tardo pomeriggio.' },
+    { id:'nangaparbat', icon:'🌨️', name:'Nanga Parbat', diff:'Media', fact:'8.126m, la "Killer Mountain" — visibile dalla KKH vicino a Raikot Bridge solo con cielo sereno.' },
+    { id:'k2', icon:'🚫', name:'K2', diff:'Assente', fact:'8.611m, seconda vetta più alta del mondo — non visibile da questo itinerario: serve un trekking dedicato fino a Concordia/Baltoro.' }
+  ];
+  var BF_KEY = 'pakistan-trip-peaks';
+  var bfSpotted = {};
+  try { bfSpotted = JSON.parse(localStorage.getItem(BF_KEY)) || {}; } catch(e){ bfSpotted = {}; }
+
+  var bfGrid = document.getElementById('bigfive-grid');
+  function updateBfCount(){
+    var n = BIGFIVE.filter(function(a){ return bfSpotted[a.id]; }).length;
+    document.getElementById('bigfive-count').textContent = n + '/5';
+  }
+  BIGFIVE.forEach(function(a){
+    var card = document.createElement('div');
+    card.className = 'bigfive-card';
+    var btnDisabled = a.diff === 'Assente';
+    card.innerHTML =
+      '<div class="bf-icon">' + a.icon + '</div>' +
+      '<div class="bf-name">' + a.name + '</div>' +
+      '<div class="bf-diff ' + a.diff + '">' + a.diff + '</div>' +
+      '<p class="bf-fact">' + a.fact + '</p>' +
+      (btnDisabled ? '' : '<button class="bf-track-btn" data-id="' + a.id + '">Da avvistare</button>');
+    bfGrid.appendChild(card);
+    if(!btnDisabled){
+      var btn = card.querySelector('.bf-track-btn');
+      function refreshBtn(){
+        if(bfSpotted[a.id]){ btn.textContent = 'Avvistata! ✅'; btn.classList.add('spotted'); }
+        else { btn.textContent = 'Da avvistare'; btn.classList.remove('spotted'); }
+      }
+      refreshBtn();
+      btn.addEventListener('click', function(){
+        bfSpotted[a.id] = !bfSpotted[a.id];
+        try { localStorage.setItem(BF_KEY, JSON.stringify(bfSpotted)); } catch(e){}
+        refreshBtn();
+        updateBfCount();
+      });
+    }
+  });
+  updateBfCount();
+
+  // ---- Come si dividono i 10 giorni ----
+  var DURATION_DIST = [
+    { label: 'Città & cultura', pct: 33 },
+    { label: 'KKH & Hunza', pct: 40 },
+    { label: 'Skardu & rientro', pct: 27 }
+  ];
+  var distBars = document.getElementById('dist-bars');
+  DURATION_DIST.forEach(function(d){
+    var row = document.createElement('div');
+    row.className = 'dist-row';
+    row.innerHTML =
+      '<div class="dlabel">' + d.label + '</div>' +
+      '<div class="dtrack"><div class="dfill" style="width:0%"></div></div>' +
+      '<div class="dpct">' + d.pct + '%</div>';
+    distBars.appendChild(row);
+    setTimeout(function(){ row.querySelector('.dfill').style.width = d.pct + '%'; }, 200);
+  });
+
+  // ---- Lo sapevi che... facts ----
+  var FACTS = [
+    { icon:'⛰️', text:'Il Pakistan ospita 5 delle 14 vette sopra 8.000m del mondo — K2, Nanga Parbat, Gasherbrum I e II, Broad Peak — più di ogni altro paese eccetto Cina e Nepal.' },
+    { icon:'🛂', text:'Il Khunjerab Pass (4.693m) è il valico di frontiera asfaltato più alto del mondo — ma resta chiuso per neve da dicembre a fine aprile.' },
+    { icon:'🕌', text:'Il Faisal Mosque di Islamabad fu il più grande mosque al mondo dal 1986 al 1993, capienza fino a ~300.000 persone tra interno e cortili.' },
+    { icon:'🌉', text:'La Passu Cathedral prende il nome dalla somiglianza con le guglie gotiche — si ammira anche dal ponte sospeso di Hussaini, tra i più fotografati (e traballanti) al mondo.' },
+    { icon:'🎿', text:'Naltar, in Gilgit-Baltistan, ospita la stazione sciistica più alta del Pakistan (~3.200m) — stagione da dicembre a marzo, proprio nel periodo del vostro viaggio.' },
+    { icon:'🏗️', text:'La Karakoram Highway richiese vent\'anni di lavori (1959-1979): si stima siano morti circa 810 lavoratori pakistani, oltre a circa 82 cinesi.' }
+  ];
+  var factsGrid = document.getElementById('facts-grid');
+  if(factsGrid){
+    FACTS.forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'bigfive-card';
+      card.innerHTML = '<div class="bf-icon">' + f.icon + '</div><p class="bf-fact" style="min-height:0;">' + f.text + '</p>';
+      factsGrid.appendChild(card);
+    });
+  }
+
+  // ---- Flight search links ----
+  function currentOrigin(){
+    var v = document.getElementById('flight-origin').value.split('|');
+    return { code: v[0], label: v[1] };
+  }
+  document.getElementById('btn-google-flights').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.google.com/travel/flights?q=' + encodeURIComponent('Voli da ' + o.label + ' a Islamabad a marzo 2027'), '_blank');
+  });
+  document.getElementById('btn-skyscanner').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.skyscanner.it/trasporti/voli/' + o.code.toLowerCase() + '/isb/', '_blank');
+  });
+  document.getElementById('btn-kayak').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.kayak.it/flights/' + o.code + '-ISB', '_blank');
+  });
+
+  // ---- Map: full route link + stops table + KML export ----
+  var STOPS = [
+    { name:'Islamabad (arrivo/partenza)', key:'islamabad' },
+    { name:'Lahore', key:'lahore' },
+    { name:'Abbottabad', key:'abbottabad' },
+    { name:'Chilas', key:'chilas' },
+    { name:'Karimabad (Hunza)', key:'karimabad' },
+    { name:'Attabad Lake', key:'attabad' },
+    { name:'Passu', key:'passu' },
+    { name:'Gilgit', key:'gilgit' },
+    { name:'Naltar Valley', key:'naltar' },
+    { name:'Skardu', key:'skardu' },
+    { name:'Khaplu', key:'khaplu' }
+  ];
+
+  var origin = COORDS.islamabad, destination = COORDS.islamabad;
+  var waypoints = STOPS.slice(1, -1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('|');
+  document.getElementById('link-full-route').href =
+    'https://www.google.com/maps/dir/?api=1&origin=' + origin[0] + ',' + origin[1] +
+    '&destination=' + destination[0] + ',' + destination[1] +
+    '&waypoints=' + encodeURIComponent(waypoints) + '&travelmode=driving';
+
+  var stopsBody = document.querySelector('#stops-table tbody');
+  STOPS.forEach(function(s){
+    var c = COORDS[s.key];
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + s.name + '</td><td class="mono">' + c[0].toFixed(4) + ', ' + c[1].toFixed(4) + '</td><td><a href="' + placeLink(s.key) + '" target="_blank" rel="noopener">Apri ↗</a></td>';
+    stopsBody.appendChild(tr);
+  });
+
+  var LEGS = [
+    { day:3, label:'Islamabad → Lahore', from:'islamabad', to:'lahore', km:'~377 km (M2)', dur:'4h20-5h' },
+    { day:6, label:'Lahore → Islamabad → Abbottabad', from:'lahore', to:'abbottabad', km:'~377 km + avvio KKH', dur:'5h+' },
+    { day:7, label:'Abbottabad → Chilas', from:'abbottabad', to:'chilas', km:'~metà della tratta Islamabad-Gilgit (476 km tot.)', dur:'~6-8h' },
+    { day:8, label:'Chilas → Karimabad (Hunza)', from:'chilas', to:'karimabad', km:'~metà tratta rimanente + Hunza (tot. Islamabad-Hunza 600 km)', dur:'~7-9h' },
+    { day:11, label:'Gilgit → Naltar Valley (andata/ritorno)', from:'gilgit', to:'naltar', km:'~40 km a tratta', dur:'~1,5-2h a tratta' },
+    { day:12, label:'Gilgit → Skardu', from:'gilgit', to:'skardu', km:'~280-290 km', dur:'5-6h' },
+    { day:14, label:'Skardu → Khaplu', from:'skardu', to:'khaplu', km:'~103 km', dur:'~3h' },
+    { day:15, label:'Skardu → Islamabad (volo)', from:'skardu', to:'islamabad', km:'~300 km in linea d\'aria', dur:'40-75 min di volo (soggetto a meteo)' }
+  ];
+  var legsBody = document.querySelector('#legs-table tbody');
+  LEGS.forEach(function(leg){
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>Giorno ' + leg.day + '</td><td>' + leg.label + '</td><td>' + leg.km + '</td><td>' + leg.dur + '</td><td><a href="' + mapsLink(leg.from, leg.to) + '" target="_blank" rel="noopener">Apri ↗</a></td>';
+    legsBody.appendChild(tr);
+  });
+
+  document.getElementById('btn-export-kml').addEventListener('click', function(){
+    var kmlPlacemarks = STOPS.map(function(s){
+      var c = COORDS[s.key];
+      return '<Placemark><name>' + s.name + '</name><Point><coordinates>' + c[1] + ',' + c[0] + ',0</coordinates></Point></Placemark>';
+    }).join('\\n');
+    var lineCoords = STOPS.map(function(s){ var c = COORDS[s.key]; return c[1] + ',' + c[0] + ',0'; }).join(' ');
+    var kml = '<?xml version="1.0" encoding="UTF-8"?>\\n' +
+      '<kml xmlns="http://www.opengis.net/kml/2.2"><Document>' +
+      '<name>Pakistan 2027 - Itinerario</name>' +
+      kmlPlacemarks +
+      '<Placemark><name>Percorso completo</name><LineString><tessellate>1</tessellate><coordinates>' + lineCoords + '</coordinates></LineString></Placemark>' +
+      '</Document></kml>';
+    var blob = new Blob([kml], { type: 'application/vnd.google-earth.kml+xml' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'pakistan-2027-itinerario.kml';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  // ---- Sun position simulator (Islamabad/Hunza, PST UTC+5) — simulazione marzo 2027 ----
+  var SUNRISE_MIN = 6.4 * 60, SUNSET_MIN = 18.2 * 60, TWILIGHT = 50;
+  var sunMarker = document.getElementById('sun-marker');
+  var sunReadout = document.getElementById('sun-readout');
+  var sunSlider = document.getElementById('sun-slider');
+  var skyTop = document.getElementById('sky-stop-top');
+  var skyBottom = document.getElementById('sky-stop-bottom');
+  var NIGHT_TOP = [5,6,11], NIGHT_BOT = [18,23,38];
+  var DAWN_TOP = [45,32,74], DAWN_BOT = [255,150,90];
+  var DAY_TOP = [47,111,176], DAY_BOT = [191,227,255];
+  function lerp(a,b,t){ return a + (b - a) * t; }
+  function mixColor(c1,c2,t){ return 'rgb(' + Math.round(lerp(c1[0],c2[0],t)) + ',' + Math.round(lerp(c1[1],c2[1],t)) + ',' + Math.round(lerp(c1[2],c2[2],t)) + ')'; }
+  function rgbStr(c){ return 'rgb(' + c[0] + ',' + c[1] + ',' + c[2] + ')'; }
+  function skyColors(t){
+    var dSunrise = t - SUNRISE_MIN, dSunset = t - SUNSET_MIN;
+    if(Math.abs(dSunrise) <= TWILIGHT){
+      var f = (dSunrise + TWILIGHT) / (2 * TWILIGHT);
+      return f < 0.5
+        ? { top: mixColor(NIGHT_TOP, DAWN_TOP, f / 0.5), bot: mixColor(NIGHT_BOT, DAWN_BOT, f / 0.5) }
+        : { top: mixColor(DAWN_TOP, DAY_TOP, (f - 0.5) / 0.5), bot: mixColor(DAWN_BOT, DAY_BOT, (f - 0.5) / 0.5) };
+    }
+    if(Math.abs(dSunset) <= TWILIGHT){
+      var f2 = (dSunset + TWILIGHT) / (2 * TWILIGHT);
+      return f2 < 0.5
+        ? { top: mixColor(DAY_TOP, DAWN_TOP, f2 / 0.5), bot: mixColor(DAY_BOT, DAWN_BOT, f2 / 0.5) }
+        : { top: mixColor(DAWN_TOP, NIGHT_TOP, (f2 - 0.5) / 0.5), bot: mixColor(DAWN_BOT, NIGHT_BOT, (f2 - 0.5) / 0.5) };
+    }
+    if(t > SUNRISE_MIN && t < SUNSET_MIN) return { top: rgbStr(DAY_TOP), bot: rgbStr(DAY_BOT) };
+    return { top: rgbStr(NIGHT_TOP), bot: rgbStr(NIGHT_BOT) };
+  }
+  function renderSun(totalMinutes){
+    var hh = Math.floor(totalMinutes / 60), mm = Math.round(totalMinutes % 60);
+    var timeLabel = String(hh).padStart(2,'0') + ':' + String(mm).padStart(2,'0') + ' PST';
+    var sky = skyColors(totalMinutes);
+    if(skyTop) skyTop.setAttribute('stop-color', sky.top);
+    if(skyBottom) skyBottom.setAttribute('stop-color', sky.bot);
+
+    if(totalMinutes < SUNRISE_MIN || totalMinutes > SUNSET_MIN){
+      var beforeDawn = totalMinutes < SUNRISE_MIN;
+      sunMarker.style.transform = 'translate(' + (beforeDawn ? 40 : 460) + 'px,176px)';
+      sunMarker.querySelector('text').textContent = '🌙';
+      sunReadout.textContent = timeLabel + ' — buio, il sole ' + (beforeDawn ? 'non è ancora sorto' : 'è già tramontato');
+      return;
+    }
+    var frac = (totalMinutes - SUNRISE_MIN) / (SUNSET_MIN - SUNRISE_MIN);
+    var x = 40 + frac * 420;
+    var y = 180 - Math.sin(frac * Math.PI) * 155;
+    sunMarker.querySelector('text').textContent = '☀️';
+    sunMarker.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+    var phase = frac < 0.06 ? 'sta sorgendo — luce dorata, ideale per foto'
+      : frac > 0.94 ? 'sta tramontando — luce dorata, ideale per foto'
+      : (frac > 0.4 && frac < 0.6) ? 'è a picco, mezzogiorno pieno, luce dura'
+      : 'è alto in cielo, luce piena';
+    sunReadout.textContent = timeLabel + ' — il sole ' + phase;
+  }
+  if(sunSlider){
+    var nowUtc = new Date();
+    var pstNowMin = ((nowUtc.getUTCHours() * 60 + nowUtc.getUTCMinutes()) + 5 * 60) % 1440;
+    var initial = Math.min(1260, Math.max(300, Math.round(pstNowMin / 5) * 5));
+    sunSlider.value = initial;
+    renderSun(initial);
+    sunSlider.addEventListener('input', function(){ renderSun(Number(sunSlider.value)); });
+  }
+
+})();
+</script>
+
+</body>
+</html>
