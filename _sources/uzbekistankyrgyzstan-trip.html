@@ -121,6 +121,8 @@
         <svg id="jeep-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
           <path class="terrain terrain-a" d="M40 260 C 55 190, 120 150, 190 165 C 250 178, 300 150, 360 170 C 420 190, 460 240, 445 300 C 430 355, 370 380, 310 370 C 250 360, 190 385, 130 375 C 75 365, 30 330, 40 260 Z"/>
           <path class="terrain terrain-b" d="M380 120 C 430 110, 470 135, 465 175 C 460 210, 415 215, 385 195 C 358 178, 350 145, 380 120 Z"/>
+          <path class="contour" d="M50 200 C 150 175, 280 175, 400 210"/>
+          <path class="contour" d="M60 320 C 170 300, 300 305, 410 335"/>
 
           <path id="route-path" class="route-shadow" d="M 70,230 Q 130,210 180,195 Q 230,180 270,190 Q 300,205 320,230 Q 340,260 355,290 Q 385,240 415,175"/>
           <path class="route-line" d="M 70,230 Q 130,210 180,195 Q 230,180 270,190 Q 300,205 320,230 Q 340,260 355,290 Q 385,240 415,175"/>
@@ -153,6 +155,22 @@
           <g class="stop-pin">
             <text x="45" y="270" text-anchor="middle" font-size="20">🏰</text>
             <text class="stop-label" x="45" y="290" text-anchor="middle">Khiva</text>
+          </g>
+          <g class="stop-pin minor">
+            <text x="385" y="315" text-anchor="middle" font-size="15">⛰️</text>
+            <text class="stop-label" x="405" y="330" text-anchor="middle">Ala-Archa</text>
+          </g>
+
+          <g class="compass" transform="translate(455,40)">
+            <line x1="0" y1="-14" x2="0" y2="14"/>
+            <line x1="-10" y1="0" x2="10" y2="0"/>
+            <text x="0" y="-18" text-anchor="middle">N</text>
+          </g>
+          <g class="scale-bar" transform="translate(30,470)">
+            <line x1="0" y1="0" x2="60" y2="0"/>
+            <line x1="0" y1="-4" x2="0" y2="4"/>
+            <line x1="60" y1="-4" x2="60" y2="4"/>
+            <text x="30" y="-6" text-anchor="middle">~300 km</text>
           </g>
 
           <text font-size="20" id="jeep-marker">🚂

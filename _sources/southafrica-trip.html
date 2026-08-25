@@ -115,6 +115,9 @@
         <svg id="jeep-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
           <path class="terrain terrain-a" d="M60 340 C 50 280, 90 220, 150 210 C 220 198, 280 230, 340 245 C 400 260, 450 290, 460 340 C 468 385, 420 410, 360 415 C 290 420, 220 430, 150 425 C 90 420, 68 390, 60 340 Z"/>
           <path class="terrain terrain-b" d="M280 60 C 340 55, 400 75, 410 120 C 418 158, 380 175, 340 170 C 300 165, 270 130, 270 95 C 270 80, 272 68, 280 60 Z"/>
+          <path class="contour" d="M80 260 C 180 240, 300 260, 420 290"/>
+          <path class="contour" d="M100 340 C 210 325, 330 335, 440 355"/>
+          <path class="contour" d="M290 90 C 330 95, 370 110, 395 135"/>
 
           <path id="route-path" class="route-shadow" d="M 90,395 Q 130,388 165,378 Q 220,368 270,358 Q 330,345 385,335 Q 400,260 405,180 Q 380,120 340,80"/>
           <path class="route-line" d="M 90,395 Q 130,388 165,378 Q 220,368 270,358 Q 330,345 385,335 Q 400,260 405,180 Q 380,120 340,80"/>
@@ -143,6 +146,34 @@
           <g class="stop-pin">
             <text x="90" y="403" text-anchor="middle" font-size="20">🏔️</text>
             <text class="stop-label" x="90" y="422" text-anchor="middle">Cape Town</text>
+          </g>
+          <g class="stop-pin minor">
+            <text x="60" y="418" text-anchor="middle" font-size="15">🐧</text>
+            <text class="stop-label" x="45" y="436" text-anchor="middle">Good Hope</text>
+          </g>
+          <g class="stop-pin minor">
+            <text x="120" y="368" text-anchor="middle" font-size="15">🍇</text>
+            <text class="stop-label" x="120" y="384" text-anchor="middle">Stellenbosch</text>
+          </g>
+          <g class="stop-pin minor">
+            <text x="148" y="380" text-anchor="middle" font-size="15">🐋</text>
+            <text class="stop-label" x="148" y="396" text-anchor="middle">Hermanus</text>
+          </g>
+          <g class="stop-pin minor">
+            <text x="420" y="200" text-anchor="middle" font-size="15">🏙️</text>
+            <text class="stop-label" x="440" y="195" text-anchor="middle">Johannesburg</text>
+          </g>
+
+          <g class="compass" transform="translate(455,40)">
+            <line x1="0" y1="-14" x2="0" y2="14"/>
+            <line x1="-10" y1="0" x2="10" y2="0"/>
+            <text x="0" y="-18" text-anchor="middle">N</text>
+          </g>
+          <g class="scale-bar" transform="translate(30,470)">
+            <line x1="0" y1="0" x2="60" y2="0"/>
+            <line x1="0" y1="-4" x2="0" y2="4"/>
+            <line x1="60" y1="-4" x2="60" y2="4"/>
+            <text x="30" y="-6" text-anchor="middle">~250 km</text>
           </g>
 
           <text font-size="22" id="jeep-marker">🚙

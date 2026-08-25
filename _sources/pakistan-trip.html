@@ -127,6 +127,11 @@
         <svg id="jeep-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
           <path class="terrain terrain-a" d="M150 20 C 260 5, 420 35, 455 120 C 475 175, 430 210, 415 270 C 400 340, 360 380, 300 420 C 230 465, 140 470, 90 420 C 50 380, 60 320, 45 250 C 30 180, 60 100, 150 20 Z"/>
           <path class="terrain terrain-b" d="M370 55 C 420 75, 460 95, 455 128 C 450 158, 402 162, 378 146 C 354 130, 345 85, 370 55 Z"/>
+          <path class="contour" d="M90 100 C 180 70, 320 80, 400 130"/>
+          <path class="contour" d="M70 200 C 190 165, 330 175, 430 220"/>
+          <path class="contour" d="M90 320 C 190 290, 300 300, 380 340"/>
+          <path class="border-line" d="M20 140 C 60 90, 110 55, 170 30"/>
+          <text class="border-label" x="55" y="95" transform="rotate(-52 55 95)">Confine cinese</text>
 
           <path id="route-path" class="route-shadow" d="M 240,430 Q 220,360 205,300 Q 260,270 300,235 Q 320,190 340,150 Q 320,110 300,75 Q 340,70 380,90 Q 400,130 415,170 Q 380,200 360,240 Q 375,290 395,330"/>
           <path class="route-line" d="M 240,430 Q 220,360 205,300 Q 260,270 300,235 Q 320,190 340,150 Q 320,110 300,75 Q 340,70 380,90 Q 400,130 415,170 Q 380,200 360,240 Q 375,290 395,330"/>
@@ -163,6 +168,30 @@
           <g class="stop-pin">
             <text x="240" y="438" text-anchor="middle" font-size="20">🕌</text>
             <text class="stop-label" x="240" y="456" text-anchor="middle">Lahore</text>
+          </g>
+          <g class="stop-pin minor">
+            <text x="410" y="205" text-anchor="middle" font-size="15">💧</text>
+            <text class="stop-label" x="410" y="221" text-anchor="middle">Attabad Lake</text>
+          </g>
+          <g class="stop-pin minor">
+            <text x="415" y="128" text-anchor="middle" font-size="15">🌉</text>
+            <text class="stop-label" x="440" y="122" text-anchor="middle">Passu</text>
+          </g>
+          <g class="stop-pin minor">
+            <text x="330" y="110" text-anchor="middle" font-size="15">🎿</text>
+            <text class="stop-label" x="308" y="105" text-anchor="middle">Naltar</text>
+          </g>
+
+          <g class="compass" transform="translate(455,40)">
+            <line x1="0" y1="-14" x2="0" y2="14"/>
+            <line x1="-10" y1="0" x2="10" y2="0"/>
+            <text x="0" y="-18" text-anchor="middle">N</text>
+          </g>
+          <g class="scale-bar" transform="translate(30,470)">
+            <line x1="0" y1="0" x2="60" y2="0"/>
+            <line x1="0" y1="-4" x2="0" y2="4"/>
+            <line x1="60" y1="-4" x2="60" y2="4"/>
+            <text x="30" y="-6" text-anchor="middle">~150 km</text>
           </g>
 
           <text font-size="22" id="jeep-marker">🚙

@@ -305,11 +305,14 @@ section.panel.dark .source-note{ color:#9b968a; }
 
 /* ---------- Jeep/route map animation ---------- */
 .jeep-map-wrap{ position:relative; background:radial-gradient(120% 100% at 30% 20%, rgba(74,156,114,0.3), var(--black) 75%); border:1px solid rgba(255,255,255,0.12); border-radius:var(--radius-lg); padding:18px; text-align:center; margin-bottom:24px; box-shadow:var(--shadow-lg); }
-.jeep-map-wrap svg{ width:100%; max-width:520px; height:auto; }
-.jeep-map-wrap .terrain{ stroke:none; }
-.jeep-map-wrap .terrain-a{ fill:rgba(74,156,114,0.16); }
-.jeep-map-wrap .terrain-b{ fill:rgba(58,134,200,0.16); }
-.jeep-map-wrap .terrain-c{ fill:rgba(58,134,200,0.14); }
+.jeep-map-wrap svg{ width:100%; max-width:560px; height:auto; }
+.jeep-map-wrap .terrain{ stroke:rgba(255,255,255,0.1); stroke-width:1.2; }
+.jeep-map-wrap .terrain-a{ fill:rgba(74,156,114,0.18); }
+.jeep-map-wrap .terrain-b{ fill:rgba(58,134,200,0.18); }
+.jeep-map-wrap .terrain-c{ fill:rgba(58,134,200,0.15); }
+.jeep-map-wrap .contour{ fill:none; stroke:rgba(255,255,255,0.14); stroke-width:0.8; }
+.jeep-map-wrap .border-line{ fill:none; stroke:rgba(255,255,255,0.3); stroke-width:1.4; stroke-dasharray:4 3; }
+.jeep-map-wrap .border-label{ font-size:8px; fill:rgba(255,255,255,0.55); font-weight:700; letter-spacing:0.06em; text-transform:uppercase; }
 .jeep-map-wrap .route-shadow{ fill:none; stroke:rgba(0,0,0,0.35); stroke-width:7; stroke-linecap:round; stroke-linejoin:round; }
 .jeep-map-wrap .route-line{ fill:none; stroke:var(--yellow); stroke-width:3; stroke-dasharray:2 9; stroke-linecap:round; opacity:0.8; }
 .jeep-map-wrap .pulse{ fill:var(--red); opacity:0.35; animation:pulse 1.8s ease-out infinite; }
@@ -317,6 +320,14 @@ section.panel.dark .source-note{ color:#9b968a; }
 .jeep-map-wrap .stop-label{ font-size:10.5px; fill:#f4f1ea; font-weight:700; paint-order:stroke; stroke:rgba(10,10,10,0.75); stroke-width:3px; stroke-linejoin:round; }
 .jeep-map-wrap .stop-label.highlight{ fill:var(--yellow); font-size:11.5px; }
 .jeep-map-wrap .stop-pin text:first-child{ filter:drop-shadow(0 2px 3px rgba(0,0,0,0.5)); }
+.jeep-map-wrap .stop-pin.minor text:first-child{ font-size:14px; opacity:0.85; }
+.jeep-map-wrap .stop-pin.minor .stop-label{ font-size:8.5px; fill:#c7c2b6; }
+.jeep-map-wrap .compass{ opacity:0.6; }
+.jeep-map-wrap .compass text{ font-size:9px; fill:#f4f1ea; font-weight:700; }
+.jeep-map-wrap .compass line{ stroke:#f4f1ea; stroke-width:1; }
+.jeep-map-wrap .scale-bar line{ stroke:#f4f1ea; stroke-width:1.5; }
+.jeep-map-wrap .scale-bar text{ font-size:8px; fill:rgba(244,241,234,0.7); }
+.jeep-map-wrap .map-caption{ font-size:9px; fill:rgba(244,241,234,0.45); font-style:italic; }
 
 /* ---------- Elevation chart ---------- */
 .elev-chart{ display:flex; align-items:flex-end; gap:10px; height:220px; padding:0 6px 40px; position:relative; min-width:640px; }
