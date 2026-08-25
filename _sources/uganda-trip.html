@@ -77,7 +77,7 @@
   }
   header.hero .bg{
     position:absolute; inset:-20px; z-index:0;
-    background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.55) 55%, rgba(10,14,11,0.92) 100%), url('https://upload.wikimedia.org/wikipedia/commons/f/f1/Silverback.JPG');
+    background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.55) 55%, rgba(10,14,11,0.92) 100%), url('foto/destinazioni/Silverback.JPG');
     background-size:cover; background-position:center 30%;
     animation:kenburns 24s ease-in-out infinite alternate;
   }
@@ -342,7 +342,7 @@
 <div class="flagbar"></div>
 
 <header class="hero">
-  <div class="bg" style="background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.55) 55%, rgba(10,14,11,0.92) 100%), url('https://upload.wikimedia.org/wikipedia/commons/f/f1/Silverback.JPG');"></div>
+  <div class="bg" style="background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.55) 55%, rgba(10,14,11,0.92) 100%), url('foto/destinazioni/Silverback.JPG');"></div>
   <div class="content">
     <h1>Uganda</h1>
     <p class="tagline">Zaino in spalla e adrenalina alle stelle: piste sterrate, foresta pluviale e un faccia a faccia a due metri da un gorilla di montagna. Non è un viaggio da spiaggia — è per chi non ha paura di sporcarsi le scarpe.</p>
@@ -370,7 +370,7 @@
   <a href="#meteo">Meteo</a>
   <a href="#curiosita">Curiosità</a>
   <a href="#altitudine">Altitudine</a>
-  <a href="#valuta">Valuta</a>
+  <a href="#cibo">Cibo &amp; alcolici</a>
   <a href="#voli">Voli</a>
   <a href="#budget">Spese stimate</a>
   <a href="#faq">FAQ</a>
@@ -386,7 +386,7 @@
 
       <div class="why-grid reveal">
         <div class="photo-banner" style="margin-bottom:0;">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/Silver_back_gorilla_-_Gorilla_beringei.jpg" alt="Silverback, gorilla di montagna adulto" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+          <img src="foto/destinazioni/Silver_back_gorilla_-_Gorilla_beringei.jpg" alt="Silverback, gorilla di montagna adulto" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
           <div class="credit">Foto: Ruggiero Richard / US Fish and Wildlife Service, <a href="https://commons.wikimedia.org/wiki/File:Silver_back_gorilla_-_Gorilla_beringei.jpg" target="_blank" rel="noopener">Pubblico dominio</a></div>
           <div class="fallback">🦍</div>
         </div>
@@ -413,7 +413,7 @@
   <section id="itinerario" class="panel" data-nav>
     <div class="inner">
       <div class="photo-banner reveal">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Bwindi_Impenetrable_National_Park_10.jpg" alt="Foresta pluviale di Bwindi Impenetrable National Park" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <img src="foto/destinazioni/Bwindi_Impenetrable_National_Park_10.jpg" alt="Foresta pluviale di Bwindi Impenetrable National Park" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
         <div class="credit">Foto: Thomas Fuhrmann, <a href="https://commons.wikimedia.org/wiki/File:Bwindi_Impenetrable_National_Park_10.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
         <div class="fallback">🌳</div>
       </div>
@@ -432,7 +432,7 @@
   <section id="mappa" class="panel" data-nav>
     <div class="inner">
       <div class="photo-banner reveal">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d6/Nile_source_point_in_jinja.jpg" alt="Punto delle sorgenti del Nilo, Jinja" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <img src="foto/destinazioni/Nile_source_point_in_jinja.jpg" alt="Punto delle sorgenti del Nilo, Jinja" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
         <div class="credit">Foto: Vaibhave nagori, <a href="https://commons.wikimedia.org/wiki/File:Nile_source_point_in_jinja.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
         <div class="fallback">🌍</div>
       </div>
@@ -491,7 +491,7 @@
       </div>
 
       <div class="map-embed reveal">
-        <iframe src="https://www.google.com/maps?q=Bwindi+Impenetrable+National+Park,+Uganda&z=7&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe id="map-route-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
 
       <div class="map-actions reveal">
@@ -522,7 +522,7 @@
   <section id="gorilla" class="panel dark" data-nav>
     <div class="inner">
       <div class="photo-banner reveal">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Mountain_gorilla_%28Gorilla_beringei_beringei%29_eating.jpg" alt="Gorilla di montagna adulto, Mubare Group, Buhoma" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <img src="foto/destinazioni/Mountain_gorilla_(Gorilla_beringei_beringei)_eating.jpg" alt="Gorilla di montagna adulto, Mubare Group, Buhoma" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
         <div class="credit">Foto: Charles J. Sharp, <a href="https://commons.wikimedia.org/wiki/File:Mountain_gorilla_(Gorilla_beringei_beringei)_eating.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
         <div class="fallback">🦍</div>
       </div>
@@ -606,7 +606,7 @@
   <section id="bigfive" class="panel dark" data-nav>
     <div class="inner">
       <div class="photo-banner reveal">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/7/7d/Tough_Lion%2C_Uganda_%2815232409559%29.jpg" alt="Leone a Queen Elizabeth National Park" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <img src="foto/destinazioni/Tough_Lion,_Uganda_(15232409559).jpg" alt="Leone a Queen Elizabeth National Park" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
         <div class="credit">Foto: Rod Waddington, <a href="https://commons.wikimedia.org/wiki/File:Tough_Lion,_Uganda_(15232409559).jpg" target="_blank" rel="noopener">CC BY-SA 2.0</a></div>
         <div class="fallback">🦁</div>
       </div>
@@ -626,7 +626,7 @@
   <section id="meteo" class="panel" data-nav>
     <div class="inner">
       <div class="photo-banner reveal">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/aa/Lake_bunyonyi_Islands_01.jpg" alt="Lake Bunyonyi, Uganda sud-occidentale" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <img src="foto/destinazioni/Lake_bunyonyi_Islands_01.jpg" alt="Lake Bunyonyi, Uganda sud-occidentale" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
         <div class="credit">Foto: Shaayflix Dr Shaay, <a href="https://commons.wikimedia.org/wiki/File:Lake_bunyonyi_Islands_01.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
         <div class="fallback">🏞️</div>
       </div>
@@ -743,28 +743,24 @@
     </div>
   </section>
 
-  <!-- CONVERTITORE VALUTA -->
-  <section id="valuta" class="panel" data-nav>
+  <!-- CIBO E ALCOLICI -->
+  <section id="cibo" class="panel dark" data-nav>
     <div class="inner">
-      <h2 class="section-title reveal">💱 Convertitore valuta live</h2>
-      <p class="section-sub reveal">Tasso di cambio in tempo reale (richiede internet) tra Euro, Dollaro USA e Scellino ugandese (UGX) — utile per farsi un'idea rapida quando si contratta al mercato o si paga in contanti.</p>
-      <div class="card reveal">
-        <div class="currency-form">
-          <div class="field">
-            <label for="cur-amount">Importo</label>
-            <input type="number" id="cur-amount" value="100" min="0">
-          </div>
-          <div class="field">
-            <label for="cur-from">Da</label>
-            <select id="cur-from"><option value="EUR">EUR €</option><option value="USD">USD $</option><option value="UGX">UGX</option></select>
-          </div>
-          <div class="field">
-            <label for="cur-to">A</label>
-            <select id="cur-to"><option value="USD">USD $</option><option value="UGX" selected>UGX</option><option value="EUR">EUR €</option></select>
-          </div>
-        </div>
-        <div id="cur-result" class="cur-result">Caricamento tasso di cambio…</div>
-        <div class="source-note">Fonte: open.er-api.com (tassi aggiornati quotidianamente). Tasso indicativo, non usarlo per transazioni ufficiali.</div>
+      <h2 class="section-title reveal">🍖 Cibo &amp; alcolici</h2>
+      <p class="section-sub reveal">Piatti veri, non da menù turistico — e una cultura del bere molto radicata.</p>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>🌯 Rolex</h3><p>Chapati arrotolato attorno a una frittata con pomodoro, cipolla e cavolo — lo street food più iconico dell'Uganda, in ogni angolo di strada. ~3.000-5.000 UGX (0,70-1,15€).</p></div>
+        <div class="card reveal"><h3>🍌 Matoke</h3><p>Banane verdi da cottura, cotte a vapore e ridotte in purea, servite con salsa di carne o arachidi — piatto nazionale. ~10.000-18.000 UGX (2,30-4,15€).</p></div>
+        <div class="card reveal"><h3>🍃 Luwombo</h3><p>Carne o pesce in salsa di arachidi, avvolti in foglie di banano e cotti a vapore per ore — piatto cerimoniale Baganda. ~25.000-40.000 UGX (5,75-9,20€).</p></div>
+        <div class="card reveal"><h3>🌽 Posho</h3><p>Polenta di mais bianco, accompagnamento economico servito con fagioli o carne. Da ~8.000 UGX (1,85€).</p></div>
+        <div class="card reveal"><h3>🥃 Waragi</h3><p>Gin ugandese distillato (40%), ~80% di tutto l'alcol consumato nel paese. Bottiglia da 750ml: 20.000-36.000 UGX (4,60-8,25€).</p></div>
+        <div class="card reveal"><h3>🍺 Tonto</h3><p>Birra di banana fermentata tradizionale (6-11%), preparata lasciando maturare le banane in una fossa — presente da secoli nei matrimoni e riti dell'Uganda occidentale.</p></div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Età legale e novità recente:</strong> 18 anni per bere (una proposta di alzarla a 21 è in discussione ma non ancora legge). Dall'11 agosto 2026 una direttiva amministrativa vieta ai bar e ai "malwa joint" di aprire prima delle 15:00 nei giorni feriali — verificare l'applicazione pratica all'arrivo. Un pasto normale in un locale locale: ~15.000-30.000 UGX (3,45-6,90€) a persona.
+        <div class="source-note">Fonti: travelwithhello.com, Wikipedia (Waragi, Tonto), VOA/thegrio, ChimpReports e Monitor.co.ug (direttiva agosto 2026), Numbeo — dati verificati ad agosto 2026.</div>
       </div>
     </div>
   </section>
@@ -898,7 +894,7 @@
 </main>
 
 <footer>
-  Uganda Trip Planner — file locale. Il tracker Big Five si salva solo nel browser in cui lo usi. Mappa, foto, cambio valuta e ricerca voli richiedono una connessione internet al momento della visualizzazione/click.
+  Uganda Trip Planner — file locale. Il tracker Big Five si salva solo nel browser in cui lo usi. Mappa e ricerca voli richiedono una connessione internet al momento della visualizzazione/click.
   <div class="credits">
     Crediti foto (Wikimedia Commons): Patrick Cyusa (silverback hero) CC0 · Ruggiero Richard/USFWS (silverback) Pubblico dominio · Charles J. Sharp (gorilla adulto, elefante) CC BY-SA 4.0 · Thomas Fuhrmann (foresta Bwindi) CC BY-SA 4.0 · Shaayflix Dr Shaay (Lake Bunyonyi) CC BY-SA 4.0 · Vaibhave nagori (sorgenti del Nilo) CC BY-SA 4.0 · Giles Laurent (scimpanzé Kibale) CC BY-SA 4.0 · Rod Waddington (leone) CC BY-SA 2.0 · Michell Zappa (rafting Bujagali) CC BY-SA 2.0. Dati verificati su fonti pubbliche ad agosto 2026 — riverificate sempre prezzi e roster permessi prima di prenotare.
   </div>
@@ -956,10 +952,10 @@
 
   var ITINERARY = [
     { d:1, title:'Arrivo a Entebbe / Kampala', tags:['Arrivo','Adattamento'], text:'Sbarco a Entebbe. Trasferimento a Kampala per una notte — l\'ultima con l\'aria condizionata e il wifi garantiti, godetevela. Da qui in poi si fa sul serio.', link: placeLink('entebbe'), linkLabel:'Vedi Entebbe su Google Maps' },
-    { d:2, title:'Kampala → Jinja', tags:['Adrenalina','~70km / 1,5-2h'], text:'Le sorgenti del Nilo Bianco — e le sue rapide di grado 4 e 5, tra le più adrenaliniche al mondo per il rafting. Nel pomeriggio si scende in acqua: preparatevi a rovesciare il raft almeno una volta.', link: mapsLink('kampala','jinja'), linkLabel:'Apri il tragitto Kampala → Jinja', highlight:true, photo:'https://upload.wikimedia.org/wikipedia/commons/e/eb/Rafting_Bujagali_Falls-2%2C_December_2007_-_by_Michell_Zappa.jpg', photoCredit:'Foto: Michell Zappa, CC BY-SA 2.0' },
+    { d:2, title:'Kampala → Jinja', tags:['Adrenalina','~70km / 1,5-2h'], text:'Le sorgenti del Nilo Bianco — e le sue rapide di grado 4 e 5, tra le più adrenaliniche al mondo per il rafting. Nel pomeriggio si scende in acqua: preparatevi a rovesciare il raft almeno una volta.', link: mapsLink('kampala','jinja'), linkLabel:'Apri il tragitto Kampala → Jinja', highlight:true, photo:'foto/destinazioni/Rafting_Bujagali_Falls-2,_December_2007_-_by_Michell_Zappa.jpg', photoCredit:'Foto: Michell Zappa, CC BY-SA 2.0' },
     { d:3, title:'Jinja → Kibale Forest (via Fort Portal)', tags:['Pista lunga','~350km / 7-8h'], text:'Giornata di puro spostamento verso ovest, attraverso le colline di Fort Portal. Musica alta, finestrino giù: è la giornata in cui il jeep diventa casa.', link: mapsLink('jinja','kibale'), linkLabel:'Apri il tragitto Jinja → Kibale' },
-    { d:4, title:'Kibale — Scimpanzé selvatici → Queen Elizabeth NP', tags:['Trekking scimpanzé','~95km / 2-3h'], text:'Trekking nella foresta più densa di primati dell\'Africa orientale: scimpanzé selvatici a pochi metri, urla nella canopy, niente gabbie. Pomeriggio verso la savana di Queen Elizabeth NP.', link: mapsLink('kibale','qenp'), linkLabel:'Apri il tragitto Kibale → Queen Elizabeth NP', highlight:true, photo:'https://upload.wikimedia.org/wikipedia/commons/8/86/013_Alpha_male_chimpanzee_at_Kibale_forest_National_Park_Photo_by_Giles_Laurent.jpg', photoCredit:'Foto: Giles Laurent, CC BY-SA 4.0' },
-    { d:5, title:'Queen Elizabeth National Park', tags:['Safari','Big Four'], text:'Game drive all\'alba nella savana — leoni che si arrampicano sugli alberi a Ishasha, elefanti, bufali. Boat safari nel pomeriggio sul Kazinga Channel, tra i più alti concentrati di ippopotami al mondo.', link: placeLink('qenp'), linkLabel:'Vedi Queen Elizabeth NP su Google Maps', photo:'https://upload.wikimedia.org/wikipedia/commons/3/3b/African_elephant_%28Loxodonta_africana%29_3.jpg', photoCredit:'Foto: Charles J. Sharp, CC BY-SA 4.0' },
+    { d:4, title:'Kibale — Scimpanzé selvatici → Queen Elizabeth NP', tags:['Trekking scimpanzé','~95km / 2-3h'], text:'Trekking nella foresta più densa di primati dell\'Africa orientale: scimpanzé selvatici a pochi metri, urla nella canopy, niente gabbie. Pomeriggio verso la savana di Queen Elizabeth NP.', link: mapsLink('kibale','qenp'), linkLabel:'Apri il tragitto Kibale → Queen Elizabeth NP', highlight:true, photo:'foto/destinazioni/013_Alpha_male_chimpanzee_at_Kibale_forest_National_Park_Photo_by_Giles_Laurent.jpg', photoCredit:'Foto: Giles Laurent, CC BY-SA 4.0' },
+    { d:5, title:'Queen Elizabeth National Park', tags:['Safari','Big Four'], text:'Game drive all\'alba nella savana — leoni che si arrampicano sugli alberi a Ishasha, elefanti, bufali. Boat safari nel pomeriggio sul Kazinga Channel, tra i più alti concentrati di ippopotami al mondo.', link: placeLink('qenp'), linkLabel:'Vedi Queen Elizabeth NP su Google Maps', photo:'foto/destinazioni/African_elephant_(Loxodonta_africana)_3.jpg', photoCredit:'Foto: Charles J. Sharp, CC BY-SA 4.0' },
     { d:6, title:'Queen Elizabeth → Bwindi Impenetrable NP', tags:['Pista panoramica','~95km / 4-5h'], text:'Si sale: dai 980m della savana ai 1.400+ metri della foresta pluviale di Bwindi. Arrivo in serata, briefing pre-trekking — l\'adrenalina inizia a salire sul serio.', link: mapsLink('qenp','buhoma'), linkLabel:'Apri il tragitto Queen Elizabeth → Bwindi' },
     { d:7, title:'Bwindi — GORILLA TREKKING 🦍', tags:['Il giorno clou'], text:'Sveglia all\'alba, si parte a piedi nella foresta pluviale più impenetrabile dell\'Africa: 1-8 ore di salita fangosa, machete alla mano dei ranger, fino a 2.607m di quota. Poi un\'ora, a pochi metri, davanti a un silverback da 200kg.', link: placeLink('buhoma'), linkLabel:'Vedi Bwindi (Buhoma) su Google Maps', highlight:true },
     { d:8, title:'Bwindi → Lake Bunyonyi', tags:['Decompressione','~47km / 2h'], text:'Il corpo ha bisogno di una tregua: canoa tradizionale su uno dei laghi più sicuri e belli d\'Africa (niente coccodrilli, niente bilharzia). Recupero muscoli prima dell\'ultimo tratto.', link: mapsLink('buhoma','bunyonyi'), linkLabel:'Apri il tragitto Bwindi → Lake Bunyonyi' },
@@ -1007,29 +1003,6 @@
     setTimeout(function(){ col.querySelector('.elev-bar').style.height = Math.round((e.m/maxElev)*100) + '%'; }, 150);
   });
 
-  // ---- Live currency converter ----
-  var curRates = null;
-  var curAmount = document.getElementById('cur-amount');
-  var curFrom = document.getElementById('cur-from');
-  var curTo = document.getElementById('cur-to');
-  var curResult = document.getElementById('cur-result');
-
-  function updateCurrency(){
-    if(!curRates){ curResult.textContent = 'Tasso non disponibile (serve internet).'; return; }
-    var amount = parseFloat(curAmount.value) || 0;
-    var from = curFrom.value, to = curTo.value;
-    var usdAmount = from === 'USD' ? amount : amount / curRates[from];
-    var converted = to === 'USD' ? usdAmount : usdAmount * curRates[to];
-    var decimals = to === 'UGX' ? 0 : 2;
-    curResult.textContent = amount.toLocaleString('it-IT') + ' ' + from + ' = ' + converted.toLocaleString('it-IT', {maximumFractionDigits: decimals}) + ' ' + to;
-  }
-
-  fetch('https://open.er-api.com/v6/latest/USD').then(function(r){ return r.json(); }).then(function(data){
-    if(data && data.rates){ curRates = data.rates; updateCurrency(); }
-    else { curResult.textContent = 'Tasso non disponibile in questo momento.'; }
-  }).catch(function(){ curResult.textContent = 'Tasso non disponibile (verifica la connessione internet).'; });
-
-  [curAmount, curFrom, curTo].forEach(function(el){ el.addEventListener('input', updateCurrency); el.addEventListener('change', updateCurrency); });
 
   // ---- Budget calculator ----
   var BUDGET = {
@@ -1295,7 +1268,7 @@
   function renderPrices(){
     if(!pricesBody) return;
     pricesBody.innerHTML = '';
-    var rate = (curRates && curRates.UGX && curRates.EUR) ? (curRates.EUR / curRates.UGX) : (1 / 4260);
+    var rate = 1 / 4260;
     PRICES.forEach(function(p){
       var eur = (p.ugx * rate).toFixed(2);
       var tr = document.createElement('tr');
@@ -1337,6 +1310,11 @@
 
   var origin = COORDS.entebbe, destination = COORDS.entebbe;
   var waypoints = STOPS.slice(1, -1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('|');
+  var routeIframe = document.getElementById('map-route-iframe');
+  if(routeIframe){
+    var routeDaddr = STOPS.slice(1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('+to:');
+    routeIframe.src = 'https://www.google.com/maps?saddr=' + origin[0] + ',' + origin[1] + '&daddr=' + routeDaddr + '&output=embed';
+  }
   document.getElementById('link-full-route').href =
     'https://www.google.com/maps/dir/?api=1&origin=' + origin[0] + ',' + origin[1] +
     '&destination=' + destination[0] + ',' + destination[1] +

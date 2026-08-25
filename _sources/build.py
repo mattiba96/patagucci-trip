@@ -72,7 +72,7 @@ for d in DESTS:
 
 hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
     <header class="hero" style="min-height:64vh;">
-      <div class="bg" style="background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.6) 55%, rgba(10,14,11,0.94) 100%), url('https://upload.wikimedia.org/wikipedia/commons/4/4b/A_land_enclosed_in_Mountains_-_Hunza_Valley.jpg'); background-position:center 55%;"></div>
+      <div class="bg" style="background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.6) 55%, rgba(10,14,11,0.94) 100%), url('foto/destinazioni/A_land_enclosed_in_Mountains_-_Hunza_Valley.jpg'); background-position:center 55%;"></div>
       <div class="content">
         <h1>Patagucci Trips</h1>
         <p class="tagline">Machu Picchu, un vulcano attivo, Rio, la foresta pluviale di Bwindi — lo stesso gruppo, una meta nuova ogni volta. Qui dentro ci sono tutti i viaggi, con lo stesso livello di dettaglio ossessivo.</p>
@@ -86,26 +86,25 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
           <h2 class="section-title reveal">🔥 I Patagucci</h2>
           <p class="section-sub reveal">Machu Picchu, un vulcano attivo, Rio — e ora Uganda, Pakistan, Sudafrica, Nepal e Bhutan. Lo stesso gruppo, una meta nuova ogni volta.</p>
           <div class="crew-grid">
-            <div class="crew-card reveal">
+            <div class="crew-card reveal" data-audio="assets/audio/manu.mp3">
               <img src="foto/32909e5a-8870-4ba2-961d-8baf5bc0c7c8.jpeg" alt="Manu, il logistico, compra le maglie" loading="lazy">
               <div class="crew-caption">Manu — il logistico</div>
             </div>
-            <div class="crew-card reveal">
+            <div class="crew-card reveal" data-audio="assets/audio/kiki.mp3">
               <img src="foto/843b0e80-020f-46ed-a7f6-561fc189847a.jpeg" alt="Kiki, la meteora pazza" loading="lazy">
               <div class="crew-caption">Kiki — la meteora pazza <span class="crew-check">✔</span></div>
             </div>
-            <div class="crew-card reveal">
+            <div class="crew-card reveal" data-audio="assets/audio/mala.mp3">
               <img src="foto/bea8bd31-b2fc-4c45-9557-03044f26a57d.jpeg" alt="Mala, l'enciclopedia vivente, al vulcano Batur" loading="lazy">
               <div class="crew-caption">Mala — l'enciclopedia vivente <span class="crew-check">✔</span></div>
             </div>
-            <div class="crew-card reveal">
+            <div class="crew-card reveal" data-audio="assets/audio/bacci.mp3">
               <img src="foto/5624176e-4c77-4989-9af3-245a53408b1d.jpeg" alt="Bacci, il tecnologico" loading="lazy">
               <div class="crew-caption">Bacci — il tecnologico</div>
             </div>
           </div>
 
           <h3 style="color:#fff; margin:32px 0 4px;">📸 Insieme in giro per il mondo</h3>
-          <p class="section-sub reveal" style="color:#c7c2b6; margin-bottom:14px;">Le foto di gruppo scorrono da sole — passa il mouse sopra per fermarle.</p>
           <div class="group-marquee reveal">
             <div class="group-marquee-track">
               <div class="group-marquee-item">
@@ -386,7 +385,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
 
           <div class="trip-grid reveal">
             <a class="trip-card" href="javascript:void(0)" onclick="showDest('ug')">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/f/f1/Silverback.JPG" alt="Gorilla di montagna, Uganda" loading="lazy">
+              <img src="foto/destinazioni/Silverback.JPG" alt="Gorilla di montagna, Uganda" loading="lazy">
               <div class="overlay"></div>
               <div class="content">
                 <div class="flag">🇺🇬</div>
@@ -397,7 +396,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
             </a>
 
             <a class="trip-card" href="javascript:void(0)" onclick="showDest('pk')">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/8/85/Baltit_Fort_%28Front_Panorama%29.jpg" alt="Baltit Fort, Hunza Valley, Pakistan" loading="lazy">
+              <img src="foto/destinazioni/Baltit_Fort_(Front_Panorama).jpg" alt="Baltit Fort, Hunza Valley, Pakistan" loading="lazy">
               <div class="overlay"></div>
               <div class="content">
                 <div class="flag">🇵🇰</div>
@@ -408,7 +407,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
             </a>
 
             <a class="trip-card" href="javascript:void(0)" onclick="showDest('za')">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/8/81/Table_Mountain_from_Blouberg%2C_South_Africa_%284028515275%29.jpg" alt="Table Mountain, Cape Town, Sudafrica" loading="lazy">
+              <img src="foto/destinazioni/Table_Mountain_from_Blouberg,_South_Africa_(4028515275).jpg" alt="Table Mountain, Cape Town, Sudafrica" loading="lazy">
               <div class="overlay"></div>
               <div class="content">
                 <div class="flag">🇿🇦</div>
@@ -419,7 +418,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
             </a>
 
             <a class="trip-card" href="javascript:void(0)" onclick="showDest('np')">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/e/e9/The_Tiger%27s_Nest_%28_Paro_Taktsang_%29.jpg" alt="Tiger's Nest Monastery, Bhutan" loading="lazy">
+              <img src="foto/destinazioni/The_Tiger's_Nest_(_Paro_Taktsang_).jpg" alt="Tiger's Nest Monastery, Bhutan" loading="lazy">
               <div class="overlay"></div>
               <div class="content">
                 <div class="flag">🇳🇵🇧🇹</div>
@@ -430,7 +429,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
             </a>
 
             <a class="trip-card" href="javascript:void(0)" onclick="showDest('uk')">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/Registan_square_Samarkand.jpg" alt="Registan Square, Samarkand" loading="lazy">
+              <img src="foto/destinazioni/Registan_square_Samarkand-7d4b00.jpg" alt="Registan Square, Samarkand" loading="lazy">
               <div class="overlay"></div>
               <div class="content">
                 <div class="flag">🇺🇿🇰🇬</div>
@@ -441,7 +440,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
             </a>
 
             <a class="trip-card" href="javascript:void(0)" onclick="showDest('gl')">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Ilulissat_Kangerlua_iceberg_2024.jpg" alt="Ilulissat Icefjord, Groenlandia" loading="lazy">
+              <img src="foto/destinazioni/Ilulissat_Kangerlua_iceberg_2024.jpg" alt="Ilulissat Icefjord, Groenlandia" loading="lazy">
               <div class="overlay"></div>
               <div class="content">
                 <div class="flag">🇬🇱</div>
@@ -452,7 +451,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
             </a>
 
             <a class="trip-card" href="javascript:void(0)" onclick="showDest('ge')">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/0/02/Narikala_fortress%2C_Tbilisi%2C_Georgia.jpg" alt="Narikala Fortress, Tbilisi, Georgia" loading="lazy">
+              <img src="foto/destinazioni/Narikala_fortress,_Tbilisi,_Georgia-fb6b37.jpg" alt="Narikala Fortress, Tbilisi, Georgia" loading="lazy">
               <div class="overlay"></div>
               <div class="content">
                 <div class="flag">🇬🇪</div>
@@ -566,6 +565,19 @@ function showDest(name){{
   target.querySelectorAll('.reveal').forEach(function(el){{ el.classList.add('visible'); }});
 }}
 function showHub(){{ showDest('hub'); }}
+
+document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){{
+  var audio = new Audio(card.getAttribute('data-audio'));
+  audio.preload = 'none';
+  card.addEventListener('mouseenter', function(){{
+    audio.currentTime = 0;
+    audio.play().catch(function(){{}});
+  }});
+  card.addEventListener('mouseleave', function(){{
+    audio.pause();
+    audio.currentTime = 0;
+  }});
+}});
 </script>
 
 {"".join(scripts)}

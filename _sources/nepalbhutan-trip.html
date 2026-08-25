@@ -14,7 +14,7 @@
 <div class="flagbar"></div>
 
 <header class="hero">
-  <div class="bg" style="background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.55) 55%, rgba(10,14,11,0.92) 100%), url('https://upload.wikimedia.org/wikipedia/commons/e/e9/The_Tiger%27s_Nest_%28_Paro_Taktsang_%29.jpg');"></div>
+  <div class="bg" style="background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.55) 55%, rgba(10,14,11,0.92) 100%), url('foto/destinazioni/The_Tiger's_Nest_(_Paro_Taktsang_).jpg');"></div>
   <div class="content">
     <h1>Nepal &amp; Bhutan</h1>
     <p class="tagline">Rododendri in fiore sull'Annapurna, l'alba da Poon Hill, e un monastero aggrappato a una scogliera a 3.120m. Due Himalaya diversi in un solo viaggio: il trekking più accessibile del Nepal e l'unico paese al mondo che misura la felicità nazionale invece del PIL.</p>
@@ -41,7 +41,7 @@
   <a href="#meteo">Meteo</a>
   <a href="#curiosita">Curiosità</a>
   <a href="#altitudine">Altitudine</a>
-  <a href="#valuta">Valuta</a>
+  <a href="#cibo">Cibo &amp; alcolici</a>
   <a href="#voli">Voli</a>
   <a href="#budget">Spese stimate</a>
   <a href="#faq">FAQ</a>
@@ -57,7 +57,7 @@
 
       <div class="why-grid reveal">
         <div class="photo-banner" style="margin-bottom:0;">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Sunrise_annapurna_from_poonhill.jpg" alt="Alba sull'Annapurna da Poon Hill" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+          <img src="foto/destinazioni/Sunrise_annapurna_from_poonhill-b5a719.jpg" alt="Alba sull'Annapurna da Poon Hill" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
           <div class="credit">Foto: Prakat Shrestha, <a href="https://commons.wikimedia.org/wiki/File:Sunrise_annapurna_from_poonhill.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
           <div class="fallback">🌄</div>
         </div>
@@ -84,7 +84,7 @@
   <section id="itinerario" class="panel" data-nav>
     <div class="inner">
       <div class="photo-banner reveal">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/Ghandruk_village_overlooking_Annapurna.jpg" alt="Villaggio di Ghandruk, regione dell'Annapurna" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <img src="foto/destinazioni/Ghandruk_village_overlooking_Annapurna.jpg" alt="Villaggio di Ghandruk, regione dell'Annapurna" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
         <div class="credit">Foto: Kushaltmg, <a href="https://commons.wikimedia.org/wiki/File:Ghandruk_village_overlooking_Annapurna.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
         <div class="fallback">🏘️</div>
       </div>
@@ -103,7 +103,7 @@
   <section id="mappa" class="panel" data-nav>
     <div class="inner">
       <div class="photo-banner reveal">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/Phewa_lake%2C_Pokhara.jpg" alt="Phewa Lake, Pokhara" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <img src="foto/destinazioni/Phewa_lake,_Pokhara.jpg" alt="Phewa Lake, Pokhara" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
         <div class="credit">Foto: Jmhullot, <a href="https://commons.wikimedia.org/wiki/File:Phewa_lake,_Pokhara.jpg" target="_blank" rel="noopener">CC BY-SA 3.0</a></div>
         <div class="fallback">🏞️</div>
       </div>
@@ -152,8 +152,16 @@
         </svg>
       </div>
 
+      <p class="section-sub reveal" style="margin-top:-6px;">Due mappe separate perché il tratto Kathmandu-Paro è un volo, non una strada: qui sotto il percorso reale su gomma/a piedi in ciascun paese.</p>
+
+      <h4 style="color:inherit; margin:18px 0 6px;">🇳🇵 Percorso in Nepal — Kathmandu, Pokhara, trekking Poon Hill</h4>
       <div class="map-embed reveal">
-        <iframe src="https://www.google.com/maps?q=Annapurna+Conservation+Area,+Nepal&z=7&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe id="map-route-iframe-np" src="https://www.google.com/maps?q=Annapurna+Conservation+Area,+Nepal&z=7&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+
+      <h4 style="color:inherit; margin:18px 0 6px;">🇧🇹 Percorso in Bhutan — Paro, Thimphu, Punakha</h4>
+      <div class="map-embed reveal">
+        <iframe id="map-route-iframe-bt" src="https://www.google.com/maps?q=Paro,+Bhutan&z=10&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
 
       <div class="map-actions reveal">
@@ -184,7 +192,7 @@
   <section id="poonhill" class="panel dark" data-nav>
     <div class="inner">
       <div class="photo-banner reveal">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Rhododendrons_of_Annapurna_conservation_area.jpg" alt="Foresta di rododendri, Annapurna Conservation Area" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <img src="foto/destinazioni/Rhododendrons_of_Annapurna_conservation_area.jpg" alt="Foresta di rododendri, Annapurna Conservation Area" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
         <div class="credit">Foto: Adheeshbikram, <a href="https://commons.wikimedia.org/wiki/File:Rhododendrons_of_Annapurna_conservation_area.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
         <div class="fallback">🌸</div>
       </div>
@@ -219,7 +227,7 @@
   <section id="bhutan" class="panel" data-nav>
     <div class="inner">
       <div class="photo-banner reveal">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Punakha_Dzong%2C_Bhutan_04.jpg" alt="Punakha Dzong, Bhutan" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <img src="foto/destinazioni/Punakha_Dzong,_Bhutan_04.jpg" alt="Punakha Dzong, Bhutan" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
         <div class="credit">Foto: Bernard Gagnon, <a href="https://commons.wikimedia.org/wiki/File:Punakha_Dzong,_Bhutan_04.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
         <div class="fallback">🏯</div>
       </div>
@@ -247,7 +255,7 @@
   <section id="vette" class="panel dark" data-nav>
     <div class="inner">
       <div class="photo-banner reveal">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Dhaulagiri%2C_Nepal.jpg" alt="Dhaulagiri, Nepal" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <img src="foto/destinazioni/Dhaulagiri,_Nepal.jpg" alt="Dhaulagiri, Nepal" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
         <div class="credit">Foto: Vyacheslav Argenberg, <a href="https://commons.wikimedia.org/wiki/File:Dhaulagiri,_Nepal.jpg" target="_blank" rel="noopener">CC BY 4.0</a></div>
         <div class="fallback">🏔️</div>
       </div>
@@ -267,7 +275,7 @@
   <section id="meteo" class="panel" data-nav>
     <div class="inner">
       <div class="photo-banner reveal">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Buddha_Dordenma_statue%2C_Thimphu_06.jpg" alt="Buddha Dordenma, Thimphu" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <img src="foto/destinazioni/Buddha_Dordenma_statue,_Thimphu_06.jpg" alt="Buddha Dordenma, Thimphu" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
         <div class="credit">Foto: Bernard Gagnon, <a href="https://commons.wikimedia.org/wiki/File:Buddha_Dordenma_statue,_Thimphu_06.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
         <div class="fallback">🗿</div>
       </div>
@@ -393,28 +401,33 @@
     </div>
   </section>
 
-  <!-- CONVERTITORE VALUTA -->
-  <section id="valuta" class="panel" data-nav>
+  <!-- CIBO E ALCOLICI -->
+  <section id="cibo" class="panel dark" data-nav>
     <div class="inner">
-      <h2 class="section-title reveal">💱 Convertitore valuta live</h2>
-      <p class="section-sub reveal">Tasso di cambio in tempo reale (richiede internet) tra Euro, Dollaro USA e Rupia nepalese (NPR). Il Ngultrum bhutanese (BTN) è agganciato 1:1 alla Rupia indiana (INR) — usa NPR come riferimento indicativo, i due non sono la stessa valuta.</p>
-      <div class="card reveal">
-        <div class="currency-form">
-          <div class="field">
-            <label for="cur-amount">Importo</label>
-            <input type="number" id="cur-amount" value="100" min="0">
-          </div>
-          <div class="field">
-            <label for="cur-from">Da</label>
-            <select id="cur-from"><option value="EUR">EUR €</option><option value="USD">USD $</option><option value="NPR">NPR</option></select>
-          </div>
-          <div class="field">
-            <label for="cur-to">A</label>
-            <select id="cur-to"><option value="USD">USD $</option><option value="NPR" selected>NPR</option><option value="EUR">EUR €</option></select>
-          </div>
-        </div>
-        <div id="cur-result" class="cur-result">Caricamento tasso di cambio…</div>
-        <div class="source-note">Fonte: open.er-api.com (tassi aggiornati quotidianamente). Ballpark verificato ad agosto 2026: ~173,6 NPR/EUR, ~152 NPR/USD (exchange-rates.org) — il Bhutan usa BTN, agganciato 1:1 a INR, non convertibile qui.</div>
+      <h2 class="section-title reveal">🥟 Cibo &amp; alcolici</h2>
+      <p class="section-sub reveal">Due cucine diverse, con un ponte comune: i momo si trovano ovunque, dal Nepal al Bhutan.</p>
+
+      <h3 style="color:#fff; margin-top:0;">🇳🇵 Nepal</h3>
+      <div class="info-grid">
+        <div class="card reveal"><h3>🥟 Momo</h3><p>Ravioli ripieni di bufalo, pollo o verdure, al vapore o fritti, con salsa piccante — un'ossessione nazionale di origine tibetana. 150-450 NPR per 10 pezzi (0,85-2,55€).</p></div>
+        <div class="card reveal"><h3>🍛 Dal Bhat</h3><p>Riso, zuppa di lenticchie, curry di verdure e sottaceti — spesso con rifornimento gratuito. 250-1.200 NPR a seconda del locale (1,40-6,80€).</p></div>
+        <div class="card reveal"><h3>🍜 Thukpa</h3><p>Zuppa di noodle tibetana con verdure e una proteina a scelta. 120-310 NPR (0,70-1,75€).</p></div>
+        <div class="card reveal"><h3>🍺 Tongba</h3><p>Birra di miglio fermentato servita calda in un recipiente di legno, rabboccata più volte con acqua calda — classica nelle teahouse lungo i sentieri di trekking, incluso Poon Hill. 200-400 NPR (1,15-2,30€).</p></div>
+      </div>
+      <div class="callout reveal" style="margin-top:14px;">
+        Età legale 18 anni, vendita solo 10:00-22:00, vietato bere in luoghi pubblici — tutte regole di legge, non solo consuetudine. Un pasto normale: ~3-5€ a persona.
+      </div>
+
+      <h3 style="color:#fff; margin-top:28px;">🇧🇹 Bhutan</h3>
+      <div class="info-grid">
+        <div class="card reveal"><h3>🌶️ Ema Datshi</h3><p>Piatto nazionale: peperoncini trattati come verdura, stufati in salsa di formaggio locale e burro. 150-450 BTN a seconda del locale (1,35-4,05€).</p></div>
+        <div class="card reveal"><h3>🥓 Phaksha Paa</h3><p>Maiale a listarelle saltato con peperoncini secchi e ravanello. 400-500 BTN (3,60-4,50€).</p></div>
+        <div class="card reveal"><h3>🍺 Red Panda</h3><p>Birra di frumento non filtrata del birrificio di Bumthang, l'unico microbirrificio del paese — note di banana e chiodi di garofano. 115-240 BTN/65cl (1,05-2,15€).</p></div>
+        <div class="card reveal"><h3>🥃 Ara</h3><p>Distillato/fermentato casalingo di riso, grano, mais o miglio — si prova soprattutto in fattorie e homestay come gesto di ospitalità, non ha un prezzo fisso al ristorante.</p></div>
+      </div>
+      <div class="callout reveal" style="margin-top:14px;">
+        <strong>Aggiornamento importante:</strong> il "martedì secco" (vendita di alcolici vietata ogni martedì, in vigore dal 1999) è stato <strong>abolito il 4 luglio 2023</strong> — molte guide più vecchie lo riportano ancora, ma oggi il martedì è un giorno normale. Età legale 18 anni, vendita 13:00-22:00. Un pasto normale: ~5-9€ a persona.
+        <div class="source-note">Fonti: nepalvue.com, insidehimalayas.com, notarynepal.com, bbs.bt (abolizione martedì secco), bhutantravelog.com, travelwithhello.com, drukasia.com — dati verificati ad agosto 2026.</div>
       </div>
     </div>
   </section>
@@ -552,7 +565,7 @@
 </main>
 
 <footer>
-  Nepal &amp; Bhutan Trip Planner — file locale, parte del sito <a href="javascript:void(0)" class="home-link" onclick="showHub()">Patagucci Trips</a>. Il tracker Vette da Poon Hill si salva solo nel browser in cui lo usi. Mappa, cambio valuta e ricerca voli richiedono una connessione internet al momento della visualizzazione/click.
+  Nepal &amp; Bhutan Trip Planner — file locale, parte del sito <a href="javascript:void(0)" class="home-link" onclick="showHub()">Patagucci Trips</a>. Il tracker Vette da Poon Hill si salva solo nel browser in cui lo usi. Mappa e ricerca voli richiedono una connessione internet al momento della visualizzazione/click.
   <div class="credits">
     Crediti foto (Wikimedia Commons): Vikramjit Kakati (Tiger's Nest) CC BY-SA 3.0 · Prakat Shrestha (alba da Poon Hill) CC BY-SA 4.0 · Kushaltmg (Ghandruk) CC BY-SA 4.0 · Jmhullot (Phewa Lake) CC BY-SA 3.0 · Adheeshbikram (rododendri) CC BY-SA 4.0 · Bernard Gagnon (Punakha Dzong, Buddha Dordenma) CC BY-SA 4.0 · Vyacheslav Argenberg (Dhaulagiri) CC BY 4.0. Dati verificati su fonti pubbliche ad agosto 2026 — riverifica sempre visto, SDF e prezzi prima di prenotare.
   </div>
@@ -611,13 +624,13 @@
 
   var ITINERARY = [
     { d:1, title:'Arrivo a Kathmandu', tags:['Arrivo','Visto all\'arrivo'], text:'Sbarco a Tribhuvan International Airport dopo uno scalo (Doha, Istanbul o Dubai — nessun volo diretto dall\'Italia). Visto all\'arrivo (30$/15gg), trasferimento in hotel a Thamel.', link: placeLink('kathmandu'), linkLabel:'Vedi Kathmandu su Google Maps' },
-    { d:2, title:'Kathmandu — Durbar Square', tags:['Città','UNESCO'], text:'Il complesso di Hanuman Dhoka, il Kumari Ghar (residenza della Dea Vivente), la Taleju Temple — architettura Malla e Shah nel cuore della città vecchia.', link: placeLink('kathmandu'), linkLabel:'Vedi Kathmandu su Google Maps', photo:'https://upload.wikimedia.org/wikipedia/commons/a/a4/SWAYAMBHUNATH_STUPA_-_World_Heritage_Site.jpg', photoCredit:'Foto: Raj Dip Lama, CC BY-SA 4.0' },
+    { d:2, title:'Kathmandu — Durbar Square', tags:['Città','UNESCO'], text:'Il complesso di Hanuman Dhoka, il Kumari Ghar (residenza della Dea Vivente), la Taleju Temple — architettura Malla e Shah nel cuore della città vecchia.', link: placeLink('kathmandu'), linkLabel:'Vedi Kathmandu su Google Maps', photo:'foto/destinazioni/SWAYAMBHUNATH_STUPA_-_World_Heritage_Site.jpg', photoCredit:'Foto: Raj Dip Lama, CC BY-SA 4.0' },
     { d:3, title:'Kathmandu — Swayambhunath, Boudhanath, Pashupatinath', tags:['Il giorno spirituale'], text:'Lo stupa più antico della valle su una collina panoramica, uno dei più grandi stupa buddhisti al mondo, e il tempio induista più importante del Nepal sulle rive del fiume Bagmati.', link: placeLink('kathmandu'), linkLabel:'Vedi Kathmandu su Google Maps', highlight:true },
-    { d:4, title:'Kathmandu → Pokhara', tags:['Volo ~25min o auto 6-7h'], text:'Trasferimento verso Pokhara, città lacustre porta d\'accesso all\'Annapurna. Pomeriggio/tramonto sul Phewa Lake, con l\'Annapurna che si riflette nell\'acqua nei giorni tersi.', link: mapsLink('kathmandu','pokhara'), linkLabel:'Apri il tragitto Kathmandu → Pokhara', photo:'https://upload.wikimedia.org/wikipedia/commons/b/b7/Phewa_lake%2C_Pokhara.jpg', photoCredit:'Foto: Jmhullot, CC BY-SA 3.0' },
+    { d:4, title:'Kathmandu → Pokhara', tags:['Volo ~25min o auto 6-7h'], text:'Trasferimento verso Pokhara, città lacustre porta d\'accesso all\'Annapurna. Pomeriggio/tramonto sul Phewa Lake, con l\'Annapurna che si riflette nell\'acqua nei giorni tersi.', link: mapsLink('kathmandu','pokhara'), linkLabel:'Apri il tragitto Kathmandu → Pokhara', photo:'foto/destinazioni/Phewa_lake,_Pokhara.jpg', photoCredit:'Foto: Jmhullot, CC BY-SA 3.0' },
     { d:5, title:'Pokhara → Nayapul → Tikhedhunga/Ulleri', tags:['Inizio trekking'], text:'Auto fino a Nayapul, poi si parte a piedi: primo giorno di trekking fino a Tikhedhunga o Ulleri, tra risaie terrazzate e villaggi Gurung.', link: mapsLink('pokhara','tikhedhunga'), linkLabel:'Apri il tragitto verso Tikhedhunga', highlight:true },
     { d:6, title:'Ulleri → Ghorepani', tags:['Trekking','2.874m'], text:'Salita tra foreste di rododendri in piena fioritura fino a Ghorepani — pernottamento in lodge, pronti per l\'alba del giorno dopo.', link: placeLink('ghorepani'), linkLabel:'Vedi Ghorepani su Google Maps' },
     { d:7, title:'Alba a Poon Hill → Tadapani', tags:['Il giorno clou','3.210m'], text:'Sveglia prima dell\'alba per la salita a Poon Hill: panorama a 360° su Annapurna, Dhaulagiri e Machapuchare. Poi discesa verso Tadapani attraverso altra foresta di rododendri.', link: placeLink('poonhill'), linkLabel:'Vedi Poon Hill su Google Maps', highlight:true },
-    { d:8, title:'Tadapani → Ghandruk → Pokhara', tags:['Fine trekking'], text:'Ultima tappa a piedi fino al villaggio Gurung di Ghandruk, poi auto di ritorno a Nayapul e Pokhara. Sera libera, meritata doccia calda.', link: mapsLink('ghandruk','pokhara'), linkLabel:'Apri il tragitto Ghandruk → Pokhara', photo:'https://upload.wikimedia.org/wikipedia/commons/8/80/Ghandruk_village_overlooking_Annapurna.jpg', photoCredit:'Foto: Kushaltmg, CC BY-SA 4.0' },
+    { d:8, title:'Tadapani → Ghandruk → Pokhara', tags:['Fine trekking'], text:'Ultima tappa a piedi fino al villaggio Gurung di Ghandruk, poi auto di ritorno a Nayapul e Pokhara. Sera libera, meritata doccia calda.', link: mapsLink('ghandruk','pokhara'), linkLabel:'Apri il tragitto Ghandruk → Pokhara', photo:'foto/destinazioni/Ghandruk_village_overlooking_Annapurna.jpg', photoCredit:'Foto: Kushaltmg, CC BY-SA 4.0' },
     { d:9, title:'Pokhara → Kathmandu → Paro', tags:['Volo interno + volo internazionale'], text:'Mattina libera a Pokhara (paragliding facoltativo a Sarangkot), poi volo verso Kathmandu e da lì il volo Drukair verso Paro — uno degli atterraggi più spettacolari al mondo, con vista sull\'Everest nei giorni tersi.', link: mapsLink('pokhara','kathmandu'), linkLabel:'Apri il tragitto Pokhara → Kathmandu', highlight:true },
     { d:10, title:'Paro — Tiger\'s Nest', tags:['Il giorno clou','~900m di dislivello'], text:'Trekking di 4-5 ore andata/ritorno fino al monastero di Taktsang, aggrappato a una scogliera 900m sopra la valle. Sosta alla caffetteria a metà salita (~2.950m).', link: placeLink('paro'), linkLabel:'Vedi Paro su Google Maps', highlight:true },
     { d:11, title:'Paro → Thimphu', tags:['Capitale'], text:'Trasferimento nell\'unica capitale al mondo senza semafori. Il Buddha Dordenma, statua dorata di 51m con ~125.000 statue più piccole al suo interno, e il Tashichho Dzong del 1641.', link: mapsLink('paro','thimphu'), linkLabel:'Apri il tragitto Paro → Thimphu' },
@@ -667,29 +680,6 @@
     setTimeout(function(){ col.querySelector('.elev-bar').style.height = Math.round((e.m/maxElev)*100) + '%'; }, 150);
   });
 
-  // ---- Live currency converter ----
-  var curRates = null;
-  var curAmount = document.getElementById('cur-amount');
-  var curFrom = document.getElementById('cur-from');
-  var curTo = document.getElementById('cur-to');
-  var curResult = document.getElementById('cur-result');
-
-  function updateCurrency(){
-    if(!curRates){ curResult.textContent = 'Tasso non disponibile (serve internet).'; return; }
-    var amount = parseFloat(curAmount.value) || 0;
-    var from = curFrom.value, to = curTo.value;
-    var usdAmount = from === 'USD' ? amount : amount / curRates[from];
-    var converted = to === 'USD' ? usdAmount : usdAmount * curRates[to];
-    var decimals = to === 'NPR' ? 0 : 2;
-    curResult.textContent = amount.toLocaleString('it-IT') + ' ' + from + ' = ' + converted.toLocaleString('it-IT', {maximumFractionDigits: decimals}) + ' ' + to;
-  }
-
-  fetch('https://open.er-api.com/v6/latest/USD').then(function(r){ return r.json(); }).then(function(data){
-    if(data && data.rates){ curRates = data.rates; updateCurrency(); }
-    else { curResult.textContent = 'Tasso non disponibile in questo momento.'; }
-  }).catch(function(){ curResult.textContent = 'Tasso non disponibile (verifica la connessione internet).'; });
-
-  [curAmount, curFrom, curTo].forEach(function(el){ el.addEventListener('input', updateCurrency); el.addEventListener('change', updateCurrency); });
 
   // ---- Budget calculator (viaggio completo) ----
   var BUDGET = {
@@ -816,6 +806,18 @@
 
   var origin = COORDS.kathmandu, destination = COORDS.paro;
   var waypoints = STOPS.slice(1, -1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('|');
+
+  var npIframe = document.getElementById('map-route-iframe-np');
+  if(npIframe){
+    var npStops = ['kathmandu', 'pokhara', 'ghorepani', 'ghandruk'].map(function(k){ return COORDS[k][0] + ',' + COORDS[k][1]; });
+    npIframe.src = 'https://www.google.com/maps?saddr=' + npStops[0] + '&daddr=' + npStops.slice(1).join('+to:') + '&output=embed';
+  }
+  var btIframe = document.getElementById('map-route-iframe-bt');
+  if(btIframe){
+    var btStops = ['paro', 'thimphu', 'punakha'].map(function(k){ return COORDS[k][0] + ',' + COORDS[k][1]; });
+    btIframe.src = 'https://www.google.com/maps?saddr=' + btStops[0] + '&daddr=' + btStops.slice(1).join('+to:') + '&output=embed';
+  }
+
   document.getElementById('link-full-route').href =
     'https://www.google.com/maps/dir/?api=1&origin=' + origin[0] + ',' + origin[1] +
     '&destination=' + destination[0] + ',' + destination[1] +
