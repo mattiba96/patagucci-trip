@@ -107,27 +107,12 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
 
           <div class="card reveal" style="margin-top:18px; text-align:center; font-style:italic;">
             <h3 style="margin-top:0; font-style:normal;">📜 I Patagucci</h3>
-            <p style="color:#c7c2b6; line-height:1.9; margin:0;">
-              Quattro amici, uno zaino e un biglietto di sola andata,<br>
-              ogni volta una meta nuova, ogni volta la stessa combriccola scatenata.<br>
-              Manu è il logistico, con lui il viaggio non si perde mai un colpo,<br>
-              ma senza dieci birre al giorno lo vedi diventare uno sconvolto.<br>
-              Kiki è la meteora pazza, sempre pronta a ripartire,<br>
-              ma toglietele il ceviche e la sentirete ruggire:<br>
-              diventa aggressiva, non capisce più niente,<br>
-              datele pesce crudo o scappate immediatamente.<br>
-              Mala è l'enciclopedia vivente del gruppo intero,<br>
-              sa tutto di ogni posto, storia e sentiero,<br>
-              ma se non prende la bumba prima di coricarsi,<br>
-              la notte è tutta un rimbombo, meglio non disturbarsi.<br>
-              Bacci è il tecnologico, con lui non ti perdi in un vicolo,<br>
-              ma portatelo in quota e guardate che spettacolo:<br>
-              trema come una foglia al primo metro guadagnato,<br>
-              e giuro che una volta se l'è quasi fatta sotto, poveraccio.<br>
-              Quattro caratteri diversi, un'unica squadra che parte,<br>
-              i Patagucci vanno per il mondo, sempre dalla stessa parte —<br>
-              e ovunque li porti il prossimo volo o il prossimo passo,<br>
-              tornano a casa con una storia in più da raccontare, senza sosta.
+            <p style="color:#c7c2b6; line-height:1.8; margin:0;">
+              Manu è il logistico, ma senza dieci birre al giorno è uno sconvolto.<br>
+              Kiki è la meteora pazza, ma senza ceviche la sentite ruggire.<br>
+              Mala sa tutto di tutti i sentieri, ma senza bumba non si dorme.<br>
+              Bacci è il tecnologico, ma in quota trema come una foglia.<br>
+              Quattro caratteri diversi, un'unica squadra che parte insieme.
             </p>
           </div>
 
