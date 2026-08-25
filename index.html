@@ -393,7 +393,7 @@
             </a>
 
             <a class="trip-card" href="javascript:void(0)" onclick="showDest('np')">
-              <img src="foto/destinazioni/The_Tiger's_Nest_(_Paro_Taktsang_).jpg" alt="Tiger's Nest Monastery, Bhutan" loading="lazy">
+              <img src="foto/destinazioni/The_Tigers_Nest_(_Paro_Taktsang_).jpg" alt="Tiger's Nest Monastery, Bhutan" loading="lazy">
               <div class="overlay"></div>
               <div class="content">
                 <div class="flag">🇳🇵🇧🇹</div>
@@ -629,9 +629,6 @@
         </svg>
       </div>
 
-      <div class="map-embed reveal">
-        <iframe id="map-route-iframe-ug" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
 
       <div class="map-actions reveal">
         <a id="link-full-route-ug" href="#" target="_blank" rel="noopener">🗺️ Apri l'itinerario completo su Google Maps</a>
@@ -1219,9 +1216,6 @@
         </svg>
       </div>
 
-      <div class="map-embed reveal">
-        <iframe id="map-route-iframe-pk" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
 
       <div class="map-actions reveal">
         <a id="link-full-route-pk" href="#" target="_blank" rel="noopener">🗺️ Apri l'itinerario completo su Google Maps</a>
@@ -1288,7 +1282,7 @@
   <!-- SITI DA NON PERDERE -->
   <section id="siti-pk" class="panel" data-nav>
     <div class="inner">
-      <h2 class="section-title reveal">🌿 Tracker dei siti da non perdere</h2>
+      <h2 class="section-title reveal">🌿 Cose da non perdere</h2>
       <p class="section-sub reveal">Le tappe principali dell'itinerario, filtrabili per categoria — così sapete già cosa aspettarvi in ogni città e valle.</p>
 
       <div class="filter-row reveal" id="family-filters-pk"></div>
@@ -1655,6 +1649,7 @@
   <a href="#perche-za">Perché andare</a>
   <a href="#itinerario-za">Itinerario</a>
   <a href="#mappa-za">Mappa</a>
+  <a href="#siti-za">Cose da non perdere</a>
   <a href="#kruger-za">Guida al Kruger</a>
   <a href="#fauna-za">Pinguini &amp; Balene</a>
   <a href="#rinoceronti-za">Rinoceronti &amp; poaching</a>
@@ -1805,9 +1800,6 @@
         </svg>
       </div>
 
-      <div class="map-embed reveal">
-        <iframe id="map-route-iframe-za" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
 
       <div class="map-actions reveal">
         <a id="link-full-route-za" href="#" target="_blank" rel="noopener">🗺️ Apri l'itinerario completo su Google Maps</a>
@@ -1829,6 +1821,22 @@
           <thead><tr><th>Tappa</th><th>Coordinate</th><th></th></tr></thead>
           <tbody></tbody>
         </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- COSE DA NON PERDERE -->
+  <section id="siti-za" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌿 Cose da non perdere</h2>
+      <p class="section-sub reveal">Le tappe principali dell'itinerario, filtrabili per categoria.</p>
+
+      <div class="filter-row reveal" id="family-filters-za"></div>
+      <div class="family-grid" id="family-grid-za"></div>
+
+      <div class="callout reveal">
+        <strong>Nota:</strong> orari e disponibilità dei traghetti per Robben Island vanno verificati e prenotati con anticipo — è spesso il primo tour a esaurirsi a Città del Capo.
+        <div class="source-note">Fonti: sanparks.org, robben-island.org.za, wander-lush.org, getaway.co.za.</div>
       </div>
     </div>
   </section>
@@ -1939,7 +1947,7 @@
 
       <div class="card reveal" style="text-align:center;">
         <div class="ring" style="--pct:100;"><span class="ring-label">5/5</span></div>
-        <p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Tutti i Big Five sono presenti nel parco che visiterete — <span id="bigfive-count-za">0/5</span> segnati come "avvistati" da voi finora.</p>
+        <p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Tutti i Big Five sono presenti nel parco che visiterete.</p>
       </div>
 
       <div class="bigfive-grid" id="bigfive-grid-za"></div>
@@ -2228,7 +2236,7 @@
 
   <div class="destination" id="dest-np" data-dest="np">
 <header class="hero">
-  <div class="bg" style="background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.55) 55%, rgba(10,14,11,0.92) 100%), url('foto/destinazioni/The_Tiger's_Nest_(_Paro_Taktsang_).jpg');"></div>
+  <div class="bg" style="background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.55) 55%, rgba(10,14,11,0.92) 100%), url('foto/destinazioni/The_Tigers_Nest_(_Paro_Taktsang_).jpg');"></div>
   <div class="content">
     <h1>Nepal &amp; Bhutan</h1>
     <p class="tagline">Rododendri in fiore sull'Annapurna, l'alba da Poon Hill, e un monastero aggrappato a una scogliera a 3.120m. Due Himalaya diversi in un solo viaggio: il trekking più accessibile del Nepal e l'unico paese al mondo che misura la felicità nazionale invece del PIL.</p>
@@ -2241,7 +2249,7 @@
     </div>
     <div class="scroll-cue">↓ scorri per esplorare</div>
   </div>
-  <div class="photo-credit">Foto: Vikramjit Kakati, <a href="https://commons.wikimedia.org/wiki/File:The_Tiger's_Nest_(_Paro_Taktsang_).jpg" target="_blank" rel="noopener">CC BY-SA 3.0, Wikimedia Commons</a></div>
+  <div class="photo-credit">Foto: Vikramjit Kakati, <a href="https://commons.wikimedia.org/wiki/File:The_Tigers_Nest_(_Paro_Taktsang_).jpg" target="_blank" rel="noopener">CC BY-SA 3.0, Wikimedia Commons</a></div>
 </header>
 
 <nav class="tabs" id="tabs-np">
@@ -2249,8 +2257,9 @@
   <a href="#perche-np">Perché andare</a>
   <a href="#itinerario-np">Itinerario</a>
   <a href="#mappa-np">Mappa</a>
+  <a href="#siti-np">Cose da non perdere</a>
   <a href="#poonhill-np">Guida al trekking</a>
-  <a href="#campibase-np">Campi base in 2 giorni</a>
+  <a href="#campibase-np">Ottomila in 2 giorni</a>
   <a href="#bhutan-np">Guida al Bhutan</a>
   <a href="#vette-np">Vette da Poon Hill</a>
   <a href="#meteo-np">Meteo</a>
@@ -2389,18 +2398,6 @@
         </svg>
       </div>
 
-      <p class="section-sub reveal" style="margin-top:-6px;">Due mappe separate perché il tratto Kathmandu-Paro è un volo, non una strada: qui sotto il percorso reale su gomma/a piedi in ciascun paese.</p>
-
-      <h4 style="color:inherit; margin:18px 0 6px;">🇳🇵 Percorso in Nepal — Kathmandu, Pokhara, trekking Poon Hill</h4>
-      <div class="map-embed reveal">
-        <iframe id="map-route-iframe-np-np" src="https://www.google.com/maps?q=Annapurna+Conservation+Area,+Nepal&z=7&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-
-      <h4 style="color:inherit; margin:18px 0 6px;">🇧🇹 Percorso in Bhutan — Paro, Thimphu, Punakha</h4>
-      <div class="map-embed reveal">
-        <iframe id="map-route-iframe-bt-np" src="https://www.google.com/maps?q=Paro,+Bhutan&z=10&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-
       <div class="map-actions reveal">
         <a id="link-full-route-np" href="#" target="_blank" rel="noopener">🗺️ Apri l'itinerario completo su Google Maps</a>
         <button class="export" id="btn-export-kml-np">⬇️ Esporta tappe (KML)</button>
@@ -2421,6 +2418,22 @@
           <thead><tr><th>Tappa</th><th>Coordinate</th><th></th></tr></thead>
           <tbody></tbody>
         </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- COSE DA NON PERDERE -->
+  <section id="siti-np" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌿 Cose da non perdere</h2>
+      <p class="section-sub reveal">Le tappe principali dell'itinerario, filtrabili per categoria.</p>
+
+      <div class="filter-row reveal" id="family-filters-np"></div>
+      <div class="family-grid" id="family-grid-np"></div>
+
+      <div class="callout reveal">
+        <strong>Nota:</strong> gli orari dei dzong bhutanesi possono variare per cerimonie religiose — verifica sempre con la guida locale (obbligatoria per i siti religiosi in Bhutan) prima di pianificare l'orario esatto.
+        <div class="source-note">Fonti: nepalbasecamptreks.com, drukasia.com, littlebhutan.com.</div>
       </div>
     </div>
   </section>
@@ -2463,18 +2476,18 @@
   <!-- CAMPI BASE IN 2 GIORNI -->
   <section id="campibase-np" class="panel" data-nav>
     <div class="inner">
-      <h2 class="section-title reveal">🥾 Campi base in 2 giorni</h2>
-      <p class="section-sub reveal">Se qualcuno del gruppo non vuole/può fare i 4-5 giorni di Poon Hill, o se avanza un giorno extra a Pokhara, questi sono trekking brevi realmente proposti dagli operatori locali — non versioni improvvisate.</p>
+      <h2 class="section-title reveal">⛰️ Ottomila avvistabili in 2 giorni</h2>
+      <p class="section-sub reveal">Se qualcuno del gruppo non vuole/può fare i 4-5 giorni di Poon Hill, o se avanza un giorno extra a Pokhara, questi sono trekking brevi realmente proposti dagli operatori locali. Uno solo dei tre regala davvero un ottomila vero — gli altri due giganti visti dagli altri due sono spettacolari ma restano sotto la soglia simbolica.</p>
 
       <div class="info-grid">
-        <div class="card reveal"><h3>🏕️ Australian Camp</h3><p>Il più semplice dei tre: da Kande (~1h-1h30 da Pokhara) fino a 2.060m, vista su Machapuchare, Annapurna South e Hiunchuli. Nessun rischio quota, adatto a principianti. ~100-150$ a persona per 2 giorni/1 notte, guida e lodge inclusi.</p></div>
-        <div class="card reveal"><h3>🏘️ Ghandruk short trek</h3><p>Da Nayapul (stesso punto di partenza del Poon Hill classico) fino al villaggio Gurung di Ghandruk, 1.940-2.010m — il contenuto culturale più ricco dei tre (case tradizionali, piccolo museo di villaggio). ~150-280$ a persona, prezzo variabile secondo l'operatore.</p></div>
-        <div class="card reveal"><h3>🌄 Panchase</h3><p>Anch'esso da Kande, ma sale fino a 2.500-2.517m — il punto più alto dei tre, con vista che si allarga anche su Dhaulagiri, non solo Annapurna. Alba dalla cima il secondo giorno. ~160-400$ a persona (dato meno consolidato, richiede preventivo diretto).</p></div>
+        <div class="card reveal"><h3>🌄 Panchase — 2.500-2.517m</h3><p>L'unico dei tre con veri ottomila all'orizzonte: <strong>Dhaulagiri I (8.167m)</strong> e, nei giorni tersi, <strong>Manaslu (8.163m)</strong>, oltre a tutta la catena dell'Annapurna. Alba dalla cima il secondo giorno. Da Kande, ~160-400$ a persona (dato meno consolidato, richiede preventivo diretto).</p></div>
+        <div class="card reveal"><h3>🏕️ Australian Camp — 2.060m</h3><p>Machhapuchhre (6.993m, sacra e mai scalata), Annapurna South (7.219m) e Annapurna II (7.937m) — giganti spettacolari ma tutti sotto gli 8.000m. Il più semplice dei tre, nessun rischio quota. Da Kande, ~100-150$ a persona.</p></div>
+        <div class="card reveal"><h3>🏘️ Ghandruk short trek — 1.940-2.010m</h3><p>Stessa vista su Machhapuchhre e Annapurna South di Australian Camp, ma con il contenuto culturale più ricco dei tre — case tradizionali Gurung, piccolo museo di villaggio. Da Nayapul, ~150-280$ a persona.</p></div>
       </div>
 
       <div class="callout reveal">
-        <strong>Nota:</strong> il "Mardi Himal in 2 giorni" venduto da alcuni operatori non è una versione facile del trekking classico — usa un tratto in jeep per bypassare la salita e raggiunge comunque i 4.200m in meno di 36 ore, un ritmo di salita che comporta un vero rischio di mal di montagna. Non è paragonabile ai tre trekking sopra come opzione "leggera": va scelto solo con esperienza di alta quota alle spalle.
-        <div class="source-note">Fonti: himalayatrip.com, mountainecotrails.com, altitudehimalaya.com, excellenttrek.com, breezeadventure.com — dati verificati ad agosto 2026, prezzi indicativi soggetti a forte variabilità tra operatori.</div>
+        <strong>Nota:</strong> il "Mardi Himal in 2 giorni" venduto da alcuni operatori non è una versione facile del trekking classico — usa un tratto in jeep per bypassare la salita e raggiunge comunque i 4.200m in meno di 36 ore, un ritmo di salita che comporta un vero rischio di mal di montagna. Non è paragonabile alle tre opzioni sopra come alternativa "leggera": va scelto solo con esperienza di alta quota alle spalle.
+        <div class="source-note">Fonti: himalayatrip.com, mountainecotrails.com, altitudehimalaya.com, excellenttrek.com, breezeadventure.com, Wikipedia (altitudini vette) — dati verificati ad agosto 2026, prezzi indicativi soggetti a forte variabilità tra operatori.</div>
       </div>
     </div>
   </section>
@@ -2850,6 +2863,7 @@
   <a href="#perche-uk">Perché andare</a>
   <a href="#itinerario-uk">Itinerario</a>
   <a href="#mappa-uk">Mappa</a>
+  <a href="#siti-uk">Cose da non perdere</a>
   <a href="#viadellaseta-uk">Guida alla Via della Seta</a>
   <a href="#marzokg-uk">Marzo in Kirghizistan</a>
   <a href="#meteo-uk">Meteo</a>
@@ -2988,9 +3002,6 @@
         </svg>
       </div>
 
-      <div class="map-embed reveal">
-        <iframe id="map-route-iframe-uk" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
 
       <div class="map-actions reveal">
         <a id="link-full-route-uk" href="#" target="_blank" rel="noopener">🗺️ Apri l'itinerario completo su Google Maps</a>
@@ -3012,6 +3023,22 @@
           <thead><tr><th>Tappa</th><th>Coordinate</th><th></th></tr></thead>
           <tbody></tbody>
         </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- COSE DA NON PERDERE -->
+  <section id="siti-uk" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌿 Cose da non perdere</h2>
+      <p class="section-sub reveal">Le tappe principali dell'itinerario, filtrabili per categoria.</p>
+
+      <div class="filter-row reveal" id="family-filters-uk"></div>
+      <div class="family-grid" id="family-grid-uk"></div>
+
+      <div class="callout reveal">
+        <strong>Nota:</strong> Song-Kul e Tash Rabat restano chiusi/difficilmente raggiungibili a marzo per neve — vedi la sezione "Marzo in Kirghizistan" per il dettaglio completo.
+        <div class="source-note">Fonti: advantour.com, caravanistan.com, whc.unesco.org.</div>
       </div>
     </div>
   </section>
@@ -3373,6 +3400,7 @@
   <a href="#perche-gl">Perché andare</a>
   <a href="#itinerario-gl">Itinerario</a>
   <a href="#mappa-gl">Mappa</a>
+  <a href="#siti-gl">Cose da non perdere</a>
   <a href="#guida-gl">Guida pratica</a>
   <a href="#curiosita-gl">Curiosità</a>
   <a href="#meteo-gl">Meteo</a>
@@ -3445,9 +3473,6 @@
       <h2 class="section-title reveal">📍 Mappa &amp; punti d'interesse</h2>
       <p class="section-sub reveal">Ilulissat come base, con l'Icefjord e la baia di Disko come teatro di tutte le uscite in barca. Apri la mappa per orientarti, o esporta i punti in un file KML.</p>
 
-      <div class="map-embed reveal">
-        <iframe src="https://www.google.com/maps?q=Ilulissat+Icefjord,+Greenland&z=9&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
 
       <div class="map-actions reveal">
         <a id="link-full-route-gl" href="#" target="_blank" rel="noopener">🗺️ Apri Ilulissat su Google Maps</a>
@@ -3461,6 +3486,22 @@
           <tbody></tbody>
         </table>
         <div class="source-note">Coordinate da countrycoordinate.com, en.wikipedia.org — verificate ad agosto 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COSE DA NON PERDERE -->
+  <section id="siti-gl" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌿 Cose da non perdere</h2>
+      <p class="section-sub reveal">Con un'unica base a Ilulissat, le "tappe" sono soprattutto uscite ed esperienze — filtrabili per categoria.</p>
+
+      <div class="filter-row reveal" id="family-filters-gl"></div>
+      <div class="family-grid" id="family-grid-gl"></div>
+
+      <div class="callout reveal">
+        <strong>Nota:</strong> tutte le uscite in barca/kayak dipendono dal meteo — tenete flessibilità nell'itinerario, specialmente per il tour del sole di mezzanotte.
+        <div class="source-note">Fonti: visitgreenland.com, hotelicefiord.com, whc.unesco.org.</div>
       </div>
     </div>
   </section>
@@ -3830,9 +3871,6 @@
       <h2 class="section-title reveal">📍 Mappa &amp; punti d'interesse</h2>
       <p class="section-sub reveal">Tbilisi come base, con Mtskheta, Sighnaghi (Kakheti) e Gudauri come gite in giornata. Apri la mappa per orientarti, o esporta i punti in un file KML.</p>
 
-      <div class="map-embed reveal">
-        <iframe id="map-route-iframe-ge" src="https://www.google.com/maps?q=Tbilisi,+Georgia&z=8&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
 
       <div class="map-actions reveal">
         <a id="link-full-route-ge" href="#" target="_blank" rel="noopener">🗺️ Apri Tbilisi su Google Maps</a>
@@ -3880,7 +3918,7 @@
   <!-- SITI DA NON PERDERE -->
   <section id="siti-ge" class="panel" data-nav>
     <div class="inner">
-      <h2 class="section-title reveal">🌿 Tracker dei siti da non perdere</h2>
+      <h2 class="section-title reveal">🌿 Cose da non perdere</h2>
       <p class="section-sub reveal">Le tappe principali dell'itinerario, filtrabili per categoria.</p>
 
       <div class="filter-row reveal" id="family-filters-ge"></div>
@@ -4188,10 +4226,19 @@ function showDest(name){
   if(btn) btn.classList.add('active');
   var flagbar = document.getElementById('flagbar');
   if(flagbar && FLAG_BARS[name]) flagbar.style.background = FLAG_BARS[name];
-  window.scrollTo(0, 0);
+  window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   target.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
+  if(typeof syncSwitcherHeight === 'function') setTimeout(syncSwitcherHeight, 0);
 }
 function showHub(){ showDest('hub'); }
+
+function syncSwitcherHeight(){
+  var switcher = document.getElementById('site-switcher');
+  if(switcher) document.documentElement.style.setProperty('--switcher-h', switcher.offsetHeight + 'px');
+}
+syncSwitcherHeight();
+window.addEventListener('resize', syncSwitcherHeight);
+window.addEventListener('load', syncSwitcherHeight);
 
 document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
   var audio = new Audio(card.getAttribute('data-audio'));
@@ -4285,6 +4332,8 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
       '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
       '</div>';
     timeline.appendChild(det);
+    det.addEventListener('mouseenter', function(){ det.open = true; });
+    det.addEventListener('mouseleave', function(){ det.open = false; });
     revealObserver.observe(det);
   });
 
@@ -4619,11 +4668,6 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
 
   var origin = COORDS.entebbe, destination = COORDS.entebbe;
   var waypoints = STOPS.slice(1, -1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('|');
-  var routeIframe = document.getElementById('map-route-iframe-ug');
-  if(routeIframe){
-    var routeDaddr = STOPS.slice(1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('+to:');
-    routeIframe.src = 'https://www.google.com/maps?saddr=' + origin[0] + ',' + origin[1] + '&daddr=' + routeDaddr + '&output=embed';
-  }
   document.getElementById('link-full-route-ug').href =
     'https://www.google.com/maps/dir/?api=1&origin=' + origin[0] + ',' + origin[1] +
     '&destination=' + destination[0] + ',' + destination[1] +
@@ -4765,6 +4809,8 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
       '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
       '</div>';
     timeline.appendChild(det);
+    det.addEventListener('mouseenter', function(){ det.open = true; });
+    det.addEventListener('mouseleave', function(){ det.open = false; });
     revealObserver.observe(det);
   });
 
@@ -5025,11 +5071,6 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
 
   var origin = COORDS.islamabad, destination = COORDS.islamabad;
   var waypoints = STOPS.slice(1, -1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('|');
-  var routeIframe = document.getElementById('map-route-iframe-pk');
-  if(routeIframe){
-    var routeDaddr = STOPS.slice(1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('+to:');
-    routeIframe.src = 'https://www.google.com/maps?saddr=' + origin[0] + ',' + origin[1] + '&daddr=' + routeDaddr + '&output=embed';
-  }
   document.getElementById('link-full-route-pk').href =
     'https://www.google.com/maps/dir/?api=1&origin=' + origin[0] + ',' + origin[1] +
     '&destination=' + destination[0] + ',' + destination[1] +
@@ -5234,6 +5275,8 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
       '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
       '</div>';
     timeline.appendChild(det);
+    det.addEventListener('mouseenter', function(){ det.open = true; });
+    det.addEventListener('mouseleave', function(){ det.open = false; });
     revealObserver.observe(det);
   });
 
@@ -5344,15 +5387,7 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
     { id:'leopard', icon:'🐆', name:'Leopardo', diff:'Difficile', fact:'Il più elusivo dei cinque nel Kruger; a Sabi Sands, densità di leopardi tra le più alte al mondo grazie a decenni di abituazione.' },
     { id:'rhino', icon:'🦏', name:'Rinoceronte', diff:'Difficile', fact:'Presente ma in forte calo: popolazione Kruger crollata del 78% dal 2013 al 2022 per il bracconaggio (vedi sezione dedicata).' }
   ];
-  var BF_KEY = 'southafrica-trip-bigfive';
-  var bfSpotted = {};
-  try { bfSpotted = JSON.parse(localStorage.getItem(BF_KEY)) || {}; } catch(e){ bfSpotted = {}; }
-
   var bfGrid = document.getElementById('bigfive-grid-za');
-  function updateBfCount(){
-    var n = BIGFIVE.filter(function(a){ return bfSpotted[a.id]; }).length;
-    document.getElementById('bigfive-count-za').textContent = n + '/5';
-  }
   BIGFIVE.forEach(function(a){
     var card = document.createElement('div');
     card.className = 'bigfive-card';
@@ -5360,23 +5395,56 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
       '<div class="bf-icon">' + a.icon + '</div>' +
       '<div class="bf-name">' + a.name + '</div>' +
       '<div class="bf-diff ' + a.diff + '">' + a.diff + '</div>' +
-      '<p class="bf-fact">' + a.fact + '</p>' +
-      '<button class="bf-track-btn" data-id="' + a.id + '">Da avvistare</button>';
+      '<p class="bf-fact">' + a.fact + '</p>';
     bfGrid.appendChild(card);
-    var btn = card.querySelector('.bf-track-btn');
-    function refreshBtn(){
-      if(bfSpotted[a.id]){ btn.textContent = 'Avvistato! ✅'; btn.classList.add('spotted'); }
-      else { btn.textContent = 'Da avvistare'; btn.classList.remove('spotted'); }
-    }
-    refreshBtn();
-    btn.addEventListener('click', function(){
-      bfSpotted[a.id] = !bfSpotted[a.id];
-      try { localStorage.setItem(BF_KEY, JSON.stringify(bfSpotted)); } catch(e){}
-      refreshBtn();
-      updateBfCount();
-    });
   });
-  updateBfCount();
+
+  // ---- Cose da non perdere ----
+  var FAMILIES = [
+    { sector:'Città del Capo', name:'Table Mountain', size:'~1-2h incl. cabinovia', level:'Facile', note:'Cabinovia rotante fino a 1.085m — chiusa con vento forte, meglio prenotare online in anticipo.' },
+    { sector:'Città del Capo', name:'Cape of Good Hope', size:'Mezza giornata', level:'Facile', note:'Punto più sud-occidentale dell\'Africa, all\'interno del Table Mountain National Park — spesso combinato con Boulders Beach.' },
+    { sector:'Città del Capo', name:'Boulders Beach', size:'~1h', level:'Facile', note:'Colonia di pinguini africani a Simon\'s Town — vedi la sezione dedicata per i numeri aggiornati.' },
+    { sector:'Città del Capo', name:'Robben Island', size:'~4h incl. traghetto', level:'Facile', note:'Il carcere dove Mandela scontò 18 dei suoi 27 anni di prigionia — sito UNESCO, tour guidato spesso da ex-detenuti.' },
+    { sector:'Winelands', name:'Stellenbosch', size:'Mezza giornata', level:'Facile', note:'Il cuore delle Cape Winelands — degustazioni tra le cantine più antiche del Sudafrica (vedi sezione dedicata).' },
+    { sector:'Garden Route', name:'Hermanus', size:'~2-3h', level:'Facile', note:'Tra le migliori destinazioni al mondo per whale watching da terra — stagionale, vedi la sezione dedicata.' },
+    { sector:'Garden Route', name:'Knysna Heads', size:'~1h', level:'Facile', note:'Le due scogliere che chiudono la laguna di Knysna verso l\'oceano — punto panoramico classico della Garden Route.' },
+    { sector:'Garden Route', name:'Ponte sospeso di Storms River', size:'~1-2h', level:'Media', note:'Ponte pedonale sospeso sull\'estuario del fiume, nel Tsitsikamma National Park — tratto costiero tra i più fotografati.' },
+    { sector:'Kruger', name:'Safari Big Five', size:'Più giorni', level:'Media', note:'Kruger National Park o riserve private come Sabi Sands — vedi la sezione dedicata.' }
+  ];
+
+  var famSectors = ['Tutti'].concat(Array.from(new Set(FAMILIES.map(function(f){ return f.sector; }))));
+  var famFilterRow = document.getElementById('family-filters-za');
+  var famGridEl = document.getElementById('family-grid-za');
+  var famActiveSector = 'Tutti';
+
+  function renderFamilies(){
+    famGridEl.innerHTML = '';
+    FAMILIES.filter(function(f){ return famActiveSector === 'Tutti' || f.sector === famActiveSector; }).forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'family-card';
+      card.innerHTML =
+        '<div class="fsector">' + f.sector + '</div>' +
+        '<div class="fname">' + f.name + '</div>' +
+        '<div class="flevel ' + f.level + '">' + f.level + '</div>' +
+        '<div class="fsize">' + f.size + '</div>' +
+        '<p class="fnote">' + f.note + '</p>';
+      famGridEl.appendChild(card);
+    });
+  }
+
+  famSectors.forEach(function(s){
+    var btn = document.createElement('button');
+    btn.textContent = s;
+    if(s === famActiveSector) btn.classList.add('active');
+    btn.addEventListener('click', function(){
+      famActiveSector = s;
+      famFilterRow.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderFamilies();
+    });
+    famFilterRow.appendChild(btn);
+  });
+  renderFamilies();
 
   // ---- Lo sapevi che... facts ----
   var FACTS = [
@@ -5431,11 +5499,6 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
 
   var origin = COORDS.capetown, destination = COORDS.johannesburg;
   var waypoints = STOPS.slice(1, -1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('|');
-  var routeIframe = document.getElementById('map-route-iframe-za');
-  if(routeIframe){
-    var routeDaddr = STOPS.slice(1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('+to:');
-    routeIframe.src = 'https://www.google.com/maps?saddr=' + origin[0] + ',' + origin[1] + '&daddr=' + routeDaddr + '&output=embed';
-  }
   document.getElementById('link-full-route-za').href =
     'https://www.google.com/maps/dir/?api=1&origin=' + origin[0] + ',' + origin[1] +
     '&destination=' + destination[0] + ',' + destination[1] +
@@ -5637,6 +5700,8 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
       '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
       '</div>';
     timeline.appendChild(det);
+    det.addEventListener('mouseenter', function(){ det.open = true; });
+    det.addEventListener('mouseleave', function(){ det.open = false; });
     revealObserver.observe(det);
   });
 
@@ -5739,6 +5804,51 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
   });
   updateBfCount();
 
+  // ---- Cose da non perdere ----
+  var FAMILIES = [
+    { sector:'Kathmandu', name:'Swayambhunath (Monkey Temple)', size:'~1-1,5h', level:'Facile', note:'Stupa buddhista su una collina panoramica sulla valle — patrimonio UNESCO, tra i simboli della città.' },
+    { sector:'Kathmandu', name:'Durbar Square', size:'~2h', level:'Facile', note:'Il palazzo reale storico, tra templi in legno intagliato e la casa della Kumari, la dea vivente.' },
+    { sector:'Pokhara', name:'Phewa Lake', size:'~1-2h', level:'Facile', note:'Lago con l\'Annapurna che si riflette nell\'acqua nei giorni tersi — base per il trekking Poon Hill.' },
+    { sector:'Trekking', name:'Alba da Poon Hill', size:'Punta del trekking di 4-5gg', level:'Media', note:'Vista panoramica a 3.210m su Annapurna, Dhaulagiri e Machhapuchhre — vedi la guida al trekking.' },
+    { sector:'Bhutan', name:'Tiger\'s Nest (Paro Taktsang)', size:'~4-5h a/r a piedi', level:'Media', note:'Monastero aggrappato a una scogliera a 3.120m — il sito più iconico del Bhutan, richiede una camminata seria.' },
+    { sector:'Bhutan', name:'Punakha Dzong', size:'~1-1,5h', level:'Facile', note:'Alla confluenza di due fiumi, considerato il dzong più bello del Bhutan — ex capitale invernale.' },
+    { sector:'Bhutan', name:'Buddha Dordenma', size:'~1h', level:'Facile', note:'Statua di Buddha alta 51,5m sopra Thimphu, visibile da gran parte della valle.' }
+  ];
+
+  var famSectors = ['Tutti'].concat(Array.from(new Set(FAMILIES.map(function(f){ return f.sector; }))));
+  var famFilterRow = document.getElementById('family-filters-np');
+  var famGridEl = document.getElementById('family-grid-np');
+  var famActiveSector = 'Tutti';
+
+  function renderFamilies(){
+    famGridEl.innerHTML = '';
+    FAMILIES.filter(function(f){ return famActiveSector === 'Tutti' || f.sector === famActiveSector; }).forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'family-card';
+      card.innerHTML =
+        '<div class="fsector">' + f.sector + '</div>' +
+        '<div class="fname">' + f.name + '</div>' +
+        '<div class="flevel ' + f.level + '">' + f.level + '</div>' +
+        '<div class="fsize">' + f.size + '</div>' +
+        '<p class="fnote">' + f.note + '</p>';
+      famGridEl.appendChild(card);
+    });
+  }
+
+  famSectors.forEach(function(s){
+    var btn = document.createElement('button');
+    btn.textContent = s;
+    if(s === famActiveSector) btn.classList.add('active');
+    btn.addEventListener('click', function(){
+      famActiveSector = s;
+      famFilterRow.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderFamilies();
+    });
+    famFilterRow.appendChild(btn);
+  });
+  renderFamilies();
+
   // ---- Lo sapevi che... facts ----
   var FACTS = [
     { icon:'✈️', text:'Il volo Kathmandu-Paro è considerato l\'atterraggio commerciale più tecnico al mondo: nessun ILS, solo approccio visivo manuale, pochissimi piloti certificati.' },
@@ -5790,17 +5900,6 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
 
   var origin = COORDS.kathmandu, destination = COORDS.paro;
   var waypoints = STOPS.slice(1, -1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('|');
-
-  var npIframe = document.getElementById('map-route-iframe-np-np');
-  if(npIframe){
-    var npStops = ['kathmandu', 'pokhara', 'ghorepani', 'ghandruk'].map(function(k){ return COORDS[k][0] + ',' + COORDS[k][1]; });
-    npIframe.src = 'https://www.google.com/maps?saddr=' + npStops[0] + '&daddr=' + npStops.slice(1).join('+to:') + '&output=embed';
-  }
-  var btIframe = document.getElementById('map-route-iframe-bt-np');
-  if(btIframe){
-    var btStops = ['paro', 'thimphu', 'punakha'].map(function(k){ return COORDS[k][0] + ',' + COORDS[k][1]; });
-    btIframe.src = 'https://www.google.com/maps?saddr=' + btStops[0] + '&daddr=' + btStops.slice(1).join('+to:') + '&output=embed';
-  }
 
   document.getElementById('link-full-route-np').href =
     'https://www.google.com/maps/dir/?api=1&origin=' + origin[0] + ',' + origin[1] +
@@ -6000,6 +6099,8 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
       '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
       '</div>';
     timeline.appendChild(det);
+    det.addEventListener('mouseenter', function(){ det.open = true; });
+    det.addEventListener('mouseleave', function(){ det.open = false; });
     revealObserver.observe(det);
   });
 
@@ -6103,6 +6204,52 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
     setTimeout(function(){ row.querySelector('.dfill').style.width = d.pct + '%'; }, 200);
   });
 
+  // ---- Cose da non perdere ----
+  var FAMILIES = [
+    { sector:'Tashkent', name:'Piazza Amir Timur', size:'~1h', level:'Facile', note:'Il cuore della Tashkent moderna, statua equestre di Tamerlano — punto di partenza classico in città.' },
+    { sector:'Samarkand', name:'Registan', size:'~1,5-2h', level:'Facile', note:'Le tre madrase affacciate sulla piazza più fotografata dell\'Asia Centrale — magnifica anche di sera, illuminata.' },
+    { sector:'Samarkand', name:'Shah-i-Zinda', size:'~1h', level:'Facile', note:'Necropoli di mausolei in maiolica turchese, uno dei complessi funerari più belli della Via della Seta.' },
+    { sector:'Bukhara', name:'Po-i-Kalyan', size:'~1-1,5h', level:'Facile', note:'Il complesso del minareto Kalyan (XII secolo), tra i simboli della città vecchia di Bukhara.' },
+    { sector:'Khiva', name:'Itchan Kala', size:'Mezza giornata', level:'Facile', note:'La città vecchia murata, primo sito UNESCO dell\'Uzbekistan (1990) — si visita quasi interamente a piedi.' },
+    { sector:'Bishkek', name:'Piazza Ala-Too', size:'~1h', level:'Facile', note:'La piazza centrale della capitale kirghisa, punto di partenza per esplorare il centro città.' },
+    { sector:'Kirghizistan', name:'Ala-Archa National Park', size:'Mezza giornata', level:'Media', note:'Gole alpine a ~40 minuti da Bishkek — la gita in montagna più semplice e veloce del viaggio.' },
+    { sector:'Kirghizistan', name:'Karakol', size:'1-2 giorni', level:'Media', note:'Base per il lago Issyk-Kul e la ski base attiva anche fuori stagione sci — vedi la sezione "Marzo in Kirghizistan".' }
+  ];
+
+  var famSectors = ['Tutti'].concat(Array.from(new Set(FAMILIES.map(function(f){ return f.sector; }))));
+  var famFilterRow = document.getElementById('family-filters-uk');
+  var famGridEl = document.getElementById('family-grid-uk');
+  var famActiveSector = 'Tutti';
+
+  function renderFamilies(){
+    famGridEl.innerHTML = '';
+    FAMILIES.filter(function(f){ return famActiveSector === 'Tutti' || f.sector === famActiveSector; }).forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'family-card';
+      card.innerHTML =
+        '<div class="fsector">' + f.sector + '</div>' +
+        '<div class="fname">' + f.name + '</div>' +
+        '<div class="flevel ' + f.level + '">' + f.level + '</div>' +
+        '<div class="fsize">' + f.size + '</div>' +
+        '<p class="fnote">' + f.note + '</p>';
+      famGridEl.appendChild(card);
+    });
+  }
+
+  famSectors.forEach(function(s){
+    var btn = document.createElement('button');
+    btn.textContent = s;
+    if(s === famActiveSector) btn.classList.add('active');
+    btn.addEventListener('click', function(){
+      famActiveSector = s;
+      famFilterRow.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderFamilies();
+    });
+    famFilterRow.appendChild(btn);
+  });
+  renderFamilies();
+
   // ---- Lo sapevi che... facts ----
   var FACTS = [
     { icon:'🏰', text:'Itchan Kala (Khiva) è stato il primo sito UNESCO dell\'Uzbekistan, nel 1990 — anni prima di Bukhara (1993) e Samarkand (2001).' },
@@ -6153,11 +6300,6 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
 
   var origin = COORDS.tashkent, destination = COORDS.bishkek;
   var waypoints = STOPS.slice(1, -1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('|');
-  var routeIframe = document.getElementById('map-route-iframe-uk');
-  if(routeIframe){
-    var routeDaddr = STOPS.slice(1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('+to:');
-    routeIframe.src = 'https://www.google.com/maps?saddr=' + origin[0] + ',' + origin[1] + '&daddr=' + routeDaddr + '&output=embed';
-  }
   document.getElementById('link-full-route-uk').href =
     'https://www.google.com/maps/dir/?api=1&origin=' + origin[0] + ',' + origin[1] +
     '&destination=' + destination[0] + ',' + destination[1] +
@@ -6340,6 +6482,8 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
       '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
       '</div>';
     timeline.appendChild(det);
+    det.addEventListener('mouseenter', function(){ det.open = true; });
+    det.addEventListener('mouseleave', function(){ det.open = false; });
     revealObserver.observe(det);
   });
 
@@ -6369,6 +6513,49 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
     [bgtPeople, bgtStyle].forEach(function(el){ el.addEventListener('input', updateBudget); el.addEventListener('change', updateBudget); });
     updateBudget();
   }
+
+  // ---- Cose da non perdere ----
+  var FAMILIES = [
+    { sector:'Natura', name:'Ilulissat Icefjord', size:'~2-3h a piedi', level:'Facile', note:'Le passerelle UNESCO (percorsi blu/giallo) sulla foce del ghiacciaio Sermeq Kujalleq — il modo più semplice per vedere gli iceberg da vicino.' },
+    { sector:'Natura', name:'Tour in barca tra gli iceberg', size:'~2-3h', level:'Facile', note:'Uscita nella baia di Disko, con buone probabilità di avvistare megattere o balenottere minori.' },
+    { sector:'Natura', name:'Tour del sole di mezzanotte', size:'~2-3h, serale', level:'Facile', note:'Uscita in barca nella luce dorata e bassa del sole che a giugno non tramonta mai davvero.' },
+    { sector:'Avventura', name:'Kayak tra gli iceberg', size:'~2h', level:'Media', note:'Con muta stagna — l\'acqua resta vicina allo zero anche d\'estate — tra iceberg più piccoli in un\'insenatura riparata.' },
+    { sector:'Cultura', name:'Godthaab Bryghus / Immiaq', size:'~1-2h', level:'Facile', note:'I due birrifici reali della Groenlandia (Nuuk e Ilulissat) — vedi la sezione Cibo & alcolici.' }
+  ];
+
+  var famSectors = ['Tutti'].concat(Array.from(new Set(FAMILIES.map(function(f){ return f.sector; }))));
+  var famFilterRow = document.getElementById('family-filters-gl');
+  var famGridEl = document.getElementById('family-grid-gl');
+  var famActiveSector = 'Tutti';
+
+  function renderFamilies(){
+    famGridEl.innerHTML = '';
+    FAMILIES.filter(function(f){ return famActiveSector === 'Tutti' || f.sector === famActiveSector; }).forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'family-card';
+      card.innerHTML =
+        '<div class="fsector">' + f.sector + '</div>' +
+        '<div class="fname">' + f.name + '</div>' +
+        '<div class="flevel ' + f.level + '">' + f.level + '</div>' +
+        '<div class="fsize">' + f.size + '</div>' +
+        '<p class="fnote">' + f.note + '</p>';
+      famGridEl.appendChild(card);
+    });
+  }
+
+  famSectors.forEach(function(s){
+    var btn = document.createElement('button');
+    btn.textContent = s;
+    if(s === famActiveSector) btn.classList.add('active');
+    btn.addEventListener('click', function(){
+      famActiveSector = s;
+      famFilterRow.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderFamilies();
+    });
+    famFilterRow.appendChild(btn);
+  });
+  renderFamilies();
 
   // ---- Lo sapevi che... facts ----
   var FACTS = [
@@ -6583,6 +6770,8 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
       '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
       '</div>';
     timeline.appendChild(det);
+    det.addEventListener('mouseenter', function(){ det.open = true; });
+    det.addEventListener('mouseleave', function(){ det.open = false; });
     revealObserver.observe(det);
   });
 
@@ -6739,13 +6928,6 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
   ];
 
   document.getElementById('link-full-route-ge').href = placeLink('tbilisi');
-
-  var routeIframe = document.getElementById('map-route-iframe-ge');
-  if(routeIframe){
-    var routeOrigin = COORDS.tbilisi;
-    var routeDaddr = STOPS.slice(1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('+to:');
-    routeIframe.src = 'https://www.google.com/maps?saddr=' + routeOrigin[0] + ',' + routeOrigin[1] + '&daddr=' + routeDaddr + '&output=embed';
-  }
 
   var stopsBody = document.querySelector('#stops-table-ge tbody');
   STOPS.forEach(function(s){

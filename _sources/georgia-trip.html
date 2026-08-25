@@ -119,9 +119,6 @@
       <h2 class="section-title reveal">📍 Mappa &amp; punti d'interesse</h2>
       <p class="section-sub reveal">Tbilisi come base, con Mtskheta, Sighnaghi (Kakheti) e Gudauri come gite in giornata. Apri la mappa per orientarti, o esporta i punti in un file KML.</p>
 
-      <div class="map-embed reveal">
-        <iframe id="map-route-iframe" src="https://www.google.com/maps?q=Tbilisi,+Georgia&z=8&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
 
       <div class="map-actions reveal">
         <a id="link-full-route" href="#" target="_blank" rel="noopener">🗺️ Apri Tbilisi su Google Maps</a>
@@ -169,7 +166,7 @@
   <!-- SITI DA NON PERDERE -->
   <section id="siti" class="panel" data-nav>
     <div class="inner">
-      <h2 class="section-title reveal">🌿 Tracker dei siti da non perdere</h2>
+      <h2 class="section-title reveal">🌿 Cose da non perdere</h2>
       <p class="section-sub reveal">Le tappe principali dell'itinerario, filtrabili per categoria.</p>
 
       <div class="filter-row reveal" id="family-filters"></div>
@@ -526,6 +523,8 @@
       '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
       '</div>';
     timeline.appendChild(det);
+    det.addEventListener('mouseenter', function(){ det.open = true; });
+    det.addEventListener('mouseleave', function(){ det.open = false; });
     revealObserver.observe(det);
   });
 
@@ -682,13 +681,6 @@
   ];
 
   document.getElementById('link-full-route').href = placeLink('tbilisi');
-
-  var routeIframe = document.getElementById('map-route-iframe');
-  if(routeIframe){
-    var routeOrigin = COORDS.tbilisi;
-    var routeDaddr = STOPS.slice(1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('+to:');
-    routeIframe.src = 'https://www.google.com/maps?saddr=' + routeOrigin[0] + ',' + routeOrigin[1] + '&daddr=' + routeDaddr + '&output=embed';
-  }
 
   var stopsBody = document.querySelector('#stops-table tbody');
   STOPS.forEach(function(s){

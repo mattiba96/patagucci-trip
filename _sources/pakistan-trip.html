@@ -202,9 +202,6 @@
         </svg>
       </div>
 
-      <div class="map-embed reveal">
-        <iframe id="map-route-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
 
       <div class="map-actions reveal">
         <a id="link-full-route" href="#" target="_blank" rel="noopener">🗺️ Apri l'itinerario completo su Google Maps</a>
@@ -271,7 +268,7 @@
   <!-- SITI DA NON PERDERE -->
   <section id="siti" class="panel" data-nav>
     <div class="inner">
-      <h2 class="section-title reveal">🌿 Tracker dei siti da non perdere</h2>
+      <h2 class="section-title reveal">🌿 Cose da non perdere</h2>
       <p class="section-sub reveal">Le tappe principali dell'itinerario, filtrabili per categoria — così sapete già cosa aspettarvi in ogni città e valle.</p>
 
       <div class="filter-row reveal" id="family-filters"></div>
@@ -700,6 +697,8 @@
       '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
       '</div>';
     timeline.appendChild(det);
+    det.addEventListener('mouseenter', function(){ det.open = true; });
+    det.addEventListener('mouseleave', function(){ det.open = false; });
     revealObserver.observe(det);
   });
 
@@ -960,11 +959,6 @@
 
   var origin = COORDS.islamabad, destination = COORDS.islamabad;
   var waypoints = STOPS.slice(1, -1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('|');
-  var routeIframe = document.getElementById('map-route-iframe');
-  if(routeIframe){
-    var routeDaddr = STOPS.slice(1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('+to:');
-    routeIframe.src = 'https://www.google.com/maps?saddr=' + origin[0] + ',' + origin[1] + '&daddr=' + routeDaddr + '&output=embed';
-  }
   document.getElementById('link-full-route').href =
     'https://www.google.com/maps/dir/?api=1&origin=' + origin[0] + ',' + origin[1] +
     '&destination=' + destination[0] + ',' + destination[1] +

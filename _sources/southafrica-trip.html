@@ -34,6 +34,7 @@
   <a href="#perche">Perché andare</a>
   <a href="#itinerario">Itinerario</a>
   <a href="#mappa">Mappa</a>
+  <a href="#siti">Cose da non perdere</a>
   <a href="#kruger">Guida al Kruger</a>
   <a href="#fauna">Pinguini &amp; Balene</a>
   <a href="#rinoceronti">Rinoceronti &amp; poaching</a>
@@ -184,9 +185,6 @@
         </svg>
       </div>
 
-      <div class="map-embed reveal">
-        <iframe id="map-route-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
 
       <div class="map-actions reveal">
         <a id="link-full-route" href="#" target="_blank" rel="noopener">🗺️ Apri l'itinerario completo su Google Maps</a>
@@ -208,6 +206,22 @@
           <thead><tr><th>Tappa</th><th>Coordinate</th><th></th></tr></thead>
           <tbody></tbody>
         </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- COSE DA NON PERDERE -->
+  <section id="siti" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌿 Cose da non perdere</h2>
+      <p class="section-sub reveal">Le tappe principali dell'itinerario, filtrabili per categoria.</p>
+
+      <div class="filter-row reveal" id="family-filters"></div>
+      <div class="family-grid" id="family-grid"></div>
+
+      <div class="callout reveal">
+        <strong>Nota:</strong> orari e disponibilità dei traghetti per Robben Island vanno verificati e prenotati con anticipo — è spesso il primo tour a esaurirsi a Città del Capo.
+        <div class="source-note">Fonti: sanparks.org, robben-island.org.za, wander-lush.org, getaway.co.za.</div>
       </div>
     </div>
   </section>
@@ -318,7 +332,7 @@
 
       <div class="card reveal" style="text-align:center;">
         <div class="ring" style="--pct:100;"><span class="ring-label">5/5</span></div>
-        <p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Tutti i Big Five sono presenti nel parco che visiterete — <span id="bigfive-count">0/5</span> segnati come "avvistati" da voi finora.</p>
+        <p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Tutti i Big Five sono presenti nel parco che visiterete.</p>
       </div>
 
       <div class="bigfive-grid" id="bigfive-grid"></div>
@@ -687,6 +701,8 @@
       '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
       '</div>';
     timeline.appendChild(det);
+    det.addEventListener('mouseenter', function(){ det.open = true; });
+    det.addEventListener('mouseleave', function(){ det.open = false; });
     revealObserver.observe(det);
   });
 
@@ -797,15 +813,7 @@
     { id:'leopard', icon:'🐆', name:'Leopardo', diff:'Difficile', fact:'Il più elusivo dei cinque nel Kruger; a Sabi Sands, densità di leopardi tra le più alte al mondo grazie a decenni di abituazione.' },
     { id:'rhino', icon:'🦏', name:'Rinoceronte', diff:'Difficile', fact:'Presente ma in forte calo: popolazione Kruger crollata del 78% dal 2013 al 2022 per il bracconaggio (vedi sezione dedicata).' }
   ];
-  var BF_KEY = 'southafrica-trip-bigfive';
-  var bfSpotted = {};
-  try { bfSpotted = JSON.parse(localStorage.getItem(BF_KEY)) || {}; } catch(e){ bfSpotted = {}; }
-
   var bfGrid = document.getElementById('bigfive-grid');
-  function updateBfCount(){
-    var n = BIGFIVE.filter(function(a){ return bfSpotted[a.id]; }).length;
-    document.getElementById('bigfive-count').textContent = n + '/5';
-  }
   BIGFIVE.forEach(function(a){
     var card = document.createElement('div');
     card.className = 'bigfive-card';
@@ -813,23 +821,56 @@
       '<div class="bf-icon">' + a.icon + '</div>' +
       '<div class="bf-name">' + a.name + '</div>' +
       '<div class="bf-diff ' + a.diff + '">' + a.diff + '</div>' +
-      '<p class="bf-fact">' + a.fact + '</p>' +
-      '<button class="bf-track-btn" data-id="' + a.id + '">Da avvistare</button>';
+      '<p class="bf-fact">' + a.fact + '</p>';
     bfGrid.appendChild(card);
-    var btn = card.querySelector('.bf-track-btn');
-    function refreshBtn(){
-      if(bfSpotted[a.id]){ btn.textContent = 'Avvistato! ✅'; btn.classList.add('spotted'); }
-      else { btn.textContent = 'Da avvistare'; btn.classList.remove('spotted'); }
-    }
-    refreshBtn();
-    btn.addEventListener('click', function(){
-      bfSpotted[a.id] = !bfSpotted[a.id];
-      try { localStorage.setItem(BF_KEY, JSON.stringify(bfSpotted)); } catch(e){}
-      refreshBtn();
-      updateBfCount();
-    });
   });
-  updateBfCount();
+
+  // ---- Cose da non perdere ----
+  var FAMILIES = [
+    { sector:'Città del Capo', name:'Table Mountain', size:'~1-2h incl. cabinovia', level:'Facile', note:'Cabinovia rotante fino a 1.085m — chiusa con vento forte, meglio prenotare online in anticipo.' },
+    { sector:'Città del Capo', name:'Cape of Good Hope', size:'Mezza giornata', level:'Facile', note:'Punto più sud-occidentale dell\'Africa, all\'interno del Table Mountain National Park — spesso combinato con Boulders Beach.' },
+    { sector:'Città del Capo', name:'Boulders Beach', size:'~1h', level:'Facile', note:'Colonia di pinguini africani a Simon\'s Town — vedi la sezione dedicata per i numeri aggiornati.' },
+    { sector:'Città del Capo', name:'Robben Island', size:'~4h incl. traghetto', level:'Facile', note:'Il carcere dove Mandela scontò 18 dei suoi 27 anni di prigionia — sito UNESCO, tour guidato spesso da ex-detenuti.' },
+    { sector:'Winelands', name:'Stellenbosch', size:'Mezza giornata', level:'Facile', note:'Il cuore delle Cape Winelands — degustazioni tra le cantine più antiche del Sudafrica (vedi sezione dedicata).' },
+    { sector:'Garden Route', name:'Hermanus', size:'~2-3h', level:'Facile', note:'Tra le migliori destinazioni al mondo per whale watching da terra — stagionale, vedi la sezione dedicata.' },
+    { sector:'Garden Route', name:'Knysna Heads', size:'~1h', level:'Facile', note:'Le due scogliere che chiudono la laguna di Knysna verso l\'oceano — punto panoramico classico della Garden Route.' },
+    { sector:'Garden Route', name:'Ponte sospeso di Storms River', size:'~1-2h', level:'Media', note:'Ponte pedonale sospeso sull\'estuario del fiume, nel Tsitsikamma National Park — tratto costiero tra i più fotografati.' },
+    { sector:'Kruger', name:'Safari Big Five', size:'Più giorni', level:'Media', note:'Kruger National Park o riserve private come Sabi Sands — vedi la sezione dedicata.' }
+  ];
+
+  var famSectors = ['Tutti'].concat(Array.from(new Set(FAMILIES.map(function(f){ return f.sector; }))));
+  var famFilterRow = document.getElementById('family-filters');
+  var famGridEl = document.getElementById('family-grid');
+  var famActiveSector = 'Tutti';
+
+  function renderFamilies(){
+    famGridEl.innerHTML = '';
+    FAMILIES.filter(function(f){ return famActiveSector === 'Tutti' || f.sector === famActiveSector; }).forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'family-card';
+      card.innerHTML =
+        '<div class="fsector">' + f.sector + '</div>' +
+        '<div class="fname">' + f.name + '</div>' +
+        '<div class="flevel ' + f.level + '">' + f.level + '</div>' +
+        '<div class="fsize">' + f.size + '</div>' +
+        '<p class="fnote">' + f.note + '</p>';
+      famGridEl.appendChild(card);
+    });
+  }
+
+  famSectors.forEach(function(s){
+    var btn = document.createElement('button');
+    btn.textContent = s;
+    if(s === famActiveSector) btn.classList.add('active');
+    btn.addEventListener('click', function(){
+      famActiveSector = s;
+      famFilterRow.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderFamilies();
+    });
+    famFilterRow.appendChild(btn);
+  });
+  renderFamilies();
 
   // ---- Lo sapevi che... facts ----
   var FACTS = [
@@ -884,11 +925,6 @@
 
   var origin = COORDS.capetown, destination = COORDS.johannesburg;
   var waypoints = STOPS.slice(1, -1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('|');
-  var routeIframe = document.getElementById('map-route-iframe');
-  if(routeIframe){
-    var routeDaddr = STOPS.slice(1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('+to:');
-    routeIframe.src = 'https://www.google.com/maps?saddr=' + origin[0] + ',' + origin[1] + '&daddr=' + routeDaddr + '&output=embed';
-  }
   document.getElementById('link-full-route').href =
     'https://www.google.com/maps/dir/?api=1&origin=' + origin[0] + ',' + origin[1] +
     '&destination=' + destination[0] + ',' + destination[1] +

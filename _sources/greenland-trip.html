@@ -34,6 +34,7 @@
   <a href="#perche">Perché andare</a>
   <a href="#itinerario">Itinerario</a>
   <a href="#mappa">Mappa</a>
+  <a href="#siti">Cose da non perdere</a>
   <a href="#guida">Guida pratica</a>
   <a href="#curiosita">Curiosità</a>
   <a href="#meteo">Meteo</a>
@@ -106,9 +107,6 @@
       <h2 class="section-title reveal">📍 Mappa &amp; punti d'interesse</h2>
       <p class="section-sub reveal">Ilulissat come base, con l'Icefjord e la baia di Disko come teatro di tutte le uscite in barca. Apri la mappa per orientarti, o esporta i punti in un file KML.</p>
 
-      <div class="map-embed reveal">
-        <iframe src="https://www.google.com/maps?q=Ilulissat+Icefjord,+Greenland&z=9&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
 
       <div class="map-actions reveal">
         <a id="link-full-route" href="#" target="_blank" rel="noopener">🗺️ Apri Ilulissat su Google Maps</a>
@@ -122,6 +120,22 @@
           <tbody></tbody>
         </table>
         <div class="source-note">Coordinate da countrycoordinate.com, en.wikipedia.org — verificate ad agosto 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COSE DA NON PERDERE -->
+  <section id="siti" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌿 Cose da non perdere</h2>
+      <p class="section-sub reveal">Con un'unica base a Ilulissat, le "tappe" sono soprattutto uscite ed esperienze — filtrabili per categoria.</p>
+
+      <div class="filter-row reveal" id="family-filters"></div>
+      <div class="family-grid" id="family-grid"></div>
+
+      <div class="callout reveal">
+        <strong>Nota:</strong> tutte le uscite in barca/kayak dipendono dal meteo — tenete flessibilità nell'itinerario, specialmente per il tour del sole di mezzanotte.
+        <div class="source-note">Fonti: visitgreenland.com, hotelicefiord.com, whc.unesco.org.</div>
       </div>
     </div>
   </section>
@@ -456,6 +470,8 @@
       '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
       '</div>';
     timeline.appendChild(det);
+    det.addEventListener('mouseenter', function(){ det.open = true; });
+    det.addEventListener('mouseleave', function(){ det.open = false; });
     revealObserver.observe(det);
   });
 
@@ -485,6 +501,49 @@
     [bgtPeople, bgtStyle].forEach(function(el){ el.addEventListener('input', updateBudget); el.addEventListener('change', updateBudget); });
     updateBudget();
   }
+
+  // ---- Cose da non perdere ----
+  var FAMILIES = [
+    { sector:'Natura', name:'Ilulissat Icefjord', size:'~2-3h a piedi', level:'Facile', note:'Le passerelle UNESCO (percorsi blu/giallo) sulla foce del ghiacciaio Sermeq Kujalleq — il modo più semplice per vedere gli iceberg da vicino.' },
+    { sector:'Natura', name:'Tour in barca tra gli iceberg', size:'~2-3h', level:'Facile', note:'Uscita nella baia di Disko, con buone probabilità di avvistare megattere o balenottere minori.' },
+    { sector:'Natura', name:'Tour del sole di mezzanotte', size:'~2-3h, serale', level:'Facile', note:'Uscita in barca nella luce dorata e bassa del sole che a giugno non tramonta mai davvero.' },
+    { sector:'Avventura', name:'Kayak tra gli iceberg', size:'~2h', level:'Media', note:'Con muta stagna — l\'acqua resta vicina allo zero anche d\'estate — tra iceberg più piccoli in un\'insenatura riparata.' },
+    { sector:'Cultura', name:'Godthaab Bryghus / Immiaq', size:'~1-2h', level:'Facile', note:'I due birrifici reali della Groenlandia (Nuuk e Ilulissat) — vedi la sezione Cibo & alcolici.' }
+  ];
+
+  var famSectors = ['Tutti'].concat(Array.from(new Set(FAMILIES.map(function(f){ return f.sector; }))));
+  var famFilterRow = document.getElementById('family-filters');
+  var famGridEl = document.getElementById('family-grid');
+  var famActiveSector = 'Tutti';
+
+  function renderFamilies(){
+    famGridEl.innerHTML = '';
+    FAMILIES.filter(function(f){ return famActiveSector === 'Tutti' || f.sector === famActiveSector; }).forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'family-card';
+      card.innerHTML =
+        '<div class="fsector">' + f.sector + '</div>' +
+        '<div class="fname">' + f.name + '</div>' +
+        '<div class="flevel ' + f.level + '">' + f.level + '</div>' +
+        '<div class="fsize">' + f.size + '</div>' +
+        '<p class="fnote">' + f.note + '</p>';
+      famGridEl.appendChild(card);
+    });
+  }
+
+  famSectors.forEach(function(s){
+    var btn = document.createElement('button');
+    btn.textContent = s;
+    if(s === famActiveSector) btn.classList.add('active');
+    btn.addEventListener('click', function(){
+      famActiveSector = s;
+      famFilterRow.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderFamilies();
+    });
+    famFilterRow.appendChild(btn);
+  });
+  renderFamilies();
 
   // ---- Lo sapevi che... facts ----
   var FACTS = [

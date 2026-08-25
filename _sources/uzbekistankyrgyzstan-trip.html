@@ -43,6 +43,7 @@
   <a href="#perche">Perché andare</a>
   <a href="#itinerario">Itinerario</a>
   <a href="#mappa">Mappa</a>
+  <a href="#siti">Cose da non perdere</a>
   <a href="#viadellaseta">Guida alla Via della Seta</a>
   <a href="#marzokg">Marzo in Kirghizistan</a>
   <a href="#meteo">Meteo</a>
@@ -181,9 +182,6 @@
         </svg>
       </div>
 
-      <div class="map-embed reveal">
-        <iframe id="map-route-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
 
       <div class="map-actions reveal">
         <a id="link-full-route" href="#" target="_blank" rel="noopener">🗺️ Apri l'itinerario completo su Google Maps</a>
@@ -205,6 +203,22 @@
           <thead><tr><th>Tappa</th><th>Coordinate</th><th></th></tr></thead>
           <tbody></tbody>
         </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- COSE DA NON PERDERE -->
+  <section id="siti" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌿 Cose da non perdere</h2>
+      <p class="section-sub reveal">Le tappe principali dell'itinerario, filtrabili per categoria.</p>
+
+      <div class="filter-row reveal" id="family-filters"></div>
+      <div class="family-grid" id="family-grid"></div>
+
+      <div class="callout reveal">
+        <strong>Nota:</strong> Song-Kul e Tash Rabat restano chiusi/difficilmente raggiungibili a marzo per neve — vedi la sezione "Marzo in Kirghizistan" per il dettaglio completo.
+        <div class="source-note">Fonti: advantour.com, caravanistan.com, whc.unesco.org.</div>
       </div>
     </div>
   </section>
@@ -622,6 +636,8 @@
       '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
       '</div>';
     timeline.appendChild(det);
+    det.addEventListener('mouseenter', function(){ det.open = true; });
+    det.addEventListener('mouseleave', function(){ det.open = false; });
     revealObserver.observe(det);
   });
 
@@ -725,6 +741,52 @@
     setTimeout(function(){ row.querySelector('.dfill').style.width = d.pct + '%'; }, 200);
   });
 
+  // ---- Cose da non perdere ----
+  var FAMILIES = [
+    { sector:'Tashkent', name:'Piazza Amir Timur', size:'~1h', level:'Facile', note:'Il cuore della Tashkent moderna, statua equestre di Tamerlano — punto di partenza classico in città.' },
+    { sector:'Samarkand', name:'Registan', size:'~1,5-2h', level:'Facile', note:'Le tre madrase affacciate sulla piazza più fotografata dell\'Asia Centrale — magnifica anche di sera, illuminata.' },
+    { sector:'Samarkand', name:'Shah-i-Zinda', size:'~1h', level:'Facile', note:'Necropoli di mausolei in maiolica turchese, uno dei complessi funerari più belli della Via della Seta.' },
+    { sector:'Bukhara', name:'Po-i-Kalyan', size:'~1-1,5h', level:'Facile', note:'Il complesso del minareto Kalyan (XII secolo), tra i simboli della città vecchia di Bukhara.' },
+    { sector:'Khiva', name:'Itchan Kala', size:'Mezza giornata', level:'Facile', note:'La città vecchia murata, primo sito UNESCO dell\'Uzbekistan (1990) — si visita quasi interamente a piedi.' },
+    { sector:'Bishkek', name:'Piazza Ala-Too', size:'~1h', level:'Facile', note:'La piazza centrale della capitale kirghisa, punto di partenza per esplorare il centro città.' },
+    { sector:'Kirghizistan', name:'Ala-Archa National Park', size:'Mezza giornata', level:'Media', note:'Gole alpine a ~40 minuti da Bishkek — la gita in montagna più semplice e veloce del viaggio.' },
+    { sector:'Kirghizistan', name:'Karakol', size:'1-2 giorni', level:'Media', note:'Base per il lago Issyk-Kul e la ski base attiva anche fuori stagione sci — vedi la sezione "Marzo in Kirghizistan".' }
+  ];
+
+  var famSectors = ['Tutti'].concat(Array.from(new Set(FAMILIES.map(function(f){ return f.sector; }))));
+  var famFilterRow = document.getElementById('family-filters');
+  var famGridEl = document.getElementById('family-grid');
+  var famActiveSector = 'Tutti';
+
+  function renderFamilies(){
+    famGridEl.innerHTML = '';
+    FAMILIES.filter(function(f){ return famActiveSector === 'Tutti' || f.sector === famActiveSector; }).forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'family-card';
+      card.innerHTML =
+        '<div class="fsector">' + f.sector + '</div>' +
+        '<div class="fname">' + f.name + '</div>' +
+        '<div class="flevel ' + f.level + '">' + f.level + '</div>' +
+        '<div class="fsize">' + f.size + '</div>' +
+        '<p class="fnote">' + f.note + '</p>';
+      famGridEl.appendChild(card);
+    });
+  }
+
+  famSectors.forEach(function(s){
+    var btn = document.createElement('button');
+    btn.textContent = s;
+    if(s === famActiveSector) btn.classList.add('active');
+    btn.addEventListener('click', function(){
+      famActiveSector = s;
+      famFilterRow.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderFamilies();
+    });
+    famFilterRow.appendChild(btn);
+  });
+  renderFamilies();
+
   // ---- Lo sapevi che... facts ----
   var FACTS = [
     { icon:'🏰', text:'Itchan Kala (Khiva) è stato il primo sito UNESCO dell\'Uzbekistan, nel 1990 — anni prima di Bukhara (1993) e Samarkand (2001).' },
@@ -775,11 +837,6 @@
 
   var origin = COORDS.tashkent, destination = COORDS.bishkek;
   var waypoints = STOPS.slice(1, -1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('|');
-  var routeIframe = document.getElementById('map-route-iframe');
-  if(routeIframe){
-    var routeDaddr = STOPS.slice(1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('+to:');
-    routeIframe.src = 'https://www.google.com/maps?saddr=' + origin[0] + ',' + origin[1] + '&daddr=' + routeDaddr + '&output=embed';
-  }
   document.getElementById('link-full-route').href =
     'https://www.google.com/maps/dir/?api=1&origin=' + origin[0] + ',' + origin[1] +
     '&destination=' + destination[0] + ',' + destination[1] +

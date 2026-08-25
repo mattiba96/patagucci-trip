@@ -418,7 +418,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
             </a>
 
             <a class="trip-card" href="javascript:void(0)" onclick="showDest('np')">
-              <img src="foto/destinazioni/The_Tiger's_Nest_(_Paro_Taktsang_).jpg" alt="Tiger's Nest Monastery, Bhutan" loading="lazy">
+              <img src="foto/destinazioni/The_Tigers_Nest_(_Paro_Taktsang_).jpg" alt="Tiger's Nest Monastery, Bhutan" loading="lazy">
               <div class="overlay"></div>
               <div class="content">
                 <div class="flag">🇳🇵🇧🇹</div>
@@ -561,10 +561,19 @@ function showDest(name){{
   if(btn) btn.classList.add('active');
   var flagbar = document.getElementById('flagbar');
   if(flagbar && FLAG_BARS[name]) flagbar.style.background = FLAG_BARS[name];
-  window.scrollTo(0, 0);
+  window.scrollTo({{ top: 0, left: 0, behavior: 'instant' }});
   target.querySelectorAll('.reveal').forEach(function(el){{ el.classList.add('visible'); }});
+  if(typeof syncSwitcherHeight === 'function') setTimeout(syncSwitcherHeight, 0);
 }}
 function showHub(){{ showDest('hub'); }}
+
+function syncSwitcherHeight(){{
+  var switcher = document.getElementById('site-switcher');
+  if(switcher) document.documentElement.style.setProperty('--switcher-h', switcher.offsetHeight + 'px');
+}}
+syncSwitcherHeight();
+window.addEventListener('resize', syncSwitcherHeight);
+window.addEventListener('load', syncSwitcherHeight);
 
 document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){{
   var audio = new Audio(card.getAttribute('data-audio'));
