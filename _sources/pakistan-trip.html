@@ -625,7 +625,10 @@
       if(entry.isIntersecting){
         navLinks.forEach(function(a){ a.classList.remove('active'); });
         var link = linkBySection[entry.target.id];
-        if(link) link.classList.add('active');
+        if(link){
+          link.classList.add('active');
+          link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
       }
     });
   }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
@@ -697,8 +700,6 @@
       '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
       '</div>';
     timeline.appendChild(det);
-    det.addEventListener('mouseenter', function(){ det.open = true; });
-    det.addEventListener('mouseleave', function(){ det.open = false; });
     revealObserver.observe(det);
   });
 

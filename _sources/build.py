@@ -4,10 +4,11 @@ DIR = "/Users/mattiabacileri/Library/Mobile Documents/com~apple~CloudDocs/proget
 SRC_DIR = DIR + "_sources/"
 
 DESTS = [
-    {"file": "uganda-trip.html", "suf": "ug", "flag": "🇺🇬", "name": "Uganda"},
+    {"file": "nepalbhutan-trip.html", "suf": "np", "flag": "🇳🇵🇧🇹", "name": "Nepal & Bhutan"},
     {"file": "pakistan-trip.html", "suf": "pk", "flag": "🇵🇰", "name": "Pakistan"},
     {"file": "southafrica-trip.html", "suf": "za", "flag": "🇿🇦", "name": "Sudafrica"},
-    {"file": "nepalbhutan-trip.html", "suf": "np", "flag": "🇳🇵🇧🇹", "name": "Nepal & Bhutan"},
+    {"file": "india-trip.html", "suf": "in", "flag": "🇮🇳", "name": "India"},
+    {"file": "uganda-trip.html", "suf": "ug", "flag": "🇺🇬", "name": "Uganda"},
     {"file": "uzbekistankyrgyzstan-trip.html", "suf": "uk", "flag": "🇺🇿🇰🇬", "name": "Uzbekistan & Kirghizistan"},
     {"file": "greenland-trip.html", "suf": "gl", "flag": "🇬🇱", "name": "Groenlandia"},
     {"file": "georgia-trip.html", "suf": "ge", "flag": "🇬🇪", "name": "Georgia"},
@@ -102,6 +103,32 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               <img src="foto/5624176e-4c77-4989-9af3-245a53408b1d.jpeg" alt="Bacci, il tecnologico" loading="lazy">
               <div class="crew-caption">Bacci — il tecnologico</div>
             </div>
+          </div>
+
+          <div class="card reveal" style="margin-top:18px; text-align:center; font-style:italic;">
+            <h3 style="margin-top:0; font-style:normal;">📜 I Patagucci</h3>
+            <p style="color:#c7c2b6; line-height:1.9; margin:0;">
+              Quattro amici, uno zaino e un biglietto di sola andata,<br>
+              ogni volta una meta nuova, ogni volta la stessa combriccola scatenata.<br>
+              Manu è il logistico, con lui il viaggio non si perde mai un colpo,<br>
+              ma senza dieci birre al giorno lo vedi diventare uno sconvolto.<br>
+              Kiki è la meteora pazza, sempre pronta a ripartire,<br>
+              ma toglietele il ceviche e la sentirete ruggire:<br>
+              diventa aggressiva, non capisce più niente,<br>
+              datele pesce crudo o scappate immediatamente.<br>
+              Mala è l'enciclopedia vivente del gruppo intero,<br>
+              sa tutto di ogni posto, storia e sentiero,<br>
+              ma se non prende la bumba prima di coricarsi,<br>
+              la notte è tutta un rimbombo, meglio non disturbarsi.<br>
+              Bacci è il tecnologico, con lui non ti perdi in un vicolo,<br>
+              ma portatelo in quota e guardate che spettacolo:<br>
+              trema come una foglia al primo metro guadagnato,<br>
+              e giuro che una volta se l'è quasi fatta sotto, poveraccio.<br>
+              Quattro caratteri diversi, un'unica squadra che parte,<br>
+              i Patagucci vanno per il mondo, sempre dalla stessa parte —<br>
+              e ovunque li porti il prossimo volo o il prossimo passo,<br>
+              tornano a casa con una storia in più da raccontare, senza sosta.
+            </p>
           </div>
 
           <h3 style="color:#fff; margin:32px 0 4px;">📸 Insieme in giro per il mondo</h3>
@@ -384,14 +411,14 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
           <p class="section-sub reveal">Ogni viaggio ha la sua pagina interattiva: itinerario giorno per giorno, mappa animata, meteo storico, convertitore valuta e tutto il resto. Clicca una card per aprirla.</p>
 
           <div class="trip-grid reveal">
-            <a class="trip-card" href="javascript:void(0)" onclick="showDest('ug')">
-              <img src="foto/destinazioni/Silverback.JPG" alt="Gorilla di montagna, Uganda" loading="lazy">
+            <a class="trip-card" href="javascript:void(0)" onclick="showDest('np')">
+              <img src="foto/destinazioni/The_Tigers_Nest_(_Paro_Taktsang_).jpg" alt="Tiger's Nest Monastery, Bhutan" loading="lazy">
               <div class="overlay"></div>
               <div class="content">
-                <div class="flag">🇺🇬</div>
-                <div class="title">Uganda</div>
-                <div class="meta">Fine feb / inizio mar 2027 · 10 giorni</div>
-                <p class="tagline">Gorilla trekking a Bwindi, safari a Queen Elizabeth NP, rafting grado 5 a Jinja.</p>
+                <div class="flag">🇳🇵🇧🇹</div>
+                <div class="title">Nepal &amp; Bhutan</div>
+                <div class="meta">Marzo 2027 · 15 giorni</div>
+                <p class="tagline">Trekking Poon Hill sull'Annapurna e i dzong del Bhutan.</p>
               </div>
             </a>
 
@@ -417,14 +444,25 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               </div>
             </a>
 
-            <a class="trip-card" href="javascript:void(0)" onclick="showDest('np')">
-              <img src="foto/destinazioni/The_Tigers_Nest_(_Paro_Taktsang_).jpg" alt="Tiger's Nest Monastery, Bhutan" loading="lazy">
+            <a class="trip-card" href="javascript:void(0)" onclick="showDest('in')">
+              <img src="foto/destinazioni/Taj_Mahal_Tomb_at_sunrise.JPG" alt="Taj Mahal all'alba, Agra, India" loading="lazy">
               <div class="overlay"></div>
               <div class="content">
-                <div class="flag">🇳🇵🇧🇹</div>
-                <div class="title">Nepal &amp; Bhutan</div>
-                <div class="meta">Marzo 2027 · 15 giorni</div>
-                <p class="tagline">Trekking Poon Hill sull'Annapurna e i dzong del Bhutan.</p>
+                <div class="flag">🇮🇳</div>
+                <div class="title">India</div>
+                <div class="meta">Marzo 2027 · 14 giorni</div>
+                <p class="tagline">Triangolo d'Oro, safari delle tigri a Ranthambore e il Gange a Varanasi.</p>
+              </div>
+            </a>
+
+            <a class="trip-card" href="javascript:void(0)" onclick="showDest('ug')">
+              <img src="foto/destinazioni/Silverback.JPG" alt="Gorilla di montagna, Uganda" loading="lazy">
+              <div class="overlay"></div>
+              <div class="content">
+                <div class="flag">🇺🇬</div>
+                <div class="title">Uganda</div>
+                <div class="meta">Fine feb / inizio mar 2027 · 10 giorni</div>
+                <p class="tagline">Gorilla trekking a Bwindi, safari a Queen Elizabeth NP, rafting grado 5 a Jinja.</p>
               </div>
             </a>
 
@@ -449,7 +487,11 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
                 <p class="tagline">Iceberg, balene e sole di mezzanotte a Ilulissat.</p>
               </div>
             </a>
+          </div>
 
+          <h3 style="color:#fff; margin:36px 0 4px;">🎄 Il viaggio di fine anno — a parte</h3>
+          <p class="section-sub reveal" style="color:#c7c2b6; margin-bottom:14px;">Diverso dal resto: è a dicembre/inizio gennaio, non a marzo.</p>
+          <div class="trip-grid reveal">
             <a class="trip-card" href="javascript:void(0)" onclick="showDest('ge')">
               <img src="foto/destinazioni/Narikala_fortress,_Tbilisi,_Georgia-fb6b37.jpg" alt="Narikala Fortress, Tbilisi, Georgia" loading="lazy">
               <div class="overlay"></div>
@@ -550,7 +592,8 @@ var FLAG_BARS = {{
   np: 'linear-gradient(90deg,#DC143C 0 25%, #003893 25% 50%, #FF9933 50% 75%, #FFB612 75% 100%)',
   uk: 'linear-gradient(90deg,#0099B5 0 50%, #1EB53A 50% 100%)',
   gl: 'linear-gradient(90deg,#ffffff 0 50%, #C60C30 50% 100%)',
-  ge: 'linear-gradient(90deg,#ffffff 0 20%, #DA291C 20% 40%, #ffffff 40% 60%, #DA291C 60% 80%, #ffffff 80% 100%)'
+  ge: 'linear-gradient(90deg,#ffffff 0 20%, #DA291C 20% 40%, #ffffff 40% 60%, #DA291C 60% 80%, #ffffff 80% 100%)',
+  in: 'linear-gradient(90deg,#FF9933 0 33%, #ffffff 33% 66%, #138808 66% 100%)'
 }};
 function showDest(name){{
   document.querySelectorAll('.destination').forEach(function(el){{ el.classList.remove('active'); }});

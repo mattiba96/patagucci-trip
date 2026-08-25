@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>India 2027 — Trip Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .route-status{ display:grid; grid-template-columns:1fr auto; gap:10px 14px; align-items:center; }
+  .route-status .r-name{ font-weight:600; color:var(--ink); }
+  section.panel.dark .route-status .r-name{ color:#f4f1ea; }
+  .route-status .r-status{ font-size:0.78rem; font-weight:700; padding:4px 10px; border-radius:8px; white-space:nowrap; justify-self:end; }
+  .r-status.open{ background:#1e4a2f; color:#8fe0ac; }
+  .r-status.closed{ background:#4a1c1c; color:#ff9b8a; }
+  .route-note{ grid-column:1 / -1; font-size:0.82rem; color:#c7c2b6; margin:-4px 0 10px; }
+</style>
+</head>
+<body>
+
+<div class="flagbar"></div>
+
+<header class="hero">
+  <div class="bg" style="background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.55) 55%, rgba(10,14,11,0.92) 100%), url('foto/destinazioni/Taj_Mahal_Tomb_at_sunrise.JPG');"></div>
+  <div class="content">
+    <h1>India</h1>
+    <p class="tagline">Il Triangolo d'Oro classico — Delhi, Jaipur, Agra — con due deviazioni che pochi fanno: un safari vero per la tigre del Bengala a Ranthambore, e le albe sul Gange a Varanasi. Due settimane, cinque tappe, un solo paese capace di cambiare completamente faccia ogni due giorni.</p>
+    <div class="badge-row">
+      <span class="badge">📅 Periodo target: marzo 2027 <em>(da confermare)</em></span>
+      <span class="badge">🕌 Delhi &amp; Triangolo d'Oro</span>
+      <span class="badge">🐅 Safari a Ranthambore</span>
+      <span class="badge">🕌 Taj Mahal all'alba</span>
+      <span class="badge">🕉️ Varanasi &amp; il Gange</span>
+    </div>
+    <div class="scroll-cue">↓ scorri per esplorare</div>
+  </div>
+  <div class="photo-credit">Foto: MarcBW, <a href="https://commons.wikimedia.org/wiki/File:Taj_Mahal_Tomb_at_sunrise.JPG" target="_blank" rel="noopener">CC BY-SA 3.0, Wikimedia Commons</a></div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <a href="javascript:void(0)" class="home-link" onclick="showHub()">🌍 Tutte le mete</a>
+  <a href="#perche">Perché andare</a>
+  <a href="#itinerario">Itinerario</a>
+  <a href="#mappa">Mappa</a>
+  <a href="#siti">Cose da non perdere</a>
+  <a href="#ranthambore">Ranthambore &amp; le tigri</a>
+  <a href="#tajmahal">Taj Mahal</a>
+  <a href="#guida">Guida pratica</a>
+  <a href="#curiosita">Curiosità</a>
+  <a href="#meteo">Meteo</a>
+  <a href="#cibo">Cibo &amp; alcolici</a>
+  <a href="#voli">Voli</a>
+  <a href="#budget">Spese stimate</a>
+  <a href="#faq">FAQ</a>
+</nav>
+
+<main>
+
+  <!-- PERCHE ANDARE -->
+  <section id="perche" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">✨ Perché andare</h2>
+      <p class="section-sub reveal">Il Triangolo d'Oro (Delhi-Jaipur-Agra) è l'itinerario indiano più fatto al mondo per un motivo semplice: funziona. Questo viaggio lo tiene come base ma aggiunge le due cose che il Triangolo classico salta — un safari vero, non un parco a tema, e la città più antica e più intensa dell'India, dove il turismo resta un dettaglio rispetto a quello che succede ogni sera sui ghat.</p>
+
+      <div class="why-grid reveal">
+        <div class="photo-banner" style="margin-bottom:0;">
+          <img src="foto/destinazioni/Amber_Fort,_Jaipur,_Rajasthan.JPG" alt="Amber Fort, Jaipur" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+          <div class="credit">Foto: Ajay Shankar, <a href="https://commons.wikimedia.org/wiki/File:Amber_Fort,_Jaipur,_Rajasthan.JPG" target="_blank" rel="noopener">CC BY-SA 3.0</a></div>
+          <div class="fallback">🏰</div>
+        </div>
+        <div>
+          <div class="stat-big"><span class="num">60-70%</span><span class="unit">probabilità di vedere una tigre a Ranthambore</span></div>
+          <p class="stat-line">Con due safari (come nell'itinerario) in stagione di punta — non è mai garantito, nessuna fonte seria lo promette, ma è tra le riserve con le probabilità più alte dell'India.</p>
+
+          <div class="stat-big"><span class="num">30</span><span class="unit">giorni senza visto necessario</span></div>
+          <p class="stat-line">L'e-Tourist Visa da 30 giorni costa 25$ a persona — si richiede online 4-120 giorni prima della partenza, in pratica meglio farlo 3-4 settimane prima.</p>
+
+          <div class="stat-big"><span class="num">1</span><span class="unit">giorno a settimana in cui il Taj Mahal è chiuso</span></div>
+          <p class="stat-line">Il venerdì, per la preghiera islamica settimanale — l'unico vincolo rigido di tutto l'itinerario, va incrociato con le date reali non appena fissate.</p>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Perché proprio questo giro:</strong> Delhi-Jaipur-Ranthambore-Agra-Varanasi copre in 14 giorni quattro India diverse — la capitale imperiale moghul, il deserto rosa del Rajasthan, la giungla del Bengala, e il fiume sacro — senza mai fare più di 3-4 ore di trasferimento in un giorno. È un ritmo faticoso ma non punitivo.
+        <div class="source-note">Fonti: indianvisaonline.gov.in, tajmahal.gov.in, ranthamborewildlife.com — dati verificati ad agosto 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ITINERARIO -->
+  <section id="itinerario" class="panel" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="foto/destinazioni/Jama_Masjid,_Delhi,_morning_view.jpg" alt="Jama Masjid, Old Delhi" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Dennis G. Jarvis, <a href="https://commons.wikimedia.org/wiki/File:Jama_Masjid,_Delhi,_morning_view.jpg" target="_blank" rel="noopener">CC BY-SA 2.0</a></div>
+        <div class="fallback">🕌</div>
+      </div>
+      <h2 class="section-title reveal">🗺️ Itinerario di massima — 14 giorni</h2>
+      <p class="section-sub reveal">Delhi, Jaipur, Ranthambore, Agra, Varanasi e ritorno a Delhi. Periodo target <strong>marzo 2027</strong> — ancora gestibile col caldo, con le mattine fresche ideali per safari e Taj Mahal all'alba. Ogni giorno ha un link diretto a Google Maps.</p>
+
+      <div class="timeline" id="timeline"></div>
+
+      <div class="callout reveal">
+        <strong>Nota:</strong> il giorno esatto ad Agra va incrociato col venerdì di chiusura del Taj Mahal non appena le date sono fissate — se cade di venerdì, l'itinerario va scalato di un giorno.
+      </div>
+    </div>
+  </section>
+
+  <!-- MAPPA -->
+  <section id="mappa" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">📍 Mappa &amp; percorso</h2>
+      <p class="section-sub reveal">Il Triangolo d'Oro allargato: da Delhi a Jaipur, deviazione a Ranthambore, poi Agra e infine Varanasi. Distanze reali per ogni tratta, con link diretto a Google Maps per la stima live col traffico.</p>
+
+      <div class="jeep-map-wrap reveal">
+        <svg id="jeep-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+          <path class="terrain terrain-a" d="M60 120 C 140 90, 260 95, 340 130 C 410 160, 460 220, 450 290 C 440 355, 390 400, 320 420 C 250 440, 170 430, 110 390 C 60 355, 40 290, 45 220 C 48 175, 40 145, 60 120 Z"/>
+          <path class="terrain terrain-b" d="M370 260 C 420 250, 465 275, 462 320 C 460 355, 420 370, 390 355 C 362 340, 350 285, 370 260 Z"/>
+          <path class="contour" d="M70 180 C 170 155, 300 160, 410 195"/>
+          <path class="contour" d="M60 280 C 170 260, 300 265, 420 300"/>
+
+          <path id="route-path" class="route-shadow" d="M 240,150 Q 170,180 130,230 Q 120,280 150,320 Q 220,350 290,340 Q 340,320 370,290 Q 300,240 240,150"/>
+          <path class="route-line" d="M 240,150 Q 170,180 130,230 Q 120,280 150,320 Q 220,350 290,340 Q 340,320 370,290 Q 300,240 240,150"/>
+
+          <circle class="pulse" cx="240" cy="150" r="8"/>
+          <g class="stop-pin">
+            <text x="240" y="140" text-anchor="middle" font-size="22">🕌</text>
+            <text class="stop-label highlight" x="240" y="122" text-anchor="middle">Delhi</text>
+          </g>
+          <g class="stop-pin">
+            <text x="130" y="238" text-anchor="middle" font-size="20">🏰</text>
+            <text class="stop-label" x="130" y="220" text-anchor="middle">Jaipur</text>
+          </g>
+          <g class="stop-pin">
+            <text x="150" y="328" text-anchor="middle" font-size="20">🐅</text>
+            <text class="stop-label" x="150" y="346" text-anchor="middle">Ranthambore</text>
+          </g>
+          <g class="stop-pin">
+            <text x="290" y="332" text-anchor="middle" font-size="22">🕌</text>
+            <text class="stop-label highlight" x="290" y="354" text-anchor="middle">Agra</text>
+          </g>
+          <g class="stop-pin">
+            <text x="395" y="282" text-anchor="middle" font-size="20">🕉️</text>
+            <text class="stop-label" x="415" y="264" text-anchor="middle">Varanasi</text>
+          </g>
+          <g class="stop-pin minor">
+            <text x="105" y="200" text-anchor="middle" font-size="14">🏛️</text>
+            <text class="stop-label" x="80" y="192" text-anchor="middle">Chand Baori</text>
+          </g>
+          <g class="stop-pin minor">
+            <text x="215" y="290" text-anchor="middle" font-size="14">👻</text>
+            <text class="stop-label" x="200" y="305" text-anchor="middle">Fatehpur Sikri</text>
+          </g>
+          <g class="stop-pin minor">
+            <text x="410" y="255" text-anchor="middle" font-size="14">🛕</text>
+            <text class="stop-label" x="430" y="240" text-anchor="middle">Sarnath</text>
+          </g>
+
+          <g class="compass" transform="translate(455,40)">
+            <line x1="0" y1="-14" x2="0" y2="14"/>
+            <line x1="-10" y1="0" x2="10" y2="0"/>
+            <text x="0" y="-18" text-anchor="middle">N</text>
+          </g>
+          <g class="scale-bar" transform="translate(30,470)">
+            <line x1="0" y1="0" x2="60" y2="0"/>
+            <line x1="0" y1="-4" x2="0" y2="4"/>
+            <line x1="60" y1="-4" x2="60" y2="4"/>
+            <text x="30" y="-6" text-anchor="middle">~200 km</text>
+          </g>
+
+          <text font-size="22" id="jeep-marker">🚙
+            <animateMotion dur="20s" repeatCount="indefinite">
+              <mpath href="#route-path"/>
+            </animateMotion>
+          </text>
+        </svg>
+      </div>
+
+      <div class="map-actions reveal">
+        <a id="link-full-route" href="#" target="_blank" rel="noopener">🗺️ Apri l'itinerario completo su Google Maps</a>
+        <button class="export" id="btn-export-kml">⬇️ Esporta tappe (KML)</button>
+      </div>
+
+      <div class="card reveal" style="overflow-x:auto;">
+        <h3 style="margin-top:0;">Percorsi giorno per giorno</h3>
+        <table class="stops-table" id="legs-table">
+          <thead><tr><th>Giorno</th><th>Tratta</th><th>Distanza</th><th>Durata stimata</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="source-note">Distanze/durate stradali indicative. Clicca "Apri" per la stima live con traffico su Google Maps — il traffico indiano rende le stime spesso ottimistiche.</div>
+      </div>
+
+      <div class="card reveal" style="overflow-x:auto;">
+        <h3 style="margin-top:0;">Tutte le tappe</h3>
+        <table class="stops-table" id="stops-table">
+          <thead><tr><th>Tappa</th><th>Coordinate</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- COSE DA NON PERDERE -->
+  <section id="siti" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌿 Cose da non perdere</h2>
+      <p class="section-sub reveal">Le tappe principali dell'itinerario, filtrabili per categoria.</p>
+
+      <div class="filter-row reveal" id="family-filters"></div>
+      <div class="family-grid" id="family-grid"></div>
+
+      <div class="source-note">Fonti: tajmahal.gov.in, ranthamborewildlife.com, wander-lush.org, Wikipedia — dati verificati ad agosto 2026.</div>
+    </div>
+  </section>
+
+  <!-- RANTHAMBORE -->
+  <section id="ranthambore" class="panel" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="foto/destinazioni/Tiger_in_Ranthambhore.jpg" alt="Tigre del Bengala a Ranthambore" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Bjørn Christian Tørrissen, <a href="https://commons.wikimedia.org/wiki/File:Tiger_in_Ranthambhore.jpg" target="_blank" rel="noopener">CC BY-SA 3.0</a></div>
+        <div class="fallback">🐅</div>
+      </div>
+      <h2 class="section-title reveal">🐅 Ranthambore &amp; le tigri</h2>
+      <p class="section-sub reveal">Marzo è stagione di punta — il parco è pienamente operativo, ma proprio per questo va prenotato con largo anticipo.</p>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>📅 Stagione</h3><p>Il parco è aperto <strong>dal 1° ottobre al 30 giugno</strong>, chiuso in estate/monsone (luglio-settembre). Marzo è tra i mesi di punta.</p></div>
+        <div class="card reveal"><h3>🗺️ Le zone</h3><p>10 zone di safari, solo il 20% del parco è aperto al turismo. <strong>Zone 3 e 4</strong> (area del lago Padam Talao) sono generalmente considerate le migliori per gli avvistamenti.</p></div>
+        <div class="card reveal"><h3>🎫 Permessi</h3><p>Sistema a permesso per zona specifica — <strong>non si sceglie la zona il giorno stesso</strong>, va prenotata con settimane/mesi di anticipo in alta stagione.</p></div>
+        <div class="card reveal"><h3>💰 Costi (stranieri)</h3><p>Gypsy/jeep 6 posti: <strong>₹5.000</strong> a persona. Canter 20 posti condiviso: <strong>₹4.200</strong> a persona. L'itinerario prevede 2 safari.</p></div>
+        <div class="card reveal"><h3>🎯 Probabilità di avvistamento</h3><p>Nessuna fonte seria la garantisce — le stime parlano di <strong>~60-70%</strong> in stagione di punta con 2 safari fatti, non con uno solo.</p></div>
+        <div class="card reveal"><h3>🌡️ Clima nel parco</h3><p>A marzo si va dai ~17,5°C mattutini ai ~33°C del primo pomeriggio — vestitevi a strati per il safari all'alba.</p></div>
+      </div>
+
+      <div class="source-note">Fonti: squidtravelindia.com, ranthamborewildlife.com, ranthambhorenationalparks.com, forum Tripadvisor — dati verificati ad agosto 2026.</div>
+    </div>
+  </section>
+
+  <!-- TAJ MAHAL -->
+  <section id="tajmahal" class="panel dark" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="foto/destinazioni/Agra_Fort.01.JPG" alt="Agra Fort" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Ashish3724, <a href="https://commons.wikimedia.org/wiki/File:Agra_Fort.01.JPG" target="_blank" rel="noopener">CC BY-SA 3.0</a></div>
+        <div class="fallback">🕌</div>
+      </div>
+      <h2 class="section-title reveal">🕌 Taj Mahal — cosa sapere prima</h2>
+      <p class="section-sub reveal">Fonte ufficiale: tajmahal.gov.in. Il vincolo più importante di tutto il viaggio è qui.</p>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>🚫 Chiuso il venerdì</h3><p>Per la preghiera islamica settimanale, confermato dalla fonte ufficiale: "closed on Fridays for general viewing". Tutti gli altri giorni sempre aperto.</p></div>
+        <div class="card reveal"><h3>🌅 Orari</h3><p>Apre 30 minuti prima dell'alba, chiude 30 minuti prima del tramonto. Biglietteria aperta da 1 ora prima dell'alba.</p></div>
+        <div class="card reveal"><h3>🎫 Prezzo (stranieri)</h3><p><strong>₹1.100</strong> ingresso complesso principale + <strong>₹200</strong> opzionali per l'accesso al mausoleo interno. -₹50 se acquistato online. Under 15 gratis.</p></div>
+        <div class="card reveal"><h3>🏰 Agra Fort</h3><p>Da abbinare nella stessa giornata — fortezza in arenaria rossa da cui Shah Jahan, imprigionato dal figlio, poteva vedere il Taj Mahal in lontananza.</p></div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Attenzione alla pianificazione:</strong> se il giorno previsto per Agra nell'itinerario cade di venerdì, va spostato — non è negoziabile, è chiuso per tutti senza eccezioni turistiche.
+        <div class="source-note">Fonte: tajmahal.gov.in (orari e prezzi ufficiali) — dati verificati ad agosto 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUIDA PRATICA -->
+  <section id="guida" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🧭 Guida pratica</h2>
+      <p class="section-sub reveal">Visto, sicurezza, salute e valuta. Dati verificati ad agosto 2026 — da riconfermare più vicino a marzo 2027.</p>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>🛂 Visto</h3><p><strong>e-Tourist Visa da 30 giorni, 25$ a persona</strong> (+2,5% commissione), richiedibile online 4-120 giorni prima della partenza. Consigliato applicare 3-4 settimane prima, non subito: la validità dei 30 giorni parte dalla data di primo ingresso dichiarata.</p></div>
+        <div class="card reveal"><h3>💶 Valuta</h3><p>Rupia indiana (INR), ~111-112 INR per 1 EUR (verificato agosto 2026). Carte accettate in hotel/ristoranti di fascia media-alta; mercati e tuk-tuk richiedono contante.</p></div>
+        <div class="card reveal"><h3>🛡️ Sicurezza — le truffe del Triangolo d'Oro</h3><p>Ben documentate su questo esatto circuito: truffa gemme/tappeti (soprattutto a Jaipur), finte guide senza tesserino plastificato/olografico, cambio hotel forzato dai touts, falsi uffici turistici a Delhi. Zona del Taj Mahal ad Agra segnalata come la più aggressiva per venditori/risciò.</p></div>
+        <div class="card reveal"><h3>🩺 Salute</h3><p>Vaccinazioni raccomandate: tifo, epatite A/B, encefalite giapponese (specifica per l'Uttar Pradesh — Agra/Varanasi). Malaria: rischio basso a Delhi/Rajasthan/Agra, più elevato in Uttar Pradesh — valutare con un medico di medicina dei viaggi.</p></div>
+        <div class="card reveal"><h3>🚗 Come spostarsi</h3><p>Auto privata con autista per l'intero circuito Delhi-Jaipur-Ranthambore-Agra è l'opzione più comune e consigliata. Per Agra-Varanasi: treno diurno diretto (~9h) o passaggio da Delhi in aereo (~1h20 Delhi-Varanasi).</p></div>
+        <div class="card reveal"><h3>💧 Acqua e cibo</h3><p>Solo acqua in bottiglia sigillata, evitare ghiaccio/succhi di dubbia provenienza. I disturbi gastrointestinali restano il problema di salute più comune tra i viaggiatori.</p></div>
+      </div>
+
+      <div class="source-note">Fonti: indianvisaonline.gov.in, viaggiaresicuri.it, CDC/passporthealthusa.com, thedelhitours.com, goldentriangletoursinindia.com — dati verificati ad agosto 2026.</div>
+    </div>
+  </section>
+
+  <!-- CURIOSITA -->
+  <section id="curiosita" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌍 Stranezze, ghat e sole</h2>
+      <p class="section-sub reveal">Le cose più sorprendenti di questo giro — verificate, non da guida turistica riciclata.</p>
+
+      <h3 style="color:#fff; margin-top:0;">☀️ Simulatore del sole — Delhi, marzo</h3>
+      <p class="section-sub reveal" style="color:#c7c2b6;">Trascina lo slider per vedere dove sarà il sole a una data ora durante il viaggio — utile per pianificare l'alba al Taj Mahal e i safari.</p>
+      <div class="card reveal" style="text-align:center;">
+        <div class="sun-sim-wrap">
+          <svg id="sun-sim" viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="skyGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop id="sky-stop-top" offset="0%" stop-color="#2f6fb0"/>
+                <stop id="sky-stop-bottom" offset="100%" stop-color="#bfe3ff"/>
+              </linearGradient>
+            </defs>
+            <rect x="2" y="4" width="496" height="176" rx="14" fill="url(#skyGradient)"/>
+            <path class="sun-arc" d="M 40,180 Q 250,20 460,180"/>
+            <path class="sun-hills" d="M0,200 Q80,160 160,192 T320,188 T500,200 L500,220 L0,220 Z"/>
+            <line class="sun-horizon" x1="0" y1="180" x2="500" y2="180"/>
+            <text x="40" y="200" text-anchor="middle" class="sun-label">🌅 Alba</text>
+            <text x="460" y="200" text-anchor="middle" class="sun-label">🌇 Tramonto</text>
+            <g id="sun-marker"><text x="0" y="0" text-anchor="middle" font-size="30">☀️</text></g>
+          </svg>
+          <div class="sun-slider-row">
+            <input type="range" id="sun-slider" min="300" max="1260" step="5" value="720" aria-label="Ora del giorno">
+            <div class="sun-slider-ticks"><span>05:00</span><span>13:00</span><span>21:00</span></div>
+          </div>
+          <div class="sun-readout" id="sun-readout">Calcolo posizione del sole…</div>
+          <div class="source-note">Simulazione per Delhi (IST, UTC+5:30) a marzo: orari medi del periodo, variano di giorno in giorno.</div>
+        </div>
+      </div>
+
+      <h3 style="color:#fff;">🤯 Lo sapevi che...</h3>
+      <div class="bigfive-grid" id="facts-grid"></div>
+    </div>
+  </section>
+
+  <!-- METEO -->
+  <section id="meteo" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌦️ Meteo storico — Marzo</h2>
+      <p class="section-sub reveal">Marzo è ancora confortevole ma già in transizione verso il caldo — soprattutto in Rajasthan/UP dove le massime sfiorano i 33-35°C a fine mese. <strong>Non è una previsione</strong>, sono medie storiche.</p>
+
+      <div class="weather-cols reveal">
+        <div>
+          <h4>Delhi — Marzo</h4>
+          <div class="weather-stats">
+            <div class="card"><div class="wval">25-32°</div><div class="wlabel">Massima</div></div>
+            <div class="card"><div class="wval">12-18°</div><div class="wlabel">Minima</div></div>
+            <div class="card"><div class="wval">Secco</div><div class="wlabel">"Periodo d'oro", ~19mm pioggia</div></div>
+          </div>
+        </div>
+        <div>
+          <h4>Jaipur — Marzo</h4>
+          <div class="weather-stats">
+            <div class="card"><div class="wval">29-33°</div><div class="wlabel">Massima (sale nel mese)</div></div>
+            <div class="card"><div class="wval">14-18°</div><div class="wlabel">Minima</div></div>
+            <div class="card"><div class="wval">~7mm</div><div class="wlabel">Pioggia nel mese</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="weather-cols reveal">
+        <div>
+          <h4>Agra — Marzo</h4>
+          <div class="weather-stats">
+            <div class="card"><div class="wval">~34°</div><div class="wlabel">Massima</div></div>
+            <div class="card"><div class="wval">~19°</div><div class="wlabel">Minima</div></div>
+            <div class="card"><div class="wval">3%</div><div class="wlabel">Giorni di pioggia</div></div>
+          </div>
+        </div>
+        <div>
+          <h4>Varanasi — Marzo</h4>
+          <div class="weather-stats">
+            <div class="card"><div class="wval">~35°</div><div class="wlabel">Massima</div></div>
+            <div class="card"><div class="wval">~17°</div><div class="wlabel">Minima</div></div>
+            <div class="card"><div class="wval">6%</div><div class="wlabel">Probabilità pioggia giornaliera</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Nota:</strong> le mattine restano piacevoli ovunque (12-19°C) — ideali per i safari a Ranthambore e l'alba al Taj Mahal. Se potete scegliere, la prima metà di marzo è più fresca della seconda.
+        <div class="source-note">Fonti: weatherspark.com, travelchinaguide.com, makemytrip.com, wanderlog.com — dati verificati ad agosto 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RICERCA VOLI -->
+  <section id="voli" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">✈️ Voli</h2>
+      <p class="section-sub reveal">Due opzioni dirette dall'Italia — cosa rara per l'India.</p>
+
+      <div class="card reveal">
+        <table class="hub-table">
+          <thead><tr><th>Compagnia</th><th>Tratta</th><th>Note</th></tr></thead>
+          <tbody>
+            <tr><td>ITA Airways</td><td>Roma Fiumicino → Delhi diretto</td><td>~7h45, in espansione a voli giornalieri da agosto 2026 (attualmente ~12/settimana)</td></tr>
+            <tr><td>Air India</td><td>Milano Malpensa → Delhi diretto</td><td>~9h40, 4 frequenze/settimana (mer/ven/dom/lun), B787 Dreamliner</td></tr>
+            <tr><td>Delhi → Varanasi</td><td>Volo interno diretto</td><td>~1h20, più compagnie, ~36-72€ a tratta se prenotato con anticipo</td></tr>
+          </tbody>
+        </table>
+        <div class="source-note">Tariffa round-trip a persona (marzo, prenotato ~1 anno prima): <strong>promo/fortunata ~480-600€</strong>, <strong>realistica tipica ~700-950€</strong>. Nessuna tariffa 2027 è ancora prenotabile — questi range sono stime per analogia da tariffe attuali sulla stessa rotta. Fonti: ita-airways.com, airindia.com, easemytrip.com — dati verificati ad agosto 2026.</div>
+      </div>
+
+      <div class="card reveal">
+        <div class="flight-form">
+          <div class="field">
+            <label for="flight-origin">Da dove parti</label>
+            <select id="flight-origin">
+              <option value="FCO|Roma Fiumicino">Roma Fiumicino (FCO)</option>
+              <option value="MXP|Milano Malpensa">Milano Malpensa (MXP)</option>
+              <option value="LIN|Milano Linate">Milano Linate (LIN)</option>
+              <option value="BGY|Milano Bergamo">Milano Bergamo (BGY)</option>
+              <option value="BLQ|Bologna">Bologna (BLQ)</option>
+              <option value="VCE|Venezia">Venezia (VCE)</option>
+            </select>
+          </div>
+          <div class="field"><label>Destinazione</label><select disabled><option>Delhi (DEL), India</option></select></div>
+          <div class="field"><label>Periodo</label><select disabled><option>Marzo 2027 (da confermare)</option></select></div>
+        </div>
+        <div class="flight-links">
+          <button id="btn-google-flights">Cerca su Google Flights</button>
+          <button class="alt" id="btn-skyscanner">Cerca su Skyscanner</button>
+          <button class="alt" id="btn-kayak">Cerca su Kayak</button>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Nota sul rientro da Varanasi:</strong> l'itinerario prevede il volo interno Varanasi-Delhi prima del rientro in Italia — prenotatelo con margine, i voli interni indiani in bassa visibilità mattutina (comune in inverno/inizio primavera nel nord) possono avere ritardi.
+      </div>
+    </div>
+  </section>
+
+  <!-- CIBO E ALCOLICI -->
+  <section id="cibo" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🍛 Cibo &amp; alcolici</h2>
+      <p class="section-sub reveal">Cucina nord-indiana, moghul e rajasthani — piatti nati proprio su questo itinerario, non cliché generici.</p>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>🍗 Butter Chicken</h3><p>Pollo tandoor in salsa di pomodoro, burro e panna — inventato davvero a Delhi negli anni '50 al ristorante Moti Mahal. ₹340-650 in un locale normale (~3-6€); ₹850-1.250 nei locali storici come Moti Mahal o Gulati (~8-11€).</p></div>
+        <div class="card reveal"><h3>🫘 Dal Makhani</h3><p>Lenticchie nere e fagioli rossi cotti a lungo con burro e panna — anch'esso nato al Moti Mahal, compagno classico del butter chicken. ₹410 (mezza porzione) - ₹700 (~4-6€).</p></div>
+        <div class="card reveal"><h3>🌶️ Laal Maas</h3><p>Curry di montone piccante rajasthano, a base di peperoncino rosso e yogurt — piatto simbolo di Jaipur, di origine Rajput. ₹500-600 in un locale normale (~5-6€); ₹1.375-1.600 nei ristoranti storici come Niros, dal 1949 (~12-15€).</p></div>
+        <div class="card reveal"><h3>🍽️ Thali rajasthano</h3><p>Dal-baati-churma, gatte ki sabzi, kadhi, roti — il modo migliore per assaggiare tutto in un solo pasto. ₹400-1.200 per due persone nei locali normali di Jaipur (~4-11€ per due).</p></div>
+      </div>
+
+      <div class="card reveal" style="margin-top:18px;">
+        <h3 style="margin-top:0;">🍺 Alcol — legale ma regolato stato per stato</h3>
+        <p style="color:#c7c2b6; font-size:0.92rem; margin:0 0 10px;">L'India <strong>non è un paese "secco"</strong> a livello nazionale, ma le licenze sono materia statale: età legale <strong>21 anni a Delhi e in Uttar Pradesh</strong> (Agra/Varanasi), <strong>18 anni per legge in Rajasthan</strong> (anche se alcuni locali controllano a soglie più alte in pratica). <strong>Old Monk</strong> (rum scuro speziato, un'istituzione indiana) e <strong>Kingfisher</strong> (la birra più diffusa, ₹150-350 al ristorante, ~1,35-3,20€) sono le scelte più comuni.</p>
+        <p style="color:#c7c2b6; font-size:0.92rem; margin:0;"><strong>Varanasi e il bhang:</strong> le foglie di cannabis (non i fiori/la resina, illegali a livello nazionale) sono escluse dal divieto della legge antidroga indiana — per questo a Varanasi esistono negozi di "bhang lassi" autorizzati dal governo (es. Blue Lassi Shop). Non è "cannabis legale in India" in senso generale: è un'eccezione ristretta, specifica per le foglie, tollerata in questa città.</p>
+      </div>
+
+      <div class="source-note" style="text-align:center;">Un pasto normale in un ristorante locale (non street-food, non fine dining): ~₹500-900 a persona (~4,50-8€); i locali storici/turistici costano il 30-50% in più. Fonti: jaipurlove.com, homegrown.co.in, legalkart.com, madirastore.com, lostwithpurpose.com, indiasomeday.com — dati verificati ad agosto 2026.</div>
+    </div>
+  </section>
+
+  <!-- BUDGET -->
+  <section id="budget" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">💰 Calcolatore budget</h2>
+      <p class="section-sub reveal">India oggettivamente economica rispetto agli altri viaggi del gruppo — anche in stile comfort. Stima indicativa, non un preventivo.</p>
+
+      <div class="card reveal">
+        <div class="currency-form">
+          <div class="field">
+            <label for="budget-people">Persone</label>
+            <input type="number" id="budget-people" value="4" min="1">
+          </div>
+          <div class="field">
+            <label for="budget-style">Stile viaggio</label>
+            <select id="budget-style">
+              <option value="budget">Budget</option>
+              <option value="standard" selected>Standard</option>
+              <option value="comfort">Comfort</option>
+            </select>
+          </div>
+        </div>
+        <div id="budget-result" class="cur-result">—</div>
+        <div id="budget-breakdown" class="source-note" style="text-align:center; margin-top:10px;"></div>
+      </div>
+
+      <div class="source-note">Include: volo Italia-Delhi a/r, e-Visa, 2 safari a Ranthambore, ingresso Taj Mahal + monumenti principali, alloggio, cibo, mance, trasporto (auto+autista condiviso per il circuito). Esclude: assicurazione di viaggio, spese personali, volo interno Varanasi-Delhi (conteggiato a parte). Dati reali da: ita-airways.com, airindia.com, ranthamborewildlife.com, tajmahal.gov.in, Numbeo — verificati ad agosto 2026, il costo dell'auto+autista privato varia molto tra fonti e va confermato con preventivi diretti.</div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">❓ Domande frequenti</h2>
+
+      <details class="faq reveal">
+        <summary>Serve il visto per l'India?</summary>
+        <div class="faq-body">Sì: <strong>e-Tourist Visa da 30 giorni, 25$ a persona</strong> (+2,5% commissione), richiedibile online su indianvisaonline.gov.in da 4 a 120 giorni prima della partenza. Consigliato farlo 3-4 settimane prima, non subito ai 120 giorni: la validità dei 30 giorni parte dalla data di primo ingresso dichiarata in domanda.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Vedremo sicuramente una tigre a Ranthambore?</summary>
+        <div class="faq-body">No, e nessun operatore serio lo promette. Con 2 safari in stagione di punta (marzo) la probabilità stimata è del ~60-70%, più alta che con un solo safari ma mai garantita al 100%. Le zone 3 e 4 sono generalmente le migliori per gli avvistamenti.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>È vero che il Taj Mahal è chiuso certi giorni?</summary>
+        <div class="faq-body">Sì, è chiuso ogni <strong>venerdì</strong> per la preghiera islamica settimanale — confermato dalla fonte ufficiale tajmahal.gov.in. Va verificato contro le date reali di marzo 2027 non appena fissate: se il giorno previsto per Agra cade di venerdì, l'itinerario va ricalibrato.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Marzo è un buon periodo?</summary>
+        <div class="faq-body">Sì, con una riserva: è ancora confortevole (mattine fresche, 12-19°C) ma già in transizione verso il caldo, soprattutto in Rajasthan e Uttar Pradesh dove le massime possono toccare 33-35°C a fine mese. La prima metà di marzo è più fresca della seconda, se potete scegliere.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Che moneta si usa e conviene cambiare prima?</summary>
+        <div class="faq-body">La Rupia indiana (INR), ~111-112 per 1 EUR (verificato ad agosto 2026). Carte accettate in hotel e ristoranti di fascia medio-alta; per mercati, tuk-tuk e piccoli venditori servono contanti.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Ci sono truffe comuni da conoscere?</summary>
+        <div class="faq-body">Sì, ben documentate su questo esatto circuito: la truffa gemme/tappeti (un "amico" porta in un negozio di famiglia con promesse di sconto — frequente a Jaipur), finte guide con tesserino di carta anziché plastificato/olografico, cambio hotel forzato dai touts alle stazioni, falsi uffici turistici a Connaught Place e stazione di Delhi. La zona del Taj Mahal ad Agra è segnalata come la più aggressiva per venditori e risciò.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Servono vaccinazioni particolari?</summary>
+        <div class="faq-body">Raccomandate: tifo, epatite A e B, encefalite giapponese (specifica per l'Uttar Pradesh, quindi rilevante per Agra e Varanasi). Il rischio malaria è basso a Delhi/Rajasthan/Agra ma più elevato in Uttar Pradesh — vale la pena valutare la profilassi con un medico di medicina dei viaggi prima della partenza.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Come ci si sposta tra le tappe?</summary>
+        <div class="faq-body">Auto privata con autista per l'intero circuito Delhi-Jaipur-Ranthambore-Agra — l'opzione più comune e consigliata per questo esatto itinerario. Da Agra a Varanasi: treno diurno diretto (~9h) oppure si torna a Delhi e si prende il volo interno Delhi-Varanasi (~1h20).</div>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  India Trip Planner — file locale, parte del sito <a href="javascript:void(0)" class="home-link" onclick="showHub()">Patagucci Trips</a>. Mappa e ricerca voli richiedono una connessione internet al momento del click.
+  <div class="credits">
+    Crediti foto (Wikimedia Commons): MarcBW (Taj Mahal all'alba) CC BY-SA 3.0 · Dennis G. Jarvis (Jama Masjid) CC BY-SA 2.0 · Fazal Ahmad (Humayun's Tomb) CC BY 2.0 · A.Savin (Qutub Minar) Free Art License · Ajay Shankar (Amber Fort) CC BY-SA 3.0 · Marcin Białek (Hawa Mahal) CC BY-SA 4.0 · Chetan (Chand Baori) CC BY-SA 3.0 · Bjørn Christian Tørrissen (tigre, Ranthambore) CC BY-SA 3.0 · Ashish3724 (Agra Fort) CC BY-SA 3.0 · Yusuke Kawasaki (Ganga Aarti, Varanasi) CC BY 2.0 · Joygopal008 (Dhamek Stupa, Sarnath) CC BY-SA 4.0. Dati verificati su fonti pubbliche ad agosto 2026 — riverifica sempre visto, orari del Taj Mahal e prezzi prima di prenotare.
+  </div>
+</footer>
+
+<script>
+(function(){
+  // ---- Scrollspy nav ----
+  var navLinks = document.querySelectorAll('nav.tabs a[href^="#"]');
+  var sections = document.querySelectorAll('section[data-nav]');
+  var linkBySection = {};
+  navLinks.forEach(function(a){ linkBySection[a.getAttribute('href').slice(1)] = a; });
+
+  var spyObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        navLinks.forEach(function(a){ a.classList.remove('active'); });
+        var link = linkBySection[entry.target.id];
+        if(link){
+          link.classList.add('active');
+          link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(function(s){ spyObserver.observe(s); });
+
+  // ---- Reveal on scroll ----
+  var revealObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ revealObserver.observe(el); });
+
+  // ---- Itinerary data + Google Maps links ----
+  var COORDS = {
+    delhi: [28.6139, 77.2090],
+    jaipur: [26.9124, 75.7873],
+    chandbaori: [27.0059, 76.6103],
+    fatehpursikri: [27.0940, 77.6611],
+    ranthambore: [26.0173, 76.5026],
+    agra: [27.1767, 78.0081],
+    varanasi: [25.3176, 82.9739],
+    sarnath: [25.3811, 83.0219]
+  };
+  function mapsLink(fromKey, toKey){
+    var a = COORDS[fromKey], b = COORDS[toKey];
+    return 'https://www.google.com/maps/dir/?api=1&origin=' + a[0] + ',' + a[1] + '&destination=' + b[0] + ',' + b[1] + '&travelmode=driving';
+  }
+  function placeLink(key){
+    var p = COORDS[key];
+    return 'https://www.google.com/maps/search/?api=1&query=' + p[0] + ',' + p[1];
+  }
+
+  var ITINERARY = [
+    { d:1, title:'Arrivo a Delhi', tags:['Arrivo'], text:'Volo diretto dall\'Italia (ITA Airways da Roma o Air India da Milano). Sistemazione e primo adattamento al fuso (IST, UTC+5:30).', link: placeLink('delhi'), linkLabel:'Vedi Delhi su Google Maps' },
+    { d:2, title:'Old &amp; New Delhi', tags:['Città','Il giorno clou'], text:'Old Delhi con un giro in tuk-tuk: la moschea Jama Masjid e il mercato di Chandni Chowk. New Delhi: la tomba di Humayun e il minareto Qutub Minar.', link: placeLink('delhi'), linkLabel:'Vedi Delhi su Google Maps', highlight:true, photo:'foto/destinazioni/Humayuns_Tomb_(Humayun_Ka_Maqbara_-_Delhi).jpg', photoCredit:'Foto: Fazal Ahmad, CC BY 2.0' },
+    { d:3, title:'Delhi → Jaipur', tags:['Su strada','~280 km'], text:'Trasferimento verso il Rajasthan, con sosta lungo il tragitto al pozzo monumentale di Chand Baori ad Abhaneri.', link: mapsLink('delhi','jaipur'), linkLabel:'Apri il tragitto Delhi → Jaipur', photo:'foto/destinazioni/Chand_Baori_(Step-well)_at_Abhaneri.JPG', photoCredit:'Foto: Chetan, CC BY-SA 3.0' },
+    { d:4, title:'Jaipur — Amber Fort &amp; City Palace', tags:['La Città Rosa'], text:'Amber Fort, il City Palace e il palazzo dei venti Hawa Mahal — il cuore della "Città Rosa".', link: placeLink('jaipur'), linkLabel:'Vedi Jaipur su Google Maps', highlight:true, photo:'foto/destinazioni/Hawa_Mahal_2011.jpg', photoCredit:'Foto: Marcin Białek, CC BY-SA 4.0' },
+    { d:5, title:'Jaipur → Ranthambore', tags:['Su strada','~3-4h'], text:'Trasferimento a Ranthambore, con sosta alla città fantasma di Fatehpur Sikri lungo il percorso più lungo verso Agra — o come deviazione dedicata secondo il tragitto scelto.', link: mapsLink('jaipur','ranthambore'), linkLabel:'Apri il tragitto Jaipur → Ranthambore' },
+    { d:6, title:'Ranthambore — Safari 1', tags:['Safari delle tigri'], text:'Primo safari in jeep/canter nella riserva, alla ricerca della tigre del Bengala nel suo habitat naturale.', link: placeLink('ranthambore'), linkLabel:'Vedi Ranthambore su Google Maps', highlight:true, photo:'foto/destinazioni/Tiger_in_Ranthambhore.jpg', photoCredit:'Foto: Bjørn Christian Tørrissen, CC BY-SA 3.0' },
+    { d:7, title:'Ranthambore — Safari 2', tags:['Safari delle tigri'], text:'Secondo safari, in una zona diversa dal primo per aumentare le probabilità di avvistamento.', link: placeLink('ranthambore'), linkLabel:'Vedi Ranthambore su Google Maps', highlight:true },
+    { d:8, title:'Ranthambore → Agra', tags:['Su strada/treno'], text:'Trasferimento ad Agra, con eventuale sosta a Fatehpur Sikri se non già vista lungo il tragitto precedente.', link: mapsLink('ranthambore','agra'), linkLabel:'Apri il tragitto Ranthambore → Agra', photo:'foto/destinazioni/Agra_Fort.01.JPG', photoCredit:'Foto: Ashish3724, CC BY-SA 3.0' },
+    { d:9, title:'Agra — Taj Mahal all\'alba &amp; Agra Fort', tags:['Il giorno più atteso'], text:'Ingresso al Taj Mahal all\'apertura, 30 minuti prima dell\'alba — luce migliore e meno folla. Nel pomeriggio, l\'Agra Fort in arenaria rossa.', link: placeLink('agra'), linkLabel:'Vedi Agra su Google Maps', highlight:true, photo:'foto/destinazioni/Taj_Mahal_Tomb_at_sunrise.JPG', photoCredit:'Foto: MarcBW, CC BY-SA 3.0' },
+    { d:10, title:'Agra → Varanasi', tags:['Treno o volo via Delhi'], text:'Treno diurno diretto (~9h) oppure trasferimento a Delhi e volo interno per Varanasi (~1h20) — i più avventurosi del gruppo possono scegliere il treno notturno.', link: mapsLink('agra','varanasi'), linkLabel:'Apri il tragitto Agra → Varanasi' },
+    { d:11, title:'Varanasi — Ganges all\'alba', tags:['Il Gange'], text:'Giro in barca sul fiume Gange all\'alba, tra i ghat e i rituali mattutini sulle rive.', link: placeLink('varanasi'), linkLabel:'Vedi Varanasi su Google Maps', highlight:true, photo:'foto/destinazioni/Evening_Ganga_Aarti,_at_Dashashwamedh_ghat,_Varanasi.jpg', photoCredit:'Foto: Yusuke Kawasaki, CC BY 2.0' },
+    { d:12, title:'Varanasi — Sarnath &amp; Ganga Aarti', tags:['Buddismo','Cerimonia del fuoco'], text:'Visita al centro buddista di Sarnath, dove il Buddha tenne il suo primo sermone. Alla sera, la cerimonia del fuoco Ganga Aarti sui ghat.', link: placeLink('sarnath'), linkLabel:'Vedi Sarnath su Google Maps', highlight:true, photo:'foto/destinazioni/Dhamek_Stupa_at_Sarnath_UP.jpg', photoCredit:'Foto: Joygopal008, CC BY-SA 4.0' },
+    { d:13, title:'Varanasi → Delhi', tags:['Volo interno','~1h20'], text:'Volo interno di rientro a Delhi. Ultime ore libere, ultimi acquisti nei mercati locali.', link: mapsLink('varanasi','delhi'), linkLabel:'Apri il tragitto Varanasi → Delhi (volo)' },
+    { d:14, title:'Delhi — Si torna a casa', tags:['Partenza'], text:'Trasferimento in aeroporto per il volo di rientro in Italia.', link: placeLink('delhi'), linkLabel:'Vedi Delhi su Google Maps' }
+  ];
+
+  var timeline = document.getElementById('timeline');
+  ITINERARY.forEach(function(day, idx){
+    var det = document.createElement('details');
+    det.className = 'day reveal';
+    if(idx === 0) det.open = true;
+    var tagsHtml = day.tags.map(function(t){ return '<span class="tag' + (day.highlight ? ' highlight' : '') + '">' + t + '</span>'; }).join('');
+    var photoHtml = day.photo ? ('<div class="mini-photo"><img src="' + day.photo + '" alt="" loading="lazy" onerror="this.parentElement.style.display=\'none\'"></div><div class="source-note">' + day.photoCredit + '</div>') : '';
+    det.innerHTML =
+      '<summary><span class="daynum">' + day.d + '</span><span class="daytitle">' + day.title + '</span><span class="chevron">▸</span></summary>' +
+      '<div class="day-body">' + tagsHtml + '<p>' + day.text + '</p>' + photoHtml +
+      '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
+      '</div>';
+    timeline.appendChild(det);
+    revealObserver.observe(det);
+  });
+
+  // ---- Budget calculator ----
+  var BUDGET = {
+    nights: 13,
+    flight: { budget:480, standard:700, comfort:950 },
+    fixedExtras: { budget:145, standard:180, comfort:230 }, // e-visa (~23) + 2 safari Ranthambore (~90) + Taj Mahal+monumenti (~40-60 std/comfort più alto)
+    lodgingPerNight: { budget:20, standard:45, comfort:120 },
+    foodPerDay: { budget:10, standard:22, comfort:40 },
+    tipsPerDay: { budget:3, standard:5, comfort:9 },
+    transportPerDayShared: { budget:35, standard:60, comfort:110 } // auto+autista condiviso tra il gruppo, costo totale al giorno
+  };
+  var bgtPeople = document.getElementById('budget-people');
+  var bgtStyle = document.getElementById('budget-style');
+  var bgtResult = document.getElementById('budget-result');
+  var bgtBreakdown = document.getElementById('budget-breakdown');
+  function updateBudget(){
+    if(!bgtPeople) return;
+    var people = Math.max(1, parseInt(bgtPeople.value, 10) || 1);
+    var style = bgtStyle.value;
+    var days = BUDGET.nights + 1;
+    var perPersonFixed = BUDGET.flight[style] + BUDGET.fixedExtras[style];
+    var perPersonNightly = BUDGET.nights * (BUDGET.lodgingPerNight[style] + BUDGET.foodPerDay[style]) + days * BUDGET.tipsPerDay[style];
+    var transportTotal = BUDGET.nights * BUDGET.transportPerDayShared[style];
+    var totalGroup = people * (perPersonFixed + perPersonNightly) + transportTotal;
+    var perPerson = totalGroup / people;
+    bgtResult.textContent = '~' + Math.round(perPerson).toLocaleString('it-IT') + ' € a persona';
+    bgtBreakdown.textContent = 'Totale gruppo (' + people + ' persone): ~' + Math.round(totalGroup).toLocaleString('it-IT') + ' € — include volo, e-Visa, 2 safari a Ranthambore, Taj Mahal e monumenti, alloggio, cibo, mance, auto+autista condiviso.';
+  }
+  if(bgtPeople){
+    [bgtPeople, bgtStyle].forEach(function(el){ el.addEventListener('input', updateBudget); el.addEventListener('change', updateBudget); });
+    updateBudget();
+  }
+
+  // ---- Cose da non perdere ----
+  var FAMILIES = [
+    { sector:'Delhi', name:'Jama Masjid', size:'~1h', level:'Facile', note:'La moschea più grande dell\'India, nel cuore di Old Delhi — si visita insieme a un giro in tuk-tuk per Chandni Chowk.' },
+    { sector:'Delhi', name:'Humayun\'s Tomb', size:'~1-1,5h', level:'Facile', note:'Tomba moghul del XVI secolo, patrimonio UNESCO — considerata il modello architettonico che ispirò il Taj Mahal.' },
+    { sector:'Delhi', name:'Qutub Minar', size:'~1h', level:'Facile', note:'Minareto in arenaria alto 73m, iniziato nel 1192 — il più alto minareto in mattoni del mondo.' },
+    { sector:'Jaipur', name:'Amber Fort', size:'~2-3h', level:'Media', note:'Fortezza-palazzo su una collina fuori Jaipur, patrimonio UNESCO insieme ad altri forti del Rajasthan.' },
+    { sector:'Jaipur', name:'Hawa Mahal', size:'~30-45min', level:'Facile', note:'Il "Palazzo dei Venti", facciata a nido d\'ape con 953 finestrelle — pensato per far osservare le donne di corte la strada senza essere viste.' },
+    { sector:'Jaipur', name:'Chand Baori', size:'~45min-1h', level:'Facile', note:'Pozzo a gradoni geometrico di Abhaneri, tra i più fotografati dell\'India — sosta classica lungo il tragitto Delhi-Jaipur.' },
+    { sector:'Jaipur', name:'Fatehpur Sikri', size:'~2h', level:'Facile', note:'Città fantasma moghul, capitale imperiale per soli 14 anni prima di essere abbandonata per mancanza d\'acqua.' },
+    { sector:'Ranthambore', name:'Safari delle tigri', size:'Mezza giornata x2', level:'Media', note:'Vedi la sezione dedicata per zone, permessi e probabilità di avvistamento.' },
+    { sector:'Agra', name:'Taj Mahal', size:'~2-3h', level:'Facile', note:'Chiuso il venerdì — vedi la sezione dedicata per tutti i dettagli pratici.' },
+    { sector:'Agra', name:'Agra Fort', size:'~1,5-2h', level:'Facile', note:'Fortezza in arenaria rossa da cui Shah Jahan, imprigionato dal figlio Aurangzeb, poteva vedere il Taj Mahal in lontananza.' },
+    { sector:'Varanasi', name:'Ganga Aarti', size:'~45min, serale', level:'Facile', note:'Cerimonia del fuoco ogni sera ai ghat principali (Dashashwamedh) — comportamento rispettoso richiesto, niente foto con flash.' },
+    { sector:'Varanasi', name:'Giro in barca sul Gange', size:'~1-2h, alba o tramonto', level:'Facile', note:'Il modo migliore per vedere i ghat e i rituali mattutini — scegliete sempre operatori con licenza e giubbotti di salvataggio.' },
+    { sector:'Varanasi', name:'Sarnath', size:'Mezza giornata', level:'Facile', note:'A ~10km da Varanasi, dove il Buddha tenne il suo primo sermone — include la Dhamek Stupa.' }
+  ];
+
+  var famSectors = ['Tutti'].concat(Array.from(new Set(FAMILIES.map(function(f){ return f.sector; }))));
+  var famFilterRow = document.getElementById('family-filters');
+  var famGridEl = document.getElementById('family-grid');
+  var famActiveSector = 'Tutti';
+
+  function renderFamilies(){
+    famGridEl.innerHTML = '';
+    FAMILIES.filter(function(f){ return famActiveSector === 'Tutti' || f.sector === famActiveSector; }).forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'family-card';
+      card.innerHTML =
+        '<div class="fsector">' + f.sector + '</div>' +
+        '<div class="fname">' + f.name + '</div>' +
+        '<div class="flevel ' + f.level + '">' + f.level + '</div>' +
+        '<div class="fsize">' + f.size + '</div>' +
+        '<p class="fnote">' + f.note + '</p>';
+      famGridEl.appendChild(card);
+    });
+  }
+
+  famSectors.forEach(function(s){
+    var btn = document.createElement('button');
+    btn.textContent = s;
+    if(s === famActiveSector) btn.classList.add('active');
+    btn.addEventListener('click', function(){
+      famActiveSector = s;
+      famFilterRow.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderFamilies();
+    });
+    famFilterRow.appendChild(btn);
+  });
+  renderFamilies();
+
+  // ---- Lo sapevi che... facts ----
+  var FACTS = [
+    { icon:'🕌', text:'Il Taj Mahal fu costruito da Shah Jahan come mausoleo per la moglie Mumtaz Mahal, morta di parto nel 1631 — ci vollero circa 22 anni e 20.000 operai per completarlo.' },
+    { icon:'🛂', text:'L\'India concede l\'e-Tourist Visa da 30 giorni ai cittadini italiani per soli 25$ — richiedibile interamente online, senza bisogno di andare in ambasciata.' },
+    { icon:'🐅', text:'Il Ranthambore National Park deve il nome all\'antica fortezza di Ranthambore al suo interno, risalente al X secolo — oggi patrimonio UNESCO insieme ad altri forti collinari del Rajasthan.' },
+    { icon:'🚫', text:'Il Taj Mahal è chiuso ogni venerdì per la preghiera islamica settimanale — l\'unico giorno della settimana in cui non si può visitare.' },
+    { icon:'🕉️', text:'Varanasi è considerata una delle città abitate più antiche del mondo, con una storia continua di insediamento umano che risale ad almeno 3.000 anni fa.' },
+    { icon:'👻', text:'Fatehpur Sikri fu capitale dell\'impero moghul per soli 14 anni (1571-1585) prima di essere abbandonata — pare per la scarsità d\'acqua della zona.' }
+  ];
+  var factsGrid = document.getElementById('facts-grid');
+  if(factsGrid){
+    FACTS.forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'bigfive-card';
+      card.innerHTML = '<div class="bf-icon">' + f.icon + '</div><p class="bf-fact" style="min-height:0;">' + f.text + '</p>';
+      factsGrid.appendChild(card);
+    });
+  }
+
+  // ---- Flight search links ----
+  function currentOrigin(){
+    var v = document.getElementById('flight-origin').value.split('|');
+    return { code: v[0], label: v[1] };
+  }
+  document.getElementById('btn-google-flights').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.google.com/travel/flights?q=' + encodeURIComponent('Voli da ' + o.label + ' a Delhi a marzo 2027'), '_blank');
+  });
+  document.getElementById('btn-skyscanner').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.skyscanner.it/trasporti/voli/' + o.code.toLowerCase() + '/del/270301/270315/', '_blank');
+  });
+  document.getElementById('btn-kayak').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.kayak.it/flights/' + o.code + '-DEL/2027-03-01/2027-03-15', '_blank');
+  });
+
+  // ---- Map: full route link + stops table + KML export ----
+  var STOPS = [
+    { name:'Delhi (arrivo/partenza)', key:'delhi' },
+    { name:'Chand Baori', key:'chandbaori' },
+    { name:'Jaipur', key:'jaipur' },
+    { name:'Fatehpur Sikri', key:'fatehpursikri' },
+    { name:'Ranthambore', key:'ranthambore' },
+    { name:'Agra', key:'agra' },
+    { name:'Varanasi', key:'varanasi' },
+    { name:'Sarnath', key:'sarnath' }
+  ];
+
+  var origin = COORDS.delhi, destination = COORDS.delhi;
+  var waypoints = STOPS.slice(1, -1).map(function(s){ return COORDS[s.key][0] + ',' + COORDS[s.key][1]; }).join('|');
+  document.getElementById('link-full-route').href =
+    'https://www.google.com/maps/dir/?api=1&origin=' + origin[0] + ',' + origin[1] +
+    '&destination=' + destination[0] + ',' + destination[1] +
+    '&waypoints=' + encodeURIComponent(waypoints) + '&travelmode=driving';
+
+  var stopsBody = document.querySelector('#stops-table tbody');
+  STOPS.forEach(function(s){
+    var c = COORDS[s.key];
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + s.name + '</td><td class="mono">' + c[0].toFixed(4) + ', ' + c[1].toFixed(4) + '</td><td><a href="' + placeLink(s.key) + '" target="_blank" rel="noopener">Apri ↗</a></td>';
+    stopsBody.appendChild(tr);
+  });
+
+  var LEGS = [
+    { day:3, label:'Delhi → Jaipur (via Chand Baori)', from:'delhi', to:'jaipur', km:'~280 km', dur:'~5-6h incl. sosta' },
+    { day:5, label:'Jaipur → Ranthambore', from:'jaipur', to:'ranthambore', km:'~180 km', dur:'~3-4h' },
+    { day:8, label:'Ranthambore → Agra', from:'ranthambore', to:'agra', km:'~250 km', dur:'~5-6h' },
+    { day:10, label:'Agra → Varanasi', from:'agra', to:'varanasi', km:'~600 km (treno) o via Delhi (volo)', dur:'~9h treno diurno diretto' },
+    { day:13, label:'Varanasi → Delhi', from:'varanasi', to:'delhi', km:'~800 km in linea d\'aria', dur:'~1h20 di volo' }
+  ];
+  var legsBody = document.querySelector('#legs-table tbody');
+  LEGS.forEach(function(leg){
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>Giorno ' + leg.day + '</td><td>' + leg.label + '</td><td>' + leg.km + '</td><td>' + leg.dur + '</td><td><a href="' + mapsLink(leg.from, leg.to) + '" target="_blank" rel="noopener">Apri ↗</a></td>';
+    legsBody.appendChild(tr);
+  });
+
+  document.getElementById('btn-export-kml').addEventListener('click', function(){
+    var kmlPlacemarks = STOPS.map(function(s){
+      var c = COORDS[s.key];
+      return '<Placemark><name>' + s.name + '</name><Point><coordinates>' + c[1] + ',' + c[0] + ',0</coordinates></Point></Placemark>';
+    }).join('\\n');
+    var lineCoords = STOPS.map(function(s){ var c = COORDS[s.key]; return c[1] + ',' + c[0] + ',0'; }).join(' ');
+    var kml = '<?xml version="1.0" encoding="UTF-8"?>\\n' +
+      '<kml xmlns="http://www.opengis.net/kml/2.2"><Document>' +
+      '<name>India 2027 - Itinerario</name>' +
+      kmlPlacemarks +
+      '<Placemark><name>Percorso completo</name><LineString><tessellate>1</tessellate><coordinates>' + lineCoords + '</coordinates></LineString></Placemark>' +
+      '</Document></kml>';
+    var blob = new Blob([kml], { type: 'application/vnd.google-earth.kml+xml' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'india-2027-itinerario.kml';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  // ---- Sun position simulator (Delhi, IST UTC+5:30 — marzo) ----
+  var SUNRISE_MIN = 6.4 * 60, SUNSET_MIN = 18.3 * 60, TWILIGHT = 45;
+  var sunMarker = document.getElementById('sun-marker');
+  var sunReadout = document.getElementById('sun-readout');
+  var sunSlider = document.getElementById('sun-slider');
+  var skyTop = document.getElementById('sky-stop-top');
+  var skyBottom = document.getElementById('sky-stop-bottom');
+  var NIGHT_TOP = [5,6,11], NIGHT_BOT = [18,23,38];
+  var DAWN_TOP = [45,32,74], DAWN_BOT = [255,150,90];
+  var DAY_TOP = [47,111,176], DAY_BOT = [191,227,255];
+  function lerp(a,b,t){ return a + (b - a) * t; }
+  function mixColor(c1,c2,t){ return 'rgb(' + Math.round(lerp(c1[0],c2[0],t)) + ',' + Math.round(lerp(c1[1],c2[1],t)) + ',' + Math.round(lerp(c1[2],c2[2],t)) + ')'; }
+  function rgbStr(c){ return 'rgb(' + c[0] + ',' + c[1] + ',' + c[2] + ')'; }
+  function skyColors(t){
+    var dSunrise = t - SUNRISE_MIN, dSunset = t - SUNSET_MIN;
+    if(Math.abs(dSunrise) <= TWILIGHT){
+      var f = (dSunrise + TWILIGHT) / (2 * TWILIGHT);
+      return f < 0.5
+        ? { top: mixColor(NIGHT_TOP, DAWN_TOP, f / 0.5), bot: mixColor(NIGHT_BOT, DAWN_BOT, f / 0.5) }
+        : { top: mixColor(DAWN_TOP, DAY_TOP, (f - 0.5) / 0.5), bot: mixColor(DAWN_BOT, DAY_BOT, (f - 0.5) / 0.5) };
+    }
+    if(Math.abs(dSunset) <= TWILIGHT){
+      var f2 = (dSunset + TWILIGHT) / (2 * TWILIGHT);
+      return f2 < 0.5
+        ? { top: mixColor(DAY_TOP, DAWN_TOP, f2 / 0.5), bot: mixColor(DAY_BOT, DAWN_BOT, f2 / 0.5) }
+        : { top: mixColor(DAWN_TOP, NIGHT_TOP, (f2 - 0.5) / 0.5), bot: mixColor(DAWN_BOT, NIGHT_BOT, (f2 - 0.5) / 0.5) };
+    }
+    if(t > SUNRISE_MIN && t < SUNSET_MIN) return { top: rgbStr(DAY_TOP), bot: rgbStr(DAY_BOT) };
+    return { top: rgbStr(NIGHT_TOP), bot: rgbStr(NIGHT_BOT) };
+  }
+  function renderSun(totalMinutes){
+    var hh = Math.floor(totalMinutes / 60), mm = Math.round(totalMinutes % 60);
+    var timeLabel = String(hh).padStart(2,'0') + ':' + String(mm).padStart(2,'0') + ' IST';
+    var sky = skyColors(totalMinutes);
+    if(skyTop) skyTop.setAttribute('stop-color', sky.top);
+    if(skyBottom) skyBottom.setAttribute('stop-color', sky.bot);
+
+    if(totalMinutes < SUNRISE_MIN || totalMinutes > SUNSET_MIN){
+      var beforeDawn = totalMinutes < SUNRISE_MIN;
+      sunMarker.style.transform = 'translate(' + (beforeDawn ? 40 : 460) + 'px,176px)';
+      sunMarker.querySelector('text').textContent = '🌙';
+      sunReadout.textContent = timeLabel + ' — buio, il sole ' + (beforeDawn ? 'non è ancora sorto' : 'è già tramontato');
+      return;
+    }
+    var frac = (totalMinutes - SUNRISE_MIN) / (SUNSET_MIN - SUNRISE_MIN);
+    var x = 40 + frac * 420;
+    var y = 180 - Math.sin(frac * Math.PI) * 155;
+    sunMarker.querySelector('text').textContent = '☀️';
+    sunMarker.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+    var phase = frac < 0.06 ? 'sta sorgendo — perfetto per il Taj Mahal o l\'uscita safari'
+      : frac > 0.94 ? 'sta tramontando — luce dorata sui ghat di Varanasi'
+      : (frac > 0.4 && frac < 0.6) ? 'è a picco, mezzogiorno pieno, meglio stare all\'ombra'
+      : 'è alto in cielo, luce piena';
+    sunReadout.textContent = timeLabel + ' — il sole ' + phase;
+  }
+  if(sunSlider){
+    var nowUtc = new Date();
+    var istNowMin = ((nowUtc.getUTCHours() * 60 + nowUtc.getUTCMinutes()) + 5.5 * 60) % 1440;
+    var initial = Math.min(1260, Math.max(300, Math.round(istNowMin / 5) * 5));
+    sunSlider.value = initial;
+    renderSun(initial);
+    sunSlider.addEventListener('input', function(){ renderSun(Number(sunSlider.value)); });
+  }
+
+})();
+</script>
+
+</body>
+</html>
