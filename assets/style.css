@@ -451,8 +451,10 @@ section.panel.dark .weather-cols h4{ color:var(--accent); }
 .rain-chart .bar-col.hl .bar-month{ color:var(--accent-2-ink); font-weight:800; }
 
 /* ---------- Jeep/route map animation ---------- */
-.jeep-map-wrap{ position:relative; background:radial-gradient(120% 100% at 30% 20%, rgba(var(--theme-rgb),0.45), var(--dark-base) 75%); border:1px solid rgba(var(--accent-rgb),0.18); border-radius:var(--radius-lg); padding:18px; text-align:center; margin-bottom:24px; box-shadow:var(--shadow-lg); }
-.jeep-map-wrap svg{ width:100%; max-width:560px; height:auto; }
+/* Il riquadro si stringe attorno al disegno: altrimenti resterebbero ~180px
+   di fondo vuoto per lato, che si leggono come due bande. */
+.jeep-map-wrap{ position:relative; background:radial-gradient(120% 100% at 30% 20%, rgba(var(--theme-rgb),0.45), var(--dark-base) 75%); border:1px solid rgba(var(--accent-rgb),0.18); border-radius:var(--radius-lg); padding:18px; text-align:center; margin:0 auto 24px; box-shadow:var(--shadow-lg); max-width:660px; }
+.jeep-map-wrap svg{ width:100%; max-width:620px; height:auto; }
 .jeep-map-wrap .terrain{ stroke:rgba(255,255,255,0.1); stroke-width:1.2; }
 .jeep-map-wrap .terrain-a{ fill:rgba(var(--theme-rgb),0.3); }
 .jeep-map-wrap .terrain-b{ fill:rgba(var(--accent-rgb),0.12); }
