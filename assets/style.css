@@ -79,6 +79,14 @@ html[data-dest="ug"]{
   --dark-base:#0E1410; --tint-100:#f7f6ef; --tint-200:#e8ecd8; --line:#d5ddc4; --paper:#fffef8;
 }
 
+/* 🇹🇿 Tanzania — ambra della savana al tramonto, verde acacia, blu dell'Indiano */
+html[data-dest="tz"]{
+  --accent:#EFA13A; --accent-rgb:239,161,58; --accent-deep:#B26A0C; --accent-ink:#8A5205;
+  --accent-2:#0E86B8; --accent-2-deep:#0A6288; --accent-2-ink:#095774;
+  --theme-900:#153F2B; --theme-800:#1E5B3E; --theme-700:#277852; --theme-rgb:39,120,82;
+  --dark-base:#120F0A; --tint-100:#faf6ee; --tint-200:#f0e6d2; --line:#e0d3b6; --paper:#fffdf7;
+}
+
 /* 🇺🇿🇰🇬 Uzbekistan & Kirghizistan — maiolica del Registan, terracotta della Via della Seta */
 html[data-dest="uk"]{
   --accent:#39B6D8; --accent-rgb:57,182,216; --accent-deep:#157A96; --accent-ink:#12657D;

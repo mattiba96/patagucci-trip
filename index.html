@@ -42,6 +42,7 @@
         <button class="switch-btn" data-dest="za" onclick="showDest('za')">🇿🇦 Sudafrica</button>
         <button class="switch-btn" data-dest="in" onclick="showDest('in')">🇮🇳 India</button>
         <button class="switch-btn" data-dest="ug" onclick="showDest('ug')">🇺🇬 Uganda</button>
+        <button class="switch-btn" data-dest="tz" onclick="showDest('tz')">🇹🇿 Tanzania</button>
         <button class="switch-btn" data-dest="uk" onclick="showDest('uk')">🇺🇿🇰🇬 Uzbekistan & Kirghizistan</button>
         <button class="switch-btn" data-dest="gl" onclick="showDest('gl')">🇬🇱 Groenlandia</button>
         <button class="switch-btn" data-dest="ge" onclick="showDest('ge')">🇬🇪 Georgia</button>
@@ -420,6 +421,17 @@
                 <div class="title">Uganda</div>
                 <div class="meta">Fine feb / inizio mar 2027 · 10 giorni</div>
                 <p class="tagline">Gorilla trekking a Bwindi, safari a Queen Elizabeth NP, rafting grado 5 a Jinja.</p>
+              </div>
+            </a>
+
+            <a class="trip-card" href="javascript:void(0)" onclick="showDest('tz')">
+              <img src="foto/destinazioni/tz-kilimanjaro.jpg" alt="Il Kilimangiaro visto dalla savana" loading="lazy">
+              <div class="overlay"></div>
+              <div class="content">
+                <div class="flag">🇹🇿</div>
+                <div class="title">Tanzania</div>
+                <div class="meta">Settembre 2027 · 15 giorni</div>
+                <p class="tagline">Salita al Kilimangiaro in 8 giorni e safari nel cratere di Ngorongoro.</p>
               </div>
             </a>
 
@@ -3393,6 +3405,573 @@
 </footer>
   </div>
 
+  <div class="destination" id="dest-tz" data-dest="tz">
+<header class="hero">
+  <div class="bg" style="background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.55) 55%, rgba(10,14,11,0.92) 100%), url('foto/destinazioni/tz-kilimanjaro.jpg');"></div>
+  <div class="content">
+    <h1>Tanzania</h1>
+    <p class="tagline">5.895 metri a piedi partendo dalla savana, e poi il cratere di Ngorongoro con dentro tutto quello che c'è da vedere in Africa. Otto giorni di salita al Kilimangiaro e un safari vero, in due settimane. Il viaggio più fisico del gruppo — e l'unico dove il mese scelto decide se arrivi in cima.</p>
+    <div class="badge-row">
+      <span class="badge">📅 Periodo consigliato: settembre 2027 <em>(vedi "Quando andare")</em></span>
+      <span class="badge">🏔️ Kilimangiaro — Lemosho 8 giorni</span>
+      <span class="badge">🦁 Cratere di Ngorongoro</span>
+      <span class="badge">🐘 Tarangire</span>
+    </div>
+    <div class="scroll-cue">↓ scorri per esplorare</div>
+  </div>
+  <div class="photo-credit">Foto: Sergey Pesterev, <a href="https://commons.wikimedia.org/wiki/File:Kilimanjaro_from_Amboseli.jpg" target="_blank" rel="noopener">CC BY-SA 4.0, Wikimedia Commons</a></div>
+</header>
+
+<nav class="tabs" id="tabs-tz">
+  <a href="javascript:void(0)" class="home-link" onclick="showHub()">🌍 Tutte le mete</a>
+  <a href="#perche-tz">Perché andare</a>
+  <a href="#quando-tz">Quando andare</a>
+  <a href="#itinerario-tz">Itinerario</a>
+  <a href="#mappa-tz">Mappa</a>
+  <a href="#siti-tz">Cose da non perdere</a>
+  <a href="#kili-tz">Guida al Kilimangiaro</a>
+  <a href="#safari-tz">Il safari</a>
+  <a href="#guida-tz">Guida pratica</a>
+  <a href="#curiosita-tz">Curiosità</a>
+  <a href="#meteo-tz">Meteo</a>
+  <a href="#cibo-tz">Cibo &amp; alcolici</a>
+  <a href="#voli-tz">Voli</a>
+  <a href="#budget-tz">Spese stimate</a>
+  <a href="#faq-tz">FAQ</a>
+</nav>
+
+<main>
+
+  <!-- PERCHE ANDARE -->
+  <section id="perche-tz" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">✨ Perché andare</h2>
+      <p class="section-sub reveal">È l'unico viaggio del gruppo dove non si arriva da qualche parte: ci si sale. Otto giorni per attraversare cinque fasce climatiche, dalla foresta pluviale equatoriale al deserto artico, camminando. E appena sotto, un cratere di 260 km² che è di fatto un recinto naturale pieno di leoni.</p>
+
+      <div class="why-grid reveal">
+        <div class="photo-banner" style="margin-bottom:0;">
+          <img src="foto/destinazioni/tz-uhuru.jpg" alt="Uhuru Peak, la vetta del Kilimangiaro a 5.895m" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+          <div class="credit">Foto: Altezzatravel, <a href="https://commons.wikimedia.org/wiki/File:Uhuru_Peak_Mount_Kilimanjaro_Tanzania.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+          <div class="fallback">🏔️</div>
+        </div>
+        <div>
+          <div class="stat-big"><span class="num">5.895</span><span class="unit">metri, Uhuru Peak</span></div>
+          <p class="stat-line">La montagna più alta dell'Africa e il vulcano isolato più alto del mondo. Ci si arriva a piedi, senza corde né arrampicata: è una lunga camminata in quota, non un'alpinismo tecnico.</p>
+
+          <div class="stat-big"><span class="num">~85%</span><span class="unit">di probabilità di vetta in 8 giorni</span></div>
+          <p class="stat-line">Contro il 27% di chi la fa in 5 giorni. Non è la via che decide se ce la fai: è il numero di giorni che ti dai per acclimatarti. Per questo l'itinerario ne usa otto.</p>
+
+          <div class="stat-big"><span class="num">16</span><span class="unit">persone di staff per 4 clienti</span></div>
+          <p class="stat-line">Una guida capo, due assistenti, un cuoco e una dozzina di portatori. Non è un lusso: è come funziona il parco, ed è il motivo per cui le mance sono una voce di spesa vera.</p>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Perché Kilimangiaro e safari insieme:</strong> partono dallo stesso aeroporto e stanno a un paio d'ore d'auto l'uno dall'altro. Il Kili va fatto per primo, da freschi; il safari dopo, quando le gambe sono a pezzi e stare seduti su un Land Cruiser è esattamente quello che serve. Un gruppo di 4 riempie esattamente un veicolo da safari: è la dimensione più efficiente possibile, si divide tutto in quattro.
+        <div class="source-note">Fonti: Kilimanjaro National Park (tassi di successo per durata, 2006), ultimatekilimanjaro.com, dumaexplorer.com — dati verificati ad agosto 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUANDO ANDARE -->
+  <section id="quando-tz" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">📅 Quando andare — la decisione che conta di più</h2>
+      <p class="section-sub reveal">Su tutti gli altri viaggi del gruppo sbagliare mese significa vedere le stesse cose con meno luce. Qui significa spendere otto giorni e ~2.600€ a testa per fermarsi sotto la vetta, nel fango. Vale la pena leggere questa sezione prima di fissare le date.</p>
+
+      <div class="card reveal">
+        <h3 style="margin-top:0;">Le stagioni, in breve</h3>
+        <div class="route-status" id="route-status-tz"></div>
+        <div class="source-note">Fonti: ultimatekilimanjaro.com, altezzatravel.com, mountkilimanjaroclimb.com, africadreamsafaris.com, weather-and-climate.com — verificati ad agosto 2026.</div>
+      </div>
+
+      <div class="callout warn reveal">
+        <strong>Marzo — il periodo degli altri viaggi — qui è la scelta sbagliata.</strong> Le lunghe piogge (<em>masika</em>) arrivano puntuali da fine marzo a maggio. Una fonte di settore quantifica il crollo: da ~85% a ~60% di probabilità di vetta sulla stessa via. La <strong>prima metà di marzo regge ancora</strong>, la seconda no. E aprile è il mese peggiore dell'anno.
+        <div class="source-note">Il 60% viene da un sito di operatore, non da dati ufficiali del parco: prendetelo come ordine di grandezza, non come statistica. La direzione però è confermata da tutte le fonti consultate.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>✅ Settembre — la risposta</h3><p>Secco sulla montagna, folla di luglio-agosto già smaltita, Serengeti in piena stagione secca con gli animali concentrati sulle pozze, e Zanzibar in uno dei mesi più asciutti (mare a 26°C). Se il gruppo ha margine sulle date, è qui che va.</p></div>
+        <div class="card reveal"><h3>✅ Fine gennaio / inizio febbraio</h3><p>La seconda finestra buona, utile se serve restare vicini al periodo degli altri viaggi. Febbraio è il mese più stabile sul Kili. In più il Serengeti è in piena stagione dei parti degli gnu, con i predatori al seguito.</p></div>
+        <div class="card reveal"><h3>⚠️ Marzo, se proprio</h3><p>Fattibile solo nella <strong>prima metà</strong>, allungando a 8-9 giorni di salita e mettendo in conto fango, nuvole basse e una probabilità di vetta materialmente più bassa. Non è la stessa esperienza.</p></div>
+        <div class="card reveal"><h3>🌧️ Da evitare: aprile-maggio</h3><p>Il cuore delle lunghe piogge. Sentieri impraticabili, molti campi safari chiudono, visibilità nulla.</p></div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Il safari, invece, a marzo funziona.</strong> È "green season": mattine limpide, rovescio nel tardo pomeriggio, paesaggio verdissimo, e le tariffe dei parchi scendono (Serengeti da 82,60$ a 70,80$ a persona al giorno da metà marzo). Il problema di marzo è la montagna, non gli animali — sono due verdetti diversi e vanno tenuti separati.
+      </div>
+
+      <div class="callout warn reveal">
+        <strong>Se si va a inizio marzo 2027, si cade dentro il Ramadan</strong> (8 febbraio – 8/9 marzo 2027). Sulla terraferma cambia poco, ma a Zanzibar la vendita di alcolici è vietata fuori dalle zone turistiche e cambiano orari e atmosfera dei locali. Da sapere prima, non da scoprire lì.
+      </div>
+    </div>
+  </section>
+
+  <!-- ITINERARIO -->
+  <section id="itinerario-tz" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🗺️ Itinerario di massima — 15 giorni</h2>
+      <p class="section-sub reveal">Kilimangiaro per primo con la via Lemosho in 8 giorni, un giorno cuscinetto per rimettersi in piedi, poi tre giorni di safari. Ogni giorno ha un link diretto a Google Maps.</p>
+
+      <div class="timeline" id="timeline-tz"></div>
+
+      <div class="callout reveal">
+        <strong>Cosa non ci sta in 15 giorni:</strong> il Serengeti e Zanzibar. Il Serengeti è lontano e vuole almeno due giorni suoi; Zanzibar richiede un volo interno e almeno 3-4 notti per avere senso. Con 18 giorni ci starebbero entrambi, e siccome volo intercontinentale, tasse dei parchi e mance sono già pagate, tre giorni in più costerebbero relativamente poco. Se il gruppo può allungare, è l'occasione giusta per farlo.
+      </div>
+    </div>
+  </section>
+
+  <!-- MAPPA -->
+  <section id="mappa-tz" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">📍 Mappa &amp; percorso</h2>
+      <p class="section-sub reveal">Moshi come base, la salita al Kilimangiaro, poi il circuito safari verso ovest. Serengeti e Zanzibar sono segnati ma restano fuori dai 15 giorni.</p>
+
+      <div class="jeep-map-wrap reveal">
+        <svg id="jeep-svg-tz" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+          <path class="terrain terrain-a" d="M62 150 C 110 118, 190 108, 260 122 C 330 136, 392 128, 430 168 C 462 202, 460 268, 438 320 C 414 376, 356 414, 288 424 C 214 436, 142 420, 100 378 C 62 340, 48 268, 54 210 C 56 182, 56 164, 62 150 Z"/>
+          <path class="terrain terrain-b" d="M378 358 C 396 350, 410 366, 406 390 C 402 412, 384 420, 374 408 C 364 396, 364 368, 378 358 Z"/>
+          <path class="contour" d="M80 210 C 170 186, 300 190, 420 218"/>
+          <path class="contour" d="M84 300 C 180 280, 310 288, 428 312"/>
+
+          <path id="route-path-tz" class="route-shadow" d="M 272,215 Q 280,195 285,175 Q 278,197 270,218 Q 252,212 235,209 Q 213,229 193,249 Q 185,237 181,224 Q 172,211 163,198"/>
+          <path class="route-line" d="M 272,215 Q 280,195 285,175 Q 278,197 270,218 Q 252,212 235,209 Q 213,229 193,249 Q 185,237 181,224 Q 172,211 163,198"/>
+
+          <circle class="pulse" cx="285" cy="175" r="8"/>
+          <g class="stop-pin">
+            <text x="285" y="183" text-anchor="middle" font-size="24">🏔️</text>
+            <text class="stop-label highlight" x="292" y="160" text-anchor="middle">Kilimangiaro</text>
+          </g>
+          <g class="stop-pin">
+            <text x="272" y="222" text-anchor="middle" font-size="18">🏠</text>
+            <text class="stop-label" x="278" y="240" text-anchor="middle">Moshi</text>
+          </g>
+          <g class="stop-pin">
+            <text x="235" y="215" text-anchor="middle" font-size="18">🏙️</text>
+            <text class="stop-label" x="228" y="197" text-anchor="middle">Arusha</text>
+          </g>
+          <g class="stop-pin">
+            <text x="193" y="255" text-anchor="middle" font-size="20">🐘</text>
+            <text class="stop-label" x="196" y="274" text-anchor="middle">Tarangire</text>
+          </g>
+          <g class="stop-pin">
+            <text x="181" y="230" text-anchor="middle" font-size="16">🦩</text>
+            <text class="stop-label" x="152" y="246" text-anchor="middle">L. Manyara</text>
+          </g>
+          <g class="stop-pin">
+            <text x="163" y="204" text-anchor="middle" font-size="22">🦁</text>
+            <text class="stop-label highlight" x="150" y="186" text-anchor="middle">Ngorongoro</text>
+          </g>
+          <g class="stop-pin minor">
+            <text x="112" y="150" text-anchor="middle" font-size="15">🦓</text>
+            <text class="stop-label" x="106" y="134" text-anchor="middle">Serengeti</text>
+          </g>
+          <g class="stop-pin minor">
+            <text x="390" y="386" text-anchor="middle" font-size="15">🏝️</text>
+            <text class="stop-label" x="396" y="404" text-anchor="middle">Zanzibar</text>
+          </g>
+
+          <g class="compass" transform="translate(455,40)">
+            <line x1="0" y1="-14" x2="0" y2="14"/>
+            <line x1="-10" y1="0" x2="10" y2="0"/>
+            <text x="0" y="-18" text-anchor="middle">N</text>
+          </g>
+          <g class="scale-bar" transform="translate(30,470)">
+            <line x1="0" y1="0" x2="60" y2="0"/>
+            <line x1="0" y1="-4" x2="0" y2="4"/>
+            <line x1="60" y1="-4" x2="60" y2="4"/>
+            <text x="30" y="-6" text-anchor="middle">~100 km</text>
+          </g>
+
+          <text font-size="22" id="jeep-marker-tz">🥾
+            <animateMotion dur="20s" repeatCount="indefinite">
+              <mpath href="#route-path-tz"/>
+            </animateMotion>
+          </text>
+        </svg>
+      </div>
+
+      <div class="map-actions reveal">
+        <a id="link-full-route-tz" href="#" target="_blank" rel="noopener">🗺️ Apri l'itinerario completo su Google Maps</a>
+        <button class="export" id="btn-export-kml-tz">⬇️ Esporta tappe (KML)</button>
+      </div>
+
+      <div class="card reveal" style="overflow-x:auto;">
+        <h3 style="margin-top:0;">Percorsi giorno per giorno</h3>
+        <table class="stops-table" id="legs-table-tz">
+          <thead><tr><th>Giorno</th><th>Tratta</th><th>Distanza</th><th>Durata stimata</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="source-note">Sul Kilimangiaro le distanze sono a piedi: quello che conta non sono i km ma il dislivello e i giorni di acclimatazione.</div>
+      </div>
+
+      <div class="card reveal" style="overflow-x:auto;">
+        <h3 style="margin-top:0;">Tutte le tappe</h3>
+        <table class="stops-table" id="stops-table-tz">
+          <thead><tr><th>Tappa</th><th>Coordinate</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- COSE DA NON PERDERE -->
+  <section id="siti-tz" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌿 Cose da non perdere</h2>
+      <p class="section-sub reveal">Le tappe principali dell'itinerario, filtrabili per categoria.</p>
+
+      <div class="filter-row reveal" id="family-filters-tz"></div>
+      <div class="family-grid" id="family-grid-tz"></div>
+
+      <div class="source-note">Fonti: kilimanjaronationalpark (TANAPA), dumaexplorer.com, africansafarimag.com — verificati ad agosto 2026.</div>
+    </div>
+  </section>
+
+  <!-- GUIDA AL KILIMANGIARO -->
+  <section id="kili-tz" class="panel" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="foto/destinazioni/tz-trekking.jpg" alt="Escursionisti e portatori in salita sul Kilimangiaro" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Sergei Andreichuk, <a href="https://commons.wikimedia.org/wiki/File:%D0%9F%D0%BE%D1%80%D1%82%D0%B5%D1%80%D1%8B_%D0%BD%D0%B0_%D0%9A%D0%B8%D0%BB%D0%B8%D0%BC%D0%B0%D0%BD%D0%B4%D0%B6%D0%B0%D1%80%D0%BE_%D0%BF%D0%B5%D1%80%D0%B5%D0%B4_%D0%BF%D0%BE%D0%B4%D1%8A%D1%91%D0%BC%D0%BE%D0%BC_%D0%BD%D0%B0_%D1%81%D1%82%D0%B5%D0%BD%D1%83_%D0%91%D0%B0%D1%80%D1%80%D0%B0%D0%BD%D0%BA%D0%BE.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+        <div class="fallback">🥾</div>
+      </div>
+      <h2 class="section-title reveal">🏔️ Guida al Kilimangiaro</h2>
+      <p class="section-sub reveal">Non serve saper arrampicare. Serve saper camminare per otto giorni respirando metà dell'ossigeno di casa.</p>
+
+      <h3 style="color:inherit;">Le vie di salita, e perché la durata conta più della via</h3>
+      <div class="card reveal" style="overflow-x:auto;">
+        <table class="hub-table">
+          <thead><tr><th>Via</th><th>Giorni</th><th>Successo</th><th>Affollamento</th><th>Note</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Lemosho</strong> ⭐</td><td>7-8</td><td><strong>~85% (7gg) / ~90% (8gg)</strong></td><td>Medio-basso</td><td>La più varia e panoramica. La scelta dell'itinerario.</td></tr>
+            <tr><td>Northern Circuit</td><td>9</td><td>95%+</td><td>Il più silenzioso</td><td>La migliore in assoluto, se si hanno i giorni.</td></tr>
+            <tr><td>Machame</td><td>6-7</td><td>~50% (6gg) / ~70% (7gg)</td><td><strong>Il più affollato</strong></td><td>Bella ma trafficata. Il "Barranco Wall" è il tratto ripido.</td></tr>
+            <tr><td>Rongai</td><td>6-7</td><td>~70% (7gg)</td><td>Basso</td><td>Approccio da nord, più arido e dolce.</td></tr>
+            <tr><td>Marangu</td><td>5-6</td><td>30% (5gg) / 50% (6gg)</td><td>Alto</td><td>La "Coca-Cola route": la più economica, la peggiore per acclimatarsi.</td></tr>
+            <tr><td>Umbwe</td><td>5-6</td><td>Bassa</td><td>Basso</td><td>La più ripida e diretta. Da evitare senza esperienza.</td></tr>
+          </tbody>
+        </table>
+        <div class="source-note">I tassi per durata vengono dai dati ufficiali del Kilimanjaro National Park: 5gg 27%, 6gg 44%, 7gg 64%, 8gg 85%. Sono però del <strong>2006</strong> — vent'anni fa — e vanno letti per l'andamento, non per il valore assoluto. I tassi per singola via sono medie di settore dichiarate dagli operatori, che tendono a gonfiare i propri numeri.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>🎫 Tasse del parco</h3><p>70$ a persona al giorno di conservation fee + 50$ a notte di campeggio + 30$ una tantum, <strong>più IVA 18%</strong>. Per 8 giorni fanno <strong>~1.110$ a persona</strong> di sole tasse, identiche per qualsiasi operatore.</p></div>
+        <div class="card reveal"><h3>🧭 Guida obbligatoria</h3><p>Salire da soli è vietato. Guida registrata, portatori e cuoco sono di fatto obbligatori: per 4 clienti lo staff è di <strong>15-18 persone</strong>. Limite di legge: 20 kg a portatore oltre al suo materiale.</p></div>
+        <div class="card reveal"><h3>💵 Costo della salita</h3><p>Economico 1.500-2.300$, <strong>medio 2.200-4.000$</strong> (la fascia giusta), premium 4.000-7.000$+. Sotto i 1.200$ è da evitare: le tasse sono fisse, quindi il risparmio esce dal cibo, dall'attrezzatura e dai <strong>salari dei portatori</strong>.</p></div>
+        <div class="card reveal"><h3>💰 Mance</h3><p>Voce reale da mettere a budget: <strong>300-450$ a persona in contanti</strong>. Guida capo ~20-25$/giorno, assistenti e cuoco 10-15$, portatori 5-10$ — per gruppo, non a testa. Buste individuali consegnate a mano.</p></div>
+        <div class="card reveal"><h3>🫁 Mal di montagna</h3><p>L'AMS ha incidenza ~50% già a 2.800m: è la norma, non l'eccezione. Il Diamox (125mg due volte al giorno, dal giorno prima) accorcia l'acclimatazione — <strong>va prescritto dal medico</strong> e provato a casa prima.</p></div>
+        <div class="card reveal"><h3>🚁 Assicurazione</h3><p>Quella standard non basta: serve copertura esplicita per <strong>trekking fino a 6.000m ed evacuazione in elicottero</strong>. Senza, un'evacuazione può costare 10.000-15.000$.</p></div>
+      </div>
+
+      <div class="callout warn reveal">
+        <strong>Il summit day è la prova vera.</strong> Si parte da Barafu (4.673m) verso mezzanotte per arrivare a Uhuru all'alba: il momento più freddo del giorno nel punto più alto, con <strong>-10/-20°C e punte sotto i -30°C col vento</strong>. Serve attrezzatura seria — piumino, guanti a muffola più un secondo paio, ghette. Non è il posto dove scoprire che manca qualcosa.
+      </div>
+
+      <div class="callout reveal">
+        <strong>Sulle mance, una precisazione:</strong> KPAP, l'organizzazione che tutela i portatori, <strong>non pubblica cifre consigliate</strong> — chi presenta un tariffario come "linee guida KPAP" non dice il vero. Le fonti divergono fra ~285$ e ~550$ a testa. Chiedete all'operatore la sua tabella scritta prima di partire.
+        <div class="source-note">Fonti: ultimatekilimanjaro.com, altezzatravel.com, dumaexplorer.com, kiliporters.org (KPAP), Wilderness Medical Society 2024 (acetazolamide), CDC Yellow Book — verificati ad agosto 2026. Le tariffe del parco sono valide fino a giugno 2026: per il 2027 mettete un margine.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAFARI -->
+  <section id="safari-tz" class="panel dark" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="foto/destinazioni/tz-ngorongoro.jpg" alt="Il cratere di Ngorongoro visto dal bordo" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Erasmus Kamugisha, <a href="https://commons.wikimedia.org/wiki/File:Majestic_View_of_Ngorongoro.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+        <div class="fallback">🦁</div>
+      </div>
+      <h2 class="section-title reveal">🦁 Il safari — circuito nord</h2>
+      <p class="section-sub reveal">Tre giorni dopo la montagna: Tarangire, Lago Manyara e il cratere. Il Serengeti resta fuori — è lontano e merita due giorni suoi.</p>
+
+      <div class="photo-banner reveal">
+        <img src="foto/destinazioni/tz-tarangire.jpg" alt="Elefanti accanto a un baobab nel Tarangire National Park" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Gary Bembridge, <a href="https://commons.wikimedia.org/wiki/File:Elephant_-_Tarangire_National_Park_-_Tanzania-2_(34980883301).jpg" target="_blank" rel="noopener">CC BY 2.0</a></div>
+        <div class="fallback">🐘</div>
+      </div>
+      <div class="info-grid">
+        <div class="card reveal"><h3>🌋 Ngorongoro</h3><p>Una caldera di 260 km² con pareti alte 600m: gli animali di fatto non escono, quindi la densità è la più alta dell'Africa orientale. È l'unico posto del circuito dove si ha una possibilità concreta di vedere il <strong>rinoceronte nero</strong>.</p></div>
+        <div class="card reveal"><h3>🐘 Tarangire</h3><p>Famoso per i <strong>baobab</strong> e per i branchi di elefanti, tra i più numerosi della Tanzania. Nella stagione secca gli animali si concentrano sul fiume Tarangire.</p></div>
+        <div class="card reveal"><h3>🦩 Lago Manyara</h3><p>Il più piccolo e il più sacrificabile dei tre, ma ha una cosa sua: i <strong>leoni che si arrampicano sugli alberi</strong>, comportamento raro, e i fenicotteri sul lago alcalino.</p></div>
+        <div class="card reveal"><h3>🎫 Tasse dei parchi</h3><p>Alte e a persona <strong>per ogni 24 ore</strong>: Serengeti 82,60$, Ngorongoro 70,80$, Tarangire e Manyara 59$ (IVA inclusa). Più <strong>295$ a veicolo</strong> per scendere nel cratere — divisi in quattro, ~74$ a testa.</p></div>
+        <div class="card reveal"><h3>🚙 Perché il tour organizzato</h3><p>Le tasse si pagano comunque, serve un 4x4 sopraelevato con guida e il self-drive nel Serengeti è sconsigliato. <strong>Un gruppo di 4 riempie esattamente un Land Cruiser</strong>: veicolo, guida e tassa del cratere si dividono in quattro.</p></div>
+        <div class="card reveal"><h3>💵 Costo al giorno</h3><p>Campeggio 180-250$ a persona al giorno, <strong>lodge medio 280-490$</strong>, lusso 550-1.050$+. Include mezzo, guida, alloggio, pasti e tasse.</p></div>
+      </div>
+
+      <div class="photo-banner reveal">
+        <img src="foto/destinazioni/tz-serengeti.jpg" alt="Gnu in attraversamento durante la Grande Migrazione nel Serengeti" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Wolves201, <a href="https://commons.wikimedia.org/wiki/File:Serengeti_wildebeest_migration_JF2.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+        <div class="fallback">🦓</div>
+      </div>
+      <div class="callout reveal">
+        <strong>Se si allunga a 18 giorni,</strong> il Serengeti entra e cambia il viaggio: è dove si vede la Grande Migrazione (a gennaio-marzo la stagione dei parti degli gnu nel sud, con i predatori al seguito). Da solo vale i due giorni in più.
+        <div class="source-note">Le tariffe dei parchi vengono da un operatore che le dichiara aggiornate a marzo 2026: il PDF ufficiale TANAPA reperibile è fermo al 2023/24. Da riverificare su tanzaniaparks.go.tz prima di prenotare.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUIDA PRATICA -->
+  <section id="guida-tz" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🧭 Guida pratica</h2>
+      <p class="section-sub reveal">Visto, salute, valuta. Dati verificati ad agosto 2026 — da riconfermare più vicino alla partenza.</p>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>🛂 Visto</h3><p><strong>50$, solo online e in anticipo</strong> su eservices.immigration.go.tz. Il visto all'arrivo è stato <strong>abolito a gennaio 2025</strong>. Tempi ufficiali 5-10 giorni lavorativi: richiedetelo 3-4 settimane prima. Diffidate degli intermediari che lo rivendono a 90-120€.</p></div>
+        <div class="card reveal"><h3>💉 Febbre gialla</h3><p>Dipende dallo scalo. <strong>Via Doha o Istanbul: non serve.</strong> <strong>Via Addis Abeba (Ethiopian): l'Etiopia è paese a rischio</strong> — con scalo oltre 12 ore il certificato è obbligatorio. Se volate Ethiopian, fatelo comunque: costa poco ed è valido a vita.</p></div>
+        <div class="card reveal"><h3>🦟 Malaria</h3><p>Rischio <strong>alto</strong> sotto i 1.800m, Zanzibar inclusa. Profilassi raccomandata (Malarone, doxiciclina o meflochina). Sopra i 1.800m — gran parte della salita — basta la protezione antipuntura, ma si parte e si torna da Moshi.</p></div>
+        <div class="card reveal"><h3>💊 Un'interazione da segnalare</h3><p>Il gruppo prenderà probabilmente <strong>doxiciclina e acetazolamide insieme, in alta quota</strong>. Fatelo sapere al medico di medicina dei viaggi quando imposta la profilassi.</p></div>
+        <div class="card reveal"><h3>💶 Valuta</h3><p>Scellino tanzaniano (TZS), <strong>~3.088 TZS per 1 EUR</strong>. I <strong>dollari USA</strong> sono accettati per salita, safari e tasse dei parchi — ma devono essere <strong>emessi dopo il 2009</strong> o vengono rifiutati. Per la vita quotidiana servono scellini.</p></div>
+        <div class="card reveal"><h3>💳 Carte e contanti</h3><p>Carte accettate nei lodge con <strong>3-5% di sovrapprezzo</strong>. Il cambio in agenzia prende 5-15%: meglio prelevare da ATM in scellini. <strong>Le mance vanno in dollari contanti</strong> — in montagna non c'è bancomat.</p></div>
+      </div>
+
+      <div class="source-note">Fonti: eservices.immigration.go.tz, TravelHealthPro/NaTHNaC (febbre gialla e malaria), CDC, xe.com, altezzatravel.com — verificati ad agosto 2026. Zanzibar ha requisiti d'ingresso propri (assicurazione locale) che non ho verificato: se la aggiungete all'itinerario, controllateli.</div>
+    </div>
+  </section>
+
+  <!-- CURIOSITA -->
+  <section id="curiosita-tz" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌍 Stranezze, quota e sole</h2>
+      <p class="section-sub reveal">Le cose più sorprendenti della Tanzania — verificate, non da guida turistica riciclata.</p>
+
+      <h3 style="color:#fff; margin-top:0;">☀️ Simulatore del sole — Moshi</h3>
+      <p class="section-sub reveal" style="color:#c7c2b6;">A 3° dall'equatore la luce dura ~12 ore tutto l'anno, e il buio arriva di colpo: niente crepuscoli lunghi. Conta per i rientri dai game drive.</p>
+      <div class="card reveal" style="text-align:center;">
+        <div class="sun-sim-wrap">
+          <svg id="sun-sim-tz" viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="skyGradient-tz" x1="0" y1="0" x2="0" y2="1">
+                <stop id="sky-stop-top-tz" offset="0%" stop-color="#2f6fb0"/>
+                <stop id="sky-stop-bottom-tz" offset="100%" stop-color="#bfe3ff"/>
+              </linearGradient>
+            </defs>
+            <rect x="2" y="4" width="496" height="176" rx="14" fill="url(#skyGradient)"/>
+            <path class="sun-arc" d="M 40,180 Q 250,20 460,180"/>
+            <path class="sun-hills" d="M0,200 Q80,160 160,192 T320,188 T500,200 L500,220 L0,220 Z"/>
+            <line class="sun-horizon" x1="0" y1="180" x2="500" y2="180"/>
+            <text x="40" y="200" text-anchor="middle" class="sun-label">🌅 ~06:20</text>
+            <text x="460" y="200" text-anchor="middle" class="sun-label">🌇 ~18:30</text>
+            <g id="sun-marker-tz"><text x="0" y="0" text-anchor="middle" font-size="30">☀️</text></g>
+          </svg>
+          <div class="sun-slider-row">
+            <input type="range" id="sun-slider-tz" min="300" max="1260" step="5" value="720" aria-label="Ora del giorno">
+            <div class="sun-slider-ticks"><span>05:00</span><span>13:00</span><span>21:00</span></div>
+          </div>
+          <div class="sun-readout" id="sun-readout-tz">Calcolo posizione del sole…</div>
+          <div class="source-note">Simulazione per Moshi (EAT, UTC+3). Alla latitudine della Tanzania la durata del giorno varia pochissimo nell'arco dell'anno. Fonte: worlddata.info, timeanddate.com.</div>
+        </div>
+      </div>
+
+      <h3 style="color:#fff;">🤯 Lo sapevi che...</h3>
+      <div class="bigfive-grid" id="facts-grid-tz"></div>
+    </div>
+  </section>
+
+  <!-- METEO -->
+  <section id="meteo-tz" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌦️ Meteo — le cinque fasce del Kilimangiaro</h2>
+      <p class="section-sub reveal">In una settimana si attraversa dall'equatoriale all'artico. È il motivo per cui si porta sia la maglietta sia il piumino da -20°C.</p>
+
+      <div class="card reveal" style="overflow-x:auto;">
+        <table class="hub-table">
+          <thead><tr><th>Fascia</th><th>Quota</th><th>Temperatura</th></tr></thead>
+          <tbody>
+            <tr><td>Coltivata e foresta pluviale</td><td>800 – 2.800 m</td><td>21-32°C di giorno, umido</td></tr>
+            <tr><td>Brughiera</td><td>2.800 – 4.000 m</td><td>Mite di giorno, <strong>vicino a 0°C di notte</strong></td></tr>
+            <tr><td>Deserto alpino</td><td>4.000 – 5.000 m</td><td>Sole violento di giorno, sotto zero di notte</td></tr>
+            <tr><td><strong>Zona artica / vetta</strong></td><td>5.000 – 5.895 m</td><td><strong>Da 0 a -20°C; col vento sotto i -30°C</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="weather-cols reveal">
+        <div>
+          <h4>Moshi (base, ~800m) — settembre</h4>
+          <div class="weather-stats">
+            <div class="card"><div class="wval">~28°</div><div class="wlabel">Massima</div></div>
+            <div class="card"><div class="wval">~15°</div><div class="wlabel">Minima</div></div>
+            <div class="card"><div class="wval">Secco</div><div class="wlabel">Piena stagione secca</div></div>
+          </div>
+        </div>
+        <div>
+          <h4>Moshi — marzo (per confronto)</h4>
+          <div class="weather-stats">
+            <div class="card"><div class="wval">~29°</div><div class="wlabel">Massima</div></div>
+            <div class="card"><div class="wval">273mm</div><div class="wlabel">Pioggia — il mese più piovoso</div></div>
+            <div class="card"><div class="wval">12</div><div class="wlabel">Giorni di pioggia</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Il confronto dice tutto:</strong> le temperature di marzo e settembre a Moshi sono quasi identiche. A cambiare è solo la pioggia — ed è esattamente quella che decide come va la salita.
+        <div class="source-note">Fonti: weather-atlas.com (Moshi), weather-and-climate.com (Arusha), climbkilimanjaroguide.com e iantaylortrekking.com (fasce climatiche) — verificati ad agosto 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CIBO E ALCOLICI -->
+  <section id="cibo-tz" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🍖 Cibo &amp; alcolici</h2>
+      <p class="section-sub reveal">Sulla montagna si mangia quello che cucina il cuoco della spedizione. A valle, invece, c'è la griglia.</p>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>🌽 Ugali</h3><p>Il piatto nazionale: polenta densa di mais, si mangia con le mani staccandone un pezzo e usandolo per raccogliere il sugo. Accompagna quasi tutto. Da bancarella ~2€.</p></div>
+        <div class="card reveal"><h3>🔥 Nyama choma</h3><p>Carne — capra o manzo — grigliata a pezzi grossi sul carbone e affettata dall'osso per essere condivisa, con ugali e <strong>kachumbari</strong> (pomodoro, cipolla rossa, peperoncino, lime). Il piatto sociale per eccellenza. Da Khan's BBQ ad Arusha, un'officina che di sera diventa griglia: <strong>~15.000 TZS (~5€)</strong>.</p></div>
+        <div class="card reveal"><h3>🍌 Ndizi na nyama</h3><p>Stufato di banane da cuocere con carne: è il piatto <strong>della regione del Kilimangiaro</strong>, tradizione Chagga. Il piatto giusto da mangiare a Moshi, non altrove.</p></div>
+        <div class="card reveal"><h3>🍢 Mishkaki</h3><p>Spiedini di carne marinata alla griglia, cibo di strada serale.</p></div>
+        <div class="card reveal"><h3>🍺 Kilimanjaro Lager</h3><p>La birra nazionale, insieme a Safari e Serengeti. <strong>~5.000 TZS (~1,60€)</strong> per una 0,5L in un locale turistico. La birra dopo la discesa è un rito, non un dettaglio.</p></div>
+        <div class="card reveal"><h3>🥃 Konyagi</h3><p>Distillato di canna da zucchero, simile al gin, il superalcolico nazionale — bottiglia iconica, si beve con tonica o succo.</p></div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Alcol:</strong> sulla terraferma (Moshi, Arusha) nessuna restrizione. <strong>A Zanzibar</strong>, a maggioranza musulmana, si beve liberamente in hotel, resort e locali con licenza, ma <strong>è vietato consumare alcolici in pubblico fuori dalle zone turistiche</strong> — e durante il Ramadan la vendita è vietata fuori dalle aree turistiche. Un pasto normale in un ristorante decente: poco più di 10€.
+        <div class="source-note">Fonti: Wikipedia (cucina tanzaniana), kandooadventures.com, gotripzi.com (prezzi Arusha), dailynews.co.tz (regole alcol Zanzibar) — verificati ad agosto 2026. Non sono riuscito a trovare listini piatto-per-piatto in TZS da fonti affidabili: le cifre sopra sono le uniche verificate.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOLI -->
+  <section id="voli-tz" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">✈️ Voli</h2>
+      <p class="section-sub reveal">L'aeroporto giusto è <strong>Kilimanjaro International (JRO)</strong>, non Dar es Salaam: è a 45 minuti da Moshi, mentre Dar aggiunge un volo interno o 8-10 ore di strada.</p>
+
+      <div class="card reveal">
+        <table class="hub-table">
+          <thead><tr><th>Compagnia</th><th>Scalo</th><th>Note</th></tr></thead>
+          <tbody>
+            <tr><td>Ethiopian Airlines</td><td>Addis Abeba</td><td>19 voli/settimana da Milano — ma attenzione al certificato febbre gialla se lo scalo supera le 12h</td></tr>
+            <tr><td>Qatar Airways</td><td>Doha</td><td>16 voli/settimana da Milano, nessun problema febbre gialla</td></tr>
+            <tr><td>Turkish Airlines</td><td>Istanbul</td><td>Voli quotidiani da varie città italiane</td></tr>
+            <tr><td>KLM</td><td>Amsterdam</td><td>Anche via Dar es Salaam</td></tr>
+          </tbody>
+        </table>
+        <div class="source-note">Nessun volo diretto dall'Italia. Durata ~17h50 da Milano con uno scalo. Tariffa a/r a persona: <strong>fortunata ~550-680€</strong> (stima, non quotata), <strong>realistica tipica ~780-950€</strong> (confermata da quotazioni reali: Qatar 777-846€, Ethiopian 836-960€). Prezzi rilevati ad agosto 2026, non per il 2027. Fonti: opodo.it, expedia.com.</div>
+      </div>
+
+      <div class="card reveal">
+        <div class="flight-form">
+          <div class="field">
+            <label for="flight-origin">Da dove parti</label>
+            <select id="flight-origin-tz">
+              <option value="MXP|Milano Malpensa">Milano Malpensa (MXP)</option>
+              <option value="FCO|Roma Fiumicino">Roma Fiumicino (FCO)</option>
+              <option value="LIN|Milano Linate">Milano Linate (LIN)</option>
+              <option value="BGY|Milano Bergamo">Milano Bergamo (BGY)</option>
+              <option value="BLQ|Bologna">Bologna (BLQ)</option>
+              <option value="VCE|Venezia">Venezia (VCE)</option>
+            </select>
+          </div>
+          <div class="field"><label>Destinazione</label><select disabled><option>Kilimanjaro (JRO), Tanzania</option></select></div>
+          <div class="field"><label>Periodo</label><select disabled><option>Settembre 2027 (da confermare)</option></select></div>
+        </div>
+        <div class="flight-links">
+          <button id="btn-google-flights-tz">Cerca su Google Flights</button>
+          <button class="alt" id="btn-skyscanner-tz">Cerca su Skyscanner</button>
+          <button class="alt" id="btn-kayak-tz">Cerca su Kayak</button>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Se aggiungete Zanzibar,</strong> cercate un multi-city <strong>Milano → JRO / ZNZ → Milano</strong>: evita il volo interno di rientro e spesso costa poco più di un semplice andata e ritorno.
+      </div>
+    </div>
+  </section>
+
+  <!-- BUDGET -->
+  <section id="budget-tz" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">💰 Calcolatore budget</h2>
+      <p class="section-sub reveal">Kilimangiaro e safari da soli sono il 60-65% del totale, e non sono comprimibili. Stima indicativa, non un preventivo.</p>
+
+      <div class="card reveal">
+        <div class="currency-form">
+          <div class="field">
+            <label for="budget-people">Persone</label>
+            <input type="number" id="budget-people-tz" value="4" min="1">
+          </div>
+          <div class="field">
+            <label for="budget-style">Stile viaggio</label>
+            <select id="budget-style-tz">
+              <option value="budget">Budget</option>
+              <option value="standard" selected>Standard</option>
+              <option value="comfort">Comfort</option>
+            </select>
+          </div>
+        </div>
+        <div id="budget-result-tz" class="cur-result">—</div>
+        <div id="budget-breakdown-tz" class="source-note" style="text-align:center; margin-top:10px;"></div>
+      </div>
+
+      <div class="callout warn reveal">
+        <strong>Qui la fascia "Budget" non è come altrove.</strong> Nella maggior parte delle destinazioni risparmiare significa dormire peggio. Sul Kilimangiaro significa scegliere un operatore con meno margine di sicurezza a 5.895 metri — e con salari più bassi per i portatori, visto che le tasse del parco (~1.110$) le paga uguali chiunque. <strong>Se dovete tagliare, tagliate sull'alloggio a Moshi, non sull'operatore della salita.</strong>
+      </div>
+
+      <div class="source-note">Include: volo Italia-JRO a/r, visto, salita al Kilimangiaro tutto incluso (tasse del parco dentro), mance di montagna, safari 3 giorni con tasse dei parchi, alloggio, cibo, trasferimenti, assicurazione alta quota. Esclude: attrezzatura personale, spese personali, Zanzibar. Dati reali da: altezzatravel.com (tasse parco), dumaexplorer.com (salita e safari), opodo/expedia (voli) — verificati ad agosto 2026. Le tasse del parco sono garantite fino a giugno 2026: per il 2027 è previsto un aumento, mettete un margine.</div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq-tz" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">❓ Domande frequenti</h2>
+
+      <details class="faq reveal">
+        <summary>Serve esperienza di alpinismo per il Kilimangiaro?</summary>
+        <div class="faq-body">No. Non ci sono tratti di arrampicata né serve attrezzatura tecnica: è una lunga camminata in quota, su sentiero. Quello che serve è tenuta fisica per 6-8 ore al giorno per otto giorni, e soprattutto la capacità di andare piano ("<em>pole pole</em>", come ripetono le guide). La difficoltà vera è l'altitudine, non il terreno.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Qual è la probabilità reale di arrivare in vetta?</summary>
+        <div class="faq-body">Dipende quasi solo dai giorni che ti dai. I dati ufficiali del parco (2006) dicono: 27% in 5 giorni, 44% in 6, 64% in 7, <strong>85% in 8</strong>. Per questo l'itinerario usa la Lemosho in 8 giorni. Attenzione però: quei dati hanno vent'anni, e i tassi che pubblicano i singoli operatori sono marketing — tendono a gonfiare i propri numeri.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Perché non a marzo come gli altri viaggi?</summary>
+        <div class="faq-body">Perché marzo è l'inizio delle lunghe piogge tanzaniane. Sentieri fangosi, nuvole basse per giorni, neve fresca in quota, e una probabilità di vetta che secondo le fonti di settore scende da ~85% a ~60%. La prima metà di marzo regge ancora; la seconda no, e aprile è il mese peggiore dell'anno. Il safari invece a marzo funziona benissimo — è solo la montagna il problema.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Quanto costano davvero le mance?</summary>
+        <div class="faq-body"><strong>300-450$ a persona, in contanti.</strong> Non è un extra facoltativo: è il reddito effettivo delle 15-18 persone che portano il vostro materiale su e giù. Va messo a budget e portato in dollari fisici (banconote emesse dopo il 2009). Nota: KPAP, l'ente che tutela i portatori, non pubblica un tariffario ufficiale — chi ve lo presenta come tale non dice il vero. Chiedete all'operatore la sua tabella scritta.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Serve il visto?</summary>
+        <div class="faq-body">Sì: <strong>50$, esclusivamente online e in anticipo</strong> su eservices.immigration.go.tz. Il visto all'arrivo è stato abolito a gennaio 2025, quindi non si può più rimediare in aeroporto. Tempi ufficiali 5-10 giorni lavorativi: fatelo 3-4 settimane prima. Evitate gli intermediari che rivendono lo stesso visto a 90-120€.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Serve la febbre gialla?</summary>
+        <div class="faq-body">Dipende da dove fate scalo. Volando via Doha o Istanbul <strong>non serve</strong>. Volando <strong>Ethiopian via Addis Abeba</strong>, l'Etiopia è paese a rischio: se lo scalo supera le 12 ore il certificato diventa obbligatorio. Con scali brevi in teoria no, ma ci sono segnalazioni di controlli anche sui voli interni per Zanzibar — se volate Ethiopian conviene farlo comunque: costa poco ed è valido a vita.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Che assicurazione serve?</summary>
+        <div class="faq-body">Una che copra <strong>esplicitamente trekking fino a 6.000m ed evacuazione in elicottero</strong>. Le polizze da viaggio standard escludono l'alta quota e non servirebbero a niente proprio dove serve: senza copertura, un'evacuazione dal Kilimangiaro può costare 10.000-15.000$.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Perché il Serengeti e Zanzibar non ci sono?</summary>
+        <div class="faq-body">Non ci stanno in 15 giorni con una salita da 8. Il Serengeti è lontano da Arusha e vuole almeno due giorni suoi; Zanzibar richiede un volo interno e 3-4 notti per non essere una toccata e fuga. Con 18 giorni entrerebbero entrambi — e visto che volo intercontinentale, tasse dei parchi e mance sono già pagati, tre giorni in più inciderebbero relativamente poco sul totale.</div>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Tanzania Trip Planner — file locale, parte del sito <a href="javascript:void(0)" class="home-link" onclick="showHub()">Patagucci Trips</a>. Mappa e ricerca voli richiedono una connessione internet al momento del click.
+  <div class="credits">Foto da Wikimedia Commons: Sergey Pesterev (Kilimangiaro da Amboseli, CC BY-SA 4.0) · Altezzatravel (Uhuru Peak, CC BY-SA 4.0) · Sergei Andreichuk (portatori sulla Barranco Wall, CC BY-SA 4.0) · Erasmus Kamugisha (cratere di Ngorongoro, CC BY-SA 4.0) · Gary Bembridge (elefanti nel Tarangire, CC BY 2.0) · Wolves201 (migrazione nel Serengeti, CC BY-SA 4.0). Tutte le immagini restano dei rispettivi autori sotto le licenze indicate.</div>
+</footer>
+  </div>
+
   <div class="destination" id="dest-uk" data-dest="uk">
 <header class="hero">
   <div class="bg" style="background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.55) 55%, rgba(10,14,11,0.92) 100%), url('foto/destinazioni/Registan_square_Samarkand-7d4b00.jpg');"></div>
@@ -4768,7 +5347,8 @@ var FLAG_BARS = {
   uk: 'linear-gradient(90deg,#0099B5 0 50%, #1EB53A 50% 100%)',
   gl: 'linear-gradient(90deg,#ffffff 0 50%, #C60C30 50% 100%)',
   ge: 'linear-gradient(90deg,#ffffff 0 20%, #DA291C 20% 40%, #ffffff 40% 60%, #DA291C 60% 80%, #ffffff 80% 100%)',
-  in: 'linear-gradient(90deg,#FF9933 0 33%, #ffffff 33% 66%, #138808 66% 100%)'
+  in: 'linear-gradient(90deg,#FF9933 0 33%, #ffffff 33% 66%, #138808 66% 100%)',
+  tz: 'linear-gradient(90deg,#1EB53A 0 30%, #FCD116 30% 40%, #000000 40% 60%, #FCD116 60% 70%, #00A3DD 70% 100%)'
 };
 function showDest(name){
   document.documentElement.setAttribute('data-dest', name);
@@ -7198,6 +7778,434 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   });
+
+})();
+
+</script><script>
+// ---- Tanzania ----
+
+(function(){
+  // ---- Scrollspy nav ----
+  var navLinks = document.querySelectorAll('nav.tabs a[href^="#"]');
+  var sections = document.querySelectorAll('section[data-nav]');
+  var linkBySection = {};
+  navLinks.forEach(function(a){ linkBySection[a.getAttribute('href').slice(1)] = a; });
+
+  var spyObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        navLinks.forEach(function(a){ a.classList.remove('active'); });
+        var link = linkBySection[entry.target.id];
+        if(link){
+          link.classList.add('active');
+          link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(function(s){ spyObserver.observe(s); });
+
+  // ---- Reveal on scroll ----
+  var revealObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ revealObserver.observe(el); });
+
+  // ---- Coordinate + link Google Maps ----
+  var COORDS = {
+    moshi: [-3.3349, 37.3404],
+    kilimanjaro: [-3.0674, 37.3556],
+    arusha: [-3.3869, 36.6830],
+    tarangire: [-3.8333, 36.0000],
+    manyara: [-3.6167, 35.8333],
+    ngorongoro: [-3.2000, 35.5000],
+    serengeti: [-2.3333, 34.8333],
+    zanzibar: [-6.1659, 39.2026]
+  };
+  function mapsLink(fromKey, toKey){
+    var a = COORDS[fromKey], b = COORDS[toKey];
+    return 'https://www.google.com/maps/dir/?api=1&origin=' + a[0] + ',' + a[1] + '&destination=' + b[0] + ',' + b[1] + '&travelmode=driving';
+  }
+  function placeLink(key){
+    var p = COORDS[key];
+    return 'https://www.google.com/maps/search/?api=1&query=' + p[0] + ',' + p[1];
+  }
+
+  var ITINERARY = [
+    { d:1, title:'Arrivo a Kilimanjaro (JRO)', tags:['Arrivo'], text:'Volo dall\'Italia con uno scalo (Doha, Istanbul o Addis Abeba). Trasferimento a Moshi, ~45 minuti dall\'aeroporto. Prima notte a bassa quota per iniziare ad ambientarsi.', link: placeLink('moshi'), linkLabel:'Vedi Moshi su Google Maps' },
+    { d:2, title:'Moshi — briefing e controllo attrezzatura', tags:['Preparazione','Non tagliatelo'], text:'Giornata di riposo vero: briefing con la guida, controllo capo per capo dell\'attrezzatura, noleggio di quello che manca (piumino, guanti, ghette si trovano facilmente a Moshi). È il giorno in cui si scoprono i problemi, non a 4.600m.', link: placeLink('moshi'), linkLabel:'Vedi Moshi su Google Maps' },
+    { d:3, title:'Inizio Lemosho — Londorossi → Mti Mkubwa', tags:['Kilimangiaro','~2.780m'], text:'Trasferimento al gate di Londorossi sul versante ovest, il lato più tranquillo della montagna. Prima camminata nella foresta pluviale, tra colobi e vegetazione fittissima. Si dorme a Mti Mkubwa ("il grande albero").', link: placeLink('kilimanjaro'), linkLabel:'Vedi il Kilimangiaro su Google Maps', highlight:true },
+    { d:4, title:'Mti Mkubwa → Shira 1', tags:['Kilimangiaro','~3.500m'], text:'Si esce dalla foresta e si entra nella brughiera: il panorama si apre di colpo sull\'altopiano di Shira, una delle tre cime vulcaniche del Kilimangiaro, ormai collassata.', link: placeLink('kilimanjaro'), linkLabel:'Vedi il Kilimangiaro su Google Maps' },
+    { d:5, title:'Shira 1 → Shira 2', tags:['Kilimangiaro','~3.890m'], text:'Traversata dell\'altopiano di Shira con il Kibo sempre davanti. Giornata relativamente breve: serve al corpo, non al chilometraggio.', link: placeLink('kilimanjaro'), linkLabel:'Vedi il Kilimangiaro su Google Maps' },
+    { d:6, title:'Shira 2 → Lava Tower → Barranco', tags:['Kilimangiaro','Sali alto, dormi basso'], text:'La giornata chiave dell\'acclimatazione: si sale fino ai 4.630m della Lava Tower e si ridiscende a dormire a Barranco (~3.960m). Si arriva stanchi ma è esattamente questo il meccanismo che fa arrivare in vetta.', link: placeLink('kilimanjaro'), linkLabel:'Vedi il Kilimangiaro su Google Maps', highlight:true },
+    { d:7, title:'Barranco → Karanga', tags:['Kilimangiaro','Barranco Wall'], text:'Si attacca il Barranco Wall, la parete che dal basso sembra impossibile e si rivela una scala rocciosa da fare con le mani. È il tratto più fotografato della montagna.', link: placeLink('kilimanjaro'), linkLabel:'Vedi il Kilimangiaro su Google Maps' },
+    { d:8, title:'Karanga → Barafu', tags:['Kilimangiaro','~4.673m','Campo base'], text:'Tappa corta fino a Barafu, il campo base per l\'attacco. Si arriva presto, si mangia e si prova a dormire nel pomeriggio: la sveglia è a mezzanotte.', link: placeLink('kilimanjaro'), linkLabel:'Vedi il Kilimangiaro su Google Maps' },
+    { d:9, title:'Barafu → Uhuru Peak → Mweka', tags:['IL GIORNO','5.895m'], text:'Partenza verso mezzanotte con la frontale. Stella Point (5.756m) all\'alba, poi 45-60 minuti di cresta fino a Uhuru Peak, 5.895m, il punto più alto dell\'Africa. E poi giù, tantissimo: si scende fino a Mweka (~3.100m) nello stesso giorno. È il giorno più lungo e più duro della vostra vita da viaggiatori.', link: placeLink('kilimanjaro'), linkLabel:'Vedi il Kilimangiaro su Google Maps', highlight:true },
+    { d:10, title:'Mweka → Moshi', tags:['Discesa','Doccia e birra'], text:'Ultima discesa nella foresta fino al gate di Mweka, consegna dei certificati di vetta, e rientro a Moshi. Doccia, Kilimanjaro Lager e mance allo staff.', link: mapsLink('kilimanjaro','moshi'), linkLabel:'Apri il tragitto Kilimangiaro → Moshi' },
+    { d:11, title:'Moshi — recupero e cuscinetto', tags:['Riposo','Margine'], text:'Giorno di recupero vero: le ginocchia sono a pezzi e il sonno è arretrato. Serve anche come margine di sicurezza se la salita slitta di un giorno per meteo.', link: placeLink('moshi'), linkLabel:'Vedi Moshi su Google Maps' },
+    { d:12, title:'Moshi → Arusha → Tarangire', tags:['Safari','~4h'], text:'Si passa dalla montagna alla savana. Tarangire, il parco dei baobab e dei grandi branchi di elefanti: il primo game drive del pomeriggio, seduti, con le gambe finalmente ferme.', link: mapsLink('moshi','tarangire'), linkLabel:'Apri il tragitto Moshi → Tarangire', highlight:true },
+    { d:13, title:'Tarangire → Lago Manyara', tags:['Safari'], text:'Il lago alcalino con i fenicotteri e la foresta a falda dove vivono i leoni che si arrampicano sugli alberi — comportamento raro, non garantito, ma questo è uno dei pochi posti al mondo dove succede.', link: mapsLink('tarangire','manyara'), linkLabel:'Apri il tragitto Tarangire → Lago Manyara' },
+    { d:14, title:'Cratere di Ngorongoro', tags:['Il giorno clou del safari'], text:'Discesa dentro la caldera: 260 km² racchiusi da pareti di 600m, con la densità di fauna più alta dell\'Africa orientale. È l\'unico punto dell\'itinerario con una possibilità concreta di vedere il rinoceronte nero.', link: placeLink('ngorongoro'), linkLabel:'Vedi Ngorongoro su Google Maps', highlight:true },
+    { d:15, title:'Rientro — Arusha → JRO → Italia', tags:['Partenza'], text:'Trasferimento all\'aeroporto di Kilimanjaro e volo di rientro con uno scalo.', link: mapsLink('ngorongoro','arusha'), linkLabel:'Apri il tragitto Ngorongoro → Arusha' }
+  ];
+
+  var timeline = document.getElementById('timeline-tz');
+  ITINERARY.forEach(function(day, idx){
+    var det = document.createElement('details');
+    det.className = 'day reveal';
+    if(idx === 0) det.open = true;
+    var tagsHtml = day.tags.map(function(t){ return '<span class="tag' + (day.highlight ? ' highlight' : '') + '">' + t + '</span>'; }).join('');
+    var photoHtml = day.photo ? ('<div class="mini-photo"><img src="' + day.photo + '" alt="" loading="lazy" onerror="this.parentElement.style.display=\'none\'"></div><div class="source-note">' + day.photoCredit + '</div>') : '';
+    det.innerHTML =
+      '<summary><span class="daynum">' + day.d + '</span><span class="daytitle">' + day.title + '</span><span class="chevron">▸</span></summary>' +
+      '<div class="day-body">' + tagsHtml + '<p>' + day.text + '</p>' + photoHtml +
+      '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
+      '</div>';
+    timeline.appendChild(det);
+    revealObserver.observe(det);
+  });
+
+  // ---- Il mezzo cambia lungo il percorso ----
+  // Sul Kilimangiaro si va a piedi, nel circuito safari in jeep.
+  var ROUTE_MODES = [
+    { verso:[285,175], mezzo:'🥾' },   // Moshi → vetta, tutto a piedi
+    { verso:[270,218], mezzo:'🥾' },   // e ritorno a valle
+    { verso:[235,209], mezzo:'🚙' },   // Moshi → Arusha, in jeep
+    { verso:[193,249], mezzo:'🚙' },   // → Tarangire
+    { verso:[181,224], mezzo:'🚙' },   // → Lago Manyara
+    { verso:[163,198], mezzo:'🚙' }    // → Ngorongoro
+  ];
+
+  var routePath = document.getElementById('route-path-tz');
+  var routeMarker = document.getElementById('jeep-marker-tz');
+  if(routePath && routeMarker && routePath.getTotalLength){
+    var routeLen = routePath.getTotalLength();
+    var smil = routeMarker.querySelector('animateMotion');
+    if(smil) smil.remove();
+    routeMarker.setAttribute('text-anchor', 'middle');
+
+    var cursore = 0;
+    ROUTE_MODES.forEach(function(tratta){
+      var migliore = cursore, distMin = Infinity;
+      for(var i = Math.ceil(cursore * 400); i <= 400; i++){
+        var p = routePath.getPointAtLength(routeLen * i / 400);
+        var dx = p.x - tratta.verso[0], dy = p.y - tratta.verso[1];
+        var d = dx * dx + dy * dy;
+        if(d < distMin){ distMin = d; migliore = i / 400; }
+      }
+      tratta.fino = migliore;
+      cursore = migliore;
+    });
+    ROUTE_MODES[ROUTE_MODES.length - 1].fino = 1;
+
+    var posiziona = function(frazione){
+      var p = routePath.getPointAtLength(routeLen * frazione);
+      routeMarker.setAttribute('x', p.x);
+      routeMarker.setAttribute('y', p.y + 7);
+      var tratta = ROUTE_MODES.filter(function(t){ return frazione <= t.fino; })[0]
+                 || ROUTE_MODES[ROUTE_MODES.length - 1];
+      if(routeMarker.textContent !== tratta.mezzo) routeMarker.textContent = tratta.mezzo;
+    };
+
+    var DURATA = 20000, avvio = null;
+    var muovi = function(ts){
+      if(avvio === null) avvio = ts;
+      posiziona(((ts - avvio) % DURATA) / DURATA);
+      requestAnimationFrame(muovi);
+    };
+
+    var ridotto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(ridotto) posiziona(0); else requestAnimationFrame(muovi);
+  }
+
+  // ---- Budget calculator ----
+  var BUDGET = {
+    nights: 14,
+    // Il volo è l'unica voce "normale": salita e safari dominano il totale.
+    flight: { budget:680, standard:850, comfort:1150 },
+    // Salita Kilimangiaro tutto incluso (dentro ci sono ~1.110$ di tasse del parco,
+    // identiche per qualsiasi operatore) + visto + assicurazione alta quota.
+    kiliFixed: { budget:1690, standard:2690, comfort:4150 },
+    // Mance di montagna: contanti, non facoltative.
+    tipsFixed: { budget:255, standard:320, comfort:410 },
+    // Safari 3 giorni, tasse dei parchi incluse.
+    safariFixed: { budget:600, standard:1250, comfort:2300 },
+    // Notti a Moshi fuori dal pacchetto (arrivo, cuscinetto) + cibo e varie.
+    lodgingPerNight: { budget:18, standard:45, comfort:120 },
+    foodPerDay: { budget:8, standard:16, comfort:32 },
+    extrasFixed: { budget:150, standard:260, comfort:420 }
+  };
+  var bgtPeople = document.getElementById('budget-people-tz');
+  var bgtStyle = document.getElementById('budget-style-tz');
+  var bgtResult = document.getElementById('budget-result-tz');
+  var bgtBreakdown = document.getElementById('budget-breakdown-tz');
+  function updateBudget(){
+    if(!bgtPeople) return;
+    var people = Math.max(1, parseInt(bgtPeople.value, 10) || 1);
+    var style = bgtStyle.value;
+    // Fuori dal pacchetto si dorme e si mangia in proprio solo ~4 giorni:
+    // durante salita e safari sono già inclusi.
+    var giorniLiberi = 4;
+    var perPerson = BUDGET.flight[style] + BUDGET.kiliFixed[style] + BUDGET.tipsFixed[style]
+                  + BUDGET.safariFixed[style] + BUDGET.extrasFixed[style]
+                  + giorniLiberi * (BUDGET.lodgingPerNight[style] + BUDGET.foodPerDay[style]);
+    var totalGroup = perPerson * people;
+    bgtResult.textContent = '~' + Math.round(perPerson).toLocaleString('it-IT') + ' € a persona';
+    bgtBreakdown.textContent = 'Totale gruppo (' + people + ' persone): ~' + Math.round(totalGroup).toLocaleString('it-IT') + ' € — include volo, visto, salita al Kilimangiaro con tasse del parco, mance, safari 3 giorni, alloggio e cibo fuori pacchetto, assicurazione alta quota.';
+  }
+  if(bgtPeople){
+    [bgtPeople, bgtStyle].forEach(function(el){ el.addEventListener('input', updateBudget); el.addEventListener('change', updateBudget); });
+    updateBudget();
+  }
+
+  // ---- Quando andare: stato delle stagioni ----
+  var ROUTES = [
+    { name:'Settembre — Kilimangiaro e safari', open:true, note:'Secco sulla montagna, folla estiva smaltita, Serengeti in piena stagione secca. La finestra migliore.' },
+    { name:'Fine gennaio / febbraio — Kilimangiaro', open:true, note:'La seconda finestra buona. Febbraio è il mese più stabile in quota; nel Serengeti è stagione dei parti degli gnu.' },
+    { name:'Prima metà di marzo — Kilimangiaro', open:true, note:'Regge ancora, ma allungando a 8-9 giorni di salita e mettendo in conto fango e nuvole basse.' },
+    { name:'Seconda metà di marzo — Kilimangiaro', open:false, note:'Arrivano le lunghe piogge: probabilità di vetta in calo netto secondo tutte le fonti consultate.' },
+    { name:'Aprile e maggio — Kilimangiaro', open:false, note:'Il cuore delle lunghe piogge, il periodo peggiore dell\'anno. Da evitare.' },
+    { name:'Marzo — safari', open:true, note:'Al contrario della montagna, funziona: green season, mattine limpide, tariffe dei parchi più basse da metà marzo. Ma molti campi remoti chiudono.' }
+  ];
+  var routeStatus = document.getElementById('route-status-tz');
+  if(routeStatus){
+    ROUTES.forEach(function(r){
+      var row = document.createElement('div');
+      row.className = 'r-name';
+      row.textContent = r.name;
+      var status = document.createElement('div');
+      status.className = 'r-status ' + (r.open ? 'open' : 'closed');
+      status.textContent = r.open ? 'Consigliato' : 'Sconsigliato';
+      var note = document.createElement('div');
+      note.className = 'route-note';
+      note.textContent = r.note;
+      routeStatus.appendChild(row);
+      routeStatus.appendChild(status);
+      routeStatus.appendChild(note);
+    });
+  }
+
+  // ---- Cose da non perdere ----
+  var FAMILIES = [
+    { sector:'Kilimangiaro', name:'Uhuru Peak', size:'Il giorno 9', level:'Impegnativa', note:'5.895m, il punto più alto dell\'Africa. Ci si arriva all\'alba dopo una notte di cammino.' },
+    { sector:'Kilimangiaro', name:'Barranco Wall', size:'~1,5h', level:'Media', note:'La parete che sembra impossibile dal basso e si rivela una scala di roccia da fare con le mani.' },
+    { sector:'Kilimangiaro', name:'Lava Tower', size:'Il giorno 6', level:'Media', note:'4.630m: si sale fin qui e si ridiscende a dormire più in basso. È il meccanismo che fa arrivare in vetta.' },
+    { sector:'Kilimangiaro', name:'Altopiano di Shira', size:'Giorni 4-5', level:'Facile', note:'Una delle tre cime vulcaniche del Kilimangiaro, collassata: si attraversa con il Kibo sempre davanti.' },
+    { sector:'Safari', name:'Cratere di Ngorongoro', size:'Giornata intera', level:'Facile', note:'260 km² di caldera con la densità di fauna più alta dell\'Africa orientale. Possibile il rinoceronte nero.' },
+    { sector:'Safari', name:'Tarangire', size:'Mezza giornata', level:'Facile', note:'Baobab e grandi branchi di elefanti, tra i più numerosi della Tanzania.' },
+    { sector:'Safari', name:'Lago Manyara', size:'Mezza giornata', level:'Facile', note:'Fenicotteri sul lago alcalino e i rari leoni che si arrampicano sugli alberi.' },
+    { sector:'Base', name:'Moshi', size:'2-3 notti', level:'Facile', note:'La cittadina ai piedi della montagna: briefing, noleggio attrezzatura e la birra del rientro.' },
+    { sector:'Extra', name:'Serengeti', size:'2+ giorni', level:'Facile', note:'Fuori dai 15 giorni: troppo lontano. Con 18 giorni entra, ed è dove si vede la Grande Migrazione.' },
+    { sector:'Extra', name:'Zanzibar', size:'3-4 notti', level:'Facile', note:'Fuori dai 15 giorni: serve un volo interno. Stone Town patrimonio UNESCO e le spiagge nord di Nungwi e Kendwa.' }
+  ];
+
+  var famSectors = ['Tutti'].concat(Array.from(new Set(FAMILIES.map(function(f){ return f.sector; }))));
+  var famFilterRow = document.getElementById('family-filters-tz');
+  var famGridEl = document.getElementById('family-grid-tz');
+  var famActiveSector = 'Tutti';
+
+  function renderFamilies(){
+    famGridEl.innerHTML = '';
+    FAMILIES.filter(function(f){ return famActiveSector === 'Tutti' || f.sector === famActiveSector; }).forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'family-card';
+      card.innerHTML =
+        '<div class="fsector">' + f.sector + '</div>' +
+        '<div class="fname">' + f.name + '</div>' +
+        '<div class="flevel ' + f.level + '">' + f.level + '</div>' +
+        '<div class="fsize">' + f.size + '</div>' +
+        '<p class="fnote">' + f.note + '</p>';
+      famGridEl.appendChild(card);
+    });
+  }
+
+  famSectors.forEach(function(s){
+    var btn = document.createElement('button');
+    btn.textContent = s;
+    if(s === famActiveSector) btn.classList.add('active');
+    btn.addEventListener('click', function(){
+      famActiveSector = s;
+      famFilterRow.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderFamilies();
+    });
+    famFilterRow.appendChild(btn);
+  });
+  renderFamilies();
+
+  // ---- Lo sapevi che... facts ----
+  var FACTS = [
+    { icon:'🌋', text:'Il Kilimangiaro non è una catena ma un singolo vulcano con tre cime: Kibo (la vetta), Mawenzi e Shira. È il vulcano isolato più alto del mondo.' },
+    { icon:'🥾', text:'Non serve alcuna tecnica alpinistica per salire: è una camminata. La difficoltà è tutta nell\'altitudine — in vetta si respira circa metà dell\'ossigeno del livello del mare.' },
+    { icon:'📊', text:'La probabilità di arrivare in vetta dipende quasi solo dai giorni: 27% in 5 giorni, 85% in 8. Chi sceglie l\'itinerario più economico sceglie anche quello che fallisce di più.' },
+    { icon:'🧊', text:'Sul Kilimangiaro ci sono ghiacciai a 3 gradi dall\'equatore — ma si sono ridotti di oltre l\'80% in un secolo e le stime li danno in scomparsa nei prossimi decenni.' },
+    { icon:'🦏', text:'Il cratere di Ngorongoro è uno dei pochissimi posti in Tanzania dove si può ancora vedere il rinoceronte nero: le pareti alte 600m funzionano da recinto naturale.' },
+    { icon:'🧗', text:'Per quattro clienti la spedizione conta 15-18 persone di staff. Il limite di legge è 20 kg a portatore, oltre al proprio equipaggiamento personale.' },
+    { icon:'💵', text:'I dollari USA sono accettati ovunque per safari e salita, ma solo se emessi dopo il 2009: le banconote più vecchie vengono rifiutate per timore di falsi.' }
+  ];
+  var factsGrid = document.getElementById('facts-grid-tz');
+  if(factsGrid){
+    FACTS.forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'bigfive-card';
+      card.innerHTML = '<div class="bf-icon">' + f.icon + '</div><p class="bf-fact" style="min-height:0;">' + f.text + '</p>';
+      factsGrid.appendChild(card);
+    });
+  }
+
+  // ---- Flight search links ----
+  function currentOrigin(){
+    var v = document.getElementById('flight-origin-tz').value.split('|');
+    return { code: v[0], label: v[1] };
+  }
+  document.getElementById('btn-google-flights-tz').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.google.com/travel/flights?q=' + encodeURIComponent('Voli da ' + o.label + ' a Kilimanjaro a settembre 2027'), '_blank');
+  });
+  document.getElementById('btn-skyscanner-tz').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.skyscanner.it/trasporti/voli/' + o.code.toLowerCase() + '/jro/270905/270919/', '_blank');
+  });
+  document.getElementById('btn-kayak-tz').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.kayak.it/flights/' + o.code + '-JRO/2027-09-05/2027-09-19', '_blank');
+  });
+
+  // ---- Mappa: link rotta completa, tabelle, export KML ----
+  var STOPS = [
+    { name:'Moshi (base)', key:'moshi' },
+    { name:'Kilimangiaro — Uhuru Peak', key:'kilimanjaro' },
+    { name:'Arusha', key:'arusha' },
+    { name:'Tarangire NP', key:'tarangire' },
+    { name:'Lago Manyara', key:'manyara' },
+    { name:'Cratere di Ngorongoro', key:'ngorongoro' },
+    { name:'Serengeti (fuori itinerario)', key:'serengeti' },
+    { name:'Zanzibar (fuori itinerario)', key:'zanzibar' }
+  ];
+
+  var origin = COORDS.moshi, destination = COORDS.ngorongoro;
+  var waypoints = ['arusha','tarangire','manyara'].map(function(k){ return COORDS[k][0] + ',' + COORDS[k][1]; }).join('|');
+  document.getElementById('link-full-route-tz').href =
+    'https://www.google.com/maps/dir/?api=1&origin=' + origin[0] + ',' + origin[1] +
+    '&destination=' + destination[0] + ',' + destination[1] +
+    '&waypoints=' + encodeURIComponent(waypoints) + '&travelmode=driving';
+
+  var stopsBody = document.querySelector('#stops-table-tz tbody');
+  STOPS.forEach(function(s){
+    var c = COORDS[s.key];
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + s.name + '</td><td class="mono">' + c[0].toFixed(4) + ', ' + c[1].toFixed(4) + '</td><td><a href="' + placeLink(s.key) + '" target="_blank" rel="noopener">Apri ↗</a></td>';
+    stopsBody.appendChild(tr);
+  });
+
+  var LEGS = [
+    { day:3, label:'Moshi → gate di Londorossi (inizio Lemosho)', from:'moshi', to:'kilimanjaro', km:'~4h di trasferimento', dur:'poi 8 giorni a piedi' },
+    { day:9, label:'Barafu → Uhuru Peak → Mweka', from:'kilimanjaro', to:'kilimanjaro', km:'~1.200m di salita, ~2.800m di discesa', dur:'12-16h, il giorno più lungo' },
+    { day:10, label:'Mweka gate → Moshi', from:'kilimanjaro', to:'moshi', km:'~30 km', dur:'~1h' },
+    { day:12, label:'Moshi → Arusha → Tarangire', from:'moshi', to:'tarangire', km:'~200 km', dur:'~4h' },
+    { day:13, label:'Tarangire → Lago Manyara', from:'tarangire', to:'manyara', km:'~70 km', dur:'~1,5h' },
+    { day:14, label:'Lago Manyara → Ngorongoro', from:'manyara', to:'ngorongoro', km:'~60 km', dur:'~1,5h' },
+    { day:15, label:'Ngorongoro → Arusha → JRO', from:'ngorongoro', to:'arusha', km:'~180 km', dur:'~3,5h' }
+  ];
+  var legsBody = document.querySelector('#legs-table-tz tbody');
+  LEGS.forEach(function(leg){
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>Giorno ' + leg.day + '</td><td>' + leg.label + '</td><td>' + leg.km + '</td><td>' + leg.dur + '</td><td><a href="' + mapsLink(leg.from, leg.to) + '" target="_blank" rel="noopener">Apri ↗</a></td>';
+    legsBody.appendChild(tr);
+  });
+
+  document.getElementById('btn-export-kml-tz').addEventListener('click', function(){
+    var kmlPlacemarks = STOPS.map(function(s){
+      var c = COORDS[s.key];
+      return '<Placemark><name>' + s.name + '</name><Point><coordinates>' + c[1] + ',' + c[0] + ',0</coordinates></Point></Placemark>';
+    }).join('\\n');
+    var lineCoords = STOPS.slice(0, 6).map(function(s){ var c = COORDS[s.key]; return c[1] + ',' + c[0] + ',0'; }).join(' ');
+    var kml = '<?xml version="1.0" encoding="UTF-8"?>\\n' +
+      '<kml xmlns="http://www.opengis.net/kml/2.2"><Document>' +
+      '<name>Tanzania 2027 - Itinerario</name>' +
+      kmlPlacemarks +
+      '<Placemark><name>Percorso completo</name><LineString><tessellate>1</tessellate><coordinates>' + lineCoords + '</coordinates></LineString></Placemark>' +
+      '</Document></kml>';
+    var blob = new Blob([kml], { type: 'application/vnd.google-earth.kml+xml' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'tanzania-2027-itinerario.kml';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  // ---- Simulatore del sole (Moshi, EAT UTC+3) ----
+  // A 3° dall'equatore alba e tramonto sono quasi fissi tutto l'anno.
+  var SUNRISE_MIN = 6.33 * 60, SUNSET_MIN = 18.5 * 60, TWILIGHT = 30;
+  var sunMarker = document.getElementById('sun-marker-tz');
+  var sunReadout = document.getElementById('sun-readout-tz');
+  var sunSlider = document.getElementById('sun-slider-tz');
+  var skyTop = document.getElementById('sky-stop-top-tz');
+  var skyBottom = document.getElementById('sky-stop-bottom-tz');
+  var NIGHT_TOP = [5,6,11], NIGHT_BOT = [18,23,38];
+  var DAWN_TOP = [45,32,74], DAWN_BOT = [255,150,90];
+  var DAY_TOP = [47,111,176], DAY_BOT = [191,227,255];
+  function lerp(a,b,t){ return a + (b - a) * t; }
+  function mixColor(c1,c2,t){ return 'rgb(' + Math.round(lerp(c1[0],c2[0],t)) + ',' + Math.round(lerp(c1[1],c2[1],t)) + ',' + Math.round(lerp(c1[2],c2[2],t)) + ')'; }
+  function rgbStr(c){ return 'rgb(' + c[0] + ',' + c[1] + ',' + c[2] + ')'; }
+  function skyColors(t){
+    var dSunrise = t - SUNRISE_MIN, dSunset = t - SUNSET_MIN;
+    if(Math.abs(dSunrise) <= TWILIGHT){
+      var f = (dSunrise + TWILIGHT) / (2 * TWILIGHT);
+      return f < 0.5
+        ? { top: mixColor(NIGHT_TOP, DAWN_TOP, f / 0.5), bot: mixColor(NIGHT_BOT, DAWN_BOT, f / 0.5) }
+        : { top: mixColor(DAWN_TOP, DAY_TOP, (f - 0.5) / 0.5), bot: mixColor(DAWN_BOT, DAY_BOT, (f - 0.5) / 0.5) };
+    }
+    if(Math.abs(dSunset) <= TWILIGHT){
+      var f2 = (dSunset + TWILIGHT) / (2 * TWILIGHT);
+      return f2 < 0.5
+        ? { top: mixColor(DAY_TOP, DAWN_TOP, f2 / 0.5), bot: mixColor(DAY_BOT, DAWN_BOT, f2 / 0.5) }
+        : { top: mixColor(DAWN_TOP, NIGHT_TOP, (f2 - 0.5) / 0.5), bot: mixColor(DAWN_BOT, NIGHT_BOT, (f2 - 0.5) / 0.5) };
+    }
+    if(t > SUNRISE_MIN && t < SUNSET_MIN) return { top: rgbStr(DAY_TOP), bot: rgbStr(DAY_BOT) };
+    return { top: rgbStr(NIGHT_TOP), bot: rgbStr(NIGHT_BOT) };
+  }
+  function renderSun(totalMinutes){
+    var hh = Math.floor(totalMinutes / 60), mm = Math.round(totalMinutes % 60);
+    var timeLabel = String(hh).padStart(2,'0') + ':' + String(mm).padStart(2,'0') + ' EAT';
+    var sky = skyColors(totalMinutes);
+    if(skyTop) skyTop.setAttribute('stop-color', sky.top);
+    if(skyBottom) skyBottom.setAttribute('stop-color', sky.bot);
+
+    if(totalMinutes < SUNRISE_MIN || totalMinutes > SUNSET_MIN){
+      var beforeDawn = totalMinutes < SUNRISE_MIN;
+      sunMarker.style.transform = 'translate(' + (beforeDawn ? 40 : 460) + 'px,176px)';
+      sunMarker.querySelector('text').textContent = '🌙';
+      sunReadout.textContent = timeLabel + ' — buio, il sole ' + (beforeDawn ? 'non è ancora sorto' : 'è già tramontato');
+      return;
+    }
+    var frac = (totalMinutes - SUNRISE_MIN) / (SUNSET_MIN - SUNRISE_MIN);
+    var x = 40 + frac * 420;
+    var y = 180 - Math.sin(frac * Math.PI) * 155;
+    sunMarker.querySelector('text').textContent = '☀️';
+    sunMarker.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+    var phase = frac < 0.06 ? 'sta sorgendo — l\'ora dei game drive migliori'
+      : frac > 0.94 ? 'sta tramontando — fra poco è buio, si rientra'
+      : (frac > 0.4 && frac < 0.6) ? 'è a picco: gli animali si nascondono all\'ombra'
+      : 'è alto in cielo';
+    sunReadout.textContent = timeLabel + ' — il sole ' + phase;
+  }
+  if(sunSlider){
+    var nowUtc = new Date();
+    var eatNowMin = ((nowUtc.getUTCHours() * 60 + nowUtc.getUTCMinutes()) + 3 * 60) % 1440;
+    var initial = Math.min(1260, Math.max(300, Math.round(eatNowMin / 5) * 5));
+    sunSlider.value = initial;
+    renderSun(initial);
+    sunSlider.addEventListener('input', function(){ renderSun(Number(sunSlider.value)); });
+  }
 
 })();
 

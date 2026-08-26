@@ -9,6 +9,7 @@ DESTS = [
     {"file": "southafrica-trip.html", "suf": "za", "flag": "🇿🇦", "name": "Sudafrica"},
     {"file": "india-trip.html", "suf": "in", "flag": "🇮🇳", "name": "India"},
     {"file": "uganda-trip.html", "suf": "ug", "flag": "🇺🇬", "name": "Uganda"},
+    {"file": "tanzania-trip.html", "suf": "tz", "flag": "🇹🇿", "name": "Tanzania"},
     {"file": "uzbekistankyrgyzstan-trip.html", "suf": "uk", "flag": "🇺🇿🇰🇬", "name": "Uzbekistan & Kirghizistan"},
     {"file": "greenland-trip.html", "suf": "gl", "flag": "🇬🇱", "name": "Groenlandia"},
     {"file": "georgia-trip.html", "suf": "ge", "flag": "🇬🇪", "name": "Georgia"},
@@ -447,6 +448,17 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               </div>
             </a>
 
+            <a class="trip-card" href="javascript:void(0)" onclick="showDest('tz')">
+              <img src="foto/destinazioni/tz-kilimanjaro.jpg" alt="Il Kilimangiaro visto dalla savana" loading="lazy">
+              <div class="overlay"></div>
+              <div class="content">
+                <div class="flag">🇹🇿</div>
+                <div class="title">Tanzania</div>
+                <div class="meta">Settembre 2027 · 15 giorni</div>
+                <p class="tagline">Salita al Kilimangiaro in 8 giorni e safari nel cratere di Ngorongoro.</p>
+              </div>
+            </a>
+
             <a class="trip-card" href="javascript:void(0)" onclick="showDest('uk')">
               <img src="foto/destinazioni/Registan_square_Samarkand-7d4b00.jpg" alt="Registan Square, Samarkand" loading="lazy">
               <div class="overlay"></div>
@@ -570,7 +582,8 @@ var FLAG_BARS = {{
   uk: 'linear-gradient(90deg,#0099B5 0 50%, #1EB53A 50% 100%)',
   gl: 'linear-gradient(90deg,#ffffff 0 50%, #C60C30 50% 100%)',
   ge: 'linear-gradient(90deg,#ffffff 0 20%, #DA291C 20% 40%, #ffffff 40% 60%, #DA291C 60% 80%, #ffffff 80% 100%)',
-  in: 'linear-gradient(90deg,#FF9933 0 33%, #ffffff 33% 66%, #138808 66% 100%)'
+  in: 'linear-gradient(90deg,#FF9933 0 33%, #ffffff 33% 66%, #138808 66% 100%)',
+  tz: 'linear-gradient(90deg,#1EB53A 0 30%, #FCD116 30% 40%, #000000 40% 60%, #FCD116 60% 70%, #00A3DD 70% 100%)'
 }};
 function showDest(name){{
   document.documentElement.setAttribute('data-dest', name);
