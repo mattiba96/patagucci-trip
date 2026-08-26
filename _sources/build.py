@@ -81,7 +81,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
       </div>
     </header>
 
-    <main style="max-width:1100px;">
+    <main>
       <section class="panel dark" data-nav>
         <div class="inner">
           <h2 class="section-title reveal">🔥 I Patagucci</h2>
