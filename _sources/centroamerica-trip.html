@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nicaragua, Costa Rica &amp; Panama 2027 — Trip Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .route-status{ display:grid; grid-template-columns:1fr auto; gap:10px 14px; align-items:center; }
+  .route-status .r-name{ font-weight:600; color:var(--ink); }
+  section.panel.dark .route-status .r-name{ color:#f4f1ea; }
+  .route-status .r-status{ font-size:0.78rem; font-weight:700; padding:4px 10px; border-radius:8px; white-space:nowrap; justify-self:end; }
+  .r-status.open{ background:#1e4a2f; color:#8fe0ac; }
+  .r-status.closed{ background:#4a1c1c; color:#ff9b8a; }
+  .route-note{ grid-column:1 / -1; font-size:0.82rem; color:var(--ink-soft); margin:-4px 0 10px; }
+  section.panel.dark .route-note{ color:#c7c2b6; }
+</style>
+</head>
+<body>
+
+<div class="flagbar"></div>
+
+<header class="hero">
+  <div class="bg" style="background-image:linear-gradient(180deg, rgba(8,19,15,0.35) 0%, rgba(8,19,15,0.55) 55%, rgba(8,19,15,0.92) 100%), url('foto/destinazioni/cx-arenal.jpg');"></div>
+  <div class="content">
+    <h1>Nicaragua, Costa Rica &amp; Panama</h1>
+    <p class="tagline">Tre paesi attaccati, due oceani a poche ore di distanza e una fila di vulcani che li tiene insieme. Si scende via terra dal lago del Nicaragua alla foresta nuvolosa, e si finisce guardando una portacontainer che sale di un piano dentro una chiusa. Il viaggio più vario del gruppo, e l'unico dove serve parlare di politica prima di prenotare.</p>
+    <div class="badge-row">
+      <span class="badge">📅 Periodo target: marzo 2027 <em>(stagione secca)</em></span>
+      <span class="badge">🌋 Vulcani del Nicaragua</span>
+      <span class="badge">🌿 Foresta nuvolosa di Monteverde</span>
+      <span class="badge">🚢 Canale di Panama</span>
+    </div>
+    <div class="scroll-cue">↓ scorri per esplorare</div>
+  </div>
+  <div class="photo-credit">Foto: Rhododendrites, <a href="https://commons.wikimedia.org/wiki/File:Arenal_volcano_(70785p)_(cropped).jpg" target="_blank" rel="noopener">CC BY-SA 4.0, Wikimedia Commons</a></div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <a href="javascript:void(0)" class="home-link" onclick="showHub()">🌍 Tutte le mete</a>
+  <a href="#perche">Perché andare</a>
+  <a href="#quando">Quando andare</a>
+  <a href="#itinerario">Itinerario</a>
+  <a href="#mappa">Mappa</a>
+  <a href="#siti">Cose da non perdere</a>
+  <a href="#nicaragua">Nicaragua</a>
+  <a href="#costarica">Costa Rica</a>
+  <a href="#panama">Panama</a>
+  <a href="#guida">Guida pratica</a>
+  <a href="#curiosita">Curiosità</a>
+  <a href="#meteo">Meteo</a>
+  <a href="#cibo">Cibo &amp; alcolici</a>
+  <a href="#voli">Voli</a>
+  <a href="#budget">Spese stimate</a>
+  <a href="#faq">FAQ</a>
+</nav>
+
+<main>
+
+  <!-- PERCHE ANDARE -->
+  <section id="perche" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">✨ Perché andare</h2>
+      <p class="section-sub reveal">Perché in quindici giorni si attraversano tre paesi che si toccano ma non si somigliano per niente: uno pieno di vulcani e povero, uno che ha trasformato la natura in un'industria, e uno costruito attorno a un taglio nella terra che divide due oceani.</p>
+
+      <div class="why-grid reveal">
+        <div class="photo-banner" style="margin-bottom:0;">
+          <img src="foto/destinazioni/cx-ometepe.jpg" alt="Il vulcano Concepción sull'isola di Ometepe, nel lago Nicaragua" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+          <div class="credit">Foto: Hulivili, <a href="https://commons.wikimedia.org/wiki/File:Concepci%C3%B3n_volcano_-_Ometepe_island.jpg" target="_blank" rel="noopener">CC BY 2.0</a></div>
+          <div class="fallback">🌋</div>
+        </div>
+        <div>
+          <div class="stat-big"><span class="num">3</span><span class="unit">paesi, un solo asse stradale</span></div>
+          <p class="stat-line">Dal confine nord del Nicaragua a Panama City sono meno di 1.000 km. In Sudamerica sarebbe una tappa: qui sono tre valute, tre modi di stare al mondo e un cambio di prezzo che raddoppia due volte.</p>
+
+          <div class="stat-big"><span class="num">6%</span><span class="unit">della biodiversità mondiale in Costa Rica</span></div>
+          <p class="stat-line">Su una superficie grande come la Lombardia e l'Emilia messe insieme. Il paese ha oltre il 25% del territorio protetto: bradipi, tucani, scimmie urlatrici e rane dagli occhi rossi non sono un extra, sono lo scenario di base.</p>
+
+          <div class="stat-big"><span class="num">26</span><span class="unit">metri di dislivello, in una vasca</span></div>
+          <p class="stat-line">Tanto sollevano le chiuse del canale di Panama una nave da 300 metri, con l'acqua che entra per gravità. Si guarda da una terrazza a due passi. È ingegneria del 1914 che regge ancora il 5% del commercio mondiale.</p>
+        </div>
+      </div>
+
+      <div class="callout warn reveal">
+        <strong>Una cosa da sapere prima di innamorarsi dell'itinerario:</strong> il Nicaragua è governato da un regime che il Dipartimento di Stato americano classifica <strong>Livello 3 — "riconsiderare il viaggio"</strong>. Non è una zona di guerra e le città turistiche sono tranquille, ma non è un dettaglio da scoprire dopo. Ne parlo per esteso nella sezione dedicata al Nicaragua, con i numeri e con l'alternativa se il gruppo preferisce evitarlo.
+      </div>
+    </div>
+  </section>
+
+  <!-- QUANDO ANDARE -->
+  <section id="quando" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">📅 Quando andare</h2>
+      <p class="section-sub reveal">Buona notizia: qui il mese giusto è proprio quello degli altri viaggi del gruppo. Marzo è dentro la stagione secca su tutti e tre i paesi.</p>
+
+      <div class="card reveal">
+        <h3 style="margin-top:0;">Le stagioni, in breve</h3>
+        <div class="route-status" id="route-status"></div>
+        <div class="source-note">Fonti: saily.com, enchantingtravels.com, costaricatravelblog.com, costarica.org — verificate ad agosto 2026.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>✅ Marzo — la finestra giusta</h3><p>Piena stagione secca. Cielo pulito sull'Arenal (che nella stagione delle piogge è nascosto dalle nuvole per giorni), sentieri asciutti nei parchi, animali concentrati vicino all'acqua. <strong>Febbraio e marzo sono i due mesi consigliati senza esitazione</strong> per un giro che unisce Arenal, Monteverde e Manuel Antonio.</p></div>
+        <div class="card reveal"><h3>⚠️ L'altra faccia</h3><p>È anche l'alta stagione. Manuel Antonio ha un <strong>tetto di 600 visitatori al giorno</strong> e i biglietti vanno comprati online in anticipo; alloggi e voli vanno prenotati con mesi di margine. Andare nel periodo giusto significa organizzarsi prima.</p></div>
+        <div class="card reveal"><h3>🌧️ Da evitare: settembre-ottobre</h3><p>Il cuore della stagione delle piogge sul versante Pacifico. Strade sterrate difficili, vulcani nascosti, molte escursioni cancellate.</p></div>
+        <div class="card reveal"><h3>🌊 Il Caribe fa storia a sé</h3><p>Il versante caraibico (Bocas del Toro, San Blas, Tortuguero) segue un calendario suo e non ha la stessa stagione secca. <strong>Settembre e ottobre, i mesi peggiori sul Pacifico, sono tra i migliori sul Caribe.</strong></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ITINERARIO -->
+  <section id="itinerario" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🗺️ Itinerario di massima — 15 giorni</h2>
+      <p class="section-sub reveal">Si entra da Managua e si esce da Panama City: tutto in discesa verso sud, senza mai tornare indietro. Ogni giorno ha un link diretto a Google Maps.</p>
+
+      <div class="timeline" id="timeline"></div>
+
+      <div class="callout reveal">
+        <strong>Perché si vola da San José a Panama City invece di andare via terra.</strong> Il valico di Paso Canoas è uno dei confini più caotici del Centro America, e da San José al confine ci sono <strong>circa 16 ore di autobus</strong>, spesso di notte, per poi aggiungerne altre fino a Panama City. Un volo di un'ora costa poco e restituisce due giorni pieni di viaggio. È l'unico punto dell'itinerario dove ha senso alzarsi da terra.
+      </div>
+    </div>
+  </section>
+
+  <!-- MAPPA -->
+  <section id="mappa" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">📍 Mappa &amp; percorso</h2>
+      <p class="section-sub reveal">Da Managua a Panama City, sempre verso sud. Il mezzo cambia lungo il tracciato: furgone, traghetto sul lago Nicaragua, barca attraverso il lago Arenal e infine l'aereo.</p>
+
+      <div class="jeep-map-wrap reveal">
+        <svg id="jeep-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+          <path class="terrain terrain-a" d="M25 130 C 90 105, 165 130, 215 190 C 255 240, 265 300, 250 350 C 290 375, 360 380, 430 350 C 470 333, 488 305, 496 285 C 500 330, 478 375, 430 398 C 360 428, 280 420, 235 395 C 205 378, 200 340, 200 300 C 200 250, 175 200, 130 170 C 92 145, 52 140, 22 145 Z"/>
+          <ellipse class="terrain terrain-b" cx="126" cy="194" rx="30" ry="17" transform="rotate(-32 126 194)"/>
+          <path class="contour" d="M40 175 C 110 165, 180 210, 225 285"/>
+          <path class="contour" d="M250 372 C 320 396, 400 392, 470 352"/>
+
+          <path id="route-path" class="route-shadow" d="M 102,165 Q 84,152 70,145 Q 92,162 115,176 Q 122,189 128,201 Q 158,232 186,262 Q 174,273 163,285 Q 186,310 205,334 Q 320,350 431,359"/>
+          <path class="route-line" d="M 102,165 Q 84,152 70,145 Q 92,162 115,176 Q 122,189 128,201 Q 158,232 186,262 Q 174,273 163,285 Q 186,310 205,334 Q 320,350 431,359"/>
+
+          <circle class="pulse" cx="431" cy="359" r="8"/>
+          <g class="stop-pin">
+            <text x="102" y="172" text-anchor="middle" font-size="16">✈️</text>
+            <text class="stop-label" x="112" y="190" text-anchor="middle">Managua</text>
+          </g>
+          <g class="stop-pin">
+            <text x="70" y="152" text-anchor="middle" font-size="18">🌋</text>
+            <text class="stop-label highlight" x="62" y="132" text-anchor="middle">León</text>
+          </g>
+          <g class="stop-pin">
+            <text x="115" y="183" text-anchor="middle" font-size="18">🏛️</text>
+            <text class="stop-label highlight" x="148" y="170" text-anchor="middle">Granada</text>
+          </g>
+          <g class="stop-pin">
+            <text x="128" y="208" text-anchor="middle" font-size="18">🏝️</text>
+            <text class="stop-label" x="120" y="226" text-anchor="middle">Ometepe</text>
+          </g>
+          <g class="stop-pin">
+            <text x="186" y="269" text-anchor="middle" font-size="20">🌋</text>
+            <text class="stop-label highlight" x="216" y="258" text-anchor="middle">Arenal</text>
+          </g>
+          <g class="stop-pin">
+            <text x="163" y="292" text-anchor="middle" font-size="18">🌿</text>
+            <text class="stop-label" x="132" y="304" text-anchor="middle">Monteverde</text>
+          </g>
+          <g class="stop-pin">
+            <text x="205" y="341" text-anchor="middle" font-size="18">🦥</text>
+            <text class="stop-label" x="222" y="360" text-anchor="middle">Manuel Antonio</text>
+          </g>
+          <g class="stop-pin">
+            <text x="431" y="366" text-anchor="middle" font-size="22">🚢</text>
+            <text class="stop-label highlight" x="424" y="386" text-anchor="middle">Panama City</text>
+          </g>
+          <g class="stop-pin minor">
+            <text x="458" y="326" text-anchor="middle" font-size="14">🏖️</text>
+            <text class="stop-label" x="452" y="310" text-anchor="middle">San Blas</text>
+          </g>
+
+          <g class="compass" transform="translate(455,40)">
+            <line x1="0" y1="-14" x2="0" y2="14"/>
+            <line x1="-10" y1="0" x2="10" y2="0"/>
+            <text x="0" y="-18" text-anchor="middle">N</text>
+          </g>
+          <g class="scale-bar" transform="translate(30,470)">
+            <line x1="0" y1="0" x2="60" y2="0"/>
+            <line x1="0" y1="-4" x2="0" y2="4"/>
+            <line x1="60" y1="-4" x2="60" y2="4"/>
+            <text x="30" y="-6" text-anchor="middle">~130 km</text>
+          </g>
+
+          <text font-size="22" id="jeep-marker">🚐
+            <animateMotion dur="20s" repeatCount="indefinite">
+              <mpath href="#route-path"/>
+            </animateMotion>
+          </text>
+        </svg>
+      </div>
+
+      <div class="map-actions reveal">
+        <a id="link-full-route" href="#" target="_blank" rel="noopener">🗺️ Apri l'itinerario completo su Google Maps</a>
+        <button class="export" id="btn-export-kml">⬇️ Esporta tappe (KML)</button>
+      </div>
+
+      <div class="card reveal" style="overflow-x:auto;">
+        <h3 style="margin-top:0;">Percorsi giorno per giorno</h3>
+        <table class="stops-table" id="legs-table">
+          <thead><tr><th>Giorno</th><th>Tratta</th><th>Distanza</th><th>Durata stimata</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="source-note">Le durate includono i tempi di frontiera, che in Centro America sono la variabile vera: la stessa tratta può prendere due ore in più senza preavviso.</div>
+      </div>
+
+      <div class="card reveal" style="overflow-x:auto;">
+        <h3 style="margin-top:0;">Tutte le tappe</h3>
+        <table class="stops-table" id="stops-table">
+          <thead><tr><th>Tappa</th><th>Coordinate</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- COSE DA NON PERDERE -->
+  <section id="siti" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌿 Cose da non perdere</h2>
+      <p class="section-sub reveal">Le tappe principali dell'itinerario, filtrabili per paese.</p>
+
+      <div class="filter-row reveal" id="family-filters"></div>
+      <div class="family-grid" id="family-grid"></div>
+
+      <div class="source-note">Fonti: getyourguide.com, viator.com, thoroughlytravel.com, costaricatravelblog.com, ampatours.com, sanblasdreams.com — verificate ad agosto 2026.</div>
+    </div>
+  </section>
+
+  <!-- NICARAGUA -->
+  <section id="nicaragua" class="panel" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="foto/destinazioni/cx-granada.jpg" alt="Portici coloniali di Granada, Nicaragua, all'imbrunire" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: MongeNajera, <a href="https://commons.wikimedia.org/wiki/File:Granada_Nicaragua_9.jpg" target="_blank" rel="noopener">CC BY-SA 3.0</a></div>
+        <div class="fallback">🇳🇮</div>
+      </div>
+      <h2 class="section-title reveal">🇳🇮 Nicaragua — il più bello e il più complicato</h2>
+      <p class="section-sub reveal">Il paese più economico e meno turistico dei tre, con i vulcani migliori. È anche quello su cui devo essere del tutto onesto prima che prenotiate.</p>
+
+      <div class="callout warn reveal">
+        <strong>La situazione politica, senza giri di parole.</strong> Il Nicaragua è governato dal regime di Daniel Ortega e Rosario Murillo. Il Dipartimento di Stato americano lo tiene a <strong>Livello 3 su 4 — "riconsiderare il viaggio"</strong>, citando criminalità, sanità limitata, detenzioni arbitrarie e <strong>applicazione arbitraria delle leggi</strong>. Dal 2018 il governo ha chiuso oltre 3.000 organizzazioni non governative; a gennaio 2026 ha abolito per via costituzionale la doppia cittadinanza; e Ortega ha dichiarato che sotto la sua famiglia non si terranno più elezioni. Fra 2018 e 2025 sono stati documentati <strong>318 divieti d'ingresso nel paese</strong>, che hanno colpito anche stranieri.
+        <div class="source-note">Fonti: travel.state.gov (aggiornamento 15 maggio 2026), Human Rights Watch World Report 2026, Freedom House 2026, RSF, ambasciata USA a Managua.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>Cosa significa in pratica</h3><p>Per un turista europeo che va a Granada, León e Ometepe e non si occupa di politica, il viaggio si svolge normalmente: <strong>la Farnesina non inserisce il Nicaragua fra i paesi totalmente sconsigliati</strong> e segnala precauzioni ordinarie (evitare periferie di notte, taxi non autorizzati, borseggi nei mercati). Il rischio non è la strada: è che le regole possano cambiare senza preavviso e senza appello.</p></div>
+        <div class="card reveal"><h3>Regole di buon senso</h3><p>Non fotografare militari, polizia o edifici governativi. Non partecipare né avvicinarsi a manifestazioni. <strong>Non pubblicare sui social commenti politici</strong> mentre siete nel paese: i telefoni possono essere controllati. Portare una copia del passaporto e tenere l'originale al sicuro.</p></div>
+        <div class="card reveal"><h3>L'alternativa, se non ve la sentite</h3><p>Togliere il Nicaragua e usare i cinque giorni liberati per fare <strong>Costa Rica e Panama in profondità</strong>: si aggiungono Tortuguero o Corcovado sul lato costaricano e Bocas del Toro o San Blas su quello panamense. Si perde il paese più autentico dei tre, si guadagna in tranquillità. È una scelta legittima, non una rinuncia.</p></div>
+        <div class="card reveal"><h3>🌋 Cerro Negro — sandboarding sul vulcano</h3><p>45 minuti da León, poi <strong>due ore di salita a piedi</strong> sul cono nero, e giù dalla parete di cenere su una tavola di legno, seduti o in piedi, fino a <strong>70 km/h</strong>. Tuta, occhiali e guanti li dà l'operatore: la roccia vulcanica taglia i vestiti. <strong>~25$ il tour + 5$ d'ingresso.</strong></p></div>
+        <div class="card reveal"><h3>🌋 Vulcano Masaya</h3><p>Uno dei pochissimi posti al mondo dove <strong>una strada asfaltata arriva sul bordo di un cratere attivo</strong>: si parcheggia a pochi passi dalla bocca. Visita diurna 4$, notturna 10$; tour serali da Granada 25-30$.</p></div>
+        <div class="card reveal"><h3>🏝️ Ometepe</h3><p>Un'isola fatta di <strong>due vulcani che escono dal lago Nicaragua</strong>, collegati da un istmo: il Concepción, cono perfetto e ancora attivo, e il Maderas, spento e coperto di foresta. Ci si arriva col traghetto da San Jorge. Sull'isola si gira in scooter.</p></div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Sul Masaya, una precisazione che le foto non dicono.</strong> Il lago di lava che ha reso famoso il cratere <strong>non è più visibile da una frana del 2024</strong>. Il parco ha riaperto, i tour notturni ci sono e un bagliore rosso si vede ancora, ma molto meno di quello che trovate nelle immagini in giro. Andateci sapendolo, così non è una delusione.
+        <div class="source-note">Verificato ad agosto 2026 su thoroughlytravel.com e takeyourbackpack.com, entrambi aggiornati al 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COSTA RICA -->
+  <section id="costarica" class="panel dark" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="foto/destinazioni/cx-monteverde.jpg" alt="Ponte sospeso sopra la foresta nuvolosa di Monteverde" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Matthias Bethke, <a href="https://commons.wikimedia.org/wiki/File:2006-08-08_Hanging_Bridges_in_Monteverde.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+        <div class="fallback">🌿</div>
+      </div>
+      <h2 class="section-title reveal">🇨🇷 Costa Rica — la natura, ma organizzata</h2>
+      <p class="section-sub reveal">Il paese che ha smesso di tagliare la foresta e ci ha costruito sopra un'economia. Funziona tutto, si vede tantissimo, e si paga.</p>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>🌋 Arenal</h3><p>Il cono quasi geometrico che vedete nella foto in cima alla pagina. Ha eruttato senza sosta dal 1968 al 2010, ora è in riposo. Alla base: <strong>sorgenti termali</strong> alimentate dal vulcano, ponti sospesi e le cascate di La Fortuna. <strong>Ingresso al parco 15$</strong>, senza tetto ai visitatori.</p></div>
+        <div class="card reveal"><h3>🌿 Monteverde</h3><p><strong>Foresta nuvolosa</strong>: si cammina dentro una nuvola, con muschi ed epifite che coprono ogni ramo. I ponti sospesi passano all'altezza delle chiome. È il posto giusto per il <strong>quetzal</strong>, e la riserva principale è privata, non statale.</p></div>
+        <div class="card reveal"><h3>🦥 Manuel Antonio</h3><p>Il parco più famoso del paese: foresta che finisce direttamente sulla spiaggia, bradipi, scimmie cappuccine e iguane a distanza ravvicinata. <strong>Ingresso 18$, solo online e in anticipo, tetto di 600 persone al giorno, chiuso il martedì.</strong> Non è un posto dove ci si presenta al cancello.</p></div>
+        <div class="card reveal"><h3>🚙 Il trasferimento più bello</h3><p>Da Arenal a Monteverde si va in <strong>jeep-barca-jeep</strong>: furgone fino al lago Arenal, traversata in barca col vulcano alle spalle, poi risalita sull'altro lato. Circa 3 ore contro le 4-5 dell'unica alternativa via terra, e costa quasi uguale.</p></div>
+        <div class="card reveal"><h3>💵 Il conto</h3><p>È di gran lunga il più caro dei tre: si sta intorno ai <strong>50$ a testa al giorno</strong> in versione economica, contro i ~40$ del Nicaragua, e sale in fretta con tour e trasferimenti privati. I parchi si pagano tutti, e quasi tutti online in anticipo.</p></div>
+        <div class="card reveal"><h3>🌎 Pura vida</h3><p>Non è uno slogan da magliette: <em>pura vida</em> si usa come saluto, come ringraziamento, come "tutto bene" e come "figurati". Se ne imparate una sola, è questa.</p></div>
+      </div>
+
+      <div class="photo-banner reveal">
+        <img src="foto/destinazioni/cx-bradipo.jpg" alt="Bradipo tridattilo aggrappato a un tronco" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Krunal Desai, <a href="https://commons.wikimedia.org/wiki/File:Brown-throated_sloth_on_tree.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+        <div class="fallback">🦥</div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Prendete una guida almeno una volta.</strong> Nei parchi costaricani la differenza fra andare da soli e andare con una guida locale col telescopio è enorme: i bradipi sono palle di pelo immobili a venti metri d'altezza e i serpenti stanno fermi sui rami. Da soli si cammina in un bel bosco; con la guida si vedono venti animali.
+      </div>
+    </div>
+  </section>
+
+  <!-- PANAMA -->
+  <section id="panama" class="panel" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="foto/destinazioni/cx-miraflores.jpg" alt="Portacontainer nelle chiuse di Miraflores, canale di Panama" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Ivo Kruusamägi, <a href="https://commons.wikimedia.org/wiki/File:Miraflores_Locks,_Panama_-_11.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+        <div class="fallback">🚢</div>
+      </div>
+      <h2 class="section-title reveal">🇵🇦 Panama — il paese costruito attorno a un taglio</h2>
+      <p class="section-sub reveal">Grattacieli, una città vecchia coloniale e la più grande opera di ingegneria del Novecento, tutto nel raggio di mezz'ora.</p>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>🚢 Chiuse di Miraflores</h3><p>Dal centro visitatori si guardano le navi salire e scendere di <strong>26 metri complessivi</strong> fra Pacifico e lago Gatún, trainate da locomotive elettriche sulle banchine. Andate quando c'è traffico: il passaggio di una nave dura circa mezz'ora ed è il momento in cui si capisce la scala della cosa.</p></div>
+        <div class="card reveal"><h3>🏛️ Casco Viejo</h3><p>Il centro storico coloniale, patrimonio UNESCO, con le facciate restaurate e i tetti rossi affacciati sulla baia — e dietro, sull'altra sponda, la selva di grattacieli. <strong>È il contrasto che fotografano tutti</strong>, ed è anche il quartiere dove conviene dormire.</p></div>
+        <div class="card reveal"><h3>🏖️ San Blas / Guna Yala</h3><p>Oltre 365 isole e isolotti amministrati dal <strong>popolo Guna, che governa sé stesso</strong>. Acqua turchese, palme, capanne. Si parte in 4x4 <strong>alle 5 del mattino</strong>, 4-5 ore fra strada sterrata e barca, e al posto di blocco Guna si pagano <strong>22$ a persona in contanti</strong>. Gita in giornata all-inclusive ~135$.</p></div>
+        <div class="card reveal"><h3>🌴 Bocas del Toro</h3><p>L'alternativa caraibica: arcipelago sul lato atlantico, surf, snorkeling e vita notturna. <strong>Volo interno da Panama City di 45 minuti, 80-120$ andata e ritorno</strong>, oppure otto ore fra bus e taxi acquatico.</p></div>
+        <div class="card reveal"><h3>💵 Valuta</h3><p>Panama usa il <strong>dollaro USA</strong>. Il "balboa" esiste solo come moneta metallica, agganciata 1:1: le banconote sono dollari americani. Dopo Nicaragua e Costa Rica è un sollievo.</p></div>
+        <div class="card reveal"><h3>📄 Prova del viaggio di uscita</h3><p>Panama <strong>richiede di dimostrare che uscirete dal paese</strong>: biglietto aereo, bus o barca. Può chiedere anche la prenotazione della prima notte. Tenete uno screenshot pronto: viene chiesto davvero.</p></div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>San Blas o Bocas del Toro, se aveste un giorno in più.</strong> San Blas vince su acqua e cultura Guna ed è più vicino a Panama City; Bocas vince su surf, locali e varietà di alloggi. San Blas costa sui 30-50$ al giorno, Bocas sui 50-70$. In una giornata sola, con quattro ore di 4x4 per lato, <strong>San Blas è faticoso</strong>: ha senso davvero solo dormendoci.
+      </div>
+
+      <div class="photo-banner reveal">
+        <img src="foto/destinazioni/cx-sanblas.jpg" alt="Isolotto di palme e acqua turchese nell'arcipelago di San Blas" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Mónica J. Mora, <a href="https://commons.wikimedia.org/wiki/File:Isla_Perro_en_la_Comarca_Guna_Yala.JPG" target="_blank" rel="noopener">CC BY-SA 3.0</a></div>
+        <div class="fallback">🏖️</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUIDA PRATICA -->
+  <section id="guida" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🧭 Guida pratica</h2>
+      <p class="section-sub reveal">Documenti, valute, frontiere. Dati verificati ad agosto 2026 — da riconfermare più vicino alla partenza.</p>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>🛂 Nicaragua</h3><p>Per gli italiani niente visto: si compra una <strong>carta turistica da 10$ in contanti</strong> all'arrivo. Passaporto con <strong>almeno 6 mesi di validità</strong>. Attenzione: è previsto anche l'<strong>invio online del modulo migratorio con circa una settimana di anticipo</strong> — non lasciatelo all'ultimo.</p></div>
+        <div class="card reveal"><h3>🛂 Costa Rica</h3><p>Niente visto per turismo. Richiede la <strong>prova del biglietto di uscita</strong> e, formalmente, la disponibilità di <strong>100$ al mese di soggiorno</strong>. Nel nostro itinerario il biglietto di uscita è il volo per Panama, quindi è già risolto.</p></div>
+        <div class="card reveal"><h3>🛂 Panama</h3><p>Niente visto. Serve la <strong>prova del viaggio di uscita</strong> e può essere richiesta la prenotazione della prima notte.</p></div>
+        <div class="card reveal"><h3>💱 Tre valute in quindici giorni</h3><p><strong>Nicaragua</strong>: córdoba, ma i dollari sono accettati quasi ovunque. <strong>Costa Rica</strong>: colón, dollari accettati nei posti turistici a cambio sfavorevole. <strong>Panama</strong>: dollaro USA. Portate contanti in dollari: servono per la carta turistica, per il posto di blocco Guna e per le mance.</p></div>
+        <div class="card reveal"><h3>🦟 Salute</h3><p>Zanzare tutto l'anno nelle zone basse: <strong>dengue</strong> è il rischio principale e non ha profilassi — l'unica difesa è il repellente. Malaria: rischio basso sulle rotte turistiche, ma sentite il medico dei viaggi. Nessun vaccino obbligatorio arrivando dall'Europa.</p></div>
+        <div class="card reveal"><h3>🌐 CA-4 — un dettaglio che confonde</h3><p>Il Nicaragua fa parte dell'accordo <strong>CA-4</strong> con Guatemala, Honduras e El Salvador: un unico timbro da 90 giorni per tutta l'area. <strong>Costa Rica e Panama sono fuori dal CA-4</strong> e contano a parte. Per un viaggio di 15 giorni non cambia nulla, ma spiega perché le regole sembrano diverse a ogni confine.</p></div>
+      </div>
+
+      <div class="source-note">Fonti: en.wikipedia.org (accordo CA-4), visaverge.com, embajadacostaricaenpanama.com, ticabus.com, viaggiaresicuri.it — verificate ad agosto 2026. I requisiti d'ingresso cambiano spesso in quest'area: riverificateli sui siti ufficiali di immigrazione un mese prima di partire.</div>
+    </div>
+  </section>
+
+  <!-- CURIOSITA -->
+  <section id="curiosita" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌍 Stranezze, luce e fusi</h2>
+      <p class="section-sub reveal">Le cose più sorprendenti dei tre paesi — verificate, non da guida turistica riciclata.</p>
+
+      <h3 style="margin-top:0;">☀️ Simulatore del sole — San José</h3>
+      <p class="section-sub reveal">A 10° dall'equatore la luce dura circa 12 ore tutto l'anno e il buio arriva di colpo verso le sei. Conta parecchio: i parchi chiudono presto e le strade di montagna al buio non sono il massimo.</p>
+      <div class="card reveal" style="text-align:center;">
+        <div class="sun-sim-wrap">
+          <svg id="sun-sim" viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="skyGradient" x1="0" y1="0" x2="0" y2="1">
+                <stop id="sky-stop-top" offset="0%" stop-color="#2f6fb0"/>
+                <stop id="sky-stop-bottom" offset="100%" stop-color="#bfe3ff"/>
+              </linearGradient>
+            </defs>
+            <rect x="2" y="4" width="496" height="176" rx="14" fill="url(#skyGradient)"/>
+            <path class="sun-arc" d="M 40,180 Q 250,20 460,180"/>
+            <path class="sun-hills" d="M0,200 Q80,160 160,192 T320,188 T500,200 L500,220 L0,220 Z"/>
+            <line class="sun-horizon" x1="0" y1="180" x2="500" y2="180"/>
+            <text x="40" y="200" text-anchor="middle" class="sun-label">🌅 ~05:40</text>
+            <text x="460" y="200" text-anchor="middle" class="sun-label">🌇 ~17:50</text>
+            <g id="sun-marker"><text x="0" y="0" text-anchor="middle" font-size="30">☀️</text></g>
+          </svg>
+          <div class="sun-slider-row">
+            <input type="range" id="sun-slider" min="240" max="1200" step="5" value="720" aria-label="Ora del giorno">
+            <div class="sun-slider-ticks"><span>04:00</span><span>12:00</span><span>20:00</span></div>
+          </div>
+          <div class="sun-readout" id="sun-readout">Calcolo posizione del sole…</div>
+          <div class="source-note">Simulazione per San José (CST, UTC-6). Alla latitudine del Centro America la durata del giorno varia pochissimo nell'arco dell'anno. Fonte: timeanddate.com.</div>
+        </div>
+      </div>
+
+      <h3>🤯 Lo sapevi che...</h3>
+      <div class="bigfive-grid" id="facts-grid"></div>
+    </div>
+  </section>
+
+  <!-- METEO -->
+  <section id="meteo" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌦️ Meteo — marzo</h2>
+      <p class="section-sub reveal">Stagione secca ovunque sul versante Pacifico. Cambia molto con la quota: fra la spiaggia e la foresta nuvolosa ci sono dieci gradi di differenza.</p>
+
+      <div class="weather-cols reveal">
+        <div>
+          <h4>Manuel Antonio (livello del mare)</h4>
+          <div class="weather-stats">
+            <div class="card"><div class="wval">30°+</div><div class="wlabel">Massima, umido</div></div>
+            <div class="card"><div class="wval">~23°</div><div class="wlabel">Minima</div></div>
+            <div class="card"><div class="wval">Secco</div><div class="wlabel">Piena stagione secca</div></div>
+          </div>
+        </div>
+        <div>
+          <h4>Monteverde (~1.400 m)</h4>
+          <div class="weather-stats">
+            <div class="card"><div class="wval">~21°</div><div class="wlabel">Massima</div></div>
+            <div class="card"><div class="wval">~13°</div><div class="wlabel">Minima</div></div>
+            <div class="card"><div class="wval">Nuvola</div><div class="wlabel">Umidità alta tutto l'anno</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Cosa mettere in valigia, in una riga:</strong> roba leggera da caldo umido, <strong>una felpa e una giacca antipioggia leggera per Monteverde</strong> (dove fa fresco e piove anche in stagione secca, perché la nuvola è il clima), scarpe da trekking che si possono bagnare, e ciabatte. Niente di pesante: in quindici giorni non serve mai.
+        <div class="source-note">Fonti: enchantingtravels.com, costaricavibes.com, wtp.travel — verificate ad agosto 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CIBO -->
+  <section id="cibo" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🍽️ Cibo &amp; alcolici</h2>
+      <p class="section-sub reveal">Tre paesi, lo stesso piatto di base — riso e fagioli — declinato in tre modi che i locali giurano essere diversissimi.</p>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>🇨🇷 Gallo pinto</h3><p>Riso e fagioli saltati insieme, la colazione nazionale di Costa Rica <strong>e</strong> Nicaragua. I due paesi litigano su chi l'ha inventato. In Costa Rica si fa coi fagioli neri e la salsa Lizano; in Nicaragua coi fagioli rossi.</p></div>
+        <div class="card reveal"><h3>🇨🇷 Casado</h3><p>Il piatto unico del pranzo: riso, fagioli, insalata, platano fritto e una proteina. Nelle <em>sodas</em>, le trattorie locali, costa una frazione dei ristoranti turistici ed è il modo giusto di mangiare in Costa Rica senza svenarsi.</p></div>
+        <div class="card reveal"><h3>🇳🇮 Vigorón</h3><p>Specialità di <strong>Granada</strong>: yuca lessa, cotenna di maiale croccante e insalata di cavolo, servita su una foglia di banano. Si mangia con le mani in piazza.</p></div>
+        <div class="card reveal"><h3>🇳🇮 Nacatamal</h3><p>Il tamal nicaraguense: massa di mais con maiale, riso, patate e menta, cotta avvolta in foglie di banano. Enorme, si mangia la domenica mattina.</p></div>
+        <div class="card reveal"><h3>🇵🇦 Sancocho</h3><p>La zuppa nazionale panamense: pollo, yuca e <strong>culantro</strong> (parente del coriandolo, molto più intenso). È quello che si mangia il giorno dopo aver bevuto.</p></div>
+        <div class="card reveal"><h3>🍺 Da bere</h3><p><strong>Nicaragua</strong>: birre Toña e Victoria, e soprattutto il rum <strong>Flor de Caña</strong>, uno dei migliori dell'America Latina. <strong>Costa Rica</strong>: Imperial, con l'aquila sull'etichetta. <strong>Panama</strong>: Balboa e Panamá, e il <em>seco herrerano</em>, distillato di canna.</p></div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Il salto di prezzo è la cosa che colpisce di più.</strong> Lo stesso pasto costa circa il doppio passando dal Nicaragua alla Costa Rica. Se il budget è un tema, mangiate nelle <em>sodas</em> e nei <em>comedores</em>: sono le mense locali, hanno il menù scritto a mano su una lavagna e sono ottime.
+        <div class="source-note">Prezzi indicativi da bucketlist2life.com e 4corners7seas.com (~40$/giorno in Nicaragua, ~50$/giorno in Costa Rica, budget backpacker) — verificati ad agosto 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOLI -->
+  <section id="voli" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">✈️ Voli</h2>
+      <p class="section-sub reveal">La chiave è cercare un <strong>multi-city</strong>: si entra da Managua e si esce da Panama City. Cercare due andata-e-ritorno separati costa molto di più.</p>
+
+      <div class="card reveal">
+        <table class="hub-table">
+          <thead><tr><th>Tratta</th><th>Scalo tipico</th><th>Note</th></tr></thead>
+          <tbody>
+            <tr><td>Italia → Managua (MGA)</td><td>Madrid o Panama City</td><td>Nessun diretto. Iberia via Madrid è la rotta più lineare dall'Europa</td></tr>
+            <tr><td>Italia → San José (SJO)</td><td>Madrid o Francoforte</td><td>Da Malpensa la coincidenza più comoda è Madrid; tariffe da ~448€ da Milano, ~377€ da Roma</td></tr>
+            <tr><td>Italia → Panama City (PTY)</td><td>Madrid o Amsterdam</td><td>Copa Airlines ha il suo hub qui: è il nodo di tutto il Centro America</td></tr>
+            <tr><td>San José → Panama City</td><td>diretto</td><td>~1h, volo interno alla regione. Sostituisce ~16h di bus fino al confine</td></tr>
+          </tbody>
+        </table>
+        <div class="source-note">Prezzi rilevati ad agosto 2026 per date generiche, non per marzo 2027: consideratele un ordine di grandezza. Tariffe più basse viste: 362€ verso San José (solo andata/offerta), voli Italia-Costa Rica da 401€. Fonti: kayak.it, airfrance.it, idealo. La rotta multi-city MGA in / PTY out non l'ho potuta quotare: va verificata direttamente.</div>
+      </div>
+
+      <div class="card reveal">
+        <div class="flight-form">
+          <div class="field">
+            <label for="flight-origin">Da dove parti</label>
+            <select id="flight-origin">
+              <option value="MXP|Milano Malpensa">Milano Malpensa (MXP)</option>
+              <option value="FCO|Roma Fiumicino">Roma Fiumicino (FCO)</option>
+              <option value="LIN|Milano Linate">Milano Linate (LIN)</option>
+              <option value="BGY|Milano Bergamo">Milano Bergamo (BGY)</option>
+              <option value="BLQ|Bologna">Bologna (BLQ)</option>
+              <option value="VCE|Venezia">Venezia (VCE)</option>
+            </select>
+          </div>
+          <div class="field"><label>Destinazione</label><select disabled><option>Managua (MGA) → Panama City (PTY)</option></select></div>
+          <div class="field"><label>Periodo</label><select disabled><option>Marzo 2027 (da confermare)</option></select></div>
+        </div>
+        <div class="flight-links">
+          <button id="btn-google-flights">Cerca multi-city su Google Flights</button>
+          <button class="alt" id="btn-skyscanner">Cerca su Skyscanner</button>
+          <button class="alt" id="btn-kayak">Cerca su Kayak</button>
+        </div>
+        <div class="source-note">I pulsanti Skyscanner e Kayak cercano il semplice andata e ritorno su Managua, che serve come riferimento di prezzo. Per il multi-city vero usate Google Flights.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUDGET -->
+  <section id="budget" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">💰 Calcolatore budget</h2>
+      <p class="section-sub reveal">Qui il volo è la voce più grossa e il resto si comprime parecchio, al contrario di un viaggio come la Tanzania. Stima indicativa, non un preventivo.</p>
+
+      <div class="card reveal">
+        <div class="currency-form">
+          <div class="field">
+            <label for="budget-people">Persone</label>
+            <input type="number" id="budget-people" value="4" min="1">
+          </div>
+          <div class="field">
+            <label for="budget-style">Stile viaggio</label>
+            <select id="budget-style">
+              <option value="budget">Budget</option>
+              <option value="standard" selected>Standard</option>
+              <option value="comfort">Comfort</option>
+            </select>
+          </div>
+        </div>
+        <div id="budget-result" class="cur-result">—</div>
+        <div id="budget-breakdown" class="source-note" style="text-align:center; margin-top:10px;"></div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Il costo cambia da paese a paese dentro lo stesso viaggio.</strong> Cinque giorni in Nicaragua costano quanto tre in Costa Rica. Se il budget stringe, la leva non è tagliare giorni: è spostarli verso nord.
+      </div>
+
+      <div class="source-note">Include: volo multi-city Italia-Managua / Panama City-Italia, carta turistica Nicaragua, trasporti fra le tappe (incluso il volo San José-Panama City), alloggio, cibo, ingressi ai parchi e un paio di attività forti (sandboarding sul Cerro Negro, guida in un parco). Esclude: spese personali, gite extra come San Blas o Bocas del Toro, assicurazione. Dati reali da: kayak.it (voli), costaricatravelblog.com e entercostarica.com (ingressi parchi), getyourguide.com e viator.com (attività), bucketlist2life.com (costo giornaliero) — verificati ad agosto 2026.</div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">❓ Domande frequenti</h2>
+
+      <details class="faq reveal">
+        <summary>Il Nicaragua è sicuro?</summary>
+        <div class="faq-body">Dipende da cosa si intende. Per la criminalità comune, le città turistiche (Granada, León, Ometepe) sono considerate tranquille, e la Farnesina <strong>non</strong> mette il Nicaragua fra i paesi totalmente sconsigliati. Il problema è politico: il Dipartimento di Stato americano lo tiene a <strong>Livello 3 — "riconsiderare il viaggio"</strong>, per detenzioni arbitrarie e applicazione arbitraria delle leggi, e fra 2018 e 2025 sono stati documentati 318 divieti d'ingresso, stranieri inclusi. In pratica: il viaggio quasi sempre fila liscio, ma non c'è un sistema di garanzie su cui contare se qualcosa va storto. Se questo non vi va bene, si toglie e si fanno Costa Rica e Panama in profondità.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Perché marzo?</summary>
+        <div class="faq-body">Perché è piena stagione secca su tutto il versante Pacifico, e le fonti consultate indicano <strong>febbraio e marzo come i due mesi migliori</strong> proprio per un giro Arenal-Monteverde-Manuel Antonio: cielo pulito sui vulcani, sentieri asciutti, animali concentrati vicino all'acqua. È il raro caso in cui il periodo abituale del gruppo è anche quello ottimale. Il rovescio della medaglia è che è alta stagione: va prenotato tutto molto prima.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Si vede davvero la lava sul Masaya?</summary>
+        <div class="faq-body">No, non come nelle foto famose. Il lago di lava <strong>non è più visibile da una frana del 2024</strong>. Il parco è riaperto, i tour notturni ci sono e un bagliore rosso dal cratere si vede ancora, ma molto attenuato. Resta comunque uno dei pochi posti al mondo dove si arriva in auto sul bordo di un cratere attivo — solo, aspettatevi quello e non il lago di lava.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Quanto costa davvero?</summary>
+        <div class="faq-body">La voce grossa è il volo intercontinentale. A terra si viaggia con poco: circa <strong>40$ a testa al giorno in Nicaragua e 50$ in Costa Rica</strong> in versione economica, Panama nel mezzo. Il salto di prezzo fra Nicaragua e Costa Rica è netto — lo stesso pasto costa circa il doppio.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Serve il visto?</summary>
+        <div class="faq-body">Per gli italiani no, in nessuno dei tre. In Nicaragua si compra una <strong>carta turistica da 10$ in contanti</strong> all'arrivo, con passaporto valido almeno 6 mesi, e va inviato il modulo migratorio online circa una settimana prima. Costa Rica e Panama chiedono la <strong>prova del biglietto di uscita</strong>: nel nostro itinerario è già coperta dal volo per Panama e da quello di rientro.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Perché non andare via terra da San José a Panama City?</summary>
+        <div class="faq-body">Perché costa due giorni. Il valico di <strong>Paso Canoas</strong> è uno dei confini più caotici della regione, e da San José al confine sono <strong>circa 16 ore di autobus</strong>, di solito notturne, a cui vanno aggiunte le ore fino a Panama City. Un volo di un'ora costa poco e restituisce due giorni di viaggio vero.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Vale la pena aggiungere San Blas o Bocas del Toro?</summary>
+        <div class="faq-body">Solo dormendoci. San Blas in giornata significa <strong>partire alle 5 del mattino e fare quattro-cinque ore di trasferimento per lato</strong> fra sterrato e barca, più 22$ a testa in contanti al posto di blocco Guna. Bocas del Toro richiede un volo interno (45 minuti, 80-120$ a/r). Con un paio di giorni in più uno dei due entra bene; in giornata sono una spremuta.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Servono vaccinazioni particolari?</summary>
+        <div class="faq-body">Arrivando dall'Europa nessun vaccino è obbligatorio. Il rischio principale nelle zone basse è la <strong>dengue</strong>, trasmessa da zanzare attive di giorno: non esiste profilassi, l'unica difesa è il repellente. La malaria è a rischio basso sulle rotte turistiche. Come sempre, l'ultima parola è del centro di medicina dei viaggi.</div>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Nicaragua, Costa Rica &amp; Panama Trip Planner — file locale, parte del sito <a href="javascript:void(0)" class="home-link" onclick="showHub()">Patagucci Trips</a>. Mappa e ricerca voli richiedono una connessione internet al momento del click.
+  <div class="credits">Foto da Wikimedia Commons: Rhododendrites (vulcano Arenal, CC BY-SA 4.0) · Hulivili (vulcano Concepción, Ometepe, CC BY 2.0) · MongeNajera (Granada, CC BY-SA 3.0) · Matthias Bethke (ponti sospesi di Monteverde, CC BY-SA 4.0) · Krunal Desai (bradipo, CC BY-SA 4.0) · Bernard Gagnon (Manuel Antonio, CC0) · Ivo Kruusamägi (chiuse di Miraflores, CC BY-SA 4.0) · Dr. Thomas Liptak (Casco Viejo, CC BY-SA 4.0) · Mónica J. Mora (Isla Perro, Guna Yala, CC BY-SA 3.0). Tutte le immagini restano dei rispettivi autori sotto le licenze indicate.</div>
+</footer>
+
+<script>
+(function(){
+  // ---- Scrollspy nav ----
+  var navLinks = document.querySelectorAll('nav.tabs a[href^="#"]');
+  var sections = document.querySelectorAll('section[data-nav]');
+  var linkBySection = {};
+  navLinks.forEach(function(a){ linkBySection[a.getAttribute('href').slice(1)] = a; });
+
+  var spyObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        navLinks.forEach(function(a){ a.classList.remove('active'); });
+        var link = linkBySection[entry.target.id];
+        if(link){
+          link.classList.add('active');
+          link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(function(s){ spyObserver.observe(s); });
+
+  // ---- Reveal on scroll ----
+  var revealObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ revealObserver.observe(el); });
+
+  // ---- Coordinate + link Google Maps ----
+  var COORDS = {
+    managua: [12.1150, -86.2362],
+    leon: [12.4345, -86.8790],
+    granada: [11.9297, -85.9560],
+    ometepe: [11.5400, -85.7000],
+    arenal: [10.4678, -84.6433],
+    monteverde: [10.3005, -84.8225],
+    manuelantonio: [9.3900, -84.1400],
+    sanjose: [9.9333, -84.0833],
+    panamacity: [8.9824, -79.5199],
+    sanblas: [9.5700, -78.9600]
+  };
+  function mapsLink(fromKey, toKey){
+    var a = COORDS[fromKey], b = COORDS[toKey];
+    return 'https://www.google.com/maps/dir/?api=1&origin=' + a[0] + ',' + a[1] + '&destination=' + b[0] + ',' + b[1] + '&travelmode=driving';
+  }
+  function placeLink(key){
+    var p = COORDS[key];
+    return 'https://www.google.com/maps/search/?api=1&query=' + p[0] + ',' + p[1];
+  }
+
+  var ITINERARY = [
+    { d:1, title:'Arrivo a Managua', tags:['Arrivo','Nicaragua'], text:'Volo dall\'Italia con uno o due scali (di norma Madrid, a volte Panama City). Si dorme vicino all\'aeroporto o si tira dritto verso León: Managua non è una città da visitare e nessuno ci resta più del necessario.', link: placeLink('managua'), linkLabel:'Vedi Managua su Google Maps' },
+    { d:2, title:'León — sandboarding sul Cerro Negro', tags:['Nicaragua','~25$ + 5$','Vulcano'], text:'León è la città universitaria e ribelle del Nicaragua, con la cattedrale coloniale più grande del Centro America. Ma il motivo per cui ci si viene è a 45 minuti: il Cerro Negro, un cono di cenere nera alto 728 metri. Due ore di salita a piedi con la tavola in spalla, poi giù dalla parete seduti o in piedi, fino a 70 km/h. Tuta e occhiali li danno loro — la roccia vulcanica taglia i vestiti.', link: placeLink('leon'), linkLabel:'Vedi León su Google Maps', highlight:true },
+    { d:3, title:'León → Granada, vulcano Masaya di notte', tags:['Nicaragua','Trasferimento ~3h'], text:'Trasferimento verso sud fino a Granada, la città coloniale sul lago Nicaragua: portici, facciate colorate e una piazza dove si sta seduti a guardare. La sera, tour al vulcano Masaya — uno dei pochissimi posti al mondo dove una strada asfaltata arriva sul bordo di un cratere attivo.', link: mapsLink('leon','granada'), linkLabel:'Apri il tragitto León → Granada', highlight:true },
+    { d:4, title:'Granada — isolette del lago e Laguna de Apoyo', tags:['Nicaragua','Riposo'], text:'Giro in barca fra le <em>isletas</em>, le oltre trecento isolette formate da un\'antica eruzione del Mombacho, e pomeriggio alla Laguna de Apoyo: un cratere allagato con acqua tiepida e trasparente, a venti minuti dalla città. La giornata più tranquilla del viaggio, e la migliore per il vigorón in piazza.', link: placeLink('granada'), linkLabel:'Vedi Granada su Google Maps' },
+    { d:5, title:'Granada → Ometepe', tags:['Nicaragua','Traghetto'], text:'Discesa a Rivas e traghetto da San Jorge verso Ometepe: un\'isola fatta di due vulcani che escono dal lago, uniti da un istmo. Il Concepción è un cono perfetto e ancora attivo, il Maderas è spento e coperto di foresta. Sull\'isola ci si muove in scooter.', link: mapsLink('granada','ometepe'), linkLabel:'Apri il tragitto Granada → Ometepe', highlight:true },
+    { d:6, title:'Ometepe — Ojo de Agua e i due vulcani', tags:['Nicaragua','Scooter'], text:'Giornata sull\'isola: bagno all\'Ojo de Agua, una piscina naturale alimentata da una sorgente filtrata dalla roccia vulcanica, giro in scooter fra piantagioni di banane e petroglifi precolombiani, e tramonto sul lago con il cono del Concepción sopra la testa.', link: placeLink('ometepe'), linkLabel:'Vedi Ometepe su Google Maps' },
+    { d:7, title:'Ometepe → Peñas Blancas → La Fortuna', tags:['Frontiera','Giornata lunga'], text:'La giornata più impegnativa: traghetto, valico di Peñas Blancas verso la Costa Rica e discesa fino a La Fortuna, ai piedi dell\'Arenal. Cambia tutto in poche ore — le strade, i prezzi, il modo in cui è organizzato il turismo. Sera nelle sorgenti termali scaldate dal vulcano, che dopo una giornata così sono esattamente la cosa giusta.', link: mapsLink('ometepe','arenal'), linkLabel:'Apri il tragitto Ometepe → La Fortuna', highlight:true },
+    { d:8, title:'Arenal — ponti sospesi e cascata', tags:['Costa Rica','Parco 15$'], text:'Il vulcano più fotografato della Costa Rica, un cono quasi geometrico che ha eruttato senza interruzione dal 1968 al 2010. Camminata sui ponti sospesi dentro la foresta primaria, colata lavica del 1992 e cascata di La Fortuna, 70 metri dentro una gola, con la pozza dove ci si può buttare.', link: placeLink('arenal'), linkLabel:'Vedi l\'Arenal su Google Maps' },
+    { d:9, title:'Arenal → Monteverde in jeep-barca-jeep', tags:['Costa Rica','~3h','Il trasferimento bello'], text:'Il trasferimento più bello del viaggio: furgone fino al lago Arenal, traversata in barca col vulcano che si allontana alle spalle, e risalita in jeep sull\'altro lato fino a Monteverde. Circa tre ore contro le quattro-cinque della strada, e costa quasi uguale.', link: mapsLink('arenal','monteverde'), linkLabel:'Apri il tragitto Arenal → Monteverde', highlight:true },
+    { d:10, title:'Monteverde — la foresta nuvolosa', tags:['Costa Rica','Foresta nuvolosa'], text:'Si cammina letteralmente dentro una nuvola: muschi ed epifite su ogni ramo, visibilità corta, umidità totale. I ponti sospesi passano all\'altezza delle chiome, dove vive quasi tutto. È il posto giusto per il quetzal, e per capire perché "foresta nuvolosa" non è un modo di dire.', link: placeLink('monteverde'), linkLabel:'Vedi Monteverde su Google Maps', highlight:true },
+    { d:11, title:'Monteverde → Manuel Antonio', tags:['Costa Rica','Trasferimento ~4h'], text:'Discesa dalla montagna al Pacifico: si passa dai 13 gradi della foresta nuvolosa ai 30 della costa nella stessa giornata. Pomeriggio in spiaggia a Quepos o Manuel Antonio, che dopo dieci giorni di vulcani è meritato.', link: mapsLink('monteverde','manuelantonio'), linkLabel:'Apri il tragitto Monteverde → Manuel Antonio' },
+    { d:12, title:'Parco nazionale Manuel Antonio', tags:['Costa Rica','18$ · solo online','Bradipi'], text:'Foresta che finisce direttamente sulla spiaggia: bradipi appesi sopra il sentiero, scimmie cappuccine che provano a rubare lo zaino, iguane e procioni. Prendete una guida col telescopio: da soli si cammina in un bel bosco, con la guida si vedono venti animali. Biglietto da comprare online in anticipo, tetto di 600 persone al giorno, chiuso il martedì.', link: placeLink('manuelantonio'), linkLabel:'Vedi Manuel Antonio su Google Maps', highlight:true },
+    { d:13, title:'Manuel Antonio → San José → Panama City', tags:['Volo ~1h','Panama'], text:'Risalita a San José e volo per Panama City: un\'ora al posto dei due giorni che servirebbero via terra passando da Paso Canoas. Sera a Casco Viejo, il centro storico coloniale, con i grattacieli accesi sull\'altra sponda della baia.', link: mapsLink('manuelantonio','sanjose'), linkLabel:'Apri il tragitto Manuel Antonio → San José', highlight:true },
+    { d:14, title:'Canale di Panama e Casco Viejo', tags:['Panama','Miraflores'], text:'Mattina alle chiuse di Miraflores a guardare le navi salire di livello trainate dalle locomotive sulle banchine: un passaggio dura circa mezz\'ora ed è il momento in cui si capisce la scala della cosa. Pomeriggio a piedi nel Casco Viejo, fra facciate restaurate, tetti rossi e rovine, con la skyline moderna sempre sullo sfondo.', link: placeLink('panamacity'), linkLabel:'Vedi Panama City su Google Maps', highlight:true },
+    { d:15, title:'Rientro da Panama City', tags:['Partenza'], text:'Volo di rientro dall\'aeroporto di Tocumen, hub di Copa Airlines e crocevia di tutto il Centro America. Con qualche ora libera, si può salire sul Cerro Ancón per l\'ultima vista sul canale.', link: placeLink('panamacity'), linkLabel:'Vedi Panama City su Google Maps' }
+  ];
+
+  var timeline = document.getElementById('timeline');
+  ITINERARY.forEach(function(day, idx){
+    var det = document.createElement('details');
+    det.className = 'day reveal';
+    if(idx === 0) det.open = true;
+    var tagsHtml = day.tags.map(function(t){ return '<span class="tag' + (day.highlight ? ' highlight' : '') + '">' + t + '</span>'; }).join('');
+    det.innerHTML =
+      '<summary><span class="daynum">' + day.d + '</span><span class="daytitle">' + day.title + '</span><span class="chevron">▸</span></summary>' +
+      '<div class="day-body">' + tagsHtml + '<p>' + day.text + '</p>' +
+      '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
+      '</div>';
+    timeline.appendChild(det);
+    revealObserver.observe(det);
+  });
+
+  // ---- Il mezzo cambia lungo il percorso ----
+  // Furgone quasi ovunque, ma due traversate d'acqua e un volo alla fine.
+  var ROUTE_MODES = [
+    { verso:[70,145], mezzo:'🚐' },   // Managua → León
+    { verso:[115,176], mezzo:'🚐' },  // → Granada
+    { verso:[128,201], mezzo:'⛴️' },  // → Ometepe, traghetto sul lago Nicaragua
+    { verso:[186,262], mezzo:'🚐' },  // → La Fortuna, passando la frontiera
+    { verso:[163,285], mezzo:'🚤' },  // → Monteverde, jeep-barca-jeep sul lago Arenal
+    { verso:[205,334], mezzo:'🚐' },  // → Manuel Antonio
+    { verso:[431,359], mezzo:'✈️' }   // → Panama City, volo
+  ];
+
+  var routePath = document.getElementById('route-path');
+  var routeMarker = document.getElementById('jeep-marker');
+  if(routePath && routeMarker && routePath.getTotalLength){
+    var routeLen = routePath.getTotalLength();
+    var smil = routeMarker.querySelector('animateMotion');
+    if(smil) smil.remove();
+    routeMarker.setAttribute('text-anchor', 'middle');
+
+    var cursore = 0;
+    ROUTE_MODES.forEach(function(tratta){
+      var migliore = cursore, distMin = Infinity;
+      for(var i = Math.ceil(cursore * 400); i <= 400; i++){
+        var p = routePath.getPointAtLength(routeLen * i / 400);
+        var dx = p.x - tratta.verso[0], dy = p.y - tratta.verso[1];
+        var d = dx * dx + dy * dy;
+        if(d < distMin){ distMin = d; migliore = i / 400; }
+      }
+      tratta.fino = migliore;
+      cursore = migliore;
+    });
+    ROUTE_MODES[ROUTE_MODES.length - 1].fino = 1;
+
+    var posiziona = function(frazione){
+      var p = routePath.getPointAtLength(routeLen * frazione);
+      routeMarker.setAttribute('x', p.x);
+      routeMarker.setAttribute('y', p.y + 7);
+      var tratta = ROUTE_MODES.filter(function(t){ return frazione <= t.fino; })[0]
+                 || ROUTE_MODES[ROUTE_MODES.length - 1];
+      if(routeMarker.textContent !== tratta.mezzo) routeMarker.textContent = tratta.mezzo;
+    };
+
+    var DURATA = 20000, avvio = null;
+    var muovi = function(ts){
+      if(avvio === null) avvio = ts;
+      posiziona(((ts - avvio) % DURATA) / DURATA);
+      requestAnimationFrame(muovi);
+    };
+
+    var ridotto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(ridotto) posiziona(0); else requestAnimationFrame(muovi);
+  }
+
+  // ---- Budget calculator ----
+  var BUDGET = {
+    nights: 14,
+    // Il volo intercontinentale domina: a terra si viaggia con poco.
+    flight: { budget:620, standard:830, comfort:1150 },
+    // Volo interno San José → Panama City + trasferimenti fra le tappe + traghetti.
+    transportFixed: { budget:200, standard:290, comfort:430 },
+    // Ingressi ai parchi (Arenal 15$, Manuel Antonio 18$, Monteverde, Masaya)
+    // + Cerro Negro (~30$) + una guida in un parco.
+    activitiesFixed: { budget:130, standard:210, comfort:340 },
+    // Carta turistica Nicaragua 10$ + varie di frontiera.
+    visaFixed: { budget:15, standard:15, comfort:15 },
+    // Media dei tre paesi: il Nicaragua tira giu', la Costa Rica tira su.
+    lodgingPerNight: { budget:14, standard:38, comfort:95 },
+    foodPerDay: { budget:16, standard:30, comfort:58 },
+    extrasFixed: { budget:90, standard:170, comfort:300 }
+  };
+  var bgtPeople = document.getElementById('budget-people');
+  var bgtStyle = document.getElementById('budget-style');
+  var bgtResult = document.getElementById('budget-result');
+  var bgtBreakdown = document.getElementById('budget-breakdown');
+  function updateBudget(){
+    if(!bgtPeople) return;
+    var people = Math.max(1, parseInt(bgtPeople.value, 10) || 1);
+    var style = bgtStyle.value;
+    var perPerson = BUDGET.flight[style] + BUDGET.transportFixed[style] + BUDGET.activitiesFixed[style]
+                  + BUDGET.visaFixed[style] + BUDGET.extrasFixed[style]
+                  + BUDGET.nights * BUDGET.lodgingPerNight[style]
+                  + 15 * BUDGET.foodPerDay[style];
+    var totalGroup = perPerson * people;
+    bgtResult.textContent = '~' + Math.round(perPerson).toLocaleString('it-IT') + ' € a persona';
+    bgtBreakdown.textContent = 'Totale gruppo (' + people + ' persone): ~' + Math.round(totalGroup).toLocaleString('it-IT') + ' € — include volo multi-city, carta turistica, trasporti fra le tappe con il volo interno, alloggio, cibo, ingressi ai parchi e le attività principali.';
+  }
+  if(bgtPeople){
+    [bgtPeople, bgtStyle].forEach(function(el){ el.addEventListener('input', updateBudget); el.addEventListener('change', updateBudget); });
+    updateBudget();
+  }
+
+  // ---- Quando andare: stato delle stagioni ----
+  var ROUTES = [
+    { name:'Dicembre – aprile — versante Pacifico', open:true, note:'Stagione secca su tutti e tre i paesi. È la finestra dell\'itinerario.' },
+    { name:'Febbraio e marzo — il meglio del meglio', open:true, note:'I due mesi indicati senza esitazione per un giro Arenal-Monteverde-Manuel Antonio: cielo pulito sui vulcani e fauna concentrata vicino all\'acqua.' },
+    { name:'Maggio – agosto — stagione verde', open:true, note:'Piove quasi ogni pomeriggio ma le mattine reggono. Meno gente, prezzi più bassi, paesaggio verdissimo. Un compromesso accettabile.' },
+    { name:'Settembre e ottobre — versante Pacifico', open:false, note:'Il cuore della stagione delle piogge: strade sterrate difficili, vulcani nascosti, escursioni cancellate.' },
+    { name:'Settembre e ottobre — versante caraibico', open:true, note:'Il Caribe ha un calendario suo: proprio quando il Pacifico affoga, Bocas del Toro e San Blas sono al meglio.' }
+  ];
+  var routeStatus = document.getElementById('route-status');
+  if(routeStatus){
+    ROUTES.forEach(function(r){
+      var row = document.createElement('div');
+      row.className = 'r-name';
+      row.textContent = r.name;
+      var status = document.createElement('div');
+      status.className = 'r-status ' + (r.open ? 'open' : 'closed');
+      status.textContent = r.open ? 'Consigliato' : 'Sconsigliato';
+      var note = document.createElement('div');
+      note.className = 'route-note';
+      note.textContent = r.note;
+      routeStatus.appendChild(row);
+      routeStatus.appendChild(status);
+      routeStatus.appendChild(note);
+    });
+  }
+
+  // ---- Cose da non perdere ----
+  var FAMILIES = [
+    { sector:'Nicaragua', name:'Cerro Negro', size:'Mezza giornata', level:'Media', note:'Due ore di salita sul cono di cenere e discesa in tavola fino a 70 km/h. ~25$ + 5$ d\'ingresso.' },
+    { sector:'Nicaragua', name:'Vulcano Masaya', size:'Serata', level:'Facile', note:'Una strada asfaltata arriva sul bordo del cratere attivo. Diurna 4$, notturna 10$. Il lago di lava non è più visibile dal 2024.' },
+    { sector:'Nicaragua', name:'Granada', size:'2 notti', level:'Facile', note:'Città coloniale sul lago Nicaragua: portici, facciate colorate, le isletas in barca e il vigorón in piazza.' },
+    { sector:'Nicaragua', name:'Ometepe', size:'2 notti', level:'Facile', note:'Due vulcani che escono dal lago uniti da un istmo. Ojo de Agua, petroglifi e giri in scooter.' },
+    { sector:'Nicaragua', name:'León', size:'1 notte', level:'Facile', note:'La città universitaria e ribelle, con la cattedrale coloniale più grande del Centro America.' },
+    { sector:'Costa Rica', name:'Vulcano Arenal', size:'1-2 giorni', level:'Facile', note:'Cono quasi geometrico, in eruzione continua dal 1968 al 2010. Sorgenti termali, ponti sospesi e la cascata di La Fortuna. Parco 15$.' },
+    { sector:'Costa Rica', name:'Monteverde', size:'1-2 giorni', level:'Facile', note:'Foresta nuvolosa: si cammina dentro una nuvola, sui ponti sospesi all\'altezza delle chiome. Il posto giusto per il quetzal.' },
+    { sector:'Costa Rica', name:'Manuel Antonio', size:'Giornata', level:'Facile', note:'Foresta che finisce sulla spiaggia, con bradipi e scimmie cappuccine. 18$, solo online, 600 persone al giorno, chiuso il martedì.' },
+    { sector:'Costa Rica', name:'Jeep-barca-jeep', size:'~3h', level:'Facile', note:'Il trasferimento Arenal-Monteverde attraverso il lago, col vulcano che si allontana alle spalle. Più bello e più veloce della strada.' },
+    { sector:'Panama', name:'Chiuse di Miraflores', size:'Mezza giornata', level:'Facile', note:'Le navi salgono di 26 metri complessivi trainate da locomotive. Un passaggio dura circa mezz\'ora.' },
+    { sector:'Panama', name:'Casco Viejo', size:'Mezza giornata', level:'Facile', note:'Centro storico coloniale UNESCO, tetti rossi sulla baia e i grattacieli sull\'altra sponda. Il quartiere dove dormire.' },
+    { sector:'Extra', name:'San Blas / Guna Yala', size:'2-3 giorni', level:'Media', note:'365 isole governate dal popolo Guna. Partenza alle 5, 4-5h per lato fra sterrato e barca, 22$ al posto di blocco. In giornata è faticoso.' },
+    { sector:'Extra', name:'Bocas del Toro', size:'3 notti', level:'Facile', note:'Arcipelago caraibico: surf, snorkeling e locali. Volo interno da Panama City di 45 minuti, 80-120$ a/r.' },
+    { sector:'Extra', name:'Tortuguero', size:'2-3 giorni', level:'Facile', note:'I canali del Caribe costaricano, raggiungibili solo in barca o aereo. Da aggiungere solo se si toglie il Nicaragua.' }
+  ];
+
+  var famSectors = ['Tutti'].concat(Array.from(new Set(FAMILIES.map(function(f){ return f.sector; }))));
+  var famFilterRow = document.getElementById('family-filters');
+  var famGridEl = document.getElementById('family-grid');
+  var famActiveSector = 'Tutti';
+
+  function renderFamilies(){
+    famGridEl.innerHTML = '';
+    FAMILIES.filter(function(f){ return famActiveSector === 'Tutti' || f.sector === famActiveSector; }).forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'family-card';
+      card.innerHTML =
+        '<div class="fsector">' + f.sector + '</div>' +
+        '<div class="fname">' + f.name + '</div>' +
+        '<div class="flevel ' + f.level + '">' + f.level + '</div>' +
+        '<div class="fsize">' + f.size + '</div>' +
+        '<p class="fnote">' + f.note + '</p>';
+      famGridEl.appendChild(card);
+    });
+  }
+
+  famSectors.forEach(function(s){
+    var btn = document.createElement('button');
+    btn.textContent = s;
+    if(s === famActiveSector) btn.classList.add('active');
+    btn.addEventListener('click', function(){
+      famActiveSector = s;
+      famFilterRow.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderFamilies();
+    });
+    famFilterRow.appendChild(btn);
+  });
+  renderFamilies();
+
+  // ---- Lo sapevi che... facts ----
+  var FACTS = [
+    { icon:'🚢', text:'Il canale di Panama solleva le navi di 26 metri complessivi usando solo la gravità: l\'acqua scende dal lago Gatún nelle chiuse, senza pompe. Funziona così dal 1914.' },
+    { icon:'🪖', text:'La Costa Rica ha abolito l\'esercito nel 1948 e non l\'ha più ricostituito. Il bilancio della difesa è stato spostato su istruzione e sanità.' },
+    { icon:'🌿', text:'La Costa Rica ospita circa il 6% della biodiversità mondiale su meno dello 0,03% delle terre emerse, e protegge oltre un quarto del proprio territorio.' },
+    { icon:'🦈', text:'Il lago Nicaragua è l\'unico lago d\'acqua dolce al mondo dove sono stati documentati squali: gli squali toro risalgono il Río San Juan dal mare.' },
+    { icon:'🌋', text:'Il Nicaragua ha una fila di oltre venti vulcani allineati lungo la costa pacifica. Su uno di questi, il Masaya, ci si arriva in auto fino al bordo del cratere.' },
+    { icon:'🏝️', text:'Le isole San Blas sono amministrate dal popolo Guna, che ha ottenuto l\'autonomia nel 1925 dopo una rivolta armata e che oggi decide chi entra nel proprio territorio.' },
+    { icon:'💵', text:'Panama non stampa banconote proprie: usa il dollaro USA. Il balboa esiste solo come moneta metallica, agganciata 1:1 al dollaro dal 1904.' }
+  ];
+  var factsGrid = document.getElementById('facts-grid');
+  if(factsGrid){
+    FACTS.forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'bigfive-card';
+      card.innerHTML = '<div class="bf-icon">' + f.icon + '</div><p class="bf-fact" style="min-height:0;">' + f.text + '</p>';
+      factsGrid.appendChild(card);
+    });
+  }
+
+  // ---- Flight search links ----
+  function currentOrigin(){
+    var v = document.getElementById('flight-origin').value.split('|');
+    return { code: v[0], label: v[1] };
+  }
+  document.getElementById('btn-google-flights').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.google.com/travel/flights?q=' + encodeURIComponent('Voli multi-city da ' + o.label + ' a Managua e ritorno da Panama City a marzo 2027'), '_blank');
+  });
+  document.getElementById('btn-skyscanner').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.skyscanner.it/trasporti/voli/' + o.code.toLowerCase() + '/mga/270306/270320/', '_blank');
+  });
+  document.getElementById('btn-kayak').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.kayak.it/flights/' + o.code + '-MGA/2027-03-06/2027-03-20', '_blank');
+  });
+
+  // ---- Mappa: link rotta completa, tabelle, export KML ----
+  var STOPS = [
+    { name:'Managua (arrivo)', key:'managua' },
+    { name:'León', key:'leon' },
+    { name:'Granada', key:'granada' },
+    { name:'Ometepe', key:'ometepe' },
+    { name:'La Fortuna / Arenal', key:'arenal' },
+    { name:'Monteverde', key:'monteverde' },
+    { name:'Manuel Antonio', key:'manuelantonio' },
+    { name:'San José', key:'sanjose' },
+    { name:'Panama City', key:'panamacity' },
+    { name:'San Blas (fuori itinerario)', key:'sanblas' }
+  ];
+
+  var origin = COORDS.managua, destination = COORDS.manuelantonio;
+  var waypoints = ['leon','granada','ometepe','arenal','monteverde'].map(function(k){ return COORDS[k][0] + ',' + COORDS[k][1]; }).join('|');
+  document.getElementById('link-full-route').href =
+    'https://www.google.com/maps/dir/?api=1&origin=' + origin[0] + ',' + origin[1] +
+    '&destination=' + destination[0] + ',' + destination[1] +
+    '&waypoints=' + encodeURIComponent(waypoints) + '&travelmode=driving';
+
+  var stopsBody = document.querySelector('#stops-table tbody');
+  STOPS.forEach(function(s){
+    var c = COORDS[s.key];
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + s.name + '</td><td class="mono">' + c[0].toFixed(4) + ', ' + c[1].toFixed(4) + '</td><td><a href="' + placeLink(s.key) + '" target="_blank" rel="noopener">Apri ↗</a></td>';
+    stopsBody.appendChild(tr);
+  });
+
+  var LEGS = [
+    { day:2, label:'Managua → León', from:'managua', to:'leon', km:'~90 km', dur:'~1,5h' },
+    { day:3, label:'León → Granada', from:'leon', to:'granada', km:'~150 km', dur:'~3h' },
+    { day:5, label:'Granada → Rivas → traghetto → Ometepe', from:'granada', to:'ometepe', km:'~80 km + traghetto', dur:'~3h in tutto' },
+    { day:7, label:'Ometepe → Peñas Blancas → La Fortuna', from:'ometepe', to:'arenal', km:'~230 km', dur:'~8-10h con la frontiera' },
+    { day:9, label:'Arenal → Monteverde (jeep-barca-jeep)', from:'arenal', to:'monteverde', km:'~40 km in linea d\'aria', dur:'~3h' },
+    { day:11, label:'Monteverde → Manuel Antonio', from:'monteverde', to:'manuelantonio', km:'~180 km', dur:'~4h' },
+    { day:13, label:'Manuel Antonio → San José → volo a Panama City', from:'manuelantonio', to:'sanjose', km:'~160 km + volo', dur:'~3h + 1h di volo' }
+  ];
+  var legsBody = document.querySelector('#legs-table tbody');
+  LEGS.forEach(function(leg){
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>Giorno ' + leg.day + '</td><td>' + leg.label + '</td><td>' + leg.km + '</td><td>' + leg.dur + '</td><td><a href="' + mapsLink(leg.from, leg.to) + '" target="_blank" rel="noopener">Apri ↗</a></td>';
+    legsBody.appendChild(tr);
+  });
+
+  document.getElementById('btn-export-kml').addEventListener('click', function(){
+    var kmlPlacemarks = STOPS.map(function(s){
+      var c = COORDS[s.key];
+      return '<Placemark><name>' + s.name + '</name><Point><coordinates>' + c[1] + ',' + c[0] + ',0</coordinates></Point></Placemark>';
+    }).join('\\n');
+    var lineCoords = STOPS.slice(0, 9).map(function(s){ var c = COORDS[s.key]; return c[1] + ',' + c[0] + ',0'; }).join(' ');
+    var kml = '<?xml version="1.0" encoding="UTF-8"?>\\n' +
+      '<kml xmlns="http://www.opengis.net/kml/2.2"><Document>' +
+      '<name>Nicaragua, Costa Rica e Panama 2027 - Itinerario</name>' +
+      kmlPlacemarks +
+      '<Placemark><name>Percorso completo</name><LineString><tessellate>1</tessellate><coordinates>' + lineCoords + '</coordinates></LineString></Placemark>' +
+      '</Document></kml>';
+    var blob = new Blob([kml], { type: 'application/vnd.google-earth.kml+xml' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'centroamerica-2027-itinerario.kml';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  // ---- Simulatore del sole (San José, CST UTC-6) ----
+  // A 10° dall'equatore alba e tramonto sono quasi fissi tutto l'anno.
+  var SUNRISE_MIN = 5.67 * 60, SUNSET_MIN = 17.83 * 60, TWILIGHT = 30;
+  var sunMarker = document.getElementById('sun-marker');
+  var sunReadout = document.getElementById('sun-readout');
+  var sunSlider = document.getElementById('sun-slider');
+  var skyTop = document.getElementById('sky-stop-top');
+  var skyBottom = document.getElementById('sky-stop-bottom');
+  var NIGHT_TOP = [5,6,11], NIGHT_BOT = [18,23,38];
+  var DAWN_TOP = [45,32,74], DAWN_BOT = [255,150,90];
+  var DAY_TOP = [47,111,176], DAY_BOT = [191,227,255];
+  function lerp(a,b,t){ return a + (b - a) * t; }
+  function mixColor(c1,c2,t){ return 'rgb(' + Math.round(lerp(c1[0],c2[0],t)) + ',' + Math.round(lerp(c1[1],c2[1],t)) + ',' + Math.round(lerp(c1[2],c2[2],t)) + ')'; }
+  function rgbStr(c){ return 'rgb(' + c[0] + ',' + c[1] + ',' + c[2] + ')'; }
+  function skyColors(t){
+    var dSunrise = t - SUNRISE_MIN, dSunset = t - SUNSET_MIN;
+    if(Math.abs(dSunrise) <= TWILIGHT){
+      var f = (dSunrise + TWILIGHT) / (2 * TWILIGHT);
+      return f < 0.5
+        ? { top: mixColor(NIGHT_TOP, DAWN_TOP, f / 0.5), bot: mixColor(NIGHT_BOT, DAWN_BOT, f / 0.5) }
+        : { top: mixColor(DAWN_TOP, DAY_TOP, (f - 0.5) / 0.5), bot: mixColor(DAWN_BOT, DAY_BOT, (f - 0.5) / 0.5) };
+    }
+    if(Math.abs(dSunset) <= TWILIGHT){
+      var f2 = (dSunset + TWILIGHT) / (2 * TWILIGHT);
+      return f2 < 0.5
+        ? { top: mixColor(DAY_TOP, DAWN_TOP, f2 / 0.5), bot: mixColor(DAY_BOT, DAWN_BOT, f2 / 0.5) }
+        : { top: mixColor(DAWN_TOP, NIGHT_TOP, (f2 - 0.5) / 0.5), bot: mixColor(DAWN_BOT, NIGHT_BOT, (f2 - 0.5) / 0.5) };
+    }
+    if(t > SUNRISE_MIN && t < SUNSET_MIN) return { top: rgbStr(DAY_TOP), bot: rgbStr(DAY_BOT) };
+    return { top: rgbStr(NIGHT_TOP), bot: rgbStr(NIGHT_BOT) };
+  }
+  function renderSun(totalMinutes){
+    var hh = Math.floor(totalMinutes / 60), mm = Math.round(totalMinutes % 60);
+    var timeLabel = String(hh).padStart(2,'0') + ':' + String(mm).padStart(2,'0') + ' CST';
+    var sky = skyColors(totalMinutes);
+    if(skyTop) skyTop.setAttribute('stop-color', sky.top);
+    if(skyBottom) skyBottom.setAttribute('stop-color', sky.bot);
+
+    if(totalMinutes < SUNRISE_MIN || totalMinutes > SUNSET_MIN){
+      var beforeDawn = totalMinutes < SUNRISE_MIN;
+      sunMarker.style.transform = 'translate(' + (beforeDawn ? 40 : 460) + 'px,176px)';
+      sunMarker.querySelector('text').textContent = '🌙';
+      sunReadout.textContent = timeLabel + ' — buio, il sole ' + (beforeDawn ? 'non è ancora sorto' : 'è già tramontato');
+      return;
+    }
+    var frac = (totalMinutes - SUNRISE_MIN) / (SUNSET_MIN - SUNRISE_MIN);
+    var x = 40 + frac * 420;
+    var y = 180 - Math.sin(frac * Math.PI) * 155;
+    sunMarker.querySelector('text').textContent = '☀️';
+    sunMarker.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+    var phase = frac < 0.06 ? 'sta sorgendo — l\'ora giusta per entrare nei parchi'
+      : frac > 0.94 ? 'sta tramontando — fra poco è buio di colpo'
+      : (frac > 0.4 && frac < 0.6) ? 'è a picco: caldo pieno, gli animali si nascondono'
+      : 'è alto in cielo';
+    sunReadout.textContent = timeLabel + ' — il sole ' + phase;
+  }
+  if(sunSlider){
+    var nowUtc = new Date();
+    var cstNowMin = ((nowUtc.getUTCHours() * 60 + nowUtc.getUTCMinutes()) - 6 * 60 + 1440) % 1440;
+    var initial = Math.min(1200, Math.max(240, Math.round(cstNowMin / 5) * 5));
+    sunSlider.value = initial;
+    renderSun(initial);
+    sunSlider.addEventListener('input', function(){ renderSun(Number(sunSlider.value)); });
+  }
+
+})();
+</script>
+
+</body>
+</html>
