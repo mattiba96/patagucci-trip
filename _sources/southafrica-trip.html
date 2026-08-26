@@ -53,7 +53,7 @@
   <!-- PERCHE ANDARE -->
   <section id="perche" class="panel dark" data-nav>
     <div class="inner">
-      <h2 class="section-title reveal">✨ Perché andare proprio ora</h2>
+      <h2 class="section-title reveal">✨ Perché andare</h2>
       <p class="section-sub reveal">Il Sudafrica è probabilmente l'unico paese al mondo dove in due settimane si passa da una città oceanica con un clima mediterraneo a una savana con leoni ed elefanti a pochi metri — con nel mezzo una delle coste più belle del pianeta.</p>
 
       <div class="why-grid reveal">
@@ -706,6 +706,61 @@
     timeline.appendChild(det);
     revealObserver.observe(det);
   });
+
+  // ---- Il mezzo cambia lungo il percorso ----
+  // L'icona che scorre sulla mappa segue come ci si sposta davvero in quella
+  // tratta: aereo dove si vola, auto o jeep su strada, treno, piedi nei trekking.
+  var ROUTE_MODES = [
+    { verso:[165,378], mezzo:'🚗' },   // Città del Capo → Garden Route, in auto
+    { verso:[270,358], mezzo:'🚗' },   // → Tsitsikamma
+    { verso:[385,335], mezzo:'🚗' },   // → Port Elizabeth
+    { verso:[405,180], mezzo:'✈️' },   // Port Elizabeth → Kruger, in volo
+    { verso:[340,80], mezzo:'✈️' }    // arrivo al Kruger
+  ];
+
+  var routePath = document.getElementById('route-path');
+  var routeMarker = document.getElementById('jeep-marker');
+  if(routePath && routeMarker && routePath.getTotalLength){
+    var routeLen = routePath.getTotalLength();
+    var smil = routeMarker.querySelector('animateMotion');
+    if(smil) smil.remove();
+    routeMarker.setAttribute('text-anchor', 'middle');
+
+    // Proietta ogni tappa sul percorso, in avanti: i confini fra tratte
+    // risultano così sempre in ordine, anche sui giri ad anello.
+    var cursore = 0;
+    ROUTE_MODES.forEach(function(tratta){
+      var migliore = cursore, distMin = Infinity;
+      for(var i = Math.ceil(cursore * 400); i <= 400; i++){
+        var p = routePath.getPointAtLength(routeLen * i / 400);
+        var dx = p.x - tratta.verso[0], dy = p.y - tratta.verso[1];
+        var d = dx * dx + dy * dy;
+        if(d < distMin){ distMin = d; migliore = i / 400; }
+      }
+      tratta.fino = migliore;
+      cursore = migliore;
+    });
+    ROUTE_MODES[ROUTE_MODES.length - 1].fino = 1;
+
+    var posiziona = function(frazione){
+      var p = routePath.getPointAtLength(routeLen * frazione);
+      routeMarker.setAttribute('x', p.x);
+      routeMarker.setAttribute('y', p.y + 7);
+      var tratta = ROUTE_MODES.filter(function(t){ return frazione <= t.fino; })[0]
+                 || ROUTE_MODES[ROUTE_MODES.length - 1];
+      if(routeMarker.textContent !== tratta.mezzo) routeMarker.textContent = tratta.mezzo;
+    };
+
+    var DURATA = 20000, avvio = null;
+    var muovi = function(ts){
+      if(avvio === null) avvio = ts;
+      posiziona(((ts - avvio) % DURATA) / DURATA);
+      requestAnimationFrame(muovi);
+    };
+
+    var ridotto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(ridotto) posiziona(0); else requestAnimationFrame(muovi);
+  }
 
   // ---- Elevation profile chart ----
   var ELEVATIONS = [

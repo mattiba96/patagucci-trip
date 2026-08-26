@@ -121,106 +121,41 @@
           <path class="contour" d="M70 180 C 170 155, 300 160, 410 195"/>
           <path class="contour" d="M60 280 C 170 260, 300 265, 420 300"/>
 
-          <!-- Deserto del Thar, a ovest del Rajasthan -->
-          <path class="desert" d="M52 200 C 90 180, 120 195, 118 250 C 116 300, 85 330, 55 315 C 40 290, 42 235, 52 200 Z"/>
-          <text class="desert-label" x="80" y="262" text-anchor="middle">THAR</text>
-
-          <!-- Catena degli Aravalli, attraversa il Rajasthan da NE a SO -->
-          <path class="ridge" d="M196 196 C 170 224, 140 252, 112 288"/>
-          <path class="ridge" d="M206 206 C 180 234, 150 262, 122 298"/>
-          <text class="ridge-label" x="188" y="188" transform="rotate(46 188 188)">ARAVALLI</text>
-
-          <!-- Yamuna: scende da Delhi verso Agra -->
-          <path class="river" d="M238 158 C 250 200, 268 268, 288 326"/>
-          <text class="river-label" x="272" y="252" transform="rotate(70 272 252)">Yamuna</text>
-
-          <!-- Gange: l'ansa su cui sorge Varanasi -->
-          <path class="river" d="M352 232 C 372 262, 380 288, 392 300 C 404 312, 418 322, 436 330"/>
-          <text class="river-label" x="356" y="228" transform="rotate(52 356 228)">Gange</text>
-
           <path id="route-path" class="route-shadow" d="M 240,150 Q 170,180 130,230 Q 120,280 150,320 Q 220,350 290,340 Q 340,320 370,290 Q 300,240 240,150"/>
           <path class="route-line" d="M 240,150 Q 170,180 130,230 Q 120,280 150,320 Q 220,350 290,340 Q 340,320 370,290 Q 300,240 240,150"/>
 
           <circle class="pulse" cx="240" cy="150" r="8"/>
-
-          <g class="stop-pin" data-days="1,2,13,14" data-place="Delhi" role="button" aria-label="Delhi, giorni 1-2 e 13-14">
-            <circle class="halo" cx="240" cy="146" r="18"/>
+          <g class="stop-pin">
             <text x="240" y="140" text-anchor="middle" font-size="22">🕌</text>
             <text class="stop-label highlight" x="240" y="122" text-anchor="middle">Delhi</text>
-            <g class="day-badge" transform="translate(276,140)">
-              <rect x="-23" y="-7" width="46" height="14" rx="7"/>
-              <text y="3.2" text-anchor="middle">1-2 · 13-14</text>
-            </g>
           </g>
-
-          <g class="stop-pin" data-days="3,4" data-place="Jaipur — la Città Rosa" role="button" aria-label="Jaipur, giorni 3-4">
-            <circle class="halo" cx="130" cy="233" r="18"/>
+          <g class="stop-pin">
             <text x="130" y="238" text-anchor="middle" font-size="20">🏰</text>
             <text class="stop-label" x="130" y="220" text-anchor="middle">Jaipur</text>
-            <g class="day-badge" transform="translate(160,238)">
-              <rect x="-13" y="-7" width="26" height="14" rx="7"/>
-              <text y="3.2" text-anchor="middle">3-4</text>
-            </g>
           </g>
-
-          <g class="stop-pin" data-days="5,6,7" data-place="Ranthambore — safari delle tigri" role="button" aria-label="Ranthambore, giorni 5-7">
-            <circle class="halo" cx="150" cy="323" r="18"/>
+          <g class="stop-pin">
             <text x="150" y="328" text-anchor="middle" font-size="20">🐅</text>
             <text class="stop-label" x="150" y="346" text-anchor="middle">Ranthambore</text>
-            <g class="day-badge" transform="translate(180,328)">
-              <rect x="-13" y="-7" width="26" height="14" rx="7"/>
-              <text y="3.2" text-anchor="middle">5-7</text>
-            </g>
           </g>
-
-          <g class="stop-pin" data-days="8,9" data-place="Agra — Taj Mahal &amp; Agra Fort" role="button" aria-label="Agra, giorni 8-9">
-            <circle class="halo" cx="290" cy="327" r="18"/>
+          <g class="stop-pin">
             <text x="290" y="332" text-anchor="middle" font-size="22">🕌</text>
             <text class="stop-label highlight" x="290" y="354" text-anchor="middle">Agra</text>
-            <g class="day-badge" transform="translate(320,332)">
-              <rect x="-13" y="-7" width="26" height="14" rx="7"/>
-              <text y="3.2" text-anchor="middle">8-9</text>
-            </g>
           </g>
-
-          <g class="stop-pin" data-days="10,11,12" data-place="Varanasi — il Gange" role="button" aria-label="Varanasi, giorni 10-12">
-            <circle class="halo" cx="395" cy="277" r="18"/>
+          <g class="stop-pin">
             <text x="395" y="282" text-anchor="middle" font-size="20">🕉️</text>
-            <text class="stop-label" x="404" y="300" text-anchor="middle">Varanasi</text>
-            <g class="day-badge" transform="translate(363,282)">
-              <rect x="-15" y="-7" width="30" height="14" rx="7"/>
-              <text y="3.2" text-anchor="middle">10-12</text>
-            </g>
+            <text class="stop-label" x="415" y="264" text-anchor="middle">Varanasi</text>
           </g>
-
-          <g class="stop-pin minor" data-days="3" data-place="Chand Baori — il pozzo a gradoni" role="button" aria-label="Chand Baori, giorno 3">
-            <circle class="halo" cx="186" cy="188" r="14"/>
-            <text x="186" y="193" text-anchor="middle" font-size="14">🏛️</text>
-            <text class="stop-label" x="186" y="177" text-anchor="middle">Chand Baori</text>
-            <g class="day-badge" transform="translate(207,193)">
-              <rect x="-9" y="-6" width="18" height="12" rx="6"/>
-              <text y="2.8" text-anchor="middle">3</text>
-            </g>
+          <g class="stop-pin minor">
+            <text x="105" y="200" text-anchor="middle" font-size="14">🏛️</text>
+            <text class="stop-label" x="80" y="192" text-anchor="middle">Chand Baori</text>
           </g>
-
-          <g class="stop-pin minor" data-days="8" data-place="Fatehpur Sikri — la città fantasma" role="button" aria-label="Fatehpur Sikri, giorno 8">
-            <circle class="halo" cx="247" cy="344" r="14"/>
-            <text x="247" y="349" text-anchor="middle" font-size="14">👻</text>
-            <text class="stop-label" x="238" y="366" text-anchor="middle">Fatehpur Sikri</text>
-            <g class="day-badge" transform="translate(266,349)">
-              <rect x="-9" y="-6" width="18" height="12" rx="6"/>
-              <text y="2.8" text-anchor="middle">8</text>
-            </g>
+          <g class="stop-pin minor">
+            <text x="215" y="290" text-anchor="middle" font-size="14">👻</text>
+            <text class="stop-label" x="200" y="305" text-anchor="middle">Fatehpur Sikri</text>
           </g>
-
-          <g class="stop-pin minor" data-days="12" data-place="Sarnath — il primo sermone del Buddha" role="button" aria-label="Sarnath, giorno 12">
-            <circle class="halo" cx="412" cy="250" r="14"/>
-            <text x="412" y="255" text-anchor="middle" font-size="14">🛕</text>
-            <text class="stop-label" x="418" y="240" text-anchor="middle">Sarnath</text>
-            <g class="day-badge" transform="translate(392,255)">
-              <rect x="-10" y="-6" width="20" height="12" rx="6"/>
-              <text y="2.8" text-anchor="middle">12</text>
-            </g>
+          <g class="stop-pin minor">
+            <text x="410" y="255" text-anchor="middle" font-size="14">🛕</text>
+            <text class="stop-label" x="430" y="240" text-anchor="middle">Sarnath</text>
           </g>
 
           <g class="compass" transform="translate(455,40)">
@@ -241,17 +176,6 @@
             </animateMotion>
           </text>
         </svg>
-
-        <div class="map-legend">
-          <span><i>🔵</i> fiumi</span>
-          <span><i>⛰️</i> rilievi</span>
-          <span><i>🟡</i> deserto</span>
-          <span><i>①</i> giorni di itinerario</span>
-        </div>
-
-        <div class="map-detail" id="map-detail">
-          <p class="map-detail-hint">Tocca una tappa sulla mappa per vedere cosa si fa in quei giorni.</p>
-        </div>
       </div>
 
       <div class="map-actions reveal">
@@ -690,40 +614,59 @@
     revealObserver.observe(det);
   });
 
-  // ---- Mappa interattiva: cosa si fa in ogni tappa ----
-  // I giorni non sono riscritti a mano: si leggono da ITINERARY, così mappa
-  // e itinerario non possono divergere.
-  var mapSvg = document.getElementById('jeep-svg');
-  var mapDetail = document.getElementById('map-detail');
-  if(mapSvg && mapDetail){
-    var mapPins = mapSvg.querySelectorAll('.stop-pin[data-days]');
-    var escapeHtml = function(s){
-      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    };
-    var showStop = function(pin){
-      mapPins.forEach(function(p){ p.classList.remove('selected'); });
-      pin.classList.add('selected');
-      var wanted = pin.getAttribute('data-days').split(',').map(Number);
-      var rows = wanted.map(function(n){
-        var day = ITINERARY.filter(function(x){ return x.d === n; })[0];
-        if(!day) return '';
-        return '<li>' +
-          '<span class="md-day">Giorno ' + day.d + '</span>' +
-          '<span class="md-title">' + day.title + '</span>' +
-          '<p class="md-text">' + day.text + '</p>' +
-        '</li>';
-      }).join('');
-      mapDetail.innerHTML =
-        '<h4 class="md-place">' + escapeHtml(pin.getAttribute('data-place')) + '</h4>' +
-        '<ul class="md-list">' + rows + '</ul>';
-    };
-    mapPins.forEach(function(pin){
-      pin.setAttribute('tabindex', '0');
-      pin.addEventListener('click', function(){ showStop(pin); });
-      pin.addEventListener('keydown', function(e){
-        if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); showStop(pin); }
-      });
+  // ---- Il mezzo cambia lungo il percorso ----
+  // L'icona che scorre sulla mappa segue come ci si sposta davvero in quella
+  // tratta: aereo dove si vola, auto o jeep su strada, treno, piedi nei trekking.
+  var ROUTE_MODES = [
+    { verso:[130,230], mezzo:'🚗' },   // Delhi → Jaipur, su strada
+    { verso:[150,320], mezzo:'🚗' },   // → Ranthambore, su strada
+    { verso:[290,340], mezzo:'🚗' },   // → Agra, su strada
+    { verso:[370,290], mezzo:'🚆' },   // → Varanasi, treno diurno diretto
+    { verso:[240,150], mezzo:'✈️' }    // → Delhi, volo interno
+  ];
+
+  var routePath = document.getElementById('route-path');
+  var routeMarker = document.getElementById('jeep-marker');
+  if(routePath && routeMarker && routePath.getTotalLength){
+    var routeLen = routePath.getTotalLength();
+    var smil = routeMarker.querySelector('animateMotion');
+    if(smil) smil.remove();
+    routeMarker.setAttribute('text-anchor', 'middle');
+
+    // Proietta ogni tappa sul percorso, in avanti: i confini fra tratte
+    // risultano così sempre in ordine, anche sui giri ad anello.
+    var cursore = 0;
+    ROUTE_MODES.forEach(function(tratta){
+      var migliore = cursore, distMin = Infinity;
+      for(var i = Math.ceil(cursore * 400); i <= 400; i++){
+        var p = routePath.getPointAtLength(routeLen * i / 400);
+        var dx = p.x - tratta.verso[0], dy = p.y - tratta.verso[1];
+        var d = dx * dx + dy * dy;
+        if(d < distMin){ distMin = d; migliore = i / 400; }
+      }
+      tratta.fino = migliore;
+      cursore = migliore;
     });
+    ROUTE_MODES[ROUTE_MODES.length - 1].fino = 1;
+
+    var posiziona = function(frazione){
+      var p = routePath.getPointAtLength(routeLen * frazione);
+      routeMarker.setAttribute('x', p.x);
+      routeMarker.setAttribute('y', p.y + 7);
+      var tratta = ROUTE_MODES.filter(function(t){ return frazione <= t.fino; })[0]
+                 || ROUTE_MODES[ROUTE_MODES.length - 1];
+      if(routeMarker.textContent !== tratta.mezzo) routeMarker.textContent = tratta.mezzo;
+    };
+
+    var DURATA = 20000, avvio = null;
+    var muovi = function(ts){
+      if(avvio === null) avvio = ts;
+      posiziona(((ts - avvio) % DURATA) / DURATA);
+      requestAnimationFrame(muovi);
+    };
+
+    var ridotto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(ridotto) posiziona(0); else requestAnimationFrame(muovi);
   }
 
   // ---- Budget calculator ----
