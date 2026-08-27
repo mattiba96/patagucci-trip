@@ -889,8 +889,8 @@ vote_script = """
 
   document.getElementById('vote-chiave').addEventListener('click', function(){
     var scelta = window.prompt(
-      'La tua chiave personale serve a impedire che altri votino al posto tuo.\n\n' +
-      'Copiala se vuoi votare anche da un altro dispositivo con lo stesso nome.\n' +
+      'La tua chiave personale serve a impedire che altri votino al posto tuo.\\n\\n' +
+      'Copiala se vuoi votare anche da un altro dispositivo con lo stesso nome.\\n' +
       'Oppure incolla qui una chiave che avevi gia\u2019, per riprendere il tuo nome.',
       chiave);
     if(scelta === null) return;
@@ -1162,3 +1162,30 @@ with open(out_path, "w", encoding="utf-8") as f:
     f.write(final_html)
 
 print("Written", out_path, "length", len(final_html))
+
+# Il sito monta il JavaScript per concatenazione di stringhe: un escape
+# sbagliato produce uno script che non parte, e il resto della pagina
+# sembra a posto. Qui li controlliamo tutti prima di considerare fatto.
+def controlla_javascript(html):
+    import re, subprocess, tempfile, os, shutil
+    if not shutil.which("node"):
+        print("  (node non disponibile: salto il controllo di sintassi JS)")
+        return True
+    ok = True
+    for i, js in enumerate(re.findall(r"<script>(.*?)</script>", html, re.S)):
+        f = tempfile.NamedTemporaryFile("w", suffix=".js", delete=False, encoding="utf-8")
+        f.write(js); f.close()
+        r = subprocess.run(["node", "--check", f.name], capture_output=True, text=True)
+        os.unlink(f.name)
+        if r.returncode:
+            ok = False
+            righe = [l for l in r.stderr.splitlines() if l.strip()]
+            print("  ERRORE di sintassi nello script inline #%d:" % i)
+            for l in righe[:4]:
+                print("   ", l)
+    return ok
+
+if controlla_javascript(final_html):
+    print("  JavaScript: sintassi ok")
+else:
+    raise SystemExit("Build interrotta: JavaScript non valido nella pagina generata.")

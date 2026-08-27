@@ -6394,11 +6394,8 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
 
   document.getElementById('vote-chiave').addEventListener('click', function(){
     var scelta = window.prompt(
-      'La tua chiave personale serve a impedire che altri votino al posto tuo.
-
-' +
-      'Copiala se vuoi votare anche da un altro dispositivo con lo stesso nome.
-' +
+      'La tua chiave personale serve a impedire che altri votino al posto tuo.\n\n' +
+      'Copiala se vuoi votare anche da un altro dispositivo con lo stesso nome.\n' +
       'Oppure incolla qui una chiave che avevi gia’, per riprendere il tuo nome.',
       chiave);
     if(scelta === null) return;
