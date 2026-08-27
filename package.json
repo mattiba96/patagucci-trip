@@ -1,0 +1,27 @@
+{
+  "name": "patagucci-trip",
+  "version": "1.0.0",
+  "description": "Patagucci Trips - Travel destinations showcase and voting system",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattiba96/patagucci-trip.git"
+  },
+  "keywords": [
+    "travel",
+    "destinations",
+    "voting"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mattiba96/patagucci-trip/issues"
+  },
+  "homepage": "https://github.com/mattiba96/patagucci-trip#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
