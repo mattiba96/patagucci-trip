@@ -723,6 +723,11 @@ footer a.home-link{ color:var(--accent); font-weight:700; }
 .vote-btn{ color:var(--accent) !important; border-color:rgba(var(--accent-rgb),0.4) !important; }
 .site-switcher button.vote-btn.active{ color:#10100e !important; background:var(--accent) !important; }
 
+.vote-stato{ display:inline-block; font-size:0.76rem; font-weight:700; letter-spacing:0.03em;
+  padding:5px 11px; border-radius:999px; margin-bottom:10px;
+  background:rgba(255,255,255,0.08); color:#c7c2b6; border:1px solid rgba(255,255,255,0.16); }
+.vote-stato.online{ background:rgba(30,150,80,0.18); color:#8fe0ac; border-color:rgba(80,200,130,0.4); }
+.vote-stato.offline{ background:rgba(210,16,52,0.16); color:#ff9b8a; border-color:rgba(255,120,100,0.35); }
 .vote-who{ font-size:0.95rem; color:#e8e2d2; margin:0 0 6px; }
 .vote-link{ background:none; border:none; padding:0; font:inherit; color:var(--accent);
   text-decoration:underline; cursor:pointer; }
@@ -811,4 +816,7 @@ section.panel.dark .vote-vuoto{ color:#9b968a; }
   .vote-voters{ grid-template-columns:1fr; }
   .vote-login-box{ padding:22px 18px; }
   .vote-login-crew button{ min-height:48px; }
+  /* "cambia nome" resta un link nel testo, ma con l'area toccabile piena:
+     il margine negativo allarga il bersaglio senza spostare la riga. */
+  .vote-link{ display:inline-block; padding:12px 4px; margin:-12px 0; }
 }

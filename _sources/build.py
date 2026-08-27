@@ -548,6 +548,57 @@ vote_script = """
   var voti = leggi(K_VOTI, {});
   var nome = leggi(K_NOME, null);
 
+  // ---- API condivisa ----
+  // 'server' = i voti stanno online e li vedono tutti.
+  // 'locale' = nessuno storage collegato: si torna alla condivisione per link.
+  var modo = 'ignoto';
+
+  function api(percorso, opzioni){
+    return fetch('/api/voti' + (percorso || ''), Object.assign({
+      headers: { 'Content-Type': 'application/json' }
+    }, opzioni || {})).then(function(r){
+      return r.json().catch(function(){ return {}; }).then(function(d){
+        if(!r.ok){ var e = new Error(d.errore || ('http ' + r.status)); e.codice = d.errore; throw e; }
+        return d;
+      });
+    });
+  }
+
+  function adottaServer(d){
+    if(d && d.voti){ voti = d.voti; scrivi(K_VOTI, voti); }
+    modo = 'server';
+  }
+
+  // All'avvio: leggo il server. Se ho un voto locale piu' recente di quello
+  // online (l'ho messo mentre ero senza rete) lo ricarico su.
+  function sincronizza(){
+    var miePrima = nome && voti[nome] ? { picks: voti[nome].picks, ts: voti[nome].ts } : null;
+    return api('').then(function(d){
+      adottaServer(d);
+      if(miePrima && (!voti[nome] || voti[nome].ts < miePrima.ts)){
+        voti[nome] = miePrima;
+        return salvaSuServer(true);
+      }
+    }).then(function(){
+      return spingiCoda();
+    }).catch(function(e){
+      if(modo !== 'server') modo = 'locale';
+    }).then(function(){ disegna(); });
+  }
+
+  var salvataggioInCorso = false;
+  function salvaSuServer(silenzioso){
+    if(modo === 'locale' || !nome) return Promise.resolve();
+    salvataggioInCorso = true;
+    return api('', { method:'POST', body: JSON.stringify({ nome: nome, picks: miei() }) })
+      .then(function(d){ adottaServer(d); if(!silenzioso) disegna(); })
+      .catch(function(e){
+        if(e.codice === 'non_configurato'){ modo = 'locale'; disegna(); return; }
+        messaggio('Voto salvato qui, ma non sono riuscito a mandarlo online. Riprova con Aggiorna.', true);
+      })
+      .then(function(){ salvataggioInCorso = false; });
+  }
+
   // ---- codifica del voto per il link (base64url, sicura sugli accenti) ----
   function codifica(o){
     var b = new TextEncoder().encode(JSON.stringify(o)), t = '';
@@ -567,9 +618,29 @@ vote_script = """
     var esistente = voti[rec.n];
     // a parita' di nome vince il voto piu' recente
     if(esistente && esistente.ts >= (rec.t || 0)) return false;
-    voti[rec.n] = { picks: pulite, ts: rec.t || Date.now() };
+    var ts = rec.t || Date.now();
+    voti[rec.n] = { picks: pulite, ts: ts };
     scrivi(K_VOTI, voti);
+    // Un voto assorbito da un link va anche caricato online, altrimenti la
+    // prima lettura del server lo cancellerebbe da sotto i piedi.
+    daSpingere.push({ n: rec.n, picks: pulite, ts: ts });
     return true;
+  }
+
+  var daSpingere = [];
+
+  function spingiCoda(){
+    if(modo !== 'server' || !daSpingere.length) return Promise.resolve();
+    var coda = daSpingere.splice(0);
+    return coda.reduce(function(catena, r){
+      return catena.then(function(){
+        var online = voti[r.n];
+        if(online && online.ts >= r.ts) return;   // online c'e' gia' qualcosa di piu' recente
+        return api('', { method:'POST', body: JSON.stringify({ nome: r.n, picks: r.picks }) })
+          .then(adottaServer)
+          .catch(function(){});
+      });
+    }, Promise.resolve());
   }
 
   // ---- login ----
@@ -609,6 +680,7 @@ vote_script = """
     scrivi(K_VOTI, voti);
     messaggio('');
     disegna();
+    salvaSuServer();
   }
 
   var msgEl = document.getElementById('vote-msg');
@@ -627,8 +699,40 @@ vote_script = """
   var risultati = document.getElementById('vote-results');
   var votanti = document.getElementById('vote-voters');
 
+  var statoEl = document.getElementById('vote-stato');
+  var avvisoEl = document.getElementById('vote-avviso');
+  var refreshBtn = document.getElementById('vote-refresh');
+
+  function disegnaStato(){
+    if(modo === 'server'){
+      statoEl.className = 'vote-stato online';
+      statoEl.textContent = '\u25CF Voti condivisi — vedete tutti la stessa cosa';
+      refreshBtn.hidden = false;
+      avvisoEl.className = 'callout reveal visible';
+      avvisoEl.innerHTML = '<strong>I voti sono online.</strong> Ogni scelta viene salvata subito e la vedono tutti. ' +
+        'Se qualcuno vota mentre sei sulla pagina, premi <em>Aggiorna</em> per rileggere. ' +
+        'Il pulsante <em>Condividi</em> serve ancora, ma solo per mandare il link della votazione al gruppo.';
+    } else if(modo === 'locale'){
+      statoEl.className = 'vote-stato offline';
+      statoEl.textContent = '\u25CF Solo su questo dispositivo';
+      refreshBtn.hidden = true;
+      avvisoEl.className = 'callout warn reveal visible';
+      avvisoEl.innerHTML = '<strong>Lo storage condiviso non e\u2019 collegato,</strong> quindi il tuo voto resta ' +
+        '<strong>su questo telefono</strong>. Per mettere insieme il gruppo premi <em>Condividi il mio voto</em> ' +
+        'e manda il link su WhatsApp: chi lo apre se lo ritrova qui dentro. ' +
+        'Per attivare i voti online serve collegare lo storage su Vercel (Storage \u2192 Upstash for Redis) e rifare il deploy.';
+    } else {
+      statoEl.className = 'vote-stato';
+      statoEl.textContent = '\u25CF Controllo i voti online\u2026';
+      refreshBtn.hidden = true;
+      avvisoEl.className = 'callout reveal visible';
+      avvisoEl.textContent = '';
+    }
+  }
+
   function disegna(){
     var p = miei();
+    disegnaStato();
 
     chi.innerHTML = nome
       ? 'Stai votando come <strong>' + esc(nome) + '</strong> · <button type="button" class="vote-link" id="vote-cambia">cambia nome</button>'
@@ -751,7 +855,11 @@ vote_script = """
     var codice = m ? m[1] : String(v).trim();
     try {
       var rec = decodifica(codice);
-      if(unisci(rec)){ messaggio('Aggiunto il voto di ' + rec.n + '.'); disegna(); }
+      if(unisci(rec)){
+        messaggio('Aggiunto il voto di ' + rec.n + '.');
+        disegna();
+        spingiCoda().then(disegna);
+      }
       else { messaggio('Quel voto c’era gia’, o e’ piu’ vecchio di quello che hai.', true); }
     } catch(e){ messaggio('Non ho riconosciuto quel link.', true); }
   });
@@ -763,6 +871,16 @@ vote_script = """
     scrivi(K_VOTI, voti);
     messaggio('Voto azzerato.');
     disegna();
+    if(modo === 'server'){
+      api('?nome=' + encodeURIComponent(nome), { method:'DELETE' })
+        .then(function(d){ adottaServer(d); disegna(); })
+        .catch(function(){ messaggio('Azzerato qui, ma non online. Riprova con Aggiorna.', true); });
+    }
+  });
+
+  document.getElementById('vote-refresh').addEventListener('click', function(){
+    api('').then(function(d){ adottaServer(d); disegna(); messaggio('Voti aggiornati.'); })
+      .catch(function(){ messaggio('Non riesco a leggere i voti online.', true); });
   });
 
   // ---- voto arrivato da un link ----
@@ -791,6 +909,15 @@ vote_script = """
   }
 
   disegna();
+  sincronizza();
+
+  // Quando si torna sulla pagina votazioni, rileggo: nel frattempo
+  // qualcun altro puo' aver votato.
+  document.addEventListener('visibilitychange', function(){
+    if(!document.hidden && modo === 'server' && !salvataggioInCorso){
+      api('').then(function(d){ adottaServer(d); disegna(); }).catch(function(){});
+    }
+  });
 })();
 </script>
 """
@@ -814,6 +941,7 @@ vote_html = '''  <div class="destination" id="dest-vote" data-dest="vote">
       <section class="panel dark" data-nav>
         <div class="inner">
           <h2 class="section-title reveal">\U0001F5F3\uFE0F Il tuo voto</h2>
+          <div class="vote-stato" id="vote-stato"></div>
           <div class="vote-who" id="vote-who"></div>
           <p class="section-sub reveal" id="vote-counter">Scegli fino a 3 mete.</p>
           <div class="vote-grid" id="vote-grid"></div>
@@ -821,6 +949,7 @@ vote_html = '''  <div class="destination" id="dest-vote" data-dest="vote">
           <div class="vote-actions reveal">
             <button id="vote-share">\U0001F4E4 Condividi il mio voto</button>
             <button class="alt" id="vote-paste">\U0001F4E5 Aggiungi il voto di un altro</button>
+            <button class="alt" id="vote-refresh" hidden>\U0001F504 Aggiorna</button>
             <button class="ghost" id="vote-reset">\U0001F5D1\uFE0F Azzera il mio voto</button>
           </div>
           <div class="vote-msg" id="vote-msg" role="status" aria-live="polite"></div>
@@ -836,9 +965,7 @@ vote_html = '''  <div class="destination" id="dest-vote" data-dest="vote">
           <h3 style="margin-top:28px;">Chi ha votato</h3>
           <div class="vote-voters" id="vote-voters"></div>
 
-          <div class="callout warn reveal" id="vote-avviso">
-            <strong>Come funziona la condivisione, senza girarci intorno.</strong> Questo sito non ha un server: il tuo voto resta <strong>sul tuo telefono</strong>. Per mettere insieme il gruppo, premi <em>Condividi il mio voto</em> e manda il link su WhatsApp: chi lo apre se lo ritrova qui dentro. Finche&#39; non lo fate, ognuno vede solo se stesso.
-          </div>
+          <div class="callout reveal" id="vote-avviso"></div>
         </div>
       </section>
     </main>
