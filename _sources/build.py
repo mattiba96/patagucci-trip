@@ -552,15 +552,25 @@ final_html = f'''<!DOCTYPE html>
   .destination{{ display:none; }}
   .destination.active{{ display:block; animation:destIn .5s cubic-bezier(.16,1,.3,1) both; }}
   @keyframes destIn{{ from{{ opacity:0; transform:translateY(10px); }} to{{ opacity:1; transform:none; }} }}
+  /* Una riga sola che scorre, a qualsiasi larghezza.
+     Andando a capo occupava 97px gia' a 1280, 138px su tablet e 302px su
+     telefono: con la barra delle sezioni sotto restava zero schermo per il
+     contenuto. I due margin:auto la tengono centrata quando ci sta e non
+     rendono irraggiungibile il primo bottone quando invece scorre. */
   .site-switcher{{
     position:sticky; top:0; z-index:200;
-    display:flex; gap:6px; justify-content:center; flex-wrap:wrap;
+    display:flex; gap:6px; justify-content:flex-start; flex-wrap:nowrap;
+    overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
     background:linear-gradient(180deg, rgba(var(--accent-rgb),0.12), transparent 60%), linear-gradient(180deg,#181818,#0e0e0e);
     padding:10px 12px; box-shadow:0 6px 18px rgba(0,0,0,0.35);
     border-bottom:1px solid rgba(var(--accent-rgb),0.22);
     transition:background .5s ease, border-color .5s ease;
   }}
+  .site-switcher::-webkit-scrollbar{{ display:none; }}
+  .site-switcher > button:first-child{{ margin-left:auto; }}
+  .site-switcher > button:last-child{{ margin-right:auto; }}
   .site-switcher button{{
+    flex:0 0 auto; white-space:nowrap;
     border:1px solid transparent; background:rgba(255,255,255,0.06); color:#cfcfcf;
     padding:8px 16px; border-radius:999px; font-size:0.8rem; font-weight:700; cursor:pointer;
     text-transform:uppercase; letter-spacing:0.04em; transition:all .2s cubic-bezier(.16,1,.3,1);
@@ -569,6 +579,10 @@ final_html = f'''<!DOCTYPE html>
   .site-switcher button.active{{ background:var(--accent); color:#10100e; box-shadow:0 4px 14px rgba(var(--accent-rgb),0.4); }}
   .site-switcher button.home-btn{{ color:var(--accent); border-color:rgba(var(--accent-rgb),0.4); }}
   .site-switcher button.home-btn.active{{ color:#10100e; }}
+  @media (max-width:760px){{
+    .site-switcher{{ padding:7px 10px; }}
+    .site-switcher button{{ padding:10px 13px; font-size:0.72rem; letter-spacing:0.03em; min-height:44px; }}
+  }}
 </style>
 </head>
 <body>
@@ -605,7 +619,12 @@ function showDest(name){{
   if(target) target.classList.add('active');
   document.querySelectorAll('#site-switcher button').forEach(function(b){{ b.classList.remove('active'); }});
   var btn = document.querySelector('#site-switcher button[data-dest="' + name + '"]');
-  if(btn) btn.classList.add('active');
+  if(btn){{
+    btn.classList.add('active');
+    // Su mobile il selettore e' una riga che scorre: senza questo la meta
+    // attiva puo' restare fuori schermo.
+    btn.scrollIntoView({{ behavior:'smooth', block:'nearest', inline:'center' }});
+  }}
   var flagbar = document.getElementById('flagbar');
   if(flagbar && FLAG_BARS[name]) flagbar.style.background = FLAG_BARS[name];
   window.scrollTo({{ top: 0, left: 0, behavior: 'instant' }});

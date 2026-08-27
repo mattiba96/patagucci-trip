@@ -591,3 +591,119 @@ footer a.home-link{ color:var(--accent); font-weight:700; }
 .trip-card.soon{ display:flex; align-items:center; justify-content:center; background:radial-gradient(120% 100% at 50% 30%, rgba(255,255,255,0.06), var(--dark-base) 70%); border:1px dashed rgba(255,255,255,0.2); }
 .trip-card.soon .soon-inner{ text-align:center; color:#8f8b80; }
 .trip-card.soon .soon-inner .plus{ font-size:2.6rem; line-height:1; margin-bottom:6px; color:#5b6a61; }
+
+
+/* ============================================================
+   MOBILE  (<=760px)
+   Il sito era nato desktop: qui sotto ci sono solo gli scostamenti.
+   Il problema principale non era la larghezza — le griglie collassano
+   gia' da sole — ma l'altezza mangiata dalle due barre appiccicate.
+   ============================================================ */
+@media (max-width:760px){
+
+  /* --- Barra delle sezioni: una riga sola che scorre --- */
+  nav.tabs{ padding:7px 10px; gap:4px; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+  nav.tabs::-webkit-scrollbar{ display:none; }
+  nav.tabs a{ padding:10px 13px; font-size:0.72rem; letter-spacing:0.03em; }
+
+  /* --- Hero: piu' corto, cosi' il contenuto inizia prima --- */
+  header.hero{ min-height:74vh; padding:34px 18px 34px; }
+  header.hero h1{ font-size:clamp(2.1rem,10vw,3.4rem); margin-bottom:10px; }
+  header.hero .tagline{ font-size:0.94rem; line-height:1.6; }
+  .badge-row{ margin-top:16px; gap:6px; }
+  .badge{ font-size:0.72rem; padding:5px 11px; }
+  .scroll-cue{ margin-top:22px; }
+
+  /* --- Respiro dei pannelli: 78px in cima erano troppi --- */
+  section.panel{ padding:44px 16px 26px; }
+  h2.section-title{ font-size:clamp(1.5rem,6.6vw,2.1rem); gap:8px; align-items:flex-start; }
+  p.section-sub{ font-size:0.93rem; }
+  .card{ padding:16px; }
+  .callout{ padding:12px 14px; font-size:0.86rem; }
+  .info-grid .card h3{ font-size:1rem; }
+
+  /* --- Giorni dell'itinerario ---
+     Il rientro da 64px lasciava 225px di testo su 309 di card. */
+  details.day summary{ padding:13px 14px; gap:10px; }
+  details.day summary .daynum{ width:34px; height:34px; font-size:1rem; }
+  details.day summary .daytitle{ font-size:1.02rem; }
+  details.day .day-body{ padding:0 16px 16px; }
+
+  .stat-big{ gap:8px; }
+  .stat-big .num{ font-size:2.4rem; }
+  .stat-big .unit{ font-size:0.88rem; }
+
+  /* --- Mappa e pulsanti a tutta larghezza: piu' facili da centrare col pollice --- */
+  .jeep-map-wrap{ padding:12px; }
+  .map-actions{ flex-direction:column; gap:8px; }
+  .map-actions a, .map-actions button{ width:100%; text-align:center; }
+
+  /* --- Tabelle ---
+     La .card che le contiene e' gia' il contenitore che scorre: basta
+     renderlo fluido al tocco e segnalarlo, perche' uno scorrimento
+     orizzontale senza indizi visivi su mobile non lo trova nessuno. */
+  .card{ -webkit-overflow-scrolling:touch; }
+  .stops-table th, .stops-table td, .hub-table th, .hub-table td{ padding:8px 10px; }
+  /* I link 'Apri' in tabella erano 26x37: troppo stretti per il pollice. */
+  .stops-table td a{ display:inline-flex; align-items:center; justify-content:center;
+    min-height:44px; min-width:44px; }
+  /* Ombra sul bordo destro finche' c'e' tabella oltre il margine: sparisce
+     da sola quando si arriva in fondo (background-attachment:local). */
+  .card:has(> table.stops-table){
+    background-image:
+      linear-gradient(to right, var(--paper) 40%, rgba(255,255,255,0)),
+      linear-gradient(to left,  var(--paper) 40%, rgba(255,255,255,0)),
+      linear-gradient(to right, rgba(0,0,0,0.20), rgba(0,0,0,0)),
+      linear-gradient(to left,  rgba(0,0,0,0.20), rgba(0,0,0,0));
+    background-position:left center, right center, left center, right center;
+    background-repeat:no-repeat;
+    background-size:24px 100%, 24px 100%, 11px 100%, 11px 100%;
+    background-attachment:local, local, scroll, scroll;
+  }
+  section.panel.dark .card:has(> table.stops-table){
+    background-image:
+      linear-gradient(to right, #1b1b1b 40%, rgba(0,0,0,0)),
+      linear-gradient(to left,  #1b1b1b 40%, rgba(0,0,0,0)),
+      linear-gradient(to right, rgba(0,0,0,0.5), rgba(0,0,0,0)),
+      linear-gradient(to left,  rgba(0,0,0,0.5), rgba(0,0,0,0));
+  }
+
+  /* --- Grafico delle piogge: sfondava di ~150px --- */
+  .rain-chart{ overflow-x:auto; -webkit-overflow-scrolling:touch; gap:8px; padding-bottom:30px; }
+  .rain-chart .bar-col{ min-width:24px; flex:0 0 auto; }
+
+  /* --- Moduli ---
+     16px sul campo e' la soglia sotto cui iOS zooma da solo al focus. */
+  .currency-form, .flight-form{ flex-direction:column; align-items:stretch; gap:12px; }
+  .currency-form .field, .flight-form .field{ width:100%; }
+  .currency-form input, .currency-form select,
+  .flight-form input, .flight-form select{ font-size:16px; width:100%; }
+  .flight-links{ flex-direction:column; }
+  .flight-links button{ width:100%; }
+  .cur-result{ font-size:1.5rem; }
+
+  /* --- Filtri e caroselli --- */
+  .filter-row{ gap:6px; }
+  .filter-row button{ padding:9px 12px; font-size:0.78rem; }
+  .group-marquee-item{ width:210px; }
+  .group-marquee-item img{ width:210px; height:145px; }
+
+  .weather-stats{ grid-template-columns:1fr 1fr; gap:10px; }
+  .trip-grid{ gap:16px; }
+
+  /* --- Aree toccabili: sotto i 44px si sbaglia bersaglio --- */
+  nav.tabs a, .filter-row button, .flight-links button,
+  .map-actions a, .map-actions button, details.day summary{ min-height:44px; }
+  nav.tabs a{ display:flex; align-items:center; }
+  /* "Apri su Maps" e' il comando piu' usato in viaggio: deve essere grosso. */
+  details.day .maps-link{ min-height:44px; display:flex; align-items:center; justify-content:center; }
+  .bf-track-btn{ min-height:44px; padding:11px 16px; }
+  /* Le didascalie delle foto restano piccole: sono attribuzioni, non comandi. */
+}
+
+/* Schermi molto stretti (iPhone SE e simili) */
+@media (max-width:400px){
+  section.panel{ padding:38px 13px 22px; }
+  header.hero h1{ font-size:clamp(1.9rem,9.4vw,2.8rem); }
+  .weather-stats{ grid-template-columns:1fr; }
+}
