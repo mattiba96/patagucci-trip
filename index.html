@@ -49,8 +49,23 @@
 
 <div class="flagbar" id="flagbar"></div>
 
+  <div class="vote-login" id="vote-login" hidden>
+    <div class="vote-login-box" role="dialog" aria-modal="true" aria-labelledby="vote-login-title">
+      <h2 id="vote-login-title">Chi sei?</h2>
+      <p>Serve solo per firmare il tuo voto. Resta salvato su questo dispositivo, non lo vede nessun server.</p>
+      <div class="vote-login-crew" id="vote-login-crew"></div>
+      <div class="vote-login-other">
+        <label for="vote-login-input">Oppure scrivi il tuo nome</label>
+        <input id="vote-login-input" type="text" maxlength="24" autocomplete="off" placeholder="Il tuo nome">
+        <button id="vote-login-ok">Entra</button>
+      </div>
+    </div>
+  </div>
+
+
 <div class="site-switcher" id="site-switcher">
   <button class="home-btn active" data-dest="hub" onclick="showDest('hub')">🌍 Home</button>
+  <button class="vote-btn" data-dest="vote" onclick="showDest('vote')">🗳️ Votazioni</button>
   <button class="switch-btn" data-dest="np" onclick="showDest('np')">🇳🇵🇧🇹 Nepal & Bhutan</button>
         <button class="switch-btn" data-dest="pk" onclick="showDest('pk')">🇵🇰 Pakistan</button>
         <button class="switch-btn" data-dest="za" onclick="showDest('za')">🇿🇦 Sudafrica</button>
@@ -518,6 +533,53 @@
 
     <footer>
       Patagucci Trips — sito locale, un file unico per tutte le mete. Nessun dato viene inviato a server esterni: mappe, cambio valuta e ricerca voli richiedono internet solo al momento del click.
+    </footer>
+  </div>
+
+  <div class="destination" id="dest-vote" data-dest="vote">
+    <header class="hero" style="min-height:46vh;">
+      <div class="bg" style="background-image:linear-gradient(180deg, rgba(10,14,11,0.42) 0%, rgba(10,14,11,0.66) 55%, rgba(10,14,11,0.94) 100%), url('foto/destinazioni/A_land_enclosed_in_Mountains_-_Hunza_Valley.jpg'); background-position:center 45%;"></div>
+      <div class="content">
+        <h1>Votazioni</h1>
+        <p class="tagline">Ognuno sceglie le <strong>tre mete</strong> che vuole di piu&#39;. Poi si guarda cosa esce.</p>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel dark" data-nav>
+        <div class="inner">
+          <h2 class="section-title reveal">🗳️ Il tuo voto</h2>
+          <div class="vote-who" id="vote-who"></div>
+          <p class="section-sub reveal" id="vote-counter">Scegli fino a 3 mete.</p>
+          <div class="vote-grid" id="vote-grid"></div>
+
+          <div class="vote-actions reveal">
+            <button id="vote-share">📤 Condividi il mio voto</button>
+            <button class="alt" id="vote-paste">📥 Aggiungi il voto di un altro</button>
+            <button class="ghost" id="vote-reset">🗑️ Azzera il mio voto</button>
+          </div>
+          <div class="vote-msg" id="vote-msg" role="status" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="panel" data-nav>
+        <div class="inner">
+          <h2 class="section-title reveal">📊 Risultati</h2>
+          <p class="section-sub reveal">In ordine di preferenze raccolte. Compaiono solo le mete con almeno un voto.</p>
+          <div class="vote-results" id="vote-results"></div>
+
+          <h3 style="margin-top:28px;">Chi ha votato</h3>
+          <div class="vote-voters" id="vote-voters"></div>
+
+          <div class="callout warn reveal" id="vote-avviso">
+            <strong>Come funziona la condivisione, senza girarci intorno.</strong> Questo sito non ha un server: il tuo voto resta <strong>sul tuo telefono</strong>. Per mettere insieme il gruppo, premi <em>Condividi il mio voto</em> e manda il link su WhatsApp: chi lo apre se lo ritrova qui dentro. Finche&#39; non lo fate, ognuno vede solo se stesso.
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Votazioni Patagucci &mdash; i voti sono salvati solo nel browser di chi vota. Nessun dato esce da qui se non premendo <em>Condividi</em>.
     </footer>
   </div>
 
@@ -5921,6 +5983,7 @@
 <script>
 var FLAG_BARS = {
   hub: 'linear-gradient(90deg,#141414 0 50%, #FFCE00 50% 100%)',
+  vote: 'linear-gradient(90deg,#141414 0 33%, #FFCE00 33% 66%, #D21034 66% 100%)',
   ug: 'linear-gradient(90deg,#141414 0 33%, #FFCE00 33% 66%, #D21034 66% 100%)',
   pk: 'linear-gradient(90deg,#ffffff 0 25%, #01411C 25% 100%)',
   za: 'linear-gradient(90deg,#DE3831 0 16.6%, #ffffff 16.6% 33.3%, #002395 33.3% 50%, #007A4D 50% 66.6%, #FFB612 66.6% 83.3%, #000000 83.3% 100%)',
@@ -5974,6 +6037,267 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
   });
 });
 </script>
+
+
+<script>
+(function(){
+  var CREW = ['Manu','Kiki','Mala','Bacci'];
+  var METE = [{"suf": "np", "flag": "🇳🇵🇧🇹", "name": "Nepal & Bhutan", "periodo": "Marzo 2027 · 15 giorni"}, {"suf": "pk", "flag": "🇵🇰", "name": "Pakistan", "periodo": "Marzo 2027 · 15 giorni"}, {"suf": "za", "flag": "🇿🇦", "name": "Sudafrica", "periodo": "Marzo 2027 · 15 giorni"}, {"suf": "in", "flag": "🇮🇳", "name": "India", "periodo": "Marzo 2027 · 14 giorni"}, {"suf": "ug", "flag": "🇺🇬", "name": "Uganda", "periodo": "Fine feb / inizio mar 2027 · 10 giorni"}, {"suf": "tz", "flag": "🇹🇿", "name": "Tanzania", "periodo": "Settembre 2027 · 15 giorni"}, {"suf": "uk", "flag": "🇺🇿🇰🇬", "name": "Uzbekistan & Kirghizistan", "periodo": "Marzo 2027 · 14 giorni"}, {"suf": "gl", "flag": "🇬🇱", "name": "Groenlandia", "periodo": "Giugno 2027 · 7 giorni"}, {"suf": "cx", "flag": "🇳🇮🇨🇷🇵🇦", "name": "Nicaragua, Costa Rica & Panama", "periodo": "Marzo 2027 · 15 giorni"}, {"suf": "ge", "flag": "🇬🇪", "name": "Georgia", "periodo": "2-7 gennaio 2027 · 6 giorni"}];
+  var MAX = 3;
+  var K_NOME = 'pt_votante', K_VOTI = 'pt_voti';
+
+  // ---- persistenza ----
+  function leggi(k, d){ try{ var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
+  function scrivi(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+  var voti = leggi(K_VOTI, {});
+  var nome = leggi(K_NOME, null);
+
+  // ---- codifica del voto per il link (base64url, sicura sugli accenti) ----
+  function codifica(o){
+    var b = new TextEncoder().encode(JSON.stringify(o)), t = '';
+    b.forEach(function(c){ t += String.fromCharCode(c); });
+    return btoa(t).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+  }
+  function decodifica(t){
+    t = t.replace(/-/g,'+').replace(/_/g,'/');
+    var bin = atob(t), b = new Uint8Array(bin.length);
+    for(var i=0;i<bin.length;i++) b[i] = bin.charCodeAt(i);
+    return JSON.parse(new TextDecoder().decode(b));
+  }
+
+  function unisci(rec){
+    if(!rec || !rec.n || !Array.isArray(rec.p)) return false;
+    var pulite = rec.p.filter(function(x){ return METE.some(function(m){ return m.suf === x; }); }).slice(0, MAX);
+    var esistente = voti[rec.n];
+    // a parita' di nome vince il voto piu' recente
+    if(esistente && esistente.ts >= (rec.t || 0)) return false;
+    voti[rec.n] = { picks: pulite, ts: rec.t || Date.now() };
+    scrivi(K_VOTI, voti);
+    return true;
+  }
+
+  // ---- login ----
+  var login = document.getElementById('vote-login');
+  var crewBox = document.getElementById('vote-login-crew');
+  var input = document.getElementById('vote-login-input');
+
+  CREW.forEach(function(c){
+    var b = document.createElement('button');
+    b.type = 'button'; b.textContent = c;
+    b.addEventListener('click', function(){ entra(c); });
+    crewBox.appendChild(b);
+  });
+  document.getElementById('vote-login-ok').addEventListener('click', function(){ entra(input.value); });
+  input.addEventListener('keydown', function(e){ if(e.key === 'Enter') entra(input.value); });
+
+  function entra(v){
+    v = (v || '').trim().slice(0, 24);
+    if(!v){ input.focus(); return; }
+    nome = v; scrivi(K_NOME, nome);
+    login.hidden = true;
+    disegna();
+  }
+  function chiediNome(){ login.hidden = false; setTimeout(function(){ input.focus(); }, 50); }
+
+  // ---- voto ----
+  function miei(){ return (voti[nome] && voti[nome].picks) || []; }
+
+  function alterna(suf){
+    if(!nome){ chiediNome(); return; }
+    var p = miei().slice();
+    var i = p.indexOf(suf);
+    if(i >= 0){ p.splice(i, 1); }
+    else if(p.length >= MAX){ messaggio('Hai gia’ scelto ' + MAX + ' mete. Togline una per cambiare.', true); return; }
+    else { p.push(suf); }
+    voti[nome] = { picks: p, ts: Date.now() };
+    scrivi(K_VOTI, voti);
+    messaggio('');
+    disegna();
+  }
+
+  var msgEl = document.getElementById('vote-msg');
+  var msgTimer = null;
+  function messaggio(t, avviso){
+    msgEl.textContent = t;
+    msgEl.className = 'vote-msg' + (t ? ' visibile' : '') + (avviso ? ' avviso' : '');
+    clearTimeout(msgTimer);
+    if(t) msgTimer = setTimeout(function(){ msgEl.className = 'vote-msg'; msgEl.textContent = ''; }, 4500);
+  }
+
+  // ---- disegno ----
+  var griglia = document.getElementById('vote-grid');
+  var contatore = document.getElementById('vote-counter');
+  var chi = document.getElementById('vote-who');
+  var risultati = document.getElementById('vote-results');
+  var votanti = document.getElementById('vote-voters');
+
+  function disegna(){
+    var p = miei();
+
+    chi.innerHTML = nome
+      ? 'Stai votando come <strong>' + esc(nome) + '</strong> · <button type="button" class="vote-link" id="vote-cambia">cambia nome</button>'
+      : '<button type="button" class="vote-link" id="vote-cambia">Dimmi chi sei per votare</button>';
+    var cambia = document.getElementById('vote-cambia');
+    if(cambia) cambia.addEventListener('click', chiediNome);
+
+    contatore.textContent = nome
+      ? (p.length + ' di ' + MAX + ' scelte usate' + (p.length === MAX ? ' — per cambiare, togline una' : ''))
+      : 'Scegli fino a ' + MAX + ' mete.';
+
+    griglia.innerHTML = '';
+    METE.forEach(function(m){
+      var scelta = p.indexOf(m.suf) >= 0;
+      var pieno = !scelta && p.length >= MAX;
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'vote-card' + (scelta ? ' scelta' : '') + (pieno ? ' piena' : '');
+      b.setAttribute('aria-pressed', scelta ? 'true' : 'false');
+      b.innerHTML =
+        '<span class="v-flag">' + m.flag + '</span>' +
+        '<span class="v-nome">' + esc(m.name) + '</span>' +
+        '<span class="v-periodo">' + esc(m.periodo) + '</span>' +
+        '<span class="v-segno">' + (scelta ? '✓' : '') + '</span>';
+      b.addEventListener('click', function(){ alterna(m.suf); });
+      griglia.appendChild(b);
+    });
+
+    disegnaRisultati();
+  }
+
+  function disegnaRisultati(){
+    var conta = {};
+    var nomi = Object.keys(voti);
+    nomi.forEach(function(n){
+      (voti[n].picks || []).forEach(function(suf){
+        (conta[suf] = conta[suf] || []).push(n);
+      });
+    });
+    var righe = METE.filter(function(m){ return conta[m.suf]; })
+      .map(function(m){ return { m: m, chi: conta[m.suf] }; })
+      .sort(function(a, b){ return b.chi.length - a.chi.length || a.m.name.localeCompare(b.m.name); });
+
+    if(!righe.length){
+      risultati.innerHTML = '<p class="vote-vuoto">Nessun voto ancora. Scegli le tue tre mete qui sopra.</p>';
+    } else {
+      var max = righe[0].chi.length;
+      risultati.innerHTML = righe.map(function(r){
+        return '<div class="vote-row">' +
+          '<div class="vr-testa"><span class="vr-flag">' + r.m.flag + '</span>' +
+            '<span class="vr-nome">' + esc(r.m.name) + '</span>' +
+            '<span class="vr-conta">' + r.chi.length + (r.chi.length === 1 ? ' voto' : ' voti') + '</span></div>' +
+          '<div class="vr-barra"><span style="width:' + Math.round(r.chi.length / max * 100) + '%"></span></div>' +
+          '<div class="vr-chi">' + r.chi.map(esc).join(' · ') + '</div>' +
+        '</div>';
+      }).join('');
+    }
+
+    if(!nomi.length){
+      votanti.innerHTML = '<p class="vote-vuoto">Ancora nessuno.</p>';
+    } else {
+      votanti.innerHTML = nomi.sort().map(function(n){
+        var picks = (voti[n].picks || []).map(function(suf){
+          var m = METE.filter(function(x){ return x.suf === suf; })[0];
+          return m ? m.flag + ' ' + esc(m.name) : suf;
+        });
+        return '<div class="vote-voter">' +
+          '<div class="vv-nome">' + esc(n) + (n === nome ? ' <em>(tu)</em>' : '') + '</div>' +
+          '<div class="vv-picks">' + (picks.length ? picks.join(' · ') : '<em>nessuna scelta</em>') + '</div>' +
+          '<div class="vv-quando">' + quando(voti[n].ts) + '</div>' +
+        '</div>';
+      }).join('');
+    }
+  }
+
+  function quando(ts){
+    if(!ts) return '';
+    var d = new Date(ts);
+    return d.toLocaleDateString('it-IT', { day:'numeric', month:'short' }) + ' ' +
+           d.toLocaleTimeString('it-IT', { hour:'2-digit', minute:'2-digit' });
+  }
+  function esc(t){ return String(t).replace(/[&<>"]/g, function(c){
+    return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]; }); }
+
+  // ---- condivisione ----
+  function mioLink(){
+    if(!nome || !miei().length) return null;
+    var codice = codifica({ n: nome, p: miei(), t: voti[nome].ts });
+    return location.origin + location.pathname + '?v=' + codice;
+  }
+
+  document.getElementById('vote-share').addEventListener('click', function(){
+    if(!nome){ chiediNome(); return; }
+    if(!miei().length){ messaggio('Prima scegli almeno una meta.', true); return; }
+    var url = mioLink();
+    var testo = nome + ' vota: ' + miei().map(function(suf){
+      var m = METE.filter(function(x){ return x.suf === suf; })[0]; return m ? m.name : suf;
+    }).join(', ');
+    if(navigator.share){
+      navigator.share({ title: 'Votazioni Patagucci', text: testo, url: url })
+        .catch(function(){ copia(url); });
+    } else { copia(url); }
+  });
+
+  function copia(url){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(url)
+        .then(function(){ messaggio('Link copiato. Incollalo nel gruppo.'); })
+        .catch(function(){ chiediCopiaManuale(url); });
+    } else { chiediCopiaManuale(url); }
+  }
+  function chiediCopiaManuale(url){
+    window.prompt('Copia questo link e mandalo nel gruppo:', url);
+  }
+
+  document.getElementById('vote-paste').addEventListener('click', function(){
+    var v = window.prompt('Incolla qui il link (o il codice) che ti hanno mandato:');
+    if(!v) return;
+    var m = String(v).match(/[?&]v=([A-Za-z0-9_-]+)/);
+    var codice = m ? m[1] : String(v).trim();
+    try {
+      var rec = decodifica(codice);
+      if(unisci(rec)){ messaggio('Aggiunto il voto di ' + rec.n + '.'); disegna(); }
+      else { messaggio('Quel voto c’era gia’, o e’ piu’ vecchio di quello che hai.', true); }
+    } catch(e){ messaggio('Non ho riconosciuto quel link.', true); }
+  });
+
+  document.getElementById('vote-reset').addEventListener('click', function(){
+    if(!nome || !voti[nome]) return;
+    if(!window.confirm('Azzero il voto di ' + nome + '?')) return;
+    delete voti[nome];
+    scrivi(K_VOTI, voti);
+    messaggio('Voto azzerato.');
+    disegna();
+  });
+
+  // ---- voto arrivato da un link ----
+  var q = new URLSearchParams(location.search).get('v');
+  if(q){
+    try {
+      var rec = decodifica(q);
+      var nuovo = unisci(rec);
+      history.replaceState(null, '', location.origin + location.pathname);
+      if(typeof showDest === 'function') showDest('vote');
+      setTimeout(function(){
+        messaggio(nuovo ? ('Aggiunto il voto di ' + rec.n + '.')
+                        : ('Il voto di ' + rec.n + ' lo avevi gia’.'));
+      }, 300);
+    } catch(e){}
+  }
+
+  if(!nome){
+    // Il nome lo chiedo solo quando si apre la pagina votazioni, non all'ingresso
+    // nel sito: chi arriva per leggere gli itinerari non deve sbattere in un modale.
+    var osserva = new MutationObserver(function(){
+      var v = document.getElementById('dest-vote');
+      if(v && v.classList.contains('active') && !nome && login.hidden) chiediNome();
+    });
+    osserva.observe(document.getElementById('dest-vote'), { attributes:true, attributeFilter:['class'] });
+  }
+
+  disegna();
+})();
+</script>
+
 
 <script>
 // ---- Nepal & Bhutan ----
