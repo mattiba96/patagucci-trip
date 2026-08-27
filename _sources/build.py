@@ -540,7 +540,7 @@ vote_script = """
   var CREW = ['Manu','Kiki','Mala','Bacci'];
   var METE = __METE__;
   var MAX = 3;
-  var K_NOME = 'pt_votante', K_VOTI = 'pt_voti', K_CHIAVE = 'pt_chiave';
+  var K_NOME = 'pt_votante', K_VOTI = 'pt_voti', K_CHIAVE = 'pt_chiave', K_INVITO = 'pt_invito';
 
   // ---- persistenza ----
   function leggi(k, d){ try{ var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
@@ -564,10 +564,13 @@ vote_script = """
   // 'locale' = nessuno storage collegato: si torna alla condivisione per link.
   var modo = 'ignoto';
 
+  var invito = leggi(K_INVITO, '') || '';
+  var invitiRichiesti = false, nomiAmmessi = null, mioNomeSulServer = null;
+
   function api(percorso, opzioni){
-    return fetch('/api/voti' + (percorso || ''), Object.assign({
-      headers: { 'Content-Type': 'application/json', 'x-voti-chiave': chiave }
-    }, opzioni || {})).then(function(r){
+    var testate = { 'Content-Type': 'application/json', 'x-voti-chiave': chiave };
+    if(invito) testate['x-voti-invito'] = invito;
+    return fetch('/api/voti' + (percorso || ''), Object.assign({ headers: testate }, opzioni || {})).then(function(r){
       return r.json().catch(function(){ return {}; }).then(function(d){
         if(!r.ok){
           var e = new Error(d.errore || ('http ' + r.status));
@@ -581,6 +584,11 @@ vote_script = """
 
   function adottaServer(d){
     if(d && d.voti){ voti = d.voti; scrivi(K_VOTI, voti); }
+    if(d && typeof d.invitiRichiesti !== 'undefined'){
+      invitiRichiesti = !!d.invitiRichiesti;
+      nomiAmmessi = d.nomiAmmessi || null;
+    }
+    if(d && typeof d.tuo !== 'undefined') mioNomeSulServer = d.tuo;
     modo = 'server';
   }
 
@@ -609,6 +617,13 @@ vote_script = """
       .then(function(d){ adottaServer(d); if(!silenzioso) disegna(); })
       .catch(function(e){
         if(e.codice === 'non_configurato'){ modo = 'locale'; disegna(); return; }
+        if(e.codice === 'invito_errato' || e.codice === 'nome_non_ammesso'){
+          chiediInvito(e.messaggio);
+          return;
+        }
+        // Rifiutato: rileggo dal server, cosi' l'interfaccia non mostra
+        // un voto che in realta' non e' stato registrato.
+        api('').then(adottaServer).catch(function(){}).then(disegna);
         if(e.codice === 'nome_occupato'){
           messaggio('Il nome "' + nome + '" e\u2019 gia\u2019 di qualcun altro: il tuo voto non e\u2019 stato salvato online. '
             + 'Cambia nome, oppure incolla la tua chiave se sei tu da un altro telefono.', true);
@@ -682,6 +697,16 @@ vote_script = """
     disegna();
   }
   function chiediNome(){ login.hidden = false; setTimeout(function(){ input.focus(); }, 50); }
+
+  function chiediInvito(spiegazione){
+    var v = window.prompt((spiegazione || 'Serve il codice di invito.') +
+      '\\n\\nIncollalo qui (te lo ha dato chi ha creato la votazione):', invito || '');
+    if(v === null){ api('').then(adottaServer).catch(function(){}).then(disegna); return; }
+    invito = v.trim(); scrivi(K_INVITO, invito);
+    if(!invito){ disegna(); return; }
+    messaggio('Riprovo con il codice\\u2026');
+    salvaSuServer();
+  }
 
   // ---- voto ----
   function miei(){ return (voti[nome] && voti[nome].picks) || []; }

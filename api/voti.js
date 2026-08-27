@@ -51,6 +51,25 @@ const TOKEN_REDIS =
 //   DELETE /api/voti?tutto=1   con header x-voti-segreto
 const SEGRETO = process.env.VOTI_SEGRETO || null;
 
+// Codici d'invito, facoltativi ma sono l'unica difesa vera.
+// La chiave personale nasce sul dispositivo: chi svuota i dati del browser
+// ne ottiene una nuova e puo' prendersi un altro nome. Con gli inviti no:
+// per prendersi un nome serve un codice che decidi tu e consegni a mano.
+//   VOTI_INVITI="Manu:ab12cd, Kiki:ef34gh, Mala:ij56kl, Bacci:mn78op"
+const INVITI = (() => {
+  const grezzo = process.env.VOTI_INVITI || '';
+  const mappa = new Map();
+  for (const pezzo of grezzo.split(/[,\n]/)) {
+    const i = pezzo.indexOf(':');
+    if (i < 1) continue;
+    const nome = pezzo.slice(0, i).trim();
+    const codice = pezzo.slice(i + 1).trim();
+    if (nome && codice) mappa.set(nome.toLowerCase(), { nome, codice });
+  }
+  return mappa;
+})();
+const INVITI_ATTIVI = INVITI.size > 0;
+
 async function redis(comando) {
   const r = await fetch(URL_REDIS, {
     method: 'POST',
@@ -190,7 +209,15 @@ export default async function handler(req, res) {
   try {
     if (req.method === 'GET') {
       const voti = aVoti(await redis(['HGETALL', CHIAVE]));
-      return res.status(200).json({ voti, aggiornato: Date.now() });
+      const ch = req.headers['x-voti-chiave'];
+      const tuo = ch ? await redis(['HGET', CHIAVE_PROPRIETARI, impronta(ch)]) : null;
+      return res.status(200).json({
+        voti,
+        tuo: tuo || null,
+        invitiRichiesti: INVITI_ATTIVI,
+        nomiAmmessi: INVITI_ATTIVI ? [...INVITI.values()].map((v) => v.nome) : null,
+        aggiornato: Date.now(),
+      });
     }
 
     if (req.method === 'POST') {
@@ -213,6 +240,31 @@ export default async function handler(req, res) {
       }
 
       const chiave = req.headers['x-voti-chiave'];
+
+      if (INVITI_ATTIVI) {
+        const atteso = INVITI.get(nome.toLowerCase());
+        if (!atteso) {
+          return res.status(403).json({
+            errore: 'nome_non_ammesso',
+            messaggio: `"${nome}" non e' fra i nomi previsti per questa votazione.`,
+          });
+        }
+        // Il codice serve solo per prendersi il nome la prima volta:
+        // dopo, a riconoscerti basta la chiave personale.
+        const giaSuo = await leggiGrezzo(atteso.nome);
+        const miaChiaveLoPossiede =
+          giaSuo && giaSuo.k && chiave && improntePariCostante(giaSuo.k, impronta(chiave));
+        if (!miaChiaveLoPossiede) {
+          const invito = String(req.headers['x-voti-invito'] || '').trim();
+          if (invito !== atteso.codice) {
+            return res.status(403).json({
+              errore: 'invito_errato',
+              messaggio: `Per votare come "${atteso.nome}" serve il codice che ti e' stato dato.`,
+            });
+          }
+        }
+      }
+
       const permesso = await permessoDiScrivere(nome, chiave);
       if (!permesso.ok) {
         const messaggi = {

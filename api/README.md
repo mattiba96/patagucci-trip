@@ -44,6 +44,37 @@ pagina si usa **"La mia chiave"** per copiarla su un altro dispositivo, o per
 incollarne una che si aveva già. In alternativa si vota con un altro nome e si
 cancella il vecchio da un dispositivo che ha ancora la chiave.
 
+## Codici d'invito (la difesa vera)
+
+La chiave personale nasce sul dispositivo: chi **svuota i dati del browser** ne
+ottiene una nuova e può prendersi un altro nome. È il limite di qualsiasi schema
+senza account.
+
+Per chiuderlo, imposta **`VOTI_INVITI`** (Vercel → Settings → Environment
+Variables, poi redeploy):
+
+```
+VOTI_INVITI = Manu:ab12cd, Kiki:ef34gh, Mala:ij56kl, Bacci:mn78op
+```
+
+Da quel momento:
+
+* si può votare **solo** con quei nomi;
+* per prendersi un nome serve il codice corrispondente, che consegni tu a mano
+  (WhatsApp privato, a voce — non nel gruppo);
+* il codice serve **una volta sola**: poi a riconoscere la persona basta la sua
+  chiave personale;
+* svuotare il browser non serve a niente senza il codice.
+
+Genera i codici come vuoi, per esempio:
+
+```bash
+for n in Manu Kiki Mala Bacci; do echo "$n:$(openssl rand -hex 4)"; done
+```
+
+Senza `VOTI_INVITI` la votazione resta aperta: chiunque abbia il link può
+scegliersi un nome libero. Va bene se il link non esce dal gruppo.
+
 ## Azzerare tutti i voti
 
 Serve la variabile d'ambiente **`VOTI_SEGRETO`** (Vercel → Settings → Environment
