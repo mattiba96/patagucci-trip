@@ -45,9 +45,10 @@ const TOKEN_REDIS =
   process.env.UPSTASH_REDIS_REST_TOKEN ||
   process.env.REDIS_REST_API_TOKEN ||
   process.env.STORAGE_REST_API_TOKEN;
-// Facoltativa: se impostata, ogni scrittura deve portare lo stesso valore
-// nell'header x-voti-segreto. Serve solo a evitare che un estraneo che
-// scopre l'URL possa scrivere; in lettura non cambia nulla.
+// Facoltativa, e serve a UNA cosa sola: azzerare tutti i voti.
+// Non blocca piu' il voto normale: a quello pensano le chiavi personali,
+// e bloccarlo qui rompeva la pagina (che quell'header non lo manda).
+//   DELETE /api/voti?tutto=1   con header x-voti-segreto
 const SEGRETO = process.env.VOTI_SEGRETO || null;
 
 async function redis(comando) {
@@ -193,10 +194,6 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'POST') {
-      if (SEGRETO && req.headers['x-voti-segreto'] !== SEGRETO) {
-        return res.status(401).json({ errore: 'non_autorizzato' });
-      }
-
       const body =
         typeof req.body === 'string' ? JSON.parse(req.body || '{}') : req.body || {};
 
@@ -252,9 +249,23 @@ export default async function handler(req, res) {
     }
 
     if (req.method === 'DELETE') {
-      if (SEGRETO && req.headers['x-voti-segreto'] !== SEGRETO) {
-        return res.status(401).json({ errore: 'non_autorizzato' });
+      // Azzeramento totale: solo per chi conosce VOTI_SEGRETO.
+      if (req.query && req.query.tutto) {
+        if (!SEGRETO) {
+          return res.status(503).json({
+            errore: 'reset_non_abilitato',
+            messaggio:
+              'Per azzerare tutto imposta la variabile VOTI_SEGRETO su Vercel e rifai il deploy.',
+          });
+        }
+        if (req.headers['x-voti-segreto'] !== SEGRETO) {
+          return res.status(401).json({ errore: 'non_autorizzato' });
+        }
+        await redis(['DEL', CHIAVE]);
+        await redis(['DEL', CHIAVE_PROPRIETARI]);
+        return res.status(200).json({ voti: {}, aggiornato: Date.now(), azzerato: true });
       }
+
       const nome = ripulisciNome(req.query && req.query.nome);
       if (!nome) return res.status(400).json({ errore: 'nome_mancante' });
 

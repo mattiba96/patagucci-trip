@@ -44,19 +44,18 @@ pagina si usa **"La mia chiave"** per copiarla su un altro dispositivo, o per
 incollarne una che si aveva già. In alternativa si vota con un altro nome e si
 cancella il vecchio da un dispositivo che ha ancora la chiave.
 
-## Scrittura protetta (facoltativa)
+## Azzerare tutti i voti
 
-L'endpoint è pubblico: chiunque conosca l'URL può votare. Per il gruppo va bene,
-ma se vuoi chiuderlo imposta la variabile d'ambiente **`VOTI_SEGRETO`**: da quel
-momento `POST` e `DELETE` richiedono l'header `x-voti-segreto` con lo stesso
-valore (la lettura resta libera).
+Serve la variabile d'ambiente **`VOTI_SEGRETO`** (Vercel → Settings → Environment
+Variables, poi redeploy). Da quel momento:
 
-Attenzione: la pagina **non** manda quell'header. Se imposti `VOTI_SEGRETO`,
-i voti dal sito smettono di salvarsi online e si torna alla modalità link.
-Serve solo se vuoi usare l'API a mano.
+```
+curl -X DELETE -H "x-voti-segreto: IL_TUO_SEGRETO" \
+  "https://patagucci-trip.vercel.app/api/voti?tutto=1"
+```
 
-## Come sono salvati
+`VOTI_SEGRETO` **non** blocca il voto normale: a quello pensano le chiavi
+personali. Serve solo per l'azzeramento totale.
 
-Una hash Redis, `patagucci:voti`, con **un campo per votante**. Ognuno scrive
-solo il proprio campo: due persone che votano nello stesso momento non si
-sovrascrivono a vicenda.
+Per cancellare un voto singolo non serve nulla di tutto questo: chi l'ha
+espresso lo azzera dalla propria pagina, con **Azzera il mio voto**.
