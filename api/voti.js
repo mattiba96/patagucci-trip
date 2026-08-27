@@ -9,8 +9,16 @@
 //   POST   /api/voti            -> body { nome, picks: [suf,...] }  (max 3)
 //   DELETE /api/voti?nome=Kiki  -> rimuove quel votante
 //
+// Chi possiede un nome: la prima volta che un nome viene usato, il client
+// manda una chiave segreta (header x-voti-chiave) e il server ne salva
+// l'impronta SHA-256. Da quel momento SOLO chi ha quella chiave puo'
+// modificare o cancellare quel voto: nessuno puo' votare al posto di un
+// altro. L'impronta non esce mai dall'API.
+//
 // Ogni votante e' un campo separato di una hash: due persone che votano
 // insieme non si sovrascrivono a vicenda (niente leggi-modifica-riscrivi).
+
+import { createHash, timingSafeEqual } from 'node:crypto';
 
 const CHIAVE = 'patagucci:voti';
 const MAX_SCELTE = 3;
@@ -52,7 +60,28 @@ async function redis(comando) {
   return dati.result;
 }
 
+function impronta(chiave) {
+  return createHash('sha256').update(String(chiave)).digest('hex');
+}
+
+function improntePariCostante(a, b) {
+  if (typeof a !== 'string' || typeof b !== 'string' || a.length !== b.length) return false;
+  return timingSafeEqual(Buffer.from(a), Buffer.from(b));
+}
+
+// Legge un singolo votante COMPRESA l'impronta: solo per uso interno.
+async function leggiGrezzo(nome) {
+  const raw = await redis(['HGET', CHIAVE, nome]);
+  if (!raw) return null;
+  try {
+    return JSON.parse(raw);
+  } catch (e) {
+    return null;
+  }
+}
+
 // HGETALL torna un array piatto [campo, valore, campo, valore, ...]
+// L'impronta della chiave (campo `k`) viene SEMPRE tolta prima di uscire.
 function aVoti(piatto) {
   const voti = {};
   if (!Array.isArray(piatto)) return voti;
@@ -61,13 +90,23 @@ function aVoti(piatto) {
     try {
       const v = JSON.parse(piatto[i + 1]);
       if (v && Array.isArray(v.picks)) {
-        voti[nome] = { picks: v.picks, ts: Number(v.ts) || 0 };
+        voti[nome] = { picks: v.picks, ts: Number(v.ts) || 0, protetto: !!v.k };
       }
     } catch (e) {
       // un campo illeggibile non deve far cadere tutta la risposta
     }
   }
   return voti;
+}
+
+// Decide se chi sta scrivendo ha il diritto di toccare questo nome.
+// Chi arriva per primo su un nome se lo prende (fidati-al-primo-uso).
+async function permessoDiScrivere(nome, chiaveInChiaro) {
+  if (!chiaveInChiaro) return { ok: false, errore: 'chiave_mancante' };
+  const attuale = await leggiGrezzo(nome);
+  if (!attuale || !attuale.k) return { ok: true, nuovo: true };
+  if (improntePariCostante(attuale.k, impronta(chiaveInChiaro))) return { ok: true };
+  return { ok: false, errore: 'nome_occupato' };
 }
 
 function ripulisciNome(v) {
@@ -158,6 +197,18 @@ export default async function handler(req, res) {
           .json({ errore: 'troppe_scelte', messaggio: `Al massimo ${MAX_SCELTE} mete.` });
       }
 
+      const chiave = req.headers['x-voti-chiave'];
+      const permesso = await permessoDiScrivere(nome, chiave);
+      if (!permesso.ok) {
+        return res.status(permesso.errore === 'chiave_mancante' ? 400 : 403).json({
+          errore: permesso.errore,
+          messaggio:
+            permesso.errore === 'chiave_mancante'
+              ? 'Manca la chiave personale.'
+              : `Il nome "${nome}" e' gia' di qualcun altro. Scegline un altro, oppure usa la tua chiave se sei tu da un altro dispositivo.`,
+        });
+      }
+
       // Tetto sui votanti: non e' sicurezza, e' un freno agli abusi.
       const esistenti = await redis(['HKEYS', CHIAVE]);
       if (
@@ -168,7 +219,12 @@ export default async function handler(req, res) {
         return res.status(429).json({ errore: 'troppi_votanti' });
       }
 
-      await redis(['HSET', CHIAVE, nome, JSON.stringify({ picks, ts: Date.now() })]);
+      await redis([
+        'HSET',
+        CHIAVE,
+        nome,
+        JSON.stringify({ picks, ts: Date.now(), k: impronta(chiave) }),
+      ]);
       const voti = aVoti(await redis(['HGETALL', CHIAVE]));
       return res.status(200).json({ voti, aggiornato: Date.now() });
     }
@@ -179,6 +235,14 @@ export default async function handler(req, res) {
       }
       const nome = ripulisciNome(req.query && req.query.nome);
       if (!nome) return res.status(400).json({ errore: 'nome_mancante' });
+
+      const permessoCanc = await permessoDiScrivere(nome, req.headers['x-voti-chiave']);
+      if (!permessoCanc.ok) {
+        return res.status(permessoCanc.errore === 'chiave_mancante' ? 400 : 403).json({
+          errore: permessoCanc.errore,
+          messaggio: 'Puoi cancellare solo il tuo voto.',
+        });
+      }
 
       await redis(['HDEL', CHIAVE, nome]);
       const voti = aVoti(await redis(['HGETALL', CHIAVE]));

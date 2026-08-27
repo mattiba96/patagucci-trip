@@ -540,13 +540,24 @@ vote_script = """
   var CREW = ['Manu','Kiki','Mala','Bacci'];
   var METE = __METE__;
   var MAX = 3;
-  var K_NOME = 'pt_votante', K_VOTI = 'pt_voti';
+  var K_NOME = 'pt_votante', K_VOTI = 'pt_voti', K_CHIAVE = 'pt_chiave';
 
   // ---- persistenza ----
   function leggi(k, d){ try{ var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
   function scrivi(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
   var voti = leggi(K_VOTI, {});
   var nome = leggi(K_NOME, null);
+
+  // Chiave personale: nasce su questo dispositivo e non la vede nessun altro.
+  // Il server ne conserva solo l'impronta, e da quel momento quel nome e'
+  // scrivibile solo da chi ha questa chiave.
+  var chiave = leggi(K_CHIAVE, null);
+  if(!chiave){
+    var b = new Uint8Array(16);
+    (window.crypto || window.msCrypto).getRandomValues(b);
+    chiave = Array.prototype.map.call(b, function(x){ return ('0'+x.toString(16)).slice(-2); }).join('');
+    scrivi(K_CHIAVE, chiave);
+  }
 
   // ---- API condivisa ----
   // 'server' = i voti stanno online e li vedono tutti.
@@ -555,7 +566,7 @@ vote_script = """
 
   function api(percorso, opzioni){
     return fetch('/api/voti' + (percorso || ''), Object.assign({
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json', 'x-voti-chiave': chiave }
     }, opzioni || {})).then(function(r){
       return r.json().catch(function(){ return {}; }).then(function(d){
         if(!r.ok){ var e = new Error(d.errore || ('http ' + r.status)); e.codice = d.errore; throw e; }
@@ -580,7 +591,7 @@ vote_script = """
         return salvaSuServer(true);
       }
     }).then(function(){
-      return spingiCoda();
+      scartaCoda();
     }).catch(function(e){
       if(modo !== 'server') modo = 'locale';
     }).then(function(){ disegna(); });
@@ -594,6 +605,11 @@ vote_script = """
       .then(function(d){ adottaServer(d); if(!silenzioso) disegna(); })
       .catch(function(e){
         if(e.codice === 'non_configurato'){ modo = 'locale'; disegna(); return; }
+        if(e.codice === 'nome_occupato'){
+          messaggio('Il nome "' + nome + '" e\u2019 gia\u2019 di qualcun altro: il tuo voto non e\u2019 stato salvato online. '
+            + 'Cambia nome, oppure incolla la tua chiave se sei tu da un altro telefono.', true);
+          return;
+        }
         messaggio('Voto salvato qui, ma non sono riuscito a mandarlo online. Riprova con Aggiorna.', true);
       })
       .then(function(){ salvataggioInCorso = false; });
@@ -629,19 +645,11 @@ vote_script = """
 
   var daSpingere = [];
 
-  function spingiCoda(){
-    if(modo !== 'server' || !daSpingere.length) return Promise.resolve();
-    var coda = daSpingere.splice(0);
-    return coda.reduce(function(catena, r){
-      return catena.then(function(){
-        var online = voti[r.n];
-        if(online && online.ts >= r.ts) return;   // online c'e' gia' qualcosa di piu' recente
-        return api('', { method:'POST', body: JSON.stringify({ nome: r.n, picks: r.picks }) })
-          .then(adottaServer)
-          .catch(function(){});
-      });
-    }, Promise.resolve());
-  }
+  // Online comanda il server: un link non scrive piu' per conto di altri,
+  // altrimenti chiunque potrebbe sovrascrivere il voto di chi vuole.
+  // I link restano validi solo in modalita' locale, dove non c'e' un server
+  // da proteggere e ognuno ha comunque solo la propria copia.
+  function scartaCoda(){ daSpingere.length = 0; }
 
   // ---- login ----
   var login = document.getElementById('vote-login');
@@ -849,17 +857,18 @@ vote_script = """
   }
 
   document.getElementById('vote-paste').addEventListener('click', function(){
+    if(modo === 'server'){
+      messaggio('Non serve: i voti sono online e li vedi gia" + AP + " tutti. '
+        + 'E ognuno puo" + AP + " votare solo per se stesso.', true);
+      return;
+    }
     var v = window.prompt('Incolla qui il link (o il codice) che ti hanno mandato:');
     if(!v) return;
     var m = String(v).match(/[?&]v=([A-Za-z0-9_-]+)/);
     var codice = m ? m[1] : String(v).trim();
     try {
       var rec = decodifica(codice);
-      if(unisci(rec)){
-        messaggio('Aggiunto il voto di ' + rec.n + '.');
-        disegna();
-        spingiCoda().then(disegna);
-      }
+      if(unisci(rec)){ messaggio('Aggiunto il voto di ' + rec.n + '.'); disegna(); }
       else { messaggio('Quel voto c’era gia’, o e’ piu’ vecchio di quello che hai.', true); }
     } catch(e){ messaggio('Non ho riconosciuto quel link.', true); }
   });
@@ -878,6 +887,20 @@ vote_script = """
     }
   });
 
+  document.getElementById('vote-chiave').addEventListener('click', function(){
+    var scelta = window.prompt(
+      'La tua chiave personale serve a impedire che altri votino al posto tuo.\n\n' +
+      'Copiala se vuoi votare anche da un altro dispositivo con lo stesso nome.\n' +
+      'Oppure incolla qui una chiave che avevi gia\u2019, per riprendere il tuo nome.',
+      chiave);
+    if(scelta === null) return;
+    scelta = scelta.trim();
+    if(!scelta || scelta === chiave){ messaggio('Chiave invariata.'); return; }
+    chiave = scelta; scrivi(K_CHIAVE, chiave);
+    messaggio('Chiave sostituita. Riprovo a salvare online\u2026');
+    salvaSuServer();
+  });
+
   document.getElementById('vote-refresh').addEventListener('click', function(){
     api('').then(function(d){ adottaServer(d); disegna(); messaggio('Voti aggiornati.'); })
       .catch(function(){ messaggio('Non riesco a leggere i voti online.', true); });
@@ -885,17 +908,25 @@ vote_script = """
 
   // ---- voto arrivato da un link ----
   var q = new URLSearchParams(location.search).get('v');
+  var recDaLink = null;
   if(q){
-    try {
-      var rec = decodifica(q);
-      var nuovo = unisci(rec);
-      history.replaceState(null, '', location.origin + location.pathname);
-      if(typeof showDest === 'function') showDest('vote');
-      setTimeout(function(){
-        messaggio(nuovo ? ('Aggiunto il voto di ' + rec.n + '.')
-                        : ('Il voto di ' + rec.n + ' lo avevi gia’.'));
-      }, 300);
-    } catch(e){}
+    try { recDaLink = decodifica(q); } catch(e){}
+    history.replaceState(null, '', location.origin + location.pathname);
+    if(typeof showDest === 'function') showDest('vote');
+  }
+
+  // Il link si applica solo dopo aver capito se siamo online: se lo siamo,
+  // il server e' l'unica verita' e il link non deve toccare niente.
+  function applicaLink(){
+    if(!recDaLink) return;
+    var r = recDaLink; recDaLink = null;
+    if(modo === 'server'){
+      messaggio('I voti sono online: quello di ' + r.n + ' lo vedi gia’ qui sotto, il link non serve.');
+      return;
+    }
+    if(unisci(r)) messaggio('Aggiunto il voto di ' + r.n + '.');
+    else messaggio('Il voto di ' + r.n + ' lo avevi gia’.');
+    disegna();
   }
 
   if(!nome){
@@ -909,7 +940,7 @@ vote_script = """
   }
 
   disegna();
-  sincronizza();
+  sincronizza().then(applicaLink);
 
   // Quando si torna sulla pagina votazioni, rileggo: nel frattempo
   // qualcun altro puo' aver votato.
@@ -950,6 +981,7 @@ vote_html = '''  <div class="destination" id="dest-vote" data-dest="vote">
             <button id="vote-share">\U0001F4E4 Condividi il mio voto</button>
             <button class="alt" id="vote-paste">\U0001F4E5 Aggiungi il voto di un altro</button>
             <button class="alt" id="vote-refresh" hidden>\U0001F504 Aggiorna</button>
+            <button class="alt" id="vote-chiave">\U0001F511 La mia chiave</button>
             <button class="ghost" id="vote-reset">\U0001F5D1\uFE0F Azzera il mio voto</button>
           </div>
           <div class="vote-msg" id="vote-msg" role="status" aria-live="polite"></div>
