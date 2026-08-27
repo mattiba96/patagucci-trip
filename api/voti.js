@@ -12,8 +12,12 @@
 // Chi possiede un nome: la prima volta che un nome viene usato, il client
 // manda una chiave segreta (header x-voti-chiave) e il server ne salva
 // l'impronta SHA-256. Da quel momento SOLO chi ha quella chiave puo'
-// modificare o cancellare quel voto: nessuno puo' votare al posto di un
-// altro. L'impronta non esce mai dall'API.
+// modificare o cancellare quel voto. L'impronta non esce mai dall'API.
+//
+// In piu': una chiave puo' possedere UN SOLO nome. Senza questo, dallo
+// stesso telefono si potevano prendere tutti i nomi non ancora usati e
+// votare al posto degli altri. Per cambiare nome bisogna prima azzerare
+// il proprio voto, cosa che solo il proprietario puo' fare.
 //
 // Ogni votante e' un campo separato di una hash: due persone che votano
 // insieme non si sovrascrivono a vicenda (niente leggi-modifica-riscrivi).
@@ -21,6 +25,7 @@
 import { createHash, timingSafeEqual } from 'node:crypto';
 
 const CHIAVE = 'patagucci:voti';
+const CHIAVE_PROPRIETARI = 'patagucci:proprietari'; // impronta chiave -> nome
 const MAX_SCELTE = 3;
 const MAX_VOTANTI = 50;
 const MAX_NOME = 24;
@@ -100,13 +105,26 @@ function aVoti(piatto) {
 }
 
 // Decide se chi sta scrivendo ha il diritto di toccare questo nome.
-// Chi arriva per primo su un nome se lo prende (fidati-al-primo-uso).
+// Due controlli: il nome non deve essere di un altro, e questa chiave non
+// deve gia' possedere un nome diverso (un dispositivo = un votante).
 async function permessoDiScrivere(nome, chiaveInChiaro) {
   if (!chiaveInChiaro) return { ok: false, errore: 'chiave_mancante' };
+  const h = impronta(chiaveInChiaro);
+
   const attuale = await leggiGrezzo(nome);
-  if (!attuale || !attuale.k) return { ok: true, nuovo: true };
-  if (improntePariCostante(attuale.k, impronta(chiaveInChiaro))) return { ok: true };
-  return { ok: false, errore: 'nome_occupato' };
+  if (attuale && attuale.k && !improntePariCostante(attuale.k, h)) {
+    return { ok: false, errore: 'nome_occupato' };
+  }
+
+  const suoNome = await redis(['HGET', CHIAVE_PROPRIETARI, h]);
+  if (suoNome && suoNome !== nome) {
+    // Se il vecchio voto non esiste piu', la chiave torna libera.
+    const vecchio = await leggiGrezzo(suoNome);
+    if (vecchio) return { ok: false, errore: 'gia_votato', nomeInUso: suoNome };
+    await redis(['HDEL', CHIAVE_PROPRIETARI, h]);
+  }
+
+  return { ok: true, impronta: h };
 }
 
 function ripulisciNome(v) {
@@ -200,12 +218,15 @@ export default async function handler(req, res) {
       const chiave = req.headers['x-voti-chiave'];
       const permesso = await permessoDiScrivere(nome, chiave);
       if (!permesso.ok) {
+        const messaggi = {
+          chiave_mancante: 'Manca la chiave personale.',
+          nome_occupato: `Il nome "${nome}" e' gia' di qualcun altro. Scegline un altro, oppure usa la tua chiave se sei tu da un altro dispositivo.`,
+          gia_votato: `Da questo dispositivo hai gia' votato come "${permesso.nomeInUso}". Puoi votare una volta sola: azzera quel voto se vuoi cambiare nome.`,
+        };
         return res.status(permesso.errore === 'chiave_mancante' ? 400 : 403).json({
           errore: permesso.errore,
-          messaggio:
-            permesso.errore === 'chiave_mancante'
-              ? 'Manca la chiave personale.'
-              : `Il nome "${nome}" e' gia' di qualcun altro. Scegline un altro, oppure usa la tua chiave se sei tu da un altro dispositivo.`,
+          nomeInUso: permesso.nomeInUso,
+          messaggio: messaggi[permesso.errore],
         });
       }
 
@@ -223,8 +244,9 @@ export default async function handler(req, res) {
         'HSET',
         CHIAVE,
         nome,
-        JSON.stringify({ picks, ts: Date.now(), k: impronta(chiave) }),
+        JSON.stringify({ picks, ts: Date.now(), k: permesso.impronta }),
       ]);
+      await redis(['HSET', CHIAVE_PROPRIETARI, permesso.impronta, nome]);
       const voti = aVoti(await redis(['HGETALL', CHIAVE]));
       return res.status(200).json({ voti, aggiornato: Date.now() });
     }
@@ -236,15 +258,21 @@ export default async function handler(req, res) {
       const nome = ripulisciNome(req.query && req.query.nome);
       if (!nome) return res.status(400).json({ errore: 'nome_mancante' });
 
-      const permessoCanc = await permessoDiScrivere(nome, req.headers['x-voti-chiave']);
-      if (!permessoCanc.ok) {
-        return res.status(permessoCanc.errore === 'chiave_mancante' ? 400 : 403).json({
-          errore: permessoCanc.errore,
+      const chiaveCanc = req.headers['x-voti-chiave'];
+      if (!chiaveCanc) return res.status(400).json({ errore: 'chiave_mancante' });
+      const hCanc = impronta(chiaveCanc);
+      const attualeCanc = await leggiGrezzo(nome);
+      if (attualeCanc && attualeCanc.k && !improntePariCostante(attualeCanc.k, hCanc)) {
+        return res.status(403).json({
+          errore: 'nome_occupato',
           messaggio: 'Puoi cancellare solo il tuo voto.',
         });
       }
 
       await redis(['HDEL', CHIAVE, nome]);
+      // Cancellando il proprio voto la chiave torna libera: cosi' si puo'
+      // cambiare nome senza restare bloccati.
+      await redis(['HDEL', CHIAVE_PROPRIETARI, hCanc]);
       const voti = aVoti(await redis(['HGETALL', CHIAVE]));
       return res.status(200).json({ voti, aggiornato: Date.now() });
     }

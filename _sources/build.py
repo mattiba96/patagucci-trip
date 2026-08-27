@@ -569,7 +569,11 @@ vote_script = """
       headers: { 'Content-Type': 'application/json', 'x-voti-chiave': chiave }
     }, opzioni || {})).then(function(r){
       return r.json().catch(function(){ return {}; }).then(function(d){
-        if(!r.ok){ var e = new Error(d.errore || ('http ' + r.status)); e.codice = d.errore; throw e; }
+        if(!r.ok){
+          var e = new Error(d.errore || ('http ' + r.status));
+          e.codice = d.errore; e.nomeInUso = d.nomeInUso;
+          throw e;
+        }
         return d;
       });
     });
@@ -608,6 +612,11 @@ vote_script = """
         if(e.codice === 'nome_occupato'){
           messaggio('Il nome "' + nome + '" e\u2019 gia\u2019 di qualcun altro: il tuo voto non e\u2019 stato salvato online. '
             + 'Cambia nome, oppure incolla la tua chiave se sei tu da un altro telefono.', true);
+          return;
+        }
+        if(e.codice === 'gia_votato'){
+          messaggio('Da questo dispositivo hai gia\u2019 votato come "' + (e.nomeInUso || '?') + '". '
+            + 'Si vota una volta sola: azzera quel voto se vuoi cambiare nome.', true);
           return;
         }
         messaggio('Voto salvato qui, ma non sono riuscito a mandarlo online. Riprova con Aggiorna.', true);
