@@ -29,6 +29,21 @@ L'integrazione imposta da sola `KV_REST_API_URL` e `KV_REST_API_TOKEN`, che sono
 le uniche variabili che servono. La funzione accetta anche i nomi
 `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN`.
 
+## Ognuno può votare solo per sé
+
+La prima volta che un nome viene usato, il client manda una **chiave personale**
+generata sul dispositivo (header `x-voti-chiave`) e il server ne salva l'impronta
+SHA-256 accanto al voto. Da quel momento **solo chi ha quella chiave** può
+modificare o cancellare quel voto: chiunque altro riceve `403 nome_occupato`.
+
+L'impronta non esce mai dall'API: nelle risposte compare solo `protetto: true`.
+
+Chi arriva per primo su un nome se lo prende. Se qualcuno perde la chiave
+(cambio telefono, cronologia cancellata) perde il controllo di quel nome: dalla
+pagina si usa **"La mia chiave"** per copiarla su un altro dispositivo, o per
+incollarne una che si aveva già. In alternativa si vota con un altro nome e si
+cancella il vecchio da un dispositivo che ha ancora la chiave.
+
 ## Scrittura protetta (facoltativa)
 
 L'endpoint è pubblico: chiunque conosca l'URL può votare. Per il gruppo va bene,
