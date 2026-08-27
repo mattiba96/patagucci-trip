@@ -20,8 +20,18 @@ const MAX_NOME = 24;
 // Le mete valide: una scelta fuori da questa lista viene scartata.
 const METE = ['np', 'pk', 'za', 'in', 'ug', 'tz', 'uk', 'gl', 'cx', 'ge'];
 
-const URL_REDIS = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL;
-const TOKEN_REDIS = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN;
+// I nomi cambiano a seconda di come e' stato collegato il database
+// (integrazione KV storica, marketplace Upstash, collegamento manuale).
+const URL_REDIS =
+  process.env.KV_REST_API_URL ||
+  process.env.UPSTASH_REDIS_REST_URL ||
+  process.env.REDIS_REST_API_URL ||
+  process.env.STORAGE_REST_API_URL;
+const TOKEN_REDIS =
+  process.env.KV_REST_API_TOKEN ||
+  process.env.UPSTASH_REDIS_REST_TOKEN ||
+  process.env.REDIS_REST_API_TOKEN ||
+  process.env.STORAGE_REST_API_TOKEN;
 // Facoltativa: se impostata, ogni scrittura deve portare lo stesso valore
 // nell'header x-voti-segreto. Serve solo a evitare che un estraneo che
 // scopre l'URL possa scrivere; in lettura non cambia nulla.
@@ -76,14 +86,46 @@ function ripulisciScelte(v) {
   return out.length > MAX_SCELTE ? null : out;
 }
 
+// Elenca quali variabili di storage sono presenti. Riporta SOLO i nomi:
+// nessun valore, nessun token, mai.
+const NOMI_NOTI = [
+  'KV_REST_API_URL', 'KV_REST_API_TOKEN', 'KV_URL', 'KV_REST_API_READ_ONLY_TOKEN',
+  'UPSTASH_REDIS_REST_URL', 'UPSTASH_REDIS_REST_TOKEN',
+  'REDIS_REST_API_URL', 'REDIS_REST_API_TOKEN', 'REDIS_URL',
+  'STORAGE_REST_API_URL', 'STORAGE_REST_API_TOKEN',
+  'POSTGRES_URL', 'POSTGRES_PRISMA_URL', 'DATABASE_URL', 'NEON_DATABASE_URL',
+  'BLOB_READ_WRITE_TOKEN', 'EDGE_CONFIG',
+];
+
+function diagnostica() {
+  const presenti = NOMI_NOTI.filter((n) => !!process.env[n]);
+  // Prendo anche eventuali nomi non previsti, per capire che integrazione e'.
+  const altri = Object.keys(process.env).filter(
+    (n) =>
+      !NOMI_NOTI.includes(n) &&
+      /(REDIS|UPSTASH|POSTGRES|DATABASE|^KV_|BLOB_|EDGE_CONFIG)/i.test(n)
+  );
+  return {
+    variabiliTrovate: presenti,
+    altreVariabiliDiStorage: altri,
+    redisPronto: !!(URL_REDIS && TOKEN_REDIS),
+    nota: 'Solo nomi di variabile, mai i valori.',
+  };
+}
+
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'no-store');
+
+  if (req.method === 'GET' && req.query && req.query.diagnostica) {
+    return res.status(200).json(diagnostica());
+  }
 
   if (!URL_REDIS || !TOKEN_REDIS) {
     return res.status(503).json({
       errore: 'non_configurato',
       messaggio:
-        'Manca lo storage. Su Vercel: Storage -> Upstash for Redis, collegalo a questo progetto e rifai il deploy.',
+        'Manca lo storage. Su Vercel: Storage -> collega il database a questo progetto, poi rifai il deploy.',
+      diagnostica: diagnostica(),
     });
   }
 
