@@ -758,3 +758,9 @@ section.panel.dark .trip-intro{ color:#9b968a; }
   .trip-tabs{ gap:8px; }
   .trip-tab{ flex:1 1 0; justify-content:center; padding:12px 10px; font-size:0.84rem; }
 }
+
+/* Esiti nella tabella storica della fioritura */
+.hub-table td.bene{ color:var(--accent-2-ink); font-weight:700; }
+.hub-table td.niente{ color:var(--ink-soft); font-style:italic; }
+section.panel.dark .hub-table td.bene{ color:#8fe0ac; }
+section.panel.dark .hub-table td.niente{ color:#9b968a; }

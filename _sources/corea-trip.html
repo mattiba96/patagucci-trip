@@ -97,13 +97,34 @@
       <div class="card reveal">
         <h3 style="margin-top:0;">Quando fiorisce, dove</h3>
         <div class="route-status" id="route-status"></div>
-        <div class="source-note">Previsioni 2026 da thesoulofseoul.net, klook.com e VisitKorea. Le date variano ogni anno di qualche giorno secondo l'inverno: la previsione ufficiale esce a inizio marzo, quindi andrà riverificata. Il picco dura circa 7-10 giorni.</div>
+        <div class="source-note">Previsioni 2026 da thesoulofseoul.net, klook.com e VisitKorea. La previsione ufficiale del KMA esce a inizio marzo: fino ad allora sono stime. Quanto ballino davvero da un anno all'altro lo si vede nella tabella qui sotto.</div>
       </div>
 
       <div class="callout warn reveal">
         <strong>Il paradosso da capire subito.</strong> Il sud (Busan, Gyeongju, Jeju) fiorisce <strong>a fine marzo</strong>: arrivandoci il 6-10 aprile è già sfiorito. Seul fiorisce <strong>dopo</strong>, con il picco intorno al <strong>10 aprile</strong>. Per questo il sud non è programmato per i fiori — lì si va per i templi, il mare e i vulcani — mentre Seul è divisa in due blocchi: si vedono i <strong>primi fiori aprirsi</strong> il 3-5 aprile e si torna in città dal 13, dentro la coda del picco.
         <br><br>
         <strong>Se i ciliegi sono la priorità assoluta, queste non sono le date ottimali.</strong> La finestra perfetta per prendere <em>tutto il paese</em> in fiore sarebbe circa <strong>27 marzo → 11 aprile</strong>: il sud ancora carico all'inizio e Seul al picco alla fine. Con il 2-17 aprile il sud è fuori tempo e a Seul si prende l'inizio e la coda, non il giorno pieno.
+      </div>
+
+      <div class="card reveal" style="overflow-x:auto;">
+        <h3 style="margin-top:0;">Gli ultimi 5 anni a Seul, dati reali</h3>
+        <table class="hub-table">
+          <thead><tr><th>Anno</th><th>Prima fioritura</th><th>Pieno (stimato)</th><th>Con le nostre date avremmo visto</th></tr></thead>
+          <tbody>
+            <tr><td><strong>2022</strong></td><td>4 aprile</td><td>~8-9 aprile</td><td>L'inizio nei primi giorni. Il pieno cadeva mentre eravamo a Busan.</td></tr>
+            <tr><td><strong>2023</strong></td><td><strong>25 marzo</strong></td><td>~30 marzo</td><td class="niente">Niente: finita prima ancora di atterrare.</td></tr>
+            <tr><td><strong>2024</strong></td><td>1 aprile</td><td>3-8 aprile</td><td class="bene">Il pieno, proprio nei tre giorni iniziali a Seul.</td></tr>
+            <tr><td><strong>2025</strong></td><td>4 aprile</td><td>~9 aprile</td><td>L'inizio all'arrivo, la coda al ritorno. Il pieno perso.</td></tr>
+            <tr><td><strong>2026</strong></td><td>3 aprile <em>(previsto)</em></td><td>7-12 aprile</td><td>Inizio e coda. Il picco cade mentre siamo a Jeju.</td></tr>
+          </tbody>
+        </table>
+        <div class="source-note">La data di fioritura è quella ufficiale del <strong>KMA</strong>, l'agenzia meteo coreana: si considera "fiorito" quando sull'albero campione davanti all'osservatorio di Songwol-dong, a Seul, si aprono <strong>almeno tre fiori su un ramo</strong>. La media storica è l'<strong>8 aprile</strong>; il record è il <strong>24 marzo 2021</strong>. Il "pieno" (만개) arriva 3-7 giorni dopo secondo l'anno, e il KMA <strong>non pubblica una data di fine</strong>: i petali reggono all'incirca un'altra settimana, quindi le stime della terza colonna sono ricavate, non ufficiali. Fonti: weather.go.kr (KMA), khan.co.kr, kmib.co.kr, mt.co.kr.</div>
+      </div>
+
+      <div class="callout warn reveal">
+        <strong>Quello che dice questa tabella è scomodo:</strong> in <strong>quattro anni su cinque</strong> il pieno della fioritura a Seul è caduto fra il <strong>3 e il 12 aprile</strong> — cioè quasi sempre nei giorni in cui, con questo itinerario, siamo nel sud. L'unico anno buono sarebbe stato il 2024, per caso.
+        <br><br>
+        Il problema quindi <strong>non sono le date del viaggio, è dove cade il blocco di Seul dentro le date.</strong> Bastano due correzioni possibili: accorciare l'apertura a Seul e <strong>rientrare in città il 9-10 aprile</strong> invece del 13, oppure spostare tutto il viaggio di 3-4 giorni indietro (<strong>29 marzo → 13 aprile</strong>), che centrerebbe il picco in quattro anni su cinque e prenderebbe anche il sud ancora in fiore.
       </div>
 
       <div class="info-grid">
@@ -616,6 +637,12 @@
     };
 
     var DURATA = 20000, avvio = null;
+
+    // L'animazione parte al caricamento della pagina, non quando si apre la
+    // meta: senza questo, arrivando qui dopo un po' si trova il mezzo gia' a
+    // meta' percorso e sembra che il viaggio cominci da li'.
+    window.addEventListener('destinazione-cambiata', function(){ avvio = null; });
+
     var muovi = function(ts){
       if(avvio === null) avvio = ts;
       posiziona(((ts - avvio) % DURATA) / DURATA);

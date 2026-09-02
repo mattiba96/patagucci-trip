@@ -708,6 +708,12 @@
     };
 
     var DURATA = 20000, avvio = null;
+
+    // L'animazione parte al caricamento della pagina, non quando si apre la
+    // meta: senza questo, arrivando qui dopo un po' si trova il mezzo gia' a
+    // meta' percorso e sembra che il viaggio cominci da li'.
+    window.addEventListener('destinazione-cambiata', function(){ avvio = null; });
+
     var muovi = function(ts){
       if(avvio === null) avvio = ts;
       posiziona(((ts - avvio) % DURATA) / DURATA);

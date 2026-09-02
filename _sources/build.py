@@ -661,6 +661,8 @@ function showDest(name){{
   if(flagbar && FLAG_BARS[name]) flagbar.style.background = FLAG_BARS[name];
   window.scrollTo({{ top: 0, left: 0, behavior: 'instant' }});
   target.querySelectorAll('.reveal').forEach(function(el){{ el.classList.add('visible'); }});
+  // Fa ripartire da capo le mappe animate della meta appena aperta.
+  window.dispatchEvent(new CustomEvent('destinazione-cambiata'));
   if(typeof syncSwitcherHeight === 'function') setTimeout(syncSwitcherHeight, 0);
 }}
 function showHub(){{ showDest('hub'); }}
