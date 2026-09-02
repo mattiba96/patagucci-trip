@@ -111,6 +111,14 @@ html[data-dest="cx"]{
   --dark-base:#08130F; --tint-100:#f1f9f2; --tint-200:#dcf0de; --line:#c4e2c8; --paper:#fbfefb;
 }
 
+/* 🇰🇷 Corea del Sud — rosa dei ciliegi, blu notte della bandiera */
+html[data-dest="kr"]{
+  --accent:#F2839F; --accent-rgb:242,131,159; --accent-deep:#C24A6B; --accent-ink:#9E3253;
+  --accent-2:#3A72C4; --accent-2-deep:#1E4E96; --accent-2-ink:#17407E;
+  --theme-900:#1B2A4A; --theme-800:#253A63; --theme-700:#2F4A7C; --theme-rgb:47,74,124;
+  --dark-base:#0B0F1A; --tint-100:#fbf5f7; --tint-200:#f4e3e9; --line:#e6cdd6; --paper:#fffcfd;
+}
+
 /* 🇬🇪 Georgia — rosso della bandiera, vino del qvevri */
 html[data-dest="ge"]{
   --accent:#EE6055; --accent-rgb:238,96,85; --accent-deep:#B93021; --accent-ink:#A32A1C;
@@ -706,4 +714,47 @@ footer a.home-link{ color:var(--accent); font-weight:700; }
   section.panel{ padding:38px 13px 22px; }
   header.hero h1{ font-size:clamp(1.9rem,9.4vw,2.8rem); }
   .weather-stats{ grid-template-columns:1fr; }
+}
+
+
+/* ---------- Home: tab confermati / in programma ---------- */
+.trip-tabs{ display:flex; gap:10px; margin:6px 0 4px; flex-wrap:wrap; }
+.trip-tab{
+  flex:0 0 auto; cursor:pointer; font:inherit; font-size:0.92rem; font-weight:700;
+  padding:12px 20px; border-radius:14px; border:1px solid var(--line);
+  background:var(--paper); color:var(--ink-soft); letter-spacing:0.02em;
+  display:inline-flex; align-items:center; gap:9px; min-height:48px;
+  transition:background .2s ease, color .2s ease, border-color .2s ease, transform .2s ease;
+}
+.trip-tab:hover{ background:var(--tint-200); color:var(--ink); transform:translateY(-1px); }
+.trip-tab .conta{
+  font-size:0.76rem; font-weight:800; padding:2px 8px; border-radius:999px;
+  background:var(--tint-200); color:var(--theme-900);
+}
+section.panel.dark .trip-tab{ background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.16); color:#c7c2b6; }
+section.panel.dark .trip-tab:hover{ background:rgba(255,255,255,0.12); color:#f4f1ea; }
+section.panel.dark .trip-tab .conta{ background:rgba(255,255,255,0.14); color:inherit; }
+.trip-tab.active,
+section.panel.dark .trip-tab.active{
+  background:var(--theme-800); color:#fff; border-color:var(--theme-800);
+  box-shadow:0 6px 18px rgba(var(--theme-rgb),0.32);
+}
+.trip-tab.active .conta,
+section.panel.dark .trip-tab.active .conta{ background:rgba(255,255,255,0.22); color:#fff; }
+
+.trip-gruppo{ display:none; }
+.trip-gruppo.attivo{ display:block; animation:destIn .35s cubic-bezier(.16,1,.3,1) both; }
+.trip-intro{ font-size:0.9rem; color:var(--ink-soft); margin:14px 0 16px; }
+section.panel.dark .trip-intro{ color:#9b968a; }
+
+/* Nel selettore in alto, le mete con la data fissata hanno un segno */
+.site-switcher button.confermato::before{
+  content:'\2713'; font-size:0.72rem; font-weight:900;
+  color:var(--accent); margin-right:5px;
+}
+.site-switcher button.confermato.active::before{ color:#10100e; }
+
+@media (max-width:760px){
+  .trip-tabs{ gap:8px; }
+  .trip-tab{ flex:1 1 0; justify-content:center; padding:12px 10px; font-size:0.84rem; }
 }

@@ -6,16 +6,17 @@ SRC_DIR = DIR + "_sources/"
 import json
 
 DESTS = [
-    {"file": "nepalbhutan-trip.html", "suf": "np", "flag": "🇳🇵🇧🇹", "name": "Nepal & Bhutan"},
-    {"file": "pakistan-trip.html", "suf": "pk", "flag": "🇵🇰", "name": "Pakistan"},
-    {"file": "southafrica-trip.html", "suf": "za", "flag": "🇿🇦", "name": "Sudafrica"},
-    {"file": "india-trip.html", "suf": "in", "flag": "🇮🇳", "name": "India"},
-    {"file": "uganda-trip.html", "suf": "ug", "flag": "🇺🇬", "name": "Uganda"},
-    {"file": "tanzania-trip.html", "suf": "tz", "flag": "🇹🇿", "name": "Tanzania"},
-    {"file": "uzbekistankyrgyzstan-trip.html", "suf": "uk", "flag": "🇺🇿🇰🇬", "name": "Uzbekistan & Kirghizistan"},
-    {"file": "greenland-trip.html", "suf": "gl", "flag": "🇬🇱", "name": "Groenlandia"},
-    {"file": "centroamerica-trip.html", "suf": "cx", "flag": "🇳🇮🇨🇷🇵🇦", "name": "Nicaragua, Costa Rica & Panama"},
-    {"file": "georgia-trip.html", "suf": "ge", "flag": "🇬🇪", "name": "Georgia"},
+    {"file": "nepalbhutan-trip.html", "suf": "np", "flag": "🇳🇵🇧🇹", "name": "Nepal & Bhutan", "stato": "programma"},
+    {"file": "pakistan-trip.html", "suf": "pk", "flag": "🇵🇰", "name": "Pakistan", "stato": "programma"},
+    {"file": "southafrica-trip.html", "suf": "za", "flag": "🇿🇦", "name": "Sudafrica", "stato": "programma"},
+    {"file": "india-trip.html", "suf": "in", "flag": "🇮🇳", "name": "India", "stato": "programma"},
+    {"file": "uganda-trip.html", "suf": "ug", "flag": "🇺🇬", "name": "Uganda", "stato": "programma"},
+    {"file": "tanzania-trip.html", "suf": "tz", "flag": "🇹🇿", "name": "Tanzania", "stato": "programma"},
+    {"file": "uzbekistankyrgyzstan-trip.html", "suf": "uk", "flag": "🇺🇿🇰🇬", "name": "Uzbekistan & Kirghizistan", "stato": "programma"},
+    {"file": "greenland-trip.html", "suf": "gl", "flag": "🇬🇱", "name": "Groenlandia", "stato": "programma"},
+    {"file": "centroamerica-trip.html", "suf": "cx", "flag": "🇳🇮🇨🇷🇵🇦", "name": "Nicaragua, Costa Rica & Panama", "stato": "programma"},
+    {"file": "corea-trip.html", "suf": "kr", "flag": "🇰🇷", "name": "Corea del Sud", "stato": "confermato"},
+    {"file": "georgia-trip.html", "suf": "ge", "flag": "🇬🇪", "name": "Georgia", "stato": "confermato"},
 ]
 
 def extract(tag, content):
@@ -395,7 +396,40 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
           <h2 class="section-title reveal">🌍 Tutte le mete</h2>
           <p class="section-sub reveal">Ogni viaggio ha la sua pagina interattiva: itinerario giorno per giorno, mappa animata, meteo storico, convertitore valuta e tutto il resto. Clicca una card per aprirla.</p>
 
-          <div class="trip-grid reveal">
+          <div class="trip-tabs reveal" id="trip-tabs" role="tablist">
+            <button role="tab" class="trip-tab active" data-gruppo="confermati" aria-selected="true">✅ Confermati <span class="conta">2</span></button>
+            <button role="tab" class="trip-tab" data-gruppo="programma" aria-selected="false">🗓️ In programma <span class="conta">9</span></button>
+          </div>
+
+          <div class="trip-gruppo attivo" id="gruppo-confermati">
+            <p class="trip-intro reveal">Date fissate. Questi si fanno.</p>
+            <div class="trip-grid reveal">
+            <a class="trip-card" href="javascript:void(0)" onclick="showDest('ge')">
+              <img src="foto/destinazioni/Narikala_fortress,_Tbilisi,_Georgia-fb6b37.jpg" alt="Narikala Fortress, Tbilisi, Georgia" loading="lazy">
+              <div class="overlay"></div>
+              <div class="content">
+                <div class="flag">🇬🇪</div>
+                <div class="title">Georgia</div>
+                <div class="meta">2-7 gennaio 2027 · 6 giorni</div>
+                <p class="tagline">Tbilisi, bagni di zolfo, vino nel qvevri e un weekend sulla neve a Gudauri.</p>
+              </div>
+            </a>
+            <a class="trip-card" href="javascript:void(0)" onclick="showDest('kr')">
+              <img src="foto/destinazioni/kr-ciliegi.jpg" alt="Ciliegi in fiore in Corea del Sud" loading="lazy">
+              <div class="overlay"></div>
+              <div class="content">
+                <div class="flag">🇰🇷</div>
+                <div class="title">Corea del Sud</div>
+                <div class="meta">2-17 aprile 2027 · 16 giorni</div>
+                <p class="tagline">Seul, Gyeongju e Busan in KTX, il vulcano di Jeju e i ciliegi in fiore.</p>
+              </div>
+            </a>
+            </div>
+          </div>
+
+          <div class="trip-gruppo" id="gruppo-programma">
+            <p class="trip-intro reveal">Idee pronte nel dettaglio, ma senza una data decisa.</p>
+            <div class="trip-grid reveal">
             <a class="trip-card" href="javascript:void(0)" onclick="showDest('np')">
               <img src="foto/destinazioni/The_Tigers_Nest_(_Paro_Taktsang_).jpg" alt="Tiger's Nest Monastery, Bhutan" loading="lazy">
               <div class="overlay"></div>
@@ -495,16 +529,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               </div>
             </a>
 
-            <a class="trip-card" href="javascript:void(0)" onclick="showDest('ge')">
-              <img src="foto/destinazioni/Narikala_fortress,_Tbilisi,_Georgia-fb6b37.jpg" alt="Narikala Fortress, Tbilisi, Georgia" loading="lazy">
-              <div class="overlay"></div>
-              <div class="content">
-                <div class="flag">🇬🇪</div>
-                <div class="title">Georgia</div>
-                <div class="meta">2-7 gennaio 2027 · 6 giorni</div>
-                <p class="tagline">Tbilisi, bagni di zolfo, vino nel qvevri e un weekend sulla neve a Gudauri.</p>
-              </div>
-            </a>
+            </div>
           </div>
         </div>
       </section>
@@ -536,8 +561,10 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
 
 destination_blocks = "\n\n".join(b["block"] for b in blocks)
 
+stato_per_suf = {d["suf"]: d["stato"] for d in DESTS}
 switcher_buttons = '\n        '.join(
-    f'<button class="switch-btn" data-dest="{b["suf"]}" onclick="showDest(\'{b["suf"]}\')">{b["flag"]} {b["name"]}</button>'
+    f'<button class="switch-btn{" confermato" if stato_per_suf[b["suf"]] == "confermato" else ""}"'
+    f' data-dest="{b["suf"]}" onclick="showDest(\'{b["suf"]}\')">{b["flag"]} {b["name"]}</button>'
     for b in blocks
 )
 
@@ -614,7 +641,8 @@ var FLAG_BARS = {{
   ge: 'linear-gradient(90deg,#ffffff 0 20%, #DA291C 20% 40%, #ffffff 40% 60%, #DA291C 60% 80%, #ffffff 80% 100%)',
   in: 'linear-gradient(90deg,#FF9933 0 33%, #ffffff 33% 66%, #138808 66% 100%)',
   tz: 'linear-gradient(90deg,#1EB53A 0 30%, #FCD116 30% 40%, #000000 40% 60%, #FCD116 60% 70%, #00A3DD 70% 100%)',
-  cx: 'linear-gradient(90deg,#0067C6 0 20%, #ffffff 20% 33%, #002B7F 33% 46%, #CE1126 46% 60%, #ffffff 60% 73%, #D21034 73% 86%, #005293 86% 100%)'
+  cx: 'linear-gradient(90deg,#0067C6 0 20%, #ffffff 20% 33%, #002B7F 33% 46%, #CE1126 46% 60%, #ffffff 60% 73%, #D21034 73% 86%, #005293 86% 100%)',
+  kr: 'linear-gradient(90deg,#ffffff 0 32%, #CD2E3A 32% 47%, #0047A0 47% 62%, #ffffff 62% 100%)'
 }};
 function showDest(name){{
   document.documentElement.setAttribute('data-dest', name);
@@ -636,6 +664,25 @@ function showDest(name){{
   if(typeof syncSwitcherHeight === 'function') setTimeout(syncSwitcherHeight, 0);
 }}
 function showHub(){{ showDest('hub'); }}
+
+// Le due tab della home: confermati / in programma.
+document.querySelectorAll('#trip-tabs .trip-tab').forEach(function(tab){{
+  tab.addEventListener('click', function(){{
+    var gruppo = tab.getAttribute('data-gruppo');
+    document.querySelectorAll('#trip-tabs .trip-tab').forEach(function(t){{
+      var attiva = t === tab;
+      t.classList.toggle('active', attiva);
+      t.setAttribute('aria-selected', attiva ? 'true' : 'false');
+    }});
+    document.querySelectorAll('.trip-gruppo').forEach(function(g){{
+      g.classList.toggle('attivo', g.id === 'gruppo-' + gruppo);
+    }});
+    // Le card appena mostrate non hanno mai incrociato l'observer.
+    document.querySelectorAll('.trip-gruppo.attivo .reveal').forEach(function(el){{
+      el.classList.add('visible');
+    }});
+  }});
+}});
 
 function syncSwitcherHeight(){{
   var switcher = document.getElementById('site-switcher');

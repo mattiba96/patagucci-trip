@@ -61,7 +61,8 @@
         <button class="switch-btn" data-dest="uk" onclick="showDest('uk')">🇺🇿🇰🇬 Uzbekistan & Kirghizistan</button>
         <button class="switch-btn" data-dest="gl" onclick="showDest('gl')">🇬🇱 Groenlandia</button>
         <button class="switch-btn" data-dest="cx" onclick="showDest('cx')">🇳🇮🇨🇷🇵🇦 Nicaragua, Costa Rica & Panama</button>
-        <button class="switch-btn" data-dest="ge" onclick="showDest('ge')">🇬🇪 Georgia</button>
+        <button class="switch-btn confermato" data-dest="kr" onclick="showDest('kr')">🇰🇷 Corea del Sud</button>
+        <button class="switch-btn confermato" data-dest="ge" onclick="showDest('ge')">🇬🇪 Georgia</button>
 </div>
 
   <div class="destination active" id="dest-hub" data-dest="hub">
@@ -384,7 +385,40 @@
           <h2 class="section-title reveal">🌍 Tutte le mete</h2>
           <p class="section-sub reveal">Ogni viaggio ha la sua pagina interattiva: itinerario giorno per giorno, mappa animata, meteo storico, convertitore valuta e tutto il resto. Clicca una card per aprirla.</p>
 
-          <div class="trip-grid reveal">
+          <div class="trip-tabs reveal" id="trip-tabs" role="tablist">
+            <button role="tab" class="trip-tab active" data-gruppo="confermati" aria-selected="true">✅ Confermati <span class="conta">2</span></button>
+            <button role="tab" class="trip-tab" data-gruppo="programma" aria-selected="false">🗓️ In programma <span class="conta">9</span></button>
+          </div>
+
+          <div class="trip-gruppo attivo" id="gruppo-confermati">
+            <p class="trip-intro reveal">Date fissate. Questi si fanno.</p>
+            <div class="trip-grid reveal">
+            <a class="trip-card" href="javascript:void(0)" onclick="showDest('ge')">
+              <img src="foto/destinazioni/Narikala_fortress,_Tbilisi,_Georgia-fb6b37.jpg" alt="Narikala Fortress, Tbilisi, Georgia" loading="lazy">
+              <div class="overlay"></div>
+              <div class="content">
+                <div class="flag">🇬🇪</div>
+                <div class="title">Georgia</div>
+                <div class="meta">2-7 gennaio 2027 · 6 giorni</div>
+                <p class="tagline">Tbilisi, bagni di zolfo, vino nel qvevri e un weekend sulla neve a Gudauri.</p>
+              </div>
+            </a>
+            <a class="trip-card" href="javascript:void(0)" onclick="showDest('kr')">
+              <img src="foto/destinazioni/kr-ciliegi.jpg" alt="Ciliegi in fiore in Corea del Sud" loading="lazy">
+              <div class="overlay"></div>
+              <div class="content">
+                <div class="flag">🇰🇷</div>
+                <div class="title">Corea del Sud</div>
+                <div class="meta">2-17 aprile 2027 · 16 giorni</div>
+                <p class="tagline">Seul, Gyeongju e Busan in KTX, il vulcano di Jeju e i ciliegi in fiore.</p>
+              </div>
+            </a>
+            </div>
+          </div>
+
+          <div class="trip-gruppo" id="gruppo-programma">
+            <p class="trip-intro reveal">Idee pronte nel dettaglio, ma senza una data decisa.</p>
+            <div class="trip-grid reveal">
             <a class="trip-card" href="javascript:void(0)" onclick="showDest('np')">
               <img src="foto/destinazioni/The_Tigers_Nest_(_Paro_Taktsang_).jpg" alt="Tiger's Nest Monastery, Bhutan" loading="lazy">
               <div class="overlay"></div>
@@ -484,16 +518,7 @@
               </div>
             </a>
 
-            <a class="trip-card" href="javascript:void(0)" onclick="showDest('ge')">
-              <img src="foto/destinazioni/Narikala_fortress,_Tbilisi,_Georgia-fb6b37.jpg" alt="Narikala Fortress, Tbilisi, Georgia" loading="lazy">
-              <div class="overlay"></div>
-              <div class="content">
-                <div class="flag">🇬🇪</div>
-                <div class="title">Georgia</div>
-                <div class="meta">2-7 gennaio 2027 · 6 giorni</div>
-                <p class="tagline">Tbilisi, bagni di zolfo, vino nel qvevri e un weekend sulla neve a Gudauri.</p>
-              </div>
-            </a>
+            </div>
           </div>
         </div>
       </section>
@@ -5486,6 +5511,474 @@
 </footer>
   </div>
 
+  <div class="destination" id="dest-kr" data-dest="kr">
+<header class="hero">
+  <div class="bg" style="background-image:linear-gradient(180deg, rgba(11,15,26,0.40) 0%, rgba(11,15,26,0.62) 55%, rgba(11,15,26,0.94) 100%), url('foto/destinazioni/kr-palazzo.jpg');"></div>
+  <div class="content">
+    <h1>Corea del Sud</h1>
+    <p class="tagline">Palazzi con le tegole all'insù e treni a 300 all'ora, monaci e insegne al neon, un villaggio dipinto aggrappato a una collina e un vulcano che esce dal mare. E in mezzo, per due settimane esatte, i ciliegi in fiore.</p>
+    <div class="badge-row">
+      <span class="badge">📅 2–17 aprile 2027 · 16 giorni <em>(confermato)</em></span>
+      <span class="badge">🌸 Stagione dei ciliegi</span>
+      <span class="badge">🚄 KTX Seul · Gyeongju · Busan</span>
+      <span class="badge">🌋 Jeju</span>
+    </div>
+    <div class="scroll-cue">↓ scorri per esplorare</div>
+  </div>
+  <div class="photo-credit">Foto: Basile Morin, <a href="https://commons.wikimedia.org/wiki/File:Front_view_of_the_Imperial_Throne_Hall_Geunjeongjeon_at_Gyeongbokgung_Palace_with_blue_sky_in_Seoul.jpg" target="_blank" rel="noopener">CC BY-SA 4.0, Wikimedia Commons</a></div>
+</header>
+
+<nav class="tabs" id="tabs-kr">
+  <a href="javascript:void(0)" class="home-link" onclick="showHub()">🌍 Tutte le mete</a>
+  <a href="#perche-kr">Perché andare</a>
+  <a href="#ciliegi-kr">I ciliegi</a>
+  <a href="#itinerario-kr">Itinerario</a>
+  <a href="#mappa-kr">Mappa</a>
+  <a href="#siti-kr">Cose da non perdere</a>
+  <a href="#dmz-kr">La DMZ</a>
+  <a href="#guida-kr">Guida pratica</a>
+  <a href="#curiosita-kr">Curiosità</a>
+  <a href="#meteo-kr">Meteo</a>
+  <a href="#cibo-kr">Cibo &amp; alcolici</a>
+  <a href="#voli-kr">Voli</a>
+  <a href="#budget-kr">Spese stimate</a>
+  <a href="#faq-kr">FAQ</a>
+</nav>
+
+<main>
+
+  <!-- PERCHE ANDARE -->
+  <section id="perche-kr" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">✨ Perché andare</h2>
+      <p class="section-sub reveal">Perché è il viaggio più facile del gruppo e insieme il più straniante: tutto funziona al secondo, si mangia benissimo per pochi euro, e ogni cosa è simultaneamente antichissima e appena inaugurata.</p>
+
+      <div class="why-grid reveal">
+        <div class="photo-banner" style="margin-bottom:0;">
+          <img src="foto/destinazioni/kr-ciliegi.jpg" alt="Tunnel di ciliegi in fiore a Jinhae, Corea del Sud" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+          <div class="credit">Foto: Alexey Komarov, <a href="https://commons.wikimedia.org/wiki/File:Cherry_Blossom_in_Jinhae-2016-04-02-1.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+          <div class="fallback">🌸</div>
+        </div>
+        <div>
+          <div class="stat-big"><span class="num">2h 15′</span><span class="unit">da Seul a Busan in treno</span></div>
+          <p class="stat-line">Il KTX attraversa tutto il paese a 300 km/h. La Corea è lunga poco più dell'Italia da Milano a Napoli: si può stare a Seul la mattina e sul mare la sera, e questo cambia completamente come si costruisce un itinerario.</p>
+
+          <div class="stat-big"><span class="num">~10 apr</span><span class="unit">picco dei ciliegi a Seul</span></div>
+          <p class="stat-line">Le date scelte cadono esattamente dentro la fioritura. È il motivo per cui l'itinerario è costruito al contrario di come verrebbe naturale — ne parlo nella sezione dopo, perché è la scelta che decide il viaggio.</p>
+
+          <div class="stat-big"><span class="num">1</span><span class="unit">confine che non si può attraversare</span></div>
+          <p class="stat-line">A un'ora da una città di dieci milioni di abitanti c'è la frontiera più militarizzata del pianeta, ferma dal 1953. Si visita, con regole precise e senza garanzie.</p>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Una cosa che rende tutto più semplice:</strong> i trasporti pubblici sono ovunque, puntuali e a poco prezzo, e si pagano con un'unica tessera ricaricabile (<strong>T-money</strong>) che vale per metro, bus e taxi in tutto il paese. Niente noleggi, niente contrattazioni, niente trasferimenti da organizzare: è il viaggio del gruppo con meno logistica di tutti.
+      </div>
+    </div>
+  </section>
+
+  <!-- I CILIEGI -->
+  <section id="ciliegi-kr" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌸 I ciliegi, e perché l'itinerario va al contrario</h2>
+      <p class="section-sub reveal">La fioritura non è un dettaglio decorativo: si sposta da sud a nord di circa una settimana, e determina in che ordine conviene visitare il paese.</p>
+
+      <div class="card reveal">
+        <h3 style="margin-top:0;">Quando fiorisce, dove</h3>
+        <div class="route-status" id="route-status-kr"></div>
+        <div class="source-note">Previsioni 2026 da thesoulofseoul.net, klook.com e VisitKorea. Le date variano ogni anno di qualche giorno secondo l'inverno: la previsione ufficiale esce a inizio marzo, quindi andrà riverificata. Il picco dura circa 7-10 giorni.</div>
+      </div>
+
+      <div class="callout warn reveal">
+        <strong>Il paradosso da capire subito.</strong> Il sud (Busan, Gyeongju, Jeju) fiorisce <strong>a fine marzo</strong>: quando arrivate il 3 aprile è già sfiorito o all'ultimo giro. Seul fiorisce <strong>dopo</strong>, con il picco intorno al <strong>10 aprile</strong>. Quindi l'itinerario fa il contrario di quello che verrebbe istintivo: <strong>si scende subito a sud</strong> (dove i fiori non ci sono più comunque) e <strong>si torna a Seul per la seconda settimana</strong>, arrivando in città proprio mentre esplode.
+      </div>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>🌸 Seul — dall'11 aprile</h3><p>La settimana in cui siete in città. I posti classici: <strong>Yeouido</strong> lungo il fiume Han, il lago <strong>Seokchon</strong> davanti alla Lotte Tower, e i vialetti attorno a <strong>Gyeongbokgung</strong>. Sono anche molto affollati: presto la mattina fa una differenza enorme.</p></div>
+        <div class="card reveal"><h3>🌸 Jinhae — il più famoso</h3><p>Vicino a Busan, la festa dei ciliegi più grande del paese: un torrente fiancheggiato da alberi che si chiudono a tunnel. Il picco però è <strong>fine marzo / primissimi di aprile</strong>: passando l'8-9 aprile la trovereste sfiorita. Se qualcuno la vuole a tutti i costi, va anticipato il viaggio, non spostato.</p></div>
+        <div class="card reveal"><h3>🌸 Gyeongju</h3><p>Fiorisce intorno al <strong>28 marzo – 5 aprile</strong>. Arrivando il 4 aprile potreste beccare la coda della fioritura sui tumuli reali: sarebbe il colpo di fortuna del viaggio, ma non contateci.</p></div>
+        <div class="card reveal"><h3>⚠️ Nessuno può garantirlo</h3><p>La fioritura dipende dall'inverno e si sposta anche di una settimana. Le date sono <strong>previsioni</strong>, non un calendario. Il viaggio deve reggere anche senza fiori: per questo l'itinerario non è costruito solo su quelli.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ITINERARIO -->
+  <section id="itinerario-kr" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🗺️ Itinerario — 2/17 aprile, 16 giorni</h2>
+      <p class="section-sub reveal">Seul di passaggio, poi giù a sud in treno, Jeju in mezzo, e ritorno a Seul per la fioritura. Ogni giorno ha un link diretto a Google Maps.</p>
+
+      <div class="timeline" id="timeline-kr"></div>
+
+      <div class="callout reveal">
+        <strong>Perché Seul è spezzata in due.</strong> Una notte all'arrivo per smaltire il fuso e vedere il centro storico, poi subito il sud; il grosso di Seul è nella seconda settimana, quando i ciliegi sono al massimo. Costa un cambio di albergo in più e fa guadagnare la cosa per cui si è scelto aprile.
+      </div>
+    </div>
+  </section>
+
+  <!-- MAPPA -->
+  <section id="mappa-kr" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">📍 Mappa &amp; percorso</h2>
+      <p class="section-sub reveal">Seul, poi il KTX verso sud, il volo per Jeju e il rientro in aereo su Seul. Il mezzo cambia lungo il tracciato.</p>
+
+      <div class="jeep-map-wrap reveal">
+        <svg id="jeep-svg-kr" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+          <path class="terrain terrain-a" d="M140 70 C 190 55, 245 75, 275 115 C 310 160, 370 200, 385 255 C 395 295, 372 335, 335 348 C 290 362, 240 342, 205 302 C 168 258, 142 195, 136 145 C 133 110, 133 85, 140 70 Z"/>
+          <ellipse class="terrain terrain-b" cx="192" cy="423" rx="44" ry="21"/>
+          <path class="contour" d="M150 120 C 210 140, 280 190, 330 260"/>
+          <path class="contour" d="M160 200 C 220 230, 290 270, 340 320"/>
+          <path class="border-line" d="M128 118 C 170 104, 220 100, 268 112"/>
+          <text class="border-label" x="198" y="94" text-anchor="middle">Corea del Nord</text>
+
+          <path id="route-path-kr" class="route-shadow" d="M 195,135 Q 275,192 354,255 Q 350,279 344,302 Q 268,362 192,423 Q 120,300 195,135"/>
+          <path class="route-line" d="M 195,135 Q 275,192 354,255 Q 350,279 344,302 Q 268,362 192,423 Q 120,300 195,135"/>
+
+          <circle class="pulse" cx="195" cy="135" r="8"/>
+          <g class="stop-pin">
+            <text x="195" y="142" text-anchor="middle" font-size="22">🏯</text>
+            <text class="stop-label highlight" x="212" y="120" text-anchor="middle">Seul</text>
+          </g>
+          <g class="stop-pin minor">
+            <text x="174" y="114" text-anchor="middle" font-size="14">🪖</text>
+            <text class="stop-label" x="150" y="106" text-anchor="middle">DMZ</text>
+          </g>
+          <g class="stop-pin">
+            <text x="354" y="262" text-anchor="middle" font-size="20">⛩️</text>
+            <text class="stop-label highlight" x="356" y="241" text-anchor="middle">Gyeongju</text>
+          </g>
+          <g class="stop-pin">
+            <text x="344" y="309" text-anchor="middle" font-size="20">🏙️</text>
+            <text class="stop-label highlight" x="352" y="329" text-anchor="middle">Busan</text>
+          </g>
+          <g class="stop-pin">
+            <text x="192" y="430" text-anchor="middle" font-size="20">🌋</text>
+            <text class="stop-label highlight" x="196" y="452" text-anchor="middle">Jeju</text>
+          </g>
+
+          <g class="compass" transform="translate(455,40)">
+            <line x1="0" y1="-14" x2="0" y2="14"/>
+            <line x1="-10" y1="0" x2="10" y2="0"/>
+            <text x="0" y="-18" text-anchor="middle">N</text>
+          </g>
+          <g class="scale-bar" transform="translate(30,470)">
+            <line x1="0" y1="0" x2="60" y2="0"/>
+            <line x1="0" y1="-4" x2="0" y2="4"/>
+            <line x1="60" y1="-4" x2="60" y2="4"/>
+            <text x="30" y="-6" text-anchor="middle">~80 km</text>
+          </g>
+
+          <text font-size="22" id="jeep-marker-kr">🚄
+            <animateMotion dur="20s" repeatCount="indefinite">
+              <mpath href="#route-path-kr"/>
+            </animateMotion>
+          </text>
+        </svg>
+      </div>
+
+      <div class="map-actions reveal">
+        <a id="link-full-route-kr" href="#" target="_blank" rel="noopener">🗺️ Apri l'itinerario completo su Google Maps</a>
+        <button class="export" id="btn-export-kml-kr">⬇️ Esporta tappe (KML)</button>
+      </div>
+
+      <div class="card reveal" style="overflow-x:auto;">
+        <h3 style="margin-top:0;">Spostamenti giorno per giorno</h3>
+        <table class="stops-table" id="legs-table-kr">
+          <thead><tr><th>Giorno</th><th>Tratta</th><th>Mezzo</th><th>Durata</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="source-note">I biglietti KTX si comprano sull'app Korail o in stazione. Il Korail Pass conviene solo con tre o più tratte lunghe: su questo giro, punto a punto costa meno.</div>
+      </div>
+
+      <div class="card reveal" style="overflow-x:auto;">
+        <h3 style="margin-top:0;">Tutte le tappe</h3>
+        <table class="stops-table" id="stops-table-kr">
+          <thead><tr><th>Tappa</th><th>Coordinate</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- COSE DA NON PERDERE -->
+  <section id="siti-kr" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🏯 Cose da non perdere</h2>
+      <p class="section-sub reveal">Le tappe principali dell'itinerario, filtrabili per città.</p>
+
+      <div class="filter-row reveal" id="family-filters-kr"></div>
+      <div class="family-grid" id="family-grid-kr"></div>
+
+      <div class="source-note">Fonti: VisitKorea (english.visitkorea.or.kr), backpackingislife.com, kkday.com, seoultourism.org — verificate ad agosto 2026.</div>
+    </div>
+  </section>
+
+  <!-- DMZ -->
+  <section id="dmz-kr" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🪖 La DMZ — regole precise, nessuna garanzia</h2>
+      <p class="section-sub reveal">La zona demilitarizzata si visita solo con tour autorizzati, e la parte più famosa può saltare all'ultimo momento.</p>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>🎟️ Due tour diversi</h3><p>Il <strong>tour DMZ standard</strong> (Terzo Tunnel d'Infiltrazione, osservatorio di Dora) costa <strong>55.000–75.000 won</strong>, fino a 95.000 con pranzo. Il <strong>JSA / Panmunjom</strong>, dove si sta davvero sulla linea di confine, costa <strong>da 150.000 won</strong> ed è un'altra cosa.</p></div>
+        <div class="card reveal"><h3>⚠️ Il JSA può chiudere</h3><p>Resta soggetto a <strong>chiusure improvvise</strong> per tensioni geopolitiche o direttive del Comando ONU. Gli operatori non possono garantirlo e le cancellazioni arrivano anche la mattina stessa. Prenotate il tour DMZ normale e trattate il JSA come un bonus.</p></div>
+        <div class="card reveal"><h3>🛂 Passaporto vero</h3><p>Serve il <strong>passaporto fisico</strong>, non una fotocopia né la foto sul telefono: ai posti di blocco i militari controllano ogni nome sulla lista consegnata prima. Un passaporto mancante può far tornare indietro l'intero pullman. Per il JSA i dati vanno registrati <strong>almeno 7 giorni prima</strong>.</p></div>
+        <div class="card reveal"><h3>👕 C'è un codice di abbigliamento</h3><p>Vietati canottiere, magliette senza colletto, pantaloncini, jeans strappati, vestiti aderenti o trasparenti, capi di foggia militare e infradito. Non è folklore: chi si presenta fuori regola non sale.</p></div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Vale la pena?</strong> Sì, ma sapendo cos'è: mezza giornata di pullman, controlli e osservatori, non un'attrazione spettacolare. Quello che colpisce è il contesto — un confine fermo dal 1953 a un'ora dai grattacieli.
+        <div class="source-note">Fonti: seoultourism.org, trazy.com, vviptravel.com, koreaexperience.com — tutte aggiornate al 2026 e concordi su prezzi e regole.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUIDA PRATICA -->
+  <section id="guida-kr" class="panel dark" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="foto/destinazioni/kr-hanok.jpg" alt="Vicolo di case hanok nel villaggio di Bukchon, Seul" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Basile Morin, <a href="https://commons.wikimedia.org/wiki/File:Bukchon-ro_11-gil_street_with_hanok_houses_and_blue_sky_in_Bukchon_Hanok_Village_Seoul.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+        <div class="fallback">🏘️</div>
+      </div>
+      <h2 class="section-title reveal">🧭 Guida pratica</h2>
+      <p class="section-sub reveal">Documenti, trasporti, valuta. Dati verificati ad agosto 2026 — da riconfermare vicino alla partenza.</p>
+
+      <div class="callout warn reveal">
+        <strong>Il K-ETA torna obbligatorio dal 1° gennaio 2027.</strong> Per gli italiani l'esenzione vale <strong>solo fino al 31 dicembre 2026</strong>: dal 2027 serve di nuovo l'autorizzazione elettronica, quindi per aprile 2027 <strong>va richiesta</strong>. Costa <strong>10.000 won (~7€)</strong>, si fa online e <strong>vale 3 anni</strong>. Non è un visto: il visto per turismo sotto i 90 giorni continua a non servire.
+        <div class="source-note">Fonti: Consolato Generale della Repubblica di Corea a Milano, viaggiaresicuri.it (scheda Corea aggiornata 30/12/2025), vistonline.it. Da riverificare a gennaio 2027, perché le proroghe sono state annunciate all'ultimo negli anni scorsi.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>🛂 Documenti</h3><p>Passaporto valido, nessun visto per turismo fino a 90 giorni, <strong>K-ETA</strong> da richiedere per il 2027. Chi non ha il K-ETA deve compilare la <strong>e-Arrival Card</strong> entro tre giorni dall'arrivo: il modulo cartaceo non esiste più dal 2026.</p></div>
+        <div class="card reveal"><h3>💳 T-money</h3><p>Una tessera ricaricabile che vale su <strong>metro, bus e taxi in tutto il paese</strong>. Si compra in qualsiasi minimarket per pochi euro. È la prima cosa da prendere appena atterrati.</p></div>
+        <div class="card reveal"><h3>🚄 KTX</h3><p>Seul–Busan in <strong>2h15</strong>, Seul–Gyeongju circa 2h, Gyeongju–Busan mezz'ora. Biglietti sull'app Korail. <strong>Il Korail Pass non conviene</strong> su questo giro: punto a punto costa circa la metà.</p></div>
+        <div class="card reveal"><h3>💱 Won</h3><p>Si paga con carta praticamente ovunque, anche i mercati. Contanti utili per i banchi di street food. Attenzione: le carte straniere non funzionano in tutti gli sportelli — cercate gli ATM con la scritta "Global".</p></div>
+        <div class="card reveal"><h3>📶 Internet</h3><p>Il paese è coperto di wifi pubblico gratuito e veloce. Una eSIM locale costa poco e risolve mappe e traduttore, che servono più di quanto sembri: fuori dalle zone turistiche l'inglese è poco diffuso.</p></div>
+        <div class="card reveal"><h3>🗺️ Google Maps non basta</h3><p>Per ragioni di sicurezza nazionale la Corea limita l'export dei dati cartografici, e <strong>Google Maps non dà indicazioni stradali affidabili</strong>. Si usano <strong>Naver Map</strong> o <strong>KakaoMap</strong>: scaricatele prima di partire.</p></div>
+      </div>
+
+      <div class="source-note">Fonti: viaggiaresicuri.it, overseas.mofa.go.kr (consolato coreano di Milano), kkday.com (KTX), VisitKorea — verificate ad agosto 2026. I link "apri su Google Maps" in questa pagina servono a localizzare le tappe, non a farsi guidare: per quello usate Naver o Kakao.</div>
+    </div>
+  </section>
+
+  <!-- CURIOSITA -->
+  <section id="curiosita-kr" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌍 Stranezze e luce</h2>
+      <p class="section-sub reveal">Le cose più sorprendenti del paese, verificate.</p>
+
+      <h3 style="margin-top:0;">☀️ Simulatore del sole — Seul, aprile</h3>
+      <p class="section-sub reveal">Ad aprile a Seul il sole sorge verso le 6 e tramonta verso le 19. Conta per i ciliegi: le foto senza folla si fanno solo all'alba.</p>
+      <div class="card reveal" style="text-align:center;">
+        <div class="sun-sim-wrap">
+          <svg id="sun-sim-kr" viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="skyGradient-kr" x1="0" y1="0" x2="0" y2="1">
+                <stop id="sky-stop-top-kr" offset="0%" stop-color="#2f6fb0"/>
+                <stop id="sky-stop-bottom-kr" offset="100%" stop-color="#bfe3ff"/>
+              </linearGradient>
+            </defs>
+            <rect x="2" y="4" width="496" height="176" rx="14" fill="url(#skyGradient)"/>
+            <path class="sun-arc" d="M 40,180 Q 250,20 460,180"/>
+            <path class="sun-hills" d="M0,200 Q80,160 160,192 T320,188 T500,200 L500,220 L0,220 Z"/>
+            <line class="sun-horizon" x1="0" y1="180" x2="500" y2="180"/>
+            <text x="40" y="200" text-anchor="middle" class="sun-label">🌅 ~05:55</text>
+            <text x="460" y="200" text-anchor="middle" class="sun-label">🌇 ~19:00</text>
+            <g id="sun-marker-kr"><text x="0" y="0" text-anchor="middle" font-size="30">☀️</text></g>
+          </svg>
+          <div class="sun-slider-row">
+            <input type="range" id="sun-slider-kr" min="240" max="1320" step="5" value="720" aria-label="Ora del giorno">
+            <div class="sun-slider-ticks"><span>04:00</span><span>13:00</span><span>22:00</span></div>
+          </div>
+          <div class="sun-readout" id="sun-readout-kr">Calcolo posizione del sole…</div>
+          <div class="source-note">Simulazione per Seul ad aprile (KST, UTC+9). Fonte: timeanddate.com.</div>
+        </div>
+      </div>
+
+      <h3>🤯 Lo sapevi che...</h3>
+      <div class="bigfive-grid" id="facts-grid-kr"></div>
+    </div>
+  </section>
+
+  <!-- METEO -->
+  <section id="meteo-kr" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌦️ Meteo — aprile</h2>
+      <p class="section-sub reveal">Primavera vera: mite di giorno, fresca la mattina e la sera. Il mese giusto, ma non ancora caldo.</p>
+
+      <div class="weather-cols reveal">
+        <div>
+          <h4>Seul</h4>
+          <div class="weather-stats">
+            <div class="card"><div class="wval">13-23°</div><div class="wlabel">Escursione tipica</div></div>
+            <div class="card"><div class="wval">~10°</div><div class="wlabel">Minime a fine mese</div></div>
+            <div class="card"><div class="wval">20-25°</div><div class="wlabel">Massime a fine mese</div></div>
+          </div>
+        </div>
+        <div>
+          <h4>Busan e il sud</h4>
+          <div class="weather-stats">
+            <div class="card"><div class="wval">Simile</div><div class="wlabel">A Seul, ma più ventoso</div></div>
+            <div class="card"><div class="wval">Sole</div><div class="wlabel">Più forte col cielo sereno</div></div>
+            <div class="card"><div class="wval">Piogge</div><div class="wlabel">Primi rovesci di primavera</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Cosa mettere in valigia:</strong> vestirsi a strati. Di giorno si sta in maglietta, la mattina presto e dopo il tramonto servono <strong>felpa e giacca leggera</strong>, e una antipioggia sottile perché aprile porta i primi rovesci. Scarpe comode: a Seul si cammina moltissimo e la metro ha scale ovunque.
+        <div class="source-note">Fonti: climieviaggi.it, dove-e-quando.it, guidacorea.it — verificate ad agosto 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CIBO -->
+  <section id="cibo-kr" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🍜 Cibo &amp; alcolici</h2>
+      <p class="section-sub reveal">Uno dei motivi principali per andarci. Si mangia benissimo a qualunque prezzo, e i contorni sono gratis e infiniti.</p>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>🥬 Banchan</h3><p>I contorni che arrivano insieme al piatto principale: kimchi, germogli, alghe, radici. Sono <strong>compresi nel prezzo e si possono richiedere all'infinito</strong>. Cambiano da locale a locale e sono metà del pasto.</p></div>
+        <div class="card reveal"><h3>🔥 Barbecue coreano</h3><p>Si cucina al tavolo su una griglia incassata: <strong>samgyeopsal</strong> (pancetta di maiale) o <strong>galbi</strong> (costine marinate). Si avvolge la carne nella lattuga con aglio e salsa. È il pasto sociale del paese.</p></div>
+        <div class="card reveal"><h3>🍲 Bibimbap</h3><p>Riso con verdure, carne, uovo e pasta di peperoncino, servito nella ciotola di pietra rovente che fa la crosta sul fondo. La versione di riferimento è quella di <strong>Jeonju</strong>.</p></div>
+        <div class="card reveal"><h3>🌶️ Tteokbokki</h3><p>Gnocchi di riso cilindrici in salsa di peperoncino dolce-piccante, il cibo di strada per eccellenza. Da provare al mercato <strong>Gwangjang</strong> di Seul insieme ai <em>bindaetteok</em>, le frittelle di fagioli.</p></div>
+        <div class="card reveal"><h3>🍶 Soju</h3><p>Il distillato nazionale, si beve in bicchierini e costa pochissimo. Regola di galateo: <strong>non ci si versa da soli</strong>, si versa agli altri, e quando un più anziano versa a te si regge il bicchiere con due mani.</p></div>
+        <div class="card reveal"><h3>🍺 Somaek e makgeolli</h3><p><strong>Somaek</strong> è soju mescolato alla birra, l'abbinamento più diffuso della sera. Il <strong>makgeolli</strong> è invece un vino di riso torbido e leggermente frizzante, servito in ciotole: tradizionalmente si beve con le frittelle nei giorni di pioggia.</p></div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Costa poco davvero.</strong> Un pasto completo in una trattoria di quartiere sta sui 8.000–12.000 won, un barbecue in due sui 30.000. La spesa giornaliera tipica di un viaggiatore è indicata intorno ai <strong>111€</strong>, ma stando attenti si scende <strong>sotto i 60€ a persona</strong>, alloggio incluso. Busan costa meno di Seul.
+        <div class="source-note">Fonti: zipangu.it, guidacorea.it, ivisitkorea.com — verificate ad agosto 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOLI -->
+  <section id="voli-kr" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">✈️ Voli</h2>
+      <p class="section-sub reveal">È una delle poche mete del gruppo con il <strong>volo diretto dall'Italia</strong>: circa 11 ore, senza scali.</p>
+
+      <div class="card reveal">
+        <table class="hub-table">
+          <thead><tr><th>Tratta</th><th>Tipo</th><th>Note</th></tr></thead>
+          <tbody>
+            <tr><td>Milano Malpensa → Seul Incheon</td><td><strong>Diretto</strong></td><td>Korean Air, ~11h, ~8.800 km. Tariffe viste da 463€</td></tr>
+            <tr><td>Roma Fiumicino → Seul Incheon</td><td><strong>Diretto</strong></td><td>La rotta più frequentata dall'Italia</td></tr>
+            <tr><td>Con scalo</td><td>1 scalo</td><td>Doha, Istanbul, Amsterdam, Parigi: spesso più economico, ~16-18h</td></tr>
+            <tr><td>Busan → Jeju</td><td>Volo interno</td><td>~1h, compagnie low cost coreane, biglietti economici</td></tr>
+            <tr><td>Jeju → Seul Gimpo</td><td>Volo interno</td><td>~1h. È una delle rotte aeree più trafficate al mondo</td></tr>
+          </tbody>
+        </table>
+        <div class="source-note">Prezzi rilevati ad agosto 2026, non per aprile 2027. <strong>Aprile è il mese più richiesto</strong> per la Corea proprio per i ciliegi: prenotare presto conta più del solito. Fonti: koreanair.com, edreams.it, volagratis.com.</div>
+      </div>
+
+      <div class="card reveal">
+        <div class="flight-form">
+          <div class="field">
+            <label for="flight-origin">Da dove parti</label>
+            <select id="flight-origin-kr">
+              <option value="MXP|Milano Malpensa">Milano Malpensa (MXP)</option>
+              <option value="FCO|Roma Fiumicino">Roma Fiumicino (FCO)</option>
+              <option value="LIN|Milano Linate">Milano Linate (LIN)</option>
+              <option value="BGY|Milano Bergamo">Milano Bergamo (BGY)</option>
+              <option value="BLQ|Bologna">Bologna (BLQ)</option>
+              <option value="VCE|Venezia">Venezia (VCE)</option>
+            </select>
+          </div>
+          <div class="field"><label>Destinazione</label><select disabled><option>Seul Incheon (ICN)</option></select></div>
+          <div class="field"><label>Date</label><select disabled><option>2 → 17 aprile 2027</option></select></div>
+        </div>
+        <div class="flight-links">
+          <button id="btn-google-flights-kr">Cerca su Google Flights</button>
+          <button class="alt" id="btn-skyscanner-kr">Cerca su Skyscanner</button>
+          <button class="alt" id="btn-kayak-kr">Cerca su Kayak</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUDGET -->
+  <section id="budget-kr" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">💰 Calcolatore budget</h2>
+      <p class="section-sub reveal">A terra la Corea costa poco per quello che offre. La voce grossa resta il volo. Stima indicativa, non un preventivo.</p>
+
+      <div class="card reveal">
+        <div class="currency-form">
+          <div class="field">
+            <label for="budget-people">Persone</label>
+            <input type="number" id="budget-people-kr" value="4" min="1">
+          </div>
+          <div class="field">
+            <label for="budget-style">Stile viaggio</label>
+            <select id="budget-style-kr">
+              <option value="budget">Budget</option>
+              <option value="standard" selected>Standard</option>
+              <option value="comfort">Comfort</option>
+            </select>
+          </div>
+        </div>
+        <div id="budget-result-kr" class="cur-result">—</div>
+        <div id="budget-breakdown-kr" class="source-note" style="text-align:center; margin-top:10px;"></div>
+      </div>
+
+      <div class="source-note">Include: volo Italia-Seul a/r, K-ETA, i due voli interni (Busan-Jeju, Jeju-Seul), KTX, trasporti urbani, alloggio 15 notti, cibo, ingressi e il tour DMZ. Esclude: spese personali e shopping. Dati da: koreanair.com/edreams (voli), kkday.com (KTX), seoultourism.org (DMZ), zipangu.it e ivisitkorea.com (costo giornaliero) — verificati ad agosto 2026.</div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq-kr" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">❓ Domande frequenti</h2>
+
+      <details class="faq reveal">
+        <summary>Serve un visto o un'autorizzazione?</summary>
+        <div class="faq-body">Il visto no, per turismo fino a 90 giorni. Ma il <strong>K-ETA torna obbligatorio dal 1° gennaio 2027</strong> per gli italiani: l'esenzione vale solo fino al 31 dicembre 2026, quindi per aprile 2027 va richiesto. Costa 10.000 won (~7€), si fa online e vale 3 anni. Chi ne è sprovvisto deve comunque compilare la <strong>e-Arrival Card</strong>, perché il modulo cartaceo è stato abolito nel 2026. Le proroghe negli anni scorsi sono state annunciate all'ultimo momento: riverificate a gennaio 2027.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Beccheremo davvero i ciliegi in fiore?</summary>
+        <div class="faq-body">A Seul molto probabilmente sì: la fioritura parte intorno al 3 aprile e il picco è verso il <strong>10</strong>, quindi la seconda settimana del viaggio cade nella finestra giusta. Nel sud invece no: Busan e Jeju fioriscono <strong>a fine marzo</strong> e quando arrivate è finita. Per questo l'itinerario scende subito a sud e torna a Seul dopo. Detto questo, sono <strong>previsioni</strong>: la fioritura si sposta di una settimana secondo l'inverno, e nessuno può garantirla.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Perché non usare Google Maps per girare?</summary>
+        <div class="faq-body">Perché in Corea non funziona bene: per motivi di sicurezza nazionale il paese limita l'esportazione dei dati cartografici, e le indicazioni stradali di Google sono incomplete. Si usano <strong>Naver Map</strong> o <strong>KakaoMap</strong>, che sono ottime. I link Maps di questa pagina servono a localizzare le tappe, non a farsi guidare.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Conviene il Korail Pass?</summary>
+        <div class="faq-body">Su questo itinerario no. Il pass più economico (2 giorni) sta intorno ai <strong>121.000 won</strong>, mentre le nostre tratte punto a punto — Seul-Gyeongju e Gyeongju-Busan — costano insieme circa <strong>60.000 won</strong>. Il pass conviene da tre tratte lunghe in su.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Si può visitare la DMZ?</summary>
+        <div class="faq-body">Sì, solo con tour autorizzati. Quello standard (Terzo Tunnel, osservatorio di Dora) costa 55.000-75.000 won. Il <strong>JSA di Panmunjom</strong>, dove si sta sulla linea di confine, costa da 150.000 won, va prenotato con <strong>almeno 7 giorni</strong> di anticipo e <strong>può essere annullato la mattina stessa</strong> per ragioni politiche. Serve il passaporto fisico e c'è un codice di abbigliamento applicato sul serio.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Quanto costa stare lì?</summary>
+        <div class="faq-body">Meno di quanto si pensi. La spesa giornaliera tipica indicata è intorno ai <strong>111€</strong> a persona, ma stando attenti si sta <strong>sotto i 60€</strong> compreso l'alloggio. Un pasto in trattoria costa 8.000-12.000 won, i trasporti urbani pochi euro al giorno. Busan è più economica di Seul.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Si parla inglese?</summary>
+        <div class="faq-body">Nelle zone turistiche di Seul abbastanza, fuori molto meno. Le indicazioni della metro e dei treni sono sempre anche in inglese, i menù spesso no. Il traduttore del telefono con la fotocamera risolve quasi tutto: vale la pena avere una eSIM o un wifi portatile.</div>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Corea del Sud Trip Planner — file locale, parte del sito <a href="javascript:void(0)" class="home-link" onclick="showHub()">Patagucci Trips</a>. Mappa e ricerca voli richiedono una connessione internet al momento del click.
+  <div class="credits">Foto da Wikimedia Commons: Basile Morin (Gyeongbokgung, Bukchon e Seongsan Ilchulbong, CC BY-SA 4.0) · Alexey Komarov (ciliegi a Jinhae, CC BY-SA 4.0) · Bernard Gagnon (Bulguksa, CC0) · Basile Morin (Gamcheon, CC BY-SA 4.0). Tutte le immagini restano dei rispettivi autori sotto le licenze indicate.</div>
+</footer>
+  </div>
+
   <div class="destination" id="dest-ge" data-dest="ge">
 <header class="hero">
   <div class="bg" style="background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.55) 55%, rgba(10,14,11,0.92) 100%), url('foto/destinazioni/Narikala_fortress,_Tbilisi,_Georgia-fb6b37.jpg');"></div>
@@ -5931,7 +6424,8 @@ var FLAG_BARS = {
   ge: 'linear-gradient(90deg,#ffffff 0 20%, #DA291C 20% 40%, #ffffff 40% 60%, #DA291C 60% 80%, #ffffff 80% 100%)',
   in: 'linear-gradient(90deg,#FF9933 0 33%, #ffffff 33% 66%, #138808 66% 100%)',
   tz: 'linear-gradient(90deg,#1EB53A 0 30%, #FCD116 30% 40%, #000000 40% 60%, #FCD116 60% 70%, #00A3DD 70% 100%)',
-  cx: 'linear-gradient(90deg,#0067C6 0 20%, #ffffff 20% 33%, #002B7F 33% 46%, #CE1126 46% 60%, #ffffff 60% 73%, #D21034 73% 86%, #005293 86% 100%)'
+  cx: 'linear-gradient(90deg,#0067C6 0 20%, #ffffff 20% 33%, #002B7F 33% 46%, #CE1126 46% 60%, #ffffff 60% 73%, #D21034 73% 86%, #005293 86% 100%)',
+  kr: 'linear-gradient(90deg,#ffffff 0 32%, #CD2E3A 32% 47%, #0047A0 47% 62%, #ffffff 62% 100%)'
 };
 function showDest(name){
   document.documentElement.setAttribute('data-dest', name);
@@ -5953,6 +6447,25 @@ function showDest(name){
   if(typeof syncSwitcherHeight === 'function') setTimeout(syncSwitcherHeight, 0);
 }
 function showHub(){ showDest('hub'); }
+
+// Le due tab della home: confermati / in programma.
+document.querySelectorAll('#trip-tabs .trip-tab').forEach(function(tab){
+  tab.addEventListener('click', function(){
+    var gruppo = tab.getAttribute('data-gruppo');
+    document.querySelectorAll('#trip-tabs .trip-tab').forEach(function(t){
+      var attiva = t === tab;
+      t.classList.toggle('active', attiva);
+      t.setAttribute('aria-selected', attiva ? 'true' : 'false');
+    });
+    document.querySelectorAll('.trip-gruppo').forEach(function(g){
+      g.classList.toggle('attivo', g.id === 'gruppo-' + gruppo);
+    });
+    // Le card appena mostrate non hanno mai incrociato l'observer.
+    document.querySelectorAll('.trip-gruppo.attivo .reveal').forEach(function(el){
+      el.classList.add('visible');
+    });
+  });
+});
 
 function syncSwitcherHeight(){
   var switcher = document.getElementById('site-switcher');
@@ -9966,6 +10479,421 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
     var nowUtc = new Date();
     var cstNowMin = ((nowUtc.getUTCHours() * 60 + nowUtc.getUTCMinutes()) - 6 * 60 + 1440) % 1440;
     var initial = Math.min(1200, Math.max(240, Math.round(cstNowMin / 5) * 5));
+    sunSlider.value = initial;
+    renderSun(initial);
+    sunSlider.addEventListener('input', function(){ renderSun(Number(sunSlider.value)); });
+  }
+
+})();
+
+</script><script>
+// ---- Corea del Sud ----
+
+(function(){
+  // ---- Scrollspy nav ----
+  var navLinks = document.querySelectorAll('nav.tabs a[href^="#"]');
+  var sections = document.querySelectorAll('section[data-nav]');
+  var linkBySection = {};
+  navLinks.forEach(function(a){ linkBySection[a.getAttribute('href').slice(1)] = a; });
+
+  var spyObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        navLinks.forEach(function(a){ a.classList.remove('active'); });
+        var link = linkBySection[entry.target.id];
+        if(link){
+          link.classList.add('active');
+          link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(function(s){ spyObserver.observe(s); });
+
+  // ---- Reveal on scroll ----
+  var revealObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ revealObserver.observe(el); });
+
+  // ---- Coordinate + link Google Maps ----
+  var COORDS = {
+    seul: [37.5665, 126.9780],
+    dmz: [37.9558, 126.6769],
+    gyeongju: [35.8562, 129.2247],
+    busan: [35.1796, 129.0756],
+    jeju: [33.4580, 126.9425],
+    incheon: [37.4602, 126.4407]
+  };
+  function mapsLink(fromKey, toKey){
+    var a = COORDS[fromKey], b = COORDS[toKey];
+    return 'https://www.google.com/maps/dir/?api=1&origin=' + a[0] + ',' + a[1] + '&destination=' + b[0] + ',' + b[1] + '&travelmode=transit';
+  }
+  function placeLink(key){
+    var p = COORDS[key];
+    return 'https://www.google.com/maps/search/?api=1&query=' + p[0] + ',' + p[1];
+  }
+
+  var ITINERARY = [
+    { d:1, data:'2 apr', title:'Volo Italia → Seul', tags:['Partenza','~11h diretto'], text:'Volo diretto da Milano o Roma, circa undici ore. Con la partenza nel primo pomeriggio si atterra a Incheon la mattina dopo: il fuso è di sette ore avanti, quindi la prima notte si dorme in aereo.', link: placeLink('incheon'), linkLabel:'Vedi l\'aeroporto di Incheon su Google Maps' },
+    { d:2, data:'3 apr', title:'Arrivo a Seul — Bukchon e Gwangjang', tags:['Seul','Primo giorno'], text:'Dall\'aeroporto in treno fino al centro, poi giornata leggera per smaltire il fuso: il villaggio hanok di <strong>Bukchon</strong>, i vicoli di Insadong e il mercato <strong>Gwangjang</strong> per la prima cena — tteokbokki, bindaetteok e mandu ai banchi.', link: placeLink('seul'), linkLabel:'Vedi Seul su Google Maps', highlight:true },
+    { d:3, data:'4 apr', title:'Seul → Gyeongju in KTX', tags:['KTX ~2h','Gyeongju'], text:'Treno veloce verso sud. Gyeongju è stata per mille anni la capitale del regno di Silla, ed è una città bassa e verde disseminata di <strong>tumuli reali</strong> — collinette erbose che sono tombe. Pomeriggio al parco di Daereungwon e allo stagno di Donggung.', link: mapsLink('seul','gyeongju'), linkLabel:'Apri il tragitto Seul → Gyeongju', highlight:true },
+    { d:4, data:'5 apr', title:'Gyeongju — Bulguksa e Seokguram', tags:['UNESCO','Templi'], text:'Il tempio di <strong>Bulguksa</strong>, patrimonio UNESCO, con le sue terrazze di pietra dell\'VIII secolo, e la grotta di <strong>Seokguram</strong> sopra la montagna, dove un Buddha di granito guarda verso il mare. Se la fioritura è in ritardo, qui potreste trovarne ancora.', link: placeLink('gyeongju'), linkLabel:'Vedi Gyeongju su Google Maps' },
+    { d:5, data:'6 apr', title:'Gyeongju → Busan, Gamcheon', tags:['KTX 30 min','Busan'], text:'Mezz\'ora di treno e si arriva al mare. Pomeriggio al <strong>villaggio culturale di Gamcheon</strong>: un quartiere di casette dipinte a gradoni sulla collina, nato come baraccopoli di profughi e diventato un labirinto di colori.', link: mapsLink('gyeongju','busan'), linkLabel:'Apri il tragitto Gyeongju → Busan', highlight:true },
+    { d:6, data:'7 apr', title:'Busan — Jagalchi e Haedong Yonggungsa', tags:['Busan','Mare'], text:'Il mercato del pesce di <strong>Jagalchi</strong>, il più grande della Corea, dove si sceglie il pesce vivo e ve lo cucinano al piano di sopra. Poi il tempio <strong>Haedong Yonggungsa</strong>, costruito sugli scogli con le onde sotto, e la spiaggia di Haeundae per la sera.', link: placeLink('busan'), linkLabel:'Vedi Busan su Google Maps' },
+    { d:7, data:'8 apr', title:'Busan → Jeju in aereo', tags:['Volo ~1h','Jeju'], text:'Un\'ora di volo verso l\'isola vulcanica a sud, un mondo a parte: muretti a secco di roccia lavica, palme, e i totem di pietra <em>dol hareubang</em> davanti alle case. Si noleggia un\'auto, perché qui i mezzi pubblici non bastano.', link: mapsLink('busan','jeju'), linkLabel:'Apri il tragitto Busan → Jeju', highlight:true },
+    { d:8, data:'9 apr', title:'Jeju — Seongsan Ilchulbong all\'alba', tags:['UNESCO','Alba'], text:'Il "picco del sole nascente": un cratere di tufo emerso dal mare cinquemila anni fa, con il bordo a corona. Si sale in una ventina di minuti e il nome non è un caso — ci si va per l\'alba. Pomeriggio in barca all\'isolotto di <strong>Udo</strong>.', link: placeLink('jeju'), linkLabel:'Vedi Seongsan Ilchulbong su Google Maps', highlight:true },
+    { d:9, data:'10 apr', title:'Jeju — Manjanggul e costa sud', tags:['Grotta di lava','Cascate'], text:'La grotta di <strong>Manjanggul</strong>, un tunnel di lava lungo chilometri in cui si cammina dentro il condotto di un\'antica colata. Poi la costa sud: le cascate di Jeongbang, che cadono direttamente in mare, e i sentieri Olle lungo la scogliera.', link: placeLink('jeju'), linkLabel:'Vedi Jeju su Google Maps' },
+    { d:10, data:'11 apr', title:'Jeju → Seul, seconda base', tags:['Volo ~1h','Seul'], text:'Rientro a Seul, dove ci si ferma per il resto del viaggio. Sera a <strong>Hongdae</strong>, il quartiere universitario: musica dal vivo per strada, locali fino a tardi e il primo assaggio del somaek.', link: mapsLink('jeju','seul'), linkLabel:'Apri il tragitto Jeju → Seul' },
+    { d:11, data:'12 apr', title:'Seul — i ciliegi', tags:['🌸 Il giorno','Presto la mattina'], text:'Il momento per cui si è scelto aprile. <strong>Yeouido</strong> lungo il fiume Han, con il viale di ciliegi dietro il parlamento, e il lago <strong>Seokchon</strong> con la Lotte Tower sullo sfondo. Andateci all\'alba: a metà mattina c\'è mezza città.', link: placeLink('seul'), linkLabel:'Vedi Seul su Google Maps', highlight:true },
+    { d:12, data:'13 apr', title:'DMZ', tags:['Mezza giornata','Passaporto'], text:'Tour alla zona demilitarizzata: il Terzo Tunnel d\'Infiltrazione, scavato dal Nord e scoperto nel 1978, e l\'osservatorio di Dora da cui si guarda dentro la Corea del Nord. Passaporto fisico obbligatorio e codice di abbigliamento applicato sul serio.', link: placeLink('dmz'), linkLabel:'Vedi l\'area della DMZ su Google Maps', highlight:true },
+    { d:13, data:'14 apr', title:'Seul — palazzi reali', tags:['Seul','UNESCO'], text:'<strong>Gyeongbokgung</strong>, il palazzo principale della dinastia Joseon, con il cambio della guardia; e <strong>Changdeokgung</strong> col suo Giardino Segreto, patrimonio UNESCO. Chi si presenta in hanbok, il vestito tradizionale noleggiabile lì fuori, entra gratis.', link: placeLink('seul'), linkLabel:'Vedi Seul su Google Maps' },
+    { d:14, data:'15 apr', title:'Gita fuori città', tags:['Suwon o Nami'], text:'Due opzioni a un\'ora da Seul: la fortezza di <strong>Hwaseong</strong> a Suwon, cinta muraria settecentesca patrimonio UNESCO che si percorre a piedi; oppure l\'<strong>isola di Nami</strong>, con i viali alberati e i noleggi di bici.', link: placeLink('seul'), linkLabel:'Vedi Seul su Google Maps' },
+    { d:15, data:'16 apr', title:'Seul — ultimo giro', tags:['Mercati','Shopping'], text:'Giornata libera: <strong>Dongdaemun</strong> e il suo edificio di Zaha Hadid, Myeongdong per lo street food serale, Gangnam, o un <em>jjimjilbang</em> — le terme coreane aperte tutta la notte, che dopo due settimane di camminate sono il modo giusto di chiudere.', link: placeLink('seul'), linkLabel:'Vedi Seul su Google Maps' },
+    { d:16, data:'17 apr', title:'Rientro', tags:['Partenza'], text:'Treno per Incheon e volo di rientro. Con il fuso a favore si arriva in Italia lo stesso giorno.', link: placeLink('incheon'), linkLabel:'Vedi l\'aeroporto di Incheon su Google Maps' }
+  ];
+
+  var timeline = document.getElementById('timeline-kr');
+  ITINERARY.forEach(function(day, idx){
+    var det = document.createElement('details');
+    det.className = 'day reveal';
+    if(idx === 0) det.open = true;
+    var tagsHtml = day.tags.map(function(t){ return '<span class="tag' + (day.highlight ? ' highlight' : '') + '">' + t + '</span>'; }).join('');
+    det.innerHTML =
+      '<summary><span class="daynum">' + day.d + '</span><span class="daytitle">' + day.title + '</span><span class="chevron">▸</span></summary>' +
+      '<div class="day-body"><span class="tag">' + day.data + '</span>' + tagsHtml + '<p>' + day.text + '</p>' +
+      '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
+      '</div>';
+    timeline.appendChild(det);
+    revealObserver.observe(det);
+  });
+
+  // ---- Il mezzo cambia lungo il percorso ----
+  var ROUTE_MODES = [
+    { verso:[354,255], mezzo:'🚄' },  // Seul → Gyeongju, KTX
+    { verso:[344,302], mezzo:'🚄' },  // → Busan, KTX
+    { verso:[192,423], mezzo:'✈️' },  // → Jeju, volo interno
+    { verso:[195,135], mezzo:'✈️' }   // → Seul, volo interno
+  ];
+
+  var routePath = document.getElementById('route-path-kr');
+  var routeMarker = document.getElementById('jeep-marker-kr');
+  if(routePath && routeMarker && routePath.getTotalLength){
+    var routeLen = routePath.getTotalLength();
+    var smil = routeMarker.querySelector('animateMotion');
+    if(smil) smil.remove();
+    routeMarker.setAttribute('text-anchor', 'middle');
+
+    var cursore = 0;
+    ROUTE_MODES.forEach(function(tratta){
+      var migliore = cursore, distMin = Infinity;
+      for(var i = Math.ceil(cursore * 400); i <= 400; i++){
+        var p = routePath.getPointAtLength(routeLen * i / 400);
+        var dx = p.x - tratta.verso[0], dy = p.y - tratta.verso[1];
+        var d = dx * dx + dy * dy;
+        if(d < distMin){ distMin = d; migliore = i / 400; }
+      }
+      tratta.fino = migliore;
+      cursore = migliore;
+    });
+    ROUTE_MODES[ROUTE_MODES.length - 1].fino = 1;
+
+    var posiziona = function(frazione){
+      var p = routePath.getPointAtLength(routeLen * frazione);
+      routeMarker.setAttribute('x', p.x);
+      routeMarker.setAttribute('y', p.y + 7);
+      var tratta = ROUTE_MODES.filter(function(t){ return frazione <= t.fino; })[0]
+                 || ROUTE_MODES[ROUTE_MODES.length - 1];
+      if(routeMarker.textContent !== tratta.mezzo) routeMarker.textContent = tratta.mezzo;
+    };
+
+    var DURATA = 20000, avvio = null;
+    var muovi = function(ts){
+      if(avvio === null) avvio = ts;
+      posiziona(((ts - avvio) % DURATA) / DURATA);
+      requestAnimationFrame(muovi);
+    };
+
+    var ridotto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(ridotto) posiziona(0); else requestAnimationFrame(muovi);
+  }
+
+  // ---- Budget ----
+  var BUDGET = {
+    notti: 15,
+    flight: { budget:520, standard:720, comfort:1050 },
+    // K-ETA (~7€) + due voli interni + KTX + trasporti urbani per 16 giorni.
+    transportFixed: { budget:190, standard:250, comfort:360 },
+    // Ingressi ai palazzi e ai parchi + tour DMZ + noleggio auto a Jeju.
+    activitiesFixed: { budget:130, standard:190, comfort:290 },
+    lodgingPerNight: { budget:26, standard:58, comfort:130 },
+    foodPerDay: { budget:20, standard:36, comfort:70 },
+    extrasFixed: { budget:80, standard:160, comfort:320 }
+  };
+  var bgtPeople = document.getElementById('budget-people-kr');
+  var bgtStyle = document.getElementById('budget-style-kr');
+  var bgtResult = document.getElementById('budget-result-kr');
+  var bgtBreakdown = document.getElementById('budget-breakdown-kr');
+  function updateBudget(){
+    if(!bgtPeople) return;
+    var people = Math.max(1, parseInt(bgtPeople.value, 10) || 1);
+    var style = bgtStyle.value;
+    var perPerson = BUDGET.flight[style] + BUDGET.transportFixed[style] + BUDGET.activitiesFixed[style]
+                  + BUDGET.extrasFixed[style]
+                  + BUDGET.notti * BUDGET.lodgingPerNight[style]
+                  + 16 * BUDGET.foodPerDay[style];
+    var totalGroup = perPerson * people;
+    bgtResult.textContent = '~' + Math.round(perPerson).toLocaleString('it-IT') + ' € a persona';
+    bgtBreakdown.textContent = 'Totale gruppo (' + people + ' persone): ~' + Math.round(totalGroup).toLocaleString('it-IT') + ' € — include volo, K-ETA, voli interni, KTX e trasporti, 15 notti, cibo, ingressi e tour DMZ.';
+  }
+  if(bgtPeople){
+    [bgtPeople, bgtStyle].forEach(function(el){ el.addEventListener('input', updateBudget); el.addEventListener('change', updateBudget); });
+    updateBudget();
+  }
+
+  // ---- Fioritura ----
+  var ROUTES = [
+    { name:'Jeju e Busan — dal 25 marzo', open:false, note:'Fioritura più precoce del paese. Quando arriviamo nel sud, il 6-8 aprile, è finita.' },
+    { name:'Gyeongju — dal 28 marzo, picco entro il 5 aprile', open:false, note:'Ci arriviamo il 4: potremmo beccare la coda della fioritura sui tumuli, ma sarebbe fortuna.' },
+    { name:'Seul — primi fiori dal 3 aprile', open:true, note:'Comincia proprio mentre atterriamo, ma non e’ ancora il massimo.' },
+    { name:'Seul — picco intorno al 10 aprile', open:true, note:'La seconda settimana del viaggio cade dentro la finestra migliore. E’ il motivo per cui torniamo a Seul.' },
+    { name:'Seul — dal 17-18 aprile in poi', open:false, note:'Il picco dura 7-10 giorni: partendo il 17 lo prendiamo tutto e ce ne andiamo prima che finisca.' }
+  ];
+  var routeStatus = document.getElementById('route-status-kr');
+  if(routeStatus){
+    ROUTES.forEach(function(r){
+      var row = document.createElement('div');
+      row.className = 'r-name';
+      row.textContent = r.name;
+      var status = document.createElement('div');
+      status.className = 'r-status ' + (r.open ? 'open' : 'closed');
+      status.textContent = r.open ? 'Ci siamo' : 'Fuori tempo';
+      var note = document.createElement('div');
+      note.className = 'route-note';
+      note.textContent = r.note;
+      routeStatus.appendChild(row);
+      routeStatus.appendChild(status);
+      routeStatus.appendChild(note);
+    });
+  }
+
+  // ---- Cose da non perdere ----
+  var FAMILIES = [
+    { sector:'Seul', name:'Gyeongbokgung', size:'Mezza giornata', level:'Facile', note:'Il palazzo reale della dinastia Joseon, col cambio della guardia. In hanbok si entra gratis.' },
+    { sector:'Seul', name:'Bukchon Hanok', size:'2-3 ore', level:'Facile', note:'Vicoli di case tradizionali fra i due palazzi reali. Ci abita gente: si gira in silenzio.' },
+    { sector:'Seul', name:'Yeouido e Seokchon', size:'Mattina', level:'Facile', note:'I due posti dei ciliegi a Seul. All\'alba sono un\'altra cosa rispetto a metà mattina.' },
+    { sector:'Seul', name:'Mercato Gwangjang', size:'Serata', level:'Facile', note:'Il mercato di street food storico: bindaetteok, mandu e tteokbokki ai banchi, seduti al bancone.' },
+    { sector:'Seul', name:'Changdeokgung', size:'2-3 ore', level:'Facile', note:'Il palazzo più bello dei cinque, col Giardino Segreto visitabile solo su prenotazione.' },
+    { sector:'Gyeongju', name:'Bulguksa', size:'Mezza giornata', level:'Facile', note:'Tempio dell\'VIII secolo su terrazze di pietra, patrimonio UNESCO. Il simbolo del regno di Silla.' },
+    { sector:'Gyeongju', name:'Seokguram', size:'2 ore', level:'Media', note:'Grotta artificiale sulla montagna con un Buddha di granito rivolto al mare. Si sale a piedi.' },
+    { sector:'Gyeongju', name:'Daereungwon', size:'2 ore', level:'Facile', note:'Il parco dei tumuli reali: collinette erbose che sono tombe di re, in mezzo alla città.' },
+    { sector:'Busan', name:'Gamcheon', size:'Mezza giornata', level:'Facile', note:'Il villaggio dipinto a gradoni sulla collina, nato come baraccopoli di profughi di guerra.' },
+    { sector:'Busan', name:'Mercato Jagalchi', size:'2 ore', level:'Facile', note:'Il più grande mercato del pesce della Corea: si sceglie sotto e si mangia sopra.' },
+    { sector:'Busan', name:'Haedong Yonggungsa', size:'Mezza giornata', level:'Facile', note:'Tempio costruito sugli scogli con le onde sotto: rarissimo, quasi tutti i templi coreani sono in montagna.' },
+    { sector:'Jeju', name:'Seongsan Ilchulbong', size:'Alba', level:'Media', note:'Cratere di tufo emerso dal mare, 20 minuti di salita. Patrimonio UNESCO, si va per l\'alba.' },
+    { sector:'Jeju', name:'Manjanggul', size:'2 ore', level:'Facile', note:'Tunnel di lava lungo chilometri: si cammina dentro il condotto di un\'antica colata.' },
+    { sector:'Jeju', name:'Isola di Udo', size:'Mezza giornata', level:'Facile', note:'Isolotto davanti a Seongsan, si gira in scooter. Spiagge bianche di corallo tritato.' },
+    { sector:'Extra', name:'DMZ', size:'Mezza giornata', level:'Facile', note:'Terzo Tunnel e osservatorio di Dora. Passaporto fisico, codice di abbigliamento, JSA a parte e non garantito.' },
+    { sector:'Extra', name:'Fortezza di Hwaseong', size:'Giornata', level:'Facile', note:'A Suwon, un\'ora da Seul: cinta muraria settecentesca UNESCO che si percorre tutta a piedi.' }
+  ];
+
+  var famSectors = ['Tutti'].concat(Array.from(new Set(FAMILIES.map(function(f){ return f.sector; }))));
+  var famFilterRow = document.getElementById('family-filters-kr');
+  var famGridEl = document.getElementById('family-grid-kr');
+  var famActiveSector = 'Tutti';
+
+  function renderFamilies(){
+    famGridEl.innerHTML = '';
+    FAMILIES.filter(function(f){ return famActiveSector === 'Tutti' || f.sector === famActiveSector; }).forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'family-card';
+      card.innerHTML =
+        '<div class="fsector">' + f.sector + '</div>' +
+        '<div class="fname">' + f.name + '</div>' +
+        '<div class="flevel ' + f.level + '">' + f.level + '</div>' +
+        '<div class="fsize">' + f.size + '</div>' +
+        '<p class="fnote">' + f.note + '</p>';
+      famGridEl.appendChild(card);
+    });
+  }
+
+  famSectors.forEach(function(s){
+    var btn = document.createElement('button');
+    btn.textContent = s;
+    if(s === famActiveSector) btn.classList.add('active');
+    btn.addEventListener('click', function(){
+      famActiveSector = s;
+      famFilterRow.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderFamilies();
+    });
+    famFilterRow.appendChild(btn);
+  });
+  renderFamilies();
+
+  // ---- Lo sapevi che... ----
+  var FACTS = [
+    { icon:'🗺️', text:'Google Maps non dà indicazioni stradali affidabili in Corea: il paese limita per legge l\'esportazione dei dati cartografici. I coreani usano Naver Map e KakaoMap.' },
+    { icon:'🚄', text:'Seul-Busan in 2 ore e 15 minuti a 300 km/h. La Corea del Sud è lunga poco più della distanza fra Milano e Napoli, e il KTX la attraversa tutta.' },
+    { icon:'🥬', text:'I banchan, i contorni che arrivano col piatto, sono compresi nel prezzo e si possono richiedere all\'infinito senza pagare niente in più.' },
+    { icon:'🍶', text:'Non ci si versa mai da bere da soli: si versa agli altri. E quando qualcuno più anziano versa a te, si regge il bicchiere con due mani.' },
+    { icon:'🌋', text:'Jeju è un\'isola interamente vulcanica, con oltre 350 coni secondari e una delle reti di tunnel di lava più estese al mondo. È patrimonio UNESCO.' },
+    { icon:'🪖', text:'La DMZ è larga 4 km e lunga 250, ed è ferma dal 1953: mancando il traffico umano da settant\'anni è diventata per paradosso una delle riserve naturali meglio conservate dell\'Asia.' },
+    { icon:'🌸', text:'La fioritura dei ciliegi risale il paese da sud a nord di circa una settimana: quando Seul comincia, Jeju ha già finito.' }
+  ];
+  var factsGrid = document.getElementById('facts-grid-kr');
+  if(factsGrid){
+    FACTS.forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'bigfive-card';
+      card.innerHTML = '<div class="bf-icon">' + f.icon + '</div><p class="bf-fact" style="min-height:0;">' + f.text + '</p>';
+      factsGrid.appendChild(card);
+    });
+  }
+
+  // ---- Voli ----
+  function currentOrigin(){
+    var v = document.getElementById('flight-origin-kr').value.split('|');
+    return { code: v[0], label: v[1] };
+  }
+  document.getElementById('btn-google-flights-kr').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.google.com/travel/flights?q=' + encodeURIComponent('Voli da ' + o.label + ' a Seul dal 2 al 17 aprile 2027'), '_blank');
+  });
+  document.getElementById('btn-skyscanner-kr').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.skyscanner.it/trasporti/voli/' + o.code.toLowerCase() + '/icn/270402/270417/', '_blank');
+  });
+  document.getElementById('btn-kayak-kr').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.kayak.it/flights/' + o.code + '-ICN/2027-04-02/2027-04-17', '_blank');
+  });
+
+  // ---- Mappa: tabelle e KML ----
+  var STOPS = [
+    { name:'Seul', key:'seul' },
+    { name:'DMZ (gita da Seul)', key:'dmz' },
+    { name:'Gyeongju', key:'gyeongju' },
+    { name:'Busan', key:'busan' },
+    { name:'Jeju — Seongsan Ilchulbong', key:'jeju' },
+    { name:'Aeroporto di Incheon', key:'incheon' }
+  ];
+
+  var origin = COORDS.seul, destination = COORDS.busan;
+  document.getElementById('link-full-route-kr').href =
+    'https://www.google.com/maps/dir/?api=1&origin=' + origin[0] + ',' + origin[1] +
+    '&destination=' + destination[0] + ',' + destination[1] +
+    '&waypoints=' + encodeURIComponent(COORDS.gyeongju[0] + ',' + COORDS.gyeongju[1]) + '&travelmode=transit';
+
+  var stopsBody = document.querySelector('#stops-table-kr tbody');
+  STOPS.forEach(function(s){
+    var c = COORDS[s.key];
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + s.name + '</td><td class="mono">' + c[0].toFixed(4) + ', ' + c[1].toFixed(4) + '</td><td><a href="' + placeLink(s.key) + '" target="_blank" rel="noopener">Apri ↗</a></td>';
+    stopsBody.appendChild(tr);
+  });
+
+  var LEGS = [
+    { day:3, label:'Seul → Gyeongju', from:'seul', to:'gyeongju', mezzo:'KTX', dur:'~2h' },
+    { day:5, label:'Gyeongju → Busan', from:'gyeongju', to:'busan', mezzo:'KTX', dur:'~30 min' },
+    { day:7, label:'Busan → Jeju', from:'busan', to:'jeju', mezzo:'Volo interno', dur:'~1h' },
+    { day:10, label:'Jeju → Seul', from:'jeju', to:'seul', mezzo:'Volo interno', dur:'~1h' },
+    { day:12, label:'Seul → DMZ e ritorno', from:'seul', to:'dmz', mezzo:'Pullman del tour', dur:'mezza giornata' }
+  ];
+  var legsBody = document.querySelector('#legs-table-kr tbody');
+  LEGS.forEach(function(leg){
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>Giorno ' + leg.day + '</td><td>' + leg.label + '</td><td>' + leg.mezzo + '</td><td>' + leg.dur + '</td><td><a href="' + mapsLink(leg.from, leg.to) + '" target="_blank" rel="noopener">Apri ↗</a></td>';
+    legsBody.appendChild(tr);
+  });
+
+  document.getElementById('btn-export-kml-kr').addEventListener('click', function(){
+    var kmlPlacemarks = STOPS.map(function(s){
+      var c = COORDS[s.key];
+      return '<Placemark><name>' + s.name + '</name><Point><coordinates>' + c[1] + ',' + c[0] + ',0</coordinates></Point></Placemark>';
+    }).join('\\n');
+    var lineCoords = ['seul','gyeongju','busan','jeju','seul'].map(function(k){ var c = COORDS[k]; return c[1] + ',' + c[0] + ',0'; }).join(' ');
+    var kml = '<?xml version="1.0" encoding="UTF-8"?>\\n' +
+      '<kml xmlns="http://www.opengis.net/kml/2.2"><Document>' +
+      '<name>Corea del Sud 2027 - Itinerario</name>' +
+      kmlPlacemarks +
+      '<Placemark><name>Percorso completo</name><LineString><tessellate>1</tessellate><coordinates>' + lineCoords + '</coordinates></LineString></Placemark>' +
+      '</Document></kml>';
+    var blob = new Blob([kml], { type: 'application/vnd.google-earth.kml+xml' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'corea-2027-itinerario.kml';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  // ---- Simulatore del sole (Seul, aprile, KST UTC+9) ----
+  var SUNRISE_MIN = 5.92 * 60, SUNSET_MIN = 19.0 * 60, TWILIGHT = 30;
+  var sunMarker = document.getElementById('sun-marker-kr');
+  var sunReadout = document.getElementById('sun-readout-kr');
+  var sunSlider = document.getElementById('sun-slider-kr');
+  var skyTop = document.getElementById('sky-stop-top-kr');
+  var skyBottom = document.getElementById('sky-stop-bottom-kr');
+  var NIGHT_TOP = [5,6,11], NIGHT_BOT = [18,23,38];
+  var DAWN_TOP = [45,32,74], DAWN_BOT = [255,150,90];
+  var DAY_TOP = [47,111,176], DAY_BOT = [191,227,255];
+  function lerp(a,b,t){ return a + (b - a) * t; }
+  function mixColor(c1,c2,t){ return 'rgb(' + Math.round(lerp(c1[0],c2[0],t)) + ',' + Math.round(lerp(c1[1],c2[1],t)) + ',' + Math.round(lerp(c1[2],c2[2],t)) + ')'; }
+  function rgbStr(c){ return 'rgb(' + c[0] + ',' + c[1] + ',' + c[2] + ')'; }
+  function skyColors(t){
+    var dSunrise = t - SUNRISE_MIN, dSunset = t - SUNSET_MIN;
+    if(Math.abs(dSunrise) <= TWILIGHT){
+      var f = (dSunrise + TWILIGHT) / (2 * TWILIGHT);
+      return f < 0.5
+        ? { top: mixColor(NIGHT_TOP, DAWN_TOP, f / 0.5), bot: mixColor(NIGHT_BOT, DAWN_BOT, f / 0.5) }
+        : { top: mixColor(DAWN_TOP, DAY_TOP, (f - 0.5) / 0.5), bot: mixColor(DAWN_BOT, DAY_BOT, (f - 0.5) / 0.5) };
+    }
+    if(Math.abs(dSunset) <= TWILIGHT){
+      var f2 = (dSunset + TWILIGHT) / (2 * TWILIGHT);
+      return f2 < 0.5
+        ? { top: mixColor(DAY_TOP, DAWN_TOP, f2 / 0.5), bot: mixColor(DAY_BOT, DAWN_BOT, f2 / 0.5) }
+        : { top: mixColor(DAWN_TOP, NIGHT_TOP, (f2 - 0.5) / 0.5), bot: mixColor(DAWN_BOT, NIGHT_BOT, (f2 - 0.5) / 0.5) };
+    }
+    if(t > SUNRISE_MIN && t < SUNSET_MIN) return { top: rgbStr(DAY_TOP), bot: rgbStr(DAY_BOT) };
+    return { top: rgbStr(NIGHT_TOP), bot: rgbStr(NIGHT_BOT) };
+  }
+  function renderSun(totalMinutes){
+    var hh = Math.floor(totalMinutes / 60), mm = Math.round(totalMinutes % 60);
+    var timeLabel = String(hh).padStart(2,'0') + ':' + String(mm).padStart(2,'0') + ' KST';
+    var sky = skyColors(totalMinutes);
+    if(skyTop) skyTop.setAttribute('stop-color', sky.top);
+    if(skyBottom) skyBottom.setAttribute('stop-color', sky.bot);
+
+    if(totalMinutes < SUNRISE_MIN || totalMinutes > SUNSET_MIN){
+      var beforeDawn = totalMinutes < SUNRISE_MIN;
+      sunMarker.style.transform = 'translate(' + (beforeDawn ? 40 : 460) + 'px,176px)';
+      sunMarker.querySelector('text').textContent = '🌙';
+      sunReadout.textContent = timeLabel + ' — buio, il sole ' + (beforeDawn ? 'non è ancora sorto' : 'è già tramontato');
+      return;
+    }
+    var frac = (totalMinutes - SUNRISE_MIN) / (SUNSET_MIN - SUNRISE_MIN);
+    var x = 40 + frac * 420;
+    var y = 180 - Math.sin(frac * Math.PI) * 155;
+    sunMarker.querySelector('text').textContent = '☀️';
+    sunMarker.style.transform = 'translate(' + x + 'px,' + y + 'px)';
+    var phase = frac < 0.06 ? 'sta sorgendo — l\'ora giusta per i ciliegi senza folla'
+      : frac > 0.94 ? 'sta tramontando — è il momento dei mercati serali'
+      : (frac > 0.4 && frac < 0.6) ? 'è a picco'
+      : 'è alto in cielo';
+    sunReadout.textContent = timeLabel + ' — il sole ' + phase;
+  }
+  if(sunSlider){
+    var nowUtc = new Date();
+    var kstNowMin = ((nowUtc.getUTCHours() * 60 + nowUtc.getUTCMinutes()) + 9 * 60) % 1440;
+    var initial = Math.min(1320, Math.max(240, Math.round(kstNowMin / 5) * 5));
     sunSlider.value = initial;
     renderSun(initial);
     sunSlider.addEventListener('input', function(){ renderSun(Number(sunSlider.value)); });
