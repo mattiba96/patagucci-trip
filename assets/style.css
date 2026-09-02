@@ -764,3 +764,13 @@ section.panel.dark .trip-intro{ color:#9b968a; }
 .hub-table td.niente{ color:var(--ink-soft); font-style:italic; }
 section.panel.dark .hub-table td.bene{ color:#8fe0ac; }
 section.panel.dark .hub-table td.niente{ color:#9b968a; }
+
+/* Etichette osservato / previsto nelle tabelle della fioritura */
+.hub-table .oss, .hub-table .prev{
+  display:inline-block; font-size:0.62rem; font-weight:800; letter-spacing:0.04em;
+  text-transform:uppercase; padding:1px 6px; border-radius:6px; margin-left:5px; vertical-align:middle;
+}
+.hub-table .oss{ background:rgba(var(--theme-rgb),0.16); color:var(--theme-900); }
+.hub-table .prev{ background:rgba(var(--accent-2-rgb,120,120,120),0.14); background:var(--tint-200); color:var(--ink-soft); }
+section.panel.dark .hub-table .oss{ background:rgba(255,255,255,0.14); color:#f4f1ea; }
+section.panel.dark .hub-table .prev{ background:rgba(255,255,255,0.08); color:#c7c2b6; }
