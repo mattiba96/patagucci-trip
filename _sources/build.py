@@ -6,6 +6,8 @@ SRC_DIR = DIR + "_sources/"
 import json
 
 DESTS = [
+    {"file": "georgia-trip.html", "suf": "ge", "flag": "🇬🇪", "name": "Georgia", "stato": "confermato"},
+    {"file": "corea-trip.html", "suf": "kr", "flag": "🇰🇷", "name": "Corea del Sud", "stato": "confermato"},
     {"file": "nepalbhutan-trip.html", "suf": "np", "flag": "🇳🇵🇧🇹", "name": "Nepal & Bhutan", "stato": "programma"},
     {"file": "pakistan-trip.html", "suf": "pk", "flag": "🇵🇰", "name": "Pakistan", "stato": "programma"},
     {"file": "southafrica-trip.html", "suf": "za", "flag": "🇿🇦", "name": "Sudafrica", "stato": "programma"},
@@ -15,8 +17,6 @@ DESTS = [
     {"file": "uzbekistankyrgyzstan-trip.html", "suf": "uk", "flag": "🇺🇿🇰🇬", "name": "Uzbekistan & Kirghizistan", "stato": "programma"},
     {"file": "greenland-trip.html", "suf": "gl", "flag": "🇬🇱", "name": "Groenlandia", "stato": "programma"},
     {"file": "centroamerica-trip.html", "suf": "cx", "flag": "🇳🇮🇨🇷🇵🇦", "name": "Nicaragua, Costa Rica & Panama", "stato": "programma"},
-    {"file": "corea-trip.html", "suf": "kr", "flag": "🇰🇷", "name": "Corea del Sud", "stato": "confermato"},
-    {"file": "georgia-trip.html", "suf": "ge", "flag": "🇬🇪", "name": "Georgia", "stato": "confermato"},
 ]
 
 def extract(tag, content):
