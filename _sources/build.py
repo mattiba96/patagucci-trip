@@ -549,8 +549,27 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               </tbody>
             </table>
           </div>
+
+          <h3 style="margin-top:26px;">E poi, sparsi</h3>
+          <p class="section-sub reveal" style="margin-bottom:14px;">Altri paesi già visti da qualcuno del gruppo, senza dettagli su quando e con chi.</p>
+          <div class="paesi-fatti reveal">
+            <span class="paese-fatto"><span class="pf-flag">🇧🇷</span><span class="pf-nome">Brasile</span></span>
+            <span class="paese-fatto"><span class="pf-flag">🇨🇺</span><span class="pf-nome">Cuba</span></span>
+            <span class="paese-fatto"><span class="pf-flag">🇺🇸</span><span class="pf-nome">Stati Uniti</span></span>
+            <span class="paese-fatto"><span class="pf-flag">🇹🇭</span><span class="pf-nome">Thailandia</span></span>
+            <span class="paese-fatto"><span class="pf-flag">🇮🇩</span><span class="pf-nome">Indonesia</span></span>
+            <span class="paese-fatto"><span class="pf-flag">🇱🇰</span><span class="pf-nome">Sri Lanka</span></span>
+            <span class="paese-fatto"><span class="pf-flag">🇪🇸</span><span class="pf-nome">Spagna</span></span>
+            <span class="paese-fatto"><span class="pf-flag">🇵🇹</span><span class="pf-nome">Portogallo</span></span>
+            <span class="paese-fatto"><span class="pf-flag">🇫🇷</span><span class="pf-nome">Francia</span></span>
+            <span class="paese-fatto"><span class="pf-flag">🇬🇧</span><span class="pf-nome">Regno Unito</span></span>
+            <span class="paese-fatto"><span class="pf-flag">🇮🇪</span><span class="pf-nome">Irlanda</span></span>
+            <span class="paese-fatto"><span class="pf-flag">🇬🇷</span><span class="pf-nome">Grecia</span></span>
+          </div>
+          <div class="source-note">Ricavati dalle mappe di viaggio Revolut di Bacci e Chiara. Sulle immagini alcuni paesi piccoli non erano leggibili e le date non ci sono: dimmi cosa manca e lo aggiungo.</div>
         </div>
       </section>
+
     </main>
 
     <footer>

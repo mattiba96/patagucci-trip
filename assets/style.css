@@ -774,3 +774,23 @@ section.panel.dark .hub-table td.niente{ color:#9b968a; }
 .hub-table .prev{ background:rgba(var(--accent-2-rgb,120,120,120),0.14); background:var(--tint-200); color:var(--ink-soft); }
 section.panel.dark .hub-table .oss{ background:rgba(255,255,255,0.14); color:#f4f1ea; }
 section.panel.dark .hub-table .prev{ background:rgba(255,255,255,0.08); color:#c7c2b6; }
+
+/* ---------- Home: bandiere dei paesi già visitati ---------- */
+.paesi-fatti{ display:flex; flex-wrap:wrap; gap:10px; margin-top:6px; }
+.paese-fatto{
+  display:inline-flex; align-items:center; gap:8px;
+  background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14);
+  border-radius:999px; padding:7px 14px 7px 11px;
+  transition:background .2s ease, border-color .2s ease, transform .2s ease;
+}
+.paese-fatto:hover{ background:rgba(255,255,255,0.12); border-color:rgba(var(--accent-rgb),0.45); transform:translateY(-2px); }
+.paese-fatto .pf-flag{ font-size:1.35rem; line-height:1; }
+.paese-fatto .pf-nome{ font-size:0.84rem; font-weight:600; color:#e8e2d2; letter-spacing:0.01em; }
+section.panel:not(.dark) .paese-fatto{ background:var(--paper); border-color:var(--line); }
+section.panel:not(.dark) .paese-fatto .pf-nome{ color:var(--ink); }
+
+@media (max-width:760px){
+  .paesi-fatti{ gap:8px; }
+  .paese-fatto{ padding:7px 12px 7px 10px; }
+  .paese-fatto .pf-nome{ font-size:0.8rem; }
+}
