@@ -384,6 +384,8 @@ section.panel.dark .callout.warn{ background:rgba(210,16,52,0.14); border-color:
 section.panel.dark .callout.warn strong{ color:#ff9b8a; }
 .source-note{ font-size:0.74rem; color:var(--ink-soft); margin-top:6px; }
 section.panel.dark .source-note{ color:#9b968a; }
+/* I link nelle note su fondo scuro prendevano il verde da pannello chiaro */
+section.panel.dark .source-note a, .mondo-wrap .source-note a{ color:var(--accent); }
 
 /* ---------- Families / filterable cards ---------- */
 .filter-row{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; }
@@ -793,4 +795,36 @@ section.panel:not(.dark) .paese-fatto .pf-nome{ color:var(--ink); }
   .paesi-fatti{ gap:8px; }
   .paese-fatto{ padding:7px 12px 7px 10px; }
   .paese-fatto .pf-nome{ font-size:0.8rem; }
+}
+
+/* ---------- Mappamondo dei paesi visitati ---------- */
+.mondo-wrap{
+  background:radial-gradient(120% 100% at 30% 15%, rgba(var(--theme-rgb),0.35), var(--dark-base) 78%);
+  border:1px solid rgba(var(--accent-rgb),0.18); border-radius:var(--radius-lg);
+  padding:18px 18px 14px; box-shadow:var(--shadow-lg); margin-top:8px;
+}
+#mondo{ width:100%; height:auto; display:block; }
+/* Paesi non visitati: presenti ma spenti, servono a dare la forma del mondo */
+#mondo path{ fill:rgba(255,255,255,0.09); stroke:rgba(255,255,255,0.16); stroke-width:0.4; }
+#mondo path.visitato{ fill:var(--accent); stroke:var(--accent-deep); stroke-width:0.5; }
+
+.mondo-stat{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-top:14px; }
+.ms-box{ display:flex; flex-direction:column; align-items:center; min-width:96px; }
+.ms-num{ font-family:var(--font-display); font-size:2.6rem; line-height:1; color:var(--accent);
+  text-shadow:0 0 26px rgba(var(--accent-rgb),0.3); }
+.ms-pct{ font-size:1.3rem; margin-left:2px; }
+.ms-lab{ font-size:0.76rem; color:#c7c2b6; margin-top:4px; letter-spacing:0.03em; }
+
+/* ---------- Paesi per persona ---------- */
+.persona-paesi{ margin-top:20px; }
+.pp-nome{ font-family:var(--font-display); text-transform:uppercase; font-size:1.35rem;
+  color:var(--accent); margin-bottom:10px; letter-spacing:0.02em; }
+section.panel:not(.dark) .pp-nome{ color:var(--accent-ink); }
+
+@media (max-width:760px){
+  .mondo-wrap{ padding:12px 12px 10px; }
+  .mondo-stat{ gap:8px; }
+  .ms-box{ min-width:0; flex:1 1 0; }
+  .ms-num{ font-size:2rem; }
+  .ms-lab{ font-size:0.7rem; }
 }
