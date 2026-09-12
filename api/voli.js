@@ -103,10 +103,16 @@ function screma(volo) {
 // grafie ovvie costa nulla e risparmia un giro di deploy.
 const NOMI_CHIAVE = ['SERPAPI_KEY', 'SERP_API_KEY', 'SERPAPI_API_KEY', 'SERPAPI_TOKEN', 'SERPAPI'];
 
+// Il confronto ignora maiuscole e underscore: SERPAPI_KEY, serpapi_key e
+// SerpApiKey sono lo stesso nome scritto da tre persone diverse.
+function normalizza(s) { return s.toUpperCase().replace(/[^A-Z]/g, ''); }
+
 function trovaChiave() {
-  for (const n of NOMI_CHIAVE) {
-    const v = (process.env[n] || '').trim();
-    if (v) return v;
+  const attesi = NOMI_CHIAVE.map(normalizza);
+  for (const [nome, valore] of Object.entries(process.env)) {
+    if (attesi.indexOf(normalizza(nome)) >= 0 && String(valore || '').trim()) {
+      return String(valore).trim();
+    }
   }
   return null;
 }
