@@ -39,6 +39,15 @@ function ipDi(req) {
 // Solo codici IATA: tre lettere, fino a cinque aeroporti di partenza.
 // Google Flights accetta la lista separata da virgola e risponde col piu'
 // economico fra tutti, a un credito solo invece che uno per aeroporto.
+// Un kgmid e' l'identificativo di un luogo nel Knowledge Graph di Google
+// ("/m/02j9z" = Europa). Passato come arrival_id vale "un posto qualsiasi
+// la' dentro", che e' il vero "ovunque" di Google Flights.
+function destinazione(valore) {
+  const s = String(valore || '').trim();
+  if (/^\/[mg]\/[a-z0-9_]{2,20}$/i.test(s)) return s;
+  return codici(s, 1);
+}
+
 function codici(valore, max) {
   const lista = String(valore || '')
     .toUpperCase()
@@ -167,12 +176,12 @@ module.exports = async function handler(req, res) {
     if (azione !== 'cerca') return res.status(400).json({ errore: 'Azione sconosciuta: ' + azione });
 
     const partenze = codici(q.da, 5);
-    const arrivo = codici(q.a, 1);
+    const arrivo = destinazione(q.a);
     const andata = data(q.andata);
     const ritorno = q.ritorno ? data(q.ritorno) : null;
 
     if (!partenze) return res.status(400).json({ errore: 'Aeroporti di partenza non validi (max 5 codici IATA).' });
-    if (!arrivo) return res.status(400).json({ errore: 'Aeroporto di arrivo non valido (un codice IATA).' });
+    if (!arrivo) return res.status(400).json({ errore: 'Destinazione non valida (un codice IATA o un kgmid /m/...).' });
     if (!andata) return res.status(400).json({ errore: 'Data di andata non valida (YYYY-MM-DD, entro un anno).' });
     if (q.ritorno && !ritorno) return res.status(400).json({ errore: 'Data di ritorno non valida.' });
     if (ritorno && ritorno < andata) return res.status(400).json({ errore: 'Il ritorno precede l\'andata.' });
@@ -241,11 +250,20 @@ module.exports = async function handler(req, res) {
       );
     }
 
-    const voli = [...(dato.best_flights || []), ...(dato.other_flights || [])]
+    const ordinati = [...(dato.best_flights || []), ...(dato.other_flights || [])]
       .map(screma)
       .filter((v) => typeof v.prezzo === 'number')
-      .sort((a, b) => a.prezzo - b.prezzo)
-      .slice(0, 6);
+      .sort((a, b) => a.prezzo - b.prezzo);
+
+    const perAeroporto = new Map();
+    const voli = [];
+    for (const v of ordinati) {
+      const quanti = perAeroporto.get(v.a) || 0;
+      if (quanti >= 2) continue;       // due alternative per meta bastano
+      perAeroporto.set(v.a, quanti + 1);
+      voli.push(v);
+      if (voli.length >= 12) break;
+    }
 
     const insights = dato.price_insights || {};
     const risposta = {

@@ -2186,7 +2186,7 @@
     <div class="badge-row">
       <span class="badge">📅 Cerca su un <em>intervallo</em> di date</span>
       <span class="badge">🛫 Bologna, Verona, Milano — o dove vuoi</span>
-      <span class="badge">🌍 40 mete papabili</span>
+      <span class="badge">🌍 Sei continenti o 40 mete precise</span>
       <span class="badge">💶 Prezzi dal vivo, in euro</span>
     </div>
     <div class="scroll-cue">↓ imposta la ricerca</div>
@@ -2346,7 +2346,7 @@
             <input type="number" id="qp-durata-nx" min="1" max="60" value="10">
           </label>
           <label class="qp-campo">Prova una partenza ogni (giorni)
-            <input type="number" id="qp-passo-nx" min="1" max="365" value="7">
+            <input type="number" id="qp-passo-nx" min="1" max="365" value="30">
           </label>
           <label class="qp-campo">Quanti siete
             <input type="number" id="qp-persone-nx" min="1" max="9" value="4">
@@ -2362,10 +2362,11 @@
 
       <div class="qp-blocco">
         <h3>🌍 Dove</h3>
-        <p class="qp-aiuto">Una meta sola, oppure quante ne vuoi: "ovunque" qui significa scandagliare l'intera lista. Ogni meta in più moltiplica il costo della ricerca.</p>
+        <p class="qp-aiuto">I sei continenti rispondono "le mete migliori là dentro", uno solo credito ciascuno: è il modo più economico di farsi sorprendere. Le mete precise sotto servono quando hai già in testa dove andare. Ogni riquadro acceso moltiplica il costo della ricerca.</p>
         <div class="qp-chips" style="margin-bottom:12px;">
+          <button type="button" class="qp-secondario" id="qp-sel-ovunque-nx">🌍 Ovunque (i 6 continenti)</button>
           <button type="button" class="qp-secondario" id="qp-sel-wishlist-nx">Solo la wishlist Patagucci</button>
-          <button type="button" class="qp-secondario" id="qp-sel-tutte-nx">Ovunque (tutte e 40)</button>
+          <button type="button" class="qp-secondario" id="qp-sel-tutte-nx">Tutte le 40 mete della lista</button>
           <button type="button" class="qp-secondario" id="qp-sel-nessuna-nx">Deseleziona tutto</button>
         </div>
         <div class="qp-chips" id="qp-mete-scelta-nx"></div>
@@ -2441,8 +2442,8 @@
         <p>Sono le tariffe che Google Flights vede in questo momento, per il numero di persone indicato. Salgono e scendono di continuo, e per date lontane oltre l'anno semplicemente non esistono ancora. Il link in fondo a ogni scheda apre la stessa ricerca su Google Flights per prenotare davvero.</p>
       </div>
       <div class="card reveal">
-        <h3>🌐 "Ovunque" è una lista</h3>
-        <p>Google Flights vuole sempre una destinazione: un "portami dove capita" non esiste come domanda. Qui "ovunque" vuol dire provare tutte le mete della lista una per una — motivo per cui costa tanti crediti quante sono.</p>
+        <h3>🌐 Come funziona "ovunque"</h3>
+        <p>Una destinazione va sempre indicata, ma può essere un <strong>continente intero</strong>: Google li riconosce come luoghi e risponde con le mete migliori là dentro. Sei continenti, sei crediti, e le mete le sceglie lui. La lista delle 40 serve per l'altra domanda — quanto costa andare <em>proprio lì</em>.</p>
       </div>
     </div>
 
@@ -3317,6 +3318,20 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
   // La wishlist e' quella vera del sito: le mete gia' studiate a fondo in
   // passato, ognuna con la sua foto. Le "altre" servono a dare senso alla
   // parola "ovunque".
+  // Un continente e' una destinazione come le altre, solo che al posto del
+  // codice aeroporto porta il kgmid del luogo: Google Flights risponde con
+  // le mete migliori la' dentro, a un credito sola. E' questo il vero
+  // "ovunque" — la lista di mete qui sotto serve a chiedere di una in
+  // particolare, non a simulare una ricerca aperta.
+  var CONTINENTI = [
+    { iata:'/m/02j9z',  flag:'🌍', nome:'Europa',       continente:true },
+    { iata:'/m/0j0k',   flag:'🌏', nome:'Asia',         continente:true },
+    { iata:'/m/0dg3n1', flag:'🌍', nome:'Africa',       continente:true },
+    { iata:'/m/059g4',  flag:'🌎', nome:'Nord America', continente:true },
+    { iata:'/m/06n3y',  flag:'🌎', nome:'Sud America',  continente:true },
+    { iata:'/m/05nrg',  flag:'🌏', nome:'Oceania',      continente:true }
+  ];
+
   var METE = [
     { iata:'TBS', flag:'🇬🇪', nome:'Georgia',        wish:true, foto:'Kazbegi,_Gergeti_Trinity_Church_and_Mt_Kazbek_(35959311351).jpg' },
     { iata:'ICN', flag:'🇰🇷', nome:'Corea del Sud',  wish:true, foto:'kr-ciliegi.jpg' },
@@ -3359,8 +3374,9 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
     { iata:'SCL', flag:'🇨🇱', nome:'Cile',           wish:false },
     { iata:'MEX', flag:'🇲🇽', nome:'Messico',        wish:false }
   ];
+  var TUTTE = CONTINENTI.concat(METE);
   var META_PER_IATA = {};
-  METE.forEach(function(m){ META_PER_IATA[m.iata] = m; });
+  TUTTE.forEach(function(m){ META_PER_IATA[m.iata] = m; });
 
   var el = {
     partenze:   document.getElementById('qp-partenze-nx'),
@@ -3385,6 +3401,7 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
     meteFoto:   document.getElementById('qp-mete-foto-nx'),
     meteAltre:  document.getElementById('qp-mete-altre-nx'),
     diagnostica:document.getElementById('qp-diagnostica-nx'),
+    selOvunque: document.getElementById('qp-sel-ovunque-nx'),
     selWish:    document.getElementById('qp-sel-wishlist-nx'),
     selTutte:   document.getElementById('qp-sel-tutte-nx'),
     selNessuna: document.getElementById('qp-sel-nessuna-nx')
@@ -3452,8 +3469,11 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
     el.partenze.appendChild(chip(a.iata, a.nome, a.iata, a.preset));
   });
 
+  CONTINENTI.forEach(function(m){
+    el.meteScelta.appendChild(chip(m.iata, m.flag + ' ' + m.nome, 'tutto il continente', true));
+  });
   METE.forEach(function(m){
-    el.meteScelta.appendChild(chip(m.iata, m.flag + ' ' + m.nome, m.iata, m.wish && ['TBS','KEF','ICN'].indexOf(m.iata) >= 0));
+    el.meteScelta.appendChild(chip(m.iata, m.flag + ' ' + m.nome, m.iata, false));
   });
 
   function selezionati(contenitore){
@@ -3617,7 +3637,16 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
           if(r.daCache) daCache++;
           var voli = (r.dato && r.dato.voli) || [];
           if(!voli.length){ vuoti++; }
-          voli.slice(0, 2).forEach(function(v){
+          // Su una meta precisa due alternative sono utili; su un continente
+          // la seconda opzione per la stessa citta' ruba il posto a una
+          // citta' che non si e' ancora vista.
+          var continente = (META_PER_IATA[lavoro.meta] || {}).continente;
+          var visti = {};
+          voli.slice(0, continente ? voli.length : 2).forEach(function(v){
+            if(continente){
+              if(visti[v.a]) return;
+              visti[v.a] = true;
+            }
             risultati.push({
               meta: lavoro.meta, andata: lavoro.andata, ritorno: lavoro.ritorno,
               persone: lavoro.persone, volo: v,
@@ -3671,9 +3700,19 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
       .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
   }
 
+  // "Aeroporto Internazionale di Barcellona-El Prat" -> "Barcellona-El Prat".
+  function nomeAeroporto(s){
+    return String(s || '').replace(/^Aeroporto(\s+Internazionale)?\s+(di\s+|d')?/i, '');
+  }
+
   function scheda(r, posizione){
     var m = META_PER_IATA[r.meta] || { flag:'🏳️', nome:r.meta };
     var v = r.volo;
+    // Su una ricerca per continente ogni scheda e' una meta diversa: dire
+    // "Europa" su tutte e sette nasconderebbe l'unica cosa che interessa.
+    var titolo = m.continente
+      ? m.flag + ' ' + (nomeAeroporto(v.aNome) || v.a) + ' <span class="qp-iata">' + esc(v.a || '') + '</span>'
+      : m.flag + ' ' + m.nome;
     var d = document.createElement('div');
     d.className = 'qp-esito' + (posizione === 0 ? ' migliore' : '');
 
@@ -3693,14 +3732,14 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
 
     d.innerHTML =
       '<div class="qp-esito-top">' +
-        '<div class="qp-meta">' + medaglia + m.flag + ' ' + m.nome + '</div>' +
+        '<div class="qp-meta">' + medaglia + titolo + '</div>' +
         '<div class="qp-prezzo">' + euro(v.prezzo) +
           (aPersona ? '<small>' + euro(aPersona) + ' a testa</small>' : '<small>totale</small>') +
         '</div>' +
       '</div>' +
       '<div class="qp-righe">' +
         '<div>📅 <strong>' + periodo + '</strong></div>' +
-        '<div>🛫 ' + esc(v.da || '?') + ' → ' + esc(v.a || r.meta) + ' · ' + testoScali + '</div>' +
+        '<div>🛫 ' + esc(v.da || '?') + (m.continente ? '' : ' → ' + esc(v.a || r.meta)) + ' · ' + testoScali + '</div>' +
         '<div>⏱️ ' + oreMinuti(v.durata) + ' · ' + esc((v.compagnie || []).join(', ')) + '</div>' +
       '</div>' +
       (tag ? '<div>' + tag + '</div>' : '');
@@ -3828,8 +3867,9 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
     }
     preventivo();
   }
+  el.selOvunque.addEventListener('click', function(){ impostaMete(function(m){ return !!m.continente; }, true); });
   el.selWish.addEventListener('click', function(){ impostaMete(function(m){ return !!m.wish; }, true); });
-  el.selTutte.addEventListener('click', function(){ impostaMete(function(){ return true; }, true); });
+  el.selTutte.addEventListener('click', function(){ impostaMete(function(m){ return !m.continente; }, true); });
   el.selNessuna.addEventListener('click', function(){ impostaMete(function(){ return false; }, false); });
 
   Array.prototype.forEach.call(el.ordina.querySelectorAll('button'), function(b){
