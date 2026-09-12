@@ -8,6 +8,8 @@ import json
 DESTS = [
     {"file": "islanda-trip.html", "suf": "is", "flag": "🇮🇸", "name": "Islanda", "stato": "confermato"},
     {"file": "corea-trip.html", "suf": "kr", "flag": "🇰🇷", "name": "Corea del Sud", "stato": "confermato"},
+    # Non e' una meta: e' la pagina che le cerca. Sta in fondo al selettore.
+    {"file": "prossimo.html", "suf": "nx", "flag": "❓", "name": "Quale sarà il prossimo?", "stato": "idea"},
 ]
 
 def extract(tag, content):
@@ -593,6 +595,7 @@ final_html = f'''<!DOCTYPE html>
 <script>
 var FLAG_BARS = {{
   hub: 'linear-gradient(90deg,#141414 0 50%, #FFCE00 50% 100%)',
+  nx: 'linear-gradient(90deg,#FFCE00 0 25%, #2a6b4d 25% 50%, #D21034 50% 75%, #1D2A4D 75% 100%)',
   ug: 'linear-gradient(90deg,#141414 0 33%, #FFCE00 33% 66%, #D21034 66% 100%)',
   pk: 'linear-gradient(90deg,#ffffff 0 25%, #01411C 25% 100%)',
   za: 'linear-gradient(90deg,#DE3831 0 16.6%, #ffffff 16.6% 33.3%, #002395 33.3% 50%, #007A4D 50% 66.6%, #FFB612 66.6% 83.3%, #000000 83.3% 100%)',

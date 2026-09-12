@@ -54,6 +54,7 @@
   <button class="home-btn active" data-dest="hub" onclick="showDest('hub')">🌍 Home</button>
   <button class="switch-btn confermato" data-dest="is" onclick="showDest('is')">🇮🇸 Islanda</button>
         <button class="switch-btn confermato" data-dest="kr" onclick="showDest('kr')">🇰🇷 Corea del Sud</button>
+        <button class="switch-btn" data-dest="nx" onclick="showDest('nx')">❓ Quale sarà il prossimo?</button>
 </div>
 
   <div class="destination active" id="dest-hub" data-dest="hub">
@@ -2176,9 +2177,293 @@
 </footer>
   </div>
 
+  <div class="destination" id="dest-nx" data-dest="nx">
+<header class="hero">
+  <div class="bg" style="background-image:linear-gradient(180deg, rgba(10,14,11,0.30) 0%, rgba(10,14,11,0.55) 55%, rgba(10,14,11,0.94) 100%), url('foto/destinazioni/Sunrise_annapurna_from_poonhill-b5a719.jpg'); background-position:center 60%;"></div>
+  <div class="content">
+    <h1>Quale sarà il prossimo?</h1>
+    <p class="tagline">Nessun itinerario, nessuna data segnata sul calendario. Solo la domanda che apre ogni viaggio: dove si va, e quanto costa arrivarci. Dici quando puoi partire e da dove, e questa pagina va a chiedere i prezzi veri a Google Flights, meta per meta.</p>
+    <div class="badge-row">
+      <span class="badge">📅 Cerca su un <em>intervallo</em> di date</span>
+      <span class="badge">🛫 Bologna, Verona, Milano — o dove vuoi</span>
+      <span class="badge">🌍 40 mete papabili</span>
+      <span class="badge">💶 Prezzi dal vivo, in euro</span>
+    </div>
+    <div class="scroll-cue">↓ imposta la ricerca</div>
+  </div>
+  <div class="photo-credit">Foto: alba sull'Annapurna da Poon Hill, Nepal — Wikimedia Commons</div>
+</header>
+
+<nav class="tabs" id="tabs-nx">
+  <a href="javascript:void(0)" class="home-link" onclick="showHub()">🌍 Tutte le mete</a>
+  <a href="#cerca-nx">Cerca</a>
+  <a href="#risultati-nx">Risultati</a>
+  <a href="#mete-nx">Mete papabili</a>
+  <a href="#motore-nx">Come funziona</a>
+</nav>
+
+<main>
+
+<style>
+  /* Stili della sola pagina "prossimo". Stanno qui dentro <main> e non
+     nell'<head> perche' build.py, montando index.html, copia header/nav/
+     main/footer e lo <style> dell'head lo lascia indietro. */
+  .qp-blocco{ margin-bottom:18px; }
+  .qp-blocco > h3{ margin:0 0 4px; font-size:0.95rem; color:var(--theme-900); }
+  section.panel.dark .qp-blocco > h3{ color:#fdf9f0; }
+  .qp-aiuto{ font-size:0.8rem; color:var(--ink-soft); margin:0 0 10px; }
+  section.panel.dark .qp-aiuto{ color:#9b968a; }
+
+  /* Chip cliccabili: aeroporti e mete. Il checkbox vero resta nel DOM per
+     accessibilita' e tastiera, ma e' invisibile. */
+  .qp-chips{ display:flex; flex-wrap:wrap; gap:8px; }
+  .qp-chip{ position:relative; display:inline-flex; align-items:center; gap:7px; cursor:pointer;
+    border:1px solid var(--line); background:var(--paper); color:var(--ink-soft);
+    padding:8px 14px; border-radius:999px; font-size:0.84rem; font-weight:600;
+    transition:all .15s cubic-bezier(.16,1,.3,1); user-select:none; }
+  .qp-chip input{ position:absolute; opacity:0; width:0; height:0; }
+  .qp-chip:hover{ background:var(--tint-200); border-color:var(--accent-deep); }
+  .qp-chip:has(input:focus-visible){ outline:2px solid var(--accent-deep); outline-offset:2px; }
+  .qp-chip:has(input:checked){ background:var(--theme-800); color:#fff; border-color:var(--theme-800);
+    box-shadow:0 4px 12px rgba(var(--theme-rgb),0.3); }
+  .qp-chip .qp-iata{ font-size:0.72rem; opacity:0.65; font-weight:700; letter-spacing:0.04em; }
+  .qp-chip:has(input:disabled){ opacity:0.35; cursor:not-allowed; }
+
+  .qp-griglia{ display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
+  .qp-campo{ display:flex; flex-direction:column; gap:6px; font-size:0.8rem; font-weight:600; color:var(--theme-900); }
+  section.panel.dark .qp-campo{ color:#e8e2d2; }
+  .qp-campo input, .qp-campo select{
+    padding:9px 12px; border:1px solid var(--line); border-radius:10px;
+    font-size:0.9rem; font-family:var(--font-body); background:var(--paper); color:var(--ink); width:100%; }
+  .qp-campo input:focus, .qp-campo select:focus{ outline:2px solid var(--accent-deep); outline-offset:1px; }
+
+  /* Preventivo crediti: la riga piu' importante della pagina. Il piano e'
+     da 250 ricerche al mese e una scansione distratta le brucia tutte. */
+  .qp-costo{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between;
+    background:var(--tint-200); border:1px solid var(--line); border-radius:14px; padding:14px 18px; margin-top:6px; }
+  section.panel.dark .qp-costo{ background:rgba(var(--accent-rgb),0.1); border-color:rgba(var(--accent-rgb),0.25); }
+  .qp-costo-num{ font-family:var(--font-display); font-size:2rem; line-height:1; color:var(--theme-800); }
+  section.panel.dark .qp-costo-num{ color:var(--accent); }
+  .qp-costo-txt{ font-size:0.82rem; color:var(--ink-soft); }
+  section.panel.dark .qp-costo-txt{ color:#c7c2b6; }
+  .qp-costo.allarme{ background:#fdeaea; border-color:#e0a0a0; }
+  .qp-costo.allarme .qp-costo-num{ color:#a32235; }
+
+  .qp-avvio{ border:none; background:linear-gradient(180deg,var(--theme-700),var(--theme-900)); color:#fff;
+    padding:13px 26px; border-radius:12px; font-size:0.95rem; font-weight:800; cursor:pointer;
+    box-shadow:0 4px 12px rgba(var(--theme-rgb),0.3); transition:transform .15s ease, box-shadow .15s ease; }
+  .qp-avvio:hover:not(:disabled){ transform:translateY(-2px); box-shadow:0 8px 20px rgba(var(--theme-rgb),0.42); }
+  .qp-avvio:disabled{ opacity:0.45; cursor:not-allowed; }
+  .qp-secondario{ border:1px solid var(--line); background:var(--paper); color:var(--ink-soft);
+    padding:9px 16px; border-radius:10px; font-size:0.82rem; font-weight:600; cursor:pointer; }
+  .qp-secondario:hover{ background:var(--tint-200); }
+  section.panel.dark .qp-secondario{ background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.16); color:#c7c2b6; }
+
+  .qp-barra{ height:8px; border-radius:999px; background:rgba(255,255,255,0.12); overflow:hidden; margin:14px 0 8px; }
+  .qp-barra > div{ height:100%; width:0; border-radius:999px; background:linear-gradient(90deg,var(--accent),var(--accent-deep)); transition:width .25s ease; }
+  .qp-stato{ font-size:0.85rem; color:#c7c2b6; }
+
+  /* Un risultato = una combinazione meta + coppia di date. */
+  .qp-esiti{ display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:14px; }
+  .qp-esito{ background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:var(--radius-md);
+    padding:16px 18px; display:flex; flex-direction:column; gap:9px; transition:transform .3s cubic-bezier(.16,1,.3,1), border-color .3s; }
+  .qp-esito:hover{ transform:translateY(-4px); border-color:rgba(var(--accent-rgb),0.45); }
+  .qp-esito.migliore{ border-color:var(--accent); box-shadow:0 0 0 1px var(--accent), 0 18px 40px rgba(0,0,0,0.35); }
+  .qp-esito-top{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; }
+  .qp-meta{ font-weight:800; color:#fdf9f0; font-size:1rem; }
+  .qp-prezzo{ font-family:var(--font-display); font-size:2rem; line-height:1; color:var(--accent); white-space:nowrap; }
+  .qp-prezzo small{ display:block; font-family:var(--font-body); font-size:0.64rem; font-weight:600;
+    letter-spacing:0.04em; text-transform:uppercase; color:#9b968a; }
+  .qp-righe{ font-size:0.82rem; color:#c7c2b6; line-height:1.65; }
+  .qp-righe strong{ color:#f4f1ea; }
+  .qp-loghi{ display:flex; gap:6px; align-items:center; }
+  .qp-loghi img{ height:20px; width:auto; background:#fff; border-radius:4px; padding:1px 3px; }
+  .qp-tag{ display:inline-block; font-size:0.68rem; font-weight:800; letter-spacing:0.05em; text-transform:uppercase;
+    padding:3px 9px; border-radius:7px; background:rgba(var(--accent-rgb),0.16); color:var(--accent); }
+  .qp-tag.caro{ background:rgba(211,16,52,0.18); color:#ff9b8a; }
+  .qp-tag.buono{ background:#1e4a2f; color:#8fe0ac; }
+  .qp-esito a.qp-link{ margin-top:auto; display:inline-block; text-align:center; text-decoration:none;
+    background:linear-gradient(180deg,var(--accent),var(--accent-deep)); color:#10100e;
+    padding:9px 14px; border-radius:10px; font-size:0.83rem; font-weight:800; }
+  .qp-vuoto{ font-size:0.85rem; color:#9b968a; font-style:italic; }
+
+  .qp-podio{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-bottom:20px; }
+  .qp-medaglia{ font-size:1.4rem; }
+
+  /* Mete papabili, con la foto di chi ce l'ha. */
+  .qp-mete-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:14px; }
+  .qp-meta-card{ border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--line); background:var(--paper);
+    box-shadow:var(--shadow); transition:transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s; }
+  .qp-meta-card:hover{ transform:translateY(-4px); box-shadow:var(--shadow-lg); }
+  .qp-meta-card img{ width:100%; height:120px; object-fit:cover; display:block; }
+  .qp-meta-card .qp-mc-testo{ padding:10px 12px; }
+  .qp-meta-card .qp-mc-nome{ font-weight:700; font-size:0.88rem; color:var(--theme-900); }
+  .qp-meta-card .qp-mc-iata{ font-size:0.72rem; color:var(--ink-soft); letter-spacing:0.06em; font-weight:700; }
+
+  .qp-nota{ font-size:0.8rem; color:var(--ink-soft); border-left:3px solid var(--accent); padding:2px 0 2px 12px; margin:12px 0; }
+  section.panel.dark .qp-nota{ color:#c7c2b6; }
+
+  .qp-crediti{ display:inline-flex; align-items:center; gap:8px; font-size:0.8rem; font-weight:700;
+    padding:6px 13px; border-radius:999px; background:rgba(var(--accent-rgb),0.14); color:var(--accent); }
+  .qp-crediti.scarsi{ background:rgba(211,16,52,0.2); color:#ff9b8a; }
+
+  @media (max-width:620px){
+    .qp-costo{ flex-direction:column; align-items:stretch; text-align:center; }
+    .qp-avvio{ width:100%; }
+  }
+</style>
+
+<!-- ===================== CERCA ===================== -->
+<section id="cerca-nx" class="panel" data-nav>
+  <div class="inner">
+    <h2 class="section-title reveal">🔎 Imposta la ricerca</h2>
+    <p class="section-sub reveal">Tre cose: da dove puoi partire, in che finestra di date, e dove ti va di andare. Il resto lo chiede la pagina a Google Flights.</p>
+
+    <div class="card reveal">
+
+      <div class="qp-blocco">
+        <h3>🛫 Da dove si parte</h3>
+        <p class="qp-aiuto">Massimo cinque aeroporti: vengono cercati tutti insieme in una chiamata sola, e il risultato dice da quale conviene partire.</p>
+        <div class="qp-chips" id="qp-partenze-nx"></div>
+        <div class="qp-griglia" style="margin-top:12px; max-width:340px;">
+          <label class="qp-campo">Aggiungi un altro aeroporto (codice IATA)
+            <input type="text" id="qp-iata-extra-nx" placeholder="es. TRN, NAP, ZRH" maxlength="3" autocomplete="off">
+          </label>
+        </div>
+      </div>
+
+      <div class="qp-blocco">
+        <h3>📅 Quando</h3>
+        <p class="qp-aiuto">L'intervallo è la finestra in cui potresti partire. La pagina prova una partenza ogni tot giorni dentro quella finestra e confronta i prezzi.</p>
+        <div class="qp-griglia">
+          <label class="qp-campo">Parti non prima del
+            <input type="date" id="qp-da-data-nx">
+          </label>
+          <label class="qp-campo">Parti non dopo il
+            <input type="date" id="qp-a-data-nx">
+          </label>
+          <label class="qp-campo">Viaggio di (giorni)
+            <input type="number" id="qp-durata-nx" min="1" max="60" value="10">
+          </label>
+          <label class="qp-campo">Prova una partenza ogni (giorni)
+            <input type="number" id="qp-passo-nx" min="1" max="365" value="7">
+          </label>
+          <label class="qp-campo">Quanti siete
+            <input type="number" id="qp-persone-nx" min="1" max="9" value="4">
+          </label>
+          <label class="qp-campo">Tipo
+            <select id="qp-tipo-nx">
+              <option value="ar">Andata e ritorno</option>
+              <option value="andata">Solo andata</option>
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="qp-blocco">
+        <h3>🌍 Dove</h3>
+        <p class="qp-aiuto">Una meta sola, oppure quante ne vuoi: "ovunque" qui significa scandagliare l'intera lista. Ogni meta in più moltiplica il costo della ricerca.</p>
+        <div class="qp-chips" style="margin-bottom:12px;">
+          <button type="button" class="qp-secondario" id="qp-sel-wishlist-nx">Solo la wishlist Patagucci</button>
+          <button type="button" class="qp-secondario" id="qp-sel-tutte-nx">Ovunque (tutte e 40)</button>
+          <button type="button" class="qp-secondario" id="qp-sel-nessuna-nx">Deseleziona tutto</button>
+        </div>
+        <div class="qp-chips" id="qp-mete-scelta-nx"></div>
+      </div>
+
+      <div class="qp-costo" id="qp-costo-nx">
+        <div>
+          <div class="qp-costo-num" id="qp-costo-num-nx">—</div>
+          <div class="qp-costo-txt" id="qp-costo-txt-nx">Imposta le date per vedere il preventivo</div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-end;">
+          <span class="qp-crediti" id="qp-crediti-nx">crediti: —</span>
+          <button class="qp-avvio" id="qp-avvio-nx" disabled>Cerca i voli</button>
+        </div>
+      </div>
+
+      <p class="qp-nota">Ogni combinazione meta + data costa <strong>una ricerca</strong> del piano SerpApi, che ne ha 250 al mese. Le ricerche già fatte restano in memoria nel browser e non si ripagano: rilanciare la stessa identica ricerca è gratis.</p>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===================== RISULTATI ===================== -->
+<section id="risultati-nx" class="panel dark" data-nav>
+  <div class="inner">
+    <h2 class="section-title reveal">🏆 Risultati</h2>
+    <p class="section-sub reveal">Ordinati per prezzo. Il prezzo è quello che Google Flights mostra in quel momento per il totale del gruppo, e cambia di ora in ora: serve a capire l'ordine di grandezza e quale meta costa meno, non a prenotare.</p>
+
+    <div class="qp-barra" id="qp-barra-nx" style="display:none;"><div></div></div>
+    <p class="qp-stato" id="qp-stato-nx">Nessuna ricerca ancora lanciata.</p>
+
+    <div class="filter-row reveal" id="qp-ordina-nx" style="display:none;">
+      <button class="active" data-ordine="prezzo">Più economici</button>
+      <button data-ordine="durata">Più veloci</button>
+      <button data-ordine="data">Per data di partenza</button>
+      <button data-ordine="meta">Per meta</button>
+    </div>
+
+    <div class="qp-podio" id="qp-podio-nx"></div>
+    <div class="qp-esiti" id="qp-esiti-nx"></div>
+  </div>
+</section>
+
+<!-- ===================== METE ===================== -->
+<section id="mete-nx" class="panel" data-nav>
+  <div class="inner">
+    <h2 class="section-title reveal">🗺️ Le mete papabili</h2>
+    <p class="section-sub reveal">Le prime sedici sono la wishlist storica dei Patagucci, quelle già studiate nel dettaglio in passato. Le altre sono idee buttate lì, perché "ovunque" abbia abbastanza posti da guardare.</p>
+    <h3 style="color:var(--theme-900);">La wishlist</h3>
+    <div class="qp-mete-grid reveal" id="qp-mete-foto-nx"></div>
+    <h3 style="color:var(--theme-900); margin-top:26px;">Altre idee</h3>
+    <div class="qp-chips reveal" id="qp-mete-altre-nx"></div>
+  </div>
+</section>
+
+<!-- ===================== MOTORE ===================== -->
+<section id="motore-nx" class="panel dark" data-nav>
+  <div class="inner">
+    <h2 class="section-title reveal">⚙️ Come funziona, e cosa non fa</h2>
+    <p class="section-sub reveal">Poca magia: la pagina interroga Google Flights tramite SerpApi, passando da una funzione che sta su Vercel.</p>
+
+    <div class="info-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px;">
+      <div class="card reveal">
+        <h3>🔑 Perché non chiama direttamente</h3>
+        <p>SerpApi non manda gli header CORS, quindi il browser non può interrogarla da solo. E la chiave non può stare nell'HTML, perché il repo del sito è pubblico su GitHub e chiunque se la prenderebbe. Sta come variabile d'ambiente su Vercel, e la pagina parla solo con <code>/api/voli</code>.</p>
+      </div>
+      <div class="card reveal">
+        <h3>💳 250 ricerche al mese</h3>
+        <p>È un piano gratuito. Una combinazione meta + coppia di date consuma una ricerca; cinque aeroporti di partenza insieme ne consumano comunque una sola. Sotto le 20 rimanenti il motore si ferma da solo, così resta sempre un fondo per l'occasione buona.</p>
+      </div>
+      <div class="card reveal">
+        <h3>🕑 Prezzi di adesso, non garantiti</h3>
+        <p>Sono le tariffe che Google Flights vede in questo momento, per il numero di persone indicato. Salgono e scendono di continuo, e per date lontane oltre l'anno semplicemente non esistono ancora. Il link in fondo a ogni scheda apre la stessa ricerca su Google Flights per prenotare davvero.</p>
+      </div>
+      <div class="card reveal">
+        <h3>🌐 "Ovunque" è una lista</h3>
+        <p>Google Flights vuole sempre una destinazione: un "portami dove capita" non esiste come domanda. Qui "ovunque" vuol dire provare tutte le mete della lista una per una — motivo per cui costa tanti crediti quante sono.</p>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top:16px;">
+      <h3 style="margin-top:0;">Stato del motore</h3>
+      <p class="qp-stato" id="qp-diagnostica-nx">Controllo in corso…</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <a href="javascript:void(0)" class="home-link" onclick="showHub()">Patagucci Trips</a> — la pagina che non ha ancora una meta. Prezzi da Google Flights via SerpApi, aggiornati al momento del click.
+</footer>
+  </div>
+
 <script>
 var FLAG_BARS = {
   hub: 'linear-gradient(90deg,#141414 0 50%, #FFCE00 50% 100%)',
+  nx: 'linear-gradient(90deg,#FFCE00 0 25%, #2a6b4d 25% 50%, #D21034 50% 75%, #1D2A4D 75% 100%)',
   ug: 'linear-gradient(90deg,#141414 0 33%, #FFCE00 33% 66%, #D21034 66% 100%)',
   pk: 'linear-gradient(90deg,#ffffff 0 25%, #01411C 25% 100%)',
   za: 'linear-gradient(90deg,#DE3831 0 16.6%, #ffffff 16.6% 33.3%, #002395 33.3% 50%, #007A4D 50% 66.6%, #FFB612 66.6% 83.3%, #000000 83.3% 100%)',
@@ -2996,6 +3281,642 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
     sunSlider.addEventListener('input', function(){ renderSun(Number(sunSlider.value)); });
   }
 
+})();
+
+</script><script>
+// ---- Quale sarà il prossimo? ----
+
+(function(){
+  // ------------------------------------------------------------------
+  // Dove sta il motore.
+  // Servito da Vercel: stessa origine. Aperto in locale col doppio click
+  // o da GitHub Pages: serve l'indirizzo assoluto del deploy, e la
+  // funzione risponde con Access-Control-Allow-Origin: *.
+  // ------------------------------------------------------------------
+  var API_REMOTA = '';  // <-- incolla qui https://<progetto>.vercel.app/api/voli dopo il deploy
+  var locale = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  var API = (location.protocol.indexOf('http') === 0 && (locale || !API_REMOTA)) ? '/api/voli' : API_REMOTA;
+
+  var CHIAVE_CACHE = 'patagucci-voli-v1';
+  var CHIAVE_ULTIMA = 'patagucci-ultima-ricerca-v1';
+  var PARALLELE = 3;        // richieste contemporanee verso il motore
+  var TETTO_RICERCHE = 60;  // oltre questo la pagina si rifiuta di partire
+
+  var AEROPORTI = [
+    { iata:'BLQ', nome:'Bologna',          preset:true  },
+    { iata:'VRN', nome:'Verona',           preset:true  },
+    { iata:'MXP', nome:'Milano Malpensa',  preset:true  },
+    { iata:'BGY', nome:'Milano Bergamo',   preset:false },
+    { iata:'LIN', nome:'Milano Linate',    preset:false },
+    { iata:'VCE', nome:'Venezia',          preset:false },
+    { iata:'TSF', nome:'Treviso',          preset:false },
+    { iata:'FLR', nome:'Firenze',          preset:false },
+    { iata:'FCO', nome:'Roma Fiumicino',   preset:false }
+  ];
+
+  // La wishlist e' quella vera del sito: le mete gia' studiate a fondo in
+  // passato, ognuna con la sua foto. Le "altre" servono a dare senso alla
+  // parola "ovunque".
+  var METE = [
+    { iata:'TBS', flag:'🇬🇪', nome:'Georgia',        wish:true, foto:'Kazbegi,_Gergeti_Trinity_Church_and_Mt_Kazbek_(35959311351).jpg' },
+    { iata:'ICN', flag:'🇰🇷', nome:'Corea del Sud',  wish:true, foto:'kr-ciliegi.jpg' },
+    { iata:'KEF', flag:'🇮🇸', nome:'Islanda',        wish:true, foto:'is-kirkjufell.jpg' },
+    { iata:'KTM', flag:'🇳🇵', nome:'Nepal',          wish:true, foto:'Sunrise_annapurna_from_poonhill-b5a719.jpg' },
+    { iata:'PBH', flag:'🇧🇹', nome:'Bhutan',         wish:true, foto:'The_Tigers_Nest_(_Paro_Taktsang_).jpg' },
+    { iata:'ISB', flag:'🇵🇰', nome:'Pakistan',       wish:true, foto:'Attabad_Lake_Full_View.jpg' },
+    { iata:'CPT', flag:'🇿🇦', nome:'Sudafrica',      wish:true, foto:'Table_Mountain_from_Blouberg,_South_Africa_(4028515275).jpg' },
+    { iata:'DEL', flag:'🇮🇳', nome:'India',          wish:true, foto:'Taj_Mahal_Tomb_at_sunrise.JPG' },
+    { iata:'EBB', flag:'🇺🇬', nome:'Uganda',         wish:true, foto:'Mountain_gorilla_(Gorilla_beringei_beringei)_eating.jpg' },
+    { iata:'JRO', flag:'🇹🇿', nome:'Tanzania',       wish:true, foto:'tz-kilimanjaro.jpg' },
+    { iata:'TAS', flag:'🇺🇿', nome:'Uzbekistan',     wish:true, foto:'Registan_square_Samarkand-7d4b00.jpg' },
+    { iata:'FRU', flag:'🇰🇬', nome:'Kirghizistan',   wish:true, foto:'Ala-Archa_in_winter-861123.jpg' },
+    { iata:'GOH', flag:'🇬🇱', nome:'Groenlandia',    wish:true, foto:'Ilulissat_and_Iceberg_Panorama-0ccc73.jpg' },
+    { iata:'SJO', flag:'🇨🇷', nome:'Costa Rica',     wish:true, foto:'cx-arenal.jpg' },
+    { iata:'MGA', flag:'🇳🇮', nome:'Nicaragua',      wish:true, foto:'cx-granada.jpg' },
+    { iata:'PTY', flag:'🇵🇦', nome:'Panama',         wish:true, foto:'cx-cascoviejo.jpg' },
+    { iata:'UBN', flag:'🇲🇳', nome:'Mongolia',       wish:false },
+    { iata:'EVN', flag:'🇦🇲', nome:'Armenia',        wish:false },
+    { iata:'GYD', flag:'🇦🇿', nome:'Azerbaigian',    wish:false },
+    { iata:'ALA', flag:'🇰🇿', nome:'Kazakistan',     wish:false },
+    { iata:'AMM', flag:'🇯🇴', nome:'Giordania',      wish:false },
+    { iata:'ADD', flag:'🇪🇹', nome:'Etiopia',        wish:false },
+    { iata:'NBO', flag:'🇰🇪', nome:'Kenya',          wish:false },
+    { iata:'WDH', flag:'🇳🇦', nome:'Namibia',        wish:false },
+    { iata:'TNR', flag:'🇲🇬', nome:'Madagascar',     wish:false },
+    { iata:'RAK', flag:'🇲🇦', nome:'Marocco',        wish:false },
+    { iata:'HAN', flag:'🇻🇳', nome:'Vietnam',        wish:false },
+    { iata:'MNL', flag:'🇵🇭', nome:'Filippine',      wish:false },
+    { iata:'CMB', flag:'🇱🇰', nome:'Sri Lanka',      wish:false },
+    { iata:'DPS', flag:'🇮🇩', nome:'Indonesia',      wish:false },
+    { iata:'NRT', flag:'🇯🇵', nome:'Giappone',       wish:false },
+    { iata:'BKK', flag:'🇹🇭', nome:'Thailandia',     wish:false },
+    { iata:'IST', flag:'🇹🇷', nome:'Turchia',        wish:false },
+    { iata:'TIA', flag:'🇦🇱', nome:'Albania',        wish:false },
+    { iata:'BOG', flag:'🇨🇴', nome:'Colombia',       wish:false },
+    { iata:'LIM', flag:'🇵🇪', nome:'Perù',           wish:false },
+    { iata:'GRU', flag:'🇧🇷', nome:'Brasile',        wish:false },
+    { iata:'EZE', flag:'🇦🇷', nome:'Argentina',      wish:false },
+    { iata:'SCL', flag:'🇨🇱', nome:'Cile',           wish:false },
+    { iata:'MEX', flag:'🇲🇽', nome:'Messico',        wish:false }
+  ];
+  var META_PER_IATA = {};
+  METE.forEach(function(m){ META_PER_IATA[m.iata] = m; });
+
+  var el = {
+    partenze:   document.getElementById('qp-partenze-nx'),
+    iataExtra:  document.getElementById('qp-iata-extra-nx'),
+    daData:     document.getElementById('qp-da-data-nx'),
+    aData:      document.getElementById('qp-a-data-nx'),
+    durata:     document.getElementById('qp-durata-nx'),
+    passo:      document.getElementById('qp-passo-nx'),
+    persone:    document.getElementById('qp-persone-nx'),
+    tipo:       document.getElementById('qp-tipo-nx'),
+    meteScelta: document.getElementById('qp-mete-scelta-nx'),
+    costo:      document.getElementById('qp-costo-nx'),
+    costoNum:   document.getElementById('qp-costo-num-nx'),
+    costoTxt:   document.getElementById('qp-costo-txt-nx'),
+    crediti:    document.getElementById('qp-crediti-nx'),
+    avvio:      document.getElementById('qp-avvio-nx'),
+    barra:      document.getElementById('qp-barra-nx'),
+    stato:      document.getElementById('qp-stato-nx'),
+    ordina:     document.getElementById('qp-ordina-nx'),
+    podio:      document.getElementById('qp-podio-nx'),
+    esiti:      document.getElementById('qp-esiti-nx'),
+    meteFoto:   document.getElementById('qp-mete-foto-nx'),
+    meteAltre:  document.getElementById('qp-mete-altre-nx'),
+    diagnostica:document.getElementById('qp-diagnostica-nx'),
+    selWish:    document.getElementById('qp-sel-wishlist-nx'),
+    selTutte:   document.getElementById('qp-sel-tutte-nx'),
+    selNessuna: document.getElementById('qp-sel-nessuna-nx')
+  };
+  // Montata dentro index.html la pagina esiste solo se build.py l'ha
+  // inclusa: senza i suoi nodi non c'e' niente da fare.
+  if(!el.partenze || !el.meteScelta) return;
+
+  // ------------------------------------------------------------------
+  // Date
+  // ------------------------------------------------------------------
+  function iso(d){ return d.toISOString().slice(0,10); }
+  function fraGiorni(d, n){ var x = new Date(d.getTime()); x.setUTCDate(x.getUTCDate() + n); return x; }
+  function daIso(s){ return new Date(s + 'T12:00:00Z'); }
+  function breve(s){
+    if(!s) return '';
+    var d = daIso(s.slice(0,10));
+    return d.toLocaleDateString('it-IT', { day:'numeric', month:'short', timeZone:'UTC' });
+  }
+  function oreMinuti(min){
+    if(!min && min !== 0) return '';
+    return Math.floor(min/60) + 'h ' + String(min%60).padStart(2,'0') + 'm';
+  }
+  function euro(n){ return new Intl.NumberFormat('it-IT',{ style:'currency', currency:'EUR', maximumFractionDigits:0 }).format(n); }
+
+  // Le partenze da provare dentro la finestra: una ogni "passo" giorni,
+  // estremi compresi.
+  function partenzeDaProvare(){
+    var a = el.daData.value, b = el.aData.value;
+    if(!a || !b) return [];
+    var d1 = daIso(a), d2 = daIso(b);
+    if(d2 < d1) return [];
+    var passo = Math.max(1, parseInt(el.passo.value, 10) || 1);
+    var durata = Math.max(1, parseInt(el.durata.value, 10) || 1);
+    var soloAndata = el.tipo.value === 'andata';
+    var fuori = [];
+    for(var d = d1; d <= d2; d = fraGiorni(d, passo)){
+      fuori.push({ andata: iso(d), ritorno: soloAndata ? null : iso(fraGiorni(d, durata)) });
+      if(fuori.length > 200) break;  // paracadute contro un passo a 0
+    }
+    return fuori;
+  }
+
+  // ------------------------------------------------------------------
+  // Chip
+  // ------------------------------------------------------------------
+  function chip(valore, etichetta, sotto, acceso){
+    var l = document.createElement('label');
+    l.className = 'qp-chip';
+    var i = document.createElement('input');
+    i.type = 'checkbox'; i.value = valore; i.checked = !!acceso;
+    l.appendChild(i);
+    var s = document.createElement('span');
+    s.textContent = etichetta;
+    l.appendChild(s);
+    if(sotto){
+      var t = document.createElement('span');
+      t.className = 'qp-iata'; t.textContent = sotto;
+      l.appendChild(t);
+    }
+    return l;
+  }
+
+  AEROPORTI.forEach(function(a){
+    el.partenze.appendChild(chip(a.iata, a.nome, a.iata, a.preset));
+  });
+
+  METE.forEach(function(m){
+    el.meteScelta.appendChild(chip(m.iata, m.flag + ' ' + m.nome, m.iata, m.wish && ['TBS','KEF','ICN'].indexOf(m.iata) >= 0));
+  });
+
+  function selezionati(contenitore){
+    return Array.prototype.slice.call(contenitore.querySelectorAll('input:checked')).map(function(i){ return i.value; });
+  }
+
+  // Il motore accetta al massimo cinque aeroporti per chiamata: raggiunto
+  // il tetto, gli altri si spengono invece di far fallire la ricerca.
+  function limitaPartenze(){
+    var scelti = selezionati(el.partenze);
+    Array.prototype.forEach.call(el.partenze.querySelectorAll('input'), function(i){
+      i.disabled = !i.checked && scelti.length >= 5;
+    });
+  }
+
+  // ------------------------------------------------------------------
+  // Preventivo
+  // ------------------------------------------------------------------
+  var creditiRimasti = null;
+
+  // Quante partenze ci stanno nel tetto, date le mete scelte, e ogni quanti
+  // giorni vanno distanziate per arrivarci. Torna null se non basta.
+  function passoCheEntra(quanteMete){
+    if(!quanteMete) return null;
+    var a = el.daData.value, b = el.aData.value;
+    if(!a || !b) return null;
+    var giorni = Math.round((daIso(b) - daIso(a)) / 86400000);
+    if(giorni < 0) return null;
+    var tetto = TETTO_RICERCHE;
+    if(creditiRimasti !== null) tetto = Math.min(tetto, creditiRimasti - 20);
+    var quanteDate = Math.floor(tetto / quanteMete);
+    if(quanteDate < 1) return null;
+    if(quanteDate === 1) return giorni + 1;               // una partenza sola
+    return Math.min(giorni + 1, Math.max(1, Math.ceil(giorni / (quanteDate - 1))));
+  }
+
+  function preventivo(){
+    var date = partenzeDaProvare();
+    var mete = selezionati(el.meteScelta);
+    var partenze = selezionati(el.partenze);
+    var totale = date.length * mete.length;
+    var problema = null;
+
+    if(!partenze.length) problema = 'Scegli almeno un aeroporto di partenza.';
+    else if(!date.length) problema = 'Imposta una finestra di date valida.';
+    else if(!mete.length) problema = 'Scegli almeno una meta.';
+    else if(totale > TETTO_RICERCHE){
+      var suggerito = passoCheEntra(mete.length);
+      problema = 'Sono ' + totale + ' ricerche: troppe in un colpo solo (tetto ' + TETTO_RICERCHE + '). ' +
+        (suggerito ? 'Con una partenza ogni ' + suggerito + ' giorni ci starebbe.' : 'Togli qualche meta.');
+    }
+    else if(creditiRimasti !== null && totale > creditiRimasti - 20) problema = 'Restano ' + creditiRimasti + ' crediti e 20 sono di riserva: questa ricerca non ci sta.';
+
+    el.costoNum.textContent = totale || '—';
+    el.costo.classList.toggle('allarme', !!problema && totale > 0);
+    el.avvio.disabled = !!problema;
+
+    if(problema){
+      el.costoTxt.textContent = problema;
+    } else {
+      el.costoTxt.textContent = totale + (totale === 1 ? ' ricerca' : ' ricerche') + ': ' +
+        date.length + (date.length === 1 ? ' data' : ' date') + ' × ' +
+        mete.length + (mete.length === 1 ? ' meta' : ' mete') +
+        ' · partenze da ' + partenze.join(', ');
+    }
+    return problema ? null : { date: date, mete: mete, partenze: partenze };
+  }
+
+  // ------------------------------------------------------------------
+  // Cache locale: rilanciare la stessa ricerca non deve costare crediti.
+  // ------------------------------------------------------------------
+  function leggiCache(){
+    try { return JSON.parse(localStorage.getItem(CHIAVE_CACHE) || '{}'); }
+    catch(e){ return {}; }
+  }
+  function scriviCache(c){
+    try { localStorage.setItem(CHIAVE_CACHE, JSON.stringify(c)); } catch(e){}
+  }
+  function firmaDi(p){
+    return [p.partenze.join(','), p.meta, p.andata, p.ritorno || '-', p.persone].join('|');
+  }
+
+  // ------------------------------------------------------------------
+  // Ricerca
+  // ------------------------------------------------------------------
+  var risultati = [];
+  var ordineCorrente = 'prezzo';
+  var inCorso = false;
+
+  function url(p){
+    var q = new URLSearchParams();
+    q.set('action', 'cerca');
+    q.set('da', p.partenze.join(','));
+    q.set('a', p.meta);
+    q.set('andata', p.andata);
+    if(p.ritorno) q.set('ritorno', p.ritorno);
+    q.set('adulti', String(p.persone));
+    return API + '?' + q.toString();
+  }
+
+  function unaRicerca(p){
+    var cache = leggiCache();
+    var firma = firmaDi(p);
+    var salvata = cache[firma];
+    // Sei ore: un prezzo di ieri non serve a nessuno, uno di stamattina si'.
+    if(salvata && Date.now() - salvata.quando < 6*3600*1000){
+      return Promise.resolve({ dato: salvata.dato, daCache: true });
+    }
+    return fetch(url(p))
+      .then(function(r){ return r.json().then(function(j){ return { stato:r.status, corpo:j }; }); })
+      .then(function(r){
+        if(r.corpo && r.corpo.errore) throw new Error(r.corpo.errore);
+        var c = leggiCache();
+        c[firma] = { quando: Date.now(), dato: r.corpo };
+        scriviCache(c);
+        if(r.corpo.crediti) aggiornaCrediti(r.corpo.crediti);
+        return { dato: r.corpo, daCache: false };
+      });
+  }
+
+  function cerca(){
+    var piano = preventivo();
+    if(!piano || inCorso) return;
+    var quante = piano.date.length * piano.mete.length;
+    if(quante > 20 && !confirm('Questa ricerca consuma fino a ' + quante + ' delle ' +
+        (creditiRimasti !== null ? creditiRimasti : 250) + ' ricerche rimaste. Procedo?')) return;
+    inCorso = true;
+    risultati = [];
+    el.podio.innerHTML = '';
+    el.esiti.innerHTML = '';
+    el.ordina.style.display = 'none';
+    el.barra.style.display = '';
+    el.avvio.disabled = true;
+
+    var persone = Math.min(Math.max(parseInt(el.persone.value, 10) || 1, 1), 9);
+    var lavori = [];
+    piano.mete.forEach(function(meta){
+      piano.date.forEach(function(d){
+        lavori.push({ partenze: piano.partenze, meta: meta, andata: d.andata, ritorno: d.ritorno, persone: persone });
+      });
+    });
+
+    var fatti = 0, errori = 0, vuoti = 0, daCache = 0;
+    var totale = lavori.length;
+
+    function avanza(){
+      fatti++;
+      el.barra.firstElementChild.style.width = Math.round(fatti/totale*100) + '%';
+      el.stato.textContent = 'Provate ' + fatti + ' combinazioni su ' + totale +
+        (daCache ? ' · ' + daCache + ' dalla memoria' : '') +
+        (vuoti ? ' · ' + vuoti + ' senza voli' : '') +
+        (errori ? ' · ' + errori + ' fallite' : '');
+    }
+
+    var indice = 0;
+    function prossimo(){
+      if(indice >= lavori.length) return Promise.resolve();
+      var lavoro = lavori[indice++];
+      return unaRicerca(lavoro)
+        .then(function(r){
+          if(r.daCache) daCache++;
+          var voli = (r.dato && r.dato.voli) || [];
+          if(!voli.length){ vuoti++; }
+          voli.slice(0, 2).forEach(function(v){
+            risultati.push({
+              meta: lavoro.meta, andata: lavoro.andata, ritorno: lavoro.ritorno,
+              persone: lavoro.persone, volo: v,
+              livello: r.dato.livelloPrezzo, link: r.dato.link
+            });
+          });
+        })
+        .catch(function(e){
+          errori++;
+          if(!el.diagnostica.dataset.bloccato) el.diagnostica.textContent = 'Ultimo errore: ' + e.message;
+        })
+        .then(function(){ avanza(); disegna(); return prossimo(); });
+    }
+
+    var pool = [];
+    for(var i = 0; i < Math.min(PARALLELE, lavori.length); i++) pool.push(prossimo());
+
+    Promise.all(pool).then(function(){
+      inCorso = false;
+      el.avvio.disabled = false;
+      el.barra.style.display = 'none';
+      var comb = totale + (totale === 1 ? ' combinazione provata' : ' combinazioni provate');
+      var opz = risultati.length + (risultati.length === 1 ? ' opzione trovata' : ' opzioni trovate');
+      el.stato.textContent = risultati.length
+        ? 'Fatto: ' + comb + ', ' + opz +
+          (daCache ? ' (' + daCache + (daCache === 1 ? ' presa dalla memoria' : ' prese dalla memoria') + ', senza consumare crediti)' : '') + '.'
+        : 'Nessun volo trovato per queste combinazioni. Prova a spostare le date o a cambiare meta.';
+      try { localStorage.setItem(CHIAVE_ULTIMA, JSON.stringify({ quando: Date.now(), risultati: risultati.slice(0, 120) })); } catch(e){}
+      preventivo();
+    });
+  }
+
+  // ------------------------------------------------------------------
+  // Disegno
+  // ------------------------------------------------------------------
+  function ordinati(){
+    var copia = risultati.slice();
+    if(ordineCorrente === 'prezzo') copia.sort(function(a,b){ return a.volo.prezzo - b.volo.prezzo; });
+    if(ordineCorrente === 'durata') copia.sort(function(a,b){ return a.volo.durata - b.volo.durata; });
+    if(ordineCorrente === 'data')   copia.sort(function(a,b){ return a.andata < b.andata ? -1 : a.andata > b.andata ? 1 : a.volo.prezzo - b.volo.prezzo; });
+    if(ordineCorrente === 'meta')   copia.sort(function(a,b){
+      var na = (META_PER_IATA[a.meta]||{}).nome || a.meta, nb = (META_PER_IATA[b.meta]||{}).nome || b.meta;
+      return na === nb ? a.volo.prezzo - b.volo.prezzo : (na < nb ? -1 : 1);
+    });
+    return copia;
+  }
+
+  function esc(s){
+    return String(s == null ? '' : s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  function scheda(r, posizione){
+    var m = META_PER_IATA[r.meta] || { flag:'🏳️', nome:r.meta };
+    var v = r.volo;
+    var d = document.createElement('div');
+    d.className = 'qp-esito' + (posizione === 0 ? ' migliore' : '');
+
+    var aPersona = r.persone > 1 ? Math.round(v.prezzo / r.persone) : null;
+    var scali = (v.scali || []).length;
+    var testoScali = scali === 0 ? 'diretto' : scali === 1 ? '1 scalo (' + esc(v.scali[0].dove) + ')' : scali + ' scali';
+    var periodo = breve(r.andata) + (r.ritorno ? ' → ' + breve(r.ritorno) : ' · solo andata');
+
+    var tag = '';
+    if(r.livello === 'low')  tag = '<span class="qp-tag buono">prezzo basso</span>';
+    if(r.livello === 'high') tag = '<span class="qp-tag caro">prezzo alto</span>';
+    if(r.livello === 'typical') tag = '<span class="qp-tag">nella media</span>';
+
+    var medaglia = posizione === 0 ? '<span class="qp-medaglia">🥇</span> ' :
+                   posizione === 1 ? '<span class="qp-medaglia">🥈</span> ' :
+                   posizione === 2 ? '<span class="qp-medaglia">🥉</span> ' : '';
+
+    d.innerHTML =
+      '<div class="qp-esito-top">' +
+        '<div class="qp-meta">' + medaglia + m.flag + ' ' + m.nome + '</div>' +
+        '<div class="qp-prezzo">' + euro(v.prezzo) +
+          (aPersona ? '<small>' + euro(aPersona) + ' a testa</small>' : '<small>totale</small>') +
+        '</div>' +
+      '</div>' +
+      '<div class="qp-righe">' +
+        '<div>📅 <strong>' + periodo + '</strong></div>' +
+        '<div>🛫 ' + esc(v.da || '?') + ' → ' + esc(v.a || r.meta) + ' · ' + testoScali + '</div>' +
+        '<div>⏱️ ' + oreMinuti(v.durata) + ' · ' + esc((v.compagnie || []).join(', ')) + '</div>' +
+      '</div>' +
+      (tag ? '<div>' + tag + '</div>' : '');
+
+    if(r.link){
+      var a = document.createElement('a');
+      a.className = 'qp-link';
+      a.href = r.link;              // proprieta', non concatenazione in HTML
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = 'Apri su Google Flights →';
+      d.appendChild(a);
+    }
+    return d;
+  }
+
+  function disegna(){
+    var lista = ordinati();
+    el.podio.innerHTML = '';
+    el.esiti.innerHTML = '';
+    if(!lista.length) return;
+    el.ordina.style.display = '';
+
+    // Il podio ha senso solo quando si ordina per prezzo: negli altri
+    // ordinamenti "primo" non vuol dire "migliore" e la medaglia mente.
+    var conPodio = ordineCorrente === 'prezzo' && lista.length > 3;
+    var testa = conPodio ? lista.slice(0, 3) : [];
+    var coda = conPodio ? lista.slice(3) : lista;
+
+    testa.forEach(function(r, i){ el.podio.appendChild(scheda(r, i)); });
+    coda.forEach(function(r){ el.esiti.appendChild(scheda(r, -1)); });
+  }
+
+  // ------------------------------------------------------------------
+  // Crediti e diagnostica
+  // ------------------------------------------------------------------
+  function aggiornaCrediti(c){
+    if(!c || typeof c.rimasti !== 'number') return;
+    creditiRimasti = c.rimasti;
+    el.crediti.textContent = 'crediti: ' + c.rimasti + (c.totali ? ' / ' + c.totali : '');
+    el.crediti.classList.toggle('scarsi', c.rimasti <= 40);
+    preventivo();
+  }
+
+  var giaControllato = false;
+  function controllaMotore(){
+    if(giaControllato) return;
+    giaControllato = true;
+    if(!API){
+      el.crediti.textContent = 'motore non configurato';
+      el.diagnostica.textContent = 'Nessun indirizzo per il motore: la pagina è aperta da file locale e API_REMOTA è vuota. Dopo il deploy su Vercel, incolla lì l\'indirizzo della funzione.';
+      el.diagnostica.dataset.bloccato = '1';
+      return;
+    }
+    fetch(API + '?action=crediti')
+      .then(function(r){ return r.json(); })
+      .then(function(j){
+        if(j.errore) throw new Error(j.errore);
+        aggiornaCrediti(j.crediti);
+        el.diagnostica.textContent = 'Motore raggiungibile su ' + API + '. Restano ' + j.crediti.rimasti +
+          ' ricerche su ' + j.crediti.totali + ', il contatore si azzera il ' + j.crediti.rinnovo + '.';
+      })
+      .catch(function(e){
+        el.crediti.textContent = 'motore non raggiungibile';
+        el.crediti.classList.add('scarsi');
+        el.diagnostica.textContent = 'Il motore non risponde (' + e.message + '). Le schede restano vuote: controlla che il deploy su Vercel sia attivo e che SERPAPI_KEY sia impostata.';
+        el.diagnostica.dataset.bloccato = '1';
+      });
+  }
+
+  // ------------------------------------------------------------------
+  // Mete: la vetrina in fondo alla pagina
+  // ------------------------------------------------------------------
+  METE.filter(function(m){ return m.wish; }).forEach(function(m){
+    var c = document.createElement('div');
+    c.className = 'qp-meta-card';
+    c.innerHTML =
+      (m.foto ? '<img src="foto/destinazioni/' + encodeURIComponent(m.foto) + '" alt="' + esc(m.nome) + '" loading="lazy">' : '') +
+      '<div class="qp-mc-testo"><div class="qp-mc-nome">' + m.flag + ' ' + m.nome + '</div>' +
+      '<div class="qp-mc-iata">' + m.iata + '</div></div>';
+    el.meteFoto.appendChild(c);
+  });
+  METE.filter(function(m){ return !m.wish; }).forEach(function(m){
+    var s = document.createElement('span');
+    s.className = 'qp-chip';
+    s.style.cursor = 'default';
+    s.innerHTML = '<span>' + m.flag + ' ' + m.nome + '</span><span class="qp-iata">' + m.iata + '</span>';
+    el.meteAltre.appendChild(s);
+  });
+
+  // ------------------------------------------------------------------
+  // Eventi
+  // ------------------------------------------------------------------
+  el.partenze.addEventListener('change', function(){ limitaPartenze(); preventivo(); });
+  el.meteScelta.addEventListener('change', preventivo);
+  [el.daData, el.aData, el.durata, el.passo, el.persone, el.tipo].forEach(function(c){
+    c.addEventListener('change', preventivo);
+    c.addEventListener('input', preventivo);
+  });
+
+  el.iataExtra.addEventListener('keydown', function(e){
+    if(e.key !== 'Enter') return;
+    e.preventDefault();
+    var code = (el.iataExtra.value || '').toUpperCase().trim();
+    if(!/^[A-Z]{3}$/.test(code)) return;
+    if(el.partenze.querySelector('input[value="' + code + '"]')) return;
+    el.partenze.appendChild(chip(code, code, '', true));
+    el.iataExtra.value = '';
+    limitaPartenze();
+    preventivo();
+  });
+
+  function impostaMete(filtro, adatta){
+    Array.prototype.forEach.call(el.meteScelta.querySelectorAll('input'), function(i){
+      i.checked = filtro(META_PER_IATA[i.value] || {});
+    });
+    if(adatta){
+      var quante = selezionati(el.meteScelta).length;
+      if(partenzeDaProvare().length * quante > TETTO_RICERCHE){
+        var passo = passoCheEntra(quante);
+        if(passo) el.passo.value = passo;
+      }
+    }
+    preventivo();
+  }
+  el.selWish.addEventListener('click', function(){ impostaMete(function(m){ return !!m.wish; }, true); });
+  el.selTutte.addEventListener('click', function(){ impostaMete(function(){ return true; }, true); });
+  el.selNessuna.addEventListener('click', function(){ impostaMete(function(){ return false; }, false); });
+
+  Array.prototype.forEach.call(el.ordina.querySelectorAll('button'), function(b){
+    b.addEventListener('click', function(){
+      Array.prototype.forEach.call(el.ordina.querySelectorAll('button'), function(x){ x.classList.remove('active'); });
+      b.classList.add('active');
+      ordineCorrente = b.dataset.ordine;
+      disegna();
+    });
+  });
+
+  el.avvio.addEventListener('click', cerca);
+
+  // ------------------------------------------------------------------
+  // Avvio
+  // ------------------------------------------------------------------
+  // Finestra di default: il mese che parte fra tre mesi. Abbastanza in la'
+  // da avere prezzi sensati, abbastanza vicina da essere un viaggio vero.
+  (function(){
+    var oggi = new Date();
+    oggi.setUTCHours(12,0,0,0);
+    el.daData.value = iso(fraGiorni(oggi, 90));
+    el.aData.value = iso(fraGiorni(oggi, 120));
+    el.daData.min = iso(oggi);
+    el.aData.min = iso(oggi);
+    var limite = iso(fraGiorni(oggi, 330));
+    el.daData.max = limite;
+    el.aData.max = limite;
+  })();
+
+  // L'ultima ricerca torna a video senza ricomprarla.
+  try {
+    var ultima = JSON.parse(localStorage.getItem(CHIAVE_ULTIMA) || 'null');
+    if(ultima && ultima.risultati && ultima.risultati.length){
+      risultati = ultima.risultati;
+      disegna();
+      el.stato.textContent = 'Ultima ricerca salvata del ' +
+        new Date(ultima.quando).toLocaleString('it-IT') + ' — ' + risultati.length + ' opzioni. Rilanciala per aggiornare i prezzi.';
+    }
+  } catch(e){}
+
+  limitaPartenze();
+  preventivo();
+
+  // Il contatore crediti si chiede solo quando la pagina si vede davvero:
+  // dentro index.html le mete sono tutte nel DOM ma nascoste, e non ha
+  // senso interrogare il motore a ogni apertura del sito.
+  function seVisibile(){
+    var radice = document.getElementById('cerca-nx');
+    while(radice && !radice.classList.contains('destination')) radice = radice.parentElement;
+    if(!radice || radice.classList.contains('active')) controllaMotore();
+  }
+  seVisibile();
+  window.addEventListener('destinazione-cambiata', seVisibile);
+
+  // Reveal: osservatore solo sui nodi di questa pagina.
+  var osservatore = new IntersectionObserver(function(voci){
+    voci.forEach(function(v){
+      if(v.isIntersecting){ v.target.classList.add('visible'); osservatore.unobserve(v.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  var sezioni = [
+    document.getElementById('cerca-nx'),
+    document.getElementById('risultati-nx'),
+    document.getElementById('mete-nx'),
+    document.getElementById('motore-nx')
+  ].filter(Boolean);
+  sezioni.forEach(function(s){
+    Array.prototype.forEach.call(s.querySelectorAll('.reveal'), function(x){ osservatore.observe(x); });
+  });
+
+  // Scrollspy sulle sole sezioni di questa pagina: i link della barra si
+  // accendono da soli mentre si scorre.
+  var barra = document.getElementById('tabs-nx');
+  if(barra){
+    var linkPerSezione = {};
+    Array.prototype.forEach.call(barra.querySelectorAll('a[href^="#"]'), function(a){
+      linkPerSezione[a.getAttribute('href').slice(1)] = a;
+    });
+    var spia = new IntersectionObserver(function(voci){
+      voci.forEach(function(v){
+        if(!v.isIntersecting) return;
+        Array.prototype.forEach.call(barra.querySelectorAll('a[href^="#"]'), function(a){ a.classList.remove('active'); });
+        var l = linkPerSezione[v.target.id];
+        if(l){ l.classList.add('active'); l.scrollIntoView({ behavior:'smooth', block:'nearest', inline:'center' }); }
+      });
+    }, { rootMargin:'-45% 0px -50% 0px', threshold:0 });
+    sezioni.forEach(function(s){ spia.observe(s); });
+  }
 })();
 
 </script>
