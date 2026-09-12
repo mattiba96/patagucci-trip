@@ -302,7 +302,7 @@
   // o da GitHub Pages: serve l'indirizzo assoluto del deploy, e la
   // funzione risponde con Access-Control-Allow-Origin: *.
   // ------------------------------------------------------------------
-  var API_REMOTA = '';  // <-- incolla qui https://<progetto>.vercel.app/api/voli dopo il deploy
+  var API_REMOTA = 'https://patagucci-trip.vercel.app/api/voli';
   var locale = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
   var API = (location.protocol.indexOf('http') === 0 && (locale || !API_REMOTA)) ? '/api/voli' : API_REMOTA;
 
