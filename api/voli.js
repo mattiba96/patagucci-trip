@@ -98,6 +98,40 @@ function screma(volo) {
   };
 }
 
+// Il nome canonico e' SERPAPI_KEY, ma sbagliarne la forma e' facile e il
+// sintomo (500 a ogni ricerca) non dice quale sia il problema. Accettare le
+// grafie ovvie costa nulla e risparmia un giro di deploy.
+const NOMI_CHIAVE = ['SERPAPI_KEY', 'SERP_API_KEY', 'SERPAPI_API_KEY', 'SERPAPI_TOKEN', 'SERPAPI'];
+
+function trovaChiave() {
+  for (const n of NOMI_CHIAVE) {
+    const v = (process.env[n] || '').trim();
+    if (v) return v;
+  }
+  return null;
+}
+
+// Distingue i due casi che si confondono: nome sbagliato (variabili
+// personali ci sono, nessuna somiglia) e ambiente sbagliato o progetto
+// sbagliato (alla funzione non arriva nessuna variabile personale).
+// Riporta solo NOMI, e solo quelli che contengono "serp": nessun valore.
+function diagnosiChiave() {
+  const sistema = /^(VERCEL|AWS|NODE|NEXT|LAMBDA|_|PATH$|HOME$|TZ$|LANG$|PWD$|SHLVL$|TMPDIR$|LD_|EXEC_|AMZN_|X_)/;
+  const tutti = Object.keys(process.env);
+  const personali = tutti.filter((k) => !sistema.test(k));
+  const somiglianti = tutti.filter((k) => /serp/i.test(k));
+  return {
+    cercate: NOMI_CHIAVE,
+    trovateSimili: somiglianti,
+    quanteVariabiliPersonali: personali.length,
+    interpretazione: somiglianti.length
+      ? 'Una variabile con "serp" nel nome esiste ma non ha uno dei nomi attesi, oppure e\' vuota. Rinominala in SERPAPI_KEY.'
+      : personali.length
+        ? 'Alla funzione arrivano ' + personali.length + ' variabili tue, ma nessuna con "serp" nel nome: il nome e\' diverso da quelli cercati.'
+        : 'Alla funzione non arriva nessuna variabile personale: la variabile non e\' spuntata per l\'ambiente Production, oppure e\' su un altro progetto Vercel.',
+  };
+}
+
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
@@ -105,11 +139,9 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'GET') return res.status(405).json({ errore: 'Solo GET.' });
 
-  const chiave = process.env.SERPAPI_KEY;
+  const chiave = trovaChiave();
   if (!chiave) {
-    return res.status(500).json({
-      errore: 'SERPAPI_KEY non configurata su Vercel. Impostala fra le Environment Variables del progetto.',
-    });
+    return res.status(500).json({ errore: 'SERPAPI_KEY non configurata su Vercel.', diagnosi: diagnosiChiave() });
   }
 
   const q = req.query || {};

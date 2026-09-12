@@ -3758,7 +3758,9 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
     fetch(API + '?action=crediti')
       .then(function(r){ return r.json(); })
       .then(function(j){
-        if(j.errore) throw new Error(j.errore);
+        // La funzione, quando non trova la chiave, spiega anche perche':
+        // vale la pena portarlo a schermo invece di ingoiarlo.
+        if(j.errore) throw new Error(j.errore + (j.diagnosi && j.diagnosi.interpretazione ? ' ' + j.diagnosi.interpretazione : ''));
         aggiornaCrediti(j.crediti);
         el.diagnostica.textContent = 'Motore raggiungibile su ' + API + '. Restano ' + j.crediti.rimasti +
           ' ricerche su ' + j.crediti.totali + ', il contatore si azzera il ' + j.crediti.rinnovo + '.';
