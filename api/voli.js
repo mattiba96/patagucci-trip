@@ -120,6 +120,9 @@ function diagnosiChiave() {
   const tutti = Object.keys(process.env);
   const personali = tutti.filter((k) => !sistema.test(k));
   const somiglianti = tutti.filter((k) => /serp/i.test(k));
+  // I nomi per esteso finiscono nei log del progetto, che sono privati,
+  // e non nella risposta, che e' pubblica. I valori non escono mai.
+  console.log('[diagnosi chiave] nomi non di sistema visti dalla funzione:', personali.join(', ') || '(nessuno)');
   return {
     cercate: NOMI_CHIAVE,
     trovateSimili: somiglianti,
