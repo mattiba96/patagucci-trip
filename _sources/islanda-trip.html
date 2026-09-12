@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Islanda 2027 — Trip Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .route-status{ display:grid; grid-template-columns:1fr auto; gap:10px 14px; align-items:center; }
+  .route-status .r-name{ font-weight:600; color:var(--ink); }
+  section.panel.dark .route-status .r-name{ color:#f4f1ea; }
+  .route-status .r-status{ font-size:0.78rem; font-weight:700; padding:4px 10px; border-radius:8px; white-space:nowrap; justify-self:end; }
+  .r-status.open{ background:#1e4a2f; color:#8fe0ac; }
+  .r-status.closed{ background:#4a1c1c; color:#ff9b8a; }
+  .route-note{ grid-column:1 / -1; font-size:0.82rem; color:var(--ink-soft); margin:-4px 0 10px; }
+  section.panel.dark .route-note{ color:#c7c2b6; }
+</style>
+</head>
+<body>
+
+<div class="flagbar"></div>
+
+<header class="hero">
+  <div class="bg" style="background-image:linear-gradient(180deg, rgba(6,12,18,0.35) 0%, rgba(6,12,18,0.55) 55%, rgba(6,12,18,0.92) 100%), url('foto/destinazioni/is-kirkjufell.jpg');"></div>
+  <div class="content">
+    <h1>Islanda</h1>
+    <p class="tagline">Quattro ore di luce al giorno e sedici di buio, che è esattamente il motivo per cui ci si va a gennaio. Cascate ghiacciate, una laguna piena di iceberg, grotte dentro un ghiacciaio e — se il cielo collabora — l'aurora.</p>
+    <div class="badge-row">
+      <span class="badge">📅 2–9 gennaio 2027 · 8 giorni <em>(confermato)</em></span>
+      <span class="badge">🌌 Stagione dell'aurora</span>
+      <span class="badge">🧊 Grotte di ghiaccio</span>
+      <span class="badge">✈️ Volo diretto da Milano</span>
+    </div>
+    <div class="scroll-cue">↓ scorri per esplorare</div>
+  </div>
+  <div class="photo-credit">Foto: vaidyanathan, <a href="https://commons.wikimedia.org/wiki/File:Aurora_Borealis_activity_on_top_of_the_Kirkjufell_mountain_in_September_2018.jpg" target="_blank" rel="noopener">CC BY-SA 4.0, Wikimedia Commons</a></div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <a href="javascript:void(0)" class="home-link" onclick="showHub()">🌍 Tutte le mete</a>
+  <a href="#perche">Perché andare</a>
+  <a href="#luce">Luce e aurora</a>
+  <a href="#itinerario">Itinerario</a>
+  <a href="#mappa">Mappa</a>
+  <a href="#siti">Cose da non perdere</a>
+  <a href="#guida">Guida pratica</a>
+  <a href="#vulcani">Vulcani</a>
+  <a href="#meteo">Meteo</a>
+  <a href="#cibo">Cibo &amp; alcolici</a>
+  <a href="#voli">Voli</a>
+  <a href="#budget">Spese stimate</a>
+  <a href="#faq">FAQ</a>
+</nav>
+
+<main>
+
+  <!-- PERCHE ANDARE -->
+  <section id="perche" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">✨ Perché andare</h2>
+      <p class="section-sub reveal">Perché è l'unico viaggio del gruppo dove il buio è il motivo del viaggio invece che un problema, e perché certe cose — le grotte di ghiaccio, l'aurora — d'estate semplicemente non esistono.</p>
+
+      <div class="why-grid reveal">
+        <div class="photo-banner" style="margin-bottom:0;">
+          <img src="foto/destinazioni/is-grotta.jpg" alt="Interno di una grotta di ghiaccio in Islanda" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+          <div class="credit">Foto: Eric Kilby, <a href="https://commons.wikimedia.org/wiki/File:Ice_Cave_Blue_Roof_-_Iceland.jpg" target="_blank" rel="noopener">CC BY-SA 2.0</a></div>
+          <div class="fallback">🧊</div>
+        </div>
+        <div>
+          <div class="stat-big"><span class="num">4-5h</span><span class="unit">di luce al giorno</span></div>
+          <p class="stat-line">Il sole sorge verso le 11:20 e tramonta verso le 15:45. Sembra un limite, e in parte lo è — ma vuol dire anche che per tutto il resto del giorno il cielo è buio abbastanza per l'aurora, e che l'alba e il tramonto durano ore.</p>
+
+          <div class="stat-big"><span class="num">gen-feb</span><span class="unit">le grotte di ghiaccio</span></div>
+          <p class="stat-line">Esistono solo in inverno, quando il freddo stabilizza il ghiaccio del Vatnajökull. Si entra <strong>solo con guida certificata</strong>, e gennaio è il periodo migliore. D'estate sono chiuse: è una cosa che si può fare solo adesso.</p>
+
+          <div class="stat-big"><span class="num">4h</span><span class="unit">di volo, diretto da Milano</span></div>
+          <p class="stat-line">Nessuno scalo. È la meta più vicina di tutte quelle che il gruppo ha guardato finora: si parte la mattina e si è a cena a Reykjavík.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LUCE E AURORA -->
+  <section id="luce" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌌 Luce e aurora</h2>
+      <p class="section-sub reveal">Gennaio è il mese con la notte più lunga e la migliore probabilità di aurora. In cambio, le giornate vanno pianificate attorno a cinque ore scarse di luce.</p>
+
+      <div class="card reveal">
+        <h3 style="margin-top:0;">Come si spartisce la giornata</h3>
+        <div class="route-status" id="route-status"></div>
+        <div class="source-note">Orari per Reykjavík a metà gennaio. Fonti: icelandtours.is, adventures.is, iceland.org, guidetoiceland.is — verificate ad agosto 2026.</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>🌠 Perché gennaio è buono</h3><p>Servono tre cose insieme: <strong>buio</strong>, <strong>cielo sereno</strong> e <strong>attività solare</strong>. Gennaio dà 16-20 ore di buio, e il 2026 è vicino al massimo del ciclo solare undecennale, con attività ancora alta nel 2027. Il buio ce l'abbiamo garantito, il resto no.</p></div>
+        <div class="card reveal"><h3>☁️ Il vero nemico è la nuvola</h3><p>L'aurora c'è anche quando non la vedi: quello che manca è il cielo sereno. Per questo <strong>otto notti sono meglio di tre</strong> — ogni notte in più è un'altra estrazione. Su otto notti a gennaio le probabilità sono buone, ma nessuno può prometterla.</p></div>
+        <div class="card reveal"><h3>📱 Come si caccia</h3><p>Si guardano due cose: <strong>previsione aurora e copertura nuvolosa</strong> sul sito dell'ufficio meteo islandese (vedur.is), che pubblica entrambe. Poi ci si sposta dove il cielo è pulito. Serve un'auto e la voglia di uscire alle 22 con -5°C.</p></div>
+        <div class="card reveal"><h3>🕚 Come si organizzano i giorni</h3><p>Colazione al buio, in strada per le 10, le cose da vedere fra le 11 e le 16, e poi cena e aurora. Sembra poco, ma con il sole sempre basso <strong>la luce è quella dell'alba per tutto il giorno</strong>: per le foto è il periodo migliore dell'anno.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ITINERARIO -->
+  <section id="itinerario" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🗺️ Itinerario — 2/9 gennaio, 8 giorni</h2>
+      <p class="section-sub reveal">Reykjavík come base iniziale, poi la costa sud fino alla laguna glaciale e ritorno. Niente giro completo dell'isola: d'inverno il nord è un rischio che non vale la pena.</p>
+
+      <div class="timeline" id="timeline"></div>
+
+      <div class="callout warn reveal">
+        <strong>Perché non il giro completo dell'isola.</strong> La Ring Road esiste tutto l'anno, ma a gennaio il nord e gli altopiani sono un'altra cosa: neve, vento, poche ore di luce e strade che chiudono senza preavviso. Il <strong>Circolo d'Oro e la costa sud restano aperti tutto l'anno</strong> ed è lì che stanno le cose che ci interessano. Il giro completo si fa d'estate, non adesso.
+      </div>
+    </div>
+  </section>
+
+  <!-- MAPPA -->
+  <section id="mappa" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">📍 Mappa &amp; percorso</h2>
+      <p class="section-sub reveal">Da Keflavík a Reykjavík, poi il Circolo d'Oro e la costa sud fino a Jökulsárlón, e ritorno sulla stessa strada.</p>
+
+      <div class="jeep-map-wrap reveal">
+        <svg id="jeep-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+          <path class="terrain terrain-a" d="M70 230 C 90 170, 150 130, 230 128 C 310 126, 390 152, 425 200 C 455 242, 450 300, 410 336 C 360 380, 270 392, 195 372 C 120 352, 72 306, 66 268 C 64 252, 66 240, 70 230 Z"/>
+          <ellipse class="terrain terrain-b" cx="330" cy="268" rx="62" ry="40"/>
+          <path class="contour" d="M110 250 C 190 222, 300 224, 400 256"/>
+          <path class="contour" d="M120 310 C 200 288, 310 292, 398 318"/>
+
+          <path id="route-path" class="route-shadow" d="M 108,286 Q 126,282 146,278 Q 176,254 206,240 Q 232,268 258,292 Q 300,318 352,330"/>
+          <path class="route-line" d="M 108,286 Q 126,282 146,278 Q 176,254 206,240 Q 232,268 258,292 Q 300,318 352,330"/>
+
+          <circle class="pulse" cx="108" cy="286" r="8"/>
+          <g class="stop-pin">
+            <text x="108" y="293" text-anchor="middle" font-size="16">✈️</text>
+            <text class="stop-label" x="92" y="311" text-anchor="middle">Keflavík</text>
+          </g>
+          <g class="stop-pin">
+            <text x="146" y="285" text-anchor="middle" font-size="20">🏘️</text>
+            <text class="stop-label highlight" x="150" y="266" text-anchor="middle">Reykjavík</text>
+          </g>
+          <g class="stop-pin">
+            <text x="206" y="247" text-anchor="middle" font-size="18">♨️</text>
+            <text class="stop-label highlight" x="214" y="228" text-anchor="middle">Circolo d'Oro</text>
+          </g>
+          <g class="stop-pin">
+            <text x="258" y="299" text-anchor="middle" font-size="18">💧</text>
+            <text class="stop-label" x="252" y="318" text-anchor="middle">Cascate</text>
+          </g>
+          <g class="stop-pin">
+            <text x="300" y="322" text-anchor="middle" font-size="16">🏖️</text>
+            <text class="stop-label" x="296" y="342" text-anchor="middle">Vík</text>
+          </g>
+          <g class="stop-pin">
+            <text x="352" y="337" text-anchor="middle" font-size="20">🧊</text>
+            <text class="stop-label highlight" x="358" y="358" text-anchor="middle">Jökulsárlón</text>
+          </g>
+          <g class="stop-pin minor">
+            <text x="330" y="272" text-anchor="middle" font-size="15">🏔️</text>
+            <text class="stop-label" x="332" y="256" text-anchor="middle">Vatnajökull</text>
+          </g>
+
+          <g class="compass" transform="translate(455,40)">
+            <line x1="0" y1="-14" x2="0" y2="14"/>
+            <line x1="-10" y1="0" x2="10" y2="0"/>
+            <text x="0" y="-18" text-anchor="middle">N</text>
+          </g>
+          <g class="scale-bar" transform="translate(30,470)">
+            <line x1="0" y1="0" x2="60" y2="0"/>
+            <line x1="0" y1="-4" x2="0" y2="4"/>
+            <line x1="60" y1="-4" x2="60" y2="4"/>
+            <text x="30" y="-6" text-anchor="middle">~80 km</text>
+          </g>
+
+          <text font-size="22" id="jeep-marker">🚙
+            <animateMotion dur="20s" repeatCount="indefinite">
+              <mpath href="#route-path"/>
+            </animateMotion>
+          </text>
+        </svg>
+      </div>
+
+      <div class="map-actions reveal">
+        <a id="link-full-route" href="#" target="_blank" rel="noopener">🗺️ Apri l'itinerario completo su Google Maps</a>
+        <button class="export" id="btn-export-kml">⬇️ Esporta tappe (KML)</button>
+      </div>
+
+      <div class="card reveal" style="overflow-x:auto;">
+        <h3 style="margin-top:0;">Spostamenti giorno per giorno</h3>
+        <table class="stops-table" id="legs-table">
+          <thead><tr><th>Giorno</th><th>Tratta</th><th>Distanza</th><th>Durata</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="source-note">Le durate sono quelle estive: <strong>d'inverno vanno aumentate</strong>, e con vento o neve parecchio. Prima di ogni spostamento si guarda <strong>road.is</strong> per lo stato delle strade e <strong>safetravel.is</strong> per gli avvisi.</div>
+      </div>
+
+      <div class="card reveal" style="overflow-x:auto;">
+        <h3 style="margin-top:0;">Tutte le tappe</h3>
+        <table class="stops-table" id="stops-table">
+          <thead><tr><th>Tappa</th><th>Coordinate</th><th></th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- COSE DA NON PERDERE -->
+  <section id="siti" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🧊 Cose da non perdere</h2>
+      <p class="section-sub reveal">Le tappe principali, filtrabili per zona.</p>
+
+      <div class="filter-row reveal" id="family-filters"></div>
+      <div class="family-grid" id="family-grid"></div>
+
+      <div class="photo-banner reveal">
+        <img src="foto/destinazioni/is-jokulsarlon.jpg" alt="Iceberg nella laguna glaciale di Jökulsárlón" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Jakub Hałun, <a href="https://commons.wikimedia.org/wiki/File:J%C3%B6kuls%C3%A1rl%C3%B3n_glacier_lagoon,_Iceland,_20240718_1522_2046.jpg" target="_blank" rel="noopener">CC BY 4.0</a></div>
+        <div class="fallback">🧊</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GUIDA PRATICA -->
+  <section id="guida" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🧭 Guida pratica</h2>
+      <p class="section-sub reveal">Guidare d'inverno, quanto costa, cosa serve. Dati verificati ad agosto 2026.</p>
+
+      <div class="callout warn reveal">
+        <strong>La cosa più pericolosa del viaggio è la strada, non i vulcani.</strong> A gennaio si guida con neve, ghiaccio, vento forte e cinque ore di luce. Due regole che in Islanda si prendono sul serio: <strong>road.is</strong> prima di ogni partenza per lo stato delle strade, e <strong>safetravel.is</strong> per gli avvisi. Se dicono di non partire, non si parte — e si perde una giornata, che è il motivo per cui l'itinerario ha margine.
+      </div>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>🚙 Che auto</h3><p>D'inverno serve un <strong>4x4</strong>: non per le strade F (chiuse) ma per neve e ghiaccio sulle strade normali. Una settimana costa circa <strong>240-370€</strong> per un Duster, sopra i 700€ per un SUV più grande. Gomme invernali chiodate incluse per legge nella stagione.</p></div>
+        <div class="card reveal"><h3>💨 Le portiere</h3><p>Sembra un dettaglio ridicolo ed è il danno più comune: il vento islandese <strong>strappa le portiere</strong> quando le apri. L'assicurazione per questo (<em>SAAP</em>, Sand and Ash Protection, e la copertura vento) di solito è a parte. Prendetela.</p></div>
+        <div class="card reveal"><h3>💰 Costa parecchio</h3><p>L'Islanda è uno dei paesi più cari d'Europa. Si paga <strong>tutto con carta</strong>, anche un caffè, e i contanti non servono praticamente mai. La corona islandese (ISK) non circola fuori dal paese.</p></div>
+        <div class="card reveal"><h3>♨️ Le piscine termali</h3><p>Ogni paese ne ha una pubblica, riscaldata geotermicamente, aperta anche d'inverno e a pochi euro. Sono l'alternativa vera alla Blue Lagoon, che costa dieci volte tanto. <strong>Regola non negoziabile: doccia nudi prima di entrare</strong>, e la fanno rispettare.</p></div>
+        <div class="card reveal"><h3>🛂 Documenti</h3><p>Niente: l'Islanda è nello <strong>spazio Schengen</strong>, basta la carta d'identità. Niente visto, niente autorizzazioni.</p></div>
+        <div class="card reveal"><h3>🌊 Reynisfjara</h3><p>La spiaggia nera ha le <strong>onde anomale</strong>, che arrivano molto più in alto delle altre e hanno ucciso più di un turista. Non si dà mai le spalle al mare e non ci si avvicina alla battigia. C'è un semaforo di allerta all'ingresso: si guarda.</p></div>
+      </div>
+
+      <div class="source-note">Fonti: safetravel.is, road.is, guidetoiceland.is, adventures.is, lavacarrental.is e autonoleggioislanda.it (prezzi noleggio) — verificate ad agosto 2026.</div>
+    </div>
+  </section>
+
+  <!-- VULCANI -->
+  <section id="vulcani" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🌋 Vulcani, e cosa comporta</h2>
+      <p class="section-sub reveal">La penisola di Reykjanes — quella dell'aeroporto e della Blue Lagoon — è in piena fase eruttiva da anni. Non è un pericolo per il viaggio, ma è un motivo di chiusure improvvise.</p>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>📍 Dove succede</h3><p>Tutto nella zona di <strong>Grindavík e Svartsengi</strong>, sulla penisola di Reykjanes: la stessa dove stanno l'aeroporto di Keflavík e la Blue Lagoon. Il resto dell'isola — Reykjavík, costa sud, Jökulsárlón — non è toccato.</p></div>
+        <div class="card reveal"><h3>📅 A che punto siamo</h3><p>L'ultima eruzione è cominciata il <strong>16 luglio 2025</strong> ed è finita il 5 agosto dopo 21 giorni, lasciando un campo lavico di 3,3 km². Da allora nessuna eruzione in corso, ma <strong>il magma si sta riaccumulando</strong> sotto Svartsengi e l'ufficio meteo islandese considera probabile una nuova intrusione.</p></div>
+        <div class="card reveal"><h3>💧 La Blue Lagoon</h3><p>È aperta, ma negli ultimi anni ha avuto <strong>chiusure brevi e improvvise</strong> per precauzione. Se è nel programma, vale la pena avere un piano B — la <strong>Sky Lagoon</strong> a Reykjavík o una qualsiasi piscina comunale — invece di considerarla garantita.</p></div>
+        <div class="card reveal"><h3>✈️ I voli</h3><p>Durante le eruzioni recenti <strong>l'aeroporto e i voli hanno continuato a funzionare normalmente</strong>: si chiudono le strade vicino alla colata, non lo spazio aereo. Il 2010 di Eyjafjallajökull era un vulcano diverso e un tipo di eruzione diverso.</p></div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>In pratica:</strong> nessun motivo per cambiare piani, ma controllate <strong>safetravel.is</strong> nei giorni prima di partire e non prenotate la Blue Lagoon come unica cosa del giorno. Situazione aggiornata ad agosto 2026 — in una zona così attiva va riletta vicino alla partenza.
+        <div class="source-note">Fonti: safetravel.is, adventures.is, volcanoexpress.is, icelandia.com — verificate ad agosto 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METEO -->
+  <section id="meteo" class="panel" data-nav>
+    <div class="inner">
+      <div class="photo-banner reveal">
+        <img src="foto/destinazioni/is-skogafoss.jpg" alt="La cascata di Skógafoss" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.nextElementSibling.style.display='flex';">
+        <div class="credit">Foto: Gerd Eichmann, <a href="https://commons.wikimedia.org/wiki/File:Skogafoss-02-2018-gje.jpg" target="_blank" rel="noopener">CC BY-SA 4.0</a></div>
+        <div class="fallback">💧</div>
+      </div>
+      <h2 class="section-title reveal">🌦️ Meteo — gennaio</h2>
+      <p class="section-sub reveal">Meno freddo di quanto ci si aspetti, molto più ventoso.</p>
+
+      <div class="weather-cols reveal">
+        <div>
+          <h4>Reykjavík</h4>
+          <div class="weather-stats">
+            <div class="card"><div class="wval">~2°</div><div class="wlabel">Massima media</div></div>
+            <div class="card"><div class="wval">~-2°</div><div class="wlabel">Minima media</div></div>
+            <div class="card"><div class="wval">4-5h</div><div class="wlabel">Luce al giorno</div></div>
+          </div>
+        </div>
+        <div>
+          <h4>Quello che conta</h4>
+          <div class="weather-stats">
+            <div class="card"><div class="wval">Vento</div><div class="wlabel">Il fattore vero</div></div>
+            <div class="card"><div class="wval">Pioggia</div><div class="wlabel">Più che neve, sulla costa</div></div>
+            <div class="card"><div class="wval">Cambia</div><div class="wlabel">Anche 4 volte al giorno</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>La Corrente del Golfo tiene l'Islanda più mite di quanto dica la latitudine:</strong> a Reykjavík a gennaio si sta intorno allo zero, meno che a Milano in certe giornate. Il problema non è il termometro, è il <strong>vento</strong>, che trasforma 0°C in una sensazione da -15. Serve il guscio antivento, non il piumino più spesso: <strong>strati, impermeabile, guanti, berretto e scarponi con la suola che tiene sul ghiaccio</strong>. E i ramponcini da mettere sotto le scarpe: costano poco e su certi sentieri ghiacciati fanno la differenza.
+        <div class="source-note">Fonti: adventures.is, iceland.org, funiceland.is — verificate ad agosto 2026.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CIBO -->
+  <section id="cibo" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">🍲 Cibo &amp; alcolici</h2>
+      <p class="section-sub reveal">Poche materie prime e tanto mare. E prezzi che fanno male.</p>
+
+      <div class="info-grid">
+        <div class="card reveal"><h3>🐟 Plokkfiskur</h3><p>Lo stufato di pesce e patate, il comfort food nazionale: merluzzo sfilettato, patate, cipolla e besciamella, servito con pane di segale. È quello che si mangia dopo una giornata al vento.</p></div>
+        <div class="card reveal"><h3>🌋 Rúgbrauð</h3><p>Pane di segale scuro e dolciastro <strong>cotto sottoterra</strong> col calore geotermico, per 24 ore. Si mangia col burro e col pesce. Non è folklore da turisti: lo fanno davvero così.</p></div>
+        <div class="card reveal"><h3>🌭 Pylsur</h3><p>L'hot dog islandese, di agnello, con cipolla fritta e crude, senape dolce e remoulade. Il chiosco <strong>Bæjarins Beztu</strong> di Reykjavík è un'istituzione dal 1937 ed è una delle poche cose economiche del paese.</p></div>
+        <div class="card reveal"><h3>🥛 Skyr</h3><p>Tecnicamente un formaggio fresco, non uno yogurt, e si mangia da mille anni. Denso, acido, pochissimi grassi. Al supermercato costa niente ed è la colazione giusta.</p></div>
+        <div class="card reveal"><h3>🥃 Brennivín</h3><p>L'acquavite nazionale aromatizzata al cumino, soprannominata <em>svarti dauði</em>, "morte nera". Si beve gelata, in bicchierini, tipicamente con lo hákarl — lo squalo fermentato, che è la sfida che tutti provano una volta sola.</p></div>
+        <div class="card reveal"><h3>🍺 Vínbúðin</h3><p>Gli alcolici oltre la birra leggera si comprano <strong>solo nei negozi di stato Vínbúðin</strong>, con orari corti e chiusi la domenica. Una birra al bar sta sui 10-12€. Se volete bere, si compra al duty free dell'aeroporto all'arrivo: lo fanno tutti gli islandesi.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOLI -->
+  <section id="voli" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">✈️ Voli</h2>
+      <p class="section-sub reveal">Volo diretto da Milano, circa quattro ore. La meta più comoda da raggiungere fra tutte quelle guardate finora.</p>
+
+      <div class="card reveal">
+        <table class="hub-table">
+          <thead><tr><th>Tratta</th><th>Tipo</th><th>Note</th></tr></thead>
+          <tbody>
+            <tr><td>Milano Malpensa → Keflavík (KEF)</td><td><strong>Diretto</strong></td><td>~4-4,5h. Wizz Air ed easyJet sono le più presenti sulla rotta</td></tr>
+            <tr><td>Altre città italiane</td><td>1 scalo</td><td>Via Londra, Amsterdam, Copenaghen o Francoforte</td></tr>
+            <tr><td>Keflavík → Reykjavík</td><td>Bus o auto</td><td>~50 km, 45 minuti. Il Flybus è coordinato con i voli</td></tr>
+          </tbody>
+        </table>
+        <div class="source-note">Tariffe viste su Milano-Reykjavík: comunemente <strong>314-539€</strong> a/r, con occasioni fino a 141€ e una media intorno ai 219€ prenotando con settimane di anticipo. Prezzi rilevati ad agosto 2026 per date generiche, non per gennaio 2027: <strong>capodanno e l'inizio di gennaio sono alta stagione</strong> e costano di più. Fonti: momondo.it, kiwi.com, edreams.</div>
+      </div>
+
+      <div class="card reveal">
+        <div class="flight-form">
+          <div class="field">
+            <label for="flight-origin">Da dove parti</label>
+            <select id="flight-origin">
+              <option value="MXP|Milano Malpensa">Milano Malpensa (MXP)</option>
+              <option value="FCO|Roma Fiumicino">Roma Fiumicino (FCO)</option>
+              <option value="BGY|Milano Bergamo">Milano Bergamo (BGY)</option>
+              <option value="BLQ|Bologna">Bologna (BLQ)</option>
+              <option value="VCE|Venezia">Venezia (VCE)</option>
+            </select>
+          </div>
+          <div class="field"><label>Destinazione</label><select disabled><option>Keflavík (KEF)</option></select></div>
+          <div class="field"><label>Date</label><select disabled><option>2 → 9 gennaio 2027</option></select></div>
+        </div>
+        <div class="flight-links">
+          <button id="btn-google-flights">Cerca su Google Flights</button>
+          <button class="alt" id="btn-skyscanner">Cerca su Skyscanner</button>
+          <button class="alt" id="btn-kayak">Cerca su Kayak</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUDGET -->
+  <section id="budget" class="panel dark" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">💰 Calcolatore budget</h2>
+      <p class="section-sub reveal">Il volo costa poco, tutto il resto costa parecchio: è il contrario delle altre mete. Stima indicativa, non un preventivo.</p>
+
+      <div class="card reveal">
+        <div class="currency-form">
+          <div class="field">
+            <label for="budget-people">Persone</label>
+            <input type="number" id="budget-people" value="4" min="1">
+          </div>
+          <div class="field">
+            <label for="budget-style">Stile viaggio</label>
+            <select id="budget-style">
+              <option value="budget">Budget</option>
+              <option value="standard" selected>Standard</option>
+              <option value="comfort">Comfort</option>
+            </select>
+          </div>
+        </div>
+        <div id="budget-result" class="cur-result">—</div>
+        <div id="budget-breakdown" class="source-note" style="text-align:center; margin-top:10px;"></div>
+      </div>
+
+      <div class="callout reveal">
+        <strong>Dove si risparmia davvero:</strong> cucinare invece di cenare fuori (i supermercati <em>Bónus</em> e <em>Krónan</em> costano una frazione dei ristoranti), le <strong>piscine comunali</strong> al posto della Blue Lagoon, e l'auto divisa in quattro. Dove non si risparmia: la grotta di ghiaccio, che si fa solo con guida e costa quello che costa.
+      </div>
+
+      <div class="source-note">Include: volo a/r, noleggio 4x4 per 7 giorni con assicurazioni, benzina, alloggio 7 notti, cibo, grotta di ghiaccio con guida e una laguna termale. Esclude: spese personali e attrezzatura. Dati da momondo.it e kiwi.com (voli), lavacarrental.is e autonoleggioislanda.it (noleggio), guidetoiceland.is (tour) — verificati ad agosto 2026.</div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="panel" data-nav>
+    <div class="inner">
+      <h2 class="section-title reveal">❓ Domande frequenti</h2>
+
+      <details class="faq reveal">
+        <summary>Vedremo l'aurora?</summary>
+        <div class="faq-body">Nessuno può prometterlo, ma le condizioni sono buone: gennaio dà <strong>16-20 ore di buio</strong> e siamo vicini al massimo del ciclo solare. Il fattore che decide non è l'aurora — quella c'è quasi sempre — ma <strong>il cielo sereno</strong>. Otto notti sono molte più possibilità di un weekend: ogni notte è un'altra estrazione. Si guarda vedur.is, che pubblica sia la previsione dell'aurora sia la copertura nuvolosa, e ci si sposta dove il cielo è pulito.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Cinque ore di luce non sono troppo poche?</summary>
+        <div class="faq-body">Sono poche, e vanno pianificate: in strada per le 10, le cose principali fra le 11 e le 16. Ma c'è un rovescio: con il sole sempre bassissimo <strong>la luce è quella dell'alba per tutto il giorno</strong>, e per le fotografie è il periodo migliore dell'anno. E il buio è il motivo per cui si è scelto gennaio.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Serve il 4x4?</summary>
+        <div class="faq-body">D'inverno sì. Non per le strade F degli altopiani, che a gennaio sono comunque chiuse, ma per neve e ghiaccio sulle strade normali. Una settimana sta sui <strong>240-370€</strong> per un Duster. E prendete le assicurazioni extra: <strong>il vento che strappa le portiere</strong> è il danno più comune in Islanda, e di solito non è nella copertura base.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Il vulcano è un problema?</summary>
+        <div class="faq-body">Per il viaggio no. L'attività è concentrata a <strong>Reykjanes, attorno a Grindavík</strong>; l'ultima eruzione è finita il 5 agosto 2025 e da allora non ce ne sono state, anche se il magma si sta riaccumulando. Durante le eruzioni recenti <strong>aeroporto e voli hanno funzionato normalmente</strong>. L'unica cosa da non dare per scontata è la <strong>Blue Lagoon</strong>, che chiude a volte per precauzione: meglio avere un'alternativa.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Fa freddissimo?</summary>
+        <div class="faq-body">Meno di quanto si pensi: a Reykjavík a gennaio si sta intorno a <strong>0°C</strong>, grazie alla Corrente del Golfo. Il problema è il <strong>vento</strong>, che porta la sensazione molto sotto. Serve un guscio antivento e impermeabile più strati sotto, non il piumino gigante. E i ramponcini da mettere sotto le scarpe.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Perché non fare il giro completo dell'isola?</summary>
+        <div class="faq-body">Perché a gennaio il nord ha neve, vento e strade che chiudono senza preavviso, con quattro ore di luce per coprire le distanze. Il <strong>Circolo d'Oro e la costa sud sono aperti tutto l'anno</strong> e contengono quasi tutto quello che ci interessa: cascate, spiaggia nera, laguna glaciale, grotte di ghiaccio. Il giro completo è un viaggio d'estate.</div>
+      </details>
+
+      <details class="faq reveal">
+        <summary>Quanto costa stare lì?</summary>
+        <div class="faq-body">È uno dei paesi più cari d'Europa: una birra al bar sta sui 10-12€ e una cena fuori vola. Si compensa cucinando — i supermercati <strong>Bónus</strong> e <strong>Krónan</strong> costano una frazione — e usando le <strong>piscine comunali</strong>, che costano pochi euro, invece della Blue Lagoon. Si paga tutto con carta, i contanti non servono.</div>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Islanda Trip Planner — file locale, parte del sito <a href="javascript:void(0)" class="home-link" onclick="showHub()">Patagucci Trips</a>. Mappa e ricerca voli richiedono una connessione internet al momento del click.
+  <div class="credits">Foto da Wikimedia Commons: vaidyanathan (aurora sul Kirkjufell, CC BY-SA 4.0) · Eric Kilby (grotta di ghiaccio, CC BY-SA 2.0) · Jakub Hałun (Jökulsárlón, CC BY 4.0) · Gerd Eichmann (Skógafoss, CC BY-SA 4.0). Tutte le immagini restano dei rispettivi autori sotto le licenze indicate.</div>
+</footer>
+
+<script>
+(function(){
+  var navLinks = document.querySelectorAll('nav.tabs a[href^="#"]');
+  var sections = document.querySelectorAll('section[data-nav]');
+  var linkBySection = {};
+  navLinks.forEach(function(a){ linkBySection[a.getAttribute('href').slice(1)] = a; });
+
+  var spyObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        navLinks.forEach(function(a){ a.classList.remove('active'); });
+        var link = linkBySection[entry.target.id];
+        if(link){
+          link.classList.add('active');
+          link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(function(s){ spyObserver.observe(s); });
+
+  var revealObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ revealObserver.observe(el); });
+
+  var COORDS = {
+    keflavik: [63.9850, -22.6056],
+    reykjavik: [64.1466, -21.9426],
+    thingvellir: [64.2559, -21.1300],
+    geysir: [64.3104, -20.3024],
+    gullfoss: [64.3271, -20.1199],
+    seljalandsfoss: [63.6156, -19.9925],
+    skogafoss: [63.5321, -19.5114],
+    reynisfjara: [63.4064, -19.0448],
+    vik: [63.4187, -19.0060],
+    jokulsarlon: [64.0784, -16.2306]
+  };
+  function mapsLink(a, b){
+    var x = COORDS[a], y = COORDS[b];
+    return 'https://www.google.com/maps/dir/?api=1&origin=' + x[0] + ',' + x[1] + '&destination=' + y[0] + ',' + y[1] + '&travelmode=driving';
+  }
+  function placeLink(k){ var p = COORDS[k]; return 'https://www.google.com/maps/search/?api=1&query=' + p[0] + ',' + p[1]; }
+
+  var ITINERARY = [
+    { d:1, data:'2 gen', title:'Volo e arrivo a Reykjavík', tags:['Arrivo','~4h diretto'], text:'Volo diretto da Milano, circa quattro ore. Ritiro dell\'auto a Keflavík e 45 minuti fino a Reykjavík. Se il cielo è pulito, <strong>la prima caccia all\'aurora è già stasera</strong>: a gennaio è buio dalle 16 in poi.', link: placeLink('keflavik'), linkLabel:'Vedi Keflavík su Google Maps' },
+    { d:2, data:'3 gen', title:'Reykjavík e laguna termale', tags:['Città','♨️'], text:'Giornata leggera per ambientarsi: il centro, la Hallgrímskirkja, il porto vecchio, e un hot dog da <strong>Bæjarins Beztu</strong>. Pomeriggio in una laguna termale — la <strong>Sky Lagoon</strong> in città oppure la Blue Lagoon, tenendo presente che quest\'ultima a volte chiude per precauzione.', link: placeLink('reykjavik'), linkLabel:'Vedi Reykjavík su Google Maps', highlight:true },
+    { d:3, data:'4 gen', title:'Circolo d\'Oro', tags:['Þingvellir','Geysir','Gullfoss'], text:'Il giro classico, aperto tutto l\'anno: <strong>Þingvellir</strong>, dove si cammina nella spaccatura fra la placca americana e quella europea e dove nel 930 nacque il primo parlamento al mondo; <strong>Geysir</strong>, con lo Strokkur che erutta ogni pochi minuti; e <strong>Gullfoss</strong>, che d\'inverno è mezza ghiacciata. Sera verso la costa sud.', link: placeLink('thingvellir'), linkLabel:'Apri Þingvellir su Google Maps', highlight:true },
+    { d:4, data:'5 gen', title:'Le cascate e la spiaggia nera', tags:['Costa sud','⚠️ onde'], text:'<strong>Seljalandsfoss</strong>, dietro cui d\'estate si passa e d\'inverno no perché il sentiero ghiaccia, e <strong>Skógafoss</strong>, 60 metri di salto. Poi <strong>Reynisfjara</strong>, la spiaggia di sabbia nera con le colonne di basalto: qui si sta lontani dall\'acqua, le onde anomale hanno ucciso più di una persona. Notte a Vík.', link: placeLink('skogafoss'), linkLabel:'Vedi Skógafoss su Google Maps', highlight:true },
+    { d:5, data:'6 gen', title:'Jökulsárlón e la grotta di ghiaccio', tags:['Il giorno','Solo con guida'], text:'Il giorno più lungo in auto e il più bello: la laguna glaciale di <strong>Jökulsárlón</strong>, piena di iceberg staccati dal Vatnajökull, e la <strong>Diamond Beach</strong> di fronte, dove i blocchi finiscono sulla sabbia nera. E la <strong>grotta di ghiaccio</strong> dentro il ghiacciaio, accessibile solo in inverno e solo con guida certificata.', link: placeLink('jokulsarlon'), linkLabel:'Vedi Jökulsárlón su Google Maps', highlight:true },
+    { d:6, data:'7 gen', title:'Ritorno verso ovest', tags:['Margine','Riserva'], text:'Rientro con calma verso Reykjavík fermandosi a quello che si è saltato. <strong>È anche il giorno cuscinetto</strong>: se una tempesta ha chiuso le strade in uno dei giorni precedenti, si recupera adesso. In Islanda a gennaio un giorno di margine non è lusso.', link: mapsLink('jokulsarlon','reykjavik'), linkLabel:'Apri il tragitto Jökulsárlón → Reykjavík' },
+    { d:7, data:'8 gen', title:'Reykjanes e ultima notte', tags:['Ultimo giro'], text:'Giornata vicino alla capitale: la penisola di <strong>Reykjanes</strong> con i campi lavici e le fumarole geotermiche, oppure Reykjavík con calma. Ultima occasione per l\'aurora — e se non si è ancora vista, stasera si esce comunque.', link: placeLink('reykjavik'), linkLabel:'Vedi Reykjavík su Google Maps' },
+    { d:8, data:'9 gen', title:'Rientro', tags:['Partenza'], text:'Riconsegna dell\'auto a Keflavík e volo di rientro. Il duty free all\'arrivo è un\'istituzione: a quello in partenza non serve fermarsi.', link: placeLink('keflavik'), linkLabel:'Vedi Keflavík su Google Maps' }
+  ];
+
+  var timeline = document.getElementById('timeline');
+  ITINERARY.forEach(function(day, idx){
+    var det = document.createElement('details');
+    det.className = 'day reveal';
+    if(idx === 0) det.open = true;
+    var tagsHtml = day.tags.map(function(t){ return '<span class="tag' + (day.highlight ? ' highlight' : '') + '">' + t + '</span>'; }).join('');
+    det.innerHTML =
+      '<summary><span class="daynum">' + day.d + '</span><span class="daytitle">' + day.title + '</span><span class="chevron">▸</span></summary>' +
+      '<div class="day-body"><span class="tag">' + day.data + '</span>' + tagsHtml + '<p>' + day.text + '</p>' +
+      '<a class="maps-link" href="' + day.link + '" target="_blank" rel="noopener">🗺️ ' + day.linkLabel + '</a>' +
+      '</div>';
+    timeline.appendChild(det);
+    revealObserver.observe(det);
+  });
+
+  // Tutto in auto: d'inverno non ci sono alternative sensate.
+  var ROUTE_MODES = [
+    { verso:[146,278], mezzo:'🚙' },
+    { verso:[206,240], mezzo:'🚙' },
+    { verso:[258,292], mezzo:'🚙' },
+    { verso:[352,330], mezzo:'🚙' }
+  ];
+
+  var routePath = document.getElementById('route-path');
+  var routeMarker = document.getElementById('jeep-marker');
+  if(routePath && routeMarker && routePath.getTotalLength){
+    var routeLen = routePath.getTotalLength();
+    var smil = routeMarker.querySelector('animateMotion');
+    if(smil) smil.remove();
+    routeMarker.setAttribute('text-anchor', 'middle');
+
+    var cursore = 0;
+    ROUTE_MODES.forEach(function(tratta){
+      var migliore = cursore, distMin = Infinity;
+      for(var i = Math.ceil(cursore * 400); i <= 400; i++){
+        var p = routePath.getPointAtLength(routeLen * i / 400);
+        var dx = p.x - tratta.verso[0], dy = p.y - tratta.verso[1];
+        var d = dx * dx + dy * dy;
+        if(d < distMin){ distMin = d; migliore = i / 400; }
+      }
+      tratta.fino = migliore;
+      cursore = migliore;
+    });
+    ROUTE_MODES[ROUTE_MODES.length - 1].fino = 1;
+
+    var posiziona = function(frazione){
+      var p = routePath.getPointAtLength(routeLen * frazione);
+      routeMarker.setAttribute('x', p.x);
+      routeMarker.setAttribute('y', p.y + 7);
+      var tratta = ROUTE_MODES.filter(function(t){ return frazione <= t.fino; })[0]
+                 || ROUTE_MODES[ROUTE_MODES.length - 1];
+      if(routeMarker.textContent !== tratta.mezzo) routeMarker.textContent = tratta.mezzo;
+    };
+
+    var DURATA = 20000, avvio = null;
+
+    // L'animazione parte al caricamento della pagina, non quando si apre la
+    // meta: senza questo, arrivando qui dopo un po' si trova il mezzo gia' a
+    // meta' percorso e sembra che il viaggio cominci da li'.
+    window.addEventListener('destinazione-cambiata', function(){ avvio = null; });
+
+    var muovi = function(ts){
+      if(avvio === null) avvio = ts;
+      posiziona(((ts - avvio) % DURATA) / DURATA);
+      requestAnimationFrame(muovi);
+    };
+
+    var ridotto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(ridotto) posiziona(0); else requestAnimationFrame(muovi);
+  }
+
+  // ---- Budget ----
+  var BUDGET = {
+    notti: 7,
+    flight: { budget:190, standard:330, comfort:520 },
+    // 4x4 una settimana con assicurazioni extra + benzina, diviso per persona.
+    autoFixed: { budget:130, standard:190, comfort:300 },
+    // Grotta di ghiaccio con guida + una laguna termale.
+    attivitaFixed: { budget:170, standard:250, comfort:390 },
+    lodgingPerNight: { budget:45, standard:85, comfort:170 },
+    foodPerDay: { budget:28, standard:55, comfort:100 },
+    extrasFixed: { budget:60, standard:120, comfort:240 }
+  };
+  var bgtPeople = document.getElementById('budget-people');
+  var bgtStyle = document.getElementById('budget-style');
+  var bgtResult = document.getElementById('budget-result');
+  var bgtBreakdown = document.getElementById('budget-breakdown');
+  function updateBudget(){
+    if(!bgtPeople) return;
+    var people = Math.max(1, parseInt(bgtPeople.value, 10) || 1);
+    var style = bgtStyle.value;
+    var perPerson = BUDGET.flight[style] + BUDGET.autoFixed[style] + BUDGET.attivitaFixed[style]
+                  + BUDGET.extrasFixed[style]
+                  + BUDGET.notti * BUDGET.lodgingPerNight[style]
+                  + 8 * BUDGET.foodPerDay[style];
+    var totalGroup = perPerson * people;
+    bgtResult.textContent = '~' + Math.round(perPerson).toLocaleString('it-IT') + ' € a persona';
+    bgtBreakdown.textContent = 'Totale gruppo (' + people + ' persone): ~' + Math.round(totalGroup).toLocaleString('it-IT') + ' € — include volo, 4x4 con assicurazioni e benzina, 7 notti, cibo, grotta di ghiaccio e una laguna termale.';
+  }
+  if(bgtPeople){
+    [bgtPeople, bgtStyle].forEach(function(el){ el.addEventListener('input', updateBudget); el.addEventListener('change', updateBudget); });
+    updateBudget();
+  }
+
+  // ---- Come si spartisce la giornata ----
+  var ROUTES = [
+    { name:'07:00 – 11:20 — buio', open:true, note:'Colazione e trasferimenti. Si guida al buio, ed è normale: la gente qui fa così tutto l\'inverno.' },
+    { name:'11:20 – 15:45 — luce', open:true, note:'Le quattro ore e mezza in cui si vedono le cose. Sole sempre basso, luce da alba per tutto il tempo.' },
+    { name:'15:45 – 17:00 — crepuscolo', open:true, note:'Lungo e bellissimo. È ancora abbastanza chiaro per guidare e fotografare.' },
+    { name:'Dalle 20:00 — caccia all\'aurora', open:true, note:'Le ore migliori sono fra le 21 e l\'una. Si controlla la copertura nuvolosa e ci si sposta dove il cielo è pulito.' },
+    { name:'Giro completo dell\'isola', open:false, note:'A gennaio no: nord e altopiani hanno neve, vento e chiusure improvvise. Si fa d\'estate.' }
+  ];
+  var routeStatus = document.getElementById('route-status');
+  if(routeStatus){
+    ROUTES.forEach(function(r){
+      var row = document.createElement('div');
+      row.className = 'r-name';
+      row.textContent = r.name;
+      var status = document.createElement('div');
+      status.className = 'r-status ' + (r.open ? 'open' : 'closed');
+      status.textContent = r.open ? 'Sì' : 'No';
+      var note = document.createElement('div');
+      note.className = 'route-note';
+      note.textContent = r.note;
+      routeStatus.appendChild(row); routeStatus.appendChild(status); routeStatus.appendChild(note);
+    });
+  }
+
+  // ---- Cose da non perdere ----
+  var FAMILIES = [
+    { sector:'Circolo d\'Oro', name:'Þingvellir', size:'2 ore', level:'Facile', note:'La spaccatura fra le placche americana ed europea, e il luogo del primo parlamento al mondo, anno 930.' },
+    { sector:'Circolo d\'Oro', name:'Geysir e Strokkur', size:'1 ora', level:'Facile', note:'Lo Strokkur erutta ogni pochi minuti. Il Geysir originale, che ha dato il nome a tutti i geyser del mondo, è ormai quasi inattivo.' },
+    { sector:'Circolo d\'Oro', name:'Gullfoss', size:'1 ora', level:'Facile', note:'La "cascata d\'oro", due salti in una gola. D\'inverno è in parte ghiacciata e i sentieri sono scivolosi.' },
+    { sector:'Costa sud', name:'Seljalandsfoss', size:'1 ora', level:'Facile', note:'Ci si passa dietro — ma d\'inverno il sentiero ghiaccia e spesso è chiuso.' },
+    { sector:'Costa sud', name:'Skógafoss', size:'1 ora', level:'Facile', note:'Sessanta metri di salto, si arriva fin sotto. La scalinata laterale d\'inverno può essere ghiacciata.' },
+    { sector:'Costa sud', name:'Reynisfjara', size:'1 ora', level:'Attenzione', note:'Spiaggia nera con colonne di basalto e faraglioni. Le onde anomale sono un pericolo reale: mai dare le spalle al mare.' },
+    { sector:'Costa sud', name:'Vík', size:'Notte', level:'Facile', note:'Il paese più a sud dell\'Islanda, base naturale per la costa. Poche case, una chiesa rossa su una collina.' },
+    { sector:'Ghiacciaio', name:'Jökulsárlón', size:'2-3 ore', level:'Facile', note:'La laguna glaciale con gli iceberg staccati dal Vatnajökull. Spesso ci sono le foche.' },
+    { sector:'Ghiacciaio', name:'Diamond Beach', size:'1 ora', level:'Facile', note:'Di fronte alla laguna: i blocchi di ghiaccio finiscono sulla sabbia nera e sembrano diamanti. Da qui il nome.' },
+    { sector:'Ghiacciaio', name:'Grotta di ghiaccio', size:'3-4 ore', level:'Media', note:'Dentro il Vatnajökull, solo in inverno e solo con guida certificata. Gennaio e febbraio sono il periodo migliore.' },
+    { sector:'Reykjavík', name:'Hallgrímskirkja', size:'1 ora', level:'Facile', note:'La chiesa che domina la città, ispirata alle colonne di basalto. Si sale sulla torre per la vista.' },
+    { sector:'Reykjavík', name:'Sky Lagoon', size:'3 ore', level:'Facile', note:'Laguna termale affacciata sull\'oceano, in città. Alternativa alla Blue Lagoon, che è lontana e chiude a volte.' },
+    { sector:'Reykjavík', name:'Bæjarins Beztu', size:'10 minuti', level:'Facile', note:'Il chiosco di hot dog aperto dal 1937. Una delle pochissime cose economiche del paese.' }
+  ];
+
+  var famSectors = ['Tutti'].concat(Array.from(new Set(FAMILIES.map(function(f){ return f.sector; }))));
+  var famFilterRow = document.getElementById('family-filters');
+  var famGridEl = document.getElementById('family-grid');
+  var famActiveSector = 'Tutti';
+
+  function renderFamilies(){
+    famGridEl.innerHTML = '';
+    FAMILIES.filter(function(f){ return famActiveSector === 'Tutti' || f.sector === famActiveSector; }).forEach(function(f){
+      var card = document.createElement('div');
+      card.className = 'family-card';
+      card.innerHTML =
+        '<div class="fsector">' + f.sector + '</div>' +
+        '<div class="fname">' + f.name + '</div>' +
+        '<div class="flevel ' + f.level + '">' + f.level + '</div>' +
+        '<div class="fsize">' + f.size + '</div>' +
+        '<p class="fnote">' + f.note + '</p>';
+      famGridEl.appendChild(card);
+    });
+  }
+  famSectors.forEach(function(s){
+    var btn = document.createElement('button');
+    btn.textContent = s;
+    if(s === famActiveSector) btn.classList.add('active');
+    btn.addEventListener('click', function(){
+      famActiveSector = s;
+      famFilterRow.querySelectorAll('button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderFamilies();
+    });
+    famFilterRow.appendChild(btn);
+  });
+  renderFamilies();
+
+  // ---- Voli ----
+  function currentOrigin(){
+    var v = document.getElementById('flight-origin').value.split('|');
+    return { code: v[0], label: v[1] };
+  }
+  document.getElementById('btn-google-flights').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.google.com/travel/flights?q=' + encodeURIComponent('Voli da ' + o.label + ' a Reykjavik dal 2 al 9 gennaio 2027'), '_blank');
+  });
+  document.getElementById('btn-skyscanner').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.skyscanner.it/trasporti/voli/' + o.code.toLowerCase() + '/kef/270102/270109/', '_blank');
+  });
+  document.getElementById('btn-kayak').addEventListener('click', function(){
+    var o = currentOrigin();
+    window.open('https://www.kayak.it/flights/' + o.code + '-KEF/2027-01-02/2027-01-09', '_blank');
+  });
+
+  // ---- Mappa: tabelle e KML ----
+  var STOPS = [
+    { name:'Aeroporto di Keflavík', key:'keflavik' },
+    { name:'Reykjavík', key:'reykjavik' },
+    { name:'Þingvellir', key:'thingvellir' },
+    { name:'Geysir', key:'geysir' },
+    { name:'Gullfoss', key:'gullfoss' },
+    { name:'Seljalandsfoss', key:'seljalandsfoss' },
+    { name:'Skógafoss', key:'skogafoss' },
+    { name:'Reynisfjara', key:'reynisfjara' },
+    { name:'Vík', key:'vik' },
+    { name:'Jökulsárlón', key:'jokulsarlon' }
+  ];
+
+  var waypoints = ['thingvellir','gullfoss','skogafoss','vik'].map(function(k){ return COORDS[k][0] + ',' + COORDS[k][1]; }).join('|');
+  document.getElementById('link-full-route').href =
+    'https://www.google.com/maps/dir/?api=1&origin=' + COORDS.reykjavik[0] + ',' + COORDS.reykjavik[1] +
+    '&destination=' + COORDS.jokulsarlon[0] + ',' + COORDS.jokulsarlon[1] +
+    '&waypoints=' + encodeURIComponent(waypoints) + '&travelmode=driving';
+
+  var stopsBody = document.querySelector('#stops-table tbody');
+  STOPS.forEach(function(s){
+    var c = COORDS[s.key];
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>' + s.name + '</td><td class="mono">' + c[0].toFixed(4) + ', ' + c[1].toFixed(4) + '</td><td><a href="' + placeLink(s.key) + '" target="_blank" rel="noopener">Apri ↗</a></td>';
+    stopsBody.appendChild(tr);
+  });
+
+  var LEGS = [
+    { day:1, label:'Keflavík → Reykjavík', from:'keflavik', to:'reykjavik', km:'~50 km', dur:'~45 min' },
+    { day:3, label:'Reykjavík → Circolo d\'Oro → costa sud', from:'reykjavik', to:'gullfoss', km:'~120 km', dur:'giornata intera' },
+    { day:4, label:'Cascate → Reynisfjara → Vík', from:'seljalandsfoss', to:'vik', km:'~60 km', dur:'giornata intera' },
+    { day:5, label:'Vík → Jökulsárlón', from:'vik', to:'jokulsarlon', km:'~190 km', dur:'~2,5h (più d\'inverno)' },
+    { day:6, label:'Jökulsárlón → Reykjavík', from:'jokulsarlon', to:'reykjavik', km:'~380 km', dur:'~5h (più d\'inverno)' }
+  ];
+  var legsBody = document.querySelector('#legs-table tbody');
+  LEGS.forEach(function(leg){
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td>Giorno ' + leg.day + '</td><td>' + leg.label + '</td><td>' + leg.km + '</td><td>' + leg.dur + '</td><td><a href="' + mapsLink(leg.from, leg.to) + '" target="_blank" rel="noopener">Apri ↗</a></td>';
+    legsBody.appendChild(tr);
+  });
+
+  document.getElementById('btn-export-kml').addEventListener('click', function(){
+    var kmlPlacemarks = STOPS.map(function(s){
+      var c = COORDS[s.key];
+      return '<Placemark><name>' + s.name + '</name><Point><coordinates>' + c[1] + ',' + c[0] + ',0</coordinates></Point></Placemark>';
+    }).join('\\n');
+    var lineCoords = STOPS.map(function(s){ var c = COORDS[s.key]; return c[1] + ',' + c[0] + ',0'; }).join(' ');
+    var kml = '<?xml version="1.0" encoding="UTF-8"?>\\n' +
+      '<kml xmlns="http://www.opengis.net/kml/2.2"><Document>' +
+      '<name>Islanda 2027 - Itinerario</name>' + kmlPlacemarks +
+      '<Placemark><name>Percorso completo</name><LineString><tessellate>1</tessellate><coordinates>' + lineCoords + '</coordinates></LineString></Placemark>' +
+      '</Document></kml>';
+    var blob = new Blob([kml], { type: 'application/vnd.google-earth.kml+xml' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'islanda-2027-itinerario.kml';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+})();
+</script>
+
+</body>
+</html>

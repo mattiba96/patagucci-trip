@@ -6,17 +6,8 @@ SRC_DIR = DIR + "_sources/"
 import json
 
 DESTS = [
-    {"file": "georgia-trip.html", "suf": "ge", "flag": "🇬🇪", "name": "Georgia", "stato": "confermato"},
+    {"file": "islanda-trip.html", "suf": "is", "flag": "🇮🇸", "name": "Islanda", "stato": "confermato"},
     {"file": "corea-trip.html", "suf": "kr", "flag": "🇰🇷", "name": "Corea del Sud", "stato": "confermato"},
-    {"file": "nepalbhutan-trip.html", "suf": "np", "flag": "🇳🇵🇧🇹", "name": "Nepal & Bhutan", "stato": "programma"},
-    {"file": "pakistan-trip.html", "suf": "pk", "flag": "🇵🇰", "name": "Pakistan", "stato": "programma"},
-    {"file": "southafrica-trip.html", "suf": "za", "flag": "🇿🇦", "name": "Sudafrica", "stato": "programma"},
-    {"file": "india-trip.html", "suf": "in", "flag": "🇮🇳", "name": "India", "stato": "programma"},
-    {"file": "uganda-trip.html", "suf": "ug", "flag": "🇺🇬", "name": "Uganda", "stato": "programma"},
-    {"file": "tanzania-trip.html", "suf": "tz", "flag": "🇹🇿", "name": "Tanzania", "stato": "programma"},
-    {"file": "uzbekistankyrgyzstan-trip.html", "suf": "uk", "flag": "🇺🇿🇰🇬", "name": "Uzbekistan & Kirghizistan", "stato": "programma"},
-    {"file": "greenland-trip.html", "suf": "gl", "flag": "🇬🇱", "name": "Groenlandia", "stato": "programma"},
-    {"file": "centroamerica-trip.html", "suf": "cx", "flag": "🇳🇮🇨🇷🇵🇦", "name": "Nicaragua, Costa Rica & Panama", "stato": "programma"},
 ]
 
 def extract(tag, content):
@@ -394,26 +385,20 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
       <section class="panel" data-nav>
         <div class="inner" style="max-width:1060px;">
           <h2 class="section-title reveal">🌍 Tutte le mete</h2>
-          <p class="section-sub reveal">Ogni viaggio ha la sua pagina interattiva: itinerario giorno per giorno, mappa animata, meteo storico, convertitore valuta e tutto il resto. Clicca una card per aprirla.</p>
+          <p class="section-sub reveal">I due viaggi con le date fissate. Ognuno ha la sua pagina: itinerario giorno per giorno, mappa animata, meteo e tutto il resto.</p>
 
-          <div class="trip-tabs reveal" id="trip-tabs" role="tablist">
-            <button role="tab" class="trip-tab active" data-gruppo="confermati" aria-selected="true">✅ Confermati <span class="conta">2</span></button>
-            <button role="tab" class="trip-tab" data-gruppo="programma" aria-selected="false">🗓️ In programma <span class="conta">9</span></button>
-          </div>
-
-          <div class="trip-gruppo attivo" id="gruppo-confermati">
-            <p class="trip-intro reveal">Date fissate. Questi si fanno.</p>
-            <div class="trip-grid reveal">
-            <a class="trip-card" href="javascript:void(0)" onclick="showDest('ge')">
-              <img src="foto/destinazioni/Narikala_fortress,_Tbilisi,_Georgia-fb6b37.jpg" alt="Narikala Fortress, Tbilisi, Georgia" loading="lazy">
+          <div class="trip-grid reveal">
+            <a class="trip-card" href="javascript:void(0)" onclick="showDest('is')">
+              <img src="foto/destinazioni/is-kirkjufell.jpg" alt="Aurora boreale sul Kirkjufell, Islanda" loading="lazy">
               <div class="overlay"></div>
               <div class="content">
-                <div class="flag">🇬🇪</div>
-                <div class="title">Georgia</div>
-                <div class="meta">2-7 gennaio 2027 · 6 giorni</div>
-                <p class="tagline">Tbilisi, bagni di zolfo, vino nel qvevri e un weekend sulla neve a Gudauri.</p>
+                <div class="flag">🇮🇸</div>
+                <div class="title">Islanda</div>
+                <div class="meta">2-9 gennaio 2027 · 8 giorni</div>
+                <p class="tagline">Aurora, grotte di ghiaccio e la laguna glaciale, con quattro ore di luce al giorno.</p>
               </div>
             </a>
+
             <a class="trip-card" href="javascript:void(0)" onclick="showDest('kr')">
               <img src="foto/destinazioni/kr-ciliegi.jpg" alt="Ciliegi in fiore in Corea del Sud" loading="lazy">
               <div class="overlay"></div>
@@ -424,112 +409,6 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
                 <p class="tagline">Seul, Gyeongju e Busan in KTX, il vulcano di Jeju e i ciliegi in fiore.</p>
               </div>
             </a>
-            </div>
-          </div>
-
-          <div class="trip-gruppo" id="gruppo-programma">
-            <p class="trip-intro reveal">Idee pronte nel dettaglio, ma senza una data decisa.</p>
-            <div class="trip-grid reveal">
-            <a class="trip-card" href="javascript:void(0)" onclick="showDest('np')">
-              <img src="foto/destinazioni/The_Tigers_Nest_(_Paro_Taktsang_).jpg" alt="Tiger's Nest Monastery, Bhutan" loading="lazy">
-              <div class="overlay"></div>
-              <div class="content">
-                <div class="flag">🇳🇵🇧🇹</div>
-                <div class="title">Nepal &amp; Bhutan</div>
-                <div class="meta">Marzo 2027 · 15 giorni</div>
-                <p class="tagline">Trekking Poon Hill sull'Annapurna e i dzong del Bhutan.</p>
-              </div>
-            </a>
-
-            <a class="trip-card" href="javascript:void(0)" onclick="showDest('pk')">
-              <img src="foto/destinazioni/Baltit_Fort_(Front_Panorama).jpg" alt="Baltit Fort, Hunza Valley, Pakistan" loading="lazy">
-              <div class="overlay"></div>
-              <div class="content">
-                <div class="flag">🇵🇰</div>
-                <div class="title">Pakistan</div>
-                <div class="meta">Marzo 2027 · 15 giorni</div>
-                <p class="tagline">Lahore, la Karakoram Highway, Hunza Valley e Skardu.</p>
-              </div>
-            </a>
-
-            <a class="trip-card" href="javascript:void(0)" onclick="showDest('za')">
-              <img src="foto/destinazioni/Table_Mountain_from_Blouberg,_South_Africa_(4028515275).jpg" alt="Table Mountain, Cape Town, Sudafrica" loading="lazy">
-              <div class="overlay"></div>
-              <div class="content">
-                <div class="flag">🇿🇦</div>
-                <div class="title">Sudafrica</div>
-                <div class="meta">Marzo 2027 · 15 giorni</div>
-                <p class="tagline">Cape Town, Garden Route e safari Big Five nel Kruger.</p>
-              </div>
-            </a>
-
-            <a class="trip-card" href="javascript:void(0)" onclick="showDest('in')">
-              <img src="foto/destinazioni/Taj_Mahal_Tomb_at_sunrise.JPG" alt="Taj Mahal all'alba, Agra, India" loading="lazy">
-              <div class="overlay"></div>
-              <div class="content">
-                <div class="flag">🇮🇳</div>
-                <div class="title">India</div>
-                <div class="meta">Marzo 2027 · 14 giorni</div>
-                <p class="tagline">Triangolo d'Oro, safari delle tigri a Ranthambore e il Gange a Varanasi.</p>
-              </div>
-            </a>
-
-            <a class="trip-card" href="javascript:void(0)" onclick="showDest('ug')">
-              <img src="foto/destinazioni/Silverback.JPG" alt="Gorilla di montagna, Uganda" loading="lazy">
-              <div class="overlay"></div>
-              <div class="content">
-                <div class="flag">🇺🇬</div>
-                <div class="title">Uganda</div>
-                <div class="meta">Fine feb / inizio mar 2027 · 10 giorni</div>
-                <p class="tagline">Gorilla trekking a Bwindi, safari a Queen Elizabeth NP, rafting grado 5 a Jinja.</p>
-              </div>
-            </a>
-
-            <a class="trip-card" href="javascript:void(0)" onclick="showDest('tz')">
-              <img src="foto/destinazioni/tz-kilimanjaro.jpg" alt="Il Kilimangiaro visto dalla savana" loading="lazy">
-              <div class="overlay"></div>
-              <div class="content">
-                <div class="flag">🇹🇿</div>
-                <div class="title">Tanzania</div>
-                <div class="meta">Settembre 2027 · 15 giorni</div>
-                <p class="tagline">Salita al Kilimangiaro in 8 giorni e safari nel cratere di Ngorongoro.</p>
-              </div>
-            </a>
-
-            <a class="trip-card" href="javascript:void(0)" onclick="showDest('uk')">
-              <img src="foto/destinazioni/Registan_square_Samarkand-7d4b00.jpg" alt="Registan Square, Samarkand" loading="lazy">
-              <div class="overlay"></div>
-              <div class="content">
-                <div class="flag">🇺🇿🇰🇬</div>
-                <div class="title">Uzbekistan &amp; Kirghizistan</div>
-                <div class="meta">Marzo 2027 · 14 giorni</div>
-                <p class="tagline">Samarkand, Bukhara, Khiva e le montagne del Tian Shan.</p>
-              </div>
-            </a>
-
-            <a class="trip-card" href="javascript:void(0)" onclick="showDest('gl')">
-              <img src="foto/destinazioni/Ilulissat_Kangerlua_iceberg_2024.jpg" alt="Ilulissat Icefjord, Groenlandia" loading="lazy">
-              <div class="overlay"></div>
-              <div class="content">
-                <div class="flag">🇬🇱</div>
-                <div class="title">Groenlandia</div>
-                <div class="meta">Giugno 2027 · 7 giorni</div>
-                <p class="tagline">Iceberg, balene e sole di mezzanotte a Ilulissat.</p>
-              </div>
-            </a>
-
-            <a class="trip-card" href="javascript:void(0)" onclick="showDest('cx')">
-              <img src="foto/destinazioni/cx-arenal.jpg" alt="Il vulcano Arenal, Costa Rica" loading="lazy">
-              <div class="overlay"></div>
-              <div class="content">
-                <div class="flag">🇳🇮🇨🇷🇵🇦</div>
-                <div class="title">Nicaragua, Costa Rica &amp; Panama</div>
-                <div class="meta">Marzo 2027 · 15 giorni</div>
-                <p class="tagline">Vulcani del Nicaragua, foresta nuvolosa di Monteverde e il canale di Panama.</p>
-              </div>
-            </a>
-
-            </div>
           </div>
         </div>
       </section>
@@ -724,7 +603,8 @@ var FLAG_BARS = {{
   in: 'linear-gradient(90deg,#FF9933 0 33%, #ffffff 33% 66%, #138808 66% 100%)',
   tz: 'linear-gradient(90deg,#1EB53A 0 30%, #FCD116 30% 40%, #000000 40% 60%, #FCD116 60% 70%, #00A3DD 70% 100%)',
   cx: 'linear-gradient(90deg,#0067C6 0 20%, #ffffff 20% 33%, #002B7F 33% 46%, #CE1126 46% 60%, #ffffff 60% 73%, #D21034 73% 86%, #005293 86% 100%)',
-  kr: 'linear-gradient(90deg,#ffffff 0 32%, #CD2E3A 32% 47%, #0047A0 47% 62%, #ffffff 62% 100%)'
+  kr: 'linear-gradient(90deg,#ffffff 0 32%, #CD2E3A 32% 47%, #0047A0 47% 62%, #ffffff 62% 100%)',
+  is: 'linear-gradient(90deg,#02529C 0 30%, #ffffff 30% 38%, #DC1E35 38% 47%, #ffffff 47% 55%, #02529C 55% 100%)'
 }};
 function showDest(name){{
   document.documentElement.setAttribute('data-dest', name);

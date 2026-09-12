@@ -111,6 +111,14 @@ html[data-dest="cx"]{
   --dark-base:#08130F; --tint-100:#f1f9f2; --tint-200:#dcf0de; --line:#c4e2c8; --paper:#fbfefb;
 }
 
+/* 🇮🇸 Islanda — verde aurora, blu notte artico, rosso lava */
+html[data-dest="is"]{
+  --accent:#7BE495; --accent-rgb:123,228,149; --accent-deep:#2E9B5A; --accent-ink:#1F7A44;
+  --accent-2:#E9573F; --accent-2-deep:#B8351F; --accent-2-ink:#9C2A17;
+  --theme-900:#0E2233; --theme-800:#143249; --theme-700:#1B4160; --theme-rgb:27,65,96;
+  --dark-base:#060C12; --tint-100:#f1f8f5; --tint-200:#dcefe4; --line:#c5e0d2; --paper:#fbfefc;
+}
+
 /* 🇰🇷 Corea del Sud — rosa dei ciliegi, blu notte della bandiera */
 html[data-dest="kr"]{
   --accent:#F2839F; --accent-rgb:242,131,159; --accent-deep:#C24A6B; --accent-ink:#9E3253;
