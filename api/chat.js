@@ -21,6 +21,10 @@ const MODELLO = 'claude-opus-5';
 // qualcuno svuoterebbe il credito in un pomeriggio.
 const LIMITE_ORARIO = 30;
 
+// Tetto complessivo per giornata, su richiesta di chi paga la chiave.
+// Vale per tutti insieme, non per IP: venti risposte al giorno e basta.
+const LIMITE_GIORNALIERO = 20;
+
 const MAX_CARATTERI = 1500;   // per singolo messaggio dell'utente
 const MAX_MESSAGGI = 16;      // di storico che riattraversano il filo
 const MAX_TOKEN = 2000;       // in uscita: qui si risponde corto
@@ -29,6 +33,20 @@ const MAX_TOKEN = 2000;       // in uscita: qui si risponde corto
 // persistente ed e' giusto cosi' — serve a smorzare le raffiche, non a
 // garantire un conteggio esatto.
 const chiamate = new Map();
+
+// Il conto della giornata vive nella stessa memoria effimera. Su questo
+// sito, con una lambda sola quasi sempre calda, il conto torna; ma se
+// Vercel ne avvia due in parallelo ognuna conta le sue, e a lambda fredda
+// si riparte da zero. E' un freno, non una garanzia: il tetto di spesa
+// vero si mette sul conto Anthropic.
+let giornata = '';
+let usateOggi = 0;
+
+// Mezzanotte italiana, non UTC: il "giorno" deve essere quello di chi
+// guarda il contatore.
+function oggi() {
+  return new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Rome' });
+}
 
 const ISTRUZIONI = `Sei la guida di "Patagucci Trips", il sito di viaggi di quattro amici: Manu (il logistico), Kiki (la meteora pazza), Mala (l'enciclopedia vivente) e Bacci (il tecnologico). Rispondi alle domande di chi sta leggendo il sito.
 
@@ -153,6 +171,16 @@ module.exports = async function handler(req, res) {
     });
   }
   chiamate.set(ip, [...recenti, ora]);
+
+  const g = oggi();
+  if (g !== giornata) { giornata = g; usateOggi = 0; }
+  if (usateOggi >= LIMITE_GIORNALIERO) {
+    return res.status(429).json({
+      errore: 'Le ' + LIMITE_GIORNALIERO + ' domande di oggi sono finite. Il contatore riparte a mezzanotte.',
+      esaurito: true,
+    });
+  }
+  usateOggi++;
 
   // La pagina dice quale meta ha aperta: sta dopo il blocco con
   // cache_control, altrimenti cambiare scheda invaliderebbe la cache
