@@ -43,6 +43,101 @@
     .site-switcher{ padding:7px 10px; }
     .site-switcher button{ padding:10px 13px; font-size:0.72rem; letter-spacing:0.03em; min-height:44px; }
   }
+
+  .pg-chat .sr-only{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+  .pg-chat-fab{
+    position:fixed; right:16px; bottom:16px; z-index:500;
+    display:flex; align-items:center; gap:9px;
+    border:1px solid rgba(var(--accent-rgb),0.5); border-radius:999px;
+    background:linear-gradient(180deg,#1d1d1d,#101010); color:var(--accent);
+    padding:11px 18px; font-family:var(--font-body); font-size:0.84rem; font-weight:800;
+    cursor:pointer; box-shadow:0 10px 28px rgba(0,0,0,0.45);
+    transition:transform .18s cubic-bezier(.16,1,.3,1), box-shadow .18s ease, background .5s ease;
+  }
+  .pg-chat-fab:hover{ transform:translateY(-2px); box-shadow:0 16px 36px rgba(0,0,0,0.5); }
+  .pg-chat-fab:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+  .pg-chat-fab .pg-fab-icona{ font-size:1.05rem; line-height:1; }
+  .pg-chat-fab[aria-expanded="true"]{ opacity:0; pointer-events:none; }
+
+  .pg-chat{
+    position:fixed; right:16px; bottom:16px; z-index:501;
+    width:min(390px, calc(100vw - 32px)); max-height:min(620px, calc(100vh - 32px));
+    display:flex; flex-direction:column; overflow:hidden;
+    background:linear-gradient(180deg,#1a1a1a,#101010);
+    border:1px solid rgba(var(--accent-rgb),0.28); border-radius:20px;
+    box-shadow:0 30px 70px rgba(0,0,0,0.55);
+    font-family:var(--font-body);
+    animation:pgChatSu .28s cubic-bezier(.16,1,.3,1) both;
+  }
+  .pg-chat[hidden]{ display:none; }
+  @keyframes pgChatSu{ from{ opacity:0; transform:translateY(14px) scale(.98); } to{ opacity:1; transform:none; } }
+
+  .pg-chat-testa{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:13px 16px; border-bottom:1px solid rgba(255,255,255,0.09);
+    background:linear-gradient(180deg, rgba(var(--accent-rgb),0.13), transparent);
+  }
+  .pg-chat-testa strong{ display:block; color:#fdf9f0; font-size:0.92rem; letter-spacing:0.01em; }
+  .pg-chat-dove{ display:block; font-size:0.72rem; color:var(--accent); font-weight:700; margin-top:2px; }
+  .pg-chat-testa button{
+    border:none; background:rgba(255,255,255,0.07); color:#c7c2b6;
+    width:30px; height:30px; border-radius:9px; font-size:0.9rem; cursor:pointer; flex:0 0 auto;
+  }
+  .pg-chat-testa button:hover{ background:rgba(255,255,255,0.15); color:#fff; }
+
+  .pg-chat-righe{ flex:1 1 auto; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:12px; }
+  .pg-chat-riga{ max-width:88%; font-size:0.87rem; line-height:1.62; }
+  .pg-chat-riga.io{
+    align-self:flex-end; background:var(--accent); color:#10100e;
+    padding:9px 14px; border-radius:16px 16px 4px 16px; font-weight:600;
+  }
+  .pg-chat-riga.lei{ align-self:flex-start; color:#e4e0d6; }
+  .pg-chat-riga.lei strong{ color:#fdf9f0; }
+  .pg-chat-riga.lei a{ color:var(--accent); }
+  .pg-chat-riga.lei ul{ margin:6px 0; padding-left:18px; }
+  .pg-chat-riga.guasto{ align-self:flex-start; color:#ff9b8a; font-size:0.82rem; }
+  .pg-chat-riga .pg-cursore{
+    display:inline-block; width:7px; height:14px; margin-left:2px; vertical-align:-2px;
+    background:var(--accent); animation:pgLampeggia 1s steps(2,start) infinite;
+  }
+  @keyframes pgLampeggia{ 50%{ opacity:0; } }
+
+  .pg-chat-spunti{ display:flex; flex-wrap:wrap; gap:6px; padding:0 16px 12px; }
+  .pg-chat-spunti button{
+    border:1px solid rgba(var(--accent-rgb),0.3); background:rgba(var(--accent-rgb),0.08);
+    color:var(--accent); padding:6px 12px; border-radius:999px;
+    font-size:0.75rem; font-weight:600; font-family:var(--font-body); cursor:pointer;
+  }
+  .pg-chat-spunti button:hover{ background:rgba(var(--accent-rgb),0.18); }
+
+  .pg-chat-invio{ display:flex; gap:8px; align-items:flex-end; padding:12px 16px 6px; border-top:1px solid rgba(255,255,255,0.09); }
+  .pg-chat-invio textarea{
+    flex:1 1 auto; resize:none; max-height:120px;
+    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:12px;
+    color:#f2efe7; font-family:var(--font-body); font-size:0.86rem; line-height:1.5; padding:10px 12px;
+  }
+  .pg-chat-invio textarea::placeholder{ color:#8d887d; }
+  .pg-chat-invio textarea:focus{ outline:2px solid var(--accent); outline-offset:0; }
+  .pg-chat-invio button{
+    flex:0 0 auto; width:40px; height:40px; border:none; border-radius:12px; cursor:pointer;
+    background:var(--accent); color:#10100e; font-size:1rem; font-weight:800;
+  }
+  .pg-chat-invio button:disabled{ opacity:0.4; cursor:not-allowed; }
+  .pg-chat-nota{ margin:0; padding:2px 16px 12px; font-size:0.68rem; line-height:1.5; color:#8d887d; }
+
+  @media (max-width:560px){
+    .pg-chat{ right:0; left:0; bottom:0; width:100%; max-height:86vh; border-radius:20px 20px 0 0; }
+    .pg-chat-fab{ right:12px; bottom:12px; padding:12px 16px; }
+    .pg-chat-fab .pg-fab-testo{ display:none; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .pg-chat{ animation:none; }
+    .pg-chat-riga .pg-cursore{ animation:none; }
+  }
+
 </style>
 </head>
 <body>
@@ -2232,6 +2327,9 @@
   .qp-griglia{ display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
   .qp-campo{ display:flex; flex-direction:column; gap:6px; font-size:0.8rem; font-weight:600; color:var(--theme-900); }
   section.panel.dark .qp-campo{ color:#e8e2d2; }
+  .qp-fac{ font-weight:600; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.05em;
+    opacity:0.6; margin-left:4px; }
+  .qp-campo.spento{ display:none; }
   .qp-campo input, .qp-campo select{
     padding:9px 12px; border:1px solid var(--line); border-radius:10px;
     font-size:0.9rem; font-family:var(--font-body); background:var(--paper); color:var(--ink); width:100%; }
@@ -2323,7 +2421,7 @@
 
       <div class="qp-blocco">
         <h3>🛫 Da dove si parte</h3>
-        <p class="qp-aiuto">Massimo cinque aeroporti: vengono cercati tutti insieme in una chiamata sola, e il risultato dice da quale conviene partire.</p>
+        <p class="qp-aiuto">Accendine quanti ne vuoi, fino a dieci: vengono cercati <strong>tutti insieme in una chiamata sola</strong> — dieci aeroporti costano come uno — e il risultato dice da quale conviene partire.</p>
         <div class="qp-chips" id="qp-partenze-nx"></div>
         <div class="qp-griglia" style="margin-top:12px; max-width:340px;">
           <label class="qp-campo">Aggiungi un altro aeroporto (codice IATA)
@@ -2334,28 +2432,34 @@
 
       <div class="qp-blocco">
         <h3>📅 Quando</h3>
-        <p class="qp-aiuto">L'intervallo è la finestra in cui potresti partire. La pagina prova una partenza ogni tot giorni dentro quella finestra e confronta i prezzi.</p>
+        <p class="qp-aiuto">Un giorno preciso, oppure un periodo: in quel caso la pagina prova più partenze lì dentro e confronta i prezzi, un credito per ognuna. Con <strong>solo andata</strong> serve la sola data di partenza, e i campi che non servono spariscono da soli.</p>
         <div class="qp-griglia">
-          <label class="qp-campo">Parti non prima del
-            <input type="date" id="qp-da-data-nx">
-          </label>
-          <label class="qp-campo">Parti non dopo il
-            <input type="date" id="qp-a-data-nx">
-          </label>
-          <label class="qp-campo">Viaggio di (giorni)
-            <input type="number" id="qp-durata-nx" min="1" max="60" value="10">
-          </label>
-          <label class="qp-campo">Prova una partenza ogni (giorni)
-            <input type="number" id="qp-passo-nx" min="1" max="365" value="30">
-          </label>
-          <label class="qp-campo">Quanti siete
-            <input type="number" id="qp-persone-nx" min="1" max="9" value="4">
-          </label>
-          <label class="qp-campo">Tipo
+          <label class="qp-campo">Tipo di viaggio
             <select id="qp-tipo-nx">
               <option value="ar">Andata e ritorno</option>
               <option value="andata">Solo andata</option>
             </select>
+          </label>
+          <label class="qp-campo">Date
+            <select id="qp-modo-date-nx">
+              <option value="giorno">Un giorno preciso</option>
+              <option value="periodo">Un periodo</option>
+            </select>
+          </label>
+          <label class="qp-campo"><span id="qp-lab-da-nx">Parti il</span>
+            <input type="date" id="qp-da-data-nx">
+          </label>
+          <label class="qp-campo" id="qp-campo-fine-nx">Fino al
+            <input type="date" id="qp-a-data-nx">
+          </label>
+          <label class="qp-campo" id="qp-campo-passo-nx">Prova una partenza ogni (giorni)
+            <input type="number" id="qp-passo-nx" min="1" max="365" value="30">
+          </label>
+          <label class="qp-campo" id="qp-campo-durata-nx">Viaggio di (giorni)
+            <input type="number" id="qp-durata-nx" min="1" max="60" value="10">
+          </label>
+          <label class="qp-campo">Quanti siete
+            <input type="number" id="qp-persone-nx" min="1" max="9" value="4">
           </label>
         </div>
       </div>
@@ -2370,6 +2474,11 @@
           <button type="button" class="qp-secondario" id="qp-sel-nessuna-nx">Deseleziona tutto</button>
         </div>
         <div class="qp-chips" id="qp-mete-scelta-nx"></div>
+        <div class="qp-griglia" style="margin-top:12px; max-width:380px;">
+          <label class="qp-campo">Oppure un aeroporto preciso (codice IATA, invio per aggiungerlo)
+            <input type="text" id="qp-iata-meta-nx" placeholder="es. KEF, BKK, JFK, CUZ" maxlength="3" autocomplete="off">
+          </label>
+        </div>
       </div>
 
       <div class="qp-costo" id="qp-costo-nx">
@@ -2460,6 +2569,31 @@
   <a href="javascript:void(0)" class="home-link" onclick="showHub()">Patagucci Trips</a> — la pagina che non ha ancora una meta. Prezzi da Google Flights via SerpApi, aggiornati al momento del click.
 </footer>
   </div>
+
+
+<button class="pg-chat-fab" id="pg-chat-fab" aria-expanded="false" aria-controls="pg-chat">
+  <span class="pg-fab-icona" aria-hidden="true">💬</span>
+  <span class="pg-fab-testo">Chiedi ai Patagucci</span>
+</button>
+
+<section class="pg-chat" id="pg-chat" role="dialog" aria-label="Chiedi ai Patagucci" hidden>
+  <header class="pg-chat-testa">
+    <div>
+      <strong>💬 Chiedi ai Patagucci</strong>
+      <span class="pg-chat-dove" id="pg-chat-dove"></span>
+    </div>
+    <button type="button" id="pg-chat-chiudi" aria-label="Chiudi">✕</button>
+  </header>
+  <div class="pg-chat-righe" id="pg-chat-righe" aria-live="polite"></div>
+  <div class="pg-chat-spunti" id="pg-chat-spunti"></div>
+  <form class="pg-chat-invio" id="pg-chat-form">
+    <label class="sr-only" for="pg-chat-testo">La tua domanda</label>
+    <textarea id="pg-chat-testo" rows="1" maxlength="1500" placeholder="Scrivi una domanda sui viaggi…"></textarea>
+    <button type="submit" id="pg-chat-manda" aria-label="Manda la domanda">➤</button>
+  </form>
+  <p class="pg-chat-nota">Risponde Claude, leggendo solo quello che c'è scritto su questo sito. I prezzi dei voli dal vivo stanno nella scheda <em>Quale sarà il prossimo?</em></p>
+</section>
+
 
 <script>
 var FLAG_BARS = {
@@ -3302,6 +3436,7 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
   var CHIAVE_ULTIMA = 'patagucci-ultima-ricerca-v1';
   var PARALLELE = 3;        // richieste contemporanee verso il motore
   var TETTO_RICERCHE = 60;  // oltre questo la pagina si rifiuta di partire
+  var MAX_PARTENZE = 10;    // aeroporti di partenza in una sola chiamata
 
   var AEROPORTI = [
     { iata:'BLQ', nome:'Bologna',          preset:true  },
@@ -3381,6 +3516,12 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
   var el = {
     partenze:   document.getElementById('qp-partenze-nx'),
     iataExtra:  document.getElementById('qp-iata-extra-nx'),
+    iataMeta:   document.getElementById('qp-iata-meta-nx'),
+    campoDurata:document.getElementById('qp-campo-durata-nx'),
+    campoPasso: document.getElementById('qp-campo-passo-nx'),
+    campoFine:  document.getElementById('qp-campo-fine-nx'),
+    modoDate:   document.getElementById('qp-modo-date-nx'),
+    labDa:      document.getElementById('qp-lab-da-nx'),
     daData:     document.getElementById('qp-da-data-nx'),
     aData:      document.getElementById('qp-a-data-nx'),
     durata:     document.getElementById('qp-durata-nx'),
@@ -3430,8 +3571,9 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
   // Le partenze da provare dentro la finestra: una ogni "passo" giorni,
   // estremi compresi.
   function partenzeDaProvare(){
-    var a = el.daData.value, b = el.aData.value;
-    if(!a || !b) return [];
+    var a = el.daData.value;
+    if(!a) return [];
+    var b = el.aData.value || a;      // vuoto = quella data e basta
     var d1 = daIso(a), d2 = daIso(b);
     if(d2 < d1) return [];
     var passo = Math.max(1, parseInt(el.passo.value, 10) || 1);
@@ -3480,12 +3622,14 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
     return Array.prototype.slice.call(contenitore.querySelectorAll('input:checked')).map(function(i){ return i.value; });
   }
 
-  // Il motore accetta al massimo cinque aeroporti per chiamata: raggiunto
-  // il tetto, gli altri si spengono invece di far fallire la ricerca.
+  // Google Flights regge senza problemi una lista lunga di aeroporti di
+  // partenza (verificato dal vivo con nove). Il tetto serve solo a non
+  // spedire richieste assurde: raggiunto, gli altri si spengono invece di
+  // far fallire la ricerca.
   function limitaPartenze(){
     var scelti = selezionati(el.partenze);
     Array.prototype.forEach.call(el.partenze.querySelectorAll('input'), function(i){
-      i.disabled = !i.checked && scelti.length >= 5;
+      i.disabled = !i.checked && scelti.length >= MAX_PARTENZE;
     });
   }
 
@@ -3498,8 +3642,9 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
   // giorni vanno distanziate per arrivarci. Torna null se non basta.
   function passoCheEntra(quanteMete){
     if(!quanteMete) return null;
-    var a = el.daData.value, b = el.aData.value;
-    if(!a || !b) return null;
+    var a = el.daData.value;
+    if(!a) return null;
+    var b = el.aData.value || a;
     var giorni = Math.round((daIso(b) - daIso(a)) / 86400000);
     if(giorni < 0) return null;
     var tetto = TETTO_RICERCHE;
@@ -3510,6 +3655,26 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
     return Math.min(giorni + 1, Math.max(1, Math.ceil(giorni / (quanteDate - 1))));
   }
 
+  // Ogni campo che non dice niente sparisce invece di restare li' a farsi
+  // leggere: su una sola andata "viaggio di N giorni" non vuol dire nulla,
+  // e su un giorno solo non vogliono dire nulla ne' la data di fine ne' il
+  // passo fra una partenza e l'altra.
+  function aggiornaCampiData(){
+    var soloAndata = el.tipo.value === 'andata';
+    var periodo = el.modoDate.value === 'periodo';
+    el.campoDurata.classList.toggle('spento', soloAndata);
+    el.campoFine.classList.toggle('spento', !periodo);
+    el.campoPasso.classList.toggle('spento', !periodo);
+    el.labDa.textContent = periodo ? 'Dal' : 'Parti il';
+    if(!periodo){
+      el.aData.value = '';
+    } else if(!el.aData.value && el.daData.value){
+      // Passando a "periodo" un campo vuoto bloccherebbe la ricerca senza
+      // dire perche': un mese e' il periodo che si intende quasi sempre.
+      el.aData.value = iso(fraGiorni(daIso(el.daData.value), 30));
+    }
+  }
+
   function preventivo(){
     var date = partenzeDaProvare();
     var mete = selezionati(el.meteScelta);
@@ -3518,7 +3683,7 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
     var problema = null;
 
     if(!partenze.length) problema = 'Scegli almeno un aeroporto di partenza.';
-    else if(!date.length) problema = 'Imposta una finestra di date valida.';
+    else if(!date.length) problema = 'Imposta la data di partenza.';
     else if(!mete.length) problema = 'Scegli almeno una meta.';
     else if(totale > TETTO_RICERCHE){
       var suggerito = passoCheEntra(mete.length);
@@ -3650,6 +3815,7 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
             risultati.push({
               meta: lavoro.meta, andata: lavoro.andata, ritorno: lavoro.ritorno,
               persone: lavoro.persone, volo: v,
+              citta: (r.dato.citta || {})[v.a] || null,
               livello: r.dato.livelloPrezzo, link: r.dato.link
             });
           });
@@ -3710,8 +3876,9 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
     var v = r.volo;
     // Su una ricerca per continente ogni scheda e' una meta diversa: dire
     // "Europa" su tutte e sette nasconderebbe l'unica cosa che interessa.
-    var titolo = m.continente
-      ? m.flag + ' ' + (nomeAeroporto(v.aNome) || v.a) + ' <span class="qp-iata">' + esc(v.a || '') + '</span>'
+    var titolo = (m.continente || m.aMano)
+      ? m.flag + ' ' + esc(r.citta || nomeAeroporto(v.aNome) || v.a) +
+        ' <span class="qp-iata">' + esc(v.a || '') + '</span>'
       : m.flag + ' ' + m.nome;
     var d = document.createElement('div');
     d.className = 'qp-esito' + (posizione === 0 ? ' migliore' : '');
@@ -3837,9 +4004,9 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
   // ------------------------------------------------------------------
   el.partenze.addEventListener('change', function(){ limitaPartenze(); preventivo(); });
   el.meteScelta.addEventListener('change', preventivo);
-  [el.daData, el.aData, el.durata, el.passo, el.persone, el.tipo].forEach(function(c){
-    c.addEventListener('change', preventivo);
-    c.addEventListener('input', preventivo);
+  [el.daData, el.aData, el.durata, el.passo, el.persone, el.tipo, el.modoDate].forEach(function(c){
+    c.addEventListener('change', function(){ aggiornaCampiData(); preventivo(); });
+    c.addEventListener('input', function(){ aggiornaCampiData(); preventivo(); });
   });
 
   el.iataExtra.addEventListener('keydown', function(e){
@@ -3851,6 +4018,23 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
     el.partenze.appendChild(chip(code, code, '', true));
     el.iataExtra.value = '';
     limitaPartenze();
+    preventivo();
+  });
+
+  el.iataMeta.addEventListener('keydown', function(e){
+    if(e.key !== 'Enter') return;
+    e.preventDefault();
+    var code = (el.iataMeta.value || '').toUpperCase().trim();
+    if(!/^[A-Z]{3}$/.test(code)) return;
+    var esistente = el.meteScelta.querySelector('input[value="' + code + '"]');
+    if(esistente){
+      // Gia' in lista fra le quaranta: accenderla e' la cosa attesa.
+      esistente.checked = true;
+    } else {
+      META_PER_IATA[code] = { iata:code, flag:'✈️', nome:code, aMano:true };
+      el.meteScelta.appendChild(chip(code, '✈️ ' + code, 'aeroporto', true));
+    }
+    el.iataMeta.value = '';
     preventivo();
   });
 
@@ -3892,7 +4076,7 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
     var oggi = new Date();
     oggi.setUTCHours(12,0,0,0);
     el.daData.value = iso(fraGiorni(oggi, 90));
-    el.aData.value = iso(fraGiorni(oggi, 120));
+    el.aData.value = '';          // di partenza si cerca un giorno solo
     el.daData.min = iso(oggi);
     el.aData.min = iso(oggi);
     var limite = iso(fraGiorni(oggi, 330));
@@ -3912,6 +4096,7 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
   } catch(e){}
 
   limitaPartenze();
+  aggiornaCampiData();
   preventivo();
 
   // Il contatore crediti si chiede solo quando la pagina si vede davvero:
@@ -3958,6 +4143,220 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
       });
     }, { rootMargin:'-45% 0px -50% 0px', threshold:0 });
     sezioni.forEach(function(s){ spia.observe(s); });
+  }
+})();
+
+</script>
+
+<script>
+
+// ------------------------------------------------------------------
+// "Chiedi ai Patagucci".
+// La pagina non sa niente dei viaggi: manda la domanda, lo storico e la
+// scheda aperta a /api/chat, che risponde in streaming. Il contenuto del
+// sito ce l'ha la funzione, generata insieme a questa pagina.
+// ------------------------------------------------------------------
+(function(){
+  // Servito da Vercel: stessa origine. Aperto in locale col doppio clic
+  // o da GitHub Pages: serve l'indirizzo assoluto del deploy.
+  var API_REMOTA = 'https://patagucci-trip.vercel.app/api/chat';
+  var locale = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  var API = (location.protocol.indexOf('http') === 0 && (locale || !API_REMOTA)) ? '/api/chat' : API_REMOTA;
+
+  var NOMI = {"hub": "la home", "is": "Islanda", "kr": "Corea del Sud", "nx": "Quale sarà il prossimo?"};
+  var SPUNTI = {"hub": ["Chi sono i Patagucci?", "Dove sono già stati?", "Qual è il prossimo viaggio?"], "is": ["Cosa si fa il primo giorno?", "Quanto costa in tutto?", "Che vestiti servono?"], "kr": ["Com'è diviso l'itinerario?", "Quando fiorisce il ciliegio?", "Quanto costa mangiare?"], "nx": ["Come funziona la ricerca voli?", "Da quali aeroporti si parte?", "Quante ricerche posso fare?"]};
+  var CHIAVE_STORICO = 'patagucci-chat-v1';
+
+  var fab = document.getElementById('pg-chat-fab');
+  var pannello = document.getElementById('pg-chat');
+  var righe = document.getElementById('pg-chat-righe');
+  var spunti = document.getElementById('pg-chat-spunti');
+  var form = document.getElementById('pg-chat-form');
+  var campo = document.getElementById('pg-chat-testo');
+  var manda = document.getElementById('pg-chat-manda');
+  var dove = document.getElementById('pg-chat-dove');
+
+  var storico = [];
+  var inCorso = false;
+
+  try {
+    var salvato = sessionStorage.getItem(CHIAVE_STORICO);
+    if(salvato) storico = JSON.parse(salvato) || [];
+  } catch(e){ storico = []; }
+
+  function metaAttiva(){ return document.documentElement.getAttribute('data-dest') || 'hub'; }
+  function nomeMeta(){ return NOMI[metaAttiva()] || 'la home'; }
+
+  function salva(){
+    try { sessionStorage.setItem(CHIAVE_STORICO, JSON.stringify(storico.slice(-16))); } catch(e){}
+  }
+
+  // La risposta arriva come testo semplice. Qui si scappa tutto e poi si
+  // riaccendono le due sole cose che il modello usa: grassetto e righe.
+  function formatta(testo){
+    var s = testo.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    s = s.replace(/\n/g, '<br>');
+    return s;
+  }
+
+  function aggiungi(ruolo, testo){
+    var el = document.createElement('div');
+    el.className = 'pg-chat-riga ' + (ruolo === 'utente' ? 'io' : ruolo === 'guasto' ? 'guasto' : 'lei');
+    el.innerHTML = ruolo === 'assistente' ? formatta(testo) : formatta(testo);
+    righe.appendChild(el);
+    righe.scrollTop = righe.scrollHeight;
+    return el;
+  }
+
+  function disegnaSpunti(){
+    var lista = SPUNTI[metaAttiva()] || SPUNTI.hub;
+    spunti.innerHTML = '';
+    if(storico.length) return;   // gli spunti servono solo a rompere il ghiaccio
+    lista.forEach(function(s){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = s;
+      b.addEventListener('click', function(){ chiedi(s); });
+      spunti.appendChild(b);
+    });
+  }
+
+  function ridisegna(){
+    righe.innerHTML = '';
+    if(!storico.length){
+      aggiungi('assistente', 'Ciao. So tutto quello che c\'è scritto su questo sito: itinerari, tappe, costi, meteo. Chiedi pure — stai guardando **' + nomeMeta() + '**.');
+    } else {
+      storico.forEach(function(m){ aggiungi(m.ruolo, m.testo); });
+    }
+    disegnaSpunti();
+  }
+
+  function apri(){
+    pannello.hidden = false;
+    fab.setAttribute('aria-expanded', 'true');
+    dove.textContent = 'stai guardando: ' + nomeMeta();
+    ridisegna();
+    setTimeout(function(){ campo.focus(); }, 60);
+  }
+
+  function chiudi(){
+    pannello.hidden = true;
+    fab.setAttribute('aria-expanded', 'false');
+    fab.focus();
+  }
+
+  fab.addEventListener('click', apri);
+  document.getElementById('pg-chat-chiudi').addEventListener('click', chiudi);
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && !pannello.hidden) chiudi();
+  });
+
+  // Cambiando scheda cambia il contesto: la chat lo dice e rinfresca gli
+  // spunti, ma non butta via la conversazione in corso.
+  window.addEventListener('destinazione-cambiata', function(){
+    if(pannello.hidden) return;
+    dove.textContent = 'stai guardando: ' + nomeMeta();
+    disegnaSpunti();
+  });
+
+  campo.addEventListener('input', function(){
+    campo.style.height = 'auto';
+    campo.style.height = Math.min(campo.scrollHeight, 120) + 'px';
+  });
+  campo.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); form.requestSubmit(); }
+  });
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    chiedi(campo.value);
+  });
+
+  function chiedi(domanda){
+    domanda = String(domanda || '').trim();
+    if(!domanda || inCorso) return;
+    if(!storico.length) righe.innerHTML = '';
+    inCorso = true;
+    manda.disabled = true;
+    campo.value = '';
+    campo.style.height = 'auto';
+    spunti.innerHTML = '';
+
+    storico.push({ ruolo:'utente', testo: domanda });
+    aggiungi('utente', domanda);
+    salva();
+
+    var el = aggiungi('assistente', '');
+    el.innerHTML = '<span class="pg-cursore"></span>';
+    var risposta = '';
+
+    function chiudiTurno(){
+      inCorso = false;
+      manda.disabled = false;
+      campo.focus();
+    }
+
+    var taglio = new AbortController();
+    var scadenza = setTimeout(function(){ taglio.abort(); }, 45000);
+
+    fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messaggi: storico.slice(-16), meta: nomeMeta() }),
+      signal: taglio.signal
+    }).then(function(r){
+      if(!r.ok || !r.body){
+        return r.json().catch(function(){ return {}; }).then(function(d){
+          throw new Error(d.errore || ('il motore ha risposto ' + r.status));
+        });
+      }
+      var lettore = r.body.getReader();
+      var decoder = new TextDecoder();
+      var resto = '';
+
+      function pezzo(){
+        return lettore.read().then(function(res){
+          if(res.done){
+            clearTimeout(scadenza);
+            if(risposta){
+              storico.push({ ruolo:'assistente', testo: risposta });
+              salva();
+            }
+            chiudiTurno();
+            return;
+          }
+          resto += decoder.decode(res.value, { stream:true });
+          var blocchi = resto.split('\n\n');
+          resto = blocchi.pop();
+          blocchi.forEach(function(b){
+            var riga = b.split('\n').filter(function(l){ return l.indexOf('data: ') === 0; })[0];
+            if(!riga) return;
+            var ev;
+            try { ev = JSON.parse(riga.slice(6)); } catch(err){ return; }
+            if(ev.t === 'testo'){
+              risposta += ev.d;
+              el.innerHTML = formatta(risposta) + '<span class="pg-cursore"></span>';
+              righe.scrollTop = righe.scrollHeight;
+            } else if(ev.t === 'errore'){
+              el.className = 'pg-chat-riga guasto';
+              el.textContent = ev.d;
+              risposta = '';
+            } else if(ev.t === 'fine'){
+              el.innerHTML = formatta(risposta) + (ev.d && ev.d.troncata ? ' <em>(risposta troncata)</em>' : '');
+            }
+          });
+          return pezzo();
+        });
+      }
+      return pezzo();
+    }).catch(function(err){
+      clearTimeout(scadenza);
+      el.className = 'pg-chat-riga guasto';
+      el.textContent = err.name === 'AbortError'
+        ? 'Nessuna risposta entro 45 secondi. Riprova.'
+        : 'Non sono riuscito a rispondere: ' + err.message;
+      chiudiTurno();
+    });
   }
 })();
 

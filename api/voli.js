@@ -175,12 +175,12 @@ module.exports = async function handler(req, res) {
 
     if (azione !== 'cerca') return res.status(400).json({ errore: 'Azione sconosciuta: ' + azione });
 
-    const partenze = codici(q.da, 5);
+    const partenze = codici(q.da, 10);
     const arrivo = destinazione(q.a);
     const andata = data(q.andata);
     const ritorno = q.ritorno ? data(q.ritorno) : null;
 
-    if (!partenze) return res.status(400).json({ errore: 'Aeroporti di partenza non validi (max 5 codici IATA).' });
+    if (!partenze) return res.status(400).json({ errore: 'Aeroporti di partenza non validi (max 10 codici IATA).' });
     if (!arrivo) return res.status(400).json({ errore: 'Destinazione non valida (un codice IATA o un kgmid /m/...).' });
     if (!andata) return res.status(400).json({ errore: 'Data di andata non valida (YYYY-MM-DD, entro un anno).' });
     if (q.ritorno && !ritorno) return res.status(400).json({ errore: 'Data di ritorno non valida.' });
@@ -265,6 +265,16 @@ module.exports = async function handler(req, res) {
       if (voli.length >= 12) break;
     }
 
+    // "Cuzco, Peru'" si legge meglio di "Aeroporto Internazionale
+    // Alejandro Velasco Astete". Google la manda gia', era solo da tenere.
+    const citta = {};
+    for (const gruppo of dato.airports || []) {
+      for (const a of gruppo.arrival || []) {
+        const id = a && a.airport && a.airport.id;
+        if (id && a.city) citta[id] = a.city + (a.country ? ', ' + a.country : '');
+      }
+    }
+
     const insights = dato.price_insights || {};
     const risposta = {
       ok: true,
@@ -273,6 +283,7 @@ module.exports = async function handler(req, res) {
       andata,
       ritorno,
       voli,
+      citta,
       livelloPrezzo: insights.price_level || null,
       rangeTipico: insights.typical_price_range || null,
       link: (dato.search_metadata || {}).google_flights_url || null,

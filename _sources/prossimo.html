@@ -67,6 +67,9 @@
   .qp-griglia{ display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
   .qp-campo{ display:flex; flex-direction:column; gap:6px; font-size:0.8rem; font-weight:600; color:var(--theme-900); }
   section.panel.dark .qp-campo{ color:#e8e2d2; }
+  .qp-fac{ font-weight:600; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.05em;
+    opacity:0.6; margin-left:4px; }
+  .qp-campo.spento{ display:none; }
   .qp-campo input, .qp-campo select{
     padding:9px 12px; border:1px solid var(--line); border-radius:10px;
     font-size:0.9rem; font-family:var(--font-body); background:var(--paper); color:var(--ink); width:100%; }
@@ -158,7 +161,7 @@
 
       <div class="qp-blocco">
         <h3>🛫 Da dove si parte</h3>
-        <p class="qp-aiuto">Massimo cinque aeroporti: vengono cercati tutti insieme in una chiamata sola, e il risultato dice da quale conviene partire.</p>
+        <p class="qp-aiuto">Accendine quanti ne vuoi, fino a dieci: vengono cercati <strong>tutti insieme in una chiamata sola</strong> — dieci aeroporti costano come uno — e il risultato dice da quale conviene partire.</p>
         <div class="qp-chips" id="qp-partenze"></div>
         <div class="qp-griglia" style="margin-top:12px; max-width:340px;">
           <label class="qp-campo">Aggiungi un altro aeroporto (codice IATA)
@@ -169,28 +172,34 @@
 
       <div class="qp-blocco">
         <h3>📅 Quando</h3>
-        <p class="qp-aiuto">L'intervallo è la finestra in cui potresti partire. La pagina prova una partenza ogni tot giorni dentro quella finestra e confronta i prezzi.</p>
+        <p class="qp-aiuto">Un giorno preciso, oppure un periodo: in quel caso la pagina prova più partenze lì dentro e confronta i prezzi, un credito per ognuna. Con <strong>solo andata</strong> serve la sola data di partenza, e i campi che non servono spariscono da soli.</p>
         <div class="qp-griglia">
-          <label class="qp-campo">Parti non prima del
-            <input type="date" id="qp-da-data">
-          </label>
-          <label class="qp-campo">Parti non dopo il
-            <input type="date" id="qp-a-data">
-          </label>
-          <label class="qp-campo">Viaggio di (giorni)
-            <input type="number" id="qp-durata" min="1" max="60" value="10">
-          </label>
-          <label class="qp-campo">Prova una partenza ogni (giorni)
-            <input type="number" id="qp-passo" min="1" max="365" value="30">
-          </label>
-          <label class="qp-campo">Quanti siete
-            <input type="number" id="qp-persone" min="1" max="9" value="4">
-          </label>
-          <label class="qp-campo">Tipo
+          <label class="qp-campo">Tipo di viaggio
             <select id="qp-tipo">
               <option value="ar">Andata e ritorno</option>
               <option value="andata">Solo andata</option>
             </select>
+          </label>
+          <label class="qp-campo">Date
+            <select id="qp-modo-date">
+              <option value="giorno">Un giorno preciso</option>
+              <option value="periodo">Un periodo</option>
+            </select>
+          </label>
+          <label class="qp-campo"><span id="qp-lab-da">Parti il</span>
+            <input type="date" id="qp-da-data">
+          </label>
+          <label class="qp-campo" id="qp-campo-fine">Fino al
+            <input type="date" id="qp-a-data">
+          </label>
+          <label class="qp-campo" id="qp-campo-passo">Prova una partenza ogni (giorni)
+            <input type="number" id="qp-passo" min="1" max="365" value="30">
+          </label>
+          <label class="qp-campo" id="qp-campo-durata">Viaggio di (giorni)
+            <input type="number" id="qp-durata" min="1" max="60" value="10">
+          </label>
+          <label class="qp-campo">Quanti siete
+            <input type="number" id="qp-persone" min="1" max="9" value="4">
           </label>
         </div>
       </div>
@@ -205,6 +214,11 @@
           <button type="button" class="qp-secondario" id="qp-sel-nessuna">Deseleziona tutto</button>
         </div>
         <div class="qp-chips" id="qp-mete-scelta"></div>
+        <div class="qp-griglia" style="margin-top:12px; max-width:380px;">
+          <label class="qp-campo">Oppure un aeroporto preciso (codice IATA, invio per aggiungerlo)
+            <input type="text" id="qp-iata-meta" placeholder="es. KEF, BKK, JFK, CUZ" maxlength="3" autocomplete="off">
+          </label>
+        </div>
       </div>
 
       <div class="qp-costo" id="qp-costo">
@@ -311,6 +325,7 @@
   var CHIAVE_ULTIMA = 'patagucci-ultima-ricerca-v1';
   var PARALLELE = 3;        // richieste contemporanee verso il motore
   var TETTO_RICERCHE = 60;  // oltre questo la pagina si rifiuta di partire
+  var MAX_PARTENZE = 10;    // aeroporti di partenza in una sola chiamata
 
   var AEROPORTI = [
     { iata:'BLQ', nome:'Bologna',          preset:true  },
@@ -390,6 +405,12 @@
   var el = {
     partenze:   document.getElementById('qp-partenze'),
     iataExtra:  document.getElementById('qp-iata-extra'),
+    iataMeta:   document.getElementById('qp-iata-meta'),
+    campoDurata:document.getElementById('qp-campo-durata'),
+    campoPasso: document.getElementById('qp-campo-passo'),
+    campoFine:  document.getElementById('qp-campo-fine'),
+    modoDate:   document.getElementById('qp-modo-date'),
+    labDa:      document.getElementById('qp-lab-da'),
     daData:     document.getElementById('qp-da-data'),
     aData:      document.getElementById('qp-a-data'),
     durata:     document.getElementById('qp-durata'),
@@ -439,8 +460,9 @@
   // Le partenze da provare dentro la finestra: una ogni "passo" giorni,
   // estremi compresi.
   function partenzeDaProvare(){
-    var a = el.daData.value, b = el.aData.value;
-    if(!a || !b) return [];
+    var a = el.daData.value;
+    if(!a) return [];
+    var b = el.aData.value || a;      // vuoto = quella data e basta
     var d1 = daIso(a), d2 = daIso(b);
     if(d2 < d1) return [];
     var passo = Math.max(1, parseInt(el.passo.value, 10) || 1);
@@ -489,12 +511,14 @@
     return Array.prototype.slice.call(contenitore.querySelectorAll('input:checked')).map(function(i){ return i.value; });
   }
 
-  // Il motore accetta al massimo cinque aeroporti per chiamata: raggiunto
-  // il tetto, gli altri si spengono invece di far fallire la ricerca.
+  // Google Flights regge senza problemi una lista lunga di aeroporti di
+  // partenza (verificato dal vivo con nove). Il tetto serve solo a non
+  // spedire richieste assurde: raggiunto, gli altri si spengono invece di
+  // far fallire la ricerca.
   function limitaPartenze(){
     var scelti = selezionati(el.partenze);
     Array.prototype.forEach.call(el.partenze.querySelectorAll('input'), function(i){
-      i.disabled = !i.checked && scelti.length >= 5;
+      i.disabled = !i.checked && scelti.length >= MAX_PARTENZE;
     });
   }
 
@@ -507,8 +531,9 @@
   // giorni vanno distanziate per arrivarci. Torna null se non basta.
   function passoCheEntra(quanteMete){
     if(!quanteMete) return null;
-    var a = el.daData.value, b = el.aData.value;
-    if(!a || !b) return null;
+    var a = el.daData.value;
+    if(!a) return null;
+    var b = el.aData.value || a;
     var giorni = Math.round((daIso(b) - daIso(a)) / 86400000);
     if(giorni < 0) return null;
     var tetto = TETTO_RICERCHE;
@@ -519,6 +544,26 @@
     return Math.min(giorni + 1, Math.max(1, Math.ceil(giorni / (quanteDate - 1))));
   }
 
+  // Ogni campo che non dice niente sparisce invece di restare li' a farsi
+  // leggere: su una sola andata "viaggio di N giorni" non vuol dire nulla,
+  // e su un giorno solo non vogliono dire nulla ne' la data di fine ne' il
+  // passo fra una partenza e l'altra.
+  function aggiornaCampiData(){
+    var soloAndata = el.tipo.value === 'andata';
+    var periodo = el.modoDate.value === 'periodo';
+    el.campoDurata.classList.toggle('spento', soloAndata);
+    el.campoFine.classList.toggle('spento', !periodo);
+    el.campoPasso.classList.toggle('spento', !periodo);
+    el.labDa.textContent = periodo ? 'Dal' : 'Parti il';
+    if(!periodo){
+      el.aData.value = '';
+    } else if(!el.aData.value && el.daData.value){
+      // Passando a "periodo" un campo vuoto bloccherebbe la ricerca senza
+      // dire perche': un mese e' il periodo che si intende quasi sempre.
+      el.aData.value = iso(fraGiorni(daIso(el.daData.value), 30));
+    }
+  }
+
   function preventivo(){
     var date = partenzeDaProvare();
     var mete = selezionati(el.meteScelta);
@@ -527,7 +572,7 @@
     var problema = null;
 
     if(!partenze.length) problema = 'Scegli almeno un aeroporto di partenza.';
-    else if(!date.length) problema = 'Imposta una finestra di date valida.';
+    else if(!date.length) problema = 'Imposta la data di partenza.';
     else if(!mete.length) problema = 'Scegli almeno una meta.';
     else if(totale > TETTO_RICERCHE){
       var suggerito = passoCheEntra(mete.length);
@@ -659,6 +704,7 @@
             risultati.push({
               meta: lavoro.meta, andata: lavoro.andata, ritorno: lavoro.ritorno,
               persone: lavoro.persone, volo: v,
+              citta: (r.dato.citta || {})[v.a] || null,
               livello: r.dato.livelloPrezzo, link: r.dato.link
             });
           });
@@ -719,8 +765,9 @@
     var v = r.volo;
     // Su una ricerca per continente ogni scheda e' una meta diversa: dire
     // "Europa" su tutte e sette nasconderebbe l'unica cosa che interessa.
-    var titolo = m.continente
-      ? m.flag + ' ' + (nomeAeroporto(v.aNome) || v.a) + ' <span class="qp-iata">' + esc(v.a || '') + '</span>'
+    var titolo = (m.continente || m.aMano)
+      ? m.flag + ' ' + esc(r.citta || nomeAeroporto(v.aNome) || v.a) +
+        ' <span class="qp-iata">' + esc(v.a || '') + '</span>'
       : m.flag + ' ' + m.nome;
     var d = document.createElement('div');
     d.className = 'qp-esito' + (posizione === 0 ? ' migliore' : '');
@@ -846,9 +893,9 @@
   // ------------------------------------------------------------------
   el.partenze.addEventListener('change', function(){ limitaPartenze(); preventivo(); });
   el.meteScelta.addEventListener('change', preventivo);
-  [el.daData, el.aData, el.durata, el.passo, el.persone, el.tipo].forEach(function(c){
-    c.addEventListener('change', preventivo);
-    c.addEventListener('input', preventivo);
+  [el.daData, el.aData, el.durata, el.passo, el.persone, el.tipo, el.modoDate].forEach(function(c){
+    c.addEventListener('change', function(){ aggiornaCampiData(); preventivo(); });
+    c.addEventListener('input', function(){ aggiornaCampiData(); preventivo(); });
   });
 
   el.iataExtra.addEventListener('keydown', function(e){
@@ -860,6 +907,23 @@
     el.partenze.appendChild(chip(code, code, '', true));
     el.iataExtra.value = '';
     limitaPartenze();
+    preventivo();
+  });
+
+  el.iataMeta.addEventListener('keydown', function(e){
+    if(e.key !== 'Enter') return;
+    e.preventDefault();
+    var code = (el.iataMeta.value || '').toUpperCase().trim();
+    if(!/^[A-Z]{3}$/.test(code)) return;
+    var esistente = el.meteScelta.querySelector('input[value="' + code + '"]');
+    if(esistente){
+      // Gia' in lista fra le quaranta: accenderla e' la cosa attesa.
+      esistente.checked = true;
+    } else {
+      META_PER_IATA[code] = { iata:code, flag:'✈️', nome:code, aMano:true };
+      el.meteScelta.appendChild(chip(code, '✈️ ' + code, 'aeroporto', true));
+    }
+    el.iataMeta.value = '';
     preventivo();
   });
 
@@ -901,7 +965,7 @@
     var oggi = new Date();
     oggi.setUTCHours(12,0,0,0);
     el.daData.value = iso(fraGiorni(oggi, 90));
-    el.aData.value = iso(fraGiorni(oggi, 120));
+    el.aData.value = '';          // di partenza si cerca un giorno solo
     el.daData.min = iso(oggi);
     el.aData.min = iso(oggi);
     var limite = iso(fraGiorni(oggi, 330));
@@ -921,6 +985,7 @@
   } catch(e){}
 
   limitaPartenze();
+  aggiornaCampiData();
   preventivo();
 
   // Il contatore crediti si chiede solo quando la pagina si vede davvero:
