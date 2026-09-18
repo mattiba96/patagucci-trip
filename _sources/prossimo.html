@@ -198,6 +198,9 @@
           <label class="qp-campo" id="qp-campo-durata">Viaggio di (giorni)
             <input type="number" id="qp-durata" min="1" max="60" value="10">
           </label>
+          <label class="qp-campo">Parti entro le
+            <select id="qp-ora-max"></select>
+          </label>
           <label class="qp-campo">Quanti siete
             <input type="number" id="qp-persone" min="1" max="9" value="4">
           </label>
@@ -215,10 +218,11 @@
         </div>
         <div class="qp-chips" id="qp-mete-scelta"></div>
         <div class="qp-griglia" style="margin-top:12px; max-width:380px;">
-          <label class="qp-campo">Oppure un aeroporto preciso (codice IATA, invio per aggiungerlo)
+          <label class="qp-campo">Oppure un aeroporto e basta (codice IATA, invio per aggiungerlo)
             <input type="text" id="qp-iata-meta" placeholder="es. KEF, BKK, JFK, CUZ" maxlength="3" autocomplete="off">
           </label>
         </div>
+        <p class="qp-aiuto" style="margin-top:10px;">Un codice scritto qui diventa <strong>l'unica meta</strong>: i riquadri accesi sopra si spengono da soli, così la ricerca costa un credito e risponde solo su quell'aeroporto. Scrivine più d'uno, uno dopo l'altro, e si sommano fra loro.</p>
       </div>
 
       <div class="qp-costo" id="qp-costo">
@@ -416,6 +420,7 @@
     durata:     document.getElementById('qp-durata'),
     passo:      document.getElementById('qp-passo'),
     persone:    document.getElementById('qp-persone'),
+    oraMax:     document.getElementById('qp-ora-max'),
     tipo:       document.getElementById('qp-tipo'),
     meteScelta: document.getElementById('qp-mete-scelta'),
     costo:      document.getElementById('qp-costo'),
@@ -495,6 +500,18 @@
     }
     return l;
   }
+
+  (function(){
+    var o = document.createElement('option');
+    o.value = ''; o.textContent = 'Nessun limite';
+    el.oraMax.appendChild(o);
+    for(var h = 5; h <= 23; h++){
+      var x = document.createElement('option');
+      x.value = String(h);
+      x.textContent = (h < 10 ? '0' : '') + h + ':00';
+      el.oraMax.appendChild(x);
+    }
+  })();
 
   AEROPORTI.forEach(function(a){
     el.partenze.appendChild(chip(a.iata, a.nome, a.iata, a.preset));
@@ -607,7 +624,7 @@
     try { localStorage.setItem(CHIAVE_CACHE, JSON.stringify(c)); } catch(e){}
   }
   function firmaDi(p){
-    return [p.partenze.join(','), p.meta, p.andata, p.ritorno || '-', p.persone].join('|');
+    return [p.partenze.join(','), p.meta, p.andata, p.ritorno || '-', p.persone, p.oraMax || '-'].join('|');
   }
 
   // ------------------------------------------------------------------
@@ -625,6 +642,7 @@
     q.set('andata', p.andata);
     if(p.ritorno) q.set('ritorno', p.ritorno);
     q.set('adulti', String(p.persone));
+    if(p.oraMax) q.set('oraMax', String(p.oraMax));
     return API + '?' + q.toString();
   }
 
@@ -666,7 +684,8 @@
     var lavori = [];
     piano.mete.forEach(function(meta){
       piano.date.forEach(function(d){
-        lavori.push({ partenze: piano.partenze, meta: meta, andata: d.andata, ritorno: d.ritorno, persone: persone });
+        lavori.push({ partenze: piano.partenze, meta: meta, andata: d.andata, ritorno: d.ritorno,
+                      persone: persone, oraMax: el.oraMax.value || null });
       });
     });
 
@@ -893,7 +912,7 @@
   // ------------------------------------------------------------------
   el.partenze.addEventListener('change', function(){ limitaPartenze(); preventivo(); });
   el.meteScelta.addEventListener('change', preventivo);
-  [el.daData, el.aData, el.durata, el.passo, el.persone, el.tipo, el.modoDate].forEach(function(c){
+  [el.daData, el.aData, el.durata, el.passo, el.persone, el.tipo, el.modoDate, el.oraMax].forEach(function(c){
     c.addEventListener('change', function(){ aggiornaCampiData(); preventivo(); });
     c.addEventListener('input', function(){ aggiornaCampiData(); preventivo(); });
   });
@@ -910,18 +929,30 @@
     preventivo();
   });
 
+  // Un aeroporto scritto qui e' una domanda diversa da quella dei riquadri
+  // accesi sopra: non "dove mi conviene andare", ma "quanto costa andare
+  // proprio li'". Sommarlo ai sei continenti, accesi di default, vorrebbe
+  // dire pagare sette ricerche per avere la risposta a una. Quindi prende
+  // il posto di quello che c'era: si spegne tutto tranne gli aeroporti
+  // scritti a mano, che invece si sommano fra loro.
   el.iataMeta.addEventListener('keydown', function(e){
     if(e.key !== 'Enter') return;
     e.preventDefault();
     var code = (el.iataMeta.value || '').toUpperCase().trim();
     if(!/^[A-Z]{3}$/.test(code)) return;
+    Array.prototype.forEach.call(el.meteScelta.querySelectorAll('input'), function(i){
+      if(i.dataset.scritto !== '1') i.checked = false;
+    });
     var esistente = el.meteScelta.querySelector('input[value="' + code + '"]');
     if(esistente){
       // Gia' in lista fra le quaranta: accenderla e' la cosa attesa.
       esistente.checked = true;
+      esistente.dataset.scritto = '1';
     } else {
       META_PER_IATA[code] = { iata:code, flag:'✈️', nome:code, aMano:true };
-      el.meteScelta.appendChild(chip(code, '✈️ ' + code, 'aeroporto', true));
+      var nuova = chip(code, '✈️ ' + code, 'aeroporto', true);
+      nuova.querySelector('input').dataset.scritto = '1';
+      el.meteScelta.appendChild(nuova);
     }
     el.iataMeta.value = '';
     preventivo();

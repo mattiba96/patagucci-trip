@@ -188,7 +188,12 @@ module.exports = async function handler(req, res) {
 
     const adulti = Math.min(Math.max(parseInt(q.adulti, 10) || 4, 1), 9);
 
-    const firma = [partenze, arrivo, andata, ritorno, adulti].join('|');
+    // Ora limite di partenza, 1-23. Google conta per fasce orarie intere e
+    // il secondo numero e' l'ultima ora *inclusa*: "0,17" vuol dire dalle
+    // 00:00 alle 18:00. Quindi "entro le H" diventa 0,H-1.
+    const oraMax = q.oraMax ? Math.min(Math.max(parseInt(q.oraMax, 10) || 0, 1), 23) : null;
+
+    const firma = [partenze, arrivo, andata, ritorno, adulti, oraMax || '-'].join('|');
     const ora = Date.now();
 
     const salvata = cache.get(firma);
@@ -229,6 +234,7 @@ module.exports = async function handler(req, res) {
       url.searchParams.set('type', '2'); // sola andata
     }
     url.searchParams.set('adults', String(adulti));
+    if (oraMax) url.searchParams.set('outbound_times', '0,' + (oraMax - 1));
     url.searchParams.set('currency', 'EUR');
     url.searchParams.set('hl', 'it');
     url.searchParams.set('gl', 'it');
@@ -282,6 +288,7 @@ module.exports = async function handler(req, res) {
       a: arrivo,
       andata,
       ritorno,
+      oraMax,
       voli,
       citta,
       livelloPrezzo: insights.price_level || null,
