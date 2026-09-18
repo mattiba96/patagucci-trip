@@ -3821,12 +3821,14 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
           if(r.daCache) daCache++;
           var voli = (r.dato && r.dato.voli) || [];
           if(!voli.length){ vuoti++; }
-          // Su una meta precisa due alternative sono utili; su un continente
-          // la seconda opzione per la stessa citta' ruba il posto a una
-          // citta' che non si e' ancora vista.
+          // Su una meta precisa servono alternative vere - orari, scali,
+          // compagnie diverse per lo stesso aeroporto - e la funzione ne
+          // manda fino a sei. Su un continente invece la seconda opzione
+          // per la stessa citta' ruba il posto a una citta' che non si e'
+          // ancora vista: li' si tiene solo la piu' economica per citta'.
           var continente = (META_PER_IATA[lavoro.meta] || {}).continente;
           var visti = {};
-          voli.slice(0, continente ? voli.length : 2).forEach(function(v){
+          voli.slice(0, continente ? voli.length : 6).forEach(function(v){
             if(continente){
               if(visti[v.a]) return;
               visti[v.a] = true;

@@ -261,11 +261,19 @@ module.exports = async function handler(req, res) {
       .filter((v) => typeof v.prezzo === 'number')
       .sort((a, b) => a.prezzo - b.prezzo);
 
+    // Quante opzioni tenere per lo stesso aeroporto di arrivo dipende dalla
+    // domanda. Su un continente una citta' nuova vale piu' di una seconda
+    // opzione per la stessa citta': due a testa, e la lista resta varia.
+    // Su un aeroporto preciso la domanda e' l'opposta - "quali voli ci sono
+    // per andare proprio li'" - e due alternative sole sono poche.
+    const precisa = !arrivo.startsWith('/');
+    const PER_AEROPORTO = precisa ? 6 : 2;
+
     const perAeroporto = new Map();
     const voli = [];
     for (const v of ordinati) {
       const quanti = perAeroporto.get(v.a) || 0;
-      if (quanti >= 2) continue;       // due alternative per meta bastano
+      if (quanti >= PER_AEROPORTO) continue;
       perAeroporto.set(v.a, quanti + 1);
       voli.push(v);
       if (voli.length >= 12) break;
