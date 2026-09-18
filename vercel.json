@@ -1,6 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
-    "api/voli.js": { "maxDuration": 30 }
+    "api/voli.js": { "maxDuration": 30 },
+    "api/chat.js": { "maxDuration": 30 }
   }
 }

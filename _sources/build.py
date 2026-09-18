@@ -19,6 +19,73 @@ def extract(tag, content):
         raise Exception(f"Could not find <{tag}> block")
     return m.group(0)
 
+
+# ----------------------------------------------------------------------
+# Il contesto della chat.
+#
+# "Chiedi ai Patagucci" (api/chat.js) risponde solo con quello che sul
+# sito c'e' scritto davvero. Il testo glielo passiamo da qui, generato
+# insieme a index.html: se la pagina cambia, cambia anche cio' che la
+# chat sa, senza doversene ricordare.
+# ----------------------------------------------------------------------
+
+def testo_da_html(html):
+    """Il testo che un lettore vedrebbe, senza markup."""
+    for tag in ("script", "style", "svg"):
+        html = re.sub(r"<" + tag + r"\b.*?</" + tag + r">", " ", html, flags=re.S | re.I)
+    html = re.sub(r"<[^>]+>", "\n", html)
+    html = html.replace("&nbsp;", " ").replace("&amp;", "&").replace("&egrave;", "è")
+    html = re.sub(r"[ \t]+", " ", html)
+    righe, pulite = [l.strip() for l in html.split("\n")], []
+    for r in righe:
+        # Il marosello di foto in home duplica ogni voce per scorrere
+        # all'infinito: la seconda copia non aggiunge niente.
+        if r and r not in pulite[-40:]:
+            pulite.append(r)
+    return "\n".join(pulite)
+
+
+def dati_da_script(js):
+    """Le tabelle della pagina (itinerario, tappe, budget) vivono in JS.
+
+    Senza queste la chat non saprebbe dire cosa si fa il quarto giorno:
+    in HTML quelle tabelle sono vuote e vengono riempite dallo script.
+    Prendo le sole dichiarazioni di dati, saltando le liste di sole
+    coordinate — al modello non dicono nulla e pesano.
+    """
+    fuori = []
+    for m in re.finditer(r"^\s*(?:const|var|let)\s+([A-Za-z_$][\w$]*)\s*=\s*([\[{])", js, re.M):
+        i = m.end() - 1
+        apri, chiudi = js[i], "]" if js[i] == "[" else "}"
+        profondita, j, stringa = 0, i, None
+        while j < len(js):
+            c = js[j]
+            if stringa:
+                if c == "\\":
+                    j += 2
+                    continue
+                if c == stringa:
+                    stringa = None
+            elif c in "\"'`":
+                stringa = c
+            elif c == apri:
+                profondita += 1
+            elif c == chiudi:
+                profondita -= 1
+                if profondita == 0:
+                    break
+            j += 1
+        blocco = js[i:j + 1]
+        if len(blocco) < 80:
+            continue
+        if sum(c.isalpha() for c in blocco) / len(blocco) < 0.35:
+            continue
+        fuori.append(f"{m.group(1)} = {blocco}")
+    return "\n\n".join(fuori)
+
+
+contesti = []
+
 blocks = []
 scripts = []
 
@@ -45,6 +112,13 @@ for d in DESTS:
     footer = extract("footer", content)
     script_m = re.search(r'<script>(.*?)</script>', content, re.DOTALL)
     script_body = script_m.group(1)
+
+    dati = dati_da_script("".join(re.findall(r"<script>(.*?)</script>", content, re.S)))
+    contesti.append(
+        f"## {d['flag']} {d['name']} — scheda \"{d['suf']}\", stato: {d['stato']}\n\n"
+        + testo_da_html(hero + main)
+        + (f"\n\n### Dati della pagina {d['name']} (itinerario, tappe, tratte, budget)\n\n{dati}" if dati else "")
+    )
 
     nav = nav.replace(
         '<a href="index.html" class="home-link">🌍 Tutte le mete</a>',
@@ -524,12 +598,389 @@ with open(DIR + "_sources/mappamondo.svg", encoding="utf-8") as _f:
 
 destination_blocks = "\n\n".join(b["block"] for b in blocks)
 
+# Il contesto della chat: la home davanti, poi una sezione per meta.
+# Finisce in un modulo JS e non in un .txt perche' cosi' Vercel se lo
+# porta dentro la funzione da solo, come qualsiasi altra dipendenza.
+import datetime
+
+contesto = "\n\n".join(
+    [
+        "# Patagucci Trips — tutto il contenuto del sito",
+        f"Generato da _sources/build.py il {datetime.date.today().isoformat()}.",
+        "Le mete con stato \"confermato\" hanno le date fissate; \"idea\" no.",
+        "## 🌍 Home — i Patagucci, i viaggi gia' fatti, le mete in programma\n\n"
+        + testo_da_html(hub_html),
+    ]
+    + contesti
+)
+with open(DIR + "api/contesto.js", "w", encoding="utf-8") as f:
+    f.write(
+        "// Generato da _sources/build.py insieme a index.html. Non modificare a mano.\n"
+        "// Serve a api/chat.js: e' tutto cio' che la chat del sito sa dei viaggi.\n"
+        "module.exports = " + json.dumps(contesto) + ";\n"
+    )
+print("Written", DIR + "api/contesto.js", "length", len(contesto))
+
 stato_per_suf = {d["suf"]: d["stato"] for d in DESTS}
 switcher_buttons = '\n        '.join(
     f'<button class="switch-btn{" confermato" if stato_per_suf[b["suf"]] == "confermato" else ""}"'
     f' data-dest="{b["suf"]}" onclick="showDest(\'{b["suf"]}\')">{b["flag"]} {b["name"]}</button>'
     for b in blocks
 )
+
+# ----------------------------------------------------------------------
+# "Chiedi ai Patagucci": il pannello di chat.
+#
+# Sta qui e non in una pagina sorgente perche' e' dell'intero sito, non
+# di una meta: il bottone resta in basso a destra ovunque, e la scheda
+# aperta viene passata alla funzione come contesto della domanda.
+# Il tema (colori, accenti) lo eredita da data-dest come tutto il resto.
+# ----------------------------------------------------------------------
+
+chat_css = '''
+  .pg-chat .sr-only{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+  .pg-chat-fab{
+    position:fixed; right:16px; bottom:16px; z-index:500;
+    display:flex; align-items:center; gap:9px;
+    border:1px solid rgba(var(--accent-rgb),0.5); border-radius:999px;
+    background:linear-gradient(180deg,#1d1d1d,#101010); color:var(--accent);
+    padding:11px 18px; font-family:var(--font-body); font-size:0.84rem; font-weight:800;
+    cursor:pointer; box-shadow:0 10px 28px rgba(0,0,0,0.45);
+    transition:transform .18s cubic-bezier(.16,1,.3,1), box-shadow .18s ease, background .5s ease;
+  }
+  .pg-chat-fab:hover{ transform:translateY(-2px); box-shadow:0 16px 36px rgba(0,0,0,0.5); }
+  .pg-chat-fab:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+  .pg-chat-fab .pg-fab-icona{ font-size:1.05rem; line-height:1; }
+  .pg-chat-fab[aria-expanded="true"]{ opacity:0; pointer-events:none; }
+
+  .pg-chat{
+    position:fixed; right:16px; bottom:16px; z-index:501;
+    width:min(390px, calc(100vw - 32px)); max-height:min(620px, calc(100vh - 32px));
+    display:flex; flex-direction:column; overflow:hidden;
+    background:linear-gradient(180deg,#1a1a1a,#101010);
+    border:1px solid rgba(var(--accent-rgb),0.28); border-radius:20px;
+    box-shadow:0 30px 70px rgba(0,0,0,0.55);
+    font-family:var(--font-body);
+    animation:pgChatSu .28s cubic-bezier(.16,1,.3,1) both;
+  }
+  .pg-chat[hidden]{ display:none; }
+  @keyframes pgChatSu{ from{ opacity:0; transform:translateY(14px) scale(.98); } to{ opacity:1; transform:none; } }
+
+  .pg-chat-testa{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:13px 16px; border-bottom:1px solid rgba(255,255,255,0.09);
+    background:linear-gradient(180deg, rgba(var(--accent-rgb),0.13), transparent);
+  }
+  .pg-chat-testa strong{ display:block; color:#fdf9f0; font-size:0.92rem; letter-spacing:0.01em; }
+  .pg-chat-dove{ display:block; font-size:0.72rem; color:var(--accent); font-weight:700; margin-top:2px; }
+  .pg-chat-testa button{
+    border:none; background:rgba(255,255,255,0.07); color:#c7c2b6;
+    width:30px; height:30px; border-radius:9px; font-size:0.9rem; cursor:pointer; flex:0 0 auto;
+  }
+  .pg-chat-testa button:hover{ background:rgba(255,255,255,0.15); color:#fff; }
+
+  .pg-chat-righe{ flex:1 1 auto; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:12px; }
+  .pg-chat-riga{ max-width:88%; font-size:0.87rem; line-height:1.62; }
+  .pg-chat-riga.io{
+    align-self:flex-end; background:var(--accent); color:#10100e;
+    padding:9px 14px; border-radius:16px 16px 4px 16px; font-weight:600;
+  }
+  .pg-chat-riga.lei{ align-self:flex-start; color:#e4e0d6; }
+  .pg-chat-riga.lei strong{ color:#fdf9f0; }
+  .pg-chat-riga.lei a{ color:var(--accent); }
+  .pg-chat-riga.lei ul{ margin:6px 0; padding-left:18px; }
+  .pg-chat-riga.guasto{ align-self:flex-start; color:#ff9b8a; font-size:0.82rem; }
+  .pg-chat-riga .pg-cursore{
+    display:inline-block; width:7px; height:14px; margin-left:2px; vertical-align:-2px;
+    background:var(--accent); animation:pgLampeggia 1s steps(2,start) infinite;
+  }
+  @keyframes pgLampeggia{ 50%{ opacity:0; } }
+
+  .pg-chat-spunti{ display:flex; flex-wrap:wrap; gap:6px; padding:0 16px 12px; }
+  .pg-chat-spunti button{
+    border:1px solid rgba(var(--accent-rgb),0.3); background:rgba(var(--accent-rgb),0.08);
+    color:var(--accent); padding:6px 12px; border-radius:999px;
+    font-size:0.75rem; font-weight:600; font-family:var(--font-body); cursor:pointer;
+  }
+  .pg-chat-spunti button:hover{ background:rgba(var(--accent-rgb),0.18); }
+
+  .pg-chat-invio{ display:flex; gap:8px; align-items:flex-end; padding:12px 16px 6px; border-top:1px solid rgba(255,255,255,0.09); }
+  .pg-chat-invio textarea{
+    flex:1 1 auto; resize:none; max-height:120px;
+    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:12px;
+    color:#f2efe7; font-family:var(--font-body); font-size:0.86rem; line-height:1.5; padding:10px 12px;
+  }
+  .pg-chat-invio textarea::placeholder{ color:#8d887d; }
+  .pg-chat-invio textarea:focus{ outline:2px solid var(--accent); outline-offset:0; }
+  .pg-chat-invio button{
+    flex:0 0 auto; width:40px; height:40px; border:none; border-radius:12px; cursor:pointer;
+    background:var(--accent); color:#10100e; font-size:1rem; font-weight:800;
+  }
+  .pg-chat-invio button:disabled{ opacity:0.4; cursor:not-allowed; }
+  .pg-chat-nota{ margin:0; padding:2px 16px 12px; font-size:0.68rem; line-height:1.5; color:#8d887d; }
+
+  @media (max-width:560px){
+    .pg-chat{ right:0; left:0; bottom:0; width:100%; max-height:86vh; border-radius:20px 20px 0 0; }
+    .pg-chat-fab{ right:12px; bottom:12px; padding:12px 16px; }
+    .pg-chat-fab .pg-fab-testo{ display:none; }
+  }
+  @media (prefers-reduced-motion:reduce){
+    .pg-chat{ animation:none; }
+    .pg-chat-riga .pg-cursore{ animation:none; }
+  }
+'''
+
+chat_html = '''
+<button class="pg-chat-fab" id="pg-chat-fab" aria-expanded="false" aria-controls="pg-chat">
+  <span class="pg-fab-icona" aria-hidden="true">💬</span>
+  <span class="pg-fab-testo">Chiedi ai Patagucci</span>
+</button>
+
+<section class="pg-chat" id="pg-chat" role="dialog" aria-label="Chiedi ai Patagucci" hidden>
+  <header class="pg-chat-testa">
+    <div>
+      <strong>💬 Chiedi ai Patagucci</strong>
+      <span class="pg-chat-dove" id="pg-chat-dove"></span>
+    </div>
+    <button type="button" id="pg-chat-chiudi" aria-label="Chiudi">✕</button>
+  </header>
+  <div class="pg-chat-righe" id="pg-chat-righe" aria-live="polite"></div>
+  <div class="pg-chat-spunti" id="pg-chat-spunti"></div>
+  <form class="pg-chat-invio" id="pg-chat-form">
+    <label class="sr-only" for="pg-chat-testo">La tua domanda</label>
+    <textarea id="pg-chat-testo" rows="1" maxlength="1500" placeholder="Scrivi una domanda sui viaggi…"></textarea>
+    <button type="submit" id="pg-chat-manda" aria-label="Manda la domanda">➤</button>
+  </form>
+  <p class="pg-chat-nota">Risponde Claude, leggendo solo quello che c'è scritto su questo sito. I prezzi dei voli dal vivo stanno nella scheda <em>Quale sarà il prossimo?</em></p>
+</section>
+'''
+
+# Nomi leggibili e spunti di partenza: la chat dice alla funzione quale
+# scheda e' aperta, e propone domande che su quella scheda hanno senso.
+NOMI_METE = {"hub": "la home"}
+NOMI_METE.update({d["suf"]: d["name"] for d in DESTS})
+
+SPUNTI = {
+    "hub": ["Chi sono i Patagucci?", "Dove sono già stati?", "Qual è il prossimo viaggio?"],
+    "is": ["Cosa si fa il primo giorno?", "Quanto costa in tutto?", "Che vestiti servono?"],
+    "kr": ["Com'è diviso l'itinerario?", "Quando fiorisce il ciliegio?", "Quanto costa mangiare?"],
+    "nx": ["Come funziona la ricerca voli?", "Da quali aeroporti si parte?", "Quante ricerche posso fare?"],
+}
+
+chat_js = '''
+// ------------------------------------------------------------------
+// "Chiedi ai Patagucci".
+// La pagina non sa niente dei viaggi: manda la domanda, lo storico e la
+// scheda aperta a /api/chat, che risponde in streaming. Il contenuto del
+// sito ce l'ha la funzione, generata insieme a questa pagina.
+// ------------------------------------------------------------------
+(function(){
+  // Servito da Vercel: stessa origine. Aperto in locale col doppio clic
+  // o da GitHub Pages: serve l'indirizzo assoluto del deploy.
+  var API_REMOTA = 'https://patagucci-trip.vercel.app/api/chat';
+  var locale = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+  var API = (location.protocol.indexOf('http') === 0 && (locale || !API_REMOTA)) ? '/api/chat' : API_REMOTA;
+
+  var NOMI = __NOMI__;
+  var SPUNTI = __SPUNTI__;
+  var CHIAVE_STORICO = 'patagucci-chat-v1';
+
+  var fab = document.getElementById('pg-chat-fab');
+  var pannello = document.getElementById('pg-chat');
+  var righe = document.getElementById('pg-chat-righe');
+  var spunti = document.getElementById('pg-chat-spunti');
+  var form = document.getElementById('pg-chat-form');
+  var campo = document.getElementById('pg-chat-testo');
+  var manda = document.getElementById('pg-chat-manda');
+  var dove = document.getElementById('pg-chat-dove');
+
+  var storico = [];
+  var inCorso = false;
+
+  try {
+    var salvato = sessionStorage.getItem(CHIAVE_STORICO);
+    if(salvato) storico = JSON.parse(salvato) || [];
+  } catch(e){ storico = []; }
+
+  function metaAttiva(){ return document.documentElement.getAttribute('data-dest') || 'hub'; }
+  function nomeMeta(){ return NOMI[metaAttiva()] || 'la home'; }
+
+  function salva(){
+    try { sessionStorage.setItem(CHIAVE_STORICO, JSON.stringify(storico.slice(-16))); } catch(e){}
+  }
+
+  // La risposta arriva come testo semplice. Qui si scappa tutto e poi si
+  // riaccendono le due sole cose che il modello usa: grassetto e righe.
+  function formatta(testo){
+    var s = testo.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    s = s.replace(/\\*\\*([^*]+)\\*\\*/g, '<strong>$1</strong>');
+    s = s.replace(/\\n/g, '<br>');
+    return s;
+  }
+
+  function aggiungi(ruolo, testo){
+    var el = document.createElement('div');
+    el.className = 'pg-chat-riga ' + (ruolo === 'utente' ? 'io' : ruolo === 'guasto' ? 'guasto' : 'lei');
+    el.innerHTML = ruolo === 'assistente' ? formatta(testo) : formatta(testo);
+    righe.appendChild(el);
+    righe.scrollTop = righe.scrollHeight;
+    return el;
+  }
+
+  function disegnaSpunti(){
+    var lista = SPUNTI[metaAttiva()] || SPUNTI.hub;
+    spunti.innerHTML = '';
+    if(storico.length) return;   // gli spunti servono solo a rompere il ghiaccio
+    lista.forEach(function(s){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.textContent = s;
+      b.addEventListener('click', function(){ chiedi(s); });
+      spunti.appendChild(b);
+    });
+  }
+
+  function ridisegna(){
+    righe.innerHTML = '';
+    if(!storico.length){
+      aggiungi('assistente', 'Ciao. So tutto quello che c\\'è scritto su questo sito: itinerari, tappe, costi, meteo. Chiedi pure — stai guardando **' + nomeMeta() + '**.');
+    } else {
+      storico.forEach(function(m){ aggiungi(m.ruolo, m.testo); });
+    }
+    disegnaSpunti();
+  }
+
+  function apri(){
+    pannello.hidden = false;
+    fab.setAttribute('aria-expanded', 'true');
+    dove.textContent = 'stai guardando: ' + nomeMeta();
+    ridisegna();
+    setTimeout(function(){ campo.focus(); }, 60);
+  }
+
+  function chiudi(){
+    pannello.hidden = true;
+    fab.setAttribute('aria-expanded', 'false');
+    fab.focus();
+  }
+
+  fab.addEventListener('click', apri);
+  document.getElementById('pg-chat-chiudi').addEventListener('click', chiudi);
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && !pannello.hidden) chiudi();
+  });
+
+  // Cambiando scheda cambia il contesto: la chat lo dice e rinfresca gli
+  // spunti, ma non butta via la conversazione in corso.
+  window.addEventListener('destinazione-cambiata', function(){
+    if(pannello.hidden) return;
+    dove.textContent = 'stai guardando: ' + nomeMeta();
+    disegnaSpunti();
+  });
+
+  campo.addEventListener('input', function(){
+    campo.style.height = 'auto';
+    campo.style.height = Math.min(campo.scrollHeight, 120) + 'px';
+  });
+  campo.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); form.requestSubmit(); }
+  });
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    chiedi(campo.value);
+  });
+
+  function chiedi(domanda){
+    domanda = String(domanda || '').trim();
+    if(!domanda || inCorso) return;
+    if(!storico.length) righe.innerHTML = '';
+    inCorso = true;
+    manda.disabled = true;
+    campo.value = '';
+    campo.style.height = 'auto';
+    spunti.innerHTML = '';
+
+    storico.push({ ruolo:'utente', testo: domanda });
+    aggiungi('utente', domanda);
+    salva();
+
+    var el = aggiungi('assistente', '');
+    el.innerHTML = '<span class="pg-cursore"></span>';
+    var risposta = '';
+
+    function chiudiTurno(){
+      inCorso = false;
+      manda.disabled = false;
+      campo.focus();
+    }
+
+    var taglio = new AbortController();
+    var scadenza = setTimeout(function(){ taglio.abort(); }, 45000);
+
+    fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messaggi: storico.slice(-16), meta: nomeMeta() }),
+      signal: taglio.signal
+    }).then(function(r){
+      if(!r.ok || !r.body){
+        return r.json().catch(function(){ return {}; }).then(function(d){
+          throw new Error(d.errore || ('il motore ha risposto ' + r.status));
+        });
+      }
+      var lettore = r.body.getReader();
+      var decoder = new TextDecoder();
+      var resto = '';
+
+      function pezzo(){
+        return lettore.read().then(function(res){
+          if(res.done){
+            clearTimeout(scadenza);
+            if(risposta){
+              storico.push({ ruolo:'assistente', testo: risposta });
+              salva();
+            }
+            chiudiTurno();
+            return;
+          }
+          resto += decoder.decode(res.value, { stream:true });
+          var blocchi = resto.split('\\n\\n');
+          resto = blocchi.pop();
+          blocchi.forEach(function(b){
+            var riga = b.split('\\n').filter(function(l){ return l.indexOf('data: ') === 0; })[0];
+            if(!riga) return;
+            var ev;
+            try { ev = JSON.parse(riga.slice(6)); } catch(err){ return; }
+            if(ev.t === 'testo'){
+              risposta += ev.d;
+              el.innerHTML = formatta(risposta) + '<span class="pg-cursore"></span>';
+              righe.scrollTop = righe.scrollHeight;
+            } else if(ev.t === 'errore'){
+              el.className = 'pg-chat-riga guasto';
+              el.textContent = ev.d;
+              risposta = '';
+            } else if(ev.t === 'fine'){
+              el.innerHTML = formatta(risposta) + (ev.d && ev.d.troncata ? ' <em>(risposta troncata)</em>' : '');
+            }
+          });
+          return pezzo();
+        });
+      }
+      return pezzo();
+    }).catch(function(err){
+      clearTimeout(scadenza);
+      el.className = 'pg-chat-riga guasto';
+      el.textContent = err.name === 'AbortError'
+        ? 'Nessuna risposta entro 45 secondi. Riprova.'
+        : 'Non sono riuscito a rispondere: ' + err.message;
+      chiudiTurno();
+    });
+  }
+})();
+'''.replace('__NOMI__', json.dumps(NOMI_METE, ensure_ascii=False)).replace('__SPUNTI__', json.dumps(SPUNTI, ensure_ascii=False))
 
 final_html = f'''<!DOCTYPE html>
 <html lang="it" data-dest="hub">
@@ -576,6 +1027,7 @@ final_html = f'''<!DOCTYPE html>
     .site-switcher{{ padding:7px 10px; }}
     .site-switcher button{{ padding:10px 13px; font-size:0.72rem; letter-spacing:0.03em; min-height:44px; }}
   }}
+{chat_css}
 </style>
 </head>
 <body>
@@ -591,6 +1043,8 @@ final_html = f'''<!DOCTYPE html>
 {hub_html}
 
 {destination_blocks}
+
+{chat_html}
 
 <script>
 var FLAG_BARS = {{
@@ -674,6 +1128,10 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){{
 </script>
 
 {"".join(scripts)}
+
+<script>
+{chat_js}
+</script>
 
 </body>
 </html>
