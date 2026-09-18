@@ -70,7 +70,25 @@ ${CONTESTO}
 // Il nome canonico e' ANTHROPIC_API_KEY, ma vale la stessa cortesia di
 // api/voli.js: le grafie ovvie passano, cosi' un underscore fuori posto
 // non costa un giro di deploy per capire perche' risponde 500.
-const NOMI_CHIAVE = ['ANTHROPIC_API_KEY', 'CLAUDE_API_KEY', 'ANTHROPIC_KEY', 'ANTHROPIC_TOKEN'];
+const NOMI_CHIAVE = ['ANTHROPIC_API_KEY', 'CLAUDE_API_KEY', 'ANTHROPIC_KEY', 'ANTHROPIC_TOKEN',
+                     'ONEPROVIDER_API_KEY', 'LLM_API_KEY'];
+
+// La chiave in uso e' di OneProvider, un gateway con API compatibili
+// Anthropic: stesso SDK, stessi parametri, stesso streaming SSE e stesso
+// prompt caching — cambia solo dove si bussa. Verificato dal vivo su
+// /v1/messages: accetta x-api-key, output_config e cache_control, e ha
+// claude-opus-5 a catalogo.
+//
+// Quale endpoint usare lo dice la chiave stessa, cosi' non ci sono due
+// variabili d'ambiente da tenere d'accordo: le chiavi Anthropic sono
+// "sk-ant-...", quelle del gateway no. LLM_BASE_URL ha comunque l'ultima
+// parola, per puntare altrove senza toccare il codice.
+const BASE_ONEPROVIDER = 'https://api.oneprovider.dev';
+
+function baseUrlPer(chiave) {
+  if (process.env.LLM_BASE_URL) return process.env.LLM_BASE_URL;
+  return chiave.startsWith('sk-ant-') ? undefined : BASE_ONEPROVIDER;
+}
 
 function normalizza(s) { return s.toUpperCase().replace(/[^A-Z]/g, ''); }
 
@@ -192,7 +210,8 @@ module.exports = async function handler(req, res) {
   res.setHeader('Connection', 'keep-alive');
   res.setHeader('X-Accel-Buffering', 'no');
 
-  const cliente = new Anthropic({ apiKey: chiave });
+  const base = baseUrlPer(chiave);
+  const cliente = new Anthropic(base ? { apiKey: chiave, baseURL: base } : { apiKey: chiave });
 
   const richiesta = {
     model: MODELLO,
