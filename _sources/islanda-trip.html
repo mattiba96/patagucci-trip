@@ -50,8 +50,6 @@
   <a href="#vulcani">Vulcani</a>
   <a href="#meteo">Meteo</a>
   <a href="#cibo">Cibo &amp; alcolici</a>
-  <a href="#voli">Voli</a>
-  <a href="#budget">Spese stimate</a>
   <a href="#faq">FAQ</a>
 </nav>
 
@@ -322,95 +320,7 @@
     </div>
   </section>
 
-  <!-- VOLI -->
-  <section id="voli" class="panel" data-nav>
-    <div class="inner">
-      <h2 class="section-title reveal">✈️ Voli</h2>
-      <p class="section-sub reveal">Volo diretto da Milano, circa quattro ore. La meta più comoda da raggiungere fra tutte quelle guardate finora.</p>
 
-      <div class="card reveal">
-        <h3>🎫 Il volo nel carrello</h3>
-        <p>easyJet, diretto in tutte e due le direzioni. <strong>317,66 € a testa</strong>, cioè circa <strong>1.270 € in quattro</strong>, e dentro c'è già il bagaglio a mano grande, il posto scelto e l'imbarco prioritario.</p>
-        <table class="hub-table">
-          <thead><tr><th>Tratta</th><th>Volo</th><th>Orari</th><th>Costo</th></tr></thead>
-          <tbody>
-            <tr><td>Malpensa → Keflavík</td><td>EJU3969</td><td>sabato 2 gennaio, 13:50 → 17:25</td><td><strong>172,83 €</strong></td></tr>
-            <tr><td>Keflavík → Malpensa</td><td>EJU3970</td><td>venerdì 8 gennaio, 11:40 → 16:55</td><td><strong>144,83 €</strong></td></tr>
-          </tbody>
-        </table>
-        <p style="margin-top:14px;">Il biglietto secco è <strong>103,85 €</strong> all'andata e <strong>76,35 €</strong> al ritorno. Il resto è il <strong>pacchetto Smart+</strong> — 68,98 € e 68,48 € — che aggiunge il bagaglio a mano grande in cappelliera, il posto nelle prime file (all'andata l'8A) e l'imbarco prima di tutti gli altri.</p>
-        <p>Gli orari sono quelli di casa propria: in Islanda l'orologio va indietro di un'ora rispetto all'Italia, quindi in aria si sta <strong>quattro ore e mezza</strong> all'andata e <strong>quattro e un quarto</strong> al ritorno.</p>
-        <div class="source-note"><strong>Occhio alla data del ritorno:</strong> questo carrello riporta a casa <strong>venerdì 8</strong>, mentre l'itinerario qui sopra arriva a sabato 9 gennaio. O si sposta il volo di un giorno, o l'ultima giornata salta.</div>
-      </div>
-
-      <div class="card reveal">
-        <table class="hub-table">
-          <thead><tr><th>Tratta</th><th>Tipo</th><th>Note</th></tr></thead>
-          <tbody>
-            <tr><td>Milano Malpensa → Keflavík (KEF)</td><td><strong>Diretto</strong></td><td>~4-4,5h. Wizz Air ed easyJet sono le più presenti sulla rotta</td></tr>
-            <tr><td>Altre città italiane</td><td>1 scalo</td><td>Via Londra, Amsterdam, Copenaghen o Francoforte</td></tr>
-            <tr><td>Keflavík → Reykjavík</td><td>Bus o auto</td><td>~50 km, 45 minuti. Il Flybus è coordinato con i voli</td></tr>
-          </tbody>
-        </table>
-        <div class="source-note">Tariffe viste su Milano-Reykjavík: comunemente <strong>314-539€</strong> a/r, con occasioni fino a 141€ e una media intorno ai 219€ prenotando con settimane di anticipo. Prezzi rilevati ad agosto 2026 per date generiche, non per gennaio 2027: <strong>capodanno e l'inizio di gennaio sono alta stagione</strong> e costano di più. Fonti: momondo.it, kiwi.com, edreams.</div>
-      </div>
-
-      <div class="card reveal">
-        <div class="flight-form">
-          <div class="field">
-            <label for="flight-origin">Da dove parti</label>
-            <select id="flight-origin">
-              <option value="MXP|Milano Malpensa">Milano Malpensa (MXP)</option>
-              <option value="FCO|Roma Fiumicino">Roma Fiumicino (FCO)</option>
-              <option value="BGY|Milano Bergamo">Milano Bergamo (BGY)</option>
-              <option value="BLQ|Bologna">Bologna (BLQ)</option>
-              <option value="VCE|Venezia">Venezia (VCE)</option>
-            </select>
-          </div>
-          <div class="field"><label>Destinazione</label><select disabled><option>Keflavík (KEF)</option></select></div>
-          <div class="field"><label>Date</label><select disabled><option>2 → 9 gennaio 2027</option></select></div>
-        </div>
-        <div class="flight-links">
-          <button id="btn-google-flights">Cerca su Google Flights</button>
-          <button class="alt" id="btn-skyscanner">Cerca su Skyscanner</button>
-          <button class="alt" id="btn-kayak">Cerca su Kayak</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BUDGET -->
-  <section id="budget" class="panel dark" data-nav>
-    <div class="inner">
-      <h2 class="section-title reveal">💰 Calcolatore budget</h2>
-      <p class="section-sub reveal">Il volo costa poco, tutto il resto costa parecchio: è il contrario delle altre mete. Stima indicativa, non un preventivo.</p>
-
-      <div class="card reveal">
-        <div class="currency-form">
-          <div class="field">
-            <label for="budget-people">Persone</label>
-            <input type="number" id="budget-people" value="4" min="1">
-          </div>
-          <div class="field">
-            <label for="budget-style">Stile viaggio</label>
-            <select id="budget-style">
-              <option value="budget">Budget</option>
-              <option value="standard" selected>Standard</option>
-              <option value="comfort">Comfort</option>
-            </select>
-          </div>
-        </div>
-        <div id="budget-result" class="cur-result">—</div>
-        <div id="budget-breakdown" class="source-note" style="text-align:center; margin-top:10px;"></div>
-      </div>
-
-      <div class="callout reveal">
-        <strong>Dove si risparmia davvero:</strong> cucinare invece di cenare fuori (i supermercati <em>Bónus</em> e <em>Krónan</em> costano una frazione dei ristoranti), le <strong>piscine comunali</strong> al posto della Blue Lagoon, e l'auto divisa in quattro. Dove non si risparmia: la grotta di ghiaccio, che si fa solo con guida e costa quello che costa.
-      </div>
-
-      <div class="source-note">Include: volo a/r, noleggio 4x4 per 7 giorni con assicurazioni, benzina, alloggio 7 notti, cibo, grotta di ghiaccio con guida e una laguna termale. Esclude: spese personali e attrezzatura. Dati da momondo.it e kiwi.com (voli), lavacarrental.is e autonoleggioislanda.it (noleggio), guidetoiceland.is (tour) — verificati ad agosto 2026.</div>
-    </div>
-  </section>
 
   <!-- FAQ -->
   <section id="faq" class="panel" data-nav>
@@ -592,39 +502,6 @@
     if(ridotto) posiziona(0); else requestAnimationFrame(muovi);
   }
 
-  // ---- Budget ----
-  var BUDGET = {
-    notti: 7,
-    flight: { budget:190, standard:330, comfort:520 },
-    // 4x4 una settimana con assicurazioni extra + benzina, diviso per persona.
-    autoFixed: { budget:130, standard:190, comfort:300 },
-    // Grotta di ghiaccio con guida + una laguna termale.
-    attivitaFixed: { budget:170, standard:250, comfort:390 },
-    lodgingPerNight: { budget:45, standard:85, comfort:170 },
-    foodPerDay: { budget:28, standard:55, comfort:100 },
-    extrasFixed: { budget:60, standard:120, comfort:240 }
-  };
-  var bgtPeople = document.getElementById('budget-people');
-  var bgtStyle = document.getElementById('budget-style');
-  var bgtResult = document.getElementById('budget-result');
-  var bgtBreakdown = document.getElementById('budget-breakdown');
-  function updateBudget(){
-    if(!bgtPeople) return;
-    var people = Math.max(1, parseInt(bgtPeople.value, 10) || 1);
-    var style = bgtStyle.value;
-    var perPerson = BUDGET.flight[style] + BUDGET.autoFixed[style] + BUDGET.attivitaFixed[style]
-                  + BUDGET.extrasFixed[style]
-                  + BUDGET.notti * BUDGET.lodgingPerNight[style]
-                  + 8 * BUDGET.foodPerDay[style];
-    var totalGroup = perPerson * people;
-    bgtResult.textContent = '~' + Math.round(perPerson).toLocaleString('it-IT') + ' € a persona';
-    bgtBreakdown.textContent = 'Totale gruppo (' + people + ' persone): ~' + Math.round(totalGroup).toLocaleString('it-IT') + ' € — include volo, 4x4 con assicurazioni e benzina, 7 notti, cibo, grotta di ghiaccio e una laguna termale.';
-  }
-  if(bgtPeople){
-    [bgtPeople, bgtStyle].forEach(function(el){ el.addEventListener('input', updateBudget); el.addEventListener('change', updateBudget); });
-    updateBudget();
-  }
-
   // ---- Come si spartisce la giornata ----
   var ROUTES = [
     { name:'07:00 – 11:20 — buio', open:true, note:'Colazione e trasferimenti. Si guida al buio, ed è normale: la gente qui fa così tutto l\'inverno.' },
@@ -698,24 +575,6 @@
     famFilterRow.appendChild(btn);
   });
   renderFamilies();
-
-  // ---- Voli ----
-  function currentOrigin(){
-    var v = document.getElementById('flight-origin').value.split('|');
-    return { code: v[0], label: v[1] };
-  }
-  document.getElementById('btn-google-flights').addEventListener('click', function(){
-    var o = currentOrigin();
-    window.open('https://www.google.com/travel/flights?q=' + encodeURIComponent('Voli da ' + o.label + ' a Reykjavik dal 2 al 9 gennaio 2027'), '_blank');
-  });
-  document.getElementById('btn-skyscanner').addEventListener('click', function(){
-    var o = currentOrigin();
-    window.open('https://www.skyscanner.it/trasporti/voli/' + o.code.toLowerCase() + '/kef/270102/270109/', '_blank');
-  });
-  document.getElementById('btn-kayak').addEventListener('click', function(){
-    var o = currentOrigin();
-    window.open('https://www.kayak.it/flights/' + o.code + '-KEF/2027-01-02/2027-01-09', '_blank');
-  });
 
   // ---- Mappa: tabelle e KML ----
   var STOPS = [
