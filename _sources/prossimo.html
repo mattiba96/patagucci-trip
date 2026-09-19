@@ -99,7 +99,10 @@
 
   .qp-barra{ height:8px; border-radius:999px; background:rgba(255,255,255,0.12); overflow:hidden; margin:14px 0 8px; }
   .qp-barra > div{ height:100%; width:0; border-radius:999px; background:linear-gradient(90deg,var(--accent),var(--accent-deep)); transition:width .25s ease; }
-  .qp-stato{ font-size:0.85rem; color:#c7c2b6; }
+  /* Questa riga di stato la usa anche la scheda Corea, su pannello
+     chiaro: il grigio da fondo scuro li' sparirebbe. Una coppia. */
+  .qp-stato{ font-size:0.85rem; color:var(--ink-soft); }
+  section.panel.dark .qp-stato{ color:#c7c2b6; }
 
   /* Un risultato = una combinazione meta + coppia di date. */
   .qp-esiti{ display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:14px; }

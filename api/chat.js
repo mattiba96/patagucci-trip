@@ -13,6 +13,7 @@
 
 const Anthropic = require('@anthropic-ai/sdk');
 const CONTESTO = require('./contesto.js');
+const { chiediGemini } = require('./gemini.js');
 
 // Le domande qui sono semplici — leggere il contenuto del sito e
 // rispondere corto — e Haiku costa un quinto di Opus in entrata e in
@@ -439,6 +440,54 @@ module.exports = async function handler(req, res) {
   } catch (e) {
     const messaggio = e && e.message ? e.message : String(e);
     console.error('[chat] richiesta fallita:', messaggio);
+
+    // ----------------------------------------------------------------
+    // La rete di sicurezza.
+    //
+    // Se Haiku si inchioda — sovraccarico, limite giornaliero del
+    // gateway, timeout — la domanda non va persa: la stessa scheda e la
+    // stessa domanda vanno a Gemini, e la risposta esce da li'.
+    //
+    // Si tenta solo se non si e' ancora scritto niente a schermo: a
+    // meta' risposta, riattaccare da capo darebbe due risposte cucite
+    // insieme, e quello confonde piu' di un errore.
+    // ----------------------------------------------------------------
+    if (!scritto) {
+      try {
+        const domanda = [...messaggi].reverse().find((m) => m.role === 'user');
+        const filo = messaggi
+          .slice(-6, -1)
+          .map((m) => (m.role === 'user' ? 'Domanda: ' : 'Risposta: ') + m.content)
+          .join('\n');
+
+        const esito = await chiediGemini({
+          sistema: ISTRUZIONI + '\n\n' + schedaAperta(scheda, meta)
+            + '\n\nNON scrivere righe che cominciano con CERCA:. Rispondi e basta.',
+          prompt: (filo ? 'Conversazione finora:\n' + filo + '\n\n' : '')
+            + (domanda ? domanda.content : ''),
+          conRicerca: true,
+          maxToken: MAX_TOKEN,
+          timeout: 30000,
+        });
+
+        if (esito.testo) {
+          console.log('[chat] risposto con Gemini (' + esito.modello + ') dopo il guasto di Haiku');
+          if (!res.headersSent) {
+            res.setHeader('Content-Type', 'text/event-stream; charset=utf-8');
+            res.setHeader('Cache-Control', 'no-cache, no-transform');
+            res.setHeader('Connection', 'keep-alive');
+            res.setHeader('X-Accel-Buffering', 'no');
+          }
+          sse(res, 'testo', esito.testo);
+          if (esito.fonti.length) sse(res, 'fonti', esito.fonti.slice(0, 4));
+          sse(res, 'fine', { troncata: false, riserva: true });
+          return res.end();
+        }
+      } catch (e2) {
+        console.error('[chat] anche la riserva Gemini ha fallito:', e2 && e2.message ? e2.message : e2);
+      }
+    }
+
     // Gli header sono gia' partiti: l'errore puo' viaggiare solo nel flusso.
     if (res.headersSent) {
       sse(res, 'errore', 'La risposta si e\' interrotta. Riprova.');

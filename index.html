@@ -2121,6 +2121,16 @@
         <strong>Per aprile 2027 non c'è ancora niente di annunciato, e non ci sarà per un pezzo.</strong> In Corea i concerti si annunciano con qualche mese di anticipo, non con un anno e mezzo: le date usciranno verosimilmente fra l'inverno e la primavera 2027. Quindi qui non trovate una lista di nomi — sarebbe inventata — ma il metodo per controllare quando sarà il momento.
       </div>
 
+      <div class="card reveal" id="kpop-live-kr">
+        <h3 style="margin-top:0;">🔎 Controlla adesso</h3>
+        <p style="margin-top:0;">Quello che c'è scritto qui sotto è fermo ad agosto 2026. Questo bottone va a guardare <em>oggi</em>, e se nel frattempo è uscito qualcosa lo trova.</p>
+        <div class="flight-links">
+          <button id="kpop-cerca-kr">Cerca i concerti nelle nostre date</button>
+        </div>
+        <p class="qp-stato" id="kpop-stato-kr" style="margin-top:12px;">Non ancora cercato.</p>
+        <div id="kpop-esito-kr"></div>
+      </div>
+
       <div class="callout reveal">
         <strong>La buona notizia: sono le date giuste.</strong> Inizio aprile è periodo pieno di concerti negli stadi di Seul. Per dare un'idea di cosa è capitato nella <em>stessa finestra</em> nel 2026: <strong>BTS</strong> allo stadio di Goyang il 9, 11 e 12 aprile, e <strong>SEVENTEEN</strong> all'Asiad di Incheon il 4 e 5. Non è una promessa per il 2027 — è il segnale che quelle date non sono un periodo morto.
       </div>
@@ -2401,7 +2411,10 @@
 
   .qp-barra{ height:8px; border-radius:999px; background:rgba(255,255,255,0.12); overflow:hidden; margin:14px 0 8px; }
   .qp-barra > div{ height:100%; width:0; border-radius:999px; background:linear-gradient(90deg,var(--accent),var(--accent-deep)); transition:width .25s ease; }
-  .qp-stato{ font-size:0.85rem; color:#c7c2b6; }
+  /* Questa riga di stato la usa anche la scheda Corea, su pannello
+     chiaro: il grigio da fondo scuro li' sparirebbe. Una coppia. */
+  .qp-stato{ font-size:0.85rem; color:var(--ink-soft); }
+  section.panel.dark .qp-stato{ color:#c7c2b6; }
 
   /* Un risultato = una combinazione meta + coppia di date. */
   .qp-esiti{ display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:14px; }
@@ -3153,6 +3166,76 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
       calendario.appendChild(b);
     });
   }
+
+  // ---- Concerti K-pop: la ricerca dal vivo ----
+  // Il calendario coreano esce pochi mesi prima, quindi una lista scritta
+  // a mano invecchia sicuro. Questo chiede a /api/kpop, che gira su
+  // Gemini. Se la ricerca sul web non e' disponibile la risposta arriva
+  // lo stesso, ma scritta a memoria: in quel caso lo si scrive grosso,
+  // perche' una data di concerto inventata e' peggio di nessuna data.
+  (function(){
+    var bottone = document.getElementById('kpop-cerca-kr');
+    if(!bottone) return;
+    var stato = document.getElementById('kpop-stato-kr');
+    var esito = document.getElementById('kpop-esito-kr');
+
+    var API_REMOTA = 'https://patagucci-trip.vercel.app/api/kpop';
+    var locale = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+    var API = (location.protocol.indexOf('http') === 0 && locale) ? '/api/kpop' : API_REMOTA;
+
+    function scappa(s){
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+    function formatta(testo){
+      var s = scappa(testo);
+      s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      s = s.replace(/^[-•]\s*/gm, '');
+      s = s.replace(/\n{2,}/g, '</p><p>').replace(/\n/g, '<br>');
+      return '<p>' + s + '</p>';
+    }
+
+    bottone.addEventListener('click', function(){
+      bottone.disabled = true;
+      esito.innerHTML = '';
+      stato.textContent = 'Sto cercando… ci vuole qualche secondo.';
+
+      var taglio = new AbortController();
+      var scadenza = setTimeout(function(){ taglio.abort(); }, 50000);
+
+      fetch(API, { signal: taglio.signal })
+        .then(function(r){ return r.json().then(function(j){ return { ok:r.ok, corpo:j }; }); })
+        .then(function(r){
+          clearTimeout(scadenza);
+          if(!r.ok || r.corpo.errore) throw new Error(r.corpo.errore || 'Ricerca non riuscita.');
+
+          var quando = new Date(r.corpo.quando);
+          stato.textContent = 'Cercato il ' + quando.toLocaleDateString('it-IT') +
+            ' alle ' + quando.toLocaleTimeString('it-IT', { hour:'2-digit', minute:'2-digit' }) + '.';
+
+          var html = '';
+          if(!r.corpo.ricercaFatta){
+            html += '<div class="callout warn" style="margin-top:12px;"><strong>Attenzione: questa risposta non viene da una ricerca sul web.</strong> ' +
+              'La ricerca dal vivo non è disponibile, quindi qui sotto c\'è quello che il modello ricorda — e può essere vecchio o sbagliato. ' +
+              '<strong>Non prendete nessuna data per buona senza controllarla</strong> su Interpark Global o Weverse.</div>';
+          }
+          html += '<div class="callout" style="margin-top:12px;">' + formatta(r.corpo.testo) + '</div>';
+
+          if(r.corpo.fonti && r.corpo.fonti.length){
+            html += '<div class="source-note">Fonti trovate: ' + r.corpo.fonti.slice(0,5).map(function(f){
+              return '<a href="' + scappa(f.url) + '" target="_blank" rel="noopener">' + scappa(f.titolo) + '</a>';
+            }).join(' · ') + '</div>';
+          }
+          esito.innerHTML = html;
+        })
+        .catch(function(e){
+          clearTimeout(scadenza);
+          stato.textContent = e.name === 'AbortError'
+            ? 'Nessuna risposta entro cinquanta secondi. Riprova.'
+            : e.message;
+        })
+        .then(function(){ bottone.disabled = false; });
+    });
+  })();
 
   // ---- La pagina cambia colore col paese che si sta guardando ----
   // Tre paesi in una scheda sola: mentre si scorre, i colori e la barra
