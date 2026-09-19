@@ -251,32 +251,50 @@ module.exports = async function handler(req, res) {
     messages: messaggi,
   };
 
-  // Le fonti citate durante la risposta, in ordine di comparsa e senza
-  // doppioni. Vanno mostrate: sono di qualcun altro, non nostre.
+  // ------------------------------------------------------------------
+  // Il giro in due tempi.
+  //
+  // OneProvider accetta web_search ma non e' lo strumento vero: cerca e
+  // incolla l'elenco dei risultati come se fosse la risposta, in
+  // inglese, poi si ferma. Verificato dal vivo, due domande su due.
+  //
+  // Quindi il primo giro vale solo come raccolta e non si trasmette
+  // niente di quello che dice; la risposta la scrive un secondo giro,
+  // che quei risultati se li legge. Se la ricerca non parte, il primo
+  // giro e' gia' la risposta e si consegna intera.
+  // ------------------------------------------------------------------
   const fonti = [];
+  let cercato = false;
   let scritto = false;
 
-  // Una ricerca lunga puo' far sospendere il turno (pause_turn): si
-  // riprende rimandando indietro il messaggio dell'assistente com'e'.
-  // Il giro si chiude comunque, qui dentro non si fanno maratone.
-  async function esegui(conRicerca) {
-    const base = conRicerca ? richiesta : { ...richiesta, tools: undefined };
-    let messaggiTurno = richiesta.messages;
+  async function giro(opzioni) {
+    const base = { ...richiesta };
+    if (!opzioni.conRicerca) delete base.tools;
+    if (opzioni.materiale) base.system = [...richiesta.system, { type: 'text', text: opzioni.materiale }];
 
-    for (let giro = 0; giro < 3; giro++) {
+    let messaggiTurno = richiesta.messages;
+    let testo = '';
+
+    // Una ricerca lunga puo' sospendere il turno (pause_turn): si
+    // riprende rimandando indietro il messaggio dell'assistente com'e'.
+    for (let ripresa = 0; ripresa < 3; ripresa++) {
       const flusso = cliente.messages.stream({ ...base, messages: messaggiTurno });
       for await (const evento of flusso) {
-        // Durante una ricerca il flusso tace per qualche secondo: la
-        // pagina merita di sapere che non si e' impiantato.
         if (evento.type === 'content_block_start' && evento.content_block.type === 'server_tool_use') {
+          cercato = true;
           sse(res, 'stato', 'cerco sul web…');
           continue;
         }
         if (evento.type !== 'content_block_delta') continue;
         if (evento.delta.type === 'text_delta') {
-          scritto = true;
-          sse(res, 'testo', evento.delta.text);
+          testo += evento.delta.text;
+          if (opzioni.trasmetti) {
+            scritto = true;
+            sse(res, 'testo', evento.delta.text);
+          }
         } else if (evento.delta.type === 'citations_delta') {
+          // Con una ricerca vera le fonti arrivano da qui. Il gateway
+          // non ne manda, e allora si pescano dal testo piu' sotto.
           const c = evento.delta.citation || {};
           if (c.url && !fonti.some((f) => f.url === c.url)) {
             fonti.push({ url: c.url, titolo: c.title || c.url });
@@ -284,30 +302,74 @@ module.exports = async function handler(req, res) {
         }
       }
       const finale = await flusso.finalMessage();
-      if (finale.stop_reason !== 'pause_turn') return finale;
+      if (finale.stop_reason !== 'pause_turn') return { finale, testo };
       messaggiTurno = [...messaggiTurno, { role: 'assistant', content: finale.content }];
     }
-    return { stop_reason: 'end_turn' };
+    return { finale: { stop_reason: 'end_turn' }, testo };
+  }
+
+  // Dall'elenco grezzo: ogni indirizzo col titolo in grassetto che lo
+  // precede. Se il gateway cambiasse formato resterebbero gli indirizzi,
+  // che e' il pezzo che conta.
+  function indirizziDa(testo) {
+    const trovati = [];
+    let titolo = '';
+    for (const riga of String(testo).split('\n')) {
+      const t = riga.match(/\*\*(.+?)\*\*/);
+      if (t) titolo = t[1].trim();
+      const u = riga.match(/https?:\/\/[^\s)\]]+/);
+      if (u && !trovati.some((f) => f.url === u[0])) {
+        trovati.push({ url: u[0], titolo: titolo || u[0] });
+      }
+    }
+    return trovati;
   }
 
   try {
-    let finale;
+    let esito;
     try {
-      finale = await esegui(true);
+      esito = await giro({ conRicerca: true, trasmetti: false });
     } catch (e) {
-      // OneProvider e' un gateway: che faccia passare gli strumenti lato
-      // server di Anthropic non e' scontato. Se li rifiuta si risponde
-      // lo stesso, col solo contenuto del sito, invece di piantarsi.
+      // Un motore che rifiuta gli strumenti non deve piantare il
+      // pannello: si risponde lo stesso, col solo contenuto del sito.
       if (scritto || !e || e.status !== 400) throw e;
       console.warn('[chat] ricerca web rifiutata dal motore, rispondo senza:', e.message);
-      finale = await esegui(false);
+      esito = await giro({ conRicerca: false, trasmetti: false });
     }
 
-    if (finale.stop_reason === 'refusal') {
+    if (cercato) {
+      sse(res, 'stato', 'metto insieme la risposta…');
+      for (const f of indirizziDa(esito.testo)) {
+        if (!fonti.some((x) => x.url === f.url)) fonti.push(f);
+      }
+      const materiale = 'Per la domanda qui sotto e\' stata appena fatta una ricerca sul web. '
+        + 'Questi sono i risultati grezzi come li sputa il motore: titoli, righe di descrizione e indirizzi, '
+        + 'in ordine sparso e a volte fuori tema.\n\n'
+        + '=== RISULTATI DELLA RICERCA ===\n'
+        + esito.testo.slice(0, 8000) + '\n'
+        + '=== FINE RISULTATI ===\n\n'
+        + 'Non ricopiarli e non elencarli: leggili e scrivi tu la risposta, in italiano e con il tono di '
+        + 'sempre, tenendo solo quello che serve davvero. Di\' da che sito viene il numero o la regola che '
+        + 'riporti. Se li' + ' dentro la risposta non c\'e\', dillo in una riga invece di inventarla.';
+      const secondo = await giro({ conRicerca: false, trasmetti: true, materiale });
+      esito = { finale: secondo.finale, testo: secondo.testo };
+      if (!esito.testo.trim()) {
+        sse(res, 'errore', 'Ho trovato qualcosa ma non sono riuscito a metterlo insieme. Riprova.');
+        return res.end();
+      }
+    } else {
+      // Nessuna ricerca: il primo giro era gia' la risposta.
+      if (esito.testo) {
+        scritto = true;
+        sse(res, 'testo', esito.testo);
+      }
+    }
+
+    if (esito.finale.stop_reason === 'refusal') {
       sse(res, 'errore', 'Su questa domanda non me la sento di rispondere. Provane un\'altra.');
     } else {
-      if (fonti.length) sse(res, 'fonti', fonti.slice(0, 6));
-      sse(res, 'fine', { troncata: finale.stop_reason === 'max_tokens' });
+      if (fonti.length) sse(res, 'fonti', fonti.slice(0, 4));
+      sse(res, 'fine', { troncata: esito.finale.stop_reason === 'max_tokens' });
     }
     return res.end();
   } catch (e) {

@@ -841,7 +841,7 @@ chat_js = '''
     if(!el || !lista || !lista.length) return;
     var box = document.createElement('div');
     box.className = 'pg-chat-fonti';
-    box.appendChild(document.createTextNode('Fonti: '));
+    box.appendChild(document.createTextNode('Cercato su: '));
     lista.forEach(function(f, i){
       if(!/^https?:\/\//i.test(f.url || '')) return;
       var a = document.createElement('a');
@@ -950,7 +950,7 @@ chat_js = '''
     }
 
     var taglio = new AbortController();
-    var scadenza = setTimeout(function(){ taglio.abort(); }, 45000);
+    var scadenza = setTimeout(function(){ taglio.abort(); }, 60000);
 
     fetch(API, {
       method: 'POST',
@@ -1020,7 +1020,7 @@ chat_js = '''
       // Solo i messaggi scritti apposta arrivano a schermo: quelli di
       // rete sono in inglese e non dicono niente a chi legge.
       el.textContent = err.name === 'AbortError'
-        ? 'Nessuna risposta entro 45 secondi. Riprova.'
+        ? 'Nessuna risposta entro un minuto. Riprova.'
         : err.gentile ? err.message : 'Non riesco a rispondere adesso. Riprova fra un attimo.';
       chiudiTurno();
     });
