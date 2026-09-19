@@ -7,7 +7,7 @@ import json
 
 DESTS = [
     {"file": "islanda-trip.html", "suf": "is", "flag": "🇮🇸", "name": "Islanda", "stato": "confermato"},
-    {"file": "corea-trip.html", "suf": "kr", "flag": "🇰🇷", "name": "Corea e Hong Kong", "stato": "confermato"},
+    {"file": "corea-trip.html", "suf": "kr", "flag": "🇰🇷", "name": "Corea, Taiwan e HK", "stato": "confermato"},
     # Non e' una meta: e' la pagina che le cerca. Sta in fondo al selettore.
     {"file": "prossimo.html", "suf": "nx", "flag": "❓", "name": "Quale sarà il prossimo?", "stato": "idea"},
 ]
@@ -480,9 +480,9 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               <div class="overlay"></div>
               <div class="content">
                 <div class="flag">🇰🇷</div>
-                <div class="title">Corea del Sud e Hong Kong</div>
-                <div class="meta">2-17 aprile 2027 · 16 giorni</div>
-                <p class="tagline">Seul, Gyeongju e Busan in KTX, il vulcano di Jeju, i ciliegi in fiore e tre giorni a Hong Kong.</p>
+                <div class="title">Corea, Taiwan e Hong Kong</div>
+                <div class="meta">2-18 aprile 2027 · 17 giorni</div>
+                <p class="tagline">Seul, Gyeongju e Busan in KTX, il vulcano di Jeju, i ciliegi in fiore, e poi giù a tappe: Taipei e Hong Kong.</p>
               </div>
             </a>
           </div>
@@ -499,11 +499,11 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
 <!--MAPPAMONDO-->
             </svg>
             <div class="mondo-stat">
-              <div class="ms-box"><span class="ms-num">15<span class="ms-pct">%</span></span><span class="ms-lab">del mondo</span></div>
-              <div class="ms-box"><span class="ms-num">29</span><span class="ms-lab">paesi</span></div>
+              <div class="ms-box"><span class="ms-num">25<span class="ms-pct">%</span></span><span class="ms-lab">del mondo</span></div>
+              <div class="ms-box"><span class="ms-num">49</span><span class="ms-lab">paesi</span></div>
               <div class="ms-box"><span class="ms-num">4</span><span class="ms-lab">continenti</span></div>
             </div>
-            <div class="source-note">Il <strong>15%</strong> è 29 paesi sui <strong>195 stati membri dell'ONU</strong>: lo dichiaro perché contando anche territori e regioni autonome verrebbe un numero diverso. Fuori da quel conto ci sono <strong>Taiwan</strong>, <strong>Kosovo</strong>, <strong>Hong Kong</strong>, <strong>Macao</strong> e la <strong>Transnistria</strong>, che non sono stati membri ONU ma sono stati visti lo stesso. Mappa: Al MacDonald (@F1LT3R), <a href="https://commons.wikimedia.org/wiki/File:World_map_-_low_resolution.svg" target="_blank" rel="noopener">CC BY-SA 3.0</a>. Hong Kong, Macao, Singapore e Kosovo sono troppo piccoli per essere colorati a questa scala. Gli elenchi per persona sono ancora parziali.</div>
+            <div class="source-note">Il <strong>25%</strong> è 49 paesi sui <strong>195 stati membri dell'ONU</strong>: lo dichiaro perché contando anche territori e regioni autonome verrebbe un numero diverso. Fuori da quel conto ci sono <strong>Taiwan</strong>, <strong>Kosovo</strong>, <strong>Hong Kong</strong>, <strong>Macao</strong>, il <strong>Vaticano</strong>, le <strong>Canarie</strong> (che sono Spagna) e la <strong>Transnistria</strong>, che non sono stati membri ONU ma sono stati visti lo stesso. Mappa: Al MacDonald (@F1LT3R), <a href="https://commons.wikimedia.org/wiki/File:World_map_-_low_resolution.svg" target="_blank" rel="noopener">CC BY-SA 3.0</a>. Hong Kong, Macao, Singapore, Kosovo, San Marino, il Vaticano e le Seychelles sono troppo piccoli per essere colorati a questa scala. Gli elenchi per persona sono ancora parziali: manca tutto Manu.</div>
           </div>
 
           <h3 style="margin-top:30px;">Chi c'era, viaggio per viaggio</h3>
@@ -546,7 +546,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               <span class="paese-fatto"><span class="pf-flag">🇪🇸</span><span class="pf-nome">Spagna</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇮🇪</span><span class="pf-nome">Irlanda</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇷🇴</span><span class="pf-nome">Romania</span></span>
-              <span class="paese-fatto"><span class="pf-flag">🏴‍☠️</span><span class="pf-nome">Transnistria</span></span>
+              <span class="paese-fatto"><span class="pf-flag"><svg viewBox="0 0 24 12" width="24" height="12" role="img" aria-label="Bandiera della Transnistria" style="display:block;border-radius:2px;"><rect width="24" height="12" fill="#de0000"/><rect y="4.5" width="24" height="3" fill="#009933"/></svg></span><span class="pf-nome">Transnistria</span></span>
             </div>
           </div>
 
@@ -559,12 +559,28 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               <span class="paese-fatto"><span class="pf-flag">🇨🇺</span><span class="pf-nome">Cuba</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇯🇵</span><span class="pf-nome">Giappone</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇹🇭</span><span class="pf-nome">Thailandia</span></span>
-              <span class="paese-fatto"><span class="pf-flag">🇱🇰</span><span class="pf-nome">Sri Lanka</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇦🇪</span><span class="pf-nome">Emirati Arabi</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇦🇿</span><span class="pf-nome">Azerbaigian</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇹🇳</span><span class="pf-nome">Tunisia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇸🇨</span><span class="pf-nome">Seychelles</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇮🇹</span><span class="pf-nome">Italia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇸🇲</span><span class="pf-nome">San Marino</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇻🇦</span><span class="pf-nome">Vaticano</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇪🇸</span><span class="pf-nome">Spagna</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇮🇨</span><span class="pf-nome">Canarie</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇵🇹</span><span class="pf-nome">Portogallo</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇫🇷</span><span class="pf-nome">Francia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇧🇪</span><span class="pf-nome">Belgio</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇳🇱</span><span class="pf-nome">Paesi Bassi</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇨🇭</span><span class="pf-nome">Svizzera</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇩🇰</span><span class="pf-nome">Danimarca</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇬🇧</span><span class="pf-nome">Regno Unito</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇬🇷</span><span class="pf-nome">Grecia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇭🇷</span><span class="pf-nome">Croazia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇭🇺</span><span class="pf-nome">Ungheria</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇷🇴</span><span class="pf-nome">Romania</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇲🇩</span><span class="pf-nome">Moldavia</span></span>
+              <span class="paese-fatto"><span class="pf-flag"><svg viewBox="0 0 24 12" width="24" height="12" role="img" aria-label="Bandiera della Transnistria" style="display:block;border-radius:2px;"><rect width="24" height="12" fill="#de0000"/><rect y="4.5" width="24" height="3" fill="#009933"/></svg></span><span class="pf-nome">Transnistria</span></span>
             </div>
           </div>
 
@@ -572,12 +588,36 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
             <div class="pp-nome">🌟 Kiki</div>
             <div class="paesi-fatti">
               <span class="paese-fatto"><span class="pf-flag">🇺🇸</span><span class="pf-nome">Stati Uniti</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇲🇽</span><span class="pf-nome">Messico</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇨🇺</span><span class="pf-nome">Cuba</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇧🇸</span><span class="pf-nome">Bahamas</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇧🇷</span><span class="pf-nome">Brasile</span></span>
-              <span class="paese-fatto"><span class="pf-flag">🇲🇦</span><span class="pf-nome">Marocco</span></span>
-              <span class="paese-fatto"><span class="pf-flag">🇹🇷</span><span class="pf-nome">Turchia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇵🇪</span><span class="pf-nome">Perù</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇧🇴</span><span class="pf-nome">Bolivia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇨🇱</span><span class="pf-nome">Cile</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇯🇵</span><span class="pf-nome">Giappone</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇵🇭</span><span class="pf-nome">Filippine</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇲🇾</span><span class="pf-nome">Malesia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇸🇬</span><span class="pf-nome">Singapore</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇮🇩</span><span class="pf-nome">Indonesia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇲🇻</span><span class="pf-nome">Maldive</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇯🇴</span><span class="pf-nome">Giordania</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇹🇷</span><span class="pf-nome">Turchia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇲🇦</span><span class="pf-nome">Marocco</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇨🇻</span><span class="pf-nome">Capo Verde</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇲🇺</span><span class="pf-nome">Mauritius</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇵🇹</span><span class="pf-nome">Portogallo</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇪🇸</span><span class="pf-nome">Spagna</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇫🇷</span><span class="pf-nome">Francia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇳🇱</span><span class="pf-nome">Paesi Bassi</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇩🇪</span><span class="pf-nome">Germania</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇦🇹</span><span class="pf-nome">Austria</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇨🇭</span><span class="pf-nome">Svizzera</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇭🇷</span><span class="pf-nome">Croazia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇬🇷</span><span class="pf-nome">Grecia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇲🇹</span><span class="pf-nome">Malta</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇬🇧</span><span class="pf-nome">Regno Unito</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇻🇦</span><span class="pf-nome">Vaticano</span></span>
             </div>
           </div>
         </div>
@@ -723,7 +763,7 @@ chat_css = '''
   }
   .pg-chat-spunti button:hover{ background:rgba(var(--accent-rgb),0.18); }
 
-  .pg-chat-invio{ display:flex; gap:8px; align-items:flex-end; padding:12px 16px 6px; border-top:1px solid rgba(255,255,255,0.09); }
+  .pg-chat-invio{ display:flex; gap:8px; align-items:flex-end; padding:12px 16px; border-top:1px solid rgba(255,255,255,0.09); }
   .pg-chat-invio textarea{
     flex:1 1 auto; resize:none; max-height:120px;
     background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:12px;
@@ -736,7 +776,6 @@ chat_css = '''
     background:var(--accent); color:#10100e; font-size:1rem; font-weight:800;
   }
   .pg-chat-invio button:disabled{ opacity:0.4; cursor:not-allowed; }
-  .pg-chat-nota{ margin:0; padding:2px 16px 12px; font-size:0.68rem; line-height:1.5; color:#8d887d; }
 
   @media (max-width:560px){
     .pg-chat{ right:0; left:0; bottom:0; width:100%; max-height:86vh; border-radius:20px 20px 0 0; }
@@ -770,7 +809,6 @@ chat_html = '''
     <textarea id="pg-chat-testo" rows="1" maxlength="1500" placeholder="Scrivi una domanda sui viaggi…"></textarea>
     <button type="submit" id="pg-chat-manda" aria-label="Manda la domanda">➤</button>
   </form>
-  <p class="pg-chat-nota">Risponde un'intelligenza artificiale: conosce queste pagine e cerca sul web quello che non c'è scritto, citando le fonti. Controlla i prezzi e gli orari prima di fidarti. I voli dal vivo stanno nella scheda <em>Quale sarà il prossimo?</em></p>
 </section>
 '''
 
@@ -782,7 +820,7 @@ NOMI_METE.update({d["suf"]: d["name"] for d in DESTS})
 SPUNTI = {
     "hub": ["Serve il visto per queste mete?", "Che vaccinazioni servono?", "Quanto costa l'assicurazione?"],
     "is": ["Quanto costa l'ingresso alla Blue Lagoon?", "Com'è il meteo adesso in Islanda?", "I vulcani sono attivi in questo momento?"],
-    "kr": ["Quanto costa il Korea Pass oggi?", "Le previsioni della fioritura per il 2027?", "Serve il K-ETA per gli italiani?"],
+    "kr": ["Quanto costano i voli in tutto?", "Cosa si fa a Taipei in due giorni?", "Serve il K-ETA per gli italiani?"],
     "nx": ["Dove si vola con poco a gennaio?", "Quali mete sono fuori stagione ad aprile?", "Come funziona la ricerca voli?"],
 }
 

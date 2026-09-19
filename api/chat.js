@@ -60,11 +60,15 @@ A COSA SERVI. Il sito sanno leggerlo da soli: ripetergli quello che c'e' gia' sc
 
 Il contenuto della scheda e' lo sfondo, non la risposta. Se quello che ti chiedono sta gia' scritto in pagina, dillo in mezza riga e poi aggiungi qualcosa che in pagina non c'e'.
 
-Quando cercare:
-- Cerca quando la risposta dipende da qualcosa che cambia o che il sito non copre: costi, orari, disponibilita', meteo, regole, notizie, consigli pratici su un posto.
-- Non cercare per il viaggio in se': date, chi parte, cosa c'e' in programma, quanto dura una tratta. Quello sta nella scheda ed e' la fonte giusta.
-- Quando rispondi con roba trovata sul web, di' da dove viene, con il nome del sito.
-- Se la ricerca non porta niente di utile, dillo invece di inventare.
+COME DECIDI SE CERCARE. Prima guarda la scheda. Se la domanda si chiude con quello che c'e' scritto li' — date, itinerario, tappe, durate, budget previsto, chi parte — rispondi e basta.
+
+Se invece serve qualcosa che la scheda non ha, o che cambia nel tempo (prezzi, orari, meteo, regole d'ingresso, aperture e chiusure, notizie, consigli pratici su un posto), non rispondere a memoria: scrivi UNA SOLA RIGA fatta cosi', e nient'altro, ne' prima ne' dopo:
+
+CERCA: le parole da dare a un motore
+
+Le parole siano quelle che scriveresti tu in un motore di ricerca — nome del posto e la cosa precisa — non la domanda ricopiata. Per esempio: CERCA: Blue Lagoon Islanda prezzo ingresso 2027
+
+Quando poi rispondi con roba trovata sul web, di' da dove viene, con il nome del sito. Se la ricerca non porta niente di utile, dillo invece di inventare.
 
 Come rispondi:
 - Sempre in italiano, a meno che la domanda non sia in un'altra lingua: in quel caso usa quella.
@@ -285,7 +289,6 @@ module.exports = async function handler(req, res) {
   // giro e' gia' la risposta e si consegna intera.
   // ------------------------------------------------------------------
   const fonti = [];
-  let cercato = false;
   let scritto = false;
 
   async function giro(opzioni) {
@@ -293,7 +296,7 @@ module.exports = async function handler(req, res) {
     if (!opzioni.conRicerca) delete base.tools;
     if (opzioni.materiale) base.system = [...richiesta.system, { type: 'text', text: opzioni.materiale }];
 
-    let messaggiTurno = richiesta.messages;
+    let messaggiTurno = opzioni.messaggi || richiesta.messages;
     let testo = '';
 
     // Una ricerca lunga puo' sospendere il turno (pause_turn): si
@@ -302,7 +305,6 @@ module.exports = async function handler(req, res) {
       const flusso = cliente.messages.stream({ ...base, messages: messaggiTurno });
       for await (const evento of flusso) {
         if (evento.type === 'content_block_start' && evento.content_block.type === 'server_tool_use') {
-          cercato = true;
           sse(res, 'stato', 'cerco sul web…');
           continue;
         }
@@ -346,59 +348,69 @@ module.exports = async function handler(req, res) {
     return trovati;
   }
 
+  // La riga con cui il modello chiede una ricerca, e le parole da dare
+  // al motore. Deve essere l'unica cosa che ha detto: se ha gia' scritto
+  // una risposta, quella vale e non si cerca niente.
+  function queryRichiesta(testo) {
+    const pulito = String(testo || '').trim();
+    if (!/^CERCA\s*:/i.test(pulito)) return null;
+    const query = pulito.replace(/^CERCA\s*:/i, '').split('\n')[0].trim().slice(0, 200);
+    return query || null;
+  }
+
   try {
+    // Primo giro, senza strumento: guarda la scheda e decide. Se la
+    // domanda si chiude li', questa e' gia' la risposta e si consegna
+    // intera — una chiamata sola e nessuna ricerca da pagare.
     let esito;
     try {
-      esito = await giro({ conRicerca: true, trasmetti: false });
-    } catch (e) {
-      // Un motore che rifiuta gli strumenti non deve piantare il
-      // pannello: si risponde lo stesso, col solo contenuto del sito.
-      if (scritto || !e || e.status !== 400) throw e;
-      console.warn('[chat] ricerca web rifiutata dal motore, rispondo senza:', e.message);
       esito = await giro({ conRicerca: false, trasmetti: false });
+    } catch (e) {
+      if (scritto || !e || e.status !== 400) throw e;
+      console.warn('[chat] primo giro fallito:', e.message);
+      throw e;
     }
 
-    if (cercato) {
+    const query = queryRichiesta(esito.testo);
+
+    if (query) {
+      console.log('[chat] ricerca chiesta dal modello:', query);
+      // Secondo giro, il solo che paga una ricerca. Il gateway cerca
+      // l'ultimo messaggio dell'utente parola per parola, quindi al suo
+      // posto ci va la query: cosi' a cercare e' quello che serve, non
+      // la domanda ricopiata. Di questo giro interessa solo l'elenco.
+      const ricerca = await giro({
+        conRicerca: true,
+        trasmetti: false,
+        messaggi: [{ role: 'user', content: query }],
+      });
+
       sse(res, 'stato', 'metto insieme la risposta…');
-      for (const f of indirizziDa(esito.testo)) {
+      for (const f of indirizziDa(ricerca.testo)) {
         if (!fonti.some((x) => x.url === f.url)) fonti.push(f);
       }
-      const materiale = 'Per la domanda qui sotto e\' stata appena fatta una ricerca sul web. '
-        + 'Questi sono i risultati grezzi come li sputa il motore: titoli, righe di descrizione e indirizzi, '
-        + 'in ordine sparso e a volte fuori tema.\n\n'
+
+      // Terzo giro: la risposta vera, con l'elenco come materiale.
+      const materiale = 'Per la domanda qui sotto e\' stata appena fatta una ricerca sul web con le parole "'
+        + query + '". Questi sono i risultati grezzi come li sputa il motore: titoli, righe di '
+        + 'descrizione e indirizzi, in ordine sparso e a volte fuori tema.\n\n'
         + '=== RISULTATI DELLA RICERCA ===\n'
-        + esito.testo.slice(0, 8000) + '\n'
+        + ricerca.testo.slice(0, 8000) + '\n'
         + '=== FINE RISULTATI ===\n\n'
         + 'Non ricopiarli e non elencarli: leggili e scrivi tu la risposta, in italiano e con il tono di '
         + 'sempre, tenendo solo quello che serve davvero. Di\' da che sito viene il numero o la regola che '
-        + 'riporti. Se li' + ' dentro la risposta non c\'e\', dillo in una riga invece di inventarla.';
-      const secondo = await giro({ conRicerca: false, trasmetti: true, materiale });
-      esito = { finale: secondo.finale, testo: secondo.testo };
+        + 'riporti. Se li dentro la risposta non c\'e\', dillo in una riga invece di inventarla. '
+        + 'Non scrivere piu\' righe che cominciano con CERCA: adesso si risponde e basta.';
+      esito = await giro({ conRicerca: false, trasmetti: true, materiale });
+
       if (!esito.testo.trim()) {
         sse(res, 'errore', 'Ho trovato qualcosa ma non sono riuscito a metterlo insieme. Riprova.');
         return res.end();
       }
-    } else {
-      // Nessuna ricerca: il primo giro era gia' la risposta.
-      if (esito.testo) {
-        scritto = true;
-        sse(res, 'testo', esito.testo);
-      }
+    } else if (esito.testo) {
+      scritto = true;
+      sse(res, 'testo', esito.testo);
     }
-
-    // Il gateway cerca a ogni richiesta, anche su "ciao" — e allora
-    // sotto una risposta compariva Wikipedia alla voce "ciao". Restano
-    // solo i siti che la risposta nomina davvero: le istruzioni gia'
-    // chiedono di dire da dove viene il numero riportato, e quando non
-    // lo nomina vuol dire che quella pagina non l'ha usata.
-    const nominate = fonti.filter((f) => {
-      const host = (f.url.match(/^https?:\/\/([^/]+)/) || [])[1];
-      if (!host) return false;
-      const pulito = host.replace(/^www\./, '');
-      const nome = pulito.split('.')[0];
-      const testo = esito.testo.toLowerCase();
-      return testo.includes(pulito.toLowerCase()) || (nome.length >= 5 && testo.includes(nome.toLowerCase()));
-    });
 
     if (esito.finale.stop_reason === 'refusal') {
       sse(res, 'errore', 'Su questa domanda non me la sento di rispondere. Provane un\'altra.');
