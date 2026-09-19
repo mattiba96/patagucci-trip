@@ -559,6 +559,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               <span class="paese-fatto"><span class="pf-flag">🇨🇺</span><span class="pf-nome">Cuba</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇯🇵</span><span class="pf-nome">Giappone</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇹🇭</span><span class="pf-nome">Thailandia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇱🇰</span><span class="pf-nome">Sri Lanka</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇦🇪</span><span class="pf-nome">Emirati Arabi</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇦🇿</span><span class="pf-nome">Azerbaigian</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇹🇳</span><span class="pf-nome">Tunisia</span></span>
