@@ -4425,7 +4425,7 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
     fetch(API, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messaggi: storico.slice(-16), meta: nomeMeta() }),
+      body: JSON.stringify({ messaggi: storico.slice(-16), meta: nomeMeta(), scheda: metaAttiva() }),
       signal: taglio.signal
     }).then(function(r){
       if(!r.ok || !r.body){

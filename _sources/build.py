@@ -84,7 +84,7 @@ def dati_da_script(js):
     return "\n\n".join(fuori)
 
 
-contesti = []
+contesti = {}
 
 blocks = []
 scripts = []
@@ -114,10 +114,10 @@ for d in DESTS:
     script_body = script_m.group(1)
 
     dati = dati_da_script("".join(re.findall(r"<script>(.*?)</script>", content, re.S)))
-    contesti.append(
-        f"## {d['flag']} {d['name']} — scheda \"{d['suf']}\", stato: {d['stato']}\n\n"
+    contesti[d["suf"]] = (
+        f"# {d['flag']} {d['name']} — stato: {d['stato']}\n\n"
         + testo_da_html(hero + main)
-        + (f"\n\n### Dati della pagina {d['name']} (itinerario, tappe, tratte, budget)\n\n{dati}" if dati else "")
+        + (f"\n\n## Dati della pagina (itinerario, tappe, tratte, budget)\n\n{dati}" if dati else "")
     )
 
     nav = nav.replace(
@@ -598,28 +598,40 @@ with open(DIR + "_sources/mappamondo.svg", encoding="utf-8") as _f:
 
 destination_blocks = "\n\n".join(b["block"] for b in blocks)
 
-# Il contesto della chat: la home davanti, poi una sezione per meta.
+# Il contesto della chat, diviso per scheda.
+#
+# In un blocco unico la chat, aperta sull'Islanda, rispondeva della
+# Corea: aveva tutto sotto gli occhi e della pagina aperta sapeva solo
+# per sentito dire. Adesso ogni scheda riceve il proprio viaggio e basta,
+# piu' la home e un indice delle altre per sapere dove mandare chi chiede
+# d'altro. Costa anche meno: un terzo dei token per domanda.
+#
 # Finisce in un modulo JS e non in un .txt perche' cosi' Vercel se lo
 # porta dentro la funzione da solo, come qualsiasi altra dipendenza.
 import datetime
 
-contesto = "\n\n".join(
-    [
-        "# Patagucci Trips — tutto il contenuto del sito",
-        f"Generato da _sources/build.py il {datetime.date.today().isoformat()}.",
-        "Le mete con stato \"confermato\" hanno le date fissate; \"idea\" no.",
-        "## 🌍 Home — i Patagucci, i viaggi gia' fatti, le mete in programma\n\n"
-        + testo_da_html(hub_html),
-    ]
-    + contesti
+comune = "\n\n".join([
+    "# Patagucci Trips",
+    f"Contenuto del sito, generato da _sources/build.py il {datetime.date.today().isoformat()}.",
+    "Le mete con stato \"confermato\" hanno le date fissate; \"idea\" no.",
+    "## 🌍 La home del sito\n\n" + testo_da_html(hub_html),
+])
+
+indice = "\n".join(
+    f"- {d['flag']} {d['name']} ({d['stato']}) — scheda \"{d['suf']}\""
+    for d in DESTS
 )
+
+contesto = {"comune": comune, "indice": indice, "schede": contesti}
 with open(DIR + "api/contesto.js", "w", encoding="utf-8") as f:
     f.write(
         "// Generato da _sources/build.py insieme a index.html. Non modificare a mano.\n"
-        "// Serve a api/chat.js: e' tutto cio' che la chat del sito sa dei viaggi.\n"
+        "// Serve a api/chat.js: il contenuto del sito, una voce per scheda.\n"
         "module.exports = " + json.dumps(contesto) + ";\n"
     )
-print("Written", DIR + "api/contesto.js", "length", len(contesto))
+print("Written", DIR + "api/contesto.js",
+      "| comune", len(comune),
+      "| schede:", ", ".join(f"{k}={len(v)}" for k, v in contesti.items()))
 
 stato_per_suf = {d["suf"]: d["stato"] for d in DESTS}
 switcher_buttons = '\n        '.join(
@@ -955,7 +967,7 @@ chat_js = '''
     fetch(API, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messaggi: storico.slice(-16), meta: nomeMeta() }),
+      body: JSON.stringify({ messaggi: storico.slice(-16), meta: nomeMeta(), scheda: metaAttiva() }),
       signal: taglio.signal
     }).then(function(r){
       if(!r.ok || !r.body){
