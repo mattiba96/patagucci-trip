@@ -277,16 +277,21 @@ module.exports = async function handler(req, res) {
   };
 
   // ------------------------------------------------------------------
-  // Il giro in due tempi.
+  // Come si arriva a una risposta.
   //
-  // OneProvider accetta web_search ma non e' lo strumento vero: cerca e
-  // incolla l'elenco dei risultati come se fosse la risposta, in
-  // inglese, poi si ferma. Verificato dal vivo, due domande su due.
+  // Due cose di OneProvider obbligano a questo giro. Primo: accetta
+  // web_search ma non e' lo strumento vero — cerca e incolla l'elenco
+  // dei risultati come se fosse la risposta, in inglese, poi si ferma,
+  // quindi a leggerli deve pensarci una chiamata dopo. Secondo: cerca
+  // a ogni richiesta che porti lo strumento, e come query usa il
+  // messaggio dell'utente parola per parola — "ciao" finiva su
+  // Wikipedia alla voce "ciao", pagata come tutte le altre.
   //
-  // Quindi il primo giro vale solo come raccolta e non si trasmette
-  // niente di quello che dice; la risposta la scrive un secondo giro,
-  // che quei risultati se li legge. Se la ricerca non parte, il primo
-  // giro e' gia' la risposta e si consegna intera.
+  // Percio': un primo giro senza strumento guarda la scheda e decide.
+  // Se basta quella, ha gia' risposto e si e' speso una chiamata sola.
+  // Se serve il web chiede lui la ricerca con la riga CERCA:, e solo
+  // allora parte il giro che la paga — con le sue parole al posto della
+  // domanda. Un terzo giro legge l'elenco e scrive la risposta.
   // ------------------------------------------------------------------
   const fonti = [];
   let scritto = false;
@@ -411,6 +416,18 @@ module.exports = async function handler(req, res) {
       scritto = true;
       sse(res, 'testo', esito.testo);
     }
+
+    // Dei risultati trovati restano solo i siti che la risposta nomina
+    // davvero: le istruzioni gia' chiedono di dire da dove viene il
+    // numero riportato, e una pagina che non nomina non l'ha usata.
+    const nominate = fonti.filter((f) => {
+      const host = (f.url.match(/^https?:\/\/([^/]+)/) || [])[1];
+      if (!host) return false;
+      const pulito = host.replace(/^www\./, '');
+      const nome = pulito.split('.')[0];
+      const testo = esito.testo.toLowerCase();
+      return testo.includes(pulito.toLowerCase()) || (nome.length >= 5 && testo.includes(nome.toLowerCase()));
+    });
 
     if (esito.finale.stop_reason === 'refusal') {
       sse(res, 'errore', 'Su questa domanda non me la sento di rispondere. Provane un\'altra.');
