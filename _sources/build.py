@@ -802,7 +802,7 @@ chat_js = '''
 
   var NOMI = __NOMI__;
   var SPUNTI = __SPUNTI__;
-  var CHIAVE_STORICO = 'patagucci-chat-v1';
+  var CHIAVE_STORICO = 'patagucci-chat-v2';
 
   var fab = document.getElementById('pg-chat-fab');
   var pannello = document.getElementById('pg-chat');
@@ -813,19 +813,32 @@ chat_js = '''
   var manda = document.getElementById('pg-chat-manda');
   var dove = document.getElementById('pg-chat-dove');
 
-  var storico = [];
+  // Una conversazione per scheda, non una sola per tutto il sito: le
+  // domande sull'Islanda non hanno niente da dire su quelle coreane, e
+  // tornando su una scheda si ritrova il discorso lasciato li'.
+  var fili = {};
   var inCorso = false;
 
   try {
     var salvato = sessionStorage.getItem(CHIAVE_STORICO);
-    if(salvato) storico = JSON.parse(salvato) || [];
-  } catch(e){ storico = []; }
+    if(salvato) fili = JSON.parse(salvato) || {};
+  } catch(e){ fili = {}; }
 
   function metaAttiva(){ return document.documentElement.getAttribute('data-dest') || 'hub'; }
   function nomeMeta(){ return NOMI[metaAttiva()] || 'la home'; }
 
+  function filo(scheda){
+    var k = scheda || metaAttiva();
+    if(!fili[k]) fili[k] = [];
+    return fili[k];
+  }
+
   function salva(){
-    try { sessionStorage.setItem(CHIAVE_STORICO, JSON.stringify(storico.slice(-16))); } catch(e){}
+    try {
+      var corti = {};
+      Object.keys(fili).forEach(function(k){ if(fili[k].length) corti[k] = fili[k].slice(-16); });
+      sessionStorage.setItem(CHIAVE_STORICO, JSON.stringify(corti));
+    } catch(e){}
   }
 
   // La risposta arriva come testo semplice. Qui si scappa tutto e poi si
@@ -870,7 +883,7 @@ chat_js = '''
   function disegnaSpunti(){
     var lista = SPUNTI[metaAttiva()] || SPUNTI.hub;
     spunti.innerHTML = '';
-    if(storico.length) return;   // gli spunti servono solo a rompere il ghiaccio
+    if(filo().length) return;   // gli spunti servono solo a rompere il ghiaccio
     lista.forEach(function(s){
       var b = document.createElement('button');
       b.type = 'button';
@@ -882,10 +895,10 @@ chat_js = '''
 
   function ridisegna(){
     righe.innerHTML = '';
-    if(!storico.length){
+    if(!filo().length){
       aggiungi('assistente', 'Ciao. Il sito lo leggi da solo: io servo per quello che non c\\'è scritto — prezzi d\\'ingresso, orari, meteo di adesso, visti, cosa conviene prenotare. Vado a cercarlo sul web. Stai guardando **' + nomeMeta() + '**.');
     } else {
-      storico.forEach(function(m){ disegnaFonti(aggiungi(m.ruolo, m.testo), m.fonti); });
+      filo().forEach(function(m){ disegnaFonti(aggiungi(m.ruolo, m.testo), m.fonti); });
     }
     disegnaSpunti();
   }
@@ -910,12 +923,13 @@ chat_js = '''
     if(e.key === 'Escape' && !pannello.hidden) chiudi();
   });
 
-  // Cambiando scheda cambia il contesto: la chat lo dice e rinfresca gli
-  // spunti, ma non butta via la conversazione in corso.
+  // Cambiando scheda si passa all'altra conversazione: quella lasciata
+  // resta dov'era e si ritrova tornando indietro. Se una risposta e'
+  // ancora in arrivo non si cambia filo a meta' — finisce nel suo.
   window.addEventListener('destinazione-cambiata', function(){
     if(pannello.hidden) return;
     dove.textContent = 'stai guardando: ' + nomeMeta();
-    disegnaSpunti();
+    if(!inCorso) ridisegna();
   });
 
   campo.addEventListener('input', function(){
@@ -933,14 +947,18 @@ chat_js = '''
   function chiedi(domanda){
     domanda = String(domanda || '').trim();
     if(!domanda || inCorso) return;
-    if(!storico.length) righe.innerHTML = '';
+    // La scheda si fissa adesso: se cambia mentre la risposta arriva,
+    // quella risposta appartiene comunque alla conversazione di qui.
+    var schedaTurno = metaAttiva();
+    var mio = filo(schedaTurno);
+    if(!mio.length) righe.innerHTML = '';
     inCorso = true;
     manda.disabled = true;
     campo.value = '';
     campo.style.height = 'auto';
     spunti.innerHTML = '';
 
-    storico.push({ ruolo:'utente', testo: domanda });
+    mio.push({ ruolo:'utente', testo: domanda });
     aggiungi('utente', domanda);
     salva();
 
@@ -967,7 +985,7 @@ chat_js = '''
     fetch(API, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messaggi: storico.slice(-16), meta: nomeMeta(), scheda: metaAttiva() }),
+      body: JSON.stringify({ messaggi: mio.slice(-16), meta: NOMI[schedaTurno] || 'la home', scheda: schedaTurno }),
       signal: taglio.signal
     }).then(function(r){
       if(!r.ok || !r.body){
@@ -987,7 +1005,7 @@ chat_js = '''
             clearTimeout(scadenza);
             stato.remove();
             if(risposta){
-              storico.push({ ruolo:'assistente', testo: risposta, fonti: fontiTurno || undefined });
+              mio.push({ ruolo:'assistente', testo: risposta, fonti: fontiTurno || undefined });
               salva();
             }
             chiudiTurno();
