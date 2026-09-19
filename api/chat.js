@@ -14,7 +14,10 @@
 const Anthropic = require('@anthropic-ai/sdk');
 const CONTESTO = require('./contesto.js');
 
-const MODELLO = 'claude-opus-5';
+// Le domande qui sono semplici — leggere il contenuto del sito e
+// rispondere corto — e Haiku costa un quinto di Opus in entrata e in
+// uscita. Il contesto (~23k token) sta largo nei suoi 200k.
+const MODELLO = 'claude-haiku-4-5-20251001';
 
 // Tetto per singolo IP, finestra scorrevole di un'ora. L'endpoint e'
 // pubblico e ogni risposta costa: senza freno una scorribanda di
@@ -76,8 +79,8 @@ const NOMI_CHIAVE = ['ANTHROPIC_API_KEY', 'CLAUDE_API_KEY', 'ANTHROPIC_KEY', 'AN
 // La chiave in uso e' di OneProvider, un gateway con API compatibili
 // Anthropic: stesso SDK, stessi parametri, stesso streaming SSE e stesso
 // prompt caching — cambia solo dove si bussa. Verificato dal vivo su
-// /v1/messages: accetta x-api-key, output_config e cache_control, e ha
-// claude-opus-5 a catalogo.
+// /v1/messages: accetta x-api-key e cache_control, e ha a catalogo sia
+// claude-opus-5 sia l'Haiku che usiamo.
 //
 // Quale endpoint usare lo dice la chiave stessa, cosi' non ci sono due
 // variabili d'ambiente da tenere d'accordo: le chiavi Anthropic sono
@@ -108,16 +111,16 @@ function diagnosiChiave() {
   const sistema = /^(VERCEL|AWS|NODE|NEXT|LAMBDA|_|PATH$|HOME$|TZ$|LANG$|PWD$|SHLVL$|TMPDIR$|LD_|EXEC_|AMZN_|X_)/;
   const tutti = Object.keys(process.env);
   const personali = tutti.filter((k) => !sistema.test(k));
-  const somiglianti = tutti.filter((k) => /anthropic|claude/i.test(k));
+  const somiglianti = tutti.filter((k) => /anthropic|claude|oneprovider|llm/i.test(k));
   console.log('[diagnosi chiave] nomi non di sistema visti dalla funzione:', personali.join(', ') || '(nessuno)');
   return {
     cercate: NOMI_CHIAVE,
     trovateSimili: somiglianti,
     quanteVariabiliPersonali: personali.length,
     interpretazione: somiglianti.length
-      ? 'Una variabile con "anthropic" o "claude" nel nome esiste ma non ha uno dei nomi attesi, oppure e\' vuota. Rinominala in ANTHROPIC_API_KEY.'
+      ? 'Una variabile dal nome somigliante esiste ma non e\' fra quelle cercate, oppure e\' vuota. Rinominala in ONEPROVIDER_API_KEY.'
       : personali.length
-        ? 'Alla funzione arrivano ' + personali.length + ' variabili tue, ma nessuna con "anthropic" nel nome: il nome e\' diverso da quelli cercati.'
+        ? 'Alla funzione arrivano ' + personali.length + ' variabili tue, ma nessuna somiglia a una chiave: non e\' mai stata aggiunta, oppure e\' su un altro progetto.'
         : 'Alla funzione non arriva nessuna variabile personale: la variabile non e\' spuntata per l\'ambiente Production, oppure e\' su un altro progetto Vercel.',
   };
 }
@@ -170,14 +173,15 @@ module.exports = async function handler(req, res) {
 
   const chiave = trovaChiave();
   if (!chiave) {
-    return res.status(500).json({ errore: 'ANTHROPIC_API_KEY non configurata su Vercel.', diagnosi: diagnosiChiave() });
+    diagnosiChiave();
+    return res.status(500).json({ errore: 'La chat non e\' disponibile in questo momento.' });
   }
 
   const corpo = await corpoDi(req);
-  if (!corpo) return res.status(400).json({ errore: 'Corpo della richiesta non leggibile (serve JSON).' });
+  if (!corpo) return res.status(400).json({ errore: 'Non ho capito la domanda. Riprova.' });
 
   const messaggi = ripulisci(corpo.messaggi);
-  if (!messaggi.length) return res.status(400).json({ errore: 'Nessuna domanda da girare.' });
+  if (!messaggi.length) return res.status(400).json({ errore: 'Scrivi una domanda e te la rispondo.' });
 
   const ora = Date.now();
   const ip = ipDi(req);
@@ -185,7 +189,7 @@ module.exports = async function handler(req, res) {
   const recenti = (chiamate.get(ip) || []).filter((t) => ora - t < 3600000);
   if (recenti.length >= LIMITE_ORARIO) {
     return res.status(429).json({
-      errore: 'Troppe domande da questo indirizzo in un\'ora (tetto: ' + LIMITE_ORARIO + '). Riprova piu\' tardi.',
+      errore: 'Troppe domande in un\'ora. Riprova piu\' tardi.',
     });
   }
   chiamate.set(ip, [...recenti, ora]);
@@ -213,11 +217,12 @@ module.exports = async function handler(req, res) {
   const base = baseUrlPer(chiave);
   const cliente = new Anthropic(base ? { apiKey: chiave, baseURL: base } : { apiKey: chiave });
 
+  // Niente output_config: su Haiku 4.5 il parametro effort non esiste e
+  // la richiesta verrebbe rifiutata. Nemmeno thinking, che qui non serve
+  // e che su questo modello va comunque chiesto a budget fisso.
   const richiesta = {
     model: MODELLO,
     max_tokens: MAX_TOKEN,
-    // Chat: conta il tempo alla prima parola, non la profondita'.
-    output_config: { effort: 'low' },
     system: [
       { type: 'text', text: ISTRUZIONI, cache_control: { type: 'ephemeral' } },
       { type: 'text', text: meta ? 'Pagina aperta in questo momento: ' + meta + '.' : 'L\'utente e\' sulla home del sito.' },
@@ -225,17 +230,12 @@ module.exports = async function handler(req, res) {
     messages: messaggi,
   };
 
-  let scritto = false;
-
-  // Il ripiego server-side: se i classificatori rifiutano la domanda,
-  // l'API la rigioca su un altro modello invece di restituire un muro.
-  async function esegui(conRipiego) {
-    const flusso = cliente.beta.messages.stream(conRipiego
-      ? { ...richiesta, betas: ['server-side-fallback-2026-07-01'], fallbacks: 'default' }
-      : richiesta);
+  // Il ripiego server-side sui rifiuti stava qui: e' roba della classe
+  // Opus 5, su Haiku non c'e' da riagganciare niente.
+  async function esegui() {
+    const flusso = cliente.messages.stream(richiesta);
     for await (const evento of flusso) {
       if (evento.type === 'content_block_delta' && evento.delta.type === 'text_delta') {
-        scritto = true;
         sse(res, 'testo', evento.delta.text);
       }
     }
@@ -243,17 +243,7 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    let finale;
-    try {
-      finale = await esegui(true);
-    } catch (e) {
-      // Se l'account non ha quel ripiego, la richiesta muore prima di
-      // dire una parola. Meglio riprovare una volta senza che lasciare
-      // la chat rotta e nessuno a guardare i log.
-      if (scritto || !e || e.status !== 400) throw e;
-      console.warn('[chat] ripiego server-side rifiutato, riprovo senza:', e.message);
-      finale = await esegui(false);
-    }
+    const finale = await esegui();
 
     if (finale.stop_reason === 'refusal') {
       sse(res, 'errore', 'Su questa domanda non me la sento di rispondere. Provane un\'altra.');
@@ -266,9 +256,9 @@ module.exports = async function handler(req, res) {
     console.error('[chat] richiesta fallita:', messaggio);
     // Gli header sono gia' partiti: l'errore puo' viaggiare solo nel flusso.
     if (res.headersSent) {
-      sse(res, 'errore', 'La risposta si e\' interrotta: ' + messaggio);
+      sse(res, 'errore', 'La risposta si e\' interrotta. Riprova.');
       return res.end();
     }
-    return res.status(502).json({ errore: 'Richiesta fallita: ' + messaggio });
+    return res.status(502).json({ errore: 'Non riesco a rispondere adesso. Riprova fra un attimo.' });
   }
 };

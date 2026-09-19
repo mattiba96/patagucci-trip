@@ -159,7 +159,8 @@ module.exports = async function handler(req, res) {
 
   const chiave = trovaChiave();
   if (!chiave) {
-    return res.status(500).json({ errore: 'SERPAPI_KEY non configurata su Vercel.', diagnosi: diagnosiChiave() });
+    diagnosiChiave();
+    return res.status(500).json({ errore: 'La ricerca voli non e\' disponibile in questo momento.' });
   }
 
   const q = req.query || {};
@@ -173,16 +174,16 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ ok: true, crediti: await crediti(chiave) });
     }
 
-    if (azione !== 'cerca') return res.status(400).json({ errore: 'Azione sconosciuta: ' + azione });
+    if (azione !== 'cerca') return res.status(400).json({ errore: 'Richiesta non valida.' });
 
     const partenze = codici(q.da, 10);
     const arrivo = destinazione(q.a);
     const andata = data(q.andata);
     const ritorno = q.ritorno ? data(q.ritorno) : null;
 
-    if (!partenze) return res.status(400).json({ errore: 'Aeroporti di partenza non validi (max 10 codici IATA).' });
-    if (!arrivo) return res.status(400).json({ errore: 'Destinazione non valida (un codice IATA o un kgmid /m/...).' });
-    if (!andata) return res.status(400).json({ errore: 'Data di andata non valida (YYYY-MM-DD, entro un anno).' });
+    if (!partenze) return res.status(400).json({ errore: 'Aeroporti di partenza non validi (al massimo dieci).' });
+    if (!arrivo) return res.status(400).json({ errore: 'Destinazione non valida.' });
+    if (!andata) return res.status(400).json({ errore: 'Data di andata non valida: dev\'essere entro un anno da oggi.' });
     if (q.ritorno && !ritorno) return res.status(400).json({ errore: 'Data di ritorno non valida.' });
     if (ritorno && ritorno < andata) return res.status(400).json({ errore: 'Il ritorno precede l\'andata.' });
 
@@ -208,7 +209,7 @@ module.exports = async function handler(req, res) {
     const recenti = (chiamate.get(ip) || []).filter((t) => ora - t < 3600000);
     if (recenti.length >= LIMITE_ORARIO) {
       return res.status(429).json({
-        errore: 'Troppe ricerche da questo indirizzo in un\'ora (tetto: ' + LIMITE_ORARIO + '). Riprova piu\' tardi.',
+        errore: 'Troppe ricerche in un\'ora. Riprova piu\' tardi.',
       });
     }
 
@@ -216,8 +217,7 @@ module.exports = async function handler(req, res) {
     if (conto.rimasti <= RISERVA_CREDITI) {
       return res.status(429).json({
         errore:
-          'Crediti SerpApi quasi esauriti (' + conto.rimasti + ' rimasti, riserva ' + RISERVA_CREDITI +
-          '). Si riparte il ' + conto.rinnovo + '.',
+          'Restano solo ' + conto.rimasti + ' ricerche di riserva. Si riparte il ' + conto.rinnovo + '.',
         crediti: conto,
       });
     }
@@ -252,7 +252,7 @@ module.exports = async function handler(req, res) {
       return res.status(vuoto ? 200 : 502).json(
         vuoto
           ? { ok: true, voli: [], vuoto: true, crediti: { rimasti: conto.rimasti - 1, totali: conto.totali } }
-          : { errore: 'SerpApi: ' + dato.error }
+          : { errore: 'La ricerca non e\' andata a buon fine su questa tratta.' }
       );
     }
 
@@ -310,6 +310,7 @@ module.exports = async function handler(req, res) {
 
     return res.status(200).json(risposta);
   } catch (e) {
-    return res.status(502).json({ errore: 'Ricerca fallita: ' + (e && e.message ? e.message : String(e)) });
+    console.error('[voli] ricerca fallita:', e && e.message ? e.message : String(e));
+    return res.status(502).json({ errore: 'Ricerca non riuscita. Riprova fra un attimo.' });
   }
 };

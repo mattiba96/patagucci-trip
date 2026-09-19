@@ -7,7 +7,7 @@ import json
 
 DESTS = [
     {"file": "islanda-trip.html", "suf": "is", "flag": "🇮🇸", "name": "Islanda", "stato": "confermato"},
-    {"file": "corea-trip.html", "suf": "kr", "flag": "🇰🇷", "name": "Corea del Sud", "stato": "confermato"},
+    {"file": "corea-trip.html", "suf": "kr", "flag": "🇰🇷", "name": "Corea e Hong Kong", "stato": "confermato"},
     # Non e' una meta: e' la pagina che le cerca. Sta in fondo al selettore.
     {"file": "prossimo.html", "suf": "nx", "flag": "❓", "name": "Quale sarà il prossimo?", "stato": "idea"},
 ]
@@ -148,7 +148,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
       <div class="bg" style="background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.6) 55%, rgba(10,14,11,0.94) 100%), url('foto/destinazioni/A_land_enclosed_in_Mountains_-_Hunza_Valley.jpg'); background-position:center 55%;"></div>
       <div class="content">
         <h1>Patagucci Trips</h1>
-        <p class="tagline">Machu Picchu, un vulcano attivo, Rio, la foresta pluviale di Bwindi — lo stesso gruppo, una meta nuova ogni volta. Qui dentro ci sono tutti i viaggi, con lo stesso livello di dettaglio ossessivo.</p>
+        <p class="tagline">Machu Picchu, il Salar de Uyuni, Rio — lo stesso gruppo, una meta nuova ogni volta. Qui dentro ci sono i viaggi con le date fissate, con lo stesso livello di dettaglio ossessivo.</p>
         <div class="scroll-cue">↓ scegli la meta</div>
       </div>
     </header>
@@ -157,7 +157,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
       <section class="panel dark" data-nav>
         <div class="inner">
           <h2 class="section-title reveal">🔥 I Patagucci</h2>
-          <p class="section-sub reveal">Machu Picchu, un vulcano attivo, Rio — e ora Uganda, Pakistan, Sudafrica, Nepal e Bhutan. Lo stesso gruppo, una meta nuova ogni volta.</p>
+          <p class="section-sub reveal">Machu Picchu, il Salar de Uyuni, Rio — e ora l'aurora islandese e i ciliegi coreani. Lo stesso gruppo, una meta nuova ogni volta.</p>
           <div class="crew-grid">
             <div class="crew-card reveal" data-audio="assets/audio/manu.mp3">
               <img src="foto/32909e5a-8870-4ba2-961d-8baf5bc0c7c8.jpeg" alt="Manu, il logistico, compra le maglie" loading="lazy">
@@ -454,7 +454,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
             </div>
           </div>
 
-          <p class="section-sub reveal" style="margin-top:18px;">Machu Picchu, un vulcano attivo, Rio, la foresta pluviale di Bwindi, la Karakoram Highway — e ora l'Africa australe e l'Himalaya. Direi che siamo pronti per qualsiasi cosa.</p>
+          <p class="section-sub reveal" style="margin-top:18px;">Machu Picchu, i geyser boliviani a 5.000 metri, Rio, le notti in bus sull'altopiano — e adesso l'inverno artico e la primavera coreana. Direi che siamo pronti per qualsiasi cosa.</p>
         </div>
       </section>
 
@@ -480,9 +480,9 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               <div class="overlay"></div>
               <div class="content">
                 <div class="flag">🇰🇷</div>
-                <div class="title">Corea del Sud</div>
+                <div class="title">Corea del Sud e Hong Kong</div>
                 <div class="meta">2-17 aprile 2027 · 16 giorni</div>
-                <p class="tagline">Seul, Gyeongju e Busan in KTX, il vulcano di Jeju e i ciliegi in fiore.</p>
+                <p class="tagline">Seul, Gyeongju e Busan in KTX, il vulcano di Jeju, i ciliegi in fiore e tre giorni a Hong Kong.</p>
               </div>
             </a>
           </div>
@@ -586,7 +586,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
     </main>
 
     <footer>
-      Patagucci Trips — sito locale, un file unico per tutte le mete. Nessun dato viene inviato a server esterni: mappe, cambio valuta e ricerca voli richiedono internet solo al momento del click.
+      Patagucci Trips — quattro amici, uno zaino e la prossima meta sempre aperta.
     </footer>
   </div>'''
 
@@ -754,7 +754,7 @@ chat_html = '''
     <textarea id="pg-chat-testo" rows="1" maxlength="1500" placeholder="Scrivi una domanda sui viaggi…"></textarea>
     <button type="submit" id="pg-chat-manda" aria-label="Manda la domanda">➤</button>
   </form>
-  <p class="pg-chat-nota">Risponde Claude, leggendo solo quello che c'è scritto su questo sito. I prezzi dei voli dal vivo stanno nella scheda <em>Quale sarà il prossimo?</em></p>
+  <p class="pg-chat-nota">Risponde un'intelligenza artificiale, e legge solo quello che c'è scritto su queste pagine. I prezzi dei voli dal vivo stanno nella scheda <em>Quale sarà il prossimo?</em></p>
 </section>
 '''
 
@@ -928,7 +928,9 @@ chat_js = '''
     }).then(function(r){
       if(!r.ok || !r.body){
         return r.json().catch(function(){ return {}; }).then(function(d){
-          throw new Error(d.errore || ('il motore ha risposto ' + r.status));
+          var guasto = new Error(d.errore || 'Non riesco a rispondere adesso. Riprova fra un attimo.');
+          guasto.gentile = true;
+          throw guasto;
         });
       }
       var lettore = r.body.getReader();
@@ -973,9 +975,11 @@ chat_js = '''
     }).catch(function(err){
       clearTimeout(scadenza);
       el.className = 'pg-chat-riga guasto';
+      // Solo i messaggi scritti apposta arrivano a schermo: quelli di
+      // rete sono in inglese e non dicono niente a chi legge.
       el.textContent = err.name === 'AbortError'
         ? 'Nessuna risposta entro 45 secondi. Riprova.'
-        : 'Non sono riuscito a rispondere: ' + err.message;
+        : err.gentile ? err.message : 'Non riesco a rispondere adesso. Riprova fra un attimo.';
       chiudiTurno();
     });
   }

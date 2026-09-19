@@ -141,9 +141,13 @@
   .qp-nota{ font-size:0.8rem; color:var(--ink-soft); border-left:3px solid var(--accent); padding:2px 0 2px 12px; margin:12px 0; }
   section.panel.dark .qp-nota{ color:#c7c2b6; }
 
+  /* Il contatore sta su un pannello chiaro: i colori da pannello scuro
+     qui sopra sparirebbero nel fondo. Ognuno ha la sua coppia. */
   .qp-crediti{ display:inline-flex; align-items:center; gap:8px; font-size:0.8rem; font-weight:700;
-    padding:6px 13px; border-radius:999px; background:rgba(var(--accent-rgb),0.14); color:var(--accent); }
-  .qp-crediti.scarsi{ background:rgba(211,16,52,0.2); color:#ff9b8a; }
+    padding:6px 13px; border-radius:999px; background:rgba(var(--accent-rgb),0.18); color:var(--theme-800); }
+  section.panel.dark .qp-crediti{ background:rgba(var(--accent-rgb),0.14); color:var(--accent); }
+  .qp-crediti.scarsi{ background:#fdeaea; color:#a32235; }
+  section.panel.dark .qp-crediti.scarsi{ background:rgba(211,16,52,0.2); color:#ff9b8a; }
 
   @media (max-width:620px){
     .qp-costo{ flex-direction:column; align-items:stretch; text-align:center; }
@@ -161,10 +165,10 @@
 
       <div class="qp-blocco">
         <h3>🛫 Da dove si parte</h3>
-        <p class="qp-aiuto">Accendine quanti ne vuoi, fino a dieci: vengono cercati <strong>tutti insieme in una chiamata sola</strong> — dieci aeroporti costano come uno — e il risultato dice da quale conviene partire.</p>
+        <p class="qp-aiuto">Accendine quanti ne vuoi, fino a dieci: vengono confrontati tutti insieme, e il risultato dice da quale conviene partire.</p>
         <div class="qp-chips" id="qp-partenze"></div>
         <div class="qp-griglia" style="margin-top:12px; max-width:340px;">
-          <label class="qp-campo">Aggiungi un altro aeroporto (codice IATA)
+          <label class="qp-campo">Aggiungi un altro aeroporto (le tre lettere)
             <input type="text" id="qp-iata-extra" placeholder="es. TRN, NAP, ZRH" maxlength="3" autocomplete="off">
           </label>
         </div>
@@ -172,7 +176,7 @@
 
       <div class="qp-blocco">
         <h3>📅 Quando</h3>
-        <p class="qp-aiuto">Un giorno preciso, oppure un periodo: in quel caso la pagina prova più partenze lì dentro e confronta i prezzi, un credito per ognuna. Con <strong>solo andata</strong> serve la sola data di partenza, e i campi che non servono spariscono da soli.</p>
+        <p class="qp-aiuto">Un giorno preciso, oppure un periodo: in quel caso la pagina prova più partenze lì dentro e confronta i prezzi, una ricerca per ognuna. Con <strong>solo andata</strong> serve la sola data di partenza, e i campi che non servono spariscono da soli.</p>
         <div class="qp-griglia">
           <label class="qp-campo">Tipo di viaggio
             <select id="qp-tipo">
@@ -209,7 +213,7 @@
 
       <div class="qp-blocco">
         <h3>🌍 Dove</h3>
-        <p class="qp-aiuto">I sei continenti rispondono "le mete migliori là dentro", uno solo credito ciascuno: è il modo più economico di farsi sorprendere. Le mete precise sotto servono quando hai già in testa dove andare. Ogni riquadro acceso moltiplica il costo della ricerca.</p>
+        <p class="qp-aiuto">I sei continenti rispondono "le mete migliori là dentro": è il modo più economico di farsi sorprendere. Le mete precise sotto servono quando hai già in testa dove andare. Ogni riquadro acceso allunga la ricerca.</p>
         <div class="qp-chips" style="margin-bottom:12px;">
           <button type="button" class="qp-secondario" id="qp-sel-ovunque">🌍 Ovunque (i 6 continenti)</button>
           <button type="button" class="qp-secondario" id="qp-sel-wishlist">Solo la wishlist Patagucci</button>
@@ -218,11 +222,11 @@
         </div>
         <div class="qp-chips" id="qp-mete-scelta"></div>
         <div class="qp-griglia" style="margin-top:12px; max-width:380px;">
-          <label class="qp-campo">Oppure un aeroporto e basta (codice IATA, invio per aggiungerlo)
+          <label class="qp-campo">Oppure un aeroporto e basta (le tre lettere, invio per aggiungerlo)
             <input type="text" id="qp-iata-meta" placeholder="es. KEF, BKK, JFK, CUZ" maxlength="3" autocomplete="off">
           </label>
         </div>
-        <p class="qp-aiuto" style="margin-top:10px;">Un codice scritto qui diventa <strong>l'unica meta</strong>: i riquadri accesi sopra si spengono da soli, così la ricerca costa un credito e risponde solo su quell'aeroporto. Scrivine più d'uno, uno dopo l'altro, e si sommano fra loro.</p>
+        <p class="qp-aiuto" style="margin-top:10px;">Un codice scritto qui diventa <strong>l'unica meta</strong>: i riquadri accesi sopra si spengono da soli, così la ricerca risponde solo su quell'aeroporto. Scrivine più d'uno, uno dopo l'altro, e si sommano fra loro.</p>
       </div>
 
       <div class="qp-costo" id="qp-costo">
@@ -231,12 +235,12 @@
           <div class="qp-costo-txt" id="qp-costo-txt">Imposta le date per vedere il preventivo</div>
         </div>
         <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-end;">
-          <span class="qp-crediti" id="qp-crediti">crediti: —</span>
+          <span class="qp-crediti" id="qp-crediti">ricerche rimaste: —</span>
           <button class="qp-avvio" id="qp-avvio" disabled>Cerca i voli</button>
         </div>
       </div>
 
-      <p class="qp-nota">Ogni combinazione meta + data costa <strong>una ricerca</strong> del piano SerpApi, che ne ha 250 al mese. Le ricerche già fatte restano in memoria nel browser e non si ripagano: rilanciare la stessa identica ricerca è gratis.</p>
+      <p class="qp-nota">Ogni combinazione meta + data è <strong>una ricerca</strong>, e ce ne sono 250 al mese. Quelle già fatte di recente non si ripagano: rilanciare la stessa identica ricerca non consuma niente.</p>
 
     </div>
   </div>
@@ -275,34 +279,29 @@
   </div>
 </section>
 
-<!-- ===================== MOTORE ===================== -->
+<!-- ===================== COME FUNZIONA ===================== -->
 <section id="motore" class="panel dark" data-nav>
   <div class="inner">
     <h2 class="section-title reveal">⚙️ Come funziona, e cosa non fa</h2>
-    <p class="section-sub reveal">Poca magia: la pagina interroga Google Flights tramite SerpApi, passando da una funzione che sta su Vercel.</p>
+    <p class="section-sub reveal">Poca magia: la pagina va a vedere su Google Flights quanto costa ogni meta nelle date che hai indicato, e mette in fila quello che trova.</p>
 
     <div class="info-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:14px;">
       <div class="card reveal">
-        <h3>🔑 Perché non chiama direttamente</h3>
-        <p>SerpApi non manda gli header CORS, quindi il browser non può interrogarla da solo. E la chiave non può stare nell'HTML, perché il repo del sito è pubblico su GitHub e chiunque se la prenderebbe. Sta come variabile d'ambiente su Vercel, e la pagina parla solo con <code>/api/voli</code>.</p>
+        <h3>🕑 Prezzi di adesso, non garantiti</h3>
+        <p>Sono le tariffe che Google Flights vede in questo momento, per il numero di persone indicato. Salgono e scendono di continuo, e per date lontane oltre l'anno semplicemente non esistono ancora. Il link in fondo a ogni scheda apre la stessa ricerca su Google Flights, per prenotare davvero.</p>
       </div>
       <div class="card reveal">
         <h3>💳 250 ricerche al mese</h3>
-        <p>È un piano gratuito. Una combinazione meta + coppia di date consuma una ricerca; cinque aeroporti di partenza insieme ne consumano comunque una sola. Sotto le 20 rimanenti il motore si ferma da solo, così resta sempre un fondo per l'occasione buona.</p>
-      </div>
-      <div class="card reveal">
-        <h3>🕑 Prezzi di adesso, non garantiti</h3>
-        <p>Sono le tariffe che Google Flights vede in questo momento, per il numero di persone indicato. Salgono e scendono di continuo, e per date lontane oltre l'anno semplicemente non esistono ancora. Il link in fondo a ogni scheda apre la stessa ricerca su Google Flights per prenotare davvero.</p>
+        <p>Tante ne ha a disposizione la pagina, e il contatore riparte ogni mese. Una meta più una coppia di date ne consuma una; cinque aeroporti di partenza insieme ne consumano comunque una sola. Sotto le venti rimanenti si ferma da sola, così resta sempre un fondo per l'occasione buona.</p>
       </div>
       <div class="card reveal">
         <h3>🌐 Come funziona "ovunque"</h3>
-        <p>Una destinazione va sempre indicata, ma può essere un <strong>continente intero</strong>: Google li riconosce come luoghi e risponde con le mete migliori là dentro. Sei continenti, sei crediti, e le mete le sceglie lui. La lista delle 40 serve per l'altra domanda — quanto costa andare <em>proprio lì</em>.</p>
+        <p>Una destinazione va sempre indicata, ma può essere un <strong>continente intero</strong>: Google lo riconosce come un luogo e risponde con le mete migliori là dentro. Sei continenti, sei ricerche, e dove andare lo sceglie lui. La lista delle 40 serve per l'altra domanda — quanto costa andare <em>proprio lì</em>.</p>
       </div>
-    </div>
-
-    <div class="card reveal" style="margin-top:16px;">
-      <h3 style="margin-top:0;">Stato del motore</h3>
-      <p class="qp-stato" id="qp-diagnostica">Controllo in corso…</p>
+      <div class="card reveal">
+        <h3>🎒 Cosa non fa</h3>
+        <p>Non prenota e non tiene il posto. Non sa niente di bagagli, cambi data e supplementi, che si vedono solo al momento di comprare, e non guarda gli alloggi: per quelli ci sono le pagine delle mete, con i conti fatti per bene.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -310,7 +309,7 @@
 </main>
 
 <footer>
-  <a href="index.html" class="home-link">Patagucci Trips</a> — la pagina che non ha ancora una meta. Prezzi da Google Flights via SerpApi, aggiornati al momento del click.
+  <a href="index.html" class="home-link">Patagucci Trips</a> — la pagina che non ha ancora una meta. Prezzi presi da Google Flights nel momento in cui clicchi.
 </footer>
 
 <script>
@@ -435,7 +434,6 @@
     esiti:      document.getElementById('qp-esiti'),
     meteFoto:   document.getElementById('qp-mete-foto'),
     meteAltre:  document.getElementById('qp-mete-altre'),
-    diagnostica:document.getElementById('qp-diagnostica'),
     selOvunque: document.getElementById('qp-sel-ovunque'),
     selWish:    document.getElementById('qp-sel-wishlist'),
     selTutte:   document.getElementById('qp-sel-tutte'),
@@ -596,7 +594,7 @@
       problema = 'Sono ' + totale + ' ricerche: troppe in un colpo solo (tetto ' + TETTO_RICERCHE + '). ' +
         (suggerito ? 'Con una partenza ogni ' + suggerito + ' giorni ci starebbe.' : 'Togli qualche meta.');
     }
-    else if(creditiRimasti !== null && totale > creditiRimasti - 20) problema = 'Restano ' + creditiRimasti + ' crediti e 20 sono di riserva: questa ricerca non ci sta.';
+    else if(creditiRimasti !== null && totale > creditiRimasti - 20) problema = 'Restano ' + creditiRimasti + ' ricerche e venti sono di riserva: questa non ci sta.';
 
     el.costoNum.textContent = totale || '—';
     el.costo.classList.toggle('allarme', !!problema && totale > 0);
@@ -696,7 +694,7 @@
       fatti++;
       el.barra.firstElementChild.style.width = Math.round(fatti/totale*100) + '%';
       el.stato.textContent = 'Provate ' + fatti + ' combinazioni su ' + totale +
-        (daCache ? ' · ' + daCache + ' dalla memoria' : '') +
+        (daCache ? ' · ' + daCache + ' gia\' viste' : '') +
         (vuoti ? ' · ' + vuoti + ' senza voli' : '') +
         (errori ? ' · ' + errori + ' fallite' : '');
     }
@@ -732,7 +730,6 @@
         })
         .catch(function(e){
           errori++;
-          if(!el.diagnostica.dataset.bloccato) el.diagnostica.textContent = 'Ultimo errore: ' + e.message;
         })
         .then(function(){ avanza(); disegna(); return prossimo(); });
     }
@@ -748,7 +745,7 @@
       var opz = risultati.length + (risultati.length === 1 ? ' opzione trovata' : ' opzioni trovate');
       el.stato.textContent = risultati.length
         ? 'Fatto: ' + comb + ', ' + opz +
-          (daCache ? ' (' + daCache + (daCache === 1 ? ' presa dalla memoria' : ' prese dalla memoria') + ', senza consumare crediti)' : '') + '.'
+          (daCache ? ' (' + daCache + (daCache === 1 ? ' gia\' cercata di recente' : ' gia\' cercate di recente') + ')' : '') + '.'
         : 'Nessun volo trovato per queste combinazioni. Prova a spostare le date o a cambiare meta.';
       try { localStorage.setItem(CHIAVE_ULTIMA, JSON.stringify({ quando: Date.now(), risultati: risultati.slice(0, 120) })); } catch(e){}
       preventivo();
@@ -856,7 +853,7 @@
   function aggiornaCrediti(c){
     if(!c || typeof c.rimasti !== 'number') return;
     creditiRimasti = c.rimasti;
-    el.crediti.textContent = 'crediti: ' + c.rimasti + (c.totali ? ' / ' + c.totali : '');
+    el.crediti.textContent = 'ricerche rimaste: ' + c.rimasti + (c.totali ? ' / ' + c.totali : '');
     el.crediti.classList.toggle('scarsi', c.rimasti <= 40);
     preventivo();
   }
@@ -866,26 +863,19 @@
     if(giaControllato) return;
     giaControllato = true;
     if(!API){
-      el.crediti.textContent = 'motore non configurato';
-      el.diagnostica.textContent = 'Nessun indirizzo per il motore: la pagina è aperta da file locale e API_REMOTA è vuota. Dopo il deploy su Vercel, incolla lì l\'indirizzo della funzione.';
-      el.diagnostica.dataset.bloccato = '1';
+      el.crediti.textContent = 'ricerca non disponibile';
+      el.crediti.classList.add('scarsi');
       return;
     }
     fetch(API + '?action=crediti')
       .then(function(r){ return r.json(); })
       .then(function(j){
-        // La funzione, quando non trova la chiave, spiega anche perche':
-        // vale la pena portarlo a schermo invece di ingoiarlo.
-        if(j.errore) throw new Error(j.errore + (j.diagnosi && j.diagnosi.interpretazione ? ' ' + j.diagnosi.interpretazione : ''));
+        if(j.errore) throw new Error(j.errore);
         aggiornaCrediti(j.crediti);
-        el.diagnostica.textContent = 'Motore raggiungibile su ' + API + '. Restano ' + j.crediti.rimasti +
-          ' ricerche su ' + j.crediti.totali + ', il contatore si azzera il ' + j.crediti.rinnovo + '.';
       })
-      .catch(function(e){
-        el.crediti.textContent = 'motore non raggiungibile';
+      .catch(function(){
+        el.crediti.textContent = 'ricerca non disponibile adesso';
         el.crediti.classList.add('scarsi');
-        el.diagnostica.textContent = 'Il motore non risponde (' + e.message + '). Le schede restano vuote: controlla che il deploy su Vercel sia attivo e che SERPAPI_KEY sia impostata.';
-        el.diagnostica.dataset.bloccato = '1';
       });
   }
 
@@ -1021,7 +1011,7 @@
   aggiornaCampiData();
   preventivo();
 
-  // Il contatore crediti si chiede solo quando la pagina si vede davvero:
+  // Il contatore si chiede solo quando la pagina si vede davvero:
   // dentro index.html le mete sono tutte nel DOM ma nascoste, e non ha
   // senso interrogare il motore a ogni apertura del sito.
   function seVisibile(){

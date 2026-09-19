@@ -711,7 +711,8 @@ footer a.home-link{ color:var(--accent); font-weight:700; }
 
   /* --- Aree toccabili: sotto i 44px si sbaglia bersaglio --- */
   nav.tabs a, .filter-row button, .flight-links button,
-  .map-actions a, .map-actions button, details.day summary{ min-height:44px; }
+  .map-actions a, .map-actions button, details.day summary,
+  .qp-secondario{ min-height:44px; }
   nav.tabs a{ display:flex; align-items:center; }
   /* "Apri su Maps" e' il comando piu' usato in viaggio: deve essere grosso. */
   details.day .maps-link{ min-height:44px; display:flex; align-items:center; justify-content:center; }
