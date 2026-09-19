@@ -693,6 +693,10 @@ chat_css = '''
   .pg-chat-riga.lei a{ color:var(--accent); }
   .pg-chat-riga.lei ul{ margin:6px 0; padding-left:18px; }
   .pg-chat-riga.guasto{ align-self:flex-start; color:#ff9b8a; font-size:0.82rem; }
+  .pg-chat-fonti{ margin-top:7px; font-size:0.72rem; line-height:1.6; color:#8d887d; }
+  .pg-chat-fonti a{ color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(var(--accent-rgb),0.35); }
+  .pg-chat-fonti a:hover{ border-bottom-color:var(--accent); }
+  .pg-chat-stato{ align-self:flex-start; font-size:0.78rem; color:var(--accent); opacity:0.85; }
   .pg-chat-riga .pg-cursore{
     display:inline-block; width:7px; height:14px; margin-left:2px; vertical-align:-2px;
     background:var(--accent); animation:pgLampeggia 1s steps(2,start) infinite;
@@ -754,7 +758,7 @@ chat_html = '''
     <textarea id="pg-chat-testo" rows="1" maxlength="1500" placeholder="Scrivi una domanda sui viaggi…"></textarea>
     <button type="submit" id="pg-chat-manda" aria-label="Manda la domanda">➤</button>
   </form>
-  <p class="pg-chat-nota">Risponde un'intelligenza artificiale, e legge solo quello che c'è scritto su queste pagine. I prezzi dei voli dal vivo stanno nella scheda <em>Quale sarà il prossimo?</em></p>
+  <p class="pg-chat-nota">Risponde un'intelligenza artificiale: conosce queste pagine e cerca sul web quello che non c'è scritto, citando le fonti. Controlla i prezzi e gli orari prima di fidarti. I voli dal vivo stanno nella scheda <em>Quale sarà il prossimo?</em></p>
 </section>
 '''
 
@@ -764,10 +768,10 @@ NOMI_METE = {"hub": "la home"}
 NOMI_METE.update({d["suf"]: d["name"] for d in DESTS})
 
 SPUNTI = {
-    "hub": ["Chi sono i Patagucci?", "Dove sono già stati?", "Qual è il prossimo viaggio?"],
-    "is": ["Cosa si fa il primo giorno?", "Quanto costa in tutto?", "Che vestiti servono?"],
-    "kr": ["Com'è diviso l'itinerario?", "Quando fiorisce il ciliegio?", "Quanto costa mangiare?"],
-    "nx": ["Come funziona la ricerca voli?", "Da quali aeroporti si parte?", "Quante ricerche posso fare?"],
+    "hub": ["Serve il visto per queste mete?", "Che vaccinazioni servono?", "Quanto costa l'assicurazione?"],
+    "is": ["Quanto costa l'ingresso alla Blue Lagoon?", "Com'è il meteo adesso in Islanda?", "I vulcani sono attivi in questo momento?"],
+    "kr": ["Quanto costa il Korea Pass oggi?", "Le previsioni della fioritura per il 2027?", "Serve il K-ETA per gli italiani?"],
+    "nx": ["Dove si vola con poco a gennaio?", "Quali mete sono fuori stagione ad aprile?", "Come funziona la ricerca voli?"],
 }
 
 chat_js = '''
@@ -824,10 +828,31 @@ chat_js = '''
   function aggiungi(ruolo, testo){
     var el = document.createElement('div');
     el.className = 'pg-chat-riga ' + (ruolo === 'utente' ? 'io' : ruolo === 'guasto' ? 'guasto' : 'lei');
-    el.innerHTML = ruolo === 'assistente' ? formatta(testo) : formatta(testo);
+    el.innerHTML = formatta(testo);
     righe.appendChild(el);
     righe.scrollTop = righe.scrollHeight;
     return el;
+  }
+
+  // Le pagine citate finiscono sotto la risposta: sono di qualcun altro
+  // e chi legge deve poterci andare. Link e titoli arrivano dal modello,
+  // quindi niente innerHTML e solo http/https come destinazione.
+  function disegnaFonti(el, lista){
+    if(!el || !lista || !lista.length) return;
+    var box = document.createElement('div');
+    box.className = 'pg-chat-fonti';
+    box.appendChild(document.createTextNode('Fonti: '));
+    lista.forEach(function(f, i){
+      if(!/^https?:\/\//i.test(f.url || '')) return;
+      var a = document.createElement('a');
+      a.href = f.url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = f.titolo || f.url;
+      box.appendChild(a);
+      if(i < lista.length - 1) box.appendChild(document.createTextNode(' · '));
+    });
+    el.appendChild(box);
   }
 
   function disegnaSpunti(){
@@ -846,9 +871,9 @@ chat_js = '''
   function ridisegna(){
     righe.innerHTML = '';
     if(!storico.length){
-      aggiungi('assistente', 'Ciao. So tutto quello che c\\'è scritto su questo sito: itinerari, tappe, costi, meteo. Chiedi pure — stai guardando **' + nomeMeta() + '**.');
+      aggiungi('assistente', 'Ciao. Il sito lo leggi da solo: io servo per quello che non c\\'è scritto — prezzi d\\'ingresso, orari, meteo di adesso, visti, cosa conviene prenotare. Vado a cercarlo sul web. Stai guardando **' + nomeMeta() + '**.');
     } else {
-      storico.forEach(function(m){ aggiungi(m.ruolo, m.testo); });
+      storico.forEach(function(m){ disegnaFonti(aggiungi(m.ruolo, m.testo), m.fonti); });
     }
     disegnaSpunti();
   }
@@ -910,6 +935,13 @@ chat_js = '''
     var el = aggiungi('assistente', '');
     el.innerHTML = '<span class="pg-cursore"></span>';
     var risposta = '';
+    var fontiTurno = null;
+    // Mentre cerca sul web non arriva testo per parecchi secondi: senza
+    // questa riga sembra piantato.
+    var stato = document.createElement('div');
+    stato.className = 'pg-chat-riga pg-chat-stato';
+    stato.hidden = true;
+    righe.appendChild(stato);
 
     function chiudiTurno(){
       inCorso = false;
@@ -941,8 +973,9 @@ chat_js = '''
         return lettore.read().then(function(res){
           if(res.done){
             clearTimeout(scadenza);
+            stato.remove();
             if(risposta){
-              storico.push({ ruolo:'assistente', testo: risposta });
+              storico.push({ ruolo:'assistente', testo: risposta, fonti: fontiTurno || undefined });
               salva();
             }
             chiudiTurno();
@@ -958,14 +991,23 @@ chat_js = '''
             try { ev = JSON.parse(riga.slice(6)); } catch(err){ return; }
             if(ev.t === 'testo'){
               risposta += ev.d;
+              stato.hidden = true;
               el.innerHTML = formatta(risposta) + '<span class="pg-cursore"></span>';
               righe.scrollTop = righe.scrollHeight;
+            } else if(ev.t === 'stato'){
+              stato.textContent = ev.d;
+              stato.hidden = false;
+              righe.scrollTop = righe.scrollHeight;
+            } else if(ev.t === 'fonti'){
+              fontiTurno = ev.d;
             } else if(ev.t === 'errore'){
               el.className = 'pg-chat-riga guasto';
               el.textContent = ev.d;
               risposta = '';
             } else if(ev.t === 'fine'){
+              stato.hidden = true;
               el.innerHTML = formatta(risposta) + (ev.d && ev.d.troncata ? ' <em>(risposta troncata)</em>' : '');
+              disegnaFonti(el, fontiTurno);
             }
           });
           return pezzo();
