@@ -365,10 +365,24 @@ module.exports = async function handler(req, res) {
       }
     }
 
+    // Il gateway cerca a ogni richiesta, anche su "ciao" — e allora
+    // sotto una risposta compariva Wikipedia alla voce "ciao". Restano
+    // solo i siti che la risposta nomina davvero: le istruzioni gia'
+    // chiedono di dire da dove viene il numero riportato, e quando non
+    // lo nomina vuol dire che quella pagina non l'ha usata.
+    const nominate = fonti.filter((f) => {
+      const host = (f.url.match(/^https?:\/\/([^/]+)/) || [])[1];
+      if (!host) return false;
+      const pulito = host.replace(/^www\./, '');
+      const nome = pulito.split('.')[0];
+      const testo = esito.testo.toLowerCase();
+      return testo.includes(pulito.toLowerCase()) || (nome.length >= 5 && testo.includes(nome.toLowerCase()));
+    });
+
     if (esito.finale.stop_reason === 'refusal') {
       sse(res, 'errore', 'Su questa domanda non me la sento di rispondere. Provane un\'altra.');
     } else {
-      if (fonti.length) sse(res, 'fonti', fonti.slice(0, 4));
+      if (nominate.length) sse(res, 'fonti', nominate.slice(0, 4));
       sse(res, 'fine', { troncata: esito.finale.stop_reason === 'max_tokens' });
     }
     return res.end();
