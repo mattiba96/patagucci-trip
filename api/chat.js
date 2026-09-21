@@ -421,6 +421,31 @@ module.exports = async function handler(req, res) {
     return query || null;
   }
 
+  // Cosa esce davvero in pagina. Il giro che risponde ogni tanto chiede
+  // un'altra ricerca invece di rispondere: quella riga non e' una
+  // risposta e non deve comparire, quindi si rifa' il giro una volta
+  // sola, togliendogli l'idea che cercare sia ancora possibile.
+  async function consegna(esito) {
+    if (queryRichiesta(esito.testo)) {
+      console.warn('[chat] ha chiesto di cercare di nuovo invece di rispondere, lo rifaccio');
+      esito = await giro({
+        conRicerca: false,
+        trasmetti: false,
+        tempo: Math.max(5000, resta()),
+        materiale: 'La ricerca e\' gia\' stata fatta e non se ne possono fare altre: adesso rispondi '
+          + 'e basta. Non scrivere per nessun motivo una riga che comincia con CERCA — non verrebbe '
+          + 'letta da nessuno, finirebbe in pagina cosi\' com\'e\' e chi legge vedrebbe quella al posto '
+          + 'della risposta. Usa quello che hai: la scheda, e i risultati se ci sono. Se un numero non '
+          + 'lo sai con certezza, dillo in una riga invece di inventarlo.',
+      });
+    }
+    if (esito.testo && !queryRichiesta(esito.testo)) {
+      scritto = true;
+      sse(res, 'testo', esito.testo);
+    }
+    return esito;
+  }
+
   try {
     // Primo giro, senza strumento: guarda la scheda e decide. Se la
     // domanda si chiude li', questa e' gia' la risposta e si consegna
@@ -443,10 +468,11 @@ module.exports = async function handler(req, res) {
       // Non c'e' piu' tempo per cercare e poi scrivere: si risponde con
       // quello che si ha, che e' meglio di un timeout.
       console.warn('[chat] tempo finito prima della ricerca, rispondo senza');
-      esito = await giro({ conRicerca: false, trasmetti: true, tempo: Math.max(5000, resta()), materiale:
+      esito = await giro({ conRicerca: false, trasmetti: false, tempo: Math.max(5000, resta()), materiale:
         'La ricerca sul web non si e\' potuta fare. Rispondi con quello che c\'e\' nella scheda, '
         + 'e di\' in una riga che per prezzi o orari aggiornati serve un controllo a parte. '
         + 'Non scrivere righe che cominciano con CERCA.' });
+      esito = await consegna(esito);
     } else if (query) {
       console.log('[chat] ricerca chiesta dal modello:', query);
       // Secondo giro, il solo che paga una ricerca. Il gateway cerca
@@ -488,15 +514,19 @@ module.exports = async function handler(req, res) {
         + 'sempre, tenendo solo quello che serve davvero. Di\' da che sito viene il numero o la regola che '
         + 'riporti. Se li dentro la risposta non c\'e\', dillo in una riga invece di inventarla. '
         + 'Non scrivere piu\' righe che cominciano con CERCA: adesso si risponde e basta.';
-      esito = await giro({ conRicerca: false, trasmetti: true, materiale, tempo: Math.max(5000, resta()) });
-
-      if (!esito.testo.trim()) {
-        sse(res, 'errore', 'Ho trovato qualcosa ma non sono riuscito a metterlo insieme. Riprova.');
-        return res.end();
-      }
+      esito = await giro({ conRicerca: false, trasmetti: false, materiale, tempo: Math.max(5000, resta()) });
+      esito = await consegna(esito);
     } else if (esito.testo) {
       scritto = true;
       sse(res, 'testo', esito.testo);
+    }
+
+    // Se a questo punto in pagina non e' uscito niente — risposta vuota,
+    // o solo richieste di ricerca che non si mandano — meglio dirlo che
+    // chiudere il flusso lasciando una riga bianca.
+    if (!scritto) {
+      sse(res, 'errore', 'Non sono riuscito a mettere insieme una risposta. Riprova.');
+      return res.end();
     }
 
     // Dei risultati trovati restano solo i siti che la risposta nomina
