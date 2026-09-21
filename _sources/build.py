@@ -499,11 +499,11 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
 <!--MAPPAMONDO-->
             </svg>
             <div class="mondo-stat">
-              <div class="ms-box"><span class="ms-num">25<span class="ms-pct">%</span></span><span class="ms-lab">del mondo</span></div>
-              <div class="ms-box"><span class="ms-num">49</span><span class="ms-lab">paesi</span></div>
-              <div class="ms-box"><span class="ms-num">4</span><span class="ms-lab">continenti</span></div>
+              <div class="ms-box"><span class="ms-num">38<span class="ms-pct">%</span></span><span class="ms-lab">del mondo</span></div>
+              <div class="ms-box"><span class="ms-num">75</span><span class="ms-lab">paesi</span></div>
+              <div class="ms-box"><span class="ms-num">5</span><span class="ms-lab">continenti</span></div>
             </div>
-            <div class="source-note">Il <strong>25%</strong> è 49 paesi sui <strong>195 stati membri dell'ONU</strong>: lo dichiaro perché contando anche territori e regioni autonome verrebbe un numero diverso. Fuori da quel conto ci sono <strong>Taiwan</strong>, <strong>Kosovo</strong>, <strong>Hong Kong</strong>, <strong>Macao</strong>, il <strong>Vaticano</strong>, le <strong>Canarie</strong> (che sono Spagna) e la <strong>Transnistria</strong>, che non sono stati membri ONU ma sono stati visti lo stesso. Bandiera della Transnistria: Wikimedia Commons, pubblico dominio. Mappa: Al MacDonald (@F1LT3R), <a href="https://commons.wikimedia.org/wiki/File:World_map_-_low_resolution.svg" target="_blank" rel="noopener">CC BY-SA 3.0</a>. Hong Kong, Macao, Singapore, Kosovo, San Marino, il Vaticano e le Seychelles sono troppo piccoli per essere colorati a questa scala. Gli elenchi per persona sono ancora parziali: manca tutto Manu.</div>
+            <div class="source-note">Il <strong>38%</strong> è 75 paesi sui <strong>195 stati membri dell'ONU</strong>: lo dichiaro perché contando anche territori e regioni autonome verrebbe un numero diverso. Fuori da quel conto ci sono <strong>Taiwan</strong>, <strong>Kosovo</strong>, <strong>Hong Kong</strong>, <strong>Macao</strong>, il <strong>Vaticano</strong>, le <strong>Canarie</strong> (che sono Spagna) e la <strong>Transnistria</strong>, che non sono stati membri ONU ma sono stati visti lo stesso. Bandiera della Transnistria: Wikimedia Commons, pubblico dominio. Mappa: Al MacDonald (@F1LT3R), <a href="https://commons.wikimedia.org/wiki/File:World_map_-_low_resolution.svg" target="_blank" rel="noopener">CC BY-SA 3.0</a>. Hong Kong, Macao, Singapore, Kosovo, San Marino, il Vaticano, le Seychelles, il Liechtenstein, il Lussemburgo, Monaco e Vanuatu sono troppo piccoli per essere colorati a questa scala, e la <strong>Lettonia</strong> non è proprio disegnata nella mappa d'origine: nel conteggio ci sono, sulla cartina no.</div>
           </div>
 
           <h3 style="margin-top:30px;">Chi c'era, viaggio per viaggio</h3>
@@ -520,6 +520,73 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
           </div>
 
           <h3 style="margin-top:30px;">Paese per paese, uno per uno</h3>
+
+          <div class="persona-paesi reveal">
+            <div class="pp-nome">🧳 Manu</div>
+            <div class="paesi-fatti">
+              <span class="paese-fatto"><span class="pf-flag">🇭🇰</span><span class="pf-nome">Hong Kong</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇲🇴</span><span class="pf-nome">Macao</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇹🇼</span><span class="pf-nome">Taiwan</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇨🇳</span><span class="pf-nome">Cina</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇰🇷</span><span class="pf-nome">Corea del Sud</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇻🇳</span><span class="pf-nome">Vietnam</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇱🇦</span><span class="pf-nome">Laos</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇰🇭</span><span class="pf-nome">Cambogia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇹🇭</span><span class="pf-nome">Thailandia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇸🇬</span><span class="pf-nome">Singapore</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇲🇾</span><span class="pf-nome">Malesia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇮🇩</span><span class="pf-nome">Indonesia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇵🇭</span><span class="pf-nome">Filippine</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇶🇦</span><span class="pf-nome">Qatar</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇦🇪</span><span class="pf-nome">Emirati Arabi</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇦🇺</span><span class="pf-nome">Australia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇳🇿</span><span class="pf-nome">Nuova Zelanda</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇫🇯</span><span class="pf-nome">Figi</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇻🇺</span><span class="pf-nome">Vanuatu</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇺🇸</span><span class="pf-nome">Stati Uniti</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇲🇽</span><span class="pf-nome">Messico</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇬🇹</span><span class="pf-nome">Guatemala</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇨🇴</span><span class="pf-nome">Colombia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇻🇪</span><span class="pf-nome">Venezuela</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇦🇷</span><span class="pf-nome">Argentina</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇲🇦</span><span class="pf-nome">Marocco</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇪🇬</span><span class="pf-nome">Egitto</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇮🇹</span><span class="pf-nome">Italia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇻🇦</span><span class="pf-nome">Vaticano</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇸🇲</span><span class="pf-nome">San Marino</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇲🇨</span><span class="pf-nome">Monaco</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇱🇮</span><span class="pf-nome">Liechtenstein</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇨🇭</span><span class="pf-nome">Svizzera</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇦🇹</span><span class="pf-nome">Austria</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇩🇪</span><span class="pf-nome">Germania</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇫🇷</span><span class="pf-nome">Francia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇧🇪</span><span class="pf-nome">Belgio</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇱🇺</span><span class="pf-nome">Lussemburgo</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇬🇧</span><span class="pf-nome">Regno Unito</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇮🇪</span><span class="pf-nome">Irlanda</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇵🇹</span><span class="pf-nome">Portogallo</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇬🇷</span><span class="pf-nome">Grecia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇭🇷</span><span class="pf-nome">Croazia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇸🇮</span><span class="pf-nome">Slovenia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇷🇸</span><span class="pf-nome">Serbia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇧🇦</span><span class="pf-nome">Bosnia ed Erzegovina</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇲🇪</span><span class="pf-nome">Montenegro</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇷🇴</span><span class="pf-nome">Romania</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇭🇺</span><span class="pf-nome">Ungheria</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇨🇿</span><span class="pf-nome">Cechia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇸🇰</span><span class="pf-nome">Slovacchia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇵🇱</span><span class="pf-nome">Polonia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇱🇹</span><span class="pf-nome">Lituania</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇱🇻</span><span class="pf-nome">Lettonia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇪🇪</span><span class="pf-nome">Estonia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇫🇮</span><span class="pf-nome">Finlandia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇸🇪</span><span class="pf-nome">Svezia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇳🇴</span><span class="pf-nome">Norvegia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇩🇰</span><span class="pf-nome">Danimarca</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇹🇷</span><span class="pf-nome">Turchia</span></span>
+            </div>
+            <div class="source-note">Sessanta paesi, e l'elenco potrebbe non essere completo: in fondo alle schermate un paio di voci erano tagliate e non le ho lette.</div>
+          </div>
 
           <div class="persona-paesi reveal">
             <div class="pp-nome">🧭 Mala</div>
