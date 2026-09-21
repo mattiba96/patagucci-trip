@@ -388,7 +388,10 @@ module.exports = async function handler(req, res) {
     // intera — una chiamata sola e nessuna ricerca da pagare.
     let esito;
     try {
-      esito = await giro({ conRicerca: false, trasmetti: false, tempo: Math.min(15000, resta()) });
+      // Nessun secondo tentativo: se il motore non risponde al primo,
+      // non risponde nemmeno al secondo, e sotto c'e' Gemini che
+      // aspetta. Ritentare raddoppia solo l'attesa di chi legge.
+      esito = await giro({ conRicerca: false, trasmetti: false, tempo: Math.min(15000, resta()), ritenta: 0 });
     } catch (e) {
       if (scritto || !e || e.status !== 400) throw e;
       console.warn('[chat] primo giro fallito:', e.message);
