@@ -45,6 +45,10 @@ const MAX_RICERCHE = 3;       // ricerche web per domanda: si pagano a numero
 // garantire un conteggio esatto.
 const chiamate = new Map();
 
+// Il gateway non e' l'API vera: se rifiuta il blocco per pensare, si
+// riprova senza e non ci si riprova piu' finche' la lambda resta calda.
+let pensa = true;
+
 // Il conto della giornata vive nella stessa memoria effimera. Su questo
 // sito, con una lambda sola quasi sempre calda, il conto torna; ma se
 // Vercel ne avvia due in parallelo ognuna conta le sue, e a lambda fredda
@@ -277,6 +281,7 @@ module.exports = async function handler(req, res) {
   const richiesta = {
     model: MODELLO,
     max_tokens: MAX_TOKEN,
+    thinking: { type: 'enabled', budget_tokens: PENSIERO },
     // La ricerca web gira sui server di Anthropic: nessuna chiave in
     // piu' da tenere, e le fonti tornano indietro come citazioni.
     // Versione base e non la _20260209: quella filtra i risultati
@@ -330,35 +335,59 @@ module.exports = async function handler(req, res) {
     let messaggiTurno = opzioni.messaggi || richiesta.messages;
     let testo = '';
 
-    // Una ricerca lunga puo' sospendere il turno (pause_turn): si
-    // riprende rimandando indietro il messaggio dell'assistente com'e'.
-    for (let ripresa = 0; ripresa < 3; ripresa++) {
-      const flusso = cliente.messages.stream(
-        { ...base, messages: messaggiTurno },
-        opzioni.tempo ? { timeout: Math.max(2000, Math.round(opzioni.tempo)), maxRetries: opzioni.ritenta } : undefined
-      );
-      for await (const evento of flusso) {
-        if (evento.type === 'content_block_start' && evento.content_block.type === 'server_tool_use') {
-          sse(res, 'stato', 'cerco sul web…');
+    // Due motivi per rifare il giro: la ricerca lunga che sospende il
+    // turno (pause_turn, si riprende rimandando indietro il messaggio
+    // dell'assistente com'e') e il motore che rifiuta il blocco per
+    // pensare, che succede prima che esca una parola.
+    for (let ripresa = 0; ripresa < 4; ripresa++) {
+      const corpo = { ...base, messages: messaggiTurno };
+      if (!pensa) delete corpo.thinking;
+
+      let finale;
+      try {
+        const flusso = cliente.messages.stream(
+          corpo,
+          opzioni.tempo
+            ? { timeout: Math.max(2000, Math.round(opzioni.tempo)), maxRetries: opzioni.ritenta }
+            : undefined
+        );
+        for await (const evento of flusso) {
+          if (evento.type === 'content_block_start' && evento.content_block.type === 'server_tool_use') {
+            sse(res, 'stato', 'cerco sul web…');
+            continue;
+          }
+          if (evento.type !== 'content_block_delta') continue;
+          if (evento.delta.type === 'text_delta') {
+            testo += evento.delta.text;
+            if (opzioni.trasmetti) {
+              scritto = true;
+              sse(res, 'testo', evento.delta.text);
+            }
+          } else if (evento.delta.type === 'citations_delta') {
+            // Con una ricerca vera le fonti arrivano da qui. Il gateway
+            // non ne manda, e allora si pescano dal testo piu' sotto.
+            const c = evento.delta.citation || {};
+            if (c.url && !fonti.some((f) => f.url === c.url)) {
+              fonti.push({ url: c.url, titolo: c.title || c.url });
+            }
+          }
+        }
+        finale = await flusso.finalMessage();
+      } catch (e) {
+        // Il pensiero e' un parametro standard, ma questo e' un gateway:
+        // se lo rifiuta lo si smette di chiedere e si rifa' il giro. E'
+        // un errore di validazione, quindi arriva prima di qualunque
+        // testo — ma il controllo su testo/scritto lo mette al riparo
+        // dal riscrivere una risposta gia' cominciata.
+        const messaggio = (e && e.message) || '';
+        if (pensa && e && e.status === 400 && /thinking|budget/i.test(messaggio) && !testo) {
+          console.warn('[chat] il motore rifiuta il blocco per pensare, proseguo senza:', messaggio);
+          pensa = false;
           continue;
         }
-        if (evento.type !== 'content_block_delta') continue;
-        if (evento.delta.type === 'text_delta') {
-          testo += evento.delta.text;
-          if (opzioni.trasmetti) {
-            scritto = true;
-            sse(res, 'testo', evento.delta.text);
-          }
-        } else if (evento.delta.type === 'citations_delta') {
-          // Con una ricerca vera le fonti arrivano da qui. Il gateway
-          // non ne manda, e allora si pescano dal testo piu' sotto.
-          const c = evento.delta.citation || {};
-          if (c.url && !fonti.some((f) => f.url === c.url)) {
-            fonti.push({ url: c.url, titolo: c.title || c.url });
-          }
-        }
+        throw e;
       }
-      const finale = await flusso.finalMessage();
+
       if (finale.stop_reason !== 'pause_turn') return { finale, testo };
       messaggiTurno = [...messaggiTurno, { role: 'assistant', content: finale.content }];
     }
