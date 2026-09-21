@@ -503,7 +503,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               <div class="ms-box"><span class="ms-num">75</span><span class="ms-lab">paesi</span></div>
               <div class="ms-box"><span class="ms-num">5</span><span class="ms-lab">continenti</span></div>
             </div>
-            <div class="source-note">Il <strong>38%</strong> è 75 paesi sui <strong>195 stati membri dell'ONU</strong>: lo dichiaro perché contando anche territori e regioni autonome verrebbe un numero diverso. Fuori da quel conto ci sono <strong>Taiwan</strong>, <strong>Kosovo</strong>, <strong>Hong Kong</strong>, <strong>Macao</strong>, il <strong>Vaticano</strong>, le <strong>Canarie</strong> (che sono Spagna) e la <strong>Transnistria</strong>, che non sono stati membri ONU ma sono stati visti lo stesso. Bandiera della Transnistria: Wikimedia Commons, pubblico dominio. Mappa: Al MacDonald (@F1LT3R), <a href="https://commons.wikimedia.org/wiki/File:World_map_-_low_resolution.svg" target="_blank" rel="noopener">CC BY-SA 3.0</a>. Hong Kong, Macao, Singapore, Kosovo, San Marino, il Vaticano, le Seychelles, il Liechtenstein, il Lussemburgo, Monaco e Vanuatu sono troppo piccoli per essere colorati a questa scala, e la <strong>Lettonia</strong> non è proprio disegnata nella mappa d'origine: nel conteggio ci sono, sulla cartina no.</div>
+            <div class="source-note">Il <strong>38%</strong> è 75 paesi sui <strong>195 stati membri dell'ONU</strong>. Contando anche territori e regioni autonome il numero sarebbe diverso: fuori dal conteggio restano <strong>Taiwan</strong>, <strong>Kosovo</strong>, <strong>Hong Kong</strong>, <strong>Macao</strong>, il <strong>Vaticano</strong>, le <strong>Canarie</strong> (che sono Spagna) e la <strong>Transnistria</strong>, che non sono stati membri ONU ma sono stati visti lo stesso. Bandiera della Transnistria: Wikimedia Commons, pubblico dominio. Mappa: Al MacDonald (@F1LT3R), <a href="https://commons.wikimedia.org/wiki/File:World_map_-_low_resolution.svg" target="_blank" rel="noopener">CC BY-SA 3.0</a>. Hong Kong, Macao, Singapore, Kosovo, San Marino, il Vaticano, le Seychelles, il Liechtenstein, il Lussemburgo, Monaco e Vanuatu sono troppo piccoli per essere colorati a questa scala, e la <strong>Lettonia</strong> non è proprio disegnata nella mappa d'origine: nel conteggio ci sono, sulla cartina no.</div>
           </div>
 
           <h3 style="margin-top:30px;">Chi c'era, viaggio per viaggio</h3>
@@ -585,7 +585,6 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               <span class="paese-fatto"><span class="pf-flag">🇩🇰</span><span class="pf-nome">Danimarca</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇹🇷</span><span class="pf-nome">Turchia</span></span>
             </div>
-            <div class="source-note">Sessanta paesi, e l'elenco potrebbe non essere completo: in fondo alle schermate un paio di voci erano tagliate e non le ho lette.</div>
           </div>
 
           <div class="persona-paesi reveal">
