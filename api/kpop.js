@@ -1,15 +1,27 @@
 // "Ci sono concerti mentre ci siamo?"
 //
 // I calendari K-pop escono pochi mesi prima, quindi una lista scritta a
-// mano sul sito nasce vecchia. Questo endpoint la chiede a Gemini ogni
-// volta, con la ricerca su Google accesa quando la chiave ce l'ha.
+// mano sul sito nasce vecchia. Questo endpoint va a guardare ogni volta.
 //
-// Il punto delicato: se la ricerca non e' disponibile (il grounding non e'
-// compreso nel piano gratuito) la risposta arriva lo stesso, ma scritta a
-// memoria dal modello. In quel caso non si spacciano date per vere —
-// `ricercaFatta: false` torna al sito, che lo scrive a chiare lettere.
+// Passa da OneProvider, che e' la chiave che il sito ha gia': la ricerca
+// del gateway funziona, va solo presa in due tempi (api/ricerca.js).
+// Gemini resta sotto come riserva, per quando il gateway non risponde,
+// e parte solo se la sua chiave c'e'.
+//
+// Il punto delicato, con tutti e due: se la ricerca non si e' potuta
+// fare, la risposta arriva lo stesso ma scritta a memoria dal modello.
+// In quel caso non si spacciano date per vere — `ricercaFatta: false`
+// torna al sito, che lo scrive a chiare lettere.
 
+const { cercaERiassumi } = require('./ricerca.js');
 const { chiediGemini } = require('./gemini.js');
+
+// Le parole che vanno al motore di ricerca. Due, perche' la Corea e le
+// due tappe finali non stanno nella stessa domanda.
+const RICERCHE = [
+  'concerti K-pop Corea del Sud aprile 2027 Seoul Busan date annunciate biglietti',
+  'concerti ed eventi musicali Taipei Hong Kong aprile 2027 date annunciate',
+];
 
 // Le date del viaggio, che sono il motivo della domanda.
 const DA = '2 aprile 2027';
@@ -60,13 +72,38 @@ module.exports = async function handler(req, res) {
   chiamate.set(ip, [...recenti, ora]);
 
   try {
-    const esito = await chiediGemini({
-      prompt: domanda(),
-      sistema: SISTEMA,
-      conRicerca: true,
-      maxToken: 1600,
-      timeout: 45000,
-    });
+    let esito;
+    try {
+      esito = await cercaERiassumi({
+        sistema: SISTEMA,
+        domanda: domanda(),
+        query: RICERCHE,
+        maxToken: 1600,
+        tempo: 45000,
+      });
+    } catch (e) {
+      // Il gateway giu' non deve spegnere il bottone: se la chiave di
+      // Gemini c'e', la domanda va li'.
+      console.warn('[kpop] OneProvider non ha risposto, provo Gemini:', e && e.message ? e.message : e);
+      try {
+        esito = await chiediGemini({
+          prompt: domanda(),
+          sistema: SISTEMA,
+          conRicerca: true,
+          maxToken: 1600,
+          timeout: 45000,
+        });
+      } catch (e2) {
+        // Due motori, due errori diversi da raccontare. "Non ancora
+        // attiva" vale solo se non c'e' nessuna chiave: se la chiave
+        // c'era e il motore e' caduto, dirlo cosi' manderebbe a cercare
+        // una configurazione che invece e' a posto.
+        if (e.codice === 'senza-chiave' && e2.codice === 'senza-chiave') throw e;
+        const caduto = new Error('nessun motore ha risposto');
+        caduto.codice = 'motori-giu';
+        throw caduto;
+      }
+    }
 
     if (!esito.testo) {
       return res.status(502).json({ errore: 'Non e\' arrivata nessuna risposta. Riprova fra un attimo.' });
@@ -85,6 +122,9 @@ module.exports = async function handler(req, res) {
     console.error('[kpop] ricerca fallita:', messaggio);
     if (e.codice === 'senza-chiave') {
       return res.status(500).json({ errore: 'La ricerca dei concerti non e\' ancora attiva.' });
+    }
+    if (e.codice === 'motori-giu') {
+      return res.status(502).json({ errore: 'Il motore non risponde in questo momento. Riprova fra qualche minuto.' });
     }
     return res.status(502).json({ errore: 'Ricerca non riuscita. Riprova fra un attimo.' });
   }
