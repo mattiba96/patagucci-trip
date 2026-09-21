@@ -7,7 +7,7 @@ import json
 
 DESTS = [
     {"file": "islanda-trip.html", "suf": "is", "flag": "🇮🇸", "name": "Islanda", "stato": "confermato"},
-    {"file": "corea-trip.html", "suf": "kr", "flag": "🇰🇷🇹🇼🇭🇰", "name": "Corea, Taiwan e Hong Kong", "stato": "confermato"},
+    {"file": "corea-trip.html", "suf": "kr", "flag": "🇰🇷🇧🇳🇸🇬", "name": "Corea, Brunei e Singapore", "stato": "confermato"},
     # Non e' una meta: e' la pagina che le cerca. Sta in fondo al selettore.
     {"file": "prossimo.html", "suf": "nx", "flag": "❓", "name": "Quale sarà il prossimo?", "stato": "idea"},
 ]
@@ -479,10 +479,10 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               <img src="foto/destinazioni/kr-ciliegi.jpg" alt="Ciliegi in fiore in Corea del Sud" loading="lazy">
               <div class="overlay"></div>
               <div class="content">
-                <div class="flag">🇰🇷🇹🇼🇭🇰</div>
-                <div class="title">Corea, Taiwan e Hong Kong</div>
+                <div class="flag">🇰🇷🇧🇳🇸🇬</div>
+                <div class="title">Corea, Brunei e Singapore</div>
                 <div class="meta">2-18 aprile 2027 · 17 giorni</div>
-                <p class="tagline">Seul, Gyeongju e Busan in KTX, il vulcano di Jeju, i ciliegi in fiore, e poi giù a tappe: Taipei e Hong Kong.</p>
+                <p class="tagline">Seul e Busan in KTX, il vulcano di Jeju e i ciliegi in fiore, poi la foresta del Borneo e una tappa a Singapore.</p>
               </div>
             </a>
           </div>
@@ -821,7 +821,7 @@ NOMI_METE.update({d["suf"]: d["name"] for d in DESTS})
 SPUNTI = {
     "hub": ["Serve il visto per queste mete?", "Che vaccinazioni servono?", "Quanto costa l'assicurazione?"],
     "is": ["Quanto costa l'ingresso alla Blue Lagoon?", "Com'è il meteo adesso in Islanda?", "I vulcani sono attivi in questo momento?"],
-    "kr": ["Quanto costano i voli in tutto?", "Cosa si fa a Taipei in due giorni?", "Serve il K-ETA per gli italiani?"],
+    "kr": ["Cosa si fa in Brunei per quattro giorni?", "Quando fioriscono i ciliegi a Seul?", "Si beve davvero niente in Brunei?"],
     "nx": ["Dove si vola con poco a gennaio?", "Quali mete sono fuori stagione ad aprile?", "Come funziona la ricerca voli?"],
 }
 
@@ -1175,10 +1175,10 @@ var FLAG_BARS = {{
   in: 'linear-gradient(90deg,#FF9933 0 33%, #ffffff 33% 66%, #138808 66% 100%)',
   tz: 'linear-gradient(90deg,#1EB53A 0 30%, #FCD116 30% 40%, #000000 40% 60%, #FCD116 60% 70%, #00A3DD 70% 100%)',
   cx: 'linear-gradient(90deg,#0067C6 0 20%, #ffffff 20% 33%, #002B7F 33% 46%, #CE1126 46% 60%, #ffffff 60% 73%, #D21034 73% 86%, #005293 86% 100%)',
-  kr: 'linear-gradient(90deg,#ffffff 0 12%, #CD2E3A 12% 22%, #0047A0 22% 33%, #FE0000 33% 44%, #000095 44% 55%, #ffffff 55% 66%, #DE2910 66% 100%)',
+  kr: 'linear-gradient(90deg,#ffffff 0 12%, #CD2E3A 12% 22%, #0047A0 22% 33%, #F7E017 33% 55%, #000000 55% 66%, #EF3340 66% 88%, #ffffff 88% 100%)',
   'kr-kr': 'linear-gradient(90deg,#ffffff 0 32%, #CD2E3A 32% 47%, #0047A0 47% 62%, #ffffff 62% 100%)',
-  'kr-tw': 'linear-gradient(90deg,#000095 0 30%, #FE0000 30% 100%)',
-  'kr-hk': 'linear-gradient(90deg,#DE2910 0 42%, #ffffff 42% 58%, #DE2910 58% 100%)',
+  'kr-bn': 'linear-gradient(90deg,#F7E017 0 55%, #ffffff 55% 68%, #000000 68% 82%, #F7E017 82% 100%)',
+  'kr-sg': 'linear-gradient(90deg,#EF3340 0 50%, #ffffff 50% 100%)',
   is: 'linear-gradient(90deg,#02529C 0 30%, #ffffff 30% 38%, #DC1E35 38% 47%, #ffffff 47% 55%, #02529C 55% 100%)'
 }};
 function showDest(name){{

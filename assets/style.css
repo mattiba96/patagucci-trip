@@ -131,23 +131,23 @@ html[data-dest="kr"]{
    mano che si scorre: data-paese lo mette il JS leggendo quale sezione si
    sta guardando. Senza attributo restano i colori della Corea, che e' il
    paese dove si sta piu' a lungo.
-   Taiwan: il blu della bandiera, e il vermiglio delle lanterne di Jiufen. */
-html[data-dest="kr"][data-paese="tw"]{
-  --accent:#FF5B3E; --accent-rgb:255,91,62; --accent-deep:#C63A22; --accent-ink:#9C2B17;
-  --accent-2:#2E8B74; --accent-2-deep:#1D6754; --accent-2-ink:#165244;
-  --theme-900:#0E1C4A; --theme-800:#16286B; --theme-700:#1E3488; --theme-rgb:30,52,136;
-  --dark-base:#050A1C; --tint-100:#fff6f3; --tint-200:#ffe4dd; --line:#f2cdc4; --paper:#fffcfb;
+   Brunei: l'oro della cupola della moschea sul verde della foresta. */
+html[data-dest="kr"][data-paese="bn"]{
+  --accent:#F7C331; --accent-rgb:247,195,49; --accent-deep:#C8960A; --accent-ink:#8A6606;
+  --accent-2:#2E8B57; --accent-2-deep:#1D6640; --accent-2-ink:#155033;
+  --theme-900:#10301F; --theme-800:#17462D; --theme-700:#1F5C3B; --theme-rgb:31,92,59;
+  --dark-base:#05130C; --tint-100:#fdf9ec; --tint-200:#faeec9; --line:#ecd9a4; --paper:#fffdf7;
 }
-/* Hong Kong: il rosso della bauhinia, e l'oro delle insegne al neon sul
-   verde scuro del porto di notte. */
-html[data-dest="kr"][data-paese="hk"]{
-  --accent:#F0374F; --accent-rgb:240,55,79; --accent-deep:#C00F26; --accent-ink:#980A1C;
-  --accent-2:#F5B301; --accent-2-deep:#C08A00; --accent-2-ink:#8A6300;
-  --theme-900:#0B2A28; --theme-800:#12403C; --theme-700:#1A554F; --theme-rgb:26,85,79;
-  --dark-base:#040F0E; --tint-100:#fff5f6; --tint-200:#ffe1e5; --line:#f3c9cf; --paper:#fffcfc;
+/* Singapore: il rosso della bandiera, e il viola elettrico dei Supertree
+   di notte. */
+html[data-dest="kr"][data-paese="sg"]{
+  --accent:#EF3340; --accent-rgb:239,51,64; --accent-deep:#C0111D; --accent-ink:#960A14;
+  --accent-2:#8E5BD0; --accent-2-deep:#6B3BAA; --accent-2-ink:#552D8A;
+  --theme-900:#1A1030; --theme-800:#271748; --theme-700:#352062; --theme-rgb:53,32,98;
+  --dark-base:#0A0618; --tint-100:#fff5f6; --tint-200:#ffe1e3; --line:#f3c9cd; --paper:#fffcfc;
 }
 
-/* --- Divisori fra il viaggio e i tre paesi --- */
+/* --- Divisori fra il viaggio e i paesi --- */
 .paese-divisore{
   position:relative; padding:46px 20px 34px; text-align:center;
   background:linear-gradient(180deg, var(--dark-base), var(--theme-900));
@@ -188,8 +188,8 @@ section.panel.dark .cal-giorno .cal-data{ color:#fdf9f0; }
 /* Il filo di colore a sinistra dice in che paese si e' quel giorno. */
 .cal-giorno{ border-left:4px solid var(--line); }
 .cal-giorno[data-paese="kr"]{ border-left-color:#CD2E3A; }
-.cal-giorno[data-paese="tw"]{ border-left-color:#1E3488; }
-.cal-giorno[data-paese="hk"]{ border-left-color:#E8112D; }
+.cal-giorno[data-paese="bn"]{ border-left-color:#F7C331; }
+.cal-giorno[data-paese="sg"]{ border-left-color:#EF3340; }
 .cal-giorno[data-volo="1"] .cal-dove::after{ content:' ✈'; opacity:0.55; }
 .cal-legenda{ display:flex; flex-wrap:wrap; gap:14px; font-size:0.76rem; color:var(--ink-soft); margin-bottom:6px; }
 section.panel.dark .cal-legenda{ color:#9b968a; }
