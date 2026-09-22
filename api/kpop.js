@@ -41,6 +41,8 @@ Non inventare MAI una data, un prezzo o un nome di locale. Se non trovi niente d
 
 Distingui sempre fra quello che e' ANNUNCIATO e quello che e' solo probabile o abituale. Se una cosa e' ricorrente ogni anno ma non ancora annunciata per quest'anno, scrivilo con quelle parole.
 
+Non raccontare quello che stai facendo: niente "sto cercando", niente "[ricerca in corso]", niente preamboli. La prima riga e' gia' la risposta.
+
 Formato: righe brevi. Per ogni evento trovato: **nome** — data, citta', luogo, e dove si comprano i biglietti. Niente introduzioni e niente conclusioni. Massimo otto voci.`;
 
 function domanda() {

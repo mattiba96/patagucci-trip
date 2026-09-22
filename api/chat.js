@@ -49,6 +49,13 @@ const chiamate = new Map();
 // riprova senza e non ci si riprova piu' finche' la lambda resta calda.
 let pensa = true;
 
+// Quando la ricerca del gateway smette di rispondere lo fa per tutti e
+// per un pezzo. Insistere costa venti secondi di attesa a ogni domanda
+// per un elenco che non arrivera': dopo un guasto si sta fermi cinque
+// minuti e si risponde subito con quello che si ha.
+let ricercaGuasta = 0;
+const PAUSA_RICERCA = 5 * 60 * 1000;
+
 // Il conto della giornata vive nella stessa memoria effimera. Su questo
 // sito, con una lambda sola quasi sempre calda, il conto torna; ma se
 // Vercel ne avvia due in parallelo ognuna conta le sue, e a lambda fredda
@@ -464,7 +471,14 @@ module.exports = async function handler(req, res) {
 
     const query = queryRichiesta(esito.testo);
 
-    if (query && resta() < 22000) {
+    if (query && Date.now() - ricercaGuasta < PAUSA_RICERCA) {
+      console.warn('[chat] ricerca in pausa dopo un guasto recente, rispondo senza');
+      esito = await giro({ conRicerca: false, trasmetti: false, tempo: Math.max(5000, resta()), materiale:
+        'La ricerca sul web e\' fuori uso in questo momento. Rispondi con quello che c\'e\' nella '
+        + 'scheda e di\' in una riga che il dato aggiornato adesso non lo puoi controllare. '
+        + 'Non scrivere righe che cominciano con CERCA.' });
+      esito = await consegna(esito);
+    } else if (query && resta() < 22000) {
       // Non c'e' piu' tempo per cercare e poi scrivere: si risponde con
       // quello che si ha, che e' meglio di un timeout.
       console.warn('[chat] tempo finito prima della ricerca, rispondo senza');
@@ -492,6 +506,7 @@ module.exports = async function handler(req, res) {
       } catch (e) {
         // Il motore che non torna non deve far morire la domanda.
         console.warn('[chat] ricerca fallita o troppo lenta:', e && e.message ? e.message : e);
+        ricercaGuasta = Date.now();
       }
 
       sse(res, 'stato', 'metto insieme la risposta…');
