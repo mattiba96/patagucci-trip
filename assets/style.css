@@ -416,6 +416,55 @@ section.panel.dark .stat-big .unit{ color:#c7c2b6; }
 .stat-line{ font-size:0.9rem; color:var(--ink-soft); margin:0 0 18px; }
 section.panel.dark .stat-line{ color:#c7c2b6; }
 
+/* ---------- Stato: cosa manca, cosa e' a posto ----------
+   Il numero grosso della home e' quello che manca, non quello che e'
+   gia' fatto: il contatore e' il premio, i voli sono il lavoro.
+   I colori sono gli stessi di "da prenotare" sul calendario. */
+.stato-grid{ display:grid; grid-template-columns:1.15fr 1fr; gap:28px; align-items:stretch; }
+@media (max-width:820px){ .stato-grid{ grid-template-columns:1fr; gap:20px; } }
+
+.stato-manca{
+  display:block; text-decoration:none; color:inherit;
+  background:var(--paper); border:1px solid var(--line);
+  border-left:7px solid var(--avviso-ink);
+  border-radius:var(--radius-lg); box-shadow:var(--shadow);
+  padding:26px 30px 24px;
+  transition:transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease, border-color .35s ease;
+}
+.sm-titolo{ margin:0; font-weight:400; }
+.stato-manca:hover{ transform:translateY(-4px); box-shadow:var(--shadow-lg); border-color:var(--avviso-ink); }
+.sm-num{
+  display:block; font-family:var(--font-display); font-weight:400;
+  font-size:clamp(5rem,13vw,10rem); line-height:0.78; letter-spacing:0.01em;
+  color:var(--avviso-ink);
+}
+.sm-testa{
+  display:block; font-family:var(--font-display); text-transform:uppercase; font-weight:400;
+  font-size:clamp(1.3rem,3.4vw,2.1rem); line-height:1.05; letter-spacing:0.02em;
+  color:var(--theme-900); margin-top:8px;
+}
+.sm-det{ margin:14px 0 0; font-size:0.92rem; line-height:1.65; color:var(--ink-soft); max-width:46ch; }
+.sm-cta{ display:inline-block; margin-top:16px; font-weight:700; font-size:0.9rem;
+  color:var(--avviso-ink); letter-spacing:0.02em; }
+.stato-manca:hover .sm-cta{ text-decoration:underline; }
+
+.stato-fatto{ align-self:center; padding-left:6px; }
+.sf-tit{ font-family:var(--font-display); text-transform:uppercase; font-weight:400;
+  font-size:1.4rem; letter-spacing:0.04em; color:var(--ink-soft); margin:0 0 16px; }
+.stato-fatto .stat-big{ margin-bottom:14px; align-items:baseline; }
+.stato-fatto .stat-big .num{ font-size:2.4rem; }
+.stato-fatto .stat-big .unit{ font-size:0.92rem; }
+
+/* Ogni fondo ha la sua coppia: la fascia sta sul pannello chiaro, ma
+   se un giorno finisse su quello scuro deve restare leggibile. */
+section.panel.dark .stato-manca{ background:rgba(255,255,255,0.05); border-color:rgba(255,255,255,0.14); border-left-color:var(--avviso); }
+section.panel.dark .stato-manca:hover{ border-color:var(--avviso); }
+section.panel.dark .sm-num{ color:var(--avviso); }
+section.panel.dark .sm-testa{ color:#fff; }
+section.panel.dark .sm-det{ color:#c7c2b6; }
+section.panel.dark .sm-cta{ color:var(--avviso); }
+section.panel.dark .sf-tit{ color:#c7c2b6; }
+
 /* ---------- Crew ---------- */
 .crew-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; }
 .crew-card{ position:relative; border-radius:var(--radius-md); overflow:hidden; box-shadow:var(--shadow); aspect-ratio:4/5; background:var(--dark-base); transition:transform .35s cubic-bezier(.16,1,.3,1), box-shadow .35s ease; }
@@ -977,10 +1026,17 @@ section.panel:not(.dark) .paese-fatto .pf-nome{ color:var(--ink); }
 .ms-lab{ font-size:0.76rem; color:#c7c2b6; margin-top:4px; letter-spacing:0.03em; }
 
 /* ---------- Paesi per persona ---------- */
-.persona-paesi{ margin-top:20px; }
+.persona-paesi{ margin-top:30px; padding-top:22px; border-top:1px solid rgba(255,255,255,0.10); }
+.persona-paesi:first-of-type{ border-top:none; padding-top:0; }
+section.panel:not(.dark) .persona-paesi{ border-top-color:var(--line); }
 .pp-nome{ font-family:var(--font-display); text-transform:uppercase; font-size:1.35rem;
   color:var(--accent); margin-bottom:10px; letter-spacing:0.02em; }
 section.panel:not(.dark) .pp-nome{ color:var(--accent-ink); }
+.pp-conto{ font-family:var(--font-display); font-size:2.1rem; color:var(--accent); margin-left:10px; letter-spacing:0.02em; }
+.pp-conto-lab{ font-family:var(--font-body); font-size:0.72rem; font-weight:600; text-transform:none;
+  color:#c7c2b6; letter-spacing:0.05em; margin-left:5px; }
+section.panel:not(.dark) .pp-conto{ color:var(--accent-ink); }
+section.panel:not(.dark) .pp-conto-lab{ color:var(--ink-soft); }
 
 @media (max-width:760px){
   .mondo-wrap{ padding:12px 12px 10px; }

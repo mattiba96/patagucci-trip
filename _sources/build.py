@@ -148,16 +148,35 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
       <div class="bg" style="background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.6) 55%, rgba(10,14,11,0.94) 100%), url('foto/destinazioni/A_land_enclosed_in_Mountains_-_Hunza_Valley.jpg'); background-position:center 55%;"></div>
       <div class="content">
         <h1>Patagucci Trips</h1>
-        <p class="tagline">Machu Picchu, il Salar de Uyuni, Rio — lo stesso gruppo, una meta nuova ogni volta. Qui dentro ci sono i viaggi con le date fissate, con lo stesso livello di dettaglio ossessivo.</p>
-        <div class="scroll-cue">↓ scegli la meta</div>
+        <p class="tagline">Due viaggi con le date fissate: l'aurora islandese a gennaio, i ciliegi coreani ad aprile. Qui dentro c'è tutto quello che serve per organizzarli — e le due cose che mancano ancora.</p>
+        <div class="scroll-cue">↓ si comincia da quello che manca</div>
       </div>
+      <div class="photo-credit">Foto: Maqalam97, <a href="https://commons.wikimedia.org/wiki/File:A_land_enclosed_in_Mountains_-_Hunza_Valley.jpg" target="_blank" rel="noopener">CC BY-SA 4.0, Wikimedia Commons</a></div>
     </header>
 
     <main>
+      <section class="panel" id="stato" data-nav>
+        <div class="inner" style="max-width:1060px;">
+          <div class="stato-grid reveal">
+            <a class="stato-manca" href="#recap-voli-kr">
+              <h2 class="sm-titolo"><span class="sm-num">2</span><span class="sm-testa">voli ancora da prenotare</span></h2>
+              <p class="sm-det">Busan → Jeju e Jeju → Seul, i due interni coreani di aprile. Sono le uniche due tratte che mancano: tutto il resto è comprato.</p>
+              <span class="sm-cta">Guarda quali e quando →</span>
+            </a>
+            <div class="stato-fatto">
+              <h3 class="sf-tit">Il resto è a posto</h3>
+              <div class="stat-big"><span class="num">2</span><span class="unit">viaggi con le date fissate</span></div>
+              <div class="stat-big"><span class="num">4</span><span class="unit">paesi, due continenti</span></div>
+              <div class="stat-big"><span class="num">25</span><span class="unit">giorni fra gennaio e aprile 2027</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="panel dark" data-nav>
         <div class="inner">
           <h2 class="section-title reveal">🔥 I Patagucci</h2>
-          <p class="section-sub reveal">Machu Picchu, il Salar de Uyuni, Rio — e ora l'aurora islandese e i ciliegi coreani. Lo stesso gruppo, una meta nuova ogni volta.</p>
+          <p class="section-sub reveal">Lo stesso gruppo da sempre, una meta nuova ogni volta. Ecco chi parte.</p>
           <div class="crew-grid">
             <div class="crew-card reveal" data-audio="assets/audio/manu.mp3">
               <img src="foto/32909e5a-8870-4ba2-961d-8baf5bc0c7c8.jpeg" alt="Manu, il logistico, compra le maglie" loading="lazy">
@@ -522,7 +541,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
           <h3 style="margin-top:30px;">Paese per paese, uno per uno</h3>
 
           <div class="persona-paesi reveal">
-            <div class="pp-nome">🧳 Manu</div>
+            <div class="pp-nome">🧳 Manu <span class="pp-conto">60<span class="pp-conto-lab">paesi</span></span></div>
             <div class="paesi-fatti">
               <span class="paese-fatto"><span class="pf-flag">🇭🇰</span><span class="pf-nome">Hong Kong</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇲🇴</span><span class="pf-nome">Macao</span></span>
@@ -588,7 +607,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
           </div>
 
           <div class="persona-paesi reveal">
-            <div class="pp-nome">🧭 Mala</div>
+            <div class="pp-nome">🧭 Mala <span class="pp-conto">23<span class="pp-conto-lab">paesi</span></span></div>
             <div class="paesi-fatti">
               <span class="paese-fatto"><span class="pf-flag">🇲🇽</span><span class="pf-nome">Messico</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇬🇹</span><span class="pf-nome">Guatemala</span></span>
@@ -617,7 +636,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
           </div>
 
           <div class="persona-paesi reveal">
-            <div class="pp-nome">💻 Bacci</div>
+            <div class="pp-nome">💻 Bacci <span class="pp-conto">29<span class="pp-conto-lab">paesi</span></span></div>
             <div class="paesi-fatti">
               <span class="paese-fatto"><span class="pf-flag">🇵🇪</span><span class="pf-nome">Perù</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇧🇴</span><span class="pf-nome">Bolivia</span></span>
@@ -652,7 +671,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
           </div>
 
           <div class="persona-paesi reveal">
-            <div class="pp-nome">🌟 Kiki</div>
+            <div class="pp-nome">🌟 Kiki <span class="pp-conto">31<span class="pp-conto-lab">paesi</span></span></div>
             <div class="paesi-fatti">
               <span class="paese-fatto"><span class="pf-flag">🇺🇸</span><span class="pf-nome">Stati Uniti</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇲🇽</span><span class="pf-nome">Messico</span></span>
@@ -1302,10 +1321,14 @@ function applicaFrammento(daCronologia){{
   showDest(trovato.meta, true);
   if(trovato.sezione){{
     var el = document.getElementById(trovato.sezione);
-    if(el) setTimeout(function(){{ el.scrollIntoView({{ behavior: daCronologia ? 'auto' : 'instant', block:'start' }}); }}, 60);
+    // Sempre secco: la meta e' appena cambiata, quindi non c'e' niente da
+    // seguire con lo sguardo. Scendere piano per ventimila pixel di una
+    // pagina che non si stava guardando fa solo perdere l'orientamento.
+    if(el) setTimeout(function(){{ el.scrollIntoView({{ behavior:'instant', block:'start' }}); }}, 60);
   }}
 }}
 window.addEventListener('popstate', function(){{ applicaFrammento(true); }});
+window.addEventListener('hashchange', function(){{ applicaFrammento(true); }});
 document.addEventListener('DOMContentLoaded', function(){{ if(location.hash) applicaFrammento(false); }});
 
 // Una meta che attraversa piu' paesi tinge la pagina col paese che si sta
