@@ -51,7 +51,7 @@ Non è un pianificatore di viaggi generico: è il registro di *questi* viaggi. O
 
 - **Voli comprati**, con numeri reali: Etihad `7GJHW8` (EY 82/822 all'andata, EY 499/81 al ritorno), Royal Brunei `BI 652` e `BI 421`.
 - **Foto** in `foto/destinazioni/`, da Wikimedia Commons, ognuna con autore e licenza citati nel piè di pagina della scheda.
-- Eccezione nota: `bn-royalbrunico.jpg` è un fotomontaggio fornito dal gruppo, **senza autore né licenza noti** — è l'unica immagine del sito priva di crediti.
+- Eccezione nota: `bn-royalbrunico.jpg` è un fotomontaggio fornito dal gruppo, **senza autore né licenza noti** — non ha crediti perché non ne esistono. Ogni altra immagine di provenienza esterna porta autore e licenza nel piè di pagina della sua scheda, compresa quella dell'intestazione della home (Hunza Valley, Maqalam97, CC BY-SA 4.0).
 - **Elenchi dei paesi visitati** per persona, dai registri del gruppo. Quello di Manu potrebbe essere incompleto.
 - Non esistono testimonianze, clienti, prezzi di vendita o metriche: non è un prodotto commerciale e non deve inventarseli.
 

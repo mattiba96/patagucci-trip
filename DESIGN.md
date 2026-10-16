@@ -192,15 +192,23 @@ Una palette calda su base carta, in cui l'accento è l'unica voce satura e cambi
 ### Hierarchy
 - **Display** (400, `clamp(3rem, 9vw, 5.6rem)`, line-height 0.95): solo il titolo della meta nell'intestazione a tutta altezza. Maiuscolo, con un filetto sfumato sotto.
 - **Headline** (400, `clamp(1.9rem, 4.2vw, 3rem)`, line-height 1): i titoli di sezione, preceduti da un'emoji che fa da segnaposto visivo.
+- **Title-lg** (400, `1.35rem`): nomi di persona negli elenchi, intestazioni di blocco dentro un pannello.
 - **Title** (400, `1.2rem`): titoli dei giorni nell'itinerario, nomi nelle schede fatti, intestazioni di card.
 - **Body** (400, `16.5px`, line-height 1.6): tutto il testo corrente.
-- **Label** (700, `0.8rem`, letter-spacing `0.04em`, maiuscolo): tab di navigazione, chip, intestazioni di tabella.
+- **Lead** (400, `1.08rem` = 17,3px): sottotitoli di sezione e primo paragrafo.
+- **Base** (400, `1rem` = 16px): corpo delle card. È il pavimento della lettura.
+- **Small** (400, `0.88rem` = 14,1px): didascalie, tag, testo denso delle griglie.
+- **Label** (700, `0.8rem` = 12,8px, letter-spacing `0.04em`, maiuscolo): tab di navigazione, chip, intestazioni di tabella. È il gradino più basso.
+- **Mono** (400, `0.8rem`): orari e codici di volo, dove le cifre devono incolonnarsi.
+- **Number** (400, `3.2rem` / `2.6rem` / `2.1rem`, Bebas): il numero che apre una sezione, quello dentro una fascia, quello accanto a un nome.
 
 ### Named Rules
 
 **La Regola del Numero Grosso.** Qualunque cifra che valga la pena ricordare — percentuale di mondo visto, giorni di viaggio, durata di una tratta — va in Bebas a corpo molto maggiore del testo attorno, con l'unità in piccolo accanto. I numeri sono il contenuto, non la decorazione.
 
-**La Regola degli Undici Pixel.** Nessun testo che si legge o si tocca scende sotto gli 11px. Il sistema oggi viola questa regola in più punti (crediti foto a 10,56px, note fonti a 11,8px): è debito, non licenza.
+**La Regola della Scala.** Nessuna misura di testo si scrive a mano. Ci sono sei gradini per il testo e tre per i numeri, tutti token. Erano trentotto misure diverse, venti delle quali fra 0,6 e 1rem: 0,83 e 0,84 e 0,85 non erano tre lavori diversi. Se una misura nuova sembra necessaria, quasi sempre è uno dei gradini che già c'è.
+
+**La Regola dei Dodici Pixel.** Nessun testo che si legge o si tocca scende sotto i 12px, crediti foto compresi: il gradino più basso è 12,8px. Vale anche per le scritte dentro le mappe SVG, che sono in unità del disegno e vanno moltiplicate per il fattore di scala prima di dire che sono grandi abbastanza — è così che i nomi dei posti erano finiti a 9 pixel veri su schermo grande e a 6,6 su telefono.
 
 ## Layout
 
@@ -209,6 +217,8 @@ Colonna unica centrata, mai una griglia multi-colonna a tutta pagina. Il conteni
 Dentro le sezioni il lavoro lo fanno due griglie fluide: `.info-grid` e `.family-grid`, entrambe `repeat(auto-fit, minmax(260px, 1fr))`, che collassano da sole senza breakpoint dedicati. Le tabelle non si impilano: restano tabelle e scorrono dentro la loro card.
 
 La navigazione è a due piani appiccicosi: il selettore delle mete in cima (`position:sticky; top:0`) e sotto la barra delle sezioni, che si ancora all'altezza del selettore tramite la variabile `--switcher-h` misurata a runtime. Entrambe scorrono orizzontalmente a qualsiasi larghezza invece di andare a capo — ad andare a capo mangiavano un terzo dello schermo su telefono.
+
+**La Regola di Ciò Che Manca.** La home apre con l'unica cosa incompiuta, non col contatore dei paesi visitati. Il contatore è il premio, i voli da prenotare sono il lavoro: il numero grosso sta sul secondo.
 
 **La Regola dell'Alternanza.** I pannelli alternano chiaro e scuro senza eccezioni, in sequenza. Togliere o inserire una sezione obbliga a rinumerare l'alternanza: due pannelli chiari di fila sono un difetto visibile.
 
