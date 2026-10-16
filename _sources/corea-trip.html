@@ -12,10 +12,10 @@
   .route-status{ display:grid; grid-template-columns:1fr auto; gap:10px 14px; align-items:center; }
   .route-status .r-name{ font-weight:600; color:var(--ink); }
   section.panel.dark .route-status .r-name{ color:#f4f1ea; }
-  .route-status .r-status{ font-size:0.78rem; font-weight:700; padding:4px 10px; border-radius:8px; white-space:nowrap; justify-self:end; }
+  .route-status .r-status{ font-size:var(--t-micro); font-weight:700; padding:4px 10px; border-radius:8px; white-space:nowrap; justify-self:end; }
   .r-status.open{ background:#1e4a2f; color:#8fe0ac; }
   .r-status.closed{ background:#4a1c1c; color:#ff9b8a; }
-  .route-note{ grid-column:1 / -1; font-size:0.82rem; color:var(--ink-soft); margin:-4px 0 10px; }
+  .route-note{ grid-column:1 / -1; font-size:var(--t-small); color:var(--ink-soft); margin:-4px 0 10px; }
   section.panel.dark .route-note{ color:#c7c2b6; }
 </style>
 </head>
@@ -88,7 +88,7 @@
         <span>✈ giorno di volo</span>
       </div>
       <div class="calendario reveal" id="calendario"></div>
-      <p class="qp-aiuto reveal" style="font-size:0.8rem;">Clicca un giorno per aprirlo qui sotto.</p>
+      <p class="qp-aiuto reveal" style="font-size:var(--t-micro);">Clicca un giorno per aprirlo qui sotto.</p>
 
       <h3 class="reveal" style="margin-top:28px;">🗓️ Giorno per giorno</h3>
       <div class="timeline" id="timeline"></div>
@@ -624,9 +624,9 @@
           </tbody>
         </table>
         <div class="source-note">Indicativamente <strong>133 € a persona</strong> per entrambi, a settembre 2026. Le rotte sono servite da parecchie low cost coreane e ci sono molte partenze al giorno, quindi la scelta dell'orario è larga. <strong>Jeju–Gimpo è una delle rotte più trafficate al mondo</strong>: posti non mancano, ma ad aprile conviene non arrivare all'ultimo.</div>
-        <div class="callout reveal" style="margin-top:12px;">
-          <strong>I ciliegi non dipendono da questo volo.</strong> Sono all'alba del 12 e la sera dell'11 si è già a Seul comunque: anche prendendo un volo tardi, si perde il pomeriggio dell'11, non i fiori.
-        </div>
+      </div>
+      <div class="callout reveal" style="margin-top:-4px;">
+        <strong>I ciliegi non dipendono da questo volo.</strong> Sono all'alba del 12 e la sera dell'11 si è già a Seul comunque: anche prendendo un volo tardi, si perde il pomeriggio dell'11, non i fiori.
       </div>
 
       <div class="callout warn reveal">

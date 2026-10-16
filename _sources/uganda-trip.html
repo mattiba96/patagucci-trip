@@ -62,7 +62,7 @@
   }
   nav.tabs a{
     flex:0 0 auto; border:1px solid transparent; background:transparent; color:#cfcfcf;
-    padding:9px 16px; border-radius:999px; font-size:0.8rem; font-weight:700; cursor:pointer;
+    padding:9px 16px; border-radius:999px; font-size:var(--t-micro); font-weight:700; cursor:pointer;
     white-space:nowrap; transition:all .2s ease; text-transform:uppercase; letter-spacing:0.04em;
   }
   nav.tabs a:hover{ background:rgba(255,255,255,0.08); }
@@ -86,11 +86,11 @@
   header.hero h1{ margin:0 0 14px; font-family:var(--font-display); font-size:clamp(3rem,9vw,5.6rem); letter-spacing:0.02em; font-weight:400; line-height:0.95; text-shadow:0 4px 24px rgba(0,0,0,0.5); text-transform:uppercase; }
   header.hero p.tagline{ margin:0 auto; color:#f1ece0; font-size:clamp(1.05rem,2.2vw,1.3rem); text-shadow:0 1px 12px rgba(0,0,0,0.4); font-weight:500; }
   .badge-row{ display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:24px; }
-  .badge{ background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.28); color:#fdf9f0; padding:6px 14px; border-radius:20px; font-size:0.82rem; backdrop-filter:blur(6px); transition:transform .2s ease; }
+  .badge{ background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.28); color:#fdf9f0; padding:6px 14px; border-radius:20px; font-size:var(--t-small); backdrop-filter:blur(6px); transition:transform .2s ease; }
   .badge:hover{ transform:translateY(-2px); }
-  .scroll-cue{ margin-top:38px; font-size:0.78rem; color:#e8e2d2; opacity:0.75; position:relative; z-index:1; animation:bounce 2.2s ease-in-out infinite; }
+  .scroll-cue{ margin-top:38px; font-size:var(--t-micro); color:#e8e2d2; opacity:0.75; position:relative; z-index:1; animation:bounce 2.2s ease-in-out infinite; }
   @keyframes bounce{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(6px); } }
-  .photo-credit{ position:absolute; bottom:8px; right:12px; font-size:0.66rem; color:rgba(255,255,255,0.55); z-index:1; }
+  .photo-credit{ position:absolute; bottom:8px; right:12px; font-size:var(--t-micro); color:rgba(255,255,255,0.55); z-index:1; }
   .photo-credit a{ color:rgba(255,255,255,0.7); }
 
   main{ max-width:980px; margin:0 auto; }
@@ -108,7 +108,7 @@
   .photo-banner img{ width:100%; height:100%; object-fit:cover; transition:transform 1.2s cubic-bezier(.16,1,.3,1); }
   .photo-banner:hover img{ transform:scale(1.08); }
   .photo-banner .credit{
-    position:absolute; bottom:0; right:0; background:rgba(0,0,0,0.5); color:#fff; font-size:0.66rem;
+    position:absolute; bottom:0; right:0; background:rgba(0,0,0,0.5); color:#fff; font-size:var(--t-micro);
     padding:4px 10px; border-radius:10px 0 0 0;
   }
   .photo-banner .credit a{ color:#fff; }
@@ -119,7 +119,7 @@
 
   h2.section-title{ font-family:var(--font-display); text-transform:uppercase; font-size:clamp(1.9rem,4.2vw,3rem); color:var(--black); margin:4px 0 8px; display:flex; align-items:center; gap:12px; font-weight:400; letter-spacing:0.01em; line-height:1; }
   section.panel:not(.dark) h2.section-title{ color:var(--green-900); }
-  p.section-sub{ color:var(--ink-soft); margin:0 0 26px; font-size:1.02rem; max-width:640px; }
+  p.section-sub{ color:var(--ink-soft); margin:0 0 26px; font-size:var(--t-lead); max-width:640px; }
 
   .reveal{ opacity:0; transform:translateY(28px) scale(0.98); transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1); }
   .reveal.visible{ opacity:1; transform:none; }
@@ -135,8 +135,8 @@
   .why-grid .photo-banner{ height:320px; margin-bottom:0; }
   .stat-big{ display:flex; align-items:baseline; gap:10px; margin-bottom:4px; }
   .stat-big .num{ font-family:var(--font-display); font-size:3.2rem; font-weight:400; color:var(--yellow); line-height:1; }
-  .stat-big .unit{ font-size:1rem; color:#c7c2b6; }
-  .stat-line{ font-size:0.9rem; color:#c7c2b6; margin:0 0 18px; }
+  .stat-big .unit{ font-size:var(--t-lead); color:#c7c2b6; }
+  .stat-line{ font-size:var(--t-base); color:#c7c2b6; margin:0 0 18px; }
 
   /* ---------- Crew ---------- */
   .crew-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; }
@@ -148,7 +148,7 @@
   .crew-caption{
     position:absolute; left:0; right:0; bottom:0; padding:14px 14px 12px;
     background:linear-gradient(180deg, transparent, rgba(0,0,0,0.85));
-    color:#fff; font-size:0.85rem; font-weight:600;
+    color:#fff; font-size:var(--t-small); font-weight:600;
   }
   .crew-check{ color:var(--yellow); }
 
@@ -157,17 +157,17 @@
   .timeline::before{ content:""; position:absolute; left:9px; top:6px; bottom:6px; width:2px; background:var(--line); }
   details.day{ position:relative; background:var(--paper); border:1px solid var(--line); border-radius:var(--radius-md); margin-bottom:12px; box-shadow:var(--shadow); overflow:hidden; }
   details.day::before{ content:""; position:absolute; left:-26px; top:22px; width:11px; height:11px; border-radius:50%; background:var(--yellow); border:3px solid var(--paper); box-shadow:0 0 0 2px var(--line); }
-  details.day summary{ list-style:none; cursor:pointer; padding:16px 18px; display:flex; align-items:center; gap:12px; font-weight:600; color:var(--green-900); font-size:1.02rem; }
+  details.day summary{ list-style:none; cursor:pointer; padding:16px 18px; display:flex; align-items:center; gap:12px; font-weight:600; color:var(--green-900); font-size:var(--t-lead); }
   details.day summary::-webkit-details-marker{ display:none; }
-  details.day summary .daynum{ background:var(--black); color:var(--yellow); width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:1.1rem; flex:0 0 auto; font-weight:400; }
-  details.day summary .daytitle{ flex:1; font-family:var(--font-display); text-transform:uppercase; font-size:1.2rem; letter-spacing:0.01em; }
-  details.day summary .chevron{ transition:transform .2s ease; color:var(--ink-soft); font-size:0.8rem; }
+  details.day summary .daynum{ background:var(--black); color:var(--yellow); width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:var(--t-title); flex:0 0 auto; font-weight:400; }
+  details.day summary .daytitle{ flex:1; font-family:var(--font-display); text-transform:uppercase; font-size:var(--t-title); letter-spacing:0.01em; }
+  details.day summary .chevron{ transition:transform .2s ease; color:var(--ink-soft); font-size:var(--t-micro); }
   details.day[open] summary .chevron{ transform:rotate(90deg); }
-  details.day .day-body{ padding:0 20px 18px 64px; font-size:0.93rem; }
-  details.day .tag{ display:inline-block; background:var(--cream-200); color:var(--green-800); border-radius:8px; padding:3px 10px; font-size:0.75rem; margin:2px 5px 8px 0; font-weight:600; }
+  details.day .day-body{ padding:0 20px 18px 64px; font-size:var(--t-base); }
+  details.day .tag{ display:inline-block; background:var(--cream-200); color:var(--green-800); border-radius:8px; padding:3px 10px; font-size:var(--t-micro); margin:2px 5px 8px 0; font-weight:600; }
   details.day .tag.highlight{ background:var(--red); color:#fff; }
   details.day .maps-link{
-    display:inline-flex; align-items:center; gap:6px; margin-top:8px; font-size:0.82rem; font-weight:700;
+    display:inline-flex; align-items:center; gap:6px; margin-top:8px; font-size:var(--t-small); font-weight:700;
     color:var(--green-700); border:1px solid var(--line); padding:6px 12px; border-radius:999px;
   }
   details.day .maps-link:hover{ background:var(--cream-200); }
@@ -176,32 +176,32 @@
 
   /* ---------- Info grids ---------- */
   .info-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px; }
-  .info-grid .card h3{ margin:0 0 8px; font-size:1rem; }
-  .info-grid .card p{ margin:0; font-size:0.88rem; color:var(--ink-soft); }
-  .rule-list{ margin:0; padding-left:20px; font-size:0.92rem; }
+  .info-grid .card h3{ margin:0 0 8px; font-size:var(--t-lead); }
+  .info-grid .card p{ margin:0; font-size:var(--t-small); color:var(--ink-soft); }
+  .rule-list{ margin:0; padding-left:20px; font-size:var(--t-base); }
   .rule-list li{ margin-bottom:8px; }
-  .callout{ background:#fff4e2; border:1px solid var(--yellow-deep); border-radius:var(--radius-md); padding:14px 18px; font-size:0.9rem; margin:16px 0; }
+  .callout{ background:#fff4e2; border:1px solid var(--yellow-deep); border-radius:var(--radius-md); padding:14px 18px; font-size:var(--t-base); margin:16px 0; }
   .callout strong{ color:var(--yellow-deep); }
   section.panel.dark .callout{ background:rgba(255,206,0,0.1); border-color:rgba(255,206,0,0.35); color:#f4f1ea; }
   section.panel.dark .callout strong{ color:var(--yellow); }
-  .source-note{ font-size:0.74rem; color:var(--ink-soft); margin-top:6px; }
+  .source-note{ font-size:var(--t-micro); color:var(--ink-soft); margin-top:6px; }
   section.panel.dark .source-note{ color:#9b968a; }
 
   /* ---------- Families ---------- */
   .filter-row{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:18px; }
-  .filter-row button{ border:1px solid var(--line); background:var(--paper); color:var(--ink-soft); padding:7px 14px; border-radius:999px; font-size:0.83rem; font-weight:600; cursor:pointer; transition:all .15s; }
+  .filter-row button{ border:1px solid var(--line); background:var(--paper); color:var(--ink-soft); padding:7px 14px; border-radius:999px; font-size:var(--t-small); font-weight:600; cursor:pointer; transition:all .15s; }
   .filter-row button:hover{ background:var(--cream-200); }
   .filter-row button.active{ background:var(--green-800); color:#fff; border-color:var(--green-800); }
   .family-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; }
   .family-card{ background:var(--paper); border:1px solid var(--line); border-radius:var(--radius-md); box-shadow:var(--shadow); padding:16px 18px; }
-  .family-card .fname{ font-weight:700; color:var(--green-900); font-size:1.02rem; }
-  .family-card .fsector{ font-size:0.78rem; color:var(--ink-soft); margin-bottom:8px; }
-  .family-card .flevel{ display:inline-block; font-size:0.72rem; font-weight:700; padding:3px 9px; border-radius:7px; margin-bottom:8px; }
+  .family-card .fname{ font-weight:700; color:var(--green-900); font-size:var(--t-lead); }
+  .family-card .fsector{ font-size:var(--t-micro); color:var(--ink-soft); margin-bottom:8px; }
+  .family-card .flevel{ display:inline-block; font-size:var(--t-micro); font-weight:700; padding:3px 9px; border-radius:7px; margin-bottom:8px; }
   .flevel.Facile{ background:#e2f2e6; color:var(--green-700); }
   .flevel.Media{ background:#fff2cf; color:#8a6c00; }
   .flevel.Impegnativo{ background:#fbe1e6; color:var(--red-deep); }
-  .family-card .fnote{ font-size:0.85rem; color:var(--ink-soft); margin:0; }
-  .family-card .fsize{ font-size:0.83rem; color:var(--ink); font-weight:600; margin-bottom:4px; }
+  .family-card .fnote{ font-size:var(--t-small); color:var(--ink-soft); margin:0; }
+  .family-card .fsize{ font-size:var(--t-small); color:var(--ink); font-weight:600; margin-bottom:4px; }
 
   /* ---------- Stats / rings ---------- */
   .stats-grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px; align-items:stretch; }
@@ -211,11 +211,11 @@
   .ring .ring-label{ position:relative; z-index:1; font-size:1.7rem; font-weight:800; color:#fff; }
   .dist-bars{ display:flex; flex-direction:column; gap:12px; }
   .dist-row{ display:flex; align-items:center; gap:12px; }
-  .dist-row .dlabel{ width:130px; font-size:0.83rem; flex:0 0 auto; color:#c7c2b6; }
+  .dist-row .dlabel{ width:130px; font-size:var(--t-small); flex:0 0 auto; color:#c7c2b6; }
   .dist-row .dtrack{ flex:1; height:12px; border-radius:8px; background:rgba(255,255,255,0.12); overflow:hidden; }
   .dist-row .dfill{ height:100%; border-radius:8px; background:linear-gradient(90deg,var(--yellow-deep),var(--yellow)); }
-  .dist-row .dpct{ width:40px; text-align:right; font-size:0.83rem; font-weight:700; color:#fff; }
-  .factor-list{ margin:0; padding-left:20px; font-size:0.9rem; color:#c7c2b6; }
+  .dist-row .dpct{ width:40px; text-align:right; font-size:var(--t-small); font-weight:700; color:#fff; }
+  .factor-list{ margin:0; padding-left:20px; font-size:var(--t-base); color:#c7c2b6; }
   .factor-list li{ margin-bottom:8px; }
 
   /* ---------- Big Five ---------- */
@@ -223,14 +223,14 @@
   .bigfive-card{ background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:var(--radius-md); padding:16px; text-align:center; transition:transform .3s cubic-bezier(.16,1,.3,1); }
   .bigfive-card:hover{ transform:translateY(-4px); }
   .bigfive-card .bf-icon{ font-size:2.4rem; margin-bottom:8px; }
-  .bigfive-card .bf-name{ font-family:var(--font-display); text-transform:uppercase; font-size:1.2rem; color:#fff; }
-  .bigfive-card .bf-diff{ display:inline-block; font-size:0.7rem; font-weight:700; padding:3px 9px; border-radius:7px; margin:6px 0 8px; }
+  .bigfive-card .bf-name{ font-family:var(--font-display); text-transform:uppercase; font-size:var(--t-title); color:#fff; }
+  .bigfive-card .bf-diff{ display:inline-block; font-size:var(--t-micro); font-weight:700; padding:3px 9px; border-radius:7px; margin:6px 0 8px; }
   .bf-diff.Facile{ background:#1e4a2f; color:#8fe0ac; }
   .bf-diff.Media{ background:#4a3a10; color:var(--yellow); }
   .bf-diff.Difficile{ background:#4a1c1c; color:#ff9b8a; }
   .bf-diff.Assente{ background:#333; color:#999; }
-  .bigfive-card .bf-fact{ font-size:0.82rem; color:#c7c2b6; margin:0 0 12px; min-height:44px; }
-  .bf-track-btn{ border:none; background:rgba(255,255,255,0.14); color:#fff; padding:8px 14px; border-radius:999px; font-size:0.78rem; font-weight:700; cursor:pointer; transition:background .15s; }
+  .bigfive-card .bf-fact{ font-size:var(--t-small); color:#c7c2b6; margin:0 0 12px; min-height:44px; }
+  .bf-track-btn{ border:none; background:rgba(255,255,255,0.14); color:#fff; padding:8px 14px; border-radius:999px; font-size:var(--t-micro); font-weight:700; cursor:pointer; transition:background .15s; }
   .bf-track-btn:hover{ background:rgba(255,255,255,0.24); }
   .bf-track-btn.spotted{ background:var(--yellow); color:var(--black); }
 
@@ -243,25 +243,25 @@
   .sun-label{ font-size:12px; fill:#c7c2b6; }
   #sun-marker{ transition:transform .12s ease-out; }
   #sun-marker text{ filter:drop-shadow(0 0 10px rgba(255,206,0,0.8)); }
-  .sun-readout{ margin-top:10px; font-family:var(--font-display); font-size:1.3rem; color:var(--yellow); }
+  .sun-readout{ margin-top:10px; font-family:var(--font-display); font-size:var(--t-title-lg); color:var(--yellow); }
   .sun-slider-row{ margin:16px auto 4px; max-width:460px; }
   .sun-slider-row input[type=range]{ width:100%; accent-color:var(--yellow); cursor:pointer; }
-  .sun-slider-ticks{ display:flex; justify-content:space-between; font-size:0.7rem; color:#8f8b80; margin-top:2px; }
+  .sun-slider-ticks{ display:flex; justify-content:space-between; font-size:var(--t-micro); color:#8f8b80; margin-top:2px; }
 
   /* ---------- Weather ---------- */
   .weather-stats{ display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:12px; margin-bottom:10px; }
   .weather-stats .card{ text-align:center; padding:16px 10px; }
   .weather-stats .wval{ font-size:1.5rem; font-weight:800; color:var(--green-800); }
-  .weather-stats .wlabel{ font-size:0.76rem; color:var(--ink-soft); margin-top:2px; }
+  .weather-stats .wlabel{ font-size:var(--t-micro); color:var(--ink-soft); margin-top:2px; }
   .weather-cols{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:24px; }
   @media (max-width:600px){ .weather-cols{ grid-template-columns:1fr; } }
-  .weather-cols h4{ margin:0 0 10px; color:var(--green-800); font-size:0.95rem; }
+  .weather-cols h4{ margin:0 0 10px; color:var(--green-800); font-size:var(--t-base); }
   .rain-chart{ display:flex; align-items:flex-end; gap:14px; height:160px; padding:0 6px 26px; position:relative; }
   .rain-chart .bar-col{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; position:relative; }
   .rain-chart .bar{ width:100%; max-width:38px; border-radius:8px 8px 4px 4px; background:#4472c4; transition:height .8s ease; }
   .rain-chart .bar-col.hl .bar{ background:var(--red); }
-  .rain-chart .bar-val{ font-size:0.72rem; color:var(--ink-soft); margin-bottom:4px; }
-  .rain-chart .bar-month{ position:absolute; bottom:-22px; font-size:0.78rem; color:var(--ink-soft); font-weight:600; }
+  .rain-chart .bar-val{ font-size:var(--t-micro); color:var(--ink-soft); margin-bottom:4px; }
+  .rain-chart .bar-month{ position:absolute; bottom:-22px; font-size:var(--t-micro); color:var(--ink-soft); font-weight:600; }
   .rain-chart .bar-col.hl .bar-month{ color:var(--red-deep); font-weight:800; }
 
   /* ---------- Jeep route animation ---------- */
@@ -283,29 +283,29 @@
   .elev-chart{ display:flex; align-items:flex-end; gap:10px; height:220px; padding:0 6px 40px; position:relative; min-width:640px; }
   .elev-chart .elev-col{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; position:relative; }
   .elev-chart .elev-bar{ width:100%; max-width:44px; border-radius:8px 8px 3px 3px; background:linear-gradient(180deg,var(--yellow),var(--red)); transition:height 1s cubic-bezier(.16,1,.3,1); }
-  .elev-chart .elev-val{ font-size:0.74rem; color:#f4f1ea; margin-bottom:6px; font-weight:700; }
-  .elev-chart .elev-name{ position:absolute; bottom:-38px; font-size:0.72rem; color:#c7c2b6; text-align:center; width:90px; left:50%; transform:translateX(-50%); line-height:1.3; }
+  .elev-chart .elev-val{ font-size:var(--t-micro); color:#f4f1ea; margin-bottom:6px; font-weight:700; }
+  .elev-chart .elev-name{ position:absolute; bottom:-38px; font-size:var(--t-micro); color:#c7c2b6; text-align:center; width:90px; left:50%; transform:translateX(-50%); line-height:1.3; }
 
   /* ---------- Currency converter ---------- */
   .currency-form{ display:flex; gap:14px; flex-wrap:wrap; align-items:flex-end; margin-bottom:16px; }
   .currency-form .field{ display:flex; flex-direction:column; gap:6px; }
-  .currency-form label{ font-size:0.8rem; font-weight:600; color:var(--green-900); }
-  .currency-form input, .currency-form select{ padding:9px 12px; border:1px solid var(--line); border-radius:10px; font-size:0.95rem; background:var(--paper); }
+  .currency-form label{ font-size:var(--t-micro); font-weight:600; color:var(--green-900); }
+  .currency-form input, .currency-form select{ padding:9px 12px; border:1px solid var(--line); border-radius:10px; font-size:var(--t-base); background:var(--paper); }
   .currency-form input{ width:130px; }
   .cur-result{ font-family:var(--font-display); font-size:2.2rem; color:var(--green-800); background:var(--cream-200); border-radius:14px; padding:16px 20px; text-align:center; }
 
   /* ---------- Flights ---------- */
   .flight-form{ display:flex; gap:12px; flex-wrap:wrap; align-items:flex-end; margin-bottom:18px; }
   .flight-form .field{ display:flex; flex-direction:column; gap:6px; }
-  .flight-form label{ font-size:0.8rem; font-weight:600; color:var(--green-900); }
-  .flight-form select{ padding:9px 12px; border:1px solid var(--line); border-radius:10px; font-size:0.9rem; background:var(--paper); min-width:200px; }
+  .flight-form label{ font-size:var(--t-micro); font-weight:600; color:var(--green-900); }
+  .flight-form select{ padding:9px 12px; border:1px solid var(--line); border-radius:10px; font-size:var(--t-base); background:var(--paper); min-width:200px; }
   .flight-links{ display:flex; gap:10px; flex-wrap:wrap; }
-  .flight-links button{ border:none; background:var(--black); color:var(--yellow); padding:11px 20px; border-radius:12px; font-size:0.9rem; font-weight:700; cursor:pointer; transition:background .15s; }
+  .flight-links button{ border:none; background:var(--black); color:var(--yellow); padding:11px 20px; border-radius:12px; font-size:var(--t-base); font-weight:700; cursor:pointer; transition:background .15s; }
   .flight-links button:hover{ background:#000; }
   .flight-links button.alt{ background:var(--red); color:#fff; }
   .flight-links button.alt:hover{ background:var(--red-deep); }
-  .hub-table{ width:100%; border-collapse:collapse; font-size:0.85rem; margin-bottom:16px; }
-  .hub-table th{ text-align:left; color:var(--ink-soft); font-size:0.75rem; text-transform:uppercase; border-bottom:2px solid var(--line); padding:6px 8px; }
+  .hub-table{ width:100%; border-collapse:collapse; font-size:var(--t-small); margin-bottom:16px; }
+  .hub-table th{ text-align:left; color:var(--ink-soft); font-size:var(--t-micro); text-transform:uppercase; border-bottom:2px solid var(--line); padding:6px 8px; }
   .hub-table td{ padding:7px 8px; border-bottom:1px solid var(--line); }
 
   /* ---------- Map ---------- */
@@ -314,15 +314,15 @@
   .map-actions{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:20px; }
   .map-actions a, .map-actions button{
     display:inline-flex; align-items:center; gap:8px; border:none; background:var(--green-800); color:#fff;
-    padding:11px 18px; border-radius:12px; font-size:0.88rem; font-weight:700; cursor:pointer; transition:background .15s;
+    padding:11px 18px; border-radius:12px; font-size:var(--t-small); font-weight:700; cursor:pointer; transition:background .15s;
   }
   .map-actions a:hover, .map-actions button:hover{ background:var(--green-700); }
   .map-actions button.export{ background:var(--yellow); color:var(--black); }
   .map-actions button.export:hover{ background:var(--yellow-deep); }
-  table.stops-table{ width:100%; min-width:480px; border-collapse:collapse; font-size:0.83rem; }
-  table.stops-table th{ text-align:left; color:var(--ink-soft); font-size:0.72rem; text-transform:uppercase; border-bottom:2px solid var(--line); padding:6px 8px; }
+  table.stops-table{ width:100%; min-width:480px; border-collapse:collapse; font-size:var(--t-small); }
+  table.stops-table th{ text-align:left; color:var(--ink-soft); font-size:var(--t-micro); text-transform:uppercase; border-bottom:2px solid var(--line); padding:6px 8px; }
   table.stops-table td{ padding:7px 8px; border-bottom:1px solid var(--line); }
-  table.stops-table td.mono{ font-family:ui-monospace,Consolas,monospace; font-size:0.78rem; color:var(--ink-soft); }
+  table.stops-table td.mono{ font-family:ui-monospace,Consolas,monospace; font-size:var(--t-micro); color:var(--ink-soft); }
 
   /* ---------- FAQ ---------- */
   details.faq{ background:var(--paper); border:1px solid var(--line); border-radius:14px; margin-bottom:8px; box-shadow:var(--shadow); }
@@ -330,10 +330,10 @@
   details.faq summary::-webkit-details-marker{ display:none; }
   details.faq[open] summary::after{ content:"−"; }
   details.faq summary::after{ content:"+"; float:right; color:var(--ink-soft); font-weight:400; }
-  details.faq .faq-body{ padding:0 18px 16px; font-size:0.9rem; color:var(--ink-soft); }
+  details.faq .faq-body{ padding:0 18px 16px; font-size:var(--t-base); color:var(--ink-soft); }
 
-  footer{ text-align:center; padding:36px 16px 46px; color:#c7c2b6; font-size:0.82rem; background:linear-gradient(160deg,var(--black),#0a0a0a); }
-  footer .credits{ max-width:700px; margin:14px auto 0; font-size:0.72rem; color:#8f8b80; line-height:1.7; }
+  footer{ text-align:center; padding:36px 16px 46px; color:#c7c2b6; font-size:var(--t-small); background:linear-gradient(160deg,var(--black),#0a0a0a); }
+  footer .credits{ max-width:700px; margin:14px auto 0; font-size:var(--t-micro); color:#8f8b80; line-height:1.7; }
   footer .credits a{ color:#a9a49a; }
 </style>
 </head>
@@ -594,7 +594,7 @@
       <div class="stats-grid">
         <div class="card ring-card reveal">
           <div class="ring" style="--pct:99;"><span class="ring-label">99%</span></div>
-          <p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Tasso di successo dell'avvistamento a Bwindi comunemente riportato da operatori turistici e UWA. I tracker locali individuano i gruppi ogni mattina prima dell'arrivo dei turisti.</p>
+          <p style="color:#c7c2b6; font-size:var(--t-small); margin:0;">Tasso di successo dell'avvistamento a Bwindi comunemente riportato da operatori turistici e UWA. I tracker locali individuano i gruppi ogni mattina prima dell'arrivo dei turisti.</p>
         </div>
         <div class="card reveal">
           <h3 style="margin-top:0;">⏱️ Durata del trekking</h3>
@@ -627,7 +627,7 @@
 
       <div class="card reveal" style="text-align:center;">
         <div class="ring" style="--pct:80;"><span class="ring-label">4/5</span></div>
-        <p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Big Five avvistabili nel parco che visiterete — <span id="bigfive-count">0/5</span> segnati come "avvistati" da voi finora.</p>
+        <p style="color:#c7c2b6; font-size:var(--t-small); margin:0;">Big Five avvistabili nel parco che visiterete — <span id="bigfive-count">0/5</span> segnati come "avvistati" da voi finora.</p>
       </div>
 
       <div class="bigfive-grid" id="bigfive-grid"></div>
@@ -717,16 +717,16 @@
 
       <h3 style="color:#fff;">🧭 Sarete letteralmente sull'Equatore</h3>
       <div class="card reveal">
-        <p style="color:#c7c2b6; font-size:0.92rem; margin:0 0 10px;">Tra Queen Elizabeth NP e Kasese c'è un vero monumento dell'Equatore, a <strong>Kikorongo</strong> — praticamente sulla vostra strada verso Bwindi. Foto con un piede in ogni emisfero, e i venditori locali offrono la "dimostrazione" dell'effetto Coriolis con una bacinella d'acqua (scientificamente discutibile a quella scala, ma divertente da vedere).</p>
+        <p style="color:#c7c2b6; font-size:var(--t-base); margin:0 0 10px;">Tra Queen Elizabeth NP e Kasese c'è un vero monumento dell'Equatore, a <strong>Kikorongo</strong> — praticamente sulla vostra strada verso Bwindi. Foto con un piede in ogni emisfero, e i venditori locali offrono la "dimostrazione" dell'effetto Coriolis con una bacinella d'acqua (scientificamente discutibile a quella scala, ma divertente da vedere).</p>
         <div class="source-note">Fonti: inspiresafaris.com, bujukuecotours.com, arcadiasafaris.com.</div>
       </div>
 
       <h3 style="color:#fff;">🌊 Il Nilo, in due parole</h3>
       <div class="stats-grid">
-        <div class="card reveal"><h3 style="margin-top:0;">6.650 km</h3><p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Il fiume più lungo del mondo secondo Guinness World Records (una spedizione ha misurato l'Amazzonas come più lungo, ma non è un dato universalmente accettato).</p></div>
-        <div class="card reveal"><h3 style="margin-top:0;">↑ Scorre a NORD</h3><p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Al contrario di quasi tutti i grandi fiumi che si immaginano scorrere verso sud, il Nilo va dall'equatore fino al Mediterraneo in Egitto.</p></div>
-        <div class="card reveal"><h3 style="margin-top:0;">11 paesi</h3><p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Il suo bacino tocca 11 stati africani. Voi lo vedrete nascere esattamente a Jinja, dove esce dal Lago Vittoria.</p></div>
-        <div class="card reveal"><h3 style="margin-top:0;">1862</h3><p style="color:#c7c2b6; font-size:0.88rem; margin:0;">John Hanning Speke identificò la sorgente a Jinja (Ripon Falls). La cascata però non esiste più: sommersa nel 1954 dalla diga di Owen Falls.</p></div>
+        <div class="card reveal"><h3 style="margin-top:0;">6.650 km</h3><p style="color:#c7c2b6; font-size:var(--t-small); margin:0;">Il fiume più lungo del mondo secondo Guinness World Records (una spedizione ha misurato l'Amazzonas come più lungo, ma non è un dato universalmente accettato).</p></div>
+        <div class="card reveal"><h3 style="margin-top:0;">↑ Scorre a NORD</h3><p style="color:#c7c2b6; font-size:var(--t-small); margin:0;">Al contrario di quasi tutti i grandi fiumi che si immaginano scorrere verso sud, il Nilo va dall'equatore fino al Mediterraneo in Egitto.</p></div>
+        <div class="card reveal"><h3 style="margin-top:0;">11 paesi</h3><p style="color:#c7c2b6; font-size:var(--t-small); margin:0;">Il suo bacino tocca 11 stati africani. Voi lo vedrete nascere esattamente a Jinja, dove esce dal Lago Vittoria.</p></div>
+        <div class="card reveal"><h3 style="margin-top:0;">1862</h3><p style="color:#c7c2b6; font-size:var(--t-small); margin:0;">John Hanning Speke identificò la sorgente a Jinja (Ripon Falls). La cascata però non esiste più: sommersa nel 1954 dalla diga di Owen Falls.</p></div>
       </div>
       <div class="source-note" style="text-align:center;">Fonti: rainforestcruises.com, nationalgeographic.com, britannica.com, historytoday.com.</div>
 

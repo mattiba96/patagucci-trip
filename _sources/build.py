@@ -198,7 +198,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
 
           <div class="card reveal" style="margin-top:18px; text-align:center; font-style:italic;">
             <h3 style="margin-top:0; font-style:normal;">📜 I Patagucci</h3>
-            <p style="color:#c7c2b6; font-size:0.88rem; line-height:1.7; margin:0; max-width:640px; margin-left:auto; margin-right:auto;">
+            <p style="color:#c7c2b6; font-size:var(--t-small); line-height:1.7; margin:0; max-width:640px; margin-left:auto; margin-right:auto;">
               Quattro amici, uno zaino e un biglietto di sola andata, ogni volta una meta nuova, ogni volta la stessa combriccola scatenata. Manu è il logistico, con lui il viaggio non si perde mai un colpo, ma senza dieci birre al giorno lo vedi diventare uno sconvolto. Kiki è la meteora pazza, sempre pronta a ripartire, ma toglietele il ceviche e la sentirete ruggire: diventa aggressiva, non capisce più niente, datele pesce crudo o scappate immediatamente. Mala è l'enciclopedia vivente del gruppo intero, sa tutto di ogni posto, storia e sentiero, ma se non prende la bumba prima di coricarsi la notte è tutta un rimbombo, meglio non disturbarsi. Bacci è il tecnologico, con lui non ti perdi in un vicolo, ma portatelo in quota e guardate che spettacolo: trema come una foglia al primo metro guadagnato, e giuro che una volta se l'è quasi fatta sotto, poveraccio. Quattro caratteri diversi, un'unica squadra che parte, i Patagucci vanno per il mondo, sempre dalla stessa parte — e ovunque li porti il prossimo volo o il prossimo passo, tornano a casa con una storia in più da raccontare, senza sosta.
             </p>
           </div>
@@ -785,13 +785,13 @@ chat_css = '''
     display:flex; align-items:center; gap:9px;
     border:1px solid rgba(var(--accent-rgb),0.5); border-radius:999px;
     background:linear-gradient(180deg,#1d1d1d,#101010); color:var(--accent);
-    padding:11px 18px; font-family:var(--font-body); font-size:0.84rem; font-weight:800;
+    padding:11px 18px; font-family:var(--font-body); font-size:var(--t-small); font-weight:800;
     cursor:pointer; box-shadow:0 10px 28px rgba(0,0,0,0.45);
     transition:transform .18s cubic-bezier(.16,1,.3,1), box-shadow .18s ease, background .5s ease;
   }
   .pg-chat-fab:hover{ transform:translateY(-2px); box-shadow:0 16px 36px rgba(0,0,0,0.5); }
   .pg-chat-fab:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
-  .pg-chat-fab .pg-fab-icona{ font-size:1.05rem; line-height:1; }
+  .pg-chat-fab .pg-fab-icona{ font-size:var(--t-lead); line-height:1; }
   .pg-chat-fab[aria-expanded="true"]{ opacity:0; pointer-events:none; }
 
   .pg-chat{
@@ -812,16 +812,16 @@ chat_css = '''
     padding:13px 16px; border-bottom:1px solid rgba(255,255,255,0.09);
     background:linear-gradient(180deg, rgba(var(--accent-rgb),0.13), transparent);
   }
-  .pg-chat-testa strong{ display:block; color:#fdf9f0; font-size:0.92rem; letter-spacing:0.01em; }
-  .pg-chat-dove{ display:block; font-size:0.72rem; color:var(--accent); font-weight:700; margin-top:2px; }
+  .pg-chat-testa strong{ display:block; color:#fdf9f0; font-size:var(--t-base); letter-spacing:0.01em; }
+  .pg-chat-dove{ display:block; font-size:var(--t-micro); color:var(--accent); font-weight:700; margin-top:2px; }
   .pg-chat-testa button{
     border:none; background:rgba(255,255,255,0.07); color:#c7c2b6;
-    width:30px; height:30px; border-radius:9px; font-size:0.9rem; cursor:pointer; flex:0 0 auto;
+    width:30px; height:30px; border-radius:9px; font-size:var(--t-base); cursor:pointer; flex:0 0 auto;
   }
   .pg-chat-testa button:hover{ background:rgba(255,255,255,0.15); color:#fff; }
 
   .pg-chat-righe{ flex:1 1 auto; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:12px; }
-  .pg-chat-riga{ max-width:88%; font-size:0.87rem; line-height:1.62; }
+  .pg-chat-riga{ max-width:88%; font-size:var(--t-small); line-height:1.62; }
   .pg-chat-riga.io{
     align-self:flex-end; background:var(--accent); color:#10100e;
     padding:9px 14px; border-radius:16px 16px 4px 16px; font-weight:600;
@@ -830,11 +830,11 @@ chat_css = '''
   .pg-chat-riga.lei strong{ color:#fdf9f0; }
   .pg-chat-riga.lei a{ color:var(--accent); }
   .pg-chat-riga.lei ul{ margin:6px 0; padding-left:18px; }
-  .pg-chat-riga.guasto{ align-self:flex-start; color:#ff9b8a; font-size:0.82rem; }
-  .pg-chat-fonti{ margin-top:7px; font-size:0.72rem; line-height:1.6; color:#8d887d; }
+  .pg-chat-riga.guasto{ align-self:flex-start; color:#ff9b8a; font-size:var(--t-small); }
+  .pg-chat-fonti{ margin-top:7px; font-size:var(--t-micro); line-height:1.6; color:#8d887d; }
   .pg-chat-fonti a{ color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(var(--accent-rgb),0.35); }
   .pg-chat-fonti a:hover{ border-bottom-color:var(--accent); }
-  .pg-chat-stato{ align-self:flex-start; font-size:0.78rem; color:var(--accent); opacity:0.85; }
+  .pg-chat-stato{ align-self:flex-start; font-size:var(--t-micro); color:var(--accent); opacity:0.85; }
   .pg-chat-riga .pg-cursore{
     display:inline-block; width:7px; height:14px; margin-left:2px; vertical-align:-2px;
     background:var(--accent); animation:pgLampeggia 1s steps(2,start) infinite;
@@ -845,7 +845,7 @@ chat_css = '''
   .pg-chat-spunti button{
     border:1px solid rgba(var(--accent-rgb),0.3); background:rgba(var(--accent-rgb),0.08);
     color:var(--accent); padding:6px 12px; border-radius:999px;
-    font-size:0.75rem; font-weight:600; font-family:var(--font-body); cursor:pointer;
+    font-size:var(--t-micro); font-weight:600; font-family:var(--font-body); cursor:pointer;
   }
   .pg-chat-spunti button:hover{ background:rgba(var(--accent-rgb),0.18); }
 
@@ -853,13 +853,13 @@ chat_css = '''
   .pg-chat-invio textarea{
     flex:1 1 auto; resize:none; max-height:120px;
     background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:12px;
-    color:#f2efe7; font-family:var(--font-body); font-size:0.86rem; line-height:1.5; padding:10px 12px;
+    color:#f2efe7; font-family:var(--font-body); font-size:var(--t-small); line-height:1.5; padding:10px 12px;
   }
   .pg-chat-invio textarea::placeholder{ color:#8d887d; }
   .pg-chat-invio textarea:focus{ outline:2px solid var(--accent); outline-offset:0; }
   .pg-chat-invio button{
     flex:0 0 auto; width:40px; height:40px; border:none; border-radius:12px; cursor:pointer;
-    background:var(--accent); color:#10100e; font-size:1rem; font-weight:800;
+    background:var(--accent); color:#10100e; font-size:var(--t-lead); font-weight:800;
   }
   .pg-chat-invio button:disabled{ opacity:0.4; cursor:not-allowed; }
 
@@ -1219,7 +1219,7 @@ final_html = f'''<!DOCTYPE html>
   .site-switcher button{{
     flex:0 0 auto; white-space:nowrap;
     border:1px solid transparent; background:rgba(255,255,255,0.06); color:#cfcfcf;
-    padding:8px 16px; border-radius:999px; font-size:0.8rem; font-weight:700; cursor:pointer;
+    padding:8px 16px; border-radius:999px; font-size:var(--t-micro); font-weight:700; cursor:pointer;
     text-transform:uppercase; letter-spacing:0.04em; transition:all .2s cubic-bezier(.16,1,.3,1);
   }}
   .site-switcher button:hover{{ background:rgba(255,255,255,0.14); transform:translateY(-1px); }}
@@ -1228,7 +1228,7 @@ final_html = f'''<!DOCTYPE html>
   .site-switcher button.home-btn.active{{ color:#10100e; }}
   @media (max-width:760px){{
     .site-switcher{{ padding:7px 10px; }}
-    .site-switcher button{{ padding:10px 13px; font-size:0.72rem; letter-spacing:0.03em; min-height:44px; }}
+    .site-switcher button{{ padding:10px 13px; font-size:var(--t-micro); letter-spacing:0.03em; min-height:44px; }}
   }}
 {chat_css}
 </style>

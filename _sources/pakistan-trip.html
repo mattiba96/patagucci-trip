@@ -14,10 +14,10 @@
   .route-status{ display:grid; grid-template-columns:1fr auto; gap:10px 14px; align-items:center; }
   .route-status .r-name{ font-weight:600; color:var(--ink); }
   section.panel.dark .route-status .r-name{ color:#f4f1ea; }
-  .route-status .r-status{ font-size:0.78rem; font-weight:700; padding:4px 10px; border-radius:8px; white-space:nowrap; justify-self:end; }
+  .route-status .r-status{ font-size:var(--t-micro); font-weight:700; padding:4px 10px; border-radius:8px; white-space:nowrap; justify-self:end; }
   .r-status.open{ background:#1e4a2f; color:#8fe0ac; }
   .r-status.closed{ background:#4a1c1c; color:#ff9b8a; }
-  .route-note{ grid-column:1 / -1; font-size:0.82rem; color:#c7c2b6; margin:-4px 0 10px; }
+  .route-note{ grid-column:1 / -1; font-size:var(--t-small); color:#c7c2b6; margin:-4px 0 10px; }
 </style>
 </head>
 <body>
@@ -290,7 +290,7 @@
       <div class="stats-grid">
         <div class="card ring-card reveal">
           <div class="ring" style="--pct:33;"><span class="ring-label">2/6</span></div>
-          <p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Percorsi/passi di montagna verificati che risultano aperti a marzo: la Karakoram Highway stessa e la stazione sciistica di Naltar. Tutti gli altri riaprono solo tra maggio e giugno.</p>
+          <p style="color:#c7c2b6; font-size:var(--t-small); margin:0;">Percorsi/passi di montagna verificati che risultano aperti a marzo: la Karakoram Highway stessa e la stazione sciistica di Naltar. Tutti gli altri riaprono solo tra maggio e giugno.</p>
         </div>
         <div class="card reveal">
           <h3 style="margin-top:0;">📅 Come si dividono i 15 giorni</h3>
@@ -319,7 +319,7 @@
 
       <div class="card reveal" style="text-align:center;">
         <div class="ring" style="--pct:80;"><span class="ring-label">4/5</span></div>
-        <p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Vette avvistabili dal nostro itinerario — <span id="bigfive-count">0/5</span> segnate come "avvistate" da voi finora.</p>
+        <p style="color:#c7c2b6; font-size:var(--t-small); margin:0;">Vette avvistabili dal nostro itinerario — <span id="bigfive-count">0/5</span> segnate come "avvistate" da voi finora.</p>
       </div>
 
       <div class="bigfive-grid" id="bigfive-grid"></div>
@@ -421,16 +421,16 @@
 
       <h3 style="color:#fff;">🧭 Sarete nel punto d'incontro di tre catene montuose</h3>
       <div class="card reveal">
-        <p style="color:#c7c2b6; font-size:0.92rem; margin:0 0 10px;">Gilgit-Baltistan è uno dei pochi posti al mondo dove convergono tre grandi sistemi montuosi: <strong>Karakoram, Himalaya e Hindu Kush</strong>. Attraverserete esattamente quella zona lungo la Karakoram Highway tra Chilas e Gilgit — con Nanga Parbat (Himalaya) da un lato e Rakaposhi (Karakoram) dall'altro.</p>
+        <p style="color:#c7c2b6; font-size:var(--t-base); margin:0 0 10px;">Gilgit-Baltistan è uno dei pochi posti al mondo dove convergono tre grandi sistemi montuosi: <strong>Karakoram, Himalaya e Hindu Kush</strong>. Attraverserete esattamente quella zona lungo la Karakoram Highway tra Chilas e Gilgit — con Nanga Parbat (Himalaya) da un lato e Rakaposhi (Karakoram) dall'altro.</p>
         <div class="source-note">Fonti: geografia fisica ampiamente documentata (Wikipedia, Encyclopedia Britannica).</div>
       </div>
 
       <h3 style="color:#fff;">🛣️ La Karakoram Highway in due parole</h3>
       <div class="stats-grid">
-        <div class="card reveal"><h3 style="margin-top:0;">~1.300 km</h3><p style="color:#c7c2b6; font-size:0.88rem; margin:0;">La lunghezza totale da Hasan Abdal (Pakistan) a Kashgar (Cina), attraverso il Khunjerab Pass.</p></div>
-        <div class="card reveal"><h3 style="margin-top:0;">4.693 m</h3><p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Il punto più alto — il valico di frontiera asfaltato più alto del mondo. Chiuso a marzo.</p></div>
-        <div class="card reveal"><h3 style="margin-top:0;">1959-1979</h3><p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Vent'anni di costruzione da squadre pakistane e cinesi, tra le più difficili al mondo per geologia e clima.</p></div>
-        <div class="card reveal"><h3 style="margin-top:0;">~810 lavoratori</h3><p style="color:#c7c2b6; font-size:0.88rem; margin:0;">Si stima siano morti durante la costruzione (pakistani, più circa 82 cinesi) — da cui il soprannome "Ottava Meraviglia del Mondo".</p></div>
+        <div class="card reveal"><h3 style="margin-top:0;">~1.300 km</h3><p style="color:#c7c2b6; font-size:var(--t-small); margin:0;">La lunghezza totale da Hasan Abdal (Pakistan) a Kashgar (Cina), attraverso il Khunjerab Pass.</p></div>
+        <div class="card reveal"><h3 style="margin-top:0;">4.693 m</h3><p style="color:#c7c2b6; font-size:var(--t-small); margin:0;">Il punto più alto — il valico di frontiera asfaltato più alto del mondo. Chiuso a marzo.</p></div>
+        <div class="card reveal"><h3 style="margin-top:0;">1959-1979</h3><p style="color:#c7c2b6; font-size:var(--t-small); margin:0;">Vent'anni di costruzione da squadre pakistane e cinesi, tra le più difficili al mondo per geologia e clima.</p></div>
+        <div class="card reveal"><h3 style="margin-top:0;">~810 lavoratori</h3><p style="color:#c7c2b6; font-size:var(--t-small); margin:0;">Si stima siano morti durante la costruzione (pakistani, più circa 82 cinesi) — da cui il soprannome "Ottava Meraviglia del Mondo".</p></div>
       </div>
       <div class="source-note" style="text-align:center;">Fonte: en.wikipedia.org (Karakoram Highway) — cifre storiche ampiamente citate, variano leggermente tra le fonti.</div>
     </div>
@@ -465,8 +465,8 @@
 
       <div class="card reveal" style="margin-top:18px;">
         <h3 style="margin-top:0;">🍺 La situazione alcol — importante da sapere</h3>
-        <p style="color:#c7c2b6; font-size:0.92rem; margin:0 0 10px;">Il Pakistan vieta per legge (dal 1979) la vendita di alcolici ai musulmani. Gli stranieri non musulmani possono richiedere un permesso temporaneo (Excise &amp; Taxation Department, ~100 PKR/mese) per acquistare in negozi su licenza — nella pratica quasi solo nei retrobottega di hotel 5 stelle a <strong>Islamabad e Lahore</strong> (es. Pearl Continental, Marriott, Serena). Offrire alcol a un musulmano è reato, e l'ubriachezza in pubblico può portare a fermo.</p>
-        <p style="color:#c7c2b6; font-size:0.92rem; margin:0;"><strong>Nel tratto nord di questo itinerario (Hunza, Naltar, Skardu) non aspettatevi alcol in nessuna forma legale</strong> — il Gilgit-Baltistan è di fatto una regione "secca", così come tutto il Khyber Pakhtunkhwa. La Murree Brewery (fondata nel 1860, unico produttore del paese) è l'unica fonte di birra/superalcolici legali, venduti solo dove esiste una licenza.</p>
+        <p style="color:#c7c2b6; font-size:var(--t-base); margin:0 0 10px;">Il Pakistan vieta per legge (dal 1979) la vendita di alcolici ai musulmani. Gli stranieri non musulmani possono richiedere un permesso temporaneo (Excise &amp; Taxation Department, ~100 PKR/mese) per acquistare in negozi su licenza — nella pratica quasi solo nei retrobottega di hotel 5 stelle a <strong>Islamabad e Lahore</strong> (es. Pearl Continental, Marriott, Serena). Offrire alcol a un musulmano è reato, e l'ubriachezza in pubblico può portare a fermo.</p>
+        <p style="color:#c7c2b6; font-size:var(--t-base); margin:0;"><strong>Nel tratto nord di questo itinerario (Hunza, Naltar, Skardu) non aspettatevi alcol in nessuna forma legale</strong> — il Gilgit-Baltistan è di fatto una regione "secca", così come tutto il Khyber Pakhtunkhwa. La Murree Brewery (fondata nel 1860, unico produttore del paese) è l'unica fonte di birra/superalcolici legali, venduti solo dove esiste una licenza.</p>
       </div>
 
       <div class="source-note" style="text-align:center;">Un pasto normale in un locale locale (non street-food, non turistico): ~3-6€ a persona a Lahore/Islamabad. Fonti: Migrationology, pakistani.org (Prohibition Order 1979), apricottours.pk, adventuretouristik.com, Wikipedia (Murree Brewery), Numbeo, Express Tribune — dati verificati ad agosto 2026.</div>

@@ -42,12 +42,42 @@ typography:
     fontWeight: 400
     lineHeight: 1.6
     letterSpacing: "normal"
+  title-lg:
+    fontFamily: "Bebas Neue, Impact, Arial Narrow, sans-serif"
+    fontSize: "1.35rem"
+    fontWeight: 400
+    lineHeight: 1.2
+    letterSpacing: "0.02em"
+  lead:
+    fontFamily: "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+    fontSize: "1.08rem"
+    fontWeight: 400
+    lineHeight: 1.7
+    letterSpacing: "normal"
+  base:
+    fontFamily: "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+    fontSize: "1rem"
+    fontWeight: 400
+    lineHeight: 1.65
+    letterSpacing: "normal"
+  small:
+    fontFamily: "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
+    fontSize: "0.88rem"
+    fontWeight: 400
+    lineHeight: 1.6
+    letterSpacing: "normal"
   label:
     fontFamily: "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
     fontSize: "0.8rem"
     fontWeight: 700
     lineHeight: 1.2
     letterSpacing: "0.04em"
+  mono:
+    fontFamily: "ui-monospace, Consolas, monospace"
+    fontSize: "0.8rem"
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: "normal"
 rounded:
   md: "18px"
   lg: "26px"
