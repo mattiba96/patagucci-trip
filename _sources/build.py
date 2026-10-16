@@ -1365,6 +1365,49 @@ def controlla_javascript(html):
                 print("   ", l)
     return ok
 
+def controlla_giorni_settimana(schede):
+    """I giorni della settimana scritti a mano si sbagliano: "mer 8 apr" era
+    in realta' un giovedi', proprio nella tabella che serve a comprare i voli.
+    Ogni scheda si confronta col calendario del SUO anno: cercare una
+    corrispondenza in un anno qualsiasi non serve, perche' un anno in cui
+    l'8 aprile cade di mercoledi' esiste sempre."""
+    import re, datetime
+    GIORNI = {0:'lun', 1:'mar', 2:'mer', 3:'gio', 4:'ven', 5:'sab', 6:'dom'}
+    MESI = {'gen':1,'feb':2,'mar':3,'apr':4,'mag':5,'giu':6,
+            'lug':7,'ago':8,'set':9,'ott':10,'nov':11,'dic':12}
+    NOMI = ('gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|'
+            'agosto|settembre|ottobre|novembre|dicembre')
+    sbagliati = []
+    for nome, html in schede:
+        m = re.search(r'\d{1,2}\s*[–-]\s*\d{1,2}\s+(?:' + NOMI + r')\s+(20\d\d)', html)
+        if not m:
+            continue
+        anno = int(m.group(1))
+        for abbrev, giorno, mese in re.findall(
+                r'\b(lun|mar|mer|gio|ven|sab|dom)\s+(\d{1,2})\s+'
+                r'(gen|feb|mar|apr|mag|giu|lug|ago|set|ott|nov|dic)\b', html):
+            try:
+                d = datetime.date(anno, MESI[mese], int(giorno))
+            except ValueError:
+                sbagliati.append('  %s: "%s %s %s" non e\' una data valida nel %d'
+                                 % (nome, abbrev, giorno, mese, anno))
+                continue
+            giusto = GIORNI[d.weekday()]
+            if giusto != abbrev:
+                sbagliati.append('  %s: scritto "%s %s %s", ma nel %d e\' un %s'
+                                 % (nome, abbrev, giorno, mese, anno, giusto))
+    if sbagliati:
+        print("  Giorni della settimana che non tornano:")
+        for s in sbagliati:
+            print(s)
+        return False
+    print("  Giorni della settimana: tornano tutti")
+    return True
+
+
+if not controlla_giorni_settimana([(b["name"], b["block"]) for b in blocks]):
+    raise SystemExit("Build interrotta: una data porta il giorno della settimana sbagliato.")
+
 if controlla_javascript(final_html):
     print("  JavaScript: sintassi ok")
 else:

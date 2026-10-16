@@ -36,6 +36,7 @@
       <span class="badge">🇧🇳 Brunei, 13–17 aprile</span>
       <span class="badge">🌳 Foresta del Borneo</span>
       <span class="badge">🇸🇬 Singapore, 17–18 aprile</span>
+      <a class="badge badge-azione" href="#recap-voli">✈️ 2 voli ancora da prenotare</a>
     </div>
     <div class="scroll-cue">↓ scorri per esplorare</div>
   </div>
@@ -68,7 +69,7 @@
 <main>
 
   <div class="paese-divisore" data-paese="">
-    <span class="pd-bandiere" aria-hidden="true">🇰🇷🇹🇼🇭🇰</span>
+    <span class="pd-bandiere" aria-hidden="true">🇰🇷🇧🇳🇸🇬</span>
     <h2>Il viaggio</h2>
     <p>Come è fatto, come ci si muove e che tempo fa. Diciassette giorni che scendono da Seul verso casa, tre paesi di fila senza mai tornare sui propri passi.</p>
     <div class="pd-riga"></div>
@@ -184,7 +185,7 @@
 
       <div class="map-actions reveal">
         <a id="link-full-route" href="#" target="_blank" rel="noopener">🗺️ Apri l'itinerario completo su Google Maps</a>
-        <button class="export" id="btn-export-kml">⬇️ Esporta tappe (KML)</button>
+        <button class="export" id="btn-export-kml">⬇️ Scarica le tappe per Google Earth</button>
       </div>
 
       <div class="card reveal" style="overflow-x:auto;">
@@ -213,7 +214,7 @@
 
       <div class="weather-cols reveal" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
         <div>
-          <h4>Seul</h4>
+          <h3 class="weather-col-title">Seul</h3>
           <div class="weather-stats">
             <div class="card"><div class="wval">13-23°</div><div class="wlabel">Escursione tipica</div></div>
             <div class="card"><div class="wval">~10°</div><div class="wlabel">Minime a fine mese</div></div>
@@ -221,7 +222,7 @@
           </div>
         </div>
         <div>
-          <h4>Busan e il sud</h4>
+          <h3 class="weather-col-title">Busan e il sud</h3>
           <div class="weather-stats">
             <div class="card"><div class="wval">Simile</div><div class="wlabel">A Seul, ma più ventoso</div></div>
             <div class="card"><div class="wval">Sole</div><div class="wlabel">Più forte col cielo sereno</div></div>
@@ -229,7 +230,7 @@
           </div>
         </div>
         <div>
-          <h4>Brunei</h4>
+          <h3 class="weather-col-title">Brunei</h3>
           <div class="weather-stats">
             <div class="card"><div class="wval">24-32°</div><div class="wlabel">Tutto l'anno, uguale</div></div>
             <div class="card"><div class="wval">Afoso</div><div class="wlabel">Equatoriale, umidità alta</div></div>
@@ -237,7 +238,7 @@
           </div>
         </div>
         <div>
-          <h4>Singapore</h4>
+          <h3 class="weather-col-title">Singapore</h3>
           <div class="weather-stats">
             <div class="card"><div class="wval">26-32°</div><div class="wlabel">Un grado sopra l'equatore</div></div>
             <div class="card"><div class="wval">~90%</div><div class="wlabel">Umidità, tutti i giorni</div></div>
@@ -618,8 +619,8 @@
         <table class="hub-table">
           <thead><tr><th>Tratta</th><th>Quando</th><th>Perché quell'orario</th></tr></thead>
           <tbody>
-            <tr><td><strong>Busan → Jeju</strong></td><td><strong>mer 8 apr</strong><br><span class="wlabel">di sera</span></td><td>L'8 è <strong>l'unica giornata piena a Busan</strong>: con un volo serale resta intera, e si dorme a Jeju.</td></tr>
-            <tr><td><strong>Jeju → Seul Gimpo</strong></td><td><strong>sab 11 apr</strong><br><span class="wlabel">di mattina, il più presto possibile</span></td><td>Più presto si parte, più pomeriggio avanza a Seul. <strong>Gimpo</strong> e non Incheon: sta in città, venti minuti dal centro.</td></tr>
+            <tr><td><strong>Busan → Jeju</strong></td><td><strong>gio 8 apr</strong><br><span class="wlabel">di sera</span></td><td>L'8 è <strong>l'unica giornata piena a Busan</strong>: con un volo serale resta intera, e si dorme a Jeju.</td></tr>
+            <tr><td><strong>Jeju → Seul Gimpo</strong></td><td><strong>dom 11 apr</strong><br><span class="wlabel">di mattina, il più presto possibile</span></td><td>Più presto si parte, più pomeriggio avanza a Seul. <strong>Gimpo</strong> e non Incheon: sta in città, venti minuti dal centro.</td></tr>
           </tbody>
         </table>
         <div class="source-note">Indicativamente <strong>133 € a persona</strong> per entrambi, a settembre 2026. Le rotte sono servite da parecchie low cost coreane e ci sono molte partenze al giorno, quindi la scelta dell'orario è larga. <strong>Jeju–Gimpo è una delle rotte più trafficate al mondo</strong>: posti non mancano, ma ad aprile conviene non arrivare all'ultimo.</div>
@@ -705,10 +706,10 @@
     { d:4, data:'5 apr', title:'DMZ, e sera a Hongdae', tags:['Mezza giornata','Passaporto'], text:'Tour alla zona demilitarizzata: il Terzo Tunnel d\'Infiltrazione, scavato dal Nord e scoperto nel 1978, e l\'osservatorio di Dora da cui si guarda dentro la Corea del Nord. Passaporto fisico obbligatorio e codice di abbigliamento applicato sul serio. Rientro nel pomeriggio e sera a <strong>Hongdae</strong>, il quartiere universitario: musica dal vivo per strada e il primo somaek.', link: placeLink('dmz'), linkLabel:'Vedi l\'area della DMZ su Google Maps', highlight:true },
     { d:5, data:'6 apr', title:'Seul → Busan in KTX', tags:['KTX 2h15','Busan'], text:'Treno veloce fino in fondo al paese: <strong>due ore e un quarto</strong> per quattrocento chilometri, e si cambia mondo — dalla capitale ordinata alla città di porto, in salita sulle colline, con i grattacieli che finiscono sulla spiaggia. Si arriva nel pomeriggio: la sera a <strong>Gwangalli</strong>, dove il ponte sulla baia si accende e i locali stanno sulla sabbia con la birra e il pollo fritto.', link: mapsLink('seul','busan'), linkLabel:'Apri il tragitto Seul → Busan', highlight:true },
     { d:6, data:'7 apr', title:'Gyeongju in giornata', tags:['UNESCO','Gita da Busan'], text:'Mezz\'ora di KTX e mille anni indietro: <strong>Gyeongju</strong> è stata per un millennio la capitale del regno di Silla, ed è una città bassa e verde disseminata di <strong>tumuli reali</strong> — collinette erbose che sono tombe di re. Presto al tempio di <strong>Bulguksa</strong>, patrimonio UNESCO, con le terrazze di pietra dell\'VIII secolo, e su per la montagna alla grotta di <strong>Seokguram</strong>, dove un Buddha di granito guarda verso il mare. Nel pomeriggio il parco dei tumuli di <strong>Daereungwon</strong>, e al tramonto lo stagno di <strong>Donggung</strong>, illuminato. Rientro a Busan la sera, nello stesso albergo.', link: mapsLink('busan','gyeongju'), linkLabel:'Apri il tragitto Busan → Gyeongju', highlight:true },
-    { d:7, data:'8 apr', title:'Busan — il giorno unico, poi volo per Jeju', tags:['Busan','Volo la sera'], text:'È <strong>l\'unica giornata piena a Busan</strong>, e il volo per Jeju è di sera, quindi si comincia presto. Mattina al <strong>villaggio culturale di Gamcheon</strong>: un quartiere di casette dipinte a gradoni sulla collina, nato come baraccopoli di profughi di guerra e diventato un labirinto di colori. Pranzo al mercato del pesce di <strong>Jagalchi</strong>, il più grande della Corea, dove si sceglie il pesce vivo al banco e ve lo cucinano al piano di sopra. Pomeriggio: o si attraversa la città fino a <strong>Haedong Yonggungsa</strong>, il tempio costruito sugli scogli con le onde sotto — una rarità, quasi tutti i templi coreani stanno in montagna — oppure si resta dalla parte dell\'aeroporto con lo <strong>Skywalk di Songdo</strong> e la funivia sulla baia. Poi Gimhae, tredici minuti di metropolitana dal centro, e un\'ora scarsa di volo.', link: mapsLink('busan','jeju'), linkLabel:'Apri il tragitto Busan → Jeju', highlight:true },
+    { d:7, data:'8 apr', title:'Busan — il giorno unico, poi volo per Jeju', tags:['Busan','✈️ Volo da prenotare'], text:'È <strong>l\'unica giornata piena a Busan</strong>, e il volo per Jeju è di sera — <strong>quello ancora da comprare</strong> — quindi si comincia presto. Mattina al <strong>villaggio culturale di Gamcheon</strong>: un quartiere di casette dipinte a gradoni sulla collina, nato come baraccopoli di profughi di guerra e diventato un labirinto di colori. Pranzo al mercato del pesce di <strong>Jagalchi</strong>, il più grande della Corea, dove si sceglie il pesce vivo al banco e ve lo cucinano al piano di sopra. Pomeriggio: o si attraversa la città fino a <strong>Haedong Yonggungsa</strong>, il tempio costruito sugli scogli con le onde sotto — una rarità, quasi tutti i templi coreani stanno in montagna — oppure si resta dalla parte dell\'aeroporto con lo <strong>Skywalk di Songdo</strong> e la funivia sulla baia. Poi Gimhae, tredici minuti di metropolitana dal centro, e un\'ora scarsa di volo.', link: mapsLink('busan','jeju'), linkLabel:'Apri il tragitto Busan → Jeju', highlight:true },
     { d:8, data:'9 apr', title:'Jeju — l\'auto, la grotta di lava e la costa est', tags:['Jeju','Grotta di lava'], text:'Si è atterrati la sera prima: mattinata senza sveglie. Si ritira l\'<strong>auto a noleggio</strong>, perché qui i mezzi pubblici non bastano, e comincia l\'isola vulcanica — muretti a secco di roccia lavica, palme, e i totem di pietra <em>dol hareubang</em> davanti alle case. La grotta di <strong>Manjanggul</strong>, un tunnel lungo chilometri scavato da un\'antica colata, e poi la costa est. <strong>Conviene dormire da questa parte dell\'isola</strong>: domani si va all\'alba, e da Jeju City vorrebbe dire sveglia alle quattro.', link: placeLink('jeju'), linkLabel:'Vedi Jeju su Google Maps', highlight:true },
     { d:9, data:'10 apr', title:'Seongsan Ilchulbong all\'alba, e Udo', tags:['UNESCO','Alba'], text:'Il "picco del sole nascente": un cratere di tufo emerso dal mare cinquemila anni fa, con il bordo a corona. Il cancello apre <strong>un\'ora prima dell\'alba</strong> e la salita è una ventina di minuti di gradini — il nome non è un caso. Dormendo lì vicino si parte con calma; da Jeju City sarebbe un\'ora di strada al buio. Il resto della giornata in barca all\'isolotto di <strong>Udo</strong>, che si gira in scooter, con le spiagge bianche di corallo tritato.', link: placeLink('jeju'), linkLabel:'Vedi Seongsan Ilchulbong su Google Maps', highlight:true },
-    { d:10, data:'11 apr', title:'Jeju → Seul, e il pomeriggio libero', tags:['Volo la mattina','Seul'], text:'Volo di prima mattina e si atterra a <strong>Gimpo</strong>, che sta dentro la città e non a un\'ora come Incheon: in centro in venti minuti di treno. Seconda base a Seul, in un quartiere diverso dai primi giorni, e <strong>il pomeriggio è libero</strong> — è il giorno che serve per la Seul che nei primi tre giorni non ci stava: <strong>Seongsu</strong>, il quartiere delle ex fabbriche diventate caffè; <strong>Dongdaemun</strong> con l\'astronave di Zaha Hadid; <strong>Myeongdong</strong> per lo shopping e il giro della skincare. La sera un <em>jjimjilbang</em>, le terme aperte tutta la notte. Chi preferisce una gita: <strong>Suwon</strong> è a un\'ora di metropolitana, con 5,7 km di mura UNESCO da camminare — ma servono un volo presto e il pomeriggio intero.', link: mapsLink('jeju','seul'), linkLabel:'Apri il tragitto Jeju → Seul', highlight:true },
+    { d:10, data:'11 apr', title:'Jeju → Seul, e il pomeriggio libero', tags:['✈️ Volo da prenotare','Seul'], text:'Volo di prima mattina e si atterra a <strong>Gimpo</strong>, che sta dentro la città e non a un\'ora come Incheon: in centro in venti minuti di treno. Seconda base a Seul, in un quartiere diverso dai primi giorni, e <strong>il pomeriggio è libero</strong> — è il giorno che serve per la Seul che nei primi tre giorni non ci stava: <strong>Seongsu</strong>, il quartiere delle ex fabbriche diventate caffè; <strong>Dongdaemun</strong> con l\'astronave di Zaha Hadid; <strong>Myeongdong</strong> per lo shopping e il giro della skincare. La sera un <em>jjimjilbang</em>, le terme aperte tutta la notte. Chi preferisce una gita: <strong>Suwon</strong> è a un\'ora di metropolitana, con 5,7 km di mura UNESCO da camminare — ma servono un volo presto e il pomeriggio intero.', link: mapsLink('jeju','seul'), linkLabel:'Apri il tragitto Jeju → Seul', highlight:true },
     { d:11, data:'12 apr', title:'Seul — i ciliegi', tags:['🌸 Il giorno','Presto la mattina'], text:'Il momento per cui si è scelto aprile, e stavolta senza corse: si è già in città dalla sera prima, quindi si può andare <strong>all\'alba</strong>, che è l\'unico modo di vederli senza mezza Seul davanti. <strong>Yeouido</strong> lungo il fiume Han, con il viale di ciliegi dietro il parlamento, e il lago <strong>Seokchon</strong> con la Lotte Tower sullo sfondo. Il picco a Seul cade di solito intorno al 10: ci siamo dentro in pieno. Il pomeriggio chiude la Corea — l\'ultimo street food, l\'ultimo soju — e domani si vola a sud.', link: placeLink('seul'), linkLabel:'Vedi Seul su Google Maps', highlight:true },
     { d:12, data:'13 apr', title:'Seul → Brunei', tags:['Volo 11:35','Brunei'], text:'Sveglia presto e a Incheon: il volo Royal Brunei parte alle <strong>11:35</strong> e sono quattro ore e venti verso sud, fino a <strong>Bandar Seri Begawan</strong>. Si scende alle 15:55 in un altro clima e in un altro mondo — dai ciliegi all\'equatore in una mattinata. Pomeriggio per arrivare in albergo e il primo giro sul lungofiume, con la <strong>moschea Omar Ali Saifuddien</strong> che si accende al tramonto dentro la sua laguna.', link: placeLink('brunei'), linkLabel:'Vedi Bandar Seri Begawan su Google Maps', highlight:true },
     { d:13, data:'14 apr', title:'Brunei — la capitale e il villaggio sull\'acqua', tags:['Brunei','Kampong Ayer'], text:'La capitale si gira in un giorno, e questo è il giorno. La <strong>moschea del 1958</strong> con la cupola d\'oro e la barca cerimoniale di pietra nella laguna; il <strong>Royal Regalia Museum</strong>, gratis, col carro dell\'incoronazione e i regali di stato. Poi il taxi d\'acqua — <strong>un dollaro, si ferma a braccio alzato</strong> — per <strong>Kampong Ayer</strong>, il villaggio su palafitte più grande del mondo, abitato da oltre mille anni: scuole, moschee e pompieri, tutto sull\'acqua, collegato da chilometri di passerelle di legno. Cena con l\'<strong>ambuyat</strong>, che si ingoia e non si mastica.', link: placeLink('kampongayer'), linkLabel:'Vedi Kampong Ayer su Google Maps', highlight:true },
@@ -728,10 +729,10 @@
     { dove:'Seul e DMZ',       paese:'kr' },
     { dove:'→ Busan',          paese:'kr' },
     { dove:'Gyeongju',         paese:'kr' },
-    { dove:'Busan → Jeju',     paese:'kr', volo:true },
+    { dove:'Busan → Jeju',     paese:'kr', volo:true, daPrenotare:true },
     { dove:'Jeju',             paese:'kr' },
     { dove:'Jeju',             paese:'kr' },
-    { dove:'Jeju → Seul',      paese:'kr', volo:true },
+    { dove:'Jeju → Seul',      paese:'kr', volo:true, daPrenotare:true },
     { dove:'Seul 🌸',          paese:'kr' },
     { dove:'Seul → Brunei',    paese:'kr', volo:true },
     { dove:'Brunei',           paese:'bn' },
@@ -766,7 +767,8 @@
       b.className = 'cal-giorno';
       b.setAttribute('data-paese', g.paese);
       if(g.volo) b.setAttribute('data-volo', '1');
-      b.setAttribute('aria-label', 'Giorno ' + (i+1) + ', ' + (giorno.data || '') + ': ' + g.dove);
+      if(g.daPrenotare) b.setAttribute('data-prenotato', 'no');
+      b.setAttribute('aria-label', 'Giorno ' + (i+1) + ', ' + (giorno.data || '') + ': ' + g.dove + (g.daPrenotare ? ' — volo ancora da prenotare' : ''));
       b.innerHTML =
         '<span class="cal-n">Giorno ' + (i+1) + '</span>' +
         '<span class="cal-data">' + (giorno.data || '') + '</span>' +
@@ -1145,8 +1147,8 @@
     { day:4, label:'Seul → DMZ e ritorno', from:'seul', to:'dmz', mezzo:'Pullman del tour', dur:'mezza giornata' },
     { day:5, label:'Seul → Busan', from:'seul', to:'busan', mezzo:'KTX', dur:'2h15' },
     { day:6, label:'Busan → Gyeongju e ritorno', from:'busan', to:'gyeongju', mezzo:'KTX', dur:'~30 min a tratta' },
-    { day:7, label:'Busan → Jeju', from:'busan', to:'jeju', mezzo:'Volo, la sera', dur:'~1h' },
-    { day:10, label:'Jeju → Seul Gimpo', from:'jeju', to:'seul', mezzo:'Volo, la mattina', dur:'~1h15' },
+    { day:7, label:'Busan → Jeju', from:'busan', to:'jeju', mezzo:'Da prenotare · sera', dur:'~1h' },
+    { day:10, label:'Jeju → Seul Gimpo', from:'jeju', to:'seul', mezzo:'Da prenotare · mattina', dur:'~1h15' },
     { day:10, label:'Seul → Suwon e ritorno', from:'seul', to:'suwon', mezzo:'Metro linea 1 · facoltativa', dur:'~1h a tratta' },
     { day:12, label:'Seul → Bandar Seri Begawan', from:'seul', to:'brunei', mezzo:'Royal Brunei, 11:35', dur:'4h20' },
     { day:14, label:'Brunei → Ulu Temburong', from:'brunei', to:'temburong', mezzo:'Ponte e barca', dur:'~1h' },

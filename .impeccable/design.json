@@ -1,0 +1,407 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-16T17:13:03Z",
+  "title": "Design System: Patagucci Trips",
+  "extensions": {
+    "colorMeta": {
+      "accent": {
+        "role": "primary",
+        "displayName": "Giallo Insegna",
+        "canonical": "#FFCE00",
+        "tonalRamp": [
+          "#4C3E00",
+          "#876D00",
+          "#C19C00",
+          "#FBCB00",
+          "#FFD837",
+          "#FFE471",
+          "#FFEFAB",
+          "#FFFAE5"
+        ]
+      },
+      "accent-deep": {
+        "role": "primary",
+        "displayName": "Oro Bruciato",
+        "canonical": "#E0AE00",
+        "tonalRamp": [
+          "#4C3B00",
+          "#876900",
+          "#C19600",
+          "#FBC300",
+          "#FFD237",
+          "#FFDF71",
+          "#FFECAB",
+          "#FFF9E5"
+        ]
+      },
+      "accent-ink": {
+        "role": "primary",
+        "displayName": "Senape Inchiostro",
+        "canonical": "#8A6B00",
+        "tonalRamp": [
+          "#4C3B00",
+          "#876900",
+          "#C19600",
+          "#FBC300",
+          "#FFD237",
+          "#FFDF71",
+          "#FFECAB",
+          "#FFF9E5"
+        ]
+      },
+      "accent-2": {
+        "role": "secondary",
+        "displayName": "Rosso Bandiera",
+        "canonical": "#D21034",
+        "tonalRamp": [
+          "#470512",
+          "#7D0A1F",
+          "#B30E2C",
+          "#EA123A",
+          "#F14565",
+          "#F57B92",
+          "#F9B1BE",
+          "#FDE7EB"
+        ]
+      },
+      "theme-900": {
+        "role": "tertiary",
+        "displayName": "Verde Spedizione Scuro",
+        "canonical": "#16362a",
+        "tonalRamp": [
+          "#16362A",
+          "#27604A",
+          "#38896B",
+          "#49B38B",
+          "#71C5A5",
+          "#9AD6BF",
+          "#C3E7DA",
+          "#EDF8F4"
+        ]
+      },
+      "theme-700": {
+        "role": "tertiary",
+        "displayName": "Verde Spedizione",
+        "canonical": "#2a6b4d",
+        "tonalRamp": [
+          "#163728",
+          "#266146",
+          "#368B64",
+          "#47B582",
+          "#6FC79E",
+          "#99D7BA",
+          "#C3E7D7",
+          "#EDF8F3"
+        ]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Carta",
+        "canonical": "#fffdf9",
+        "tonalRamp": [
+          "#4C3300",
+          "#875A00",
+          "#C18100",
+          "#FBA800",
+          "#FFBC37",
+          "#FFD071",
+          "#FFE3AB",
+          "#FFF7E5"
+        ]
+      },
+      "tint-100": {
+        "role": "neutral",
+        "displayName": "Carta Ingiallita",
+        "canonical": "#f8f5ef",
+        "tonalRamp": [
+          "#352B17",
+          "#5E4C29",
+          "#866D3B",
+          "#AF8E4C",
+          "#C2A874",
+          "#D4C19C",
+          "#E6DBC5",
+          "#F7F4ED"
+        ]
+      },
+      "tint-200": {
+        "role": "neutral",
+        "displayName": "Sabbia",
+        "canonical": "#efe8d9",
+        "tonalRamp": [
+          "#362C17",
+          "#5F4D28",
+          "#886F39",
+          "#B1904A",
+          "#C4AA72",
+          "#D5C29B",
+          "#E6DBC4",
+          "#F7F4ED"
+        ]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Bordo Spago",
+        "canonical": "#e2d9c6",
+        "tonalRamp": [
+          "#332B1A",
+          "#594B2D",
+          "#806C41",
+          "#A78C55",
+          "#BBA67A",
+          "#CFC0A1",
+          "#E3DAC7",
+          "#F6F4EE"
+        ]
+      },
+      "dark-base": {
+        "role": "neutral",
+        "displayName": "Nero Pannello",
+        "canonical": "#141414",
+        "tonalRamp": [
+          "#262626",
+          "#434343",
+          "#616161",
+          "#7E7E7E",
+          "#9B9B9B",
+          "#B8B8B8",
+          "#D5D5D5",
+          "#F2F2F2"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Inchiostro",
+        "canonical": "#20281f",
+        "tonalRamp": [
+          "#222B21",
+          "#3D4C3B",
+          "#576D54",
+          "#718E6E",
+          "#91A88E",
+          "#B1C1AF",
+          "#D1DAD0",
+          "#F1F4F1"
+        ]
+      },
+      "ink-soft": {
+        "role": "neutral",
+        "displayName": "Inchiostro Tenue",
+        "canonical": "#5b6a61",
+        "tonalRamp": [
+          "#232926",
+          "#3E4942",
+          "#59685F",
+          "#74877C",
+          "#93A299",
+          "#B3BDB7",
+          "#D2D8D4",
+          "#F1F3F2"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Solo il titolo della meta nell'intestazione a tutta altezza."
+      },
+      "headline": {
+        "displayName": "Titolo di sezione",
+        "purpose": "Intestazioni di sezione, precedute da un'emoji."
+      },
+      "title": {
+        "displayName": "Titolo",
+        "purpose": "Giorni dell'itinerario, nomi nelle schede, titoli di card."
+      },
+      "body": {
+        "displayName": "Corpo",
+        "purpose": "Tutto il testo corrente."
+      },
+      "label": {
+        "displayName": "Etichetta",
+        "purpose": "Tab, chip e intestazioni di tabella: maiuscolo spaziato."
+      }
+    },
+    "shadows": [
+      {
+        "name": "ambientale",
+        "value": "0 10px 30px rgba(20,20,20,0.10)",
+        "purpose": "Stato di riposo di card e contenitori."
+      },
+      {
+        "name": "sollevata",
+        "value": "0 24px 60px rgba(20,20,20,0.22)",
+        "purpose": "Passaggio del mouse, pannelli flottanti, chat."
+      },
+      {
+        "name": "anello-accento",
+        "value": "0 0 0 1px rgba(255,206,0,0.35)",
+        "purpose": "Si somma alla sollevata: focus senza bordo duro."
+      },
+      {
+        "name": "spinta-tema",
+        "value": "0 4px 12px rgba(42,107,77,0.3)",
+        "purpose": "Sotto bottoni e chip attivi."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-sistema",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "L'unico easing del sistema: ogni transizione di stato lo usa."
+      },
+      {
+        "name": "durata-stato",
+        "value": "0.2s",
+        "purpose": "Cambi di stato su controlli: tab, chip, badge."
+      },
+      {
+        "name": "durata-superficie",
+        "value": "0.3s",
+        "purpose": "Sollevamento delle card al passaggio."
+      },
+      {
+        "name": "durata-tema",
+        "value": "0.5s",
+        "purpose": "Transizione del fondo quando cambia il paese."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "mobile",
+        "value": "760px"
+      },
+      {
+        "name": "compatto",
+        "value": "620px"
+      },
+      {
+        "name": "chat",
+        "value": "560px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Il contenitore base: carta su carta, si alza al passaggio.",
+      "html": "<div class=\"ds-card\"><h3>🚄 KTX</h3><p>Seul–Busan in <strong>2h15</strong> e Busan–Gyeongju in mezz'ora, sulla stessa linea.</p></div>",
+      "css": ".ds-card{background:var(--paper,#fffdf9);border:1px solid var(--line,#e2d9c6);border-radius:18px;box-shadow:0 10px 30px rgba(20,20,20,.10);padding:18px 20px;color:var(--ink,#20281f);font-family:Inter,system-ui,sans-serif;font-size:16.5px;line-height:1.6;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s ease,border-color .3s ease}.ds-card h3{font-family:'Bebas Neue',Impact,sans-serif;text-transform:uppercase;font-size:1.2rem;font-weight:400;letter-spacing:.01em;margin:0 0 6px;color:var(--theme-900,#16362a)}.ds-card p{margin:0}.ds-card:hover{transform:translateY(-4px);box-shadow:0 24px 60px rgba(20,20,20,.22),0 0 0 1px rgba(255,206,0,.35);border-color:#E0AE00}"
+    },
+    {
+      "name": "Tab di navigazione",
+      "kind": "nav",
+      "refersTo": "nav-tab",
+      "description": "Pillole maiuscole su barra scura appiccicosa; l'attiva si riempie dell'accento.",
+      "html": "<nav class=\"ds-tabs\"><a class=\"ds-tab ds-tab--active\">Itinerario</a><a class=\"ds-tab\">Mappa</a><a class=\"ds-tab\">Meteo</a></nav>",
+      "css": ".ds-tabs{display:flex;gap:4px;padding:8px 12px;background:linear-gradient(180deg,rgba(255,206,0,.10),transparent),rgba(18,18,18,.92);border-radius:14px}.ds-tab{flex:0 0 auto;border:1px solid transparent;background:transparent;color:#cfcfcf;padding:9px 16px;border-radius:999px;font-family:Inter,system-ui,sans-serif;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;transition:all .2s ease}.ds-tab:hover{background:rgba(255,255,255,.08);color:#fff}.ds-tab:focus-visible{outline:2px solid #FFCE00;outline-offset:2px}.ds-tab--active{background:#FFCE00;color:#10100e;box-shadow:0 4px 14px rgba(255,206,0,.35)}"
+    },
+    {
+      "name": "Chip filtro",
+      "kind": "chip",
+      "refersTo": "filter-chip",
+      "description": "Filtro per zona o città; l'attivo passa al verde tema.",
+      "html": "<div class=\"ds-filtri\"><button class=\"ds-chip ds-chip--active\">Tutte</button><button class=\"ds-chip\">Capitale</button><button class=\"ds-chip\">Temburong</button></div>",
+      "css": ".ds-filtri{display:flex;gap:8px;flex-wrap:wrap}.ds-chip{border:1px solid var(--line,#e2d9c6);background:var(--paper,#fffdf9);color:var(--ink-soft,#5b6a61);padding:7px 14px;border-radius:999px;font-family:Inter,system-ui,sans-serif;font-size:.83rem;font-weight:600;cursor:pointer;transition:all .15s}.ds-chip:hover{background:#efe8d9;border-color:#E0AE00}.ds-chip:focus-visible{outline:2px solid #E0AE00;outline-offset:2px}.ds-chip--active{background:#1f4d3a;color:#fff;border-color:#1f4d3a;box-shadow:0 4px 12px rgba(42,107,77,.3)}"
+    },
+    {
+      "name": "Badge",
+      "kind": "chip",
+      "refersTo": "badge",
+      "description": "Pillole in vetro smerigliato sull'intestazione fotografica.",
+      "html": "<div class=\"ds-badges\"><span class=\"ds-badge\">📅 2–18 aprile 2027</span><span class=\"ds-badge\">🌸 Stagione dei ciliegi</span></div>",
+      "css": ".ds-badges{display:flex;gap:8px;flex-wrap:wrap;background:#2a2a2a;padding:16px;border-radius:14px}.ds-badge{background:rgba(255,255,255,.14);border:1px solid rgba(255,206,0,.35);color:#fdf9f0;padding:6px 14px;border-radius:20px;font-family:Inter,system-ui,sans-serif;font-size:.82rem;backdrop-filter:blur(6px);transition:transform .2s ease,background .2s ease}.ds-badge:hover{transform:translateY(-2px);background:rgba(255,206,0,.18);border-color:rgba(255,206,0,.6)}"
+    },
+    {
+      "name": "Giorno dell'itinerario",
+      "kind": "custom",
+      "refersTo": "day-number",
+      "description": "Componente firma: cerchio numerato in Bebas, titolo condensato, tag, link a Maps.",
+      "html": "<details class=\"ds-giorno\" open><summary><span class=\"ds-giorno-n\">7</span><span class=\"ds-giorno-t\">Busan — il giorno unico</span></summary><div class=\"ds-giorno-corpo\"><span class=\"ds-tag\">8 apr</span><span class=\"ds-tag\">Volo la sera</span><p>Mattina a Gamcheon, pranzo a Jagalchi, e la sera si vola.</p></div></details>",
+      "css": ".ds-giorno{background:var(--paper,#fffdf9);border:1px solid var(--line,#e2d9c6);border-radius:18px;box-shadow:0 10px 30px rgba(20,20,20,.10);margin-bottom:10px;overflow:hidden;color:var(--ink,#20281f);font-family:Inter,system-ui,sans-serif}.ds-giorno summary{display:flex;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;list-style:none}.ds-giorno summary::-webkit-details-marker{display:none}.ds-giorno-n{background:#16362a;color:#FFCE00;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',Impact,sans-serif;font-size:1.1rem;flex:0 0 auto}.ds-giorno-t{flex:1;font-family:'Bebas Neue',Impact,sans-serif;text-transform:uppercase;font-size:1.2rem;letter-spacing:.01em}.ds-giorno-corpo{padding:0 20px 18px 64px;font-size:.93rem;line-height:1.6}.ds-tag{display:inline-block;background:#efe8d9;color:#5b6a61;border-radius:999px;padding:3px 10px;font-size:.72rem;font-weight:700;margin:0 6px 8px 0}.ds-giorno:hover{border-color:#E0AE00}"
+    },
+    {
+      "name": "Cella del calendario",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Componente firma: una cella per giorno, con filo di colore del paese a sinistra.",
+      "html": "<div class=\"ds-cal\"><button class=\"ds-cal-g\" data-paese=\"kr\"><span class=\"ds-cal-n\">Giorno 7</span><span class=\"ds-cal-d\">8 apr</span><span class=\"ds-cal-l\">Busan → Jeju ✈</span><span>🇰🇷</span></button><button class=\"ds-cal-g\" data-paese=\"bn\"><span class=\"ds-cal-n\">Giorno 13</span><span class=\"ds-cal-d\">14 apr</span><span class=\"ds-cal-l\">Brunei</span><span>🇧🇳</span></button></div>",
+      "css": ".ds-cal{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px}.ds-cal-g{display:flex;flex-direction:column;gap:3px;text-align:left;padding:10px 11px;border-radius:11px;cursor:pointer;background:var(--paper,#fffdf9);border:1px solid var(--line,#e2d9c6);border-left:4px solid var(--line,#e2d9c6);color:var(--ink,#20281f);font-family:Inter,system-ui,sans-serif;transition:transform .15s cubic-bezier(.16,1,.3,1),box-shadow .15s ease,border-color .15s ease}.ds-cal-g[data-paese=kr]{border-left-color:#CD2E3A}.ds-cal-g[data-paese=bn]{border-left-color:#F7C331}.ds-cal-g:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(0,0,0,.18);border-color:#FFCE00}.ds-cal-n{font-size:.66rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#5b6a61}.ds-cal-d{font-family:'Bebas Neue',Impact,sans-serif;font-size:1.15rem;line-height:1;color:#16362a}.ds-cal-l{font-size:.76rem;font-weight:600;line-height:1.35}"
+    },
+    {
+      "name": "Callout",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "Nota in evidenza nel colore d'accento. Porta il border-left da 4px che il sistema segna come debito.",
+      "html": "<div class=\"ds-callout\"><strong>Le basi sono quattro, non otto.</strong> Seul, Busan, Jeju, poi Brunei e Singapore.</div>",
+      "css": ".ds-callout{background:rgba(255,206,0,.13);border:1px solid #E0AE00;border-left:4px solid #E0AE00;border-radius:18px;padding:14px 18px;font-family:Inter,system-ui,sans-serif;font-size:.9rem;line-height:1.6;color:var(--ink,#20281f);box-shadow:0 6px 16px rgba(255,206,0,.12)}"
+    }
+  ],
+  "narrative": {
+    "northStar": "L'almanacco dei Patagucci",
+    "overview": "Un annuario sportivo, non una brochure di agenzia. Il sistema tratta un viaggio come una stagione da archiviare: tabelle di tratte, numeri grossi battuti in carattere condensato, conteggi di paesi e percentuali, giorni numerati come giornate di campionato. È rigoroso e un po' nerd, ma sta su fondo carta e in caratteri caldi, quindi non diventa mai un cruscotto.\n\nLa firma vera non è un colore: è che la pagina cambia palette col paese che si sta guardando. Un attributo sulla radice riscrive i token semantici, e con loro accenti, titoli, pannelli scuri e la fascia-bandiera in cima. Il layout non si muove di un pixel: cambia solo il colore, e lo fa scorrendo.\n\nLa palette gialla della home è provvisoria e non vincolante: non porta un significato, è il punto di partenza da cui le mete divergono. Quello che è invariante è il meccanismo, non la tinta.",
+    "keyCharacteristics": [
+      "Tipografia condensata tutta maiuscola per ogni titolo e ogni numero; corpo neutro per la lettura",
+      "Palette semantica ritematizzata per paese, layout immutato",
+      "Superfici sollevate: card che galleggiano e si alzano al passaggio",
+      "Alternanza obbligata di pannelli chiari e scuri, sezione dopo sezione",
+      "Densità da almanacco: tabelle, conteggi, griglie filtrabili"
+    ],
+    "rules": [
+      {
+        "name": "La Regola delle Due Coppie",
+        "body": "Ogni componente che porta testo dichiara il colore per fondo chiaro e quello per section.panel.dark. Scriverne uno solo è il difetto ricorrente di questo progetto.",
+        "section": "colors"
+      },
+      {
+        "name": "La Regola dell'Accento Inchiostro",
+        "body": "L'accento saturo non tocca mai il testo su carta: su fondo chiaro si usa accent-ink, su fondo scuro accent.",
+        "section": "colors"
+      },
+      {
+        "name": "La Regola del Paese",
+        "body": "Nessun colore si scrive a mano nei componenti: si usano i token semantici, così la ritematizzazione per paese funziona senza toccare il componente.",
+        "section": "colors"
+      },
+      {
+        "name": "La Regola del Numero Grosso",
+        "body": "Qualunque cifra che valga la pena ricordare va in Bebas a corpo molto maggiore del testo attorno, con l'unità in piccolo accanto.",
+        "section": "typography"
+      },
+      {
+        "name": "La Regola degli Undici Pixel",
+        "body": "Nessun testo che si legge o si tocca scende sotto gli 11px. Il sistema oggi viola questa regola in più punti: è debito, non licenza.",
+        "section": "typography"
+      },
+      {
+        "name": "La Regola dell'Alternanza",
+        "body": "I pannelli alternano chiaro e scuro senza eccezioni. Togliere o inserire una sezione obbliga a rinumerare l'alternanza.",
+        "section": "layout"
+      },
+      {
+        "name": "La Regola dell'Alone Sobrio",
+        "body": "Le ombre colorate si usano solo sotto un elemento, mai come alone a offset zero attorno a un testo.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do usare i token semantici e mai un colore letterale dentro un componente",
+      "Do dichiarare sempre la coppia chiaro/scuro di ogni componente testuale",
+      "Do mettere in Bebas ogni numero che conta, molto più grande del testo attorno",
+      "Do usare l'unico easing del sistema, cubic-bezier(.16,1,.3,1)",
+      "Do far scorrere in orizzontale le barre di navigazione invece di mandarle a capo",
+      "Do mantenere l'alternanza chiaro/scuro dei pannelli"
+    ],
+    "donts": [
+      "Don't scendere sotto gli 11px su testo leggibile o toccabile",
+      "Don't aggiungere un terzo carattere: il sistema è Bebas più Inter",
+      "Don't usare l'accento saturo per il testo su fondo chiaro",
+      "Don't mettere alone colorato a offset zero attorno a testo o riquadri",
+      "Don't aggiungere nuovi border-left spessi su contenitori arrotondati",
+      "Don't annidare una card dentro un'altra card",
+      "Don't usare easing elastici o di rimbalzo"
+    ]
+  }
+}
