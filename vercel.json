@@ -10,5 +10,25 @@
     "api/kpop.js": {
       "maxDuration": 60
     }
-  }
+  },
+  "headers": [
+    {
+      "source": "/foto/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
+    }
+  ]
 }
