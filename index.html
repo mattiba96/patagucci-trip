@@ -2687,6 +2687,8 @@
 
 
 <script>
+var SUFFISSI = ["hub", "is", "kr", "nx"];
+var TITOLI = {"hub": "Tutte le mete", "is": "Islanda", "kr": "Corea, Brunei e Singapore", "nx": "Quale sarà il prossimo?"};
 var FLAG_BARS = {
   hub: 'linear-gradient(90deg,#141414 0 50%, #FFCE00 50% 100%)',
   nx: 'linear-gradient(90deg,#FFCE00 0 25%, #2a6b4d 25% 50%, #D21034 50% 75%, #1D2A4D 75% 100%)',
@@ -2706,7 +2708,7 @@ var FLAG_BARS = {
   'kr-sg': 'linear-gradient(90deg,#EF3340 0 50%, #ffffff 50% 100%)',
   is: 'linear-gradient(90deg,#02529C 0 30%, #ffffff 30% 38%, #DC1E35 38% 47%, #ffffff 47% 55%, #02529C 55% 100%)'
 };
-function showDest(name){
+function showDest(name, daCronologia){
   document.documentElement.setAttribute('data-dest', name);
   document.documentElement.removeAttribute('data-paese');
   document.querySelectorAll('.destination').forEach(function(el){ el.classList.remove('active'); });
@@ -2724,11 +2726,43 @@ function showDest(name){
   if(flagbar && FLAG_BARS[name]) flagbar.style.background = FLAG_BARS[name];
   window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   target.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
+  // Un indirizzo per ogni meta: senza questo "guarda i voli" diventa
+  // "apri il sito, clicca Corea, scorri fino in fondo", ogni volta.
+  document.title = (TITOLI[name] ? TITOLI[name] + ' — ' : '') + 'Patagucci Trips';
+  if(!daCronologia){
+    var nuovo = name === 'hub' ? location.pathname : location.pathname + '#' + name;
+    if(location.hash.slice(1) !== name) history.pushState({ meta: name }, '', nuovo);
+  }
   // Fa ripartire da capo le mappe animate della meta appena aperta.
   window.dispatchEvent(new CustomEvent('destinazione-cambiata'));
   if(typeof syncSwitcherHeight === 'function') setTimeout(syncSwitcherHeight, 0);
 }
 function showHub(){ showDest('hub'); }
+
+// ---- L'indirizzo dice dove sei, e ci si torna ----
+// Le sezioni hanno id col suffisso della meta ("#voli-kr"), quindi dal
+// frammento si ricava sia la meta sia il punto della pagina.
+function metaDaFrammento(frammento){
+  if(!frammento) return null;
+  if(SUFFISSI.indexOf(frammento) !== -1) return { meta: frammento, sezione: null };
+  var taglio = frammento.lastIndexOf('-');
+  if(taglio > 0){
+    var suf = frammento.slice(taglio + 1);
+    if(SUFFISSI.indexOf(suf) !== -1) return { meta: suf, sezione: frammento };
+  }
+  return null;
+}
+function applicaFrammento(daCronologia){
+  var trovato = metaDaFrammento(location.hash.slice(1));
+  if(!trovato){ showDest('hub', true); return; }
+  showDest(trovato.meta, true);
+  if(trovato.sezione){
+    var el = document.getElementById(trovato.sezione);
+    if(el) setTimeout(function(){ el.scrollIntoView({ behavior: daCronologia ? 'auto' : 'instant', block:'start' }); }, 60);
+  }
+}
+window.addEventListener('popstate', function(){ applicaFrammento(true); });
+document.addEventListener('DOMContentLoaded', function(){ if(location.hash) applicaFrammento(false); });
 
 // Una meta che attraversa piu' paesi tinge la pagina col paese che si sta
 // guardando: la scheda chiama questa passando 'kr-tw', 'kr-hk' e simili,
@@ -4016,7 +4050,7 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
 
     el.costoNum.textContent = totale || '—';
     el.costo.classList.toggle('allarme', !!problema && totale > 0);
-    el.avvio.disabled = !!problema;
+    el.avvio.disabled = !!problema || motoreGiu;
 
     if(problema){
       el.costoTxt.textContent = problema;
@@ -4096,6 +4130,8 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
     el.barra.style.display = '';
     el.avvio.disabled = true;
 
+    document.getElementById('risultati-nx').scrollIntoView({ behavior:'smooth', block:'start' });
+
     var persone = Math.min(Math.max(parseInt(el.persone.value, 10) || 1, 1), 9);
     var lavori = [];
     piano.mete.forEach(function(meta){
@@ -4164,7 +4200,9 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
       el.stato.textContent = risultati.length
         ? 'Fatto: ' + comb + ', ' + opz +
           (daCache ? ' (' + daCache + (daCache === 1 ? ' gia\' cercata di recente' : ' gia\' cercate di recente') + ')' : '') + '.'
-        : 'Nessun volo trovato per queste combinazioni. Prova a spostare le date o a cambiare meta.';
+        : (errori === totale
+            ? 'Nessuna ricerca è andata a buon fine: il problema è il motore, non le date. Riprova fra qualche minuto.'
+            : 'Nessun volo trovato per queste combinazioni. Prova a spostare le date o a cambiare meta.');
       try { localStorage.setItem(CHIAVE_ULTIMA, JSON.stringify({ quando: Date.now(), risultati: risultati.slice(0, 120) })); } catch(e){}
       preventivo();
     });
@@ -4277,6 +4315,9 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
   }
 
   var giaControllato = false;
+  // Quando il motore non risponde il bottone deve spegnersi: lo stato
+  // appartiene al comando, non a una pastiglia lì accanto.
+  var motoreGiu = false;
   function controllaMotore(){
     if(giaControllato) return;
     giaControllato = true;
@@ -4294,6 +4335,10 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
       .catch(function(){
         el.crediti.textContent = 'ricerca non disponibile adesso';
         el.crediti.classList.add('scarsi');
+        motoreGiu = true;
+        el.avvio.disabled = true;
+        el.avvio.textContent = 'La ricerca è ferma';
+        el.stato.textContent = 'La ricerca non risponde in questo momento. Riprova fra qualche minuto.';
       });
   }
 

@@ -1163,6 +1163,9 @@ chat_js = '''
 })();
 '''.replace('__NOMI__', json.dumps(NOMI_METE, ensure_ascii=False)).replace('__SPUNTI__', json.dumps(SPUNTI, ensure_ascii=False))
 
+suffissi_js = json.dumps(["hub"] + [d["suf"] for d in DESTS], ensure_ascii=False)
+titoli_js = json.dumps({"hub": "Tutte le mete", **{d["suf"]: d["name"] for d in DESTS}}, ensure_ascii=False)
+
 final_html = f'''<!DOCTYPE html>
 <html lang="it" data-dest="hub">
 <head>
@@ -1228,6 +1231,8 @@ final_html = f'''<!DOCTYPE html>
 {chat_html}
 
 <script>
+var SUFFISSI = {suffissi_js};
+var TITOLI = {titoli_js};
 var FLAG_BARS = {{
   hub: 'linear-gradient(90deg,#141414 0 50%, #FFCE00 50% 100%)',
   nx: 'linear-gradient(90deg,#FFCE00 0 25%, #2a6b4d 25% 50%, #D21034 50% 75%, #1D2A4D 75% 100%)',
@@ -1247,7 +1252,7 @@ var FLAG_BARS = {{
   'kr-sg': 'linear-gradient(90deg,#EF3340 0 50%, #ffffff 50% 100%)',
   is: 'linear-gradient(90deg,#02529C 0 30%, #ffffff 30% 38%, #DC1E35 38% 47%, #ffffff 47% 55%, #02529C 55% 100%)'
 }};
-function showDest(name){{
+function showDest(name, daCronologia){{
   document.documentElement.setAttribute('data-dest', name);
   document.documentElement.removeAttribute('data-paese');
   document.querySelectorAll('.destination').forEach(function(el){{ el.classList.remove('active'); }});
@@ -1265,11 +1270,43 @@ function showDest(name){{
   if(flagbar && FLAG_BARS[name]) flagbar.style.background = FLAG_BARS[name];
   window.scrollTo({{ top: 0, left: 0, behavior: 'instant' }});
   target.querySelectorAll('.reveal').forEach(function(el){{ el.classList.add('visible'); }});
+  // Un indirizzo per ogni meta: senza questo "guarda i voli" diventa
+  // "apri il sito, clicca Corea, scorri fino in fondo", ogni volta.
+  document.title = (TITOLI[name] ? TITOLI[name] + ' — ' : '') + 'Patagucci Trips';
+  if(!daCronologia){{
+    var nuovo = name === 'hub' ? location.pathname : location.pathname + '#' + name;
+    if(location.hash.slice(1) !== name) history.pushState({{ meta: name }}, '', nuovo);
+  }}
   // Fa ripartire da capo le mappe animate della meta appena aperta.
   window.dispatchEvent(new CustomEvent('destinazione-cambiata'));
   if(typeof syncSwitcherHeight === 'function') setTimeout(syncSwitcherHeight, 0);
 }}
 function showHub(){{ showDest('hub'); }}
+
+// ---- L'indirizzo dice dove sei, e ci si torna ----
+// Le sezioni hanno id col suffisso della meta ("#voli-kr"), quindi dal
+// frammento si ricava sia la meta sia il punto della pagina.
+function metaDaFrammento(frammento){{
+  if(!frammento) return null;
+  if(SUFFISSI.indexOf(frammento) !== -1) return {{ meta: frammento, sezione: null }};
+  var taglio = frammento.lastIndexOf('-');
+  if(taglio > 0){{
+    var suf = frammento.slice(taglio + 1);
+    if(SUFFISSI.indexOf(suf) !== -1) return {{ meta: suf, sezione: frammento }};
+  }}
+  return null;
+}}
+function applicaFrammento(daCronologia){{
+  var trovato = metaDaFrammento(location.hash.slice(1));
+  if(!trovato){{ showDest('hub', true); return; }}
+  showDest(trovato.meta, true);
+  if(trovato.sezione){{
+    var el = document.getElementById(trovato.sezione);
+    if(el) setTimeout(function(){{ el.scrollIntoView({{ behavior: daCronologia ? 'auto' : 'instant', block:'start' }}); }}, 60);
+  }}
+}}
+window.addEventListener('popstate', function(){{ applicaFrammento(true); }});
+document.addEventListener('DOMContentLoaded', function(){{ if(location.hash) applicaFrammento(false); }});
 
 // Una meta che attraversa piu' paesi tinge la pagina col paese che si sta
 // guardando: la scheda chiama questa passando 'kr-tw', 'kr-hk' e simili,

@@ -601,7 +601,7 @@
 
     el.costoNum.textContent = totale || '—';
     el.costo.classList.toggle('allarme', !!problema && totale > 0);
-    el.avvio.disabled = !!problema;
+    el.avvio.disabled = !!problema || motoreGiu;
 
     if(problema){
       el.costoTxt.textContent = problema;
@@ -681,6 +681,8 @@
     el.barra.style.display = '';
     el.avvio.disabled = true;
 
+    document.getElementById('risultati').scrollIntoView({ behavior:'smooth', block:'start' });
+
     var persone = Math.min(Math.max(parseInt(el.persone.value, 10) || 1, 1), 9);
     var lavori = [];
     piano.mete.forEach(function(meta){
@@ -749,7 +751,9 @@
       el.stato.textContent = risultati.length
         ? 'Fatto: ' + comb + ', ' + opz +
           (daCache ? ' (' + daCache + (daCache === 1 ? ' gia\' cercata di recente' : ' gia\' cercate di recente') + ')' : '') + '.'
-        : 'Nessun volo trovato per queste combinazioni. Prova a spostare le date o a cambiare meta.';
+        : (errori === totale
+            ? 'Nessuna ricerca è andata a buon fine: il problema è il motore, non le date. Riprova fra qualche minuto.'
+            : 'Nessun volo trovato per queste combinazioni. Prova a spostare le date o a cambiare meta.');
       try { localStorage.setItem(CHIAVE_ULTIMA, JSON.stringify({ quando: Date.now(), risultati: risultati.slice(0, 120) })); } catch(e){}
       preventivo();
     });
@@ -862,6 +866,9 @@
   }
 
   var giaControllato = false;
+  // Quando il motore non risponde il bottone deve spegnersi: lo stato
+  // appartiene al comando, non a una pastiglia lì accanto.
+  var motoreGiu = false;
   function controllaMotore(){
     if(giaControllato) return;
     giaControllato = true;
@@ -879,6 +886,10 @@
       .catch(function(){
         el.crediti.textContent = 'ricerca non disponibile adesso';
         el.crediti.classList.add('scarsi');
+        motoreGiu = true;
+        el.avvio.disabled = true;
+        el.avvio.textContent = 'La ricerca è ferma';
+        el.stato.textContent = 'La ricerca non risponde in questo momento. Riprova fra qualche minuto.';
       });
   }
 
