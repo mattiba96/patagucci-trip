@@ -1,457 +1,780 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-16T18:58:54Z",
+  "generatedAt": "2026-10-20T17:47:07Z",
   "title": "Design System: Patagucci Trips",
   "extensions": {
     "colorMeta": {
-      "accent": {
-        "role": "primary",
-        "displayName": "Giallo Insegna",
-        "canonical": "#FFCE00",
-        "tonalRamp": [
-          "#4C3E00",
-          "#876D00",
-          "#C19C00",
-          "#FBCB00",
-          "#FFD837",
-          "#FFE471",
-          "#FFEFAB",
-          "#FFFAE5"
-        ]
-      },
-      "accent-deep": {
-        "role": "primary",
-        "displayName": "Oro Bruciato",
-        "canonical": "#E0AE00",
-        "tonalRamp": [
-          "#4C3B00",
-          "#876900",
-          "#C19600",
-          "#FBC300",
-          "#FFD237",
-          "#FFDF71",
-          "#FFECAB",
-          "#FFF9E5"
-        ]
-      },
-      "accent-ink": {
-        "role": "primary",
-        "displayName": "Senape Inchiostro",
-        "canonical": "#8A6B00",
-        "tonalRamp": [
-          "#4C3B00",
-          "#876900",
-          "#C19600",
-          "#FBC300",
-          "#FFD237",
-          "#FFDF71",
-          "#FFECAB",
-          "#FFF9E5"
-        ]
-      },
-      "accent-2": {
-        "role": "secondary",
-        "displayName": "Rosso Bandiera",
-        "canonical": "#D21034",
-        "tonalRamp": [
-          "#470512",
-          "#7D0A1F",
-          "#B30E2C",
-          "#EA123A",
-          "#F14565",
-          "#F57B92",
-          "#F9B1BE",
-          "#FDE7EB"
-        ]
-      },
-      "theme-900": {
-        "role": "tertiary",
-        "displayName": "Verde Spedizione Scuro",
-        "canonical": "#16362a",
-        "tonalRamp": [
-          "#16362A",
-          "#27604A",
-          "#38896B",
-          "#49B38B",
-          "#71C5A5",
-          "#9AD6BF",
-          "#C3E7DA",
-          "#EDF8F4"
-        ]
-      },
-      "theme-700": {
-        "role": "tertiary",
-        "displayName": "Verde Spedizione",
-        "canonical": "#2a6b4d",
-        "tonalRamp": [
-          "#163728",
-          "#266146",
-          "#368B64",
-          "#47B582",
-          "#6FC79E",
-          "#99D7BA",
-          "#C3E7D7",
-          "#EDF8F3"
-        ]
-      },
-      "paper": {
+      "carta": {
         "role": "neutral",
         "displayName": "Carta",
-        "canonical": "#fffdf9",
+        "canonical": "#ffffff",
         "tonalRamp": [
-          "#4C3300",
-          "#875A00",
-          "#C18100",
-          "#FBA800",
-          "#FFBC37",
-          "#FFD071",
-          "#FFE3AB",
-          "#FFF7E5"
+          "#0b0b0b",
+          "#242424",
+          "#404040",
+          "#5d5d5d",
+          "#7d7d7d",
+          "#9e9e9e",
+          "#c4c4c4",
+          "#eeeeee"
         ]
       },
-      "tint-100": {
+      "quadretto": {
         "role": "neutral",
-        "displayName": "Carta Ingiallita",
-        "canonical": "#f8f5ef",
+        "displayName": "Quadretto Azzurrino",
+        "canonical": "#dbe4ee",
         "tonalRamp": [
-          "#352B17",
-          "#5E4C29",
-          "#866D3B",
-          "#AF8E4C",
-          "#C2A874",
-          "#D4C19C",
-          "#E6DBC5",
-          "#F7F4ED"
+          "#060c12",
+          "#1e252c",
+          "#394148",
+          "#575e67",
+          "#767e87",
+          "#979fa9",
+          "#bcc5cf",
+          "#e6f0fa"
         ]
       },
-      "tint-200": {
+      "margine": {
         "role": "neutral",
-        "displayName": "Sabbia",
-        "canonical": "#efe8d9",
+        "displayName": "Riga del Margine",
+        "canonical": "#f2a3a3",
         "tonalRamp": [
-          "#362C17",
-          "#5F4D28",
-          "#886F39",
-          "#B1904A",
-          "#C4AA72",
-          "#D5C29B",
-          "#E6DBC4",
-          "#F7F4ED"
+          "#220001",
+          "#470610",
+          "#69272b",
+          "#8b4648",
+          "#ae6566",
+          "#d38687",
+          "#fbacac",
+          "#ffe8e8"
         ]
       },
-      "line": {
+      "riga-matita": {
         "role": "neutral",
-        "displayName": "Bordo Spago",
-        "canonical": "#e2d9c6",
+        "displayName": "Riga a Matita",
+        "canonical": "#cfd6de",
         "tonalRamp": [
-          "#332B1A",
-          "#594B2D",
-          "#806C41",
-          "#A78C55",
-          "#BBA67A",
-          "#CFC0A1",
-          "#E3DAC7",
-          "#F6F4EE"
+          "#070c11",
+          "#1f252a",
+          "#3b4047",
+          "#585e65",
+          "#787e85",
+          "#999fa7",
+          "#bec5cd",
+          "#e8eff7"
         ]
       },
-      "dark-base": {
+      "campitura-matita": {
         "role": "neutral",
-        "displayName": "Nero Pannello",
-        "canonical": "#141414",
+        "displayName": "Campitura a Matita",
+        "canonical": "#eef2f6",
         "tonalRamp": [
-          "#262626",
-          "#434343",
-          "#616161",
-          "#7E7E7E",
-          "#9B9B9B",
-          "#B8B8B8",
-          "#D5D5D5",
-          "#F2F2F2"
+          "#090b0e",
+          "#212427",
+          "#3d4043",
+          "#5b5e61",
+          "#7a7e81",
+          "#9b9fa3",
+          "#c1c5c8",
+          "#ebeff3"
         ]
       },
-      "ink": {
+      "pennarello": {
         "role": "neutral",
-        "displayName": "Inchiostro",
-        "canonical": "#20281f",
+        "displayName": "Pennarello Nero",
+        "canonical": "#161616",
         "tonalRamp": [
-          "#222B21",
-          "#3D4C3B",
-          "#576D54",
-          "#718E6E",
-          "#91A88E",
-          "#B1C1AF",
-          "#D1DAD0",
-          "#F1F4F1"
+          "#0b0b0b",
+          "#242424",
+          "#404040",
+          "#5d5d5d",
+          "#7d7d7d",
+          "#9e9e9e",
+          "#c4c4c4",
+          "#eeeeee"
         ]
       },
-      "ink-soft": {
+      "matita": {
         "role": "neutral",
-        "displayName": "Inchiostro Tenue",
-        "canonical": "#5b6a61",
+        "displayName": "Matita",
+        "canonical": "#555b63",
         "tonalRamp": [
-          "#232926",
-          "#3E4942",
-          "#59685F",
-          "#74877C",
-          "#93A299",
-          "#B3BDB7",
-          "#D2D8D4",
-          "#F1F3F2"
+          "#070b11",
+          "#1f242b",
+          "#3b4048",
+          "#585e66",
+          "#777e86",
+          "#989fa8",
+          "#bec5ce",
+          "#e8eff9"
+        ]
+      },
+      "penna-blu": {
+        "role": "secondary",
+        "displayName": "Penna Bic Blu",
+        "canonical": "#1d3fa8",
+        "tonalRamp": [
+          "#01003a",
+          "#040475",
+          "#123099",
+          "#2d53bd",
+          "#4a75e3",
+          "#729af9",
+          "#a8c4ff",
+          "#e7efff"
+        ]
+      },
+      "penna-rossa": {
+        "role": "tertiary",
+        "displayName": "Penna Rossa (solo da prenotare)",
+        "canonical": "#c8102e",
+        "tonalRamp": [
+          "#210001",
+          "#4b0009",
+          "#7c0117",
+          "#b00626",
+          "#de3040",
+          "#ff6366",
+          "#fdaba7",
+          "#fee9e7"
+        ]
+      },
+      "evid-casa": {
+        "role": "primary",
+        "displayName": "Evidenziatore Giallo (home)",
+        "canonical": "#ffe14d",
+        "tonalRamp": [
+          "#100b00",
+          "#2b2400",
+          "#4b3f00",
+          "#6d5d01",
+          "#907d12",
+          "#b69e1c",
+          "#e1c321",
+          "#fff0a9"
+        ]
+      },
+      "evid-casa-calcato": {
+        "role": "primary",
+        "displayName": "Giallo Calcato",
+        "canonical": "#f2c200",
+        "tonalRamp": [
+          "#120a00",
+          "#2e2300",
+          "#4f3e03",
+          "#725b08",
+          "#977a1a",
+          "#be9a25",
+          "#eabf2d",
+          "#feeebf"
+        ]
+      },
+      "evid-casa-ink": {
+        "role": "primary",
+        "displayName": "Giallo Leggibile",
+        "canonical": "#6b5600",
+        "tonalRamp": [
+          "#120a00",
+          "#2e2300",
+          "#4d3e04",
+          "#705b0a",
+          "#917b34",
+          "#b39d56",
+          "#dac37b",
+          "#feeebb"
+        ]
+      },
+      "evid-secondo": {
+        "role": "secondary",
+        "displayName": "Secondo Evidenziatore Rosa",
+        "canonical": "#ff8fb8",
+        "tonalRamp": [
+          "#20000b",
+          "#490024",
+          "#740b40",
+          "#98325e",
+          "#bd547e",
+          "#e3769f",
+          "#fea6c4",
+          "#ffe7ee"
+        ]
+      },
+      "evid-islanda": {
+        "role": "primary",
+        "displayName": "Verde Aurora (Islanda)",
+        "canonical": "#7deaa0",
+        "tonalRamp": [
+          "#001103",
+          "#002d13",
+          "#004d25",
+          "#047139",
+          "#199551",
+          "#48b871",
+          "#72df96",
+          "#c6ffd5"
+        ]
+      },
+      "evid-islanda-calcato": {
+        "role": "primary",
+        "displayName": "Verde Aurora Calcato",
+        "canonical": "#2fbf6a",
+        "tonalRamp": [
+          "#001102",
+          "#002d12",
+          "#034d25",
+          "#097039",
+          "#1e9550",
+          "#29bb67",
+          "#5ce38c",
+          "#c7ffd4"
+        ]
+      },
+      "evid-islanda-ink": {
+        "role": "primary",
+        "displayName": "Verde Aurora Leggibile",
+        "canonical": "#146b3a",
+        "tonalRamp": [
+          "#001003",
+          "#002d13",
+          "#024d26",
+          "#1a6f3e",
+          "#41905d",
+          "#64b37d",
+          "#8ad9a2",
+          "#c6ffd5"
+        ]
+      },
+      "evid-corea": {
+        "role": "primary",
+        "displayName": "Rosa Ciliegio (Corea)",
+        "canonical": "#ff92bb",
+        "tonalRamp": [
+          "#21000c",
+          "#480025",
+          "#730f41",
+          "#97345f",
+          "#bb557f",
+          "#e177a0",
+          "#fda7c5",
+          "#fee8ef"
+        ]
+      },
+      "evid-corea-calcato": {
+        "role": "primary",
+        "displayName": "Rosa Ciliegio Calcato",
+        "canonical": "#ee4f8b",
+        "tonalRamp": [
+          "#200009",
+          "#470121",
+          "#76083b",
+          "#a81257",
+          "#d43576",
+          "#fc5c97",
+          "#fca8c0",
+          "#fee8ed"
+        ]
+      },
+      "evid-corea-ink": {
+        "role": "primary",
+        "displayName": "Rosa Ciliegio Leggibile",
+        "canonical": "#a3164f",
+        "tonalRamp": [
+          "#200008",
+          "#49001e",
+          "#790036",
+          "#a61b52",
+          "#cd4471",
+          "#f46891",
+          "#ffa7bc",
+          "#ffe8ec"
+        ]
+      },
+      "evid-brunei": {
+        "role": "primary",
+        "displayName": "Oro della Cupola (Brunei)",
+        "canonical": "#ffc93c",
+        "tonalRamp": [
+          "#130900",
+          "#2f2200",
+          "#513c01",
+          "#755904",
+          "#9b7816",
+          "#c39720",
+          "#f1bc27",
+          "#feedc6"
+        ]
+      },
+      "evid-brunei-calcato": {
+        "role": "primary",
+        "displayName": "Oro Calcato",
+        "canonical": "#e09c00",
+        "tonalRamp": [
+          "#150800",
+          "#332000",
+          "#573900",
+          "#7b5610",
+          "#a4720b",
+          "#cf9113",
+          "#fbb638",
+          "#feecd1"
+        ]
+      },
+      "evid-brunei-ink": {
+        "role": "primary",
+        "displayName": "Oro Leggibile",
+        "canonical": "#7a5200",
+        "tonalRamp": [
+          "#160700",
+          "#332000",
+          "#563901",
+          "#7d5505",
+          "#9f7532",
+          "#c19654",
+          "#e9bc79",
+          "#feecd2"
+        ]
+      },
+      "evid-singapore": {
+        "role": "primary",
+        "displayName": "Lilla Supertree (Singapore)",
+        "canonical": "#cdb0ff",
+        "tonalRamp": [
+          "#130029",
+          "#2e0e51",
+          "#4a2d71",
+          "#694c93",
+          "#896cb6",
+          "#aa8dda",
+          "#cfb5fd",
+          "#f1ebff"
+        ]
+      },
+      "evid-singapore-calcato": {
+        "role": "primary",
+        "displayName": "Lilla Calcato",
+        "canonical": "#9b6bef",
+        "tonalRamp": [
+          "#12002b",
+          "#2f025c",
+          "#500b95",
+          "#6d38b9",
+          "#8d5cde",
+          "#ac82fd",
+          "#cbb7fc",
+          "#f0ebfe"
+        ]
+      },
+      "evid-singapore-ink": {
+        "role": "primary",
+        "displayName": "Lilla Leggibile",
+        "canonical": "#5b2ba8",
+        "tonalRamp": [
+          "#11002e",
+          "#2d0060",
+          "#4c1394",
+          "#693cb9",
+          "#885fde",
+          "#a785fc",
+          "#c8b8fc",
+          "#efecfe"
+        ]
+      },
+      "logo-verde": {
+        "role": "logo",
+        "displayName": "Verde Cielo del Logo",
+        "canonical": "#09442d",
+        "tonalRamp": [
+          "#001006",
+          "#002d1a",
+          "#134b34",
+          "#356a51",
+          "#558b70",
+          "#76ad91",
+          "#9bd3b6",
+          "#c5fee0"
+        ]
+      },
+      "logo-rosso": {
+        "role": "logo",
+        "displayName": "Rosso Banda del Logo",
+        "canonical": "#b30e1a",
+        "tonalRamp": [
+          "#210000",
+          "#4b0004",
+          "#7c020c",
+          "#b00817",
+          "#d83d3a",
+          "#f96a61",
+          "#feaba3",
+          "#fee9e6"
+        ]
+      },
+      "logo-nero": {
+        "role": "logo",
+        "displayName": "Nero Montagne del Logo",
+        "canonical": "#060606",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242424",
+          "#404040",
+          "#5d5d5d",
+          "#7d7d7d",
+          "#9e9e9e",
+          "#c4c4c4",
+          "#eeeeee"
+        ]
+      },
+      "logo-cresta": {
+        "role": "logo",
+        "displayName": "Bianco Cresta del Logo",
+        "canonical": "#fcfbfc",
+        "tonalRamp": [
+          "#0b0b0b",
+          "#242424",
+          "#403f40",
+          "#5e5d5e",
+          "#7e7d7e",
+          "#9f9e9f",
+          "#c5c4c5",
+          "#efeeef"
+        ]
+      },
+      "logo-scritta": {
+        "role": "logo",
+        "displayName": "Crema Scritta del Logo",
+        "canonical": "#fcf8ec",
+        "tonalRamp": [
+          "#0e0b04",
+          "#27241b",
+          "#434036",
+          "#615d53",
+          "#817d72",
+          "#a29e93",
+          "#c8c4b8",
+          "#f2eee2"
         ]
       }
     },
     "typographyMeta": {
       "display": {
-        "displayName": "Display",
-        "purpose": "Solo il titolo della meta nell'intestazione a tutta altezza."
+        "displayName": "Pennarello, titolo della meta",
+        "purpose": "Il titolo della prima pagina di ogni meta, con una sola parola evidenziata."
       },
       "headline": {
-        "displayName": "Titolo di sezione",
-        "purpose": "Intestazioni di sezione, precedute da un'emoji."
+        "displayName": "Pennarello, titolo di sezione",
+        "purpose": "Titoli di sezione evidenziati riga per riga, massimo 30ch."
+      },
+      "numeral": {
+        "displayName": "Pennarello, numeri grossi",
+        "purpose": "Numeri grossi, conteggi, date del calendario, numeri dei giorni (scala 3.4 / 2.7 / 2.1rem)."
       },
       "title": {
-        "displayName": "Titolo",
-        "purpose": "Giorni dell'itinerario, nomi nelle schede, titoli di card."
-      },
-      "body": {
-        "displayName": "Corpo",
-        "purpose": "Tutto il testo corrente."
+        "displayName": "Stampatello a mano, titoletto",
+        "purpose": "h3, titoli dei giorni, nomi nelle schede."
       },
       "label": {
-        "displayName": "Etichetta",
-        "purpose": "Tab, chip e intestazioni di tabella: maiuscolo spaziato. 12,8px, il gradino piu' basso della scala."
+        "displayName": "Stampatello a mano, etichetta",
+        "purpose": "Linguette, etichette, tag, bottoni, intestazioni di tabella, didascalie delle polaroid."
       },
-      "title-lg": {
-        "displayName": "Titolo grosso",
-        "purpose": "Nomi di persona negli elenchi, intestazioni di blocco dentro un pannello."
+      "body": {
+        "displayName": "Testo",
+        "purpose": "Ogni frase da leggere, massimo 72ch, cifre tabellari."
       },
-      "lead": {
-        "displayName": "Apertura",
-        "purpose": "Sottotitoli di sezione e primo paragrafo: 17,3px."
+      "body-lead": {
+        "displayName": "Sottotitolo",
+        "purpose": "Sottotitoli di sezione, massimo 62ch."
       },
-      "base": {
-        "displayName": "Base",
-        "purpose": "Corpo delle card. 16px: e' il pavimento, non si scende."
+      "body-small": {
+        "displayName": "Testo piccolo",
+        "purpose": "Testo delle schede e delle tabelle."
       },
-      "small": {
-        "displayName": "Piccolo",
-        "purpose": "Didascalie, tag, testo denso delle griglie: 14,1px."
+      "micro": {
+        "displayName": "Micro",
+        "purpose": "Fonti, crediti, didascalie: il gradino piu' basso (12,8px)."
       },
       "mono": {
-        "displayName": "Monospazio",
-        "purpose": "Orari e codici di volo, dove le cifre devono incolonnarsi."
-      },
-      "number": {
-        "displayName": "Numero",
-        "purpose": "Tre gradini — 3,2 / 2,6 / 2,1rem — per il numero che apre una sezione, quello dentro una fascia, quello accanto a un nome. Sempre in Bebas."
+        "displayName": "Mono",
+        "purpose": "Codici di prenotazione, numeri di volo, orari."
       }
     },
     "shadows": [
       {
-        "name": "ambientale",
-        "value": "0 10px 30px rgba(20,20,20,0.10)",
-        "purpose": "Stato di riposo di card e contenitori."
+        "name": "carta-su-carta",
+        "value": "0 1px 1px rgba(20,24,30,0.06), 0 12px 22px -16px rgba(20,24,30,0.38)",
+        "purpose": "Foto piccole dentro i giorni e riquadri delle sorgenti senza tratto. Mai sui riquadri a pennarello."
       },
       {
-        "name": "sollevata",
-        "value": "0 24px 60px rgba(20,20,20,0.22)",
-        "purpose": "Passaggio del mouse, pannelli flottanti, chat."
+        "name": "polaroid",
+        "value": "0 2px 3px rgba(20,24,30,0.10), 0 22px 34px -18px rgba(20,24,30,0.48)",
+        "purpose": "Polaroid: intestazione, equipaggio, giostra, cartoline delle mete, striscia fotografica."
       },
       {
-        "name": "anello-accento",
-        "value": "0 0 0 1px rgba(255,206,0,0.35)",
-        "purpose": "Si somma alla sollevata: focus senza bordo duro."
+        "name": "nastro",
+        "value": "0 1px 2px rgba(0,0,0,0.08)",
+        "purpose": "Il nastro adesivo sopra la polaroid."
       },
       {
-        "name": "spinta-tema",
-        "value": "0 4px 12px rgba(42,107,77,0.3)",
-        "purpose": "Sotto bottoni e chip attivi."
+        "name": "foglio-che-si-volta",
+        "value": "inset -40px 0 60px -40px rgba(0,0,0,0.25)",
+        "purpose": "La pagina a quadretti che gira sul bordo sinistro al cambio di meta."
+      },
+      {
+        "name": "anello-focus",
+        "value": "0 0 0 6px rgba(255,255,255,0.92)",
+        "purpose": "Alone bianco attorno all'anello di focus in penna blu (outline 3px, offset 2px)."
       }
     ],
     "motion": [
       {
-        "name": "ease-sistema",
-        "value": "cubic-bezier(.16,1,.3,1)",
-        "purpose": "L'unico easing del sistema: ogni transizione di stato lo usa."
+        "name": "cambio-evidenziatore",
+        "value": ".6s cubic-bezier(.16,1,.3,1)",
+        "purpose": "Transizione dei token --accent registrati con @property al cambio di meta o di paese."
       },
       {
-        "name": "durata-stato",
-        "value": "0.2s",
-        "purpose": "Cambi di stato su controlli: tab, chip, badge."
+        "name": "passata-evidenziatore",
+        "value": ".75s cubic-bezier(.22,1,.36,1)",
+        "purpose": "background-size della passata, solo sulla parola del titolo della meta."
       },
       {
-        "name": "durata-superficie",
-        "value": "0.3s",
-        "purpose": "Sollevamento delle card al passaggio."
+        "name": "pagina-che-si-volta",
+        "value": "0.75s cubic-bezier(.55,.05,.35,1)",
+        "purpose": "rotateY 0 -> -100deg in perspective(2400px), brightness 1 -> .78."
       },
       {
-        "name": "durata-tema",
-        "value": "0.5s",
-        "purpose": "Transizione del fondo quando cambia il paese."
+        "name": "polaroid-cade",
+        "value": "0.85s cubic-bezier(.16,1,.3,1)",
+        "purpose": "rotateX(32deg) translateY(-46px) -> piatta, opacita' 0 -> 1."
       },
       {
-        "name": "durata-paese",
-        "value": "0.5s",
-        "purpose": "Il passaggio da un paese all'altro dentro la stessa meta: i token colore sono registrati con @property e scorrono, cosi' ogni componente si tinge senza saperlo."
+        "name": "penna-rossa",
+        "value": "0.9s cubic-bezier(.65,0,.35,1)",
+        "purpose": "strokeDashoffset 1 -> 0 con pathLength=1, quando il disegno entra nello schermo."
+      },
+      {
+        "name": "polaroid-inclinata",
+        "value": "0.35s cubic-bezier(.16,1,.3,1); ritorno spring visualDuration .55 bounce .18",
+        "purpose": "Inclinazione 3D sotto un mouse vero (rotateX +-6deg, rotateY +-7deg, translateZ 16px)."
+      },
+      {
+        "name": "stato-comando",
+        "value": ".2s cubic-bezier(.16,1,.3,1)",
+        "purpose": "Bottoni, filtri, caselle del calendario al passaggio del mouse."
+      },
+      {
+        "name": "copertina-apre",
+        "value": "1.05s cubic-bezier(.62,.02,.3,1), ritardo 2.3s",
+        "purpose": "L'anta gira sul dorso a rotateY(-98deg) dopo che il logo si e' composto (2s)."
+      },
+      {
+        "name": "copertina-css",
+        "value": ".95s cubic-bezier(.62,.02,.3,1)",
+        "purpose": "Apertura della copertina senza Motion; con movimento ridotto dissolvenza .25s."
+      },
+      {
+        "name": "canzone-sfuma",
+        "value": "1800ms",
+        "purpose": "La Patagucci song sfuma premendo Entra."
+      },
+      {
+        "name": "giostra-foto",
+        "value": "90s linear infinite",
+        "purpose": "Scorrimento della giostra delle foto del gruppo, ferma sotto il mouse e con movimento ridotto."
       }
     ],
     "breakpoints": [
       {
-        "name": "mobile",
+        "name": "stretto",
+        "value": "400px"
+      },
+      {
+        "name": "copertina-piccola",
+        "value": "560px"
+      },
+      {
+        "name": "nomi-corti",
+        "value": "600px"
+      },
+      {
+        "name": "telefono",
         "value": "760px"
       },
       {
-        "name": "compatto",
-        "value": "620px"
-      },
-      {
-        "name": "chat",
-        "value": "560px"
+        "name": "margine-rosso",
+        "value": "1220px"
       }
     ]
   },
   "components": [
     {
-      "name": "Card",
+      "name": "Bottone d'azione",
+      "kind": "button",
+      "refersTo": "bottone-azione",
+      "description": "Etichetta evidenziata col contorno ripassato: cerca voli, apri la mappa.",
+      "html": "<button class=\"ds-btn-azione\">Apri la mappa</button>",
+      "css": "@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Patrick+Hand+SC&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap'); .ds-btn-azione { position:relative; z-index:0; display:inline-flex; align-items:center; gap:8px; font-family:'Patrick Hand SC','Marker Felt','Comic Sans MS',cursive; font-size:1.12rem; letter-spacing:0.02em; line-height:1.2; color:#161616; background:#ffe14d; border:2px solid #161616; border-radius:12px 7px 14px 8px / 8px 13px 7px 12px; padding:9px 18px 7px; cursor:pointer; transition:transform .2s cubic-bezier(.16,1,.3,1); } .ds-btn-azione::after { content:''; position:absolute; inset:0; transform:translate(3px,4px); z-index:-1; border:2px solid #161616; border-radius:12px 7px 14px 8px / 8px 13px 7px 12px; pointer-events:none; } .ds-btn-azione:hover { transform:translate(-1px,-1px) rotate(-1deg); } .ds-btn-azione:focus-visible { outline:3px solid #1d3fa8; outline-offset:2px; box-shadow:0 0 0 6px rgba(255,255,255,0.92); }"
+    },
+    {
+      "name": "Bottone su carta",
+      "kind": "button",
+      "refersTo": "bottone-carta",
+      "description": "La variante bianca del bottone d'azione, per i link alle mappe.",
+      "html": "<a class=\"ds-btn-carta\" href=\"#\">Tutto il percorso</a>",
+      "css": "@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Patrick+Hand+SC&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap'); .ds-btn-carta { position:relative; z-index:0; display:inline-flex; align-items:center; font-family:'Patrick Hand SC','Marker Felt','Comic Sans MS',cursive; font-size:1.12rem; letter-spacing:0.02em; line-height:1.2; text-decoration:none; color:#161616; background:#fff; border:2px solid #161616; border-radius:12px 7px 14px 8px / 8px 13px 7px 12px; padding:9px 18px 7px; transition:transform .2s cubic-bezier(.16,1,.3,1); } .ds-btn-carta::after { content:''; position:absolute; inset:0; transform:translate(3px,4px); z-index:-1; border:2px solid #161616; border-radius:12px 7px 14px 8px / 8px 13px 7px 12px; } .ds-btn-carta:hover { transform:translate(-1px,-1px) rotate(-1deg); } .ds-btn-carta:focus-visible { outline:3px solid #1d3fa8; outline-offset:2px; box-shadow:0 0 0 6px rgba(255,255,255,0.92); }"
+    },
+    {
+      "name": "Filtro",
+      "kind": "chip",
+      "refersTo": "filtro",
+      "description": "Filtro e linguetta delle mete: carta, poi evidenziatore e un giro di penna da attivo.",
+      "html": "<div class=\"ds-filtri\"><button class=\"ds-filtro ds-attivo\">Tutti</button><button class=\"ds-filtro\">Seul</button><button class=\"ds-filtro\">Jeju</button></div>",
+      "css": "@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Patrick+Hand+SC&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap'); .ds-filtri { display:flex; gap:8px; flex-wrap:wrap; } .ds-filtro { font-family:'Patrick Hand SC','Marker Felt','Comic Sans MS',cursive; font-size:1.05rem; line-height:1.2; letter-spacing:0.02em; border:1.5px solid #161616; background:#fff; color:#161616; padding:7px 14px 5px; border-radius:12px 7px 14px 8px / 8px 13px 7px 12px; cursor:pointer; transition:background-color .2s ease, transform .2s cubic-bezier(.16,1,.3,1); } .ds-filtro:hover { background:#eef2f6; } .ds-filtro.ds-attivo { background:#ffe14d; transform:rotate(-1.5deg); } .ds-filtro:focus-visible { outline:3px solid #1d3fa8; outline-offset:2px; box-shadow:0 0 0 6px rgba(255,255,255,0.92); }"
+    },
+    {
+      "name": "Etichette",
+      "kind": "chip",
+      "refersTo": "etichetta",
+      "description": "Etichette scritte a mano; quella da prenotare e' a penna rossa tratteggiata.",
+      "html": "<div class=\"ds-etichette\"><span class=\"ds-etichetta\">10 giorni</span><span class=\"ds-etichetta ds-media\">Media</span><span class=\"ds-etichetta ds-rossa\">Volo da prenotare</span></div>",
+      "css": "@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Patrick+Hand+SC&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap'); .ds-etichette { display:flex; gap:8px 10px; flex-wrap:wrap; } .ds-etichetta { display:inline-block; font-family:'Patrick Hand SC','Marker Felt','Comic Sans MS',cursive; font-size:1.02rem; line-height:1.25; letter-spacing:0.02em; color:#161616; background:#fff; border:1.5px solid #161616; border-radius:12px 7px 14px 8px / 8px 13px 7px 12px; padding:5px 12px 4px; transform:rotate(-1.2deg); } .ds-etichetta:nth-child(2) { transform:rotate(0.8deg); } .ds-media { background:color-mix(in srgb, #ffe14d 34%, #fff); } .ds-rossa { color:#c8102e; border:2px dashed #c8102e; }"
+    },
+    {
+      "name": "Riquadro a pennarello",
       "kind": "card",
-      "refersTo": "card",
-      "description": "Il contenitore base: carta su carta, si alza al passaggio.",
-      "html": "<div class=\"ds-card\"><h3>🚄 KTX</h3><p>Seul–Busan in <strong>2h15</strong> e Busan–Gyeongju in mezz'ora, sulla stessa linea.</p></div>",
-      "css": ".ds-card{background:var(--paper,#fffdf9);border:1px solid var(--line,#e2d9c6);border-radius:18px;box-shadow:0 10px 30px rgba(20,20,20,.10);padding:18px 20px;color:var(--ink,#20281f);font-family:Inter,system-ui,sans-serif;font-size:16.5px;line-height:1.6;transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s ease,border-color .3s ease}.ds-card h3{font-family:'Bebas Neue',Impact,sans-serif;text-transform:uppercase;font-size:1.2rem;font-weight:400;letter-spacing:.01em;margin:0 0 6px;color:var(--theme-900,#16362a)}.ds-card p{margin:0}.ds-card:hover{transform:translateY(-4px);box-shadow:0 24px 60px rgba(20,20,20,.22),0 0 0 1px rgba(255,206,0,.35);border-color:#E0AE00}"
+      "refersTo": "riquadro",
+      "description": "Il contenitore di testo: carta con il tratto tirato a mano, nessuna ombra, nessun hover.",
+      "html": "<div class=\"ds-riquadro\"><h3>Cosa portiamo</h3><p>Ramponcini, frontale, e il caricabatterie che resiste al freddo.</p></div>",
+      "css": "@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Patrick+Hand+SC&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap'); .ds-riquadro { max-width:340px; background:#fff; color:#161616; border:2px solid transparent; border-radius:4px; border-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23161616' stroke-linecap='round' stroke-width='2.4'%3E%3Cpath d='M3.4 5.4 C 30 4.2, 60 6.2, 90 4.8 S 112 4.6, 117.2 5'/%3E%3Cpath d='M115 2.6 C 116.2 30, 114 60, 115.4 90 S 115 112, 115.2 117.6'/%3E%3Cpath d='M117.4 114.8 C 90 116, 60 114, 30 115.4 S 8 115.2, 2.4 114.6'/%3E%3Cpath d='M5 117.8 C 3.8 90, 6 60, 4.6 30 S 5 8, 4.8 2.2'/%3E%3C/g%3E%3C/svg%3E\") 16 / 16px / 4px round; padding:18px 22px; font-family:'Atkinson Hyperlegible Next','Atkinson Hyperlegible',-apple-system,'Segoe UI',Roboto,Arial,sans-serif; font-size:0.88rem; line-height:1.6; } .ds-riquadro h3 { margin:0 0 8px; font-family:'Patrick Hand SC','Marker Felt','Comic Sans MS',cursive; font-weight:400; font-size:1.25rem; letter-spacing:0.02em; } .ds-riquadro p { margin:0; color:#555b63; }"
     },
     {
-      "name": "Tab di navigazione",
+      "name": "Campo",
+      "kind": "input",
+      "refersTo": "campo",
+      "description": "Una riga da riempire a penna, con l'etichetta in stampatello sopra.",
+      "html": "<label class=\"ds-campo\"><span>Euro</span><input type=\"number\" value=\"100\"></label>",
+      "css": "@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Patrick+Hand+SC&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap'); .ds-campo { display:inline-flex; flex-direction:column; gap:6px; } .ds-campo span { font-family:'Patrick Hand SC','Marker Felt','Comic Sans MS',cursive; font-size:1.02rem; color:#161616; } .ds-campo input { width:130px; font-family:'Atkinson Hyperlegible Next','Atkinson Hyperlegible',-apple-system,'Segoe UI',Roboto,Arial,sans-serif; font-size:1rem; color:#161616; background:#fff; border:1.5px solid #161616; border-radius:12px 7px 14px 8px / 8px 13px 7px 12px; padding:9px 12px; } .ds-campo input:focus-visible { outline:3px solid #1d3fa8; outline-offset:2px; box-shadow:0 0 0 6px rgba(255,255,255,0.92); }"
+    },
+    {
+      "name": "Linguette delle mete",
       "kind": "nav",
-      "refersTo": "nav-tab",
-      "description": "Pillole maiuscole su barra scura appiccicosa; l'attiva si riempie dell'accento.",
-      "html": "<nav class=\"ds-tabs\"><a class=\"ds-tab ds-tab--active\">Itinerario</a><a class=\"ds-tab\">Mappa</a><a class=\"ds-tab\">Meteo</a></nav>",
-      "css": ".ds-tabs{display:flex;gap:4px;padding:8px 12px;background:linear-gradient(180deg,rgba(255,206,0,.10),transparent),rgba(18,18,18,.92);border-radius:14px}.ds-tab{flex:0 0 auto;border:1px solid transparent;background:transparent;color:#cfcfcf;padding:9px 16px;border-radius:999px;font-family:Inter,system-ui,sans-serif;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;cursor:pointer;transition:all .2s ease}.ds-tab:hover{background:rgba(255,255,255,.08);color:#fff}.ds-tab:focus-visible{outline:2px solid #FFCE00;outline-offset:2px}.ds-tab--active{background:#FFCE00;color:#10100e;box-shadow:0 4px 14px rgba(255,206,0,.35)}"
+      "refersTo": "selettore",
+      "description": "Il selettore in alto: un trattino di evidenziatore per meta, la passata intera su quella aperta.",
+      "html": "<nav class=\"ds-linguette\"><button class=\"ds-l ds-attiva\">Home</button><button class=\"ds-l\" style=\"--dab:#7deaa0\">Islanda</button><button class=\"ds-l\" style=\"--dab:#ff92bb\">Corea</button></nav>",
+      "css": "@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Patrick+Hand+SC&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap'); .ds-linguette { display:flex; gap:4px; background:#fff; padding:9px 12px 12px; border-bottom:2px solid #161616; } .ds-l { --dab:#ffe14d; font-family:'Permanent Marker','Marker Felt','Comic Sans MS',cursive; font-size:1.08rem; line-height:1.2; color:#555b63; background:linear-gradient(var(--dab),var(--dab)) no-repeat 13px 100% / 22px 5px; border:0; padding:8px 13px 9px; cursor:pointer; transition:color .2s ease, background-size .4s cubic-bezier(.16,1,.3,1), background-position .4s cubic-bezier(.16,1,.3,1); } .ds-l:hover { color:#161616; background-size:calc(100% - 26px) 5px; } .ds-l.ds-attiva { color:#161616; background-position:6px 76%; background-size:calc(100% - 12px) 0.6em; } .ds-l:focus-visible { outline:3px solid #1d3fa8; outline-offset:2px; box-shadow:0 0 0 6px rgba(255,255,255,0.92); }"
     },
     {
-      "name": "Chip filtro",
-      "kind": "chip",
-      "refersTo": "filter-chip",
-      "description": "Filtro per zona o città; l'attivo passa al verde tema.",
-      "html": "<div class=\"ds-filtri\"><button class=\"ds-chip ds-chip--active\">Tutte</button><button class=\"ds-chip\">Capitale</button><button class=\"ds-chip\">Temburong</button></div>",
-      "css": ".ds-filtri{display:flex;gap:8px;flex-wrap:wrap}.ds-chip{border:1px solid var(--line,#e2d9c6);background:var(--paper,#fffdf9);color:var(--ink-soft,#5b6a61);padding:7px 14px;border-radius:999px;font-family:Inter,system-ui,sans-serif;font-size:.83rem;font-weight:600;cursor:pointer;transition:all .15s}.ds-chip:hover{background:#efe8d9;border-color:#E0AE00}.ds-chip:focus-visible{outline:2px solid #E0AE00;outline-offset:2px}.ds-chip--active{background:#1f4d3a;color:#fff;border-color:#1f4d3a;box-shadow:0 4px 12px rgba(42,107,77,.3)}"
-    },
-    {
-      "name": "Badge",
-      "kind": "chip",
-      "refersTo": "badge",
-      "description": "Pillole in vetro smerigliato sull'intestazione fotografica.",
-      "html": "<div class=\"ds-badges\"><span class=\"ds-badge\">📅 2–18 aprile 2027</span><span class=\"ds-badge\">🌸 Stagione dei ciliegi</span></div>",
-      "css": ".ds-badges{display:flex;gap:8px;flex-wrap:wrap;background:#2a2a2a;padding:16px;border-radius:14px}.ds-badge{background:rgba(255,255,255,.14);border:1px solid rgba(255,206,0,.35);color:#fdf9f0;padding:6px 14px;border-radius:20px;font-family:Inter,system-ui,sans-serif;font-size:.82rem;backdrop-filter:blur(6px);transition:transform .2s ease,background .2s ease}.ds-badge:hover{transform:translateY(-2px);background:rgba(255,206,0,.18);border-color:rgba(255,206,0,.6)}"
-    },
-    {
-      "name": "Giorno dell'itinerario",
+      "name": "Polaroid col nastro",
       "kind": "custom",
-      "refersTo": "day-number",
-      "description": "Componente firma: cerchio numerato in Bebas, titolo condensato, tag, link a Maps.",
-      "html": "<details class=\"ds-giorno\" open><summary><span class=\"ds-giorno-n\">7</span><span class=\"ds-giorno-t\">Busan — il giorno unico</span></summary><div class=\"ds-giorno-corpo\"><span class=\"ds-tag\">8 apr</span><span class=\"ds-tag\">Volo la sera</span><p>Mattina a Gamcheon, pranzo a Jagalchi, e la sera si vola.</p></div></details>",
-      "css": ".ds-giorno{background:var(--paper,#fffdf9);border:1px solid var(--line,#e2d9c6);border-radius:18px;box-shadow:0 10px 30px rgba(20,20,20,.10);margin-bottom:10px;overflow:hidden;color:var(--ink,#20281f);font-family:Inter,system-ui,sans-serif}.ds-giorno summary{display:flex;align-items:center;gap:14px;padding:14px 18px;cursor:pointer;list-style:none}.ds-giorno summary::-webkit-details-marker{display:none}.ds-giorno-n{background:#16362a;color:#FFCE00;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',Impact,sans-serif;font-size:1.1rem;flex:0 0 auto}.ds-giorno-t{flex:1;font-family:'Bebas Neue',Impact,sans-serif;text-transform:uppercase;font-size:1.2rem;letter-spacing:.01em}.ds-giorno-corpo{padding:0 20px 18px 64px;font-size:.93rem;line-height:1.6}.ds-tag{display:inline-block;background:#efe8d9;color:#5b6a61;border-radius:999px;padding:3px 10px;font-size:.72rem;font-weight:700;margin:0 6px 8px 0}.ds-giorno:hover{border-color:#E0AE00}"
+      "refersTo": "polaroid",
+      "description": "La foto come oggetto: bordo bianco alto in basso, inclinazione propria, nastro strappato nel colore della meta.",
+      "html": "<figure class=\"ds-polaroid\"><div class=\"ds-foto\"></div><figcaption>Bacci</figcaption></figure>",
+      "css": "@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Patrick+Hand+SC&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap'); .ds-polaroid { position:relative; width:200px; margin:30px 20px; background:#fff; padding:10px 10px 0; border-radius:3px; box-shadow:0 2px 3px rgba(20,24,30,0.10), 0 22px 34px -18px rgba(20,24,30,0.48); transform:rotate(-2deg); transition:transform .35s cubic-bezier(.16,1,.3,1); } .ds-polaroid:hover { transform:perspective(900px) rotate(-2deg) rotateX(4deg) rotateY(-6deg) translateZ(16px); } .ds-polaroid::before { content:''; position:absolute; top:-18px; left:50%; width:96px; height:28px; transform:translateX(-50%) rotate(-4deg); background:color-mix(in srgb, #ffe14d 62%, rgba(255,255,255,0.35)); opacity:0.9; box-shadow:0 1px 2px rgba(0,0,0,0.08); } .ds-foto { aspect-ratio:4/5; background:linear-gradient(160deg,#a8deff,#7deaa0); } .ds-polaroid figcaption { padding:10px 4px 12px; text-align:center; font-family:'Patrick Hand SC','Marker Felt','Comic Sans MS',cursive; font-size:1.12rem; color:#161616; }"
     },
     {
-      "name": "Cella del calendario",
+      "name": "Nota di quello che manca",
       "kind": "custom",
-      "refersTo": "card",
-      "description": "Componente firma: una cella per giorno, con filo di colore del paese a sinistra.",
-      "html": "<div class=\"ds-cal\"><button class=\"ds-cal-g\" data-paese=\"kr\"><span class=\"ds-cal-n\">Giorno 7</span><span class=\"ds-cal-d\">8 apr</span><span class=\"ds-cal-l\">Busan → Jeju ✈</span><span>🇰🇷</span></button><button class=\"ds-cal-g\" data-paese=\"bn\"><span class=\"ds-cal-n\">Giorno 13</span><span class=\"ds-cal-d\">14 apr</span><span class=\"ds-cal-l\">Brunei</span><span>🇧🇳</span></button></div>",
-      "css": ".ds-cal{display:grid;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));gap:8px}.ds-cal-g{display:flex;flex-direction:column;gap:3px;text-align:left;padding:10px 11px;border-radius:11px;cursor:pointer;background:var(--paper,#fffdf9);border:1px solid var(--line,#e2d9c6);border-left:4px solid var(--line,#e2d9c6);color:var(--ink,#20281f);font-family:Inter,system-ui,sans-serif;transition:transform .15s cubic-bezier(.16,1,.3,1),box-shadow .15s ease,border-color .15s ease}.ds-cal-g[data-paese=kr]{border-left-color:#CD2E3A}.ds-cal-g[data-paese=bn]{border-left-color:#F7C331}.ds-cal-g:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(0,0,0,.18);border-color:#FFCE00}.ds-cal-n{font-size:.66rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#5b6a61}.ds-cal-d{font-family:'Bebas Neue',Impact,sans-serif;font-size:1.15rem;line-height:1;color:#16362a}.ds-cal-l{font-size:.76rem;font-weight:600;line-height:1.35}"
+      "refersTo": "nota-manca",
+      "description": "In home: il numero cerchiato a penna rossa e la nota tratteggiata. Sempre visibile, mai protagonista.",
+      "html": "<a class=\"ds-nota\" href=\"#\"><span class=\"ds-num\">2<svg viewBox=\"0 0 120 100\" aria-hidden=\"true\"><path d=\"M93 17 C 70 3, 27 6, 12 33 C 0 59, 22 92, 62 92 C 101 92, 117 63, 106 37 C 98 17, 73 7, 48 12\"/></svg></span><span>voli ci mancano ancora: Busan &rarr; Jeju e Jeju &rarr; Seul.</span></a>",
+      "css": "@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Patrick+Hand+SC&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap'); .ds-nota { display:inline-flex; align-items:center; gap:12px; padding:8px 16px 8px 10px; color:#c8102e; text-decoration:none; background:#fff; font-family:'Patrick Hand SC','Marker Felt','Comic Sans MS',cursive; font-size:1.12rem; line-height:1.3; border:2px solid transparent; border-radius:4px; border-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23c8102e' stroke-linecap='round' stroke-width='2.4' stroke-dasharray='7 4'%3E%3Cpath d='M3.4 5.4 C 30 4.2, 60 6.2, 90 4.8 S 112 4.6, 117.2 5'/%3E%3Cpath d='M115 2.6 C 116.2 30, 114 60, 115.4 90 S 115 112, 115.2 117.6'/%3E%3Cpath d='M117.4 114.8 C 90 116, 60 114, 30 115.4 S 8 115.2, 2.4 114.6'/%3E%3Cpath d='M5 117.8 C 3.8 90, 6 60, 4.6 30 S 5 8, 4.8 2.2'/%3E%3C/g%3E%3C/svg%3E\") 16 / 16px / 4px round; transform:rotate(-0.8deg); } .ds-nota:hover { background:color-mix(in srgb, #c8102e 6%, #fff); } .ds-nota:focus-visible { outline:3px solid #1d3fa8; outline-offset:2px; box-shadow:0 0 0 6px rgba(255,255,255,0.92); } .ds-num { position:relative; display:inline-grid; place-items:center; width:1.6em; height:1.45em; font-family:'Permanent Marker','Marker Felt','Comic Sans MS',cursive; font-size:1.6rem; line-height:1; } .ds-num svg { position:absolute; inset:-16% -20%; width:140%; height:132%; overflow:visible; } .ds-num path { fill:none; stroke:#c8102e; stroke-width:4.5; stroke-linecap:round; }"
     },
     {
-      "name": "Callout",
-      "kind": "custom",
-      "refersTo": "card",
-      "description": "Nota in evidenza nel colore d'accento. Porta il border-left da 4px che il sistema segna come debito.",
-      "html": "<div class=\"ds-callout\"><strong>Le basi sono quattro, non otto.</strong> Seul, Busan, Jeju, poi Brunei e Singapore.</div>",
-      "css": ".ds-callout{background:rgba(255,206,0,.13);border:1px solid #E0AE00;border-left:4px solid #E0AE00;border-radius:18px;padding:14px 18px;font-family:Inter,system-ui,sans-serif;font-size:.9rem;line-height:1.6;color:var(--ink,#20281f);box-shadow:0 6px 16px rgba(255,206,0,.12)}"
-    },
-    {
-      "name": "Fascia dello stato",
-      "purpose": "In cima alla home: a sinistra, in grande, l'unica cosa incompiuta; a destra, in piccolo, quelle fatte. Il numero grosso sta su cio' che manca, mai sul contatore.",
-      "html": "<section class=\"ds-stato\">\n  <a class=\"ds-stato-manca\" href=\"#voli\">\n    <h2 class=\"ds-sm-titolo\"><span class=\"ds-sm-num\">2</span><span class=\"ds-sm-testa\">voli ancora da prenotare</span></h2>\n    <p class=\"ds-sm-det\">Le uniche due tratte che mancano: tutto il resto e' comprato.</p>\n    <span class=\"ds-sm-cta\">Guarda quali e quando &rarr;</span>\n  </a>\n  <div class=\"ds-stato-fatto\">\n    <h3 class=\"ds-sf-tit\">Il resto e' a posto</h3>\n    <div class=\"ds-stat\"><span class=\"ds-num\">2</span><span class=\"ds-unit\">viaggi con le date fissate</span></div>\n  </div>\n</section>",
-      "css": ".ds-stato{display:grid;grid-template-columns:1.15fr 1fr;gap:28px;align-items:stretch}\n@media (max-width:820px){.ds-stato{grid-template-columns:1fr;gap:20px}}\n.ds-stato-manca{display:block;text-decoration:none;color:inherit;background:#fffdf9;border:1px solid #e2d9c6;border-left:7px solid #9A3412;border-radius:26px;box-shadow:0 10px 30px rgba(20,20,20,.10);padding:26px 30px 24px;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s ease,border-color .35s ease}\n.ds-stato-manca:hover{transform:translateY(-4px);box-shadow:0 24px 60px rgba(20,20,20,.22);border-color:#9A3412}\n.ds-sm-titolo{margin:0;font-weight:400}\n.ds-sm-num{display:block;font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(5rem,13vw,10rem);line-height:.78;color:#9A3412}\n.ds-sm-testa{display:block;font-family:'Bebas Neue',Impact,sans-serif;text-transform:uppercase;font-size:clamp(1.3rem,3.4vw,2.1rem);line-height:1.05;color:#16362a;margin-top:8px}\n.ds-sm-det{margin:14px 0 0;font-size:1rem;line-height:1.65;color:#5b6a61;max-width:46ch}\n.ds-sm-cta{display:inline-block;margin-top:16px;font-weight:700;font-size:.88rem;color:#9A3412}\n.ds-stato-fatto{align-self:center}\n.ds-sf-tit{font-family:'Bebas Neue',Impact,sans-serif;text-transform:uppercase;font-weight:400;font-size:1.35rem;letter-spacing:.04em;color:#5b6a61;margin:0 0 16px}\n.ds-stat{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}\n.ds-num{font-family:'Bebas Neue',Impact,sans-serif;font-size:2.6rem;color:#8A6B00;line-height:1}\n.ds-unit{font-size:1rem;color:#5b6a61}"
+      "name": "Entra (copertina)",
+      "kind": "button",
+      "refersTo": "copertina-entra",
+      "description": "Il bottone della copertina: giallo, contorno ripassato in crema del logo, affonda nel contorno quando si preme.",
+      "html": "<div class=\"ds-cop\"><span class=\"ds-giro\"><button class=\"ds-entra\">Entra <svg viewBox=\"0 0 40 20\" aria-hidden=\"true\"><path d=\"M2 11 C 13 7, 25 13, 36 9 M29 3 L37 9 L30 16\"/></svg></button></span></div>",
+      "css": "@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Patrick+Hand+SC&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap'); .ds-cop { background:#09442d; padding:36px 40px; display:flex; justify-content:center; } .ds-giro { position:relative; z-index:0; display:inline-block; transform:rotate(-1.2deg); } .ds-giro::before { content:''; position:absolute; inset:0; transform:translate(4px,5px); z-index:-1; border:2.5px solid #fcf8ec; border-radius:12px 7px 14px 8px / 8px 13px 7px 12px; } .ds-entra { display:inline-flex; align-items:center; gap:12px; min-height:58px; font-family:'Permanent Marker','Marker Felt','Comic Sans MS',cursive; font-size:1.95rem; line-height:1; color:#161616; background:#ffe14d; border:2.5px solid #161616; border-radius:12px 7px 14px 8px / 8px 13px 7px 12px; padding:12px 30px 11px 34px; cursor:pointer; transition:transform .2s cubic-bezier(.16,1,.3,1); } .ds-entra svg { width:40px; height:20px; overflow:visible; } .ds-entra path { fill:none; stroke:#161616; stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round; } .ds-entra:hover { transform:translate(-1px,-2px); } .ds-entra:active { transform:translate(4px,5px); } .ds-entra:focus-visible { outline:3px solid #fff; outline-offset:7px; }"
     }
   ],
   "narrative": {
-    "northStar": "L'almanacco dei Patagucci",
-    "overview": "Un annuario sportivo, non una brochure di agenzia. Il sistema tratta un viaggio come una stagione da archiviare: tabelle di tratte, numeri grossi battuti in carattere condensato, conteggi di paesi e percentuali, giorni numerati come giornate di campionato. È rigoroso e un po' nerd, ma sta su fondo carta e in caratteri caldi, quindi non diventa mai un cruscotto.\n\nLa firma vera non è un colore: è che la pagina cambia palette col paese che si sta guardando. Un attributo sulla radice riscrive i token semantici, e con loro accenti, titoli, pannelli scuri e la fascia-bandiera in cima. Il layout non si muove di un pixel: cambia solo il colore, e lo fa scorrendo.\n\nLa palette gialla della home è provvisoria e non vincolante: non porta un significato, è il punto di partenza da cui le mete divergono. Quello che è invariante è il meccanismo, non la tinta.",
+    "northStar": "Il taccuino a pennarello",
+    "overview": "Il sito è un quaderno di scuola italiano a quadretti da 5 mm su cui i quattro Patagucci prendono appunti di viaggio. Il foglio è bianco, con i quadretti azzurrini (22px) e, dove lo schermo è largo, la riga rossa del margine. Sopra ci sono quattro strumenti, e ognuno ha un compito solo: il pennarello nero scrive i titoli e i numeri, la matita grigia il testo di contorno, la penna Bic blu i link e i comandi, la penna rossa soltanto quello che manca da prenotare. In più c'è l'evidenziatore, e il suo colore cambia con il paese che si sta leggendo.\n\nLe cose non si mettono in scatola, si disegnano. I riquadri hanno un bordo tirato a mano (un SVG usato come border-image) e non fanno ombra, perché l'inchiostro su un foglio non ne fa. L'ombra c'è solo sugli oggetti di carta appoggiati sul quaderno: polaroid, nastro adesivo, il foglio che si volta, la copertina. Le foto non fanno da sfondo, sono polaroid inclinate e attaccate col nastro. Le pagine non diventano mai scure e non si tingono mai di crema: cambia solo il colore dei quadretti.\n\nIl movimento è fatto di gesti di carta, e senza di esso non si perde niente. Ci sono la copertina che si apre attorno al dorso, la pagina che si volta quando si cambia meta, la passata di evidenziatore sulla parola del titolo, la penna rossa che cerchia, le polaroid che si sollevano sotto il mouse. Se Motion non arriva, o chi guarda chiede meno movimento, la pagina è già intera e ferma. Questo mondo sostituisce del tutto quello precedente: niente foto a tutto schermo, niente card arrotondate con ombra, niente pannelli scuri alternati.",
     "keyCharacteristics": [
-      "Tipografia condensata tutta maiuscola per ogni titolo e ogni numero; corpo neutro per la lettura",
-      "Palette semantica ritematizzata per paese, layout immutato",
-      "Superfici sollevate: card che galleggiano e si alzano al passaggio",
-      "Alternanza obbligata di pannelli chiari e scuri, sezione dopo sezione",
-      "Densità da almanacco: tabelle, conteggi, griglie filtrabili"
+      "Foglio bianco a quadretti da 22px; la riga rossa del margine compare solo da 1220px in su.",
+      "Tre mani tipografiche: pennarello (Permanent Marker), stampatello a mano (Patrick Hand SC), testo leggibile (Atkinson Hyperlegible Next), più il mono per codici e orari.",
+      "Un evidenziatore per meta, registrato con @property perché il passaggio di colore scorra invece di saltare.",
+      "Riquadri a tratto di pennarello, e niente ombra sull'inchiostro.",
+      "Polaroid con il nastro strappato per le foto, l'equipaggio e le mete.",
+      "Penna rossa riservata a «da prenotare».",
+      "Ingresso dalla copertina del quaderno, con il logo vero del gruppo e la «Patagucci song»."
     ],
     "rules": [
       {
-        "name": "La Regola delle Due Coppie",
-        "body": "Ogni componente che porta testo dichiara il colore per fondo chiaro e quello per section.panel.dark. Scriverne uno solo è il difetto ricorrente di questo progetto.",
+        "name": "La Regola della Penna Rossa",
+        "body": "Il rosso (`penna-rossa`) compare solo su ciò che manca da prenotare, e sempre insieme a un secondo segnale che non dipende dal colore: tratteggio, numero cerchiato o la scritta «da prenotare». Gli avvisi qualunque usano il tratteggio nero e il secondo evidenziatore, mai il rosso.",
         "section": "colors"
       },
       {
-        "name": "La Regola dell'Accento Inchiostro",
-        "body": "L'accento saturo non tocca mai il testo su carta: su fondo chiaro si usa accent-ink, su fondo scuro accent.",
+        "name": "La Regola del Nero sull'Evidenziatore",
+        "body": "Sopra l'evidenziatore si scrive solo con il pennarello nero. Il grigio matita non va mai sopra un colore di meta: il grigio sul rosa scendeva a 3,3:1. Il colore pieno dell'evidenziatore non diventa mai testo; quando il testo deve avere il colore della meta si usa la sua versione leggibile (`--accent-ink`).",
+        "section": "colors"
+      },
+      {
+        "name": "La Regola del Foglio Bianco",
+        "body": "Nessuna pagina diventa scura o color crema. Le pagine alternate (`section.panel.alt`) cambiano colore solo nei quadretti, che prendono la tinta della meta. Il fondo resta la carta.",
         "section": "colors"
       },
       {
         "name": "La Regola del Paese",
-        "body": "Nessun colore si scrive a mano nei componenti: si usano i token semantici, così la ritematizzazione per paese funziona senza toccare il componente.",
+        "body": "I componenti usano solo i token semantici (`--accent`, `--accent-deep`, `--accent-ink`, `--accent-2`, `--evid-tenue`). La meta si imposta con `data-dest` e `data-paese` sull'elemento `<html>`. Gli unici esadecimali ripetuti fuori dall'astuccio sono gli evidenziatori locali di paese (il divisore di paese, le caselle del calendario, i trattini delle linguette): devono restare identici a quelli dell'astuccio.",
         "section": "colors"
       },
       {
-        "name": "La Regola del Numero Grosso",
-        "body": "Qualunque cifra che valga la pena ricordare va in Bebas a corpo molto maggiore del testo attorno, con l'unità in piccolo accanto.",
+        "name": "La Regola del Logo a Parte",
+        "body": "I cinque colori del logo stanno sulla copertina e non entrano nel quaderno. Il logo non si ridisegna: i livelli sono le immagini e i contorni del logo vero del gruppo.",
+        "section": "colors"
+      },
+      {
+        "name": "La Regola delle Tre Mani",
+        "body": "Pennarello per titoli e numeri, stampatello a mano per le etichette, Atkinson per qualsiasi frase. Un paragrafo non si scrive mai in Patrick Hand o in Permanent Marker.",
         "section": "typography"
       },
       {
-        "name": "La Regola degli Undici Pixel",
-        "body": "Nessun testo che si legge o si tocca scende sotto gli 11px. Il sistema oggi viola questa regola in più punti: è debito, non licenza.",
+        "name": "La Regola della Parola Sola",
+        "body": "Nel titolo della meta si evidenzia una parola sola, quella che conta («Patagucci», «Corea»). Se tutte le righe sono evidenziate, non risalta niente. Nei titoli di sezione la passata copre il titolo intero, una riga alla volta.",
         "section": "typography"
       },
       {
-        "name": "La Regola dell'Alternanza",
-        "body": "I pannelli alternano chiaro e scuro senza eccezioni. Togliere o inserire una sezione obbliga a rinumerare l'alternanza.",
-        "section": "layout"
+        "name": "La Regola del 12,8",
+        "body": "La scala ha sei gradini per il testo e tre per i numeri. Il più piccolo è 0.8rem (12,8px): sotto i 12px non si legge. Sul telefono le scritte delle cartine passano a 19px e quelle secondarie si nascondono.",
+        "section": "typography"
       },
       {
-        "name": "La Regola dell'Alone Sobrio",
-        "body": "Le ombre colorate si usano solo sotto un elemento, mai come alone a offset zero attorno a un testo.",
+        "name": "La Regola dell'Inchiostro Senza Ombra",
+        "body": "Un riquadro disegnato a pennarello non fa ombra, mai, nemmeno da aperto o sotto il mouse. L'ombra spetta solo agli oggetti di carta: polaroid, nastro, il foglio che si volta, la copertina.",
         "section": "elevation"
       },
       {
-        "name": "La Regola della Scala",
-        "section": "typography",
-        "body": "Nessuna misura di testo si scrive a mano: esistono sei gradini (micro, small, base, lead, title, title-lg) piu' tre per i numeri. Il gradino piu' basso e' 12,8px e sotto non si scende, nemmeno per i crediti. Se una misura nuova sembra necessaria, quasi sempre e' uno dei gradini che gia' c'e'."
+        "name": "La Regola del Tratto Intero",
+        "body": "Per ridare il bordo a un riquadro disegnato si riscrive sempre per intero: `border` e poi `border-image`. La forma abbreviata di `border` azzera il border-image, e il riquadro torna una scatola CSS.",
+        "section": "shapes"
       },
       {
-        "name": "La Regola del Confine",
-        "section": "motion",
-        "body": "Quando la pagina cambia paese i colori ci arrivano in mezzo secondo, non ci saltano: attraversare un confine si deve vedere. Lo fanno i token stessi, registrati con @property, cosi' nessun componente deve dichiarare una transizione per tingersi."
-      },
-      {
-        "name": "La Regola di Cio' Che Manca",
-        "section": "layout",
-        "body": "La home apre con l'unica cosa incompiuta, non col contatore dei paesi visitati. Il contatore e' il premio, i voli da prenotare sono il lavoro: il numero grosso sta sul secondo."
+        "name": "La Regola del Disegno, non del Carattere",
+        "body": "Le icone sono disegni SVG, non emoji e non caratteri. In fase di montaggio `build.py` toglie le emoji davanti a titoli, titoletti, etichette e link. Restano due eccezioni, perché sono dati e non decorazione: le bandiere (nelle etichette dei paesi visti, sulle cartoline e nelle caselle del calendario) e il veicolo che percorre le cartine del percorso, che lo script cambia a seconda del mezzo.",
+        "section": "shapes"
       }
     ],
     "dos": [
-      "Do usare i token semantici e mai un colore letterale dentro un componente",
-      "Do dichiarare sempre la coppia chiaro/scuro di ogni componente testuale",
-      "Do mettere in Bebas ogni numero che conta, molto più grande del testo attorno",
-      "Do usare l'unico easing del sistema, cubic-bezier(.16,1,.3,1)",
-      "Do far scorrere in orizzontale le barre di navigazione invece di mandarle a capo",
-      "Do mantenere l'alternanza chiaro/scuro dei pannelli"
+      "Do scrivere i titoli in Permanent Marker, le etichette in Patrick Hand SC e ogni frase in Atkinson Hyperlegible Next, con le cifre tabellari.",
+      "Do dare a ogni riquadro di inchiostro il tratto a pennarello (`--tratto`, `--tratto-tratteggio` o `--tratto-rosso`, `16 / 16px / 4px round`), riscrivendo `border` e `border-image` per intero.",
+      "Do usare la penna rossa per «da prenotare» insieme al tratteggio o al cerchio, così si distingue anche senza colore.",
+      "Do prendere il colore della meta dai token (`--accent`, `--accent-ink`, `--evid-tenue`) e lasciarlo cambiare a `data-dest` e `data-paese`.",
+      "Do mettere le foto in polaroid inclinate con `--gira`, con il nastro strappato quando la foto è da sola.",
+      "Do disegnare le icone come maschere SVG (spunta, aeroplanino, puntine) colorate con il colore del testo.",
+      "Do fare in modo che ogni movimento sia un gesto di carta, e che senza Motion o con il movimento ridotto la pagina sia già intera e ferma.",
+      "Do tenere il testo dentro 72ch (62ch per i sottotitoli) e lasciare gli elementi toccabili alti almeno 44px sul telefono."
     ],
     "donts": [
-      "Don't scendere sotto gli 11px su testo leggibile o toccabile",
-      "Don't aggiungere un terzo carattere: il sistema è Bebas più Inter",
-      "Don't usare l'accento saturo per il testo su fondo chiaro",
-      "Don't mettere alone colorato a offset zero attorno a testo o riquadri",
-      "Don't aggiungere nuovi border-left spessi su contenitori arrotondati",
-      "Don't annidare una card dentro un'altra card",
-      "Don't usare easing elastici o di rimbalzo"
+      "Don't mettere ombre sui riquadri di inchiostro, nemmeno al passaggio del mouse o da aperti: l'ombra spetta solo a polaroid, nastro, il foglio che si volta e la copertina.",
+      "Don't fare pagine scure o color crema: le pagine alternate cambiano solo il colore dei quadretti.",
+      "Don't usare il rosso per avvisi generici: quelli prendono il tratteggio nero e il secondo evidenziatore.",
+      "Don't mettere testo grigio, o il colore pieno dell'evidenziatore come testo, sopra un evidenziatore.",
+      "Don't evidenziare più di una parola nel titolo della meta, né animare l'entrata di ogni titolo di sezione.",
+      "Don't usare emoji o caratteri come icone. Le bandiere e il veicolo sulla cartina sono dati, non decorazione.",
+      "Don't usare foto a tutto schermo con un velo scuro sotto il testo, né card arrotondate in modo uniforme con l'ombra.",
+      "Don't portare i colori del logo dentro il quaderno, né ridisegnare il logo.",
+      "Don't scendere sotto 0.8rem per qualsiasi testo."
     ]
   }
 }

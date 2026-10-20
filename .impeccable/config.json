@@ -1,0 +1,26 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "_sources/islanda-trip.html"
+        ],
+        "createdAt": "2026-10-20T17:26:51.349Z",
+        "reason": "Claude: the source page is a fragment assembled by build.py; in the built index.html section titles are 2.7rem Permanent Marker over 17px body, a 2.5x step"
+      },
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "_sources/corea-trip.html"
+        ],
+        "createdAt": "2026-10-20T17:36:59.179Z",
+        "reason": "Claude: source fragment assembled by build.py; in the built index.html section titles are 2.7rem Permanent Marker over 17px body, a 2.5x step"
+      }
+    ]
+  }
+}

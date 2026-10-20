@@ -4,9 +4,6 @@
     "api/voli.js": {
       "maxDuration": 30
     },
-    "api/chat.js": {
-      "maxDuration": 60
-    },
     "api/kpop.js": {
       "maxDuration": 60
     }

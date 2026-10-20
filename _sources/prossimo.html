@@ -43,118 +43,99 @@
   /* Stili della sola pagina "prossimo". Stanno qui dentro <main> e non
      nell'<head> perche' build.py, montando index.html, copia header/nav/
      main/footer e lo <style> dell'head lo lascia indietro. */
-  .qp-blocco{ margin-bottom:18px; }
-  .qp-blocco > h3{ margin:0 0 4px; font-size:var(--t-base); color:var(--theme-900); }
-  section.panel.dark .qp-blocco > h3{ color:#fdf9f0; }
-  .qp-aiuto{ font-size:var(--t-micro); color:var(--ink-soft); margin:0 0 10px; }
-  section.panel.dark .qp-aiuto{ color:#9b968a; }
+  .qp-blocco{ margin-bottom:20px; }
+  .qp-blocco > h3{ margin:0 0 4px; font-size:var(--t-title); color:var(--ink); }
+  .qp-aiuto{ font-size:var(--t-small); color:var(--ink-soft); margin:0 0 10px; }
 
   /* Chip cliccabili: aeroporti e mete. Il checkbox vero resta nel DOM per
-     accessibilita' e tastiera, ma e' invisibile. */
+     accessibilita' e tastiera, ma e' invisibile. Scelto = evidenziato. */
   .qp-chips{ display:flex; flex-wrap:wrap; gap:8px; }
   .qp-chip{ position:relative; display:inline-flex; align-items:center; gap:7px; cursor:pointer;
-    border:1px solid var(--line); background:var(--paper); color:var(--ink-soft);
-    padding:8px 14px; border-radius:999px; font-size:var(--t-small); font-weight:600;
-    transition:all .15s cubic-bezier(.16,1,.3,1); user-select:none; }
+    font-family:var(--font-hand); font-size:1.05rem; line-height:1.2; color:var(--ink);
+    border:1.5px solid var(--ink); background:var(--paper); padding:6px 13px 4px; border-radius:var(--mano-piccola);
+    transition:background-color .15s ease, transform .2s cubic-bezier(.16,1,.3,1); user-select:none; }
   .qp-chip input{ position:absolute; opacity:0; width:0; height:0; }
-  .qp-chip:hover{ background:var(--tint-200); border-color:var(--accent-deep); }
-  .qp-chip:has(input:focus-visible){ outline:2px solid var(--accent-deep); outline-offset:2px; }
-  .qp-chip:has(input:checked){ background:var(--theme-800); color:#fff; border-color:var(--theme-800);
-    box-shadow:0 4px 12px rgba(var(--theme-rgb),0.3); }
-  .qp-chip .qp-iata{ font-size:var(--t-micro); opacity:0.65; font-weight:700; letter-spacing:0.04em; }
-  .qp-chip:has(input:disabled){ opacity:0.35; cursor:not-allowed; }
+  .qp-chip:hover{ background:var(--tint-200); }
+  .qp-chip:has(input:focus-visible){ outline:3px solid var(--penna); outline-offset:2px; }
+  .qp-chip:has(input:checked){ background:var(--accent); transform:rotate(-1.2deg); }
+  .qp-chip .qp-iata{ font-family:var(--font-mono); font-size:var(--t-micro); color:var(--ink-soft); }
+  .qp-chip:has(input:disabled){ opacity:0.4; cursor:not-allowed; }
 
   .qp-griglia{ display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px; }
-  .qp-campo{ display:flex; flex-direction:column; gap:6px; font-size:var(--t-micro); font-weight:600; color:var(--theme-900); }
-  section.panel.dark .qp-campo{ color:#e8e2d2; }
-  .qp-fac{ font-weight:600; font-size:var(--t-micro); text-transform:uppercase; letter-spacing:0.05em;
-    opacity:0.6; margin-left:4px; }
+  .qp-campo{ display:flex; flex-direction:column; gap:6px; font-family:var(--font-hand); font-size:1.02rem; color:var(--ink); }
+  .qp-fac{ font-size:0.92rem; color:var(--ink-soft); margin-left:4px; }
   .qp-campo.spento{ display:none; }
   .qp-campo input, .qp-campo select{
-    padding:9px 12px; border:1px solid var(--line); border-radius:10px;
+    padding:9px 12px; border:1.5px solid var(--ink); border-radius:var(--mano-piccola);
     font-size:var(--t-base); font-family:var(--font-body); background:var(--paper); color:var(--ink); width:100%; }
-  .qp-campo input:focus, .qp-campo select:focus{ outline:2px solid var(--accent-deep); outline-offset:1px; }
 
-  /* Preventivo crediti: la riga piu' importante della pagina. Il piano e'
-     da 250 ricerche al mese e una scansione distratta le brucia tutte. */
+  /* Il preventivo delle ricerche: la riga piu' importante della pagina.
+     Il piano e' da 250 ricerche al mese e una scansione distratta le
+     brucia tutte. */
   .qp-costo{ display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between;
-    background:var(--tint-200); border:1px solid var(--line); border-radius:14px; padding:14px 18px; margin-top:6px; }
-  section.panel.dark .qp-costo{ background:rgba(var(--accent-rgb),0.1); border-color:rgba(var(--accent-rgb),0.25); }
-  .qp-costo-num{ font-family:var(--font-display); font-size:2rem; line-height:1; color:var(--theme-800); }
-  section.panel.dark .qp-costo-num{ color:var(--accent); }
-  .qp-costo-txt{ font-size:var(--t-small); color:var(--ink-soft); }
-  section.panel.dark .qp-costo-txt{ color:#c7c2b6; }
-  .qp-costo.allarme{ background:#fdeaea; border-color:#e0a0a0; }
-  .qp-costo.allarme .qp-costo-num{ color:#a32235; }
+    background:var(--evid-tenue); border:1.5px solid var(--ink); border-radius:var(--mano); padding:14px 18px; margin-top:8px; }
+  .qp-costo-num{ font-family:var(--font-display); font-size:2.1rem; line-height:1; color:var(--ink); }
+  .qp-costo-txt{ font-size:var(--t-small); color:var(--ink); }
+  .qp-costo.allarme{ background:var(--paper); border-style:dashed; border-width:2px; }
 
-  .qp-avvio{ border:none; background:linear-gradient(180deg,var(--theme-700),var(--theme-900)); color:#fff;
-    padding:13px 26px; border-radius:12px; font-size:var(--t-base); font-weight:800; cursor:pointer;
-    box-shadow:0 4px 12px rgba(var(--theme-rgb),0.3); transition:transform .15s ease, box-shadow .15s ease; }
-  .qp-avvio:hover:not(:disabled){ transform:translateY(-2px); box-shadow:0 8px 20px rgba(var(--theme-rgb),0.42); }
+  .qp-avvio{ position:relative; font-family:var(--font-hand); font-size:1.2rem; letter-spacing:0.02em;
+    border:2px solid var(--ink); background:var(--accent); color:var(--ink);
+    padding:10px 24px 8px; border-radius:var(--mano-piccola); cursor:pointer;
+    transition:transform .2s cubic-bezier(.16,1,.3,1); }
+  .qp-avvio::after{ content:""; position:absolute; inset:0; transform:translate(3px,4px); z-index:-1; border:2px solid var(--ink); border-radius:var(--mano-piccola); }
+  .qp-avvio:hover:not(:disabled){ transform:translate(-1px,-1px) rotate(-1deg); }
   .qp-avvio:disabled{ opacity:0.45; cursor:not-allowed; }
-  .qp-secondario{ border:1px solid var(--line); background:var(--paper); color:var(--ink-soft);
-    padding:9px 16px; border-radius:10px; font-size:var(--t-small); font-weight:600; cursor:pointer; }
+  .qp-secondario{ font-family:var(--font-hand); font-size:1.02rem; border:1.5px solid var(--ink); background:var(--paper); color:var(--ink);
+    padding:7px 15px 5px; border-radius:var(--mano-piccola); cursor:pointer; }
   .qp-secondario:hover{ background:var(--tint-200); }
-  section.panel.dark .qp-secondario{ background:rgba(255,255,255,0.06); border-color:rgba(255,255,255,0.16); color:#c7c2b6; }
 
-  .qp-barra{ height:8px; border-radius:999px; background:rgba(255,255,255,0.12); overflow:hidden; margin:14px 0 8px; }
-  .qp-barra > div{ height:100%; width:0; border-radius:999px; background:linear-gradient(90deg,var(--accent),var(--accent-deep)); transition:width .25s ease; }
-  /* Questa riga di stato la usa anche la scheda Corea, su pannello
-     chiaro: il grigio da fondo scuro li' sparirebbe. Una coppia. */
+  .qp-barra{ height:12px; border:1.5px solid var(--ink); border-radius:var(--mano-piccola); background:var(--paper); overflow:hidden; margin:14px 0 8px; }
+  .qp-barra > div{ height:100%; width:0; background:var(--accent); transition:width .25s ease; }
   .qp-stato{ font-size:var(--t-small); color:var(--ink-soft); }
-  section.panel.dark .qp-stato{ color:#c7c2b6; }
 
   /* Un risultato = una combinazione meta + coppia di date. */
-  .qp-esiti{ display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:14px; }
-  .qp-esito{ background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:var(--radius-md);
-    padding:16px 18px; display:flex; flex-direction:column; gap:9px; transition:transform .3s cubic-bezier(.16,1,.3,1), border-color .3s; }
-  .qp-esito:hover{ transform:translateY(-4px); border-color:rgba(var(--accent-rgb),0.45); }
-  .qp-esito.migliore{ border-color:var(--accent); box-shadow:0 0 0 1px var(--accent), 0 18px 40px rgba(0,0,0,0.35); }
+  .qp-esiti{ display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:16px; }
+  .qp-esito{ background:var(--paper); border:1.5px solid var(--ink); border-radius:var(--mano); box-shadow:var(--shadow);
+    padding:16px 18px; display:flex; flex-direction:column; gap:9px; }
+  .qp-esito.migliore{ border-width:2.5px; box-shadow:var(--shadow-lg); }
   .qp-esito-top{ display:flex; align-items:baseline; justify-content:space-between; gap:10px; }
-  .qp-meta{ font-weight:800; color:#fdf9f0; font-size:var(--t-lead); }
-  .qp-prezzo{ font-family:var(--font-display); font-size:2rem; line-height:1; color:var(--accent); white-space:nowrap; }
-  .qp-prezzo small{ display:block; font-family:var(--font-body); font-size:var(--t-micro); font-weight:600;
-    letter-spacing:0.04em; text-transform:uppercase; color:#9b968a; }
-  .qp-righe{ font-size:var(--t-small); color:#c7c2b6; line-height:1.65; }
-  .qp-righe strong{ color:#f4f1ea; }
+  .qp-meta{ font-weight:800; color:var(--ink); font-size:var(--t-lead); }
+  .qp-prezzo{ font-family:var(--font-display); font-size:2rem; line-height:1; color:var(--ink); white-space:nowrap;
+    background:linear-gradient(var(--accent),var(--accent)) no-repeat 0 88% / 100% 0.42em; padding:0 3px; }
+  .qp-prezzo small{ display:block; font-family:var(--font-hand); font-size:0.92rem; color:var(--ink-soft); background:var(--paper); }
+  .qp-righe{ font-size:var(--t-small); color:var(--ink); line-height:1.65; }
+  .qp-righe strong{ color:var(--ink); }
   .qp-loghi{ display:flex; gap:6px; align-items:center; }
-  .qp-loghi img{ height:20px; width:auto; background:#fff; border-radius:4px; padding:1px 3px; }
-  .qp-tag{ display:inline-block; font-size:var(--t-micro); font-weight:800; letter-spacing:0.05em; text-transform:uppercase;
-    padding:3px 9px; border-radius:7px; background:rgba(var(--accent-rgb),0.16); color:var(--accent); }
-  .qp-tag.caro{ background:rgba(211,16,52,0.18); color:#ff9b8a; }
-  .qp-tag.buono{ background:#1e4a2f; color:#8fe0ac; }
+  .qp-loghi img{ height:20px; width:auto; background:#fff; border:1px solid var(--line); border-radius:4px; padding:1px 3px; }
+  .qp-tag{ display:inline-block; font-family:var(--font-hand); font-size:0.98rem; padding:1px 9px; border:1.5px solid var(--ink); border-radius:var(--mano-piccola); background:var(--evid-tenue); color:var(--ink); }
+  .qp-tag.caro{ background:var(--paper); border-style:dashed; }
+  .qp-tag.buono{ background:var(--accent); }
   .qp-esito a.qp-link{ margin-top:auto; display:inline-block; text-align:center; text-decoration:none;
-    background:linear-gradient(180deg,var(--accent),var(--accent-deep)); color:#10100e;
-    padding:9px 14px; border-radius:10px; font-size:var(--t-small); font-weight:800; }
-  .qp-vuoto{ font-size:var(--t-small); color:#9b968a; font-style:italic; }
+    font-family:var(--font-hand); font-size:1.08rem; background:var(--accent); color:var(--ink);
+    border:2px solid var(--ink); border-radius:var(--mano-piccola); padding:8px 14px 6px; }
+  .qp-vuoto{ font-size:var(--t-small); color:var(--ink-soft); font-style:italic; }
 
-  .qp-podio{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-bottom:20px; }
-  .qp-medaglia{ font-size:1.4rem; }
+  .qp-podio{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-bottom:20px; }
+  .qp-medaglia{ font-size:1.3rem; }
 
-  /* Mete papabili, con la foto di chi ce l'ha. */
-  .qp-mete-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:14px; }
-  .qp-meta-card{ border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--line); background:var(--paper);
-    box-shadow:var(--shadow); transition:transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s; }
-  .qp-meta-card:hover{ transform:translateY(-4px); box-shadow:var(--shadow-lg); }
+  /* Mete papabili: cartoline con la foto. */
+  .qp-mete-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:22px 16px; }
+  .qp-meta-card{ background:#fff; padding:8px 8px 4px; border-radius:3px; box-shadow:var(--shadow-lg); transform:rotate(-1deg); }
+  .qp-meta-card:nth-child(even){ transform:rotate(1.1deg); }
   .qp-meta-card img{ width:100%; height:120px; object-fit:cover; display:block; }
-  .qp-meta-card .qp-mc-testo{ padding:10px 12px; }
-  .qp-meta-card .qp-mc-nome{ font-weight:700; font-size:var(--t-small); color:var(--theme-900); }
-  .qp-meta-card .qp-mc-iata{ font-size:var(--t-micro); color:var(--ink-soft); letter-spacing:0.06em; font-weight:700; }
+  .qp-meta-card .qp-mc-testo{ padding:8px 4px 6px; }
+  .qp-meta-card .qp-mc-nome{ font-family:var(--font-hand); font-size:1.08rem; color:var(--ink); }
+  .qp-meta-card .qp-mc-iata{ font-family:var(--font-mono); font-size:var(--t-micro); color:var(--ink-soft); }
 
-  .qp-nota{ font-size:var(--t-micro); color:var(--ink-soft); border-left:3px solid var(--accent); padding:2px 0 2px 12px; margin:12px 0; }
-  section.panel.dark .qp-nota{ color:#c7c2b6; }
+  .qp-nota{ font-size:var(--t-small); color:var(--ink-soft); padding:2px 0; margin:12px 0; }
 
-  /* Il contatore sta su un pannello chiaro: i colori da pannello scuro
-     qui sopra sparirebbero nel fondo. Ognuno ha la sua coppia. */
-  .qp-crediti{ display:inline-flex; align-items:center; gap:8px; font-size:var(--t-micro); font-weight:700;
-    padding:6px 13px; border-radius:999px; background:rgba(var(--accent-rgb),0.18); color:var(--theme-800); }
-  section.panel.dark .qp-crediti{ background:rgba(var(--accent-rgb),0.14); color:var(--accent); }
-  .qp-crediti.scarsi{ background:#fdeaea; color:#a32235; }
-  section.panel.dark .qp-crediti.scarsi{ background:rgba(211,16,52,0.2); color:#ff9b8a; }
+  .qp-crediti{ display:inline-flex; align-items:center; gap:8px; font-family:var(--font-hand); font-size:1.02rem;
+    padding:3px 12px 2px; border:1.5px solid var(--ink); border-radius:var(--mano-piccola); background:var(--evid-tenue); color:var(--ink); }
+  .qp-crediti.scarsi{ background:var(--paper); border-style:dashed; }
 
   @media (max-width:620px){
     .qp-costo{ flex-direction:column; align-items:stretch; text-align:center; }
-    .qp-avvio{ width:100%; }
+    .qp-avvio{ width:calc(100% - 4px); }
   }
 </style>
 

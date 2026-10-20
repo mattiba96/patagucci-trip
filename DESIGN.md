@@ -1,294 +1,380 @@
 ---
 name: Patagucci Trips
-description: L'almanacco di viaggio di quattro amici — tipografia condensata, numeri grossi, e una palette che cambia col paese.
+description: Il taccuino a pennarello dei quattro Patagucci, un quaderno a quadretti per meta.
 colors:
-  accent: "#FFCE00"
-  accent-deep: "#E0AE00"
-  accent-ink: "#8A6B00"
-  accent-2: "#D21034"
-  accent-2-deep: "#A80E29"
-  theme-900: "#16362a"
-  theme-800: "#1f4d3a"
-  theme-700: "#2a6b4d"
-  dark-base: "#141414"
-  paper: "#fffdf9"
-  tint-100: "#f8f5ef"
-  tint-200: "#efe8d9"
-  line: "#e2d9c6"
-  ink: "#20281f"
-  ink-soft: "#5b6a61"
+  carta: "#ffffff"
+  quadretto: "#dbe4ee"
+  margine: "#f2a3a3"
+  riga-matita: "#cfd6de"
+  campitura-matita: "#eef2f6"
+  pennarello: "#161616"
+  matita: "#555b63"
+  penna-blu: "#1d3fa8"
+  penna-rossa: "#c8102e"
+  evid-casa: "#ffe14d"
+  evid-casa-calcato: "#f2c200"
+  evid-casa-ink: "#6b5600"
+  evid-secondo: "#ff8fb8"
+  evid-islanda: "#7deaa0"
+  evid-islanda-calcato: "#2fbf6a"
+  evid-islanda-ink: "#146b3a"
+  evid-corea: "#ff92bb"
+  evid-corea-calcato: "#ee4f8b"
+  evid-corea-ink: "#a3164f"
+  evid-brunei: "#ffc93c"
+  evid-brunei-calcato: "#e09c00"
+  evid-brunei-ink: "#7a5200"
+  evid-singapore: "#cdb0ff"
+  evid-singapore-calcato: "#9b6bef"
+  evid-singapore-ink: "#5b2ba8"
+  logo-verde: "#09442d"
+  logo-rosso: "#b30e1a"
+  logo-nero: "#060606"
+  logo-cresta: "#fcfbfc"
+  logo-scritta: "#fcf8ec"
 typography:
   display:
-    fontFamily: "Bebas Neue, Impact, Arial Narrow, sans-serif"
-    fontSize: "clamp(3rem, 9vw, 5.6rem)"
+    fontFamily: "'Permanent Marker', 'Marker Felt', 'Comic Sans MS', cursive"
+    fontSize: "clamp(2.7rem, 6.4vw, 5.6rem)"
     fontWeight: 400
-    lineHeight: 0.95
-    letterSpacing: "0.02em"
+    lineHeight: 1.02
+    letterSpacing: "0.005em"
   headline:
-    fontFamily: "Bebas Neue, Impact, Arial Narrow, sans-serif"
-    fontSize: "clamp(1.9rem, 4.2vw, 3rem)"
+    fontFamily: "'Permanent Marker', 'Marker Felt', 'Comic Sans MS', cursive"
+    fontSize: "clamp(1.85rem, 3.5vw, 2.7rem)"
+    fontWeight: 400
+    lineHeight: 1.12
+    letterSpacing: "0.005em"
+  numeral:
+    fontFamily: "'Permanent Marker', 'Marker Felt', 'Comic Sans MS', cursive"
+    fontSize: "3.4rem"
     fontWeight: 400
     lineHeight: 1
-    letterSpacing: "0.01em"
   title:
-    fontFamily: "Bebas Neue, Impact, Arial Narrow, sans-serif"
-    fontSize: "1.2rem"
-    fontWeight: 400
-    lineHeight: 1.2
-    letterSpacing: "0.01em"
-  body:
-    fontFamily: "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
-    fontSize: "16.5px"
-    fontWeight: 400
-    lineHeight: 1.6
-    letterSpacing: "normal"
-  title-lg:
-    fontFamily: "Bebas Neue, Impact, Arial Narrow, sans-serif"
-    fontSize: "1.35rem"
+    fontFamily: "'Patrick Hand SC', 'Marker Felt', 'Comic Sans MS', cursive"
+    fontSize: "1.45rem"
     fontWeight: 400
     lineHeight: 1.2
     letterSpacing: "0.02em"
-  lead:
-    fontFamily: "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
-    fontSize: "1.08rem"
+  label:
+    fontFamily: "'Patrick Hand SC', 'Marker Felt', 'Comic Sans MS', cursive"
+    fontSize: "1.05rem"
     fontWeight: 400
-    lineHeight: 1.7
-    letterSpacing: "normal"
-  base:
-    fontFamily: "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
-    fontSize: "1rem"
-    fontWeight: 400
-    lineHeight: 1.65
-    letterSpacing: "normal"
-  small:
-    fontFamily: "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
-    fontSize: "0.88rem"
+    lineHeight: 1.2
+    letterSpacing: "0.02em"
+  body:
+    fontFamily: "'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+    fontSize: "17px"
     fontWeight: 400
     lineHeight: 1.6
-    letterSpacing: "normal"
-  label:
-    fontFamily: "Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif"
-    fontSize: "0.8rem"
-    fontWeight: 700
-    lineHeight: 1.2
-    letterSpacing: "0.04em"
-  mono:
-    fontFamily: "ui-monospace, Consolas, monospace"
+    fontFeature: "'tnum'"
+  body-lead:
+    fontFamily: "'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+    fontSize: "1.1rem"
+    fontWeight: 400
+    lineHeight: 1.6
+  body-small:
+    fontFamily: "'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+    fontSize: "0.88rem"
+    fontWeight: 400
+    lineHeight: 1.55
+  micro:
+    fontFamily: "'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
     fontSize: "0.8rem"
     fontWeight: 400
     lineHeight: 1.5
-    letterSpacing: "normal"
+  mono:
+    fontFamily: "'Atkinson Hyperlegible Mono', ui-monospace, Consolas, monospace"
+    fontSize: "0.8rem"
+    fontWeight: 400
+    lineHeight: 1.5
 rounded:
-  md: "18px"
-  lg: "26px"
-  pill: "999px"
-  dot: "50%"
+  cornice: "4px"
+  polaroid: "3px"
+  mano-piccola: "12px 7px 14px 8px / 8px 13px 7px 12px"
+  mano-tonda: "52% 48% 55% 45% / 47% 55% 45% 53%"
 spacing:
-  xs: "6px"
-  sm: "14px"
-  md: "20px"
-  lg: "30px"
-  panel: "78px"
+  quadretto: "22px"
+  gap: "16px"
+  riquadro: "18px 22px"
+  pagina: "72px 20px 34px"
+  pagina-mobile: "52px 16px 26px"
+  giustezza: "1040px"
 components:
-  card:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.md}"
-    padding: "18px 20px"
-  card-hover:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink}"
-    rounded: "{rounded.md}"
-  nav-tab:
-    backgroundColor: "transparent"
-    textColor: "#cfcfcf"
-    rounded: "{rounded.pill}"
-    padding: "9px 16px"
+  bottone-azione:
+    backgroundColor: "{colors.evid-casa}"
+    textColor: "{colors.pennarello}"
     typography: "{typography.label}"
-  nav-tab-active:
-    backgroundColor: "{colors.accent}"
-    textColor: "#10100e"
-    rounded: "{rounded.pill}"
-    padding: "9px 16px"
-  filter-chip:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink-soft}"
-    rounded: "{rounded.pill}"
-    padding: "7px 14px"
-  filter-chip-active:
-    backgroundColor: "{colors.theme-800}"
-    textColor: "#ffffff"
-    rounded: "{rounded.pill}"
-    padding: "7px 14px"
-  badge:
-    backgroundColor: "rgba(255,255,255,0.14)"
-    textColor: "#fdf9f0"
-    rounded: "20px"
-    padding: "6px 14px"
-  day-number:
-    backgroundColor: "{colors.theme-900}"
-    textColor: "{colors.accent}"
-    rounded: "{rounded.dot}"
-    size: "40px"
+    rounded: "{rounded.mano-piccola}"
+    padding: "9px 18px 7px"
+  bottone-carta:
+    backgroundColor: "{colors.carta}"
+    textColor: "{colors.pennarello}"
+    typography: "{typography.label}"
+    rounded: "{rounded.mano-piccola}"
+    padding: "9px 18px 7px"
+  filtro:
+    backgroundColor: "{colors.carta}"
+    textColor: "{colors.pennarello}"
+    typography: "{typography.label}"
+    rounded: "{rounded.mano-piccola}"
+    padding: "7px 14px 5px"
+  filtro-hover:
+    backgroundColor: "{colors.campitura-matita}"
+  filtro-attivo:
+    backgroundColor: "{colors.evid-casa}"
+  etichetta:
+    backgroundColor: "{colors.carta}"
+    textColor: "{colors.pennarello}"
+    typography: "{typography.label}"
+    rounded: "{rounded.mano-piccola}"
+    padding: "5px 12px 4px"
+  etichetta-da-prenotare:
+    backgroundColor: "{colors.carta}"
+    textColor: "{colors.penna-rossa}"
+    typography: "{typography.label}"
+    rounded: "{rounded.mano-piccola}"
+    padding: "5px 12px 4px"
+  riquadro:
+    backgroundColor: "{colors.carta}"
+    textColor: "{colors.pennarello}"
+    rounded: "{rounded.cornice}"
+    padding: "{spacing.riquadro}"
+  campo:
+    backgroundColor: "{colors.carta}"
+    textColor: "{colors.pennarello}"
+    typography: "{typography.body}"
+    rounded: "{rounded.mano-piccola}"
+    padding: "9px 12px"
+  polaroid:
+    backgroundColor: "{colors.carta}"
+    rounded: "{rounded.polaroid}"
+    padding: "10px 10px 0"
+  numero-giorno:
+    backgroundColor: "{colors.evid-casa}"
+    textColor: "{colors.pennarello}"
+    rounded: "{rounded.mano-tonda}"
+    size: "44px"
+  nota-manca:
+    backgroundColor: "{colors.carta}"
+    textColor: "{colors.penna-rossa}"
+    typography: "{typography.label}"
+    rounded: "{rounded.cornice}"
+    padding: "8px 16px 8px 10px"
+  copertina-entra:
+    backgroundColor: "{colors.evid-casa}"
+    textColor: "{colors.pennarello}"
+    typography: "{typography.headline}"
+    rounded: "{rounded.mano-piccola}"
+    padding: "12px 30px 11px 34px"
+    height: "58px"
+  copertina-musica:
+    backgroundColor: "transparent"
+    textColor: "{colors.carta}"
+    typography: "{typography.label}"
+    rounded: "{rounded.mano-piccola}"
+    padding: "6px 14px 5px 11px"
+    height: "44px"
 ---
 
 # Design System: Patagucci Trips
 
 ## Overview
 
-**Creative North Star: "L'almanacco dei Patagucci"**
+**Creative North Star: "Il taccuino a pennarello"**
 
-Un annuario sportivo, non una brochure di agenzia. Il sistema tratta un viaggio come una stagione da archiviare: tabelle di tratte, numeri grossi battuti in carattere condensato, conteggi di paesi e percentuali, giorni numerati come giornate di campionato. È rigoroso e un po' nerd — ci sono più tabelle che fotografie — ma sta su fondo carta e in caratteri caldi, quindi non diventa mai un cruscotto.
+Il sito è un quaderno di scuola italiano a quadretti da 5 mm su cui i quattro Patagucci prendono appunti di viaggio. Il foglio è bianco, con i quadretti azzurrini (22px) e, dove lo schermo è largo, la riga rossa del margine. Sopra ci sono quattro strumenti, e ognuno ha un compito solo: il pennarello nero scrive i titoli e i numeri, la matita grigia il testo di contorno, la penna Bic blu i link e i comandi, la penna rossa soltanto quello che manca da prenotare. In più c'è l'evidenziatore, e il suo colore cambia con il paese che si sta leggendo.
 
-La firma vera del sistema non è un colore: è il fatto che **la pagina cambia palette col paese che si sta guardando**. Un attributo sulla radice (`data-dest`, e dentro una meta `data-paese`) riscrive i token semantici, e con loro accenti, titoli, pannelli scuri, bordi e la fascia-bandiera in cima. L'Islanda è verde aurora su blu notte, la Corea rosa ciliegio su blu, il Brunei oro su verde foresta. Il layout non si muove di un pixel: cambia solo il colore, e lo fa scorrendo.
+Le cose non si mettono in scatola, si disegnano. I riquadri hanno un bordo tirato a mano (un SVG usato come border-image) e non fanno ombra, perché l'inchiostro su un foglio non ne fa. L'ombra c'è solo sugli oggetti di carta appoggiati sul quaderno: polaroid, nastro adesivo, il foglio che si volta, la copertina. Le foto non fanno da sfondo, sono polaroid inclinate e attaccate col nastro. Le pagine non diventano mai scure e non si tingono mai di crema: cambia solo il colore dei quadretti.
 
-La palette gialla della home è **provvisoria e non vincolante**: non porta un significato, è il punto di partenza da cui le mete divergono. Quello che è invariante è il meccanismo, non la tinta.
+Il movimento è fatto di gesti di carta, e senza di esso non si perde niente. Ci sono la copertina che si apre attorno al dorso, la pagina che si volta quando si cambia meta, la passata di evidenziatore sulla parola del titolo, la penna rossa che cerchia, le polaroid che si sollevano sotto il mouse. Se Motion non arriva, o chi guarda chiede meno movimento, la pagina è già intera e ferma. Questo mondo sostituisce del tutto quello precedente: niente foto a tutto schermo, niente card arrotondate con ombra, niente pannelli scuri alternati.
 
 **Key Characteristics:**
-- Tipografia condensata tutta maiuscola per ogni titolo e ogni numero; corpo neutro per la lettura
-- Palette semantica ritematizzata per paese, layout immutato
-- Superfici sollevate: card che galleggiano e si alzano al passaggio
-- Alternanza obbligata di pannelli chiari e scuri, sezione dopo sezione
-- Densità da almanacco: tabelle, conteggi, griglie filtrabili
+- Foglio bianco a quadretti da 22px; la riga rossa del margine compare solo da 1220px in su.
+- Tre mani tipografiche: pennarello (Permanent Marker), stampatello a mano (Patrick Hand SC), testo leggibile (Atkinson Hyperlegible Next), più il mono per codici e orari.
+- Un evidenziatore per meta, registrato con @property perché il passaggio di colore scorra invece di saltare.
+- Riquadri a tratto di pennarello, e niente ombra sull'inchiostro.
+- Polaroid con il nastro strappato per le foto, l'equipaggio e le mete.
+- Penna rossa riservata a «da prenotare».
+- Ingresso dalla copertina del quaderno, con il logo vero del gruppo e la «Patagucci song».
 
 ## Colors
 
-Una palette calda su base carta, in cui l'accento è l'unica voce satura e cambia identità a ogni meta.
+Una carta e quattro inchiostri restano fissi in tutto il sito. L'unica cosa che cambia è l'evidenziatore, uno per meta.
 
 ### Primary
-- **Giallo Insegna** (`#FFCE00`): l'accento della home. Numeri grossi, tab attiva, percorsi sulle mappe, anelli e bordi al passaggio. Su fondo chiaro non si usa mai per il testo — per quello c'è la sua versione inchiostro.
-- **Oro Bruciato** (`#E0AE00`): la variante scura dell'accento. Bordi, gradienti, stati al passaggio.
-- **Senape Inchiostro** (`#8A6B00`): l'accento reso leggibile su carta. È il colore dei numeri grossi nei pannelli chiari.
+- **Evidenziatore** (`evid-casa`, `evid-islanda`, `evid-corea`, `evid-brunei`, `evid-singapore`): passa sotto la parola del titolo, sotto la linguetta attiva, nei numeri dei giorni, nelle rotte delle cartine, nei filtri attivi, nei paesi visitati sul mappamondo. In CSS è `--accent`. La home è gialla, l'Islanda verde aurora, la Corea rosa ciliegio, il Brunei oro della cupola, Singapore lilla Supertree. Le mete archiviate hanno già il loro evidenziatore nel foglio di stile (Nepal, Pakistan, Sudafrica, India, Uganda, Tanzania, Uzbekistan, Groenlandia, Christmas Island, Georgia, e il turchese del «prossimo»), così il giorno che tornano in linea sono già pronte.
+- **Evidenziatore calcato** (`evid-*-calcato`, `--accent-deep`): lo stesso colore ripassato più volte. Serve per i tratti spessi e l'alone pulsante sulle cartine.
+- **Evidenziatore leggibile** (`evid-*-ink`, `--accent-ink`): il colore del paese scurito quanto basta per stare come testo sulla carta (circa 6,6:1). Si usa per i pallini degli elenchi e per ogni testo che deve portare il colore della meta.
+- **Evidenziatore tenue** (`--evid-tenue`, accento al 34% sul bianco) e **quadretti della meta** (`--quadretto-meta`, al 58%): si ricavano con color-mix e non sono primitive. Il primo colora le note (callout), i risultati e i livelli medi; il secondo i quadretti delle pagine alternate.
 
 ### Secondary
-- **Rosso Bandiera** (`#D21034`): il contrasto. Tag evidenziati, pulsazioni sulla mappa, allarmi. Usato con parsimonia.
+- **Penna Bic blu** (`penna-blu`): link, link alla home, link alle mappe, anello del focus. I link nel testo sono sottolineati a 1,5px con la sottolineatura al 45% di trasparenza; al passaggio del mouse la sottolineatura diventa piena e dietro il link passa l'evidenziatore.
+- **Secondo evidenziatore** (`evid-secondo`, `--accent-2`): il secondo pennarello dell'astuccio. Ha un compagno diverso per ogni meta. Si usa per gli avvisi (callout tratteggiato), per i livelli difficili e per le etichette messe in risalto.
 
 ### Tertiary
-- **Verde Spedizione** (`#16362a` / `#1f4d3a` / `#2a6b4d`): la famiglia dei titoli e dei pannelli scuri. Dal più scuro per i titoli su carta al più chiaro per link e bottoni mappa.
+- **Penna rossa** (`penna-rossa`): soltanto «da prenotare». Ricorre in cinque punti: la nota della home con il numero cerchiato, l'etichetta d'azione nell'intestazione, il riquadro dei voli mancanti, la casella del calendario di un volo non comprato, l'etichetta «volo da prenotare» nei giorni.
 
 ### Neutral
-- **Carta** (`#fffdf9`): il fondo delle card.
-- **Carta Ingiallita** (`#f8f5ef`): il fondo pagina.
-- **Sabbia** (`#efe8d9`): chip, righe di risultato, campiture tenui.
-- **Bordo Spago** (`#e2d9c6`): tutte le linee e i divisori su fondo chiaro.
-- **Nero Pannello** (`#141414`): la base dei pannelli scuri.
-- **Inchiostro** (`#20281f`) e **Inchiostro Tenue** (`#5b6a61`): testo primario e secondario su carta.
+- **Carta** (`carta`): il foglio, il fondo dei riquadri, la cornice delle polaroid.
+- **Quadretto** (`quadretto`): le righe del quaderno, 1px ogni 22px nei due versi.
+- **Margine** (`margine`): la riga rossa verticale a sinistra della colonna di testo, larga 2px.
+- **Riga a matita** (`riga-matita`): righe delle tabelle e divisori sottili.
+- **Campitura a matita** (`campitura-matita`): passaggio del mouse sui filtri, binari delle barre, fondo della barra di scorrimento.
+- **Pennarello** (`pennarello`): titoli, testo, bordi, contorni.
+- **Matita** (`matita`): testo secondario, crediti, sottotitoli (7:1 sulla carta).
+
+### Il logo (solo copertina)
+- **Verde cielo** (`logo-verde`), **rosso banda** (`logo-rosso`), **nero montagne** (`logo-nero`), **bianco cresta** (`logo-cresta`), **crema scritta** (`logo-scritta`). Sono i colori del logo animato del gruppo e vivono soltanto sulla copertina d'ingresso. Il nero è anche il fondo dell'anta, la crema è il contorno ripassato del bottone «Entra», che è giallo come l'evidenziatore della home.
 
 ### Named Rules
 
-**La Regola delle Due Coppie.** Ogni componente che porta testo dichiara il colore per fondo chiaro *e* quello per `section.panel.dark`. Scriverne uno solo è il difetto ricorrente di questo progetto: un componente pensato per il pannello scuro, spostato su quello chiaro, sparisce. Test: cercare la classe nel CSS e verificare che esista la riga `section.panel.dark .classe{ color: … }`.
+**La Regola della Penna Rossa.** Il rosso (`penna-rossa`) compare solo su ciò che manca da prenotare, e sempre insieme a un secondo segnale che non dipende dal colore: tratteggio, numero cerchiato o la scritta «da prenotare». Gli avvisi qualunque usano il tratteggio nero e il secondo evidenziatore, mai il rosso.
 
-**La Regola dell'Accento Inchiostro.** L'accento saturo non tocca mai il testo su carta. Su fondo chiaro si usa `accent-ink`; su fondo scuro si usa `accent`.
+**La Regola del Nero sull'Evidenziatore.** Sopra l'evidenziatore si scrive solo con il pennarello nero. Il grigio matita non va mai sopra un colore di meta: il grigio sul rosa scendeva a 3,3:1. Il colore pieno dell'evidenziatore non diventa mai testo; quando il testo deve avere il colore della meta si usa la sua versione leggibile (`--accent-ink`).
 
-**La Regola del Paese.** Nessun colore si scrive a mano nei componenti: si usano i token semantici, così la ritematizzazione per paese funziona senza toccare il componente.
+**La Regola del Foglio Bianco.** Nessuna pagina diventa scura o color crema. Le pagine alternate (`section.panel.alt`) cambiano colore solo nei quadretti, che prendono la tinta della meta. Il fondo resta la carta.
+
+**La Regola del Paese.** I componenti usano solo i token semantici (`--accent`, `--accent-deep`, `--accent-ink`, `--accent-2`, `--evid-tenue`). La meta si imposta con `data-dest` e `data-paese` sull'elemento `<html>`. Gli unici esadecimali ripetuti fuori dall'astuccio sono gli evidenziatori locali di paese (il divisore di paese, le caselle del calendario, i trattini delle linguette): devono restare identici a quelli dell'astuccio.
+
+**La Regola del Logo a Parte.** I cinque colori del logo stanno sulla copertina e non entrano nel quaderno. Il logo non si ridisegna: i livelli sono le immagini e i contorni del logo vero del gruppo.
 
 ## Typography
 
-**Display Font:** Bebas Neue (fallback Impact, Arial Narrow)
-**Body Font:** Inter (fallback stack di sistema)
+**Display Font:** Permanent Marker (con Marker Felt, Comic Sans MS, cursive)
+**Label Font:** Patrick Hand SC (con Marker Felt, Comic Sans MS, cursive)
+**Body Font:** Atkinson Hyperlegible Next (con Atkinson Hyperlegible e lo stack di sistema)
+**Mono Font:** Atkinson Hyperlegible Mono (con ui-monospace, Consolas)
 
-**Character:** Un condensato da manifesto contro un grottesco neutro. Bebas grida i titoli e i numeri in maiuscolo stretto; Inter si fa dimenticare e porta il peso della lettura. Il contrasto fra i due è tutta la tensione tipografica del sistema: non ci sono pesi intermedi né terzo carattere.
+**Character:** Il pennarello urla i titoli, lo stampatello a mano scrive le etichette, e le frasi da leggere sono sempre in un carattere progettato per leggersi bene. L'aria di quaderno la danno i titoli e le etichette. Il testo resta comodo da leggere come in una guida.
 
 ### Hierarchy
-- **Display** (400, `clamp(3rem, 9vw, 5.6rem)`, line-height 0.95): solo il titolo della meta nell'intestazione a tutta altezza. Maiuscolo, con un filetto sfumato sotto.
-- **Headline** (400, `clamp(1.9rem, 4.2vw, 3rem)`, line-height 1): i titoli di sezione, preceduti da un'emoji che fa da segnaposto visivo.
-- **Title-lg** (400, `1.35rem`): nomi di persona negli elenchi, intestazioni di blocco dentro un pannello.
-- **Title** (400, `1.2rem`): titoli dei giorni nell'itinerario, nomi nelle schede fatti, intestazioni di card.
-- **Body** (400, `16.5px`, line-height 1.6): tutto il testo corrente.
-- **Lead** (400, `1.08rem` = 17,3px): sottotitoli di sezione e primo paragrafo.
-- **Base** (400, `1rem` = 16px): corpo delle card. È il pavimento della lettura.
-- **Small** (400, `0.88rem` = 14,1px): didascalie, tag, testo denso delle griglie.
-- **Label** (700, `0.8rem` = 12,8px, letter-spacing `0.04em`, maiuscolo): tab di navigazione, chip, intestazioni di tabella. È il gradino più basso.
-- **Mono** (400, `0.8rem`): orari e codici di volo, dove le cifre devono incolonnarsi.
-- **Number** (400, `3.2rem` / `2.6rem` / `2.1rem`, Bebas): il numero che apre una sezione, quello dentro una fascia, quello accanto a un nome.
+- **Display** (400, clamp(2.7rem, 6.4vw, 5.6rem), 1.02): il titolo della prima pagina di ogni meta. Una sola parola è evidenziata.
+- **Headline** (400, clamp(1.85rem, 3.5vw, 2.7rem), 1.12, al massimo 30ch): i titoli di sezione, evidenziati riga per riga. Il divisore di paese usa la stessa voce più grande (clamp(2.2rem, 6vw, 3.6rem)).
+- **Numeral** (Permanent Marker, 3.4rem / 2.7rem / 2.1rem): numeri grossi, conteggi dei paesi, numeri del mappamondo. Lo stesso pennarello scrive anche le date del calendario, i numeri dei giorni e il risultato del cambio valuta.
+- **Title** (Patrick Hand SC 400, 1.45rem / 1.25rem, 1.2, 0.02em): h3, titoli dei giorni, nomi nelle schede.
+- **Label** (Patrick Hand SC 400, 1–1.12rem, 0.02em): linguette, etichette, tag, bottoni, intestazioni delle tabelle, didascalie delle polaroid, nota della home.
+- **Body** (Atkinson 400, 17px, 1.6; 16,5px sotto i 760px): tutto il testo da leggere, al massimo 72ch. Cifre tabellari su tutto il sito.
+- **Lead / Small / Micro** (1.1rem / 0.88rem / 0.8rem): sottotitoli di sezione (62ch), testi delle schede, fonti e crediti.
+- **Mono** (0.8rem, matita): codici di prenotazione, numeri di volo, orari nelle tabelle.
 
 ### Named Rules
 
-**La Regola del Numero Grosso.** Qualunque cifra che valga la pena ricordare — percentuale di mondo visto, giorni di viaggio, durata di una tratta — va in Bebas a corpo molto maggiore del testo attorno, con l'unità in piccolo accanto. I numeri sono il contenuto, non la decorazione.
+**La Regola delle Tre Mani.** Pennarello per titoli e numeri, stampatello a mano per le etichette, Atkinson per qualsiasi frase. Un paragrafo non si scrive mai in Patrick Hand o in Permanent Marker.
 
-**La Regola della Scala.** Nessuna misura di testo si scrive a mano. Ci sono sei gradini per il testo e tre per i numeri, tutti token. Erano trentotto misure diverse, venti delle quali fra 0,6 e 1rem: 0,83 e 0,84 e 0,85 non erano tre lavori diversi. Se una misura nuova sembra necessaria, quasi sempre è uno dei gradini che già c'è.
+**La Regola della Parola Sola.** Nel titolo della meta si evidenzia una parola sola, quella che conta («Patagucci», «Corea»). Se tutte le righe sono evidenziate, non risalta niente. Nei titoli di sezione la passata copre il titolo intero, una riga alla volta.
 
-**La Regola dei Dodici Pixel.** Nessun testo che si legge o si tocca scende sotto i 12px, crediti foto compresi: il gradino più basso è 12,8px. Vale anche per le scritte dentro le mappe SVG, che sono in unità del disegno e vanno moltiplicate per il fattore di scala prima di dire che sono grandi abbastanza — è così che i nomi dei posti erano finiti a 9 pixel veri su schermo grande e a 6,6 su telefono.
+**La Regola del 12,8.** La scala ha sei gradini per il testo e tre per i numeri. Il più piccolo è 0.8rem (12,8px): sotto i 12px non si legge. Sul telefono le scritte delle cartine passano a 19px e quelle secondarie si nascondono.
 
 ## Layout
 
-Colonna unica centrata, mai una griglia multi-colonna a tutta pagina. Il contenitore è `.inner` con larghezza massima intorno ai 1100px; le sezioni sono `section.panel` con `78px` di respiro sopra e `30px` sotto, ridotti a `44px / 16px` sotto i 760px.
+Una colonna di testo larga 1040px, centrata, su un foglio che riempie lo schermo. Le pagine (sezioni) hanno 72px sopra, 20px ai lati e 34px sotto (52 / 16 / 26 sotto i 760px, 46 / 13 / 22 sotto i 400px). Fra una pagina e l'altra c'è una riga a pennarello disegnata a mano (`--riga-mano`, un SVG da 240×10 ripetuto in orizzontale). La riga rossa del margine corre lungo tutto il quaderno, 44px a sinistra della colonna, e solo da 1220px in su.
 
-Dentro le sezioni il lavoro lo fanno due griglie fluide: `.info-grid` e `.family-grid`, entrambe `repeat(auto-fit, minmax(260px, 1fr))`, che collassano da sole senza breakpoint dedicati. Le tabelle non si impilano: restano tabelle e scorrono dentro la loro card.
+L'intestazione di ogni meta divide lo spazio fra testo e foto in proporzione 1,12 : 0,88, con il titolo a sinistra e la polaroid a destra (al massimo 430px, 4:5). Sotto i 760px diventa una colonna sola: testo, poi foto (78% della larghezza, al massimo 330px), poi credito. Le griglie di schede usano `auto-fit` con un minimo fra 200 e 300px e collassano da sole. L'equipaggio resta su due colonne sul telefono.
 
-La navigazione è a due piani appiccicosi: il selettore delle mete in cima (`position:sticky; top:0`) e sotto la barra delle sezioni, che si ancora all'altezza del selettore tramite la variabile `--switcher-h` misurata a runtime. Entrambe scorrono orizzontalmente a qualsiasi larghezza invece di andare a capo — ad andare a capo mangiavano un terzo dello schermo su telefono.
-
-**La Regola di Ciò Che Manca.** La home apre con l'unica cosa incompiuta, non col contatore dei paesi visitati. Il contatore è il premio, i voli da prenotare sono il lavoro: il numero grosso sta sul secondo.
-
-**La Regola dell'Alternanza.** I pannelli alternano chiaro e scuro senza eccezioni, in sequenza. Togliere o inserire una sezione obbliga a rinumerare l'alternanza: due pannelli chiari di fila sono un difetto visibile.
+In alto ci sono due barre fisse: il selettore delle mete (con la riga a pennarello sotto) e le linguette delle sezioni (con una riga a matita). Entrambe stanno su una riga sola che scorre orizzontalmente a qualsiasi larghezza e restano centrate quando c'è spazio. Sotto i 600px il selettore mostra i nomi corti. Gli elementi toccabili sul telefono sono alti almeno 44px. Le tabelle a quattro colonne scorrono orizzontalmente, con un'ombra sul bordo che indica che c'è altro da vedere. In stampa spariscono quadretti, barre e ombre, e i riquadri non si spezzano fra due pagine.
 
 ## Elevation & Depth
 
-Sistema **sollevato**, non piatto. Due ombre ambientali portano quasi tutto: `--shadow` (`0 10px 30px rgba(20,20,20,0.10)`) a riposo e `--shadow-lg` (`0 24px 60px rgba(20,20,20,0.22)`) in evidenza. La profondità è morbida e diffusa, mai una cornice dura.
-
-Lo stato al passaggio non cambia solo l'ombra: la card si alza di 4px e guadagna un anello sottile nel colore dell'accento. È il gesto tattile che tiene insieme il sistema.
+Il sistema è ibrido e la regola che lo divide è materiale. L'inchiostro è piatto: riquadri, giorni, note, cartine, caselle, domande frequenti. Hanno il tratto a pennarello e nessuna ombra, nemmeno quando sono aperti o sotto il mouse. La carta appoggiata sul quaderno fa invece un'ombra corta e morbida. La profondità della copertina e della pagina che si volta viene dalla prospettiva 3D e da una sfumatura scura sul bordo, non da un alone.
 
 ### Shadow Vocabulary
-- **Ambientale** (`0 10px 30px rgba(20,20,20,0.10)`): stato di riposo di card e contenitori.
-- **Sollevata** (`0 24px 60px rgba(20,20,20,0.22)`): passaggio del mouse, pannelli flottanti, pannello chat.
-- **Anello d'accento** (`0 0 0 1px rgba(var(--accent-rgb),0.35)`): si somma alla sollevata per segnare il focus senza bordo duro.
-- **Spinta colorata** (`0 4px 12px rgba(var(--theme-rgb),0.3)`): sotto bottoni e chip attivi.
+- **Carta su carta** (`box-shadow: 0 1px 1px rgba(20,24,30,0.06), 0 12px 22px -16px rgba(20,24,30,0.38)`): la foto piccola dentro un giorno, i riquadri delle pagine sorgente più vecchie che non hanno il tratto.
+- **Polaroid** (`box-shadow: 0 2px 3px rgba(20,24,30,0.10), 0 22px 34px -18px rgba(20,24,30,0.48)`): foto dell'intestazione, equipaggio, giostra delle foto, cartoline delle mete, striscia fotografica.
+- **Nastro** (`box-shadow: 0 1px 2px rgba(0,0,0,0.08)`): il nastro adesivo sopra la polaroid.
+- **Foglio che si volta** (`box-shadow: inset -40px 0 60px -40px rgba(0,0,0,0.25)`, più un velo che scurisce durante la rotazione): la pagina a quadretti che gira sul bordo sinistro.
+- **Ombra della copertina** (gradiente da `rgba(4,8,6,0.55)` a trasparente): l'ombra che l'anta getta sulla pagina mentre si alza.
 
 ### Named Rules
 
-**La Regola dell'Alone Sobrio.** Le ombre colorate si usano solo sotto un elemento, mai come alone a offset zero attorno a un testo. Un bagliore cromatico centrato è l'effetto più datato del repertorio.
+**La Regola dell'Inchiostro Senza Ombra.** Un riquadro disegnato a pennarello non fa ombra, mai, nemmeno da aperto o sotto il mouse. L'ombra spetta solo agli oggetti di carta: polaroid, nastro, il foglio che si volta, la copertina.
 
 ## Shapes
 
-Forme morbide e generose. Due raggi soli per le superfici: `18px` per card e callout, `26px` per i contenitori grandi e le schede meta. I controlli — tab, chip, bottoni filtro, badge — sono completamente a pillola (`999px`). I numeri dei giorni sono cerchi pieni da 40px.
+Nessun angolo è uguale all'altro. I riquadri di inchiostro hanno un bordo trasparente da 2px con `border-image: var(--tratto) 16 / 16px / 4px round` sopra un raggio di 4px. Il disegno sborda di qualche pixel agli angoli, come una riga vera. Il tratto esiste in tre versioni: nero pieno (`--tratto`), nero tratteggiato per gli avvisi e il preventivo che sfora (`--tratto-tratteggio`), rosso tratteggiato per il da prenotare (`--tratto-rosso`). Nelle tabelle che scorrono il tratto non sborda.
 
-Le linee sono sempre da 1px e nel colore `line`; non esistono bordi spessi a scopo decorativo, con una sola eccezione ereditata: `.callout` e `.cal-giorno` portano un `border-left` da 4px su un contenitore arrotondato. È il tell più riconoscibile dell'interfaccia generata, ed è l'unico punto dove il sistema lo fa.
+Etichette, bottoni, linguette, filtri, tag e campi usano il raggio asimmetrico `mano-piccola` e alcuni sono leggermente ruotati (da −1,5° a 0,8°). I numeri dei giorni sono cerchi storti (`mano-tonda`, ruotati di −4° o 3°, con il secondo profilo sui giorni pari). Le polaroid hanno angoli da 3px, il bordo bianco più alto in basso e un'inclinazione propria fra −2° e 2,6°, scritta in `--gira` perché il movimento la conservi. Il nastro ha le estremità strappate (`--nastro`, una maschera SVG). Le barre dei grafici hanno la cima arrotondata a mano (10px 6px 2px 2px).
+
+Anche le icone sono disegnate e si applicano come maschere SVG colorate con il colore del testo: la spunta (`--spunta`) accanto ai nomi e alle mete confermate, l'aeroplanino di carta (`--aereo`) nei giorni di volo. Sulle cartine le tappe sono puntine a pennarello, cioè cerchi evidenziati con il contorno nero. La grana dell'evidenziatore (`--evid-grana`) è un velo bianco sopra la passata di colore: sfrangia le estremità e lascia le righe del pennarello.
+
+### Named Rules
+
+**La Regola del Tratto Intero.** Per ridare il bordo a un riquadro disegnato si riscrive sempre per intero: `border` e poi `border-image`. La forma abbreviata di `border` azzera il border-image, e il riquadro torna una scatola CSS.
+
+**La Regola del Disegno, non del Carattere.** Le icone sono disegni SVG, non emoji e non caratteri. In fase di montaggio `build.py` toglie le emoji davanti a titoli, titoletti, etichette e link. Restano due eccezioni, perché sono dati e non decorazione: le bandiere (nelle etichette dei paesi visti, sulle cartoline e nelle caselle del calendario) e il veicolo che percorre le cartine del percorso, che lo script cambia a seconda del mezzo.
 
 ## Components
 
-### Cards
-- **Corner Style:** arrotondate (18px)
-- **Background:** carta (`#fffdf9`) su pannello chiaro; bianco al 6% su pannello scuro
-- **Shadow Strategy:** ambientale a riposo, sollevata + anello d'accento al passaggio
-- **Border:** 1px in `line`, che al passaggio diventa `accent-deep`
-- **Internal Padding:** `18px 20px`
-- **Carattere:** solide e tattili. Si alzano di 4px al passaggio con l'easing unico del sistema.
+### Bottoni
+- **Character:** etichette evidenziate con il tratto ripassato.
+- **Azione** (`bottone-azione`): stampatello a mano 1.12rem, fondo evidenziatore, contorno pennarello da 2px. Dietro c'è un secondo contorno spostato di 3px a destra e 4px in basso (`::after`, solo contorno, nessuna campitura). La variante su carta (`bottone-carta`) ha il fondo bianco; quella per l'esportazione usa il secondo evidenziatore.
+- **Hover / Focus:** il bottone si stacca dal secondo contorno (`translate(-1px,-1px) rotate(-1deg)`, 0,2s su curva `cubic-bezier(.16,1,.3,1)`). Il focus è l'anello unico del sito: penna blu da 3px con 2px di distacco e un alone bianco da 6px, che resta visibile anche sopra l'evidenziatore.
 
-### Navigation
-Due barre appiccicose sovrapposte. Il **selettore delle mete** sta sopra, su gradiente quasi nero, con bottoni a pillola in maiuscolo; l'attivo si riempie dell'accento con testo scurissimo. La **barra delle sezioni** sta sotto, stessa grammatica ma trasparente, e si ancora sotto il selettore misurandone l'altezza a runtime. Entrambe scorrono in orizzontale, senza scrollbar visibile, e su mobile i bersagli salgono a 44px.
+### Filtri e linguette delle mete
+- **Filtri** (`filtro`): stampatello a mano su carta, contorno nero da 1,5px. Sotto il mouse prendono la campitura a matita; da attivi prendono l'evidenziatore e ruotano di −1,5°. Le linguette delle mete in home (con il conteggio in pennarello) usano la stessa forma, alte almeno 46px.
 
-### Chips e filtri
-- **Riposo:** fondo carta, bordo `line`, testo inchiostro tenue, pillola piena
-- **Passaggio:** fondo sabbia, bordo `accent-deep`
-- **Attivo:** fondo `theme-800`, testo bianco, spinta colorata sotto
+### Etichette e tag
+- **Style:** stampatello a mano su carta, contorno pennarello da 1,5px, `mano-piccola`, leggera rotazione alternata. Livelli e difficoltà si distinguono per il fondo: carta (facile), evidenziatore tenue (media), secondo evidenziatore (difficile), matita tratteggiata (assente). Aperto e chiuso si distinguono anche per il contorno: pieno o tratteggiato.
+- **Da prenotare:** penna rossa, tratteggio da 2px, fondo carta.
 
-### Badge
-Pillole in vetro smerigliato sull'intestazione fotografica: bianco al 14% con `backdrop-filter: blur(6px)` e bordo nell'accento. Si alzano di 2px al passaggio.
+### Riquadri
+- **Corner Style:** il tratto a pennarello (raggio 4px sotto il disegno).
+- **Background:** carta. Le note (callout) hanno l'evidenziatore tenue; gli avvisi hanno il secondo evidenziatore al 30% e il tratto tratteggiato.
+- **Shadow Strategy:** nessuna (Regola dell'Inchiostro Senza Ombra).
+- **Internal Padding:** 18px 22px (16px sul telefono); note 15px 20px.
+- **Hover:** nessuno. È un foglio, non un bottone.
 
-### Pannelli di sezione
-Il pannello chiaro è carta nuda. Il pannello scuro è costruito a gradienti radiali: una luce d'accento in alto a sinistra, una di tema in basso a destra, sopra la base nera. Ogni sezione tranne la prima porta un filetto sfumato centrato in cima, largo `min(680px, 74%)`, che fa da divisore.
+### Campi
+- **Style:** riga da riempire a penna. Carta, contorno pennarello da 1,5px, `mano-piccola`, padding 9px 12px, Atkinson. L'etichetta sopra è in stampatello a mano.
+- **Focus:** l'anello in penna blu.
+- **Mobile:** 16px nel campo (sotto, iOS ingrandisce da solo al focus) e larghezza piena.
 
-### Timeline dei giorni (componente firma)
-Ogni giorno è un `<details>` con un cerchio numerato in Bebas sul colore tema, titolo condensato maiuscolo, una riga di tag e un link a Maps. È il componente che definisce il prodotto: la struttura dell'itinerario si legge dai numeri prima che dal testo.
+### Navigazione
+- **Selettore delle mete:** Permanent Marker 1.08rem, in matita. Ogni linguetta ha il suo evidenziatore (`--dab`): da chiusa è un trattino da 22×5px sotto la scritta, sotto il mouse il trattino si allunga, da aperta diventa la passata intera con la grana dietro le lettere. Le mete con le date fissate hanno la spunta disegnata.
+- **Linguette delle sezioni:** stampatello a mano in matita. Sotto il mouse sono sottolineate a matita; la sezione attiva ha l'evidenziatore all'82% dell'altezza, con la grana. Il ritorno alla home è in penna blu.
+- **Nastro della bandiera:** una striscia da 6px in cima, con i colori della bandiera della meta. È un dato, non una decorazione del sistema.
 
-### Calendario a colpo d'occhio (componente firma)
-Griglia di celle cliccabili, una per giorno, con numero di giornata, data, luogo e bandiera. Un filo di colore a sinistra codifica il paese. Cliccando si apre il giorno corrispondente nella timeline.
+### Polaroid (componente firma)
+Bordo bianco (12px, e 54px in basso nell'intestazione), angoli da 3px, ombra da polaroid, inclinazione propria in `--gira`. Nell'intestazione c'è il nastro strappato, tinto con l'evidenziatore al 62%. Con un mouse vero si inclina in 3D seguendo il puntatore (fino a ±6° in verticale e ±7° in orizzontale, sollevata di 16px) e torna giù con una molla morbida (0,55s, rimbalzo 0,18). Quando arriva una meta, la polaroid cade sul foglio (`rotateX(32deg)` → 0, da −46px, 0,85s). Le cartoline delle mete e le foto dell'equipaggio sono polaroid, con la didascalia in stampatello a mano.
+
+### Il numero del giorno e l'itinerario (componente firma)
+Ogni giorno è un riquadro a tratto che si apre. Il numero è scritto in pennarello dentro un cerchio storto evidenziato (44×42px, 38×36px sul telefono). Il titolo è in stampatello a mano, e la freccia ruota di 90° all'apertura. Il calendario a colpo d'occhio ha una casella per giorno: la data è passata con l'evidenziatore del paese, il giorno di volo ha l'aeroplanino di carta, il volo da comprare ha il tratto rosso tratteggiato e la scritta «da prenotare».
+
+### La nota di quello che manca
+In home, sotto il sottotitolo, c'è una nota a penna rossa con il tratto rosso tratteggiato, ruotata di −0,8°. Il numero (in pennarello) è cerchiato da un tratto rosso che si disegna da solo quando entra nello schermo (0,9s, curva `[.65,0,.35,1]`). La nota è sempre visibile, ma non è mai la cosa principale della pagina.
+
+### La copertina (componente firma)
+Il quaderno chiuso, a schermo pieno, con il logo vero del gruppo stampato in copertina. Il logo è fatto a livelli: cielo, banda e aereo sono immagini in `assets/logo/`, montagne, cresta e lettere sono vettori da `_sources/logo/forme.json`. Il disegno si misura in unità del disegno originale (`--u`, su una tavola di 1672×941) e il colore pieno continua oltre i bordi. Sul dorso ci sono i due punti metallici; in basso a destra la scritta «Quadretti 5 mm»; in alto a destra il tasto della musica (bianco, contorno a mano, `aria-pressed`). All'arrivo il cielo si accende, la banda si stende e l'aereo entra in volo e ondeggia. Su «Entra» il logo si compone e gira come un plastico a strati: la cresta si disegna dalla vetta, il nero sale, le lettere spuntano una alla volta. Poi l'anta si apre attorno al dorso (`rotateY(-98deg)`, 1,05s) e sotto arriva la home. La «Patagucci song» suona sulla copertina e sfuma in 1,8s quando si preme «Entra». Senza Motion la copertina si apre con il CSS; con il movimento ridotto si dissolve; senza JavaScript non c'è e il sito è già aperto. Il focus qui è bianco, perché il blu sul verde e sul nero non si vedrebbe.
+
+### Il movimento (assets/anima.js)
+Motion senza React, cinque gesti:
+- La pagina che si volta: un foglio a quadretti grande quanto lo schermo gira sul bordo sinistro, 0,75s.
+- La polaroid che cade sul foglio.
+- La passata di evidenziatore, solo sulla parola del titolo della meta (0,75s).
+- La penna rossa che si disegna.
+- Le polaroid che si inclinano sotto il mouse.
+
+Il cambio di colore della meta scorre in 0,6s grazie a @property. Con il movimento ridotto, o senza Motion, non si muove niente: gli evidenziatori sono già stesi, la giostra delle foto è ferma e i colori cambiano di colpo.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** usare i token semantici (`--accent`, `--theme-900`, `--ink`) e mai un colore letterale dentro un componente: è ciò che rende possibile la ritematizzazione per paese.
-- **Do** dichiarare sempre la coppia chiaro/scuro di ogni componente testuale, con la variante `section.panel.dark`.
-- **Do** mettere in Bebas ogni numero che conta, molto più grande del testo attorno.
-- **Do** usare l'unico easing del sistema, `cubic-bezier(.16,1,.3,1)`, per ogni transizione di stato.
-- **Do** far scorrere in orizzontale le barre di navigazione invece di mandarle a capo.
-- **Do** mantenere l'alternanza chiaro/scuro dei pannelli quando se ne aggiunge o toglie uno.
+- **Do** scrivere i titoli in Permanent Marker, le etichette in Patrick Hand SC e ogni frase in Atkinson Hyperlegible Next, con le cifre tabellari.
+- **Do** dare a ogni riquadro di inchiostro il tratto a pennarello (`--tratto`, `--tratto-tratteggio` o `--tratto-rosso`, `16 / 16px / 4px round`), riscrivendo `border` e `border-image` per intero.
+- **Do** usare la penna rossa per «da prenotare» insieme al tratteggio o al cerchio, così si distingue anche senza colore.
+- **Do** prendere il colore della meta dai token (`--accent`, `--accent-ink`, `--evid-tenue`) e lasciarlo cambiare a `data-dest` e `data-paese`.
+- **Do** mettere le foto in polaroid inclinate con `--gira`, con il nastro strappato quando la foto è da sola.
+- **Do** disegnare le icone come maschere SVG (spunta, aeroplanino, puntine) colorate con il colore del testo.
+- **Do** fare in modo che ogni movimento sia un gesto di carta, e che senza Motion o con il movimento ridotto la pagina sia già intera e ferma.
+- **Do** tenere il testo dentro 72ch (62ch per i sottotitoli) e lasciare gli elementi toccabili alti almeno 44px sul telefono.
 
 ### Don't:
-- **Don't** scendere sotto gli 11px su testo leggibile o toccabile.
-- **Don't** aggiungere un terzo carattere: il sistema è Bebas più Inter, e basta.
-- **Don't** usare l'accento saturo per il testo su fondo chiaro: c'è `accent-ink` per quello.
-- **Don't** mettere alone colorato a offset zero attorno a testo o riquadri.
-- **Don't** aggiungere nuovi `border-left` spessi su contenitori arrotondati: quelli esistenti sono debito ereditato, non un modello da seguire.
-- **Don't** annidare una card dentro un'altra card: la profondità si fa con spazio e tipografia.
-- **Don't** usare easing elastici o di rimbalzo.
+- **Don't** mettere ombre sui riquadri di inchiostro, nemmeno al passaggio del mouse o da aperti: l'ombra spetta solo a polaroid, nastro, il foglio che si volta e la copertina.
+- **Don't** fare pagine scure o color crema: le pagine alternate cambiano solo il colore dei quadretti.
+- **Don't** usare il rosso per avvisi generici: quelli prendono il tratteggio nero e il secondo evidenziatore.
+- **Don't** mettere testo grigio, o il colore pieno dell'evidenziatore come testo, sopra un evidenziatore.
+- **Don't** evidenziare più di una parola nel titolo della meta, né animare l'entrata di ogni titolo di sezione.
+- **Don't** usare emoji o caratteri come icone. Le bandiere e il veicolo sulla cartina sono dati, non decorazione.
+- **Don't** usare foto a tutto schermo con un velo scuro sotto il testo, né card arrotondate in modo uniforme con l'ombra.
+- **Don't** portare i colori del logo dentro il quaderno, né ridisegnare il logo.
+- **Don't** scendere sotto 0.8rem per qualsiasi testo.

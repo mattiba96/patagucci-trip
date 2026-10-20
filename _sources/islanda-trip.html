@@ -10,13 +10,13 @@
 <link rel="stylesheet" href="assets/style.css">
 <style>
   .route-status{ display:grid; grid-template-columns:1fr auto; gap:10px 14px; align-items:center; }
-  .route-status .r-name{ font-weight:600; color:var(--ink); }
-  section.panel.dark .route-status .r-name{ color:#f4f1ea; }
-  .route-status .r-status{ font-size:var(--t-micro); font-weight:700; padding:4px 10px; border-radius:8px; white-space:nowrap; justify-self:end; }
-  .r-status.open{ background:#1e4a2f; color:#8fe0ac; }
-  .r-status.closed{ background:#4a1c1c; color:#ff9b8a; }
+  .route-status .r-name{ font-weight:700; color:var(--ink); }
+  /* Strada aperta o chiusa: un'etichetta scritta a mano, e il contorno
+     pieno o tratteggiato la distingue anche senza colore. */
+  .route-status .r-status{ font-family:var(--font-hand); font-size:1rem; line-height:1.3; padding:2px 10px 1px; border:1.5px solid var(--ink); border-radius:var(--mano-piccola); white-space:nowrap; justify-self:end; color:var(--ink); }
+  .r-status.open{ background:var(--accent); }
+  .r-status.closed{ background:var(--paper); border-style:dashed; }
   .route-note{ grid-column:1 / -1; font-size:var(--t-small); color:var(--ink-soft); margin:-4px 0 10px; }
-  section.panel.dark .route-note{ color:#c7c2b6; }
 </style>
 </head>
 <body>
@@ -27,7 +27,7 @@
   <div class="bg" style="background-image:linear-gradient(180deg, rgba(6,12,18,0.35) 0%, rgba(6,12,18,0.55) 55%, rgba(6,12,18,0.92) 100%), url('foto/destinazioni/is-kirkjufell.jpg');"></div>
   <div class="content">
     <h1>Islanda</h1>
-    <p class="tagline">Quattro ore di luce al giorno e sedici di buio, che è esattamente il motivo per cui ci si va a gennaio. Cascate ghiacciate, una laguna piena di iceberg, grotte dentro un ghiacciaio e — se il cielo collabora — l'aurora.</p>
+    <p class="tagline">Quattro ore di luce al giorno e sedici di buio: è esattamente il motivo per cui ci andiamo a gennaio. Cascate ghiacciate, una laguna piena di iceberg, grotte dentro un ghiacciaio e — se il cielo collabora — l'aurora.</p>
     <div class="badge-row">
       <span class="badge">📅 2–9 gennaio 2027 · 8 giorni <em>(confermato)</em></span>
       <span class="badge">🌌 Stagione dell'aurora</span>
@@ -45,12 +45,12 @@
   <a href="#luce">Luce e aurora</a>
   <a href="#itinerario">Itinerario</a>
   <a href="#mappa">Mappa</a>
-  <a href="#siti">Cose da non perdere</a>
-  <a href="#guida">Guida pratica</a>
+  <a href="#siti">Cosa vediamo</a>
+  <a href="#guida">Come ci organizziamo</a>
   <a href="#vulcani">Vulcani</a>
   <a href="#meteo">Meteo</a>
   <a href="#cibo">Cibo &amp; alcolici</a>
-  <a href="#faq">FAQ</a>
+  <a href="#faq">Le nostre domande</a>
 </nav>
 
 <main>
@@ -60,19 +60,19 @@
   <section id="luce" class="panel" data-nav>
     <div class="inner">
       <h2 class="section-title reveal">🌌 Luce e aurora</h2>
-      <p class="section-sub reveal">Gennaio è il mese con la notte più lunga e la migliore probabilità di aurora. In cambio, le giornate vanno pianificate attorno a cinque ore scarse di luce.</p>
+      <p class="section-sub reveal">Gennaio è il mese con la notte più lunga e la migliore probabilità di aurora. In cambio, organizziamo le giornate attorno a cinque ore scarse di luce.</p>
 
       <div class="card reveal">
-        <h3 style="margin-top:0;">Come si spartisce la giornata</h3>
+        <h3 style="margin-top:0;">Come ci spartiamo la giornata</h3>
         <div class="route-status" id="route-status"></div>
         <div class="source-note">Orari per Reykjavík a metà gennaio. Fonti: icelandtours.is, adventures.is, iceland.org, guidetoiceland.is — verificate ad agosto 2026.</div>
       </div>
 
       <div class="info-grid">
-        <div class="card reveal"><h3>🌠 Perché gennaio è buono</h3><p>Servono tre cose insieme: <strong>buio</strong>, <strong>cielo sereno</strong> e <strong>attività solare</strong>. Gennaio dà 16-20 ore di buio, e il 2026 è vicino al massimo del ciclo solare undecennale, con attività ancora alta nel 2027. Il buio ce l'abbiamo garantito, il resto no.</p></div>
-        <div class="card reveal"><h3>☁️ Il vero nemico è la nuvola</h3><p>L'aurora c'è anche quando non la vedi: quello che manca è il cielo sereno. Per questo <strong>sette notti sono meglio di tre</strong> — ogni notte in più è un'altra estrazione. Su sette notti a gennaio le probabilità sono buone, ma nessuno può prometterla.</p></div>
-        <div class="card reveal"><h3>📱 Come si caccia</h3><p>Si guardano due cose: <strong>previsione aurora e copertura nuvolosa</strong> sul sito dell'ufficio meteo islandese (vedur.is), che pubblica entrambe. Poi ci si sposta dove il cielo è pulito. Serve un'auto e la voglia di uscire alle 22 con -5°C.</p></div>
-        <div class="card reveal"><h3>🕚 Come si organizzano i giorni</h3><p>Colazione al buio, in strada per le 10, le cose da vedere fra le 11 e le 16, e poi cena e aurora. Sembra poco, ma con il sole sempre basso <strong>la luce è quella dell'alba per tutto il giorno</strong>: per le foto è il periodo migliore dell'anno.</p></div>
+        <div class="card reveal"><h3>🌠 Perché gennaio è buono</h3><p>Ci servono tre cose insieme: <strong>buio</strong>, <strong>cielo sereno</strong> e <strong>attività solare</strong>. Gennaio dà 16-20 ore di buio, e il 2026 è vicino al massimo del ciclo solare undecennale, con attività ancora alta nel 2027. Il buio ce l'abbiamo garantito, il resto no.</p></div>
+        <div class="card reveal"><h3>☁️ Il vero nemico è la nuvola</h3><p>L'aurora c'è anche quando non la vediamo: quello che manca è il cielo sereno. Per questo <strong>sette notti sono meglio di tre</strong> — ogni notte in più è un'altra estrazione. Con le nostre sette notti a gennaio le probabilità sono buone, ma nessuno può prometterla.</p></div>
+        <div class="card reveal"><h3>📱 Come andiamo a caccia</h3><p>Guardiamo due cose: <strong>previsione aurora e copertura nuvolosa</strong> sul sito dell'ufficio meteo islandese (vedur.is), che pubblica entrambe. Poi ci spostiamo dove il cielo è pulito. Ci servono un'auto e la voglia di uscire alle 22 con -5°C.</p></div>
+        <div class="card reveal"><h3>🕚 Come organizziamo i giorni</h3><p>Facciamo colazione al buio, siamo in strada per le 10, vediamo le cose fra le 11 e le 16, e poi cena e aurora. Sembra poco, ma con il sole sempre basso <strong>la luce è quella dell'alba per tutto il giorno</strong>: per le foto è il periodo migliore dell'anno.</p></div>
       </div>
     </div>
   </section>
@@ -81,25 +81,25 @@
   <section id="itinerario" class="panel dark" data-nav>
     <div class="inner">
       <h2 class="section-title reveal">🗺️ Itinerario — 2/9 gennaio, 8 giorni</h2>
-      <p class="section-sub reveal">Si dorme ogni notte in un posto diverso: Reykjavík, Flúðir, Vík, Hof, Selfoss, Grundarfjörður e di nuovo Reykjavík. Circolo d'Oro, costa sud fino a Jökulsárlón, poi su a Snæfellsnes e un giorno intero in città. Circa 1.600 km in tutto, metà dei quali col buio.</p>
+      <p class="section-sub reveal">Dormiamo ogni notte in un posto diverso: Reykjavík, Flúðir, Vík, Hof, Selfoss, Grundarfjörður e di nuovo Reykjavík. Facciamo il Circolo d'Oro, la costa sud fino a Jökulsárlón, poi saliamo a Snæfellsnes e ci teniamo un giorno intero in città. Circa 1.600 km in tutto, e metà li guidiamo col buio.</p>
 
       <div class="timeline" id="timeline"></div>
 
       <div class="card reveal">
-        <h3 style="margin-top:0;">Cosa va prenotato</h3>
+        <h3 style="margin-top:0;">Cosa dobbiamo prenotare</h3>
         <ul class="rule-list">
-          <li><strong>4x4 con gomme chiodate</strong>, con la franchigia bassa e l'assicurazione per ghiaia e sabbia. La copertura per il vento sulle portiere è a parte: va presa.</li>
-          <li><strong>Grotta di ghiaccio</strong> del 5 gennaio, con <strong>tariffa rimborsabile</strong> — col maltempo la annullano e il rimborso serve davvero.</li>
-          <li><strong>Pranzo a Friðheimar</strong> il 3: senza prenotazione non si entra.</li>
+          <li><strong>4x4 con gomme chiodate</strong>, con la franchigia bassa e l'assicurazione per ghiaia e sabbia. La copertura per il vento sulle portiere è a parte: la prendiamo.</li>
+          <li><strong>Grotta di ghiaccio</strong> del 5 gennaio, con <strong>tariffa rimborsabile</strong> — col maltempo la annullano e il rimborso ci serve davvero.</li>
+          <li><strong>Pranzo a Friðheimar</strong> il 3: senza prenotazione non entriamo.</li>
           <li><strong>Secret Lagoon</strong> il 3 e <strong>Sky Lagoon</strong> l'8.</li>
-          <li><strong>Blue Lagoon</strong> il 9, ma solo quando si conosce l'orario del volo.</li>
-          <li><strong>Sette notti</strong>: Reykjavík (100 Iceland Hotel), Flúðir, Vík, Hof o Hali, Selfoss, Grundarfjörður e di nuovo Reykjavík. A Vík e a Hof gli alloggi sono pochi, sono quelli da chiudere per primi.</li>
+          <li><strong>Blue Lagoon</strong> il 9, ma solo quando conosciamo l'orario del volo.</li>
+          <li><strong>Sette notti</strong>: Reykjavík (100 Iceland Hotel), Flúðir, Vík, Hof o Hali, Selfoss, Grundarfjörður e di nuovo Reykjavík. A Vík e a Hof gli alloggi sono pochi: sono quelli che chiudiamo per primi.</li>
         </ul>
         <div class="source-note">Ogni mattina si controllano comunque <strong>road.is</strong> (anche al telefono, 1777) per le strade, <strong>vedur.is</strong> per meteo e aurora e <strong>safetravel.is</strong> per gli avvisi. Emergenze: <strong>112</strong>.</div>
       </div>
 
       <div class="callout warn reveal">
-        <strong>Perché non il giro completo dell'isola.</strong> La Ring Road esiste tutto l'anno, ma a gennaio il nord e gli altopiani sono un'altra cosa: neve, vento, poche ore di luce e strade che chiudono senza preavviso. Il <strong>Circolo d'Oro, la costa sud e Snæfellsnes restano aperti tutto l'anno</strong> ed è lì che stanno le cose che ci interessano. Snæfellsnes è l'unica puntata a nord di Reykjavík, e si fa in giornata. Il giro completo si fa d'estate, non adesso.
+        <strong>Perché non facciamo il giro completo dell'isola.</strong> La Ring Road esiste tutto l'anno, ma a gennaio il nord e gli altopiani sono un'altra cosa: neve, vento, poche ore di luce e strade che chiudono senza preavviso. Il <strong>Circolo d'Oro, la costa sud e Snæfellsnes restano aperti tutto l'anno</strong> ed è lì che stanno le cose che ci interessano. Snæfellsnes è la nostra unica puntata a nord di Reykjavík, e la facciamo in giornata. Il giro completo è un viaggio d'estate: adesso no.
       </div>
     </div>
   </section>
@@ -108,7 +108,7 @@
   <section id="mappa" class="panel" data-nav>
     <div class="inner">
       <h2 class="section-title reveal">📍 Mappa &amp; percorso</h2>
-      <p class="section-sub reveal">Un anello: Keflavík e Reykjavík, il Circolo d'Oro, la costa sud fino a Jökulsárlón, ritorno sulla stessa strada fino a Selfoss, poi su a Snæfellsnes e giù di nuovo in città. Reykjanes è l'ultimo giorno, sulla strada per l'aeroporto.</p>
+      <p class="section-sub reveal">Facciamo un anello: Keflavík e Reykjavík, il Circolo d'Oro, la costa sud fino a Jökulsárlón, poi torniamo sulla stessa strada fino a Selfoss, saliamo a Snæfellsnes e scendiamo di nuovo in città. Reykjanes ce lo teniamo per l'ultimo giorno, sulla strada per l'aeroporto.</p>
 
       <div class="jeep-map-wrap reveal">
         <svg id="jeep-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
@@ -190,7 +190,7 @@
 
       <div class="card reveal" style="overflow-x:auto;">
         <h3 style="margin-top:0;">Tutte le tappe</h3>
-        <p style="margin-top:0;">Nell'ordine in cui si incontrano, dal primo giorno all'ultimo. Le coordinate servono ad aprire il punto sulla mappa, non a navigare al metro.</p>
+        <p style="margin-top:0;">Nell'ordine in cui le incontriamo, dal primo giorno all'ultimo. Le coordinate servono ad aprire il punto sulla mappa, non a navigare al metro.</p>
         <table class="stops-table" id="stops-table">
           <thead><tr><th>Tappa</th><th>Coordinate</th><th></th></tr></thead>
           <tbody></tbody>
@@ -202,8 +202,8 @@
   <!-- COSE DA NON PERDERE -->
   <section id="siti" class="panel dark" data-nav>
     <div class="inner">
-      <h2 class="section-title reveal">🧊 Cose da non perdere</h2>
-      <p class="section-sub reveal">Le tappe principali, filtrabili per zona.</p>
+      <h2 class="section-title reveal">🧊 Cosa andiamo a vedere</h2>
+      <p class="section-sub reveal">Le tappe principali del nostro giro, filtrabili per zona.</p>
 
       <div class="filter-row reveal" id="family-filters"></div>
       <div class="family-grid" id="family-grid"></div>
@@ -219,20 +219,20 @@
   <!-- GUIDA PRATICA -->
   <section id="guida" class="panel" data-nav>
     <div class="inner">
-      <h2 class="section-title reveal">🧭 Guida pratica</h2>
-      <p class="section-sub reveal">Guidare d'inverno, quanto costa, cosa serve. Dati verificati ad agosto 2026.</p>
+      <h2 class="section-title reveal">🧭 Come ci organizziamo</h2>
+      <p class="section-sub reveal">Guidare d'inverno, quanto ci costa, cosa ci serve. Dati verificati ad agosto 2026.</p>
 
       <div class="callout warn reveal">
-        <strong>La cosa più pericolosa del viaggio è la strada, non i vulcani.</strong> A gennaio si guida con neve, ghiaccio, vento forte e cinque ore di luce. Due regole che in Islanda si prendono sul serio: <strong>road.is</strong> prima di ogni partenza per lo stato delle strade, e <strong>safetravel.is</strong> per gli avvisi. Se dicono di non partire, non si parte. In questo giro <strong>non c'è un giorno cuscinetto</strong>: se una giornata salta, si taglia. Per ogni giorno il programma dice già cosa sacrificare per primo.
+        <strong>La cosa più pericolosa del viaggio è la strada, non i vulcani.</strong> A gennaio guidiamo con neve, ghiaccio, vento forte e cinque ore di luce. Due regole che in Islanda si prendono sul serio, e noi con loro: <strong>road.is</strong> prima di ogni partenza per lo stato delle strade, e <strong>safetravel.is</strong> per gli avvisi. Se dicono di non partire, non partiamo. In questo giro <strong>non abbiamo un giorno cuscinetto</strong>: se una giornata salta, tagliamo. Per ogni giorno il programma dice già cosa sacrifichiamo per primo.
       </div>
 
       <div class="info-grid">
-        <div class="card reveal"><h3>🚙 Che auto</h3><p>D'inverno serve un <strong>4x4</strong>: non per le strade F (chiuse) ma per neve e ghiaccio sulle strade normali. Una settimana costa circa <strong>240-370€</strong> per un Duster, sopra i 700€ per un SUV più grande. Gomme invernali chiodate incluse per legge nella stagione.</p></div>
-        <div class="card reveal"><h3>💨 Le portiere</h3><p>Sembra un dettaglio ridicolo ed è il danno più comune: il vento islandese <strong>strappa le portiere</strong> quando le apri. L'assicurazione per questo (<em>SAAP</em>, Sand and Ash Protection, e la copertura vento) di solito è a parte. Prendetela.</p></div>
-        <div class="card reveal"><h3>💰 Costa parecchio</h3><p>L'Islanda è uno dei paesi più cari d'Europa. Si paga <strong>tutto con carta</strong>, anche un caffè, e i contanti non servono praticamente mai. La corona islandese (ISK) non circola fuori dal paese.</p></div>
-        <div class="card reveal"><h3>♨️ Le piscine termali</h3><p>Ogni paese ne ha una pubblica, riscaldata geotermicamente, aperta anche d'inverno e a pochi euro. Sono l'alternativa vera alla Blue Lagoon, che costa dieci volte tanto. <strong>Regola non negoziabile: doccia nudi prima di entrare</strong>, e la fanno rispettare.</p></div>
-        <div class="card reveal"><h3>🛂 Documenti</h3><p>Niente: l'Islanda è nello <strong>spazio Schengen</strong>, basta la carta d'identità. Niente visto, niente autorizzazioni.</p></div>
-        <div class="card reveal"><h3>🌊 Reynisfjara</h3><p>La spiaggia nera ha le <strong>onde anomale</strong>, che arrivano molto più in alto delle altre e hanno ucciso più di un turista. Non si dà mai le spalle al mare e non ci si avvicina alla battigia. C'è un semaforo di allerta all'ingresso: si guarda.</p></div>
+        <div class="card reveal"><h3>🚙 Che auto</h3><p>D'inverno ci serve un <strong>4x4</strong>: non per le strade F (chiuse) ma per neve e ghiaccio sulle strade normali. Una settimana costa circa <strong>240-370€</strong> per un Duster, sopra i 700€ per un SUV più grande. Gomme invernali chiodate incluse per legge nella stagione.</p></div>
+        <div class="card reveal"><h3>💨 Le portiere</h3><p>Sembra un dettaglio ridicolo ed è il danno più comune: il vento islandese <strong>strappa le portiere</strong> quando le apriamo. L'assicurazione per questo (<em>SAAP</em>, Sand and Ash Protection, e la copertura vento) di solito è a parte. La prendiamo.</p></div>
+        <div class="card reveal"><h3>💰 Costa parecchio</h3><p>L'Islanda è uno dei paesi più cari d'Europa. Paghiamo <strong>tutto con carta</strong>, anche un caffè, e i contanti non ci servono praticamente mai. La corona islandese (ISK) non circola fuori dal paese.</p></div>
+        <div class="card reveal"><h3>♨️ Le piscine termali</h3><p>Ogni paese ne ha una pubblica, riscaldata geotermicamente, aperta anche d'inverno e a pochi euro. Sono la nostra alternativa vera alla Blue Lagoon, che costa dieci volte tanto. <strong>Regola non negoziabile: doccia nudi prima di entrare</strong>, e la fanno rispettare.</p></div>
+        <div class="card reveal"><h3>🛂 Documenti</h3><p>Niente: l'Islanda è nello <strong>spazio Schengen</strong>, ci basta la carta d'identità. Niente visto, niente autorizzazioni.</p></div>
+        <div class="card reveal"><h3>🌊 Reynisfjara</h3><p>La spiaggia nera ha le <strong>onde anomale</strong>, che arrivano molto più in alto delle altre e hanno ucciso più di un turista. Non diamo mai le spalle al mare e non ci avviciniamo alla battigia. C'è un semaforo di allerta all'ingresso: lo guardiamo.</p></div>
       </div>
 
       <div class="source-note">Fonti: safetravel.is, road.is, guidetoiceland.is, adventures.is, lavacarrental.is e autonoleggioislanda.it (prezzi noleggio) — verificate ad agosto 2026.</div>
@@ -242,18 +242,18 @@
   <!-- VULCANI -->
   <section id="vulcani" class="panel dark" data-nav>
     <div class="inner">
-      <h2 class="section-title reveal">🌋 Vulcani, e cosa comporta</h2>
-      <p class="section-sub reveal">La penisola di Reykjanes — quella dell'aeroporto e della Blue Lagoon — è in piena fase eruttiva da anni. Non è un pericolo per il viaggio, ma è un motivo di chiusure improvvise.</p>
+      <h2 class="section-title reveal">🌋 Vulcani, e cosa cambia per noi</h2>
+      <p class="section-sub reveal">La penisola di Reykjanes — quella dell'aeroporto e della Blue Lagoon — è in piena fase eruttiva da anni. Non è un pericolo per il nostro viaggio, ma può farci trovare qualcosa chiuso all'improvviso.</p>
 
       <div class="info-grid">
         <div class="card reveal"><h3>📍 Dove succede</h3><p>Tutto nella zona di <strong>Grindavík e Svartsengi</strong>, sulla penisola di Reykjanes: la stessa dove stanno l'aeroporto di Keflavík e la Blue Lagoon. Il resto dell'isola — Reykjavík, costa sud, Jökulsárlón — non è toccato.</p></div>
         <div class="card reveal"><h3>📅 A che punto siamo</h3><p>L'ultima eruzione è cominciata il <strong>16 luglio 2025</strong> ed è finita il 5 agosto dopo 21 giorni, lasciando un campo lavico di 3,3 km². Da allora nessuna eruzione in corso, ma <strong>il magma si sta riaccumulando</strong> sotto Svartsengi e l'ufficio meteo islandese considera probabile una nuova intrusione.</p></div>
-        <div class="card reveal"><h3>💧 La Blue Lagoon</h3><p>È aperta, ma negli ultimi anni ha avuto <strong>chiusure brevi e improvvise</strong> per precauzione. Se è nel programma, vale la pena avere un piano B — la <strong>Sky Lagoon</strong> a Reykjavík o una qualsiasi piscina comunale — invece di considerarla garantita.</p></div>
+        <div class="card reveal"><h3>💧 La Blue Lagoon</h3><p>È aperta, ma negli ultimi anni ha avuto <strong>chiusure brevi e improvvise</strong> per precauzione. Se è nel programma, ci conviene avere un piano B — la <strong>Sky Lagoon</strong> a Reykjavík o una qualsiasi piscina comunale — invece di considerarla garantita.</p></div>
         <div class="card reveal"><h3>✈️ I voli</h3><p>Durante le eruzioni recenti <strong>l'aeroporto e i voli hanno continuato a funzionare normalmente</strong>: si chiudono le strade vicino alla colata, non lo spazio aereo. Il 2010 di Eyjafjallajökull era un vulcano diverso e un tipo di eruzione diverso.</p></div>
       </div>
 
       <div class="callout reveal">
-        <strong>In pratica:</strong> nessun motivo per cambiare piani, ma controllate <strong>safetravel.is</strong> nei giorni prima di partire e non prenotate la Blue Lagoon come unica cosa del giorno. Situazione aggiornata ad agosto 2026 — in una zona così attiva va riletta vicino alla partenza.
+        <strong>In pratica:</strong> nessun motivo per cambiare piani, ma controlliamo <strong>safetravel.is</strong> nei giorni prima di partire e non prenotiamo la Blue Lagoon come unica cosa del giorno. Situazione aggiornata ad agosto 2026 — in una zona così attiva la rileggiamo vicino alla partenza.
         <div class="source-note">Fonti: safetravel.is, adventures.is, volcanoexpress.is, icelandia.com — verificate ad agosto 2026.</div>
       </div>
     </div>
@@ -268,7 +268,7 @@
         <div class="fallback">💧</div>
       </div>
       <h2 class="section-title reveal">🌦️ Meteo — gennaio</h2>
-      <p class="section-sub reveal">Meno freddo di quanto ci si aspetti, molto più ventoso.</p>
+      <p class="section-sub reveal">Meno freddo di quanto ci aspettiamo, molto più ventoso.</p>
 
       <div class="weather-cols reveal">
         <div>
@@ -290,7 +290,7 @@
       </div>
 
       <div class="callout reveal">
-        <strong>La Corrente del Golfo tiene l'Islanda più mite di quanto dica la latitudine:</strong> a Reykjavík a gennaio si sta intorno allo zero, meno che a Milano in certe giornate. Il problema non è il termometro, è il <strong>vento</strong>, che trasforma 0°C in una sensazione da -15. Serve il guscio antivento, non il piumino più spesso: <strong>strati, impermeabile, guanti, berretto e scarponi con la suola che tiene sul ghiaccio</strong>. E i ramponcini da mettere sotto le scarpe: costano poco e su certi sentieri ghiacciati fanno la differenza.
+        <strong>La Corrente del Golfo tiene l'Islanda più mite di quanto dica la latitudine:</strong> a Reykjavík a gennaio si sta intorno allo zero, meno che a Milano in certe giornate. Il problema non è il termometro, è il <strong>vento</strong>, che trasforma 0°C in una sensazione da -15. Ci serve il guscio antivento, non il piumino più spesso: <strong>strati, impermeabile, guanti, berretto e scarponi con la suola che tiene sul ghiaccio</strong>. E ci portiamo i ramponcini da mettere sotto le scarpe: costano poco e su certi sentieri ghiacciati fanno la differenza.
         <div class="source-note">Fonti: adventures.is, iceland.org, funiceland.is — verificate ad agosto 2026.</div>
       </div>
     </div>
@@ -300,7 +300,7 @@
   <section id="cibo" class="panel dark" data-nav>
     <div class="inner">
       <h2 class="section-title reveal">🍲 Cibo &amp; alcolici</h2>
-      <p class="section-sub reveal">Poche materie prime e tanto mare. E prezzi che fanno male.</p>
+      <p class="section-sub reveal">Poche materie prime e tanto mare. E prezzi che ci faranno male.</p>
 
       <div class="info-grid">
         <div class="card reveal"><h3>🐟 Plokkfiskur</h3><p>Lo stufato di pesce e patate, il comfort food nazionale: merluzzo sfilettato, patate, cipolla e besciamella, servito con pane di segale. È quello che si mangia dopo una giornata al vento.</p></div>
@@ -308,7 +308,7 @@
         <div class="card reveal"><h3>🌭 Pylsur</h3><p>L'hot dog islandese, di agnello, con cipolla fritta e crude, senape dolce e remoulade. Il chiosco <strong>Bæjarins Beztu</strong> di Reykjavík è un'istituzione dal 1937 ed è una delle poche cose economiche del paese.</p></div>
         <div class="card reveal"><h3>🥛 Skyr</h3><p>Tecnicamente un formaggio fresco, non uno yogurt, e si mangia da mille anni. Denso, acido, pochissimi grassi. Al supermercato costa niente ed è la colazione giusta.</p></div>
         <div class="card reveal"><h3>🥃 Brennivín</h3><p>L'acquavite nazionale aromatizzata al cumino, soprannominata <em>svarti dauði</em>, "morte nera". Si beve gelata, in bicchierini, tipicamente con lo hákarl — lo squalo fermentato, che è la sfida che tutti provano una volta sola.</p></div>
-        <div class="card reveal"><h3>🍺 Vínbúðin</h3><p>Gli alcolici oltre la birra leggera si comprano <strong>solo nei negozi di stato Vínbúðin</strong>, con orari corti e chiusi la domenica. Una birra al bar sta sui 10-12€. Se volete bere, si compra al duty free dell'aeroporto all'arrivo: lo fanno tutti gli islandesi.</p></div>
+        <div class="card reveal"><h3>🍺 Vínbúðin</h3><p>Gli alcolici oltre la birra leggera si comprano <strong>solo nei negozi di stato Vínbúðin</strong>, con orari corti e chiusi la domenica. Una birra al bar sta sui 10-12€. Se vogliamo bere, ci conviene comprare al duty free dell'aeroporto all'arrivo: lo fanno tutti gli islandesi.</p></div>
       </div>
     </div>
   </section>
@@ -318,41 +318,41 @@
   <!-- FAQ -->
   <section id="faq" class="panel" data-nav>
     <div class="inner">
-      <h2 class="section-title reveal">❓ Domande frequenti</h2>
+      <h2 class="section-title reveal">❓ Le domande che ci facciamo</h2>
 
       <details class="faq reveal">
         <summary>Vedremo l'aurora?</summary>
-        <div class="faq-body">Nessuno può prometterlo, ma le condizioni sono buone: gennaio dà <strong>16-20 ore di buio</strong> e siamo vicini al massimo del ciclo solare. Il fattore che decide non è l'aurora — quella c'è quasi sempre — ma <strong>il cielo sereno</strong>. Sette notti sono molte più possibilità di un weekend: ogni notte è un'altra estrazione. Si guarda vedur.is, che pubblica sia la previsione dell'aurora sia la copertura nuvolosa, e ci si sposta dove il cielo è pulito.</div>
+        <div class="faq-body">Nessuno può prometterlo, ma le condizioni sono buone: gennaio dà <strong>16-20 ore di buio</strong> e siamo vicini al massimo del ciclo solare. Il fattore che decide non è l'aurora — quella c'è quasi sempre — ma <strong>il cielo sereno</strong>. Le nostre sette notti sono molte più possibilità di un weekend: ogni notte è un'altra estrazione. Guardiamo vedur.is, che pubblica sia la previsione dell'aurora sia la copertura nuvolosa, e ci spostiamo dove il cielo è pulito.</div>
       </details>
 
       <details class="faq reveal">
         <summary>Cinque ore di luce non sono troppo poche?</summary>
-        <div class="faq-body">Sono poche, e vanno pianificate: in strada per le 10, le cose principali fra le 11 e le 16. Ma c'è un rovescio: con il sole sempre bassissimo <strong>la luce è quella dell'alba per tutto il giorno</strong>, e per le fotografie è il periodo migliore dell'anno. E il buio è il motivo per cui si è scelto gennaio.</div>
+        <div class="faq-body">Sono poche, e le pianifichiamo bene: in strada per le 10, le cose principali fra le 11 e le 16. Ma c'è un rovescio: con il sole sempre bassissimo <strong>la luce è quella dell'alba per tutto il giorno</strong>, e per le fotografie è il periodo migliore dell'anno. E il buio è il motivo per cui abbiamo scelto gennaio.</div>
       </details>
 
       <details class="faq reveal">
-        <summary>Serve il 4x4?</summary>
-        <div class="faq-body">D'inverno sì. Non per le strade F degli altopiani, che a gennaio sono comunque chiuse, ma per neve e ghiaccio sulle strade normali. Una settimana sta sui <strong>240-370€</strong> per un Duster. E prendete le assicurazioni extra: <strong>il vento che strappa le portiere</strong> è il danno più comune in Islanda, e di solito non è nella copertura base.</div>
+        <summary>Ci serve il 4x4?</summary>
+        <div class="faq-body">D'inverno sì. Non per le strade F degli altopiani, che a gennaio sono comunque chiuse, ma per neve e ghiaccio sulle strade normali. Una settimana sta sui <strong>240-370€</strong> per un Duster. E prendiamo le assicurazioni extra: <strong>il vento che strappa le portiere</strong> è il danno più comune in Islanda, e di solito non è nella copertura base.</div>
       </details>
 
       <details class="faq reveal">
         <summary>Il vulcano è un problema?</summary>
-        <div class="faq-body">Per il viaggio no. L'attività è concentrata a <strong>Reykjanes, attorno a Grindavík</strong>; l'ultima eruzione è finita il 5 agosto 2025 e da allora non ce ne sono state, anche se il magma si sta riaccumulando. Durante le eruzioni recenti <strong>aeroporto e voli hanno funzionato normalmente</strong>. L'unica cosa da non dare per scontata è la <strong>Blue Lagoon</strong>, che chiude a volte per precauzione: meglio avere un'alternativa.</div>
+        <div class="faq-body">Per il viaggio no. L'attività è concentrata a <strong>Reykjanes, attorno a Grindavík</strong>; l'ultima eruzione è finita il 5 agosto 2025 e da allora non ce ne sono state, anche se il magma si sta riaccumulando. Durante le eruzioni recenti <strong>aeroporto e voli hanno funzionato normalmente</strong>. L'unica cosa che non diamo per scontata è la <strong>Blue Lagoon</strong>, che chiude a volte per precauzione: meglio tenerci un'alternativa.</div>
       </details>
 
       <details class="faq reveal">
         <summary>Fa freddissimo?</summary>
-        <div class="faq-body">Meno di quanto si pensi: a Reykjavík a gennaio si sta intorno a <strong>0°C</strong>, grazie alla Corrente del Golfo. Il problema è il <strong>vento</strong>, che porta la sensazione molto sotto. Serve un guscio antivento e impermeabile più strati sotto, non il piumino gigante. E i ramponcini da mettere sotto le scarpe.</div>
+        <div class="faq-body">Meno di quanto pensiamo: a Reykjavík a gennaio si sta intorno a <strong>0°C</strong>, grazie alla Corrente del Golfo. Il problema è il <strong>vento</strong>, che porta la sensazione molto sotto. Ci serve un guscio antivento e impermeabile più strati sotto, non il piumino gigante. E i ramponcini da mettere sotto le scarpe.</div>
       </details>
 
       <details class="faq reveal">
-        <summary>Perché non fare il giro completo dell'isola?</summary>
+        <summary>Perché non facciamo il giro completo dell'isola?</summary>
         <div class="faq-body">Perché a gennaio il nord ha neve, vento e strade che chiudono senza preavviso, con quattro ore di luce per coprire le distanze. Il <strong>Circolo d'Oro e la costa sud sono aperti tutto l'anno</strong> e contengono quasi tutto quello che ci interessa: cascate, spiaggia nera, laguna glaciale, grotte di ghiaccio. Il giro completo è un viaggio d'estate.</div>
       </details>
 
       <details class="faq reveal">
         <summary>Quanto costa stare lì?</summary>
-        <div class="faq-body">È uno dei paesi più cari d'Europa: una birra al bar sta sui 10-12€ e una cena fuori vola. Si compensa cucinando — i supermercati <strong>Bónus</strong> e <strong>Krónan</strong> costano una frazione — e usando le <strong>piscine comunali</strong>, che costano pochi euro, invece della Blue Lagoon. Si paga tutto con carta, i contanti non servono.</div>
+        <div class="faq-body">È uno dei paesi più cari d'Europa: una birra al bar sta sui 10-12€ e una cena fuori vola. Compensiamo cucinando — i supermercati <strong>Bónus</strong> e <strong>Krónan</strong> costano una frazione — e usando le <strong>piscine comunali</strong>, che costano pochi euro, invece della Blue Lagoon. Paghiamo tutto con carta, i contanti non ci servono.</div>
       </details>
     </div>
   </section>
@@ -436,14 +436,14 @@
   function placeLink(k){ var p = COORDS[k]; return 'https://www.google.com/maps/search/?api=1&query=' + p[0] + ',' + p[1]; }
 
   var ITINERARY = [
-    { d:1, data:'sab 2 gen', title:'Arrivo e prima notte a Reykjav\u00edk', tags:['Arrivo','~10 km','Notte: Reykjav\u00edk'], text:'Atterraggio alle 17:00, che a gennaio vuol dire buio da un pezzo. Ritiro dei bagagli e della <strong>4x4</strong> \u2014 fotografatela da tutti i lati e controllate che le gomme siano chiodate \u2014 poi dritti in citt\u00e0 e check-in al <strong>100 Iceland Hotel</strong>. Spesa da B\u00f3nus o Kr\u00f3nan per i giorni in cui gli alloggi sono isolati, cena in centro e, se il cielo \u00e8 sereno, una prima uscita breve fuori dalle luci. Visite nessuna: oggi si arriva e basta.', link: placeLink('reykjavik'), linkLabel:'Vedi Reykjav\u00edk su Google Maps' },
-    { d:2, data:'dom 3 gen', title:'Il Circolo d\'Oro', tags:['\u00deingvellir','Geysir','Gullfoss','~240 km','Notte: Fl\u00fa\u00f0ir'], text:'Partenza alle 9:00 col buio. A <strong>\u00deingvellir</strong> si cammina nella gola di Almannagj\u00e1, dove la placca americana e quella euroasiatica si allontanano di due centimetri l\'anno e dove nel 930 si riuniva l\'Al\u00feingi. Poi lo <strong>Strokkur</strong>, che erutta ogni 5-10 minuti fino a venti metri: mettetevi con il vento alle spalle. Pranzo a <strong>Fri\u00f0heimar</strong>, la serra dove coltivano pomodori tutto l\'anno (va prenotato), e <strong>Gullfoss</strong> fino al tramonto. Si chiude nella <strong>Secret Lagoon</strong> di Fl\u00fa\u00f0ir, che col buio \u00e8 un\'altra cosa. Luce: 11:15-15:50.', link: placeLink('thingvellir'), linkLabel:'Apri \u00deingvellir su Google Maps', highlight:true },
-    { d:3, data:'lun 4 gen', title:'Costa sud e il relitto del DC-3', tags:['Costa sud','DC-3','8 km a piedi','Notte: V\u00edk'], text:'<strong>Seljalandsfoss</strong>, dietro cui d\'inverno non si passa perch\u00e9 il sentiero ghiaccia, e cinquecento metri pi\u00f9 avanti <strong>Glj\u00fafrab\u00fai</strong>, nascosta in una gola in cui si entra camminando nel torrente: servono scarpe impermeabili. Poi <strong>Sk\u00f3gafoss</strong>, sessanta metri di salto. Il pezzo grosso \u00e8 il <strong>relitto del DC-3</strong> sulla spiaggia nera di S\u00f3lheimasandur: un aereo della US Navy atterrato d\'emergenza nel 1973, tutti salvi. Sono quattro chilometri a piedi per tratta su terreno piatto, due ore e mezza in tutto \u2014 portate la frontale, al ritorno \u00e8 buio. Tramonto da <strong>Dyrh\u00f3laey</strong>, poi V\u00edk.', link: placeLink('dc3'), linkLabel:'Vedi il relitto del DC-3 su Google Maps', highlight:true },
-    { d:4, data:'mar 5 gen', title:'Il giorno del ghiaccio', tags:['Grotta di ghiaccio','J\u00f6kuls\u00e1rl\u00f3n','Notte: Hof'], text:'Si parte alle 8:00 al buio, attraverso il deserto di sabbia nera di M\u00fdrdalssandur e il campo di lava coperto di muschio dell\'Eldhraun. <strong>Fja\u00f0r\u00e1rglj\u00fafur</strong> se \u00e8 aperto, <strong>Skaftafell</strong> solo se avanza tempo \u2014 niente trekking lungo. Alle 12:30 la <strong>grotta di ghiaccio</strong>: super-jeep e guida da J\u00f6kuls\u00e1rl\u00f3n, casco e ramponi forniti, tre ore dentro un blu che non esiste altrove. <strong>Tutta la giornata si costruisce attorno a quell\'orario.</strong> Poi la <strong>Diamond Beach</strong> col tramonto e notte a Hof, dove c\'\u00e8 la chiesetta col tetto d\'erba. La sera si torna alla laguna: l\'aurora riflessa fra gli iceberg \u00e8 la foto del viaggio.', link: placeLink('jokulsarlon'), linkLabel:'Vedi J\u00f6kuls\u00e1rl\u00f3n su Google Maps', highlight:true },
-    { d:5, data:'mer 6 gen', title:'Reynisfjara e rientro verso ovest', tags:['Reynisfjara','\u26a0\ufe0f onde','\u00derett\u00e1ndinn','~320 km','Notte: Selfoss'], text:'Due ore e dieci di buio fino a V\u00edk, sulla strada di ieri. <strong>Reynisfjara</strong>: spiaggia nera, colonne di basalto e la grotta di H\u00e1lsanefshellir. Qui si rispetta il semaforo e non si danno mai le spalle al mare \u2014 le onde anomale hanno ucciso pi\u00f9 di una persona. Pranzo a V\u00edk, la <strong>V\u00edkurkirkja</strong> se non l\'avete gi\u00e0 vista, e il cratere <strong>Keri\u00f0</strong> solo se resta luce. Il 6 gennaio \u00e8 <strong>\u00derett\u00e1ndinn</strong>, l\'ultimo giorno delle feste: a Selfoss di solito ci sono fal\u00f2 e fuochi. La tradizione dice che stanotte gli elfi traslocano e le mucche parlano.', link: placeLink('reynisfjara'), linkLabel:'Vedi Reynisfjara su Google Maps' },
-    { d:6, data:'gio 7 gen', title:'Sn\u00e6fellsnes', tags:['Kirkjufell','Foche','~330 km','Notte: Grundarfj\u00f6r\u00f0ur'], text:'La giornata pi\u00f9 lunga, si parte alle 8:00. Si passa da Reykjav\u00edk e dal tunnel dell\'Hvalfj\u00f6r\u00f0ur, che \u00e8 gratuito, e dopo due ore e tre quarti si arriva a <strong>B\u00fa\u00f0ir</strong>: una chiesa nera isolata nel campo di lava con lo Sn\u00e6fellsj\u00f6kull dietro, il vulcano da cui Jules Verne faceva cominciare il <em>Viaggio al centro della Terra</em>. Poi le scogliere di <strong>Arnarstapi</strong> con l\'arco di Gatklettur, <strong>Dj\u00fapal\u00f3nssandur</strong> con i resti di un naufragio e le pietre che i pescatori sollevavano per mettersi alla prova, e <strong>Ytri Tunga</strong>, dove le foche si vedono tutto l\'anno: mezz\'ora di sentiero, non illuminato. Si chiude al tramonto sul <strong>Kirkjufell</strong> con la cascata davanti, la vista pi\u00f9 fotografata d\'Islanda.', link: placeLink('kirkjufell'), linkLabel:'Vedi il Kirkjufell su Google Maps', highlight:true },
-    { d:7, data:'ven 8 gen', title:'Un giorno intero a Reykjav\u00edk', tags:['Citt\u00e0','Sky Lagoon','Tutto a piedi','Notte: Reykjav\u00edk'], text:'Sveglia presto: alle 7:30 si lascia Grundarfj\u00f6r\u00f0ur al buio e si arriva in citt\u00e0 quando comincia la luce. <strong>Hallgr\u00edmskirkja</strong> e la vista dalla torre, poi tutto a piedi: Sk\u00f3lav\u00f6r\u00f0ust\u00edgur con l\'arcobaleno dipinto sull\'asfalto, Laugavegur fra lana e design, l\'hot dog da <strong>B\u00e6jarins Beztu</strong> (si ordina \u00abeina me\u00f0 \u00f6llu\u00bb, con tutto), <strong>Harpa</strong> e il Sun Voyager, il porto vecchio e Grandi. Niente musei. Alle 18:00 la <strong>Sky Lagoon</strong> con il rituale in sette passaggi, cena in centro e, se il cielo tiene, aurora al <strong>faro di Gr\u00f3tta</strong>.', link: placeLink('hallgrimskirkja'), linkLabel:'Vedi la Hallgr\u00edmskirkja su Google Maps' },
-    { d:8, data:'sab 9 gen', title:'Reykjanes e rientro', tags:['Partenza','Lava recente','~110 km'], text:'Partenza alle 9:45 e un\'ora scarsa fino alla punta della penisola. <strong>Valahn\u00fakur</strong> con le scogliere e il faro di Reykjanesviti, <strong>Gunnuhver</strong> che \u00e8 una sorgente di vapore bollente, e il <strong>ponte fra i continenti</strong> sopra la faglia. Le colate delle eruzioni del 2021-2024 si vedono dalla strada, ma Grind\u00e1vik ha spesso gli accessi chiusi: si controlla safetravel.is la mattina stessa. <strong>Blue Lagoon</strong> solo se il volo lo permette \u2014 ha il deposito bagagli ed \u00e8 a venti minuti dall\'aeroporto. L\'auto si riconsegna col pieno, almeno due ore prima del decollo.', link: placeLink('valahnukur'), linkLabel:'Vedi Valahn\u00fakur su Google Maps' }
+    { d:1, data:'sab 2 gen', title:'Arrivo e prima notte a Reykjav\u00edk', tags:['Arrivo','~10 km','Notte: Reykjav\u00edk'], text:'Atterriamo alle 17:00, che a gennaio vuol dire buio da un pezzo. Ritiriamo i bagagli e la <strong>4x4</strong> \u2014 la fotografiamo da tutti i lati e controlliamo che le gomme siano chiodate \u2014 poi dritti in citt\u00e0 e check-in al <strong>100 Iceland Hotel</strong>. Facciamo la spesa da B\u00f3nus o Kr\u00f3nan per i giorni in cui gli alloggi sono isolati, ceniamo in centro e, se il cielo \u00e8 sereno, facciamo una prima uscita breve fuori dalle luci. Visite nessuna: oggi arriviamo e basta.', link: placeLink('reykjavik'), linkLabel:'Vedi Reykjav\u00edk su Google Maps' },
+    { d:2, data:'dom 3 gen', title:'Il Circolo d\'Oro', tags:['\u00deingvellir','Geysir','Gullfoss','~240 km','Notte: Fl\u00fa\u00f0ir'], text:'Partiamo alle 9:00 col buio. A <strong>\u00deingvellir</strong> camminiamo nella gola di Almannagj\u00e1, dove la placca americana e quella euroasiatica si allontanano di due centimetri l\'anno e dove nel 930 si riuniva l\'Al\u00feingi. Poi lo <strong>Strokkur</strong>, che erutta ogni 5-10 minuti fino a venti metri: ci mettiamo con il vento alle spalle. Pranzo a <strong>Fri\u00f0heimar</strong>, la serra dove coltivano pomodori tutto l\'anno (lo prenotiamo prima), e <strong>Gullfoss</strong> fino al tramonto. Chiudiamo nella <strong>Secret Lagoon</strong> di Fl\u00fa\u00f0ir, che col buio \u00e8 un\'altra cosa. Luce: 11:15-15:50.', link: placeLink('thingvellir'), linkLabel:'Apri \u00deingvellir su Google Maps', highlight:true },
+    { d:3, data:'lun 4 gen', title:'Costa sud e il relitto del DC-3', tags:['Costa sud','DC-3','8 km a piedi','Notte: V\u00edk'], text:'Cominciamo da <strong>Seljalandsfoss</strong>, dietro cui d\'inverno non si passa perch\u00e9 il sentiero ghiaccia, e cinquecento metri pi\u00f9 avanti <strong>Glj\u00fafrab\u00fai</strong>, nascosta in una gola in cui entriamo camminando nel torrente: ci servono scarpe impermeabili. Poi <strong>Sk\u00f3gafoss</strong>, sessanta metri di salto. Il pezzo grosso \u00e8 il <strong>relitto del DC-3</strong> sulla spiaggia nera di S\u00f3lheimasandur: un aereo della US Navy atterrato d\'emergenza nel 1973, tutti salvi. Sono quattro chilometri a piedi per tratta su terreno piatto, due ore e mezza in tutto \u2014 ci portiamo la frontale, al ritorno \u00e8 buio. Tramonto da <strong>Dyrh\u00f3laey</strong>, poi V\u00edk.', link: placeLink('dc3'), linkLabel:'Vedi il relitto del DC-3 su Google Maps', highlight:true },
+    { d:4, data:'mar 5 gen', title:'Il giorno del ghiaccio', tags:['Grotta di ghiaccio','J\u00f6kuls\u00e1rl\u00f3n','Notte: Hof'], text:'Partiamo alle 8:00 al buio, attraverso il deserto di sabbia nera di M\u00fdrdalssandur e il campo di lava coperto di muschio dell\'Eldhraun. <strong>Fja\u00f0r\u00e1rglj\u00fafur</strong> se \u00e8 aperto, <strong>Skaftafell</strong> solo se ci avanza tempo \u2014 niente trekking lungo. Alle 12:30 la <strong>grotta di ghiaccio</strong>: super-jeep e guida da J\u00f6kuls\u00e1rl\u00f3n, casco e ramponi forniti, tre ore dentro un blu che non esiste altrove. <strong>Tutta la giornata la costruiamo attorno a quell\'orario.</strong> Poi la <strong>Diamond Beach</strong> col tramonto e notte a Hof, dove c\'\u00e8 la chiesetta col tetto d\'erba. La sera torniamo alla laguna: l\'aurora riflessa fra gli iceberg \u00e8 la foto del viaggio.', link: placeLink('jokulsarlon'), linkLabel:'Vedi J\u00f6kuls\u00e1rl\u00f3n su Google Maps', highlight:true },
+    { d:5, data:'mer 6 gen', title:'Reynisfjara e rientro verso ovest', tags:['Reynisfjara','\u26a0\ufe0f onde','\u00derett\u00e1ndinn','~320 km','Notte: Selfoss'], text:'Ci facciamo due ore e dieci di buio fino a V\u00edk, sulla strada di ieri. <strong>Reynisfjara</strong>: spiaggia nera, colonne di basalto e la grotta di H\u00e1lsanefshellir. Qui rispettiamo il semaforo e non diamo mai le spalle al mare \u2014 le onde anomale hanno ucciso pi\u00f9 di una persona. Pranzo a V\u00edk, la <strong>V\u00edkurkirkja</strong> se non l\'abbiamo gi\u00e0 vista, e il cratere <strong>Keri\u00f0</strong> solo se ci resta luce. Il 6 gennaio \u00e8 <strong>\u00derett\u00e1ndinn</strong>, l\'ultimo giorno delle feste: a Selfoss di solito ci sono fal\u00f2 e fuochi. La tradizione dice che stanotte gli elfi traslocano e le mucche parlano.', link: placeLink('reynisfjara'), linkLabel:'Vedi Reynisfjara su Google Maps' },
+    { d:6, data:'gio 7 gen', title:'Sn\u00e6fellsnes', tags:['Kirkjufell','Foche','~330 km','Notte: Grundarfj\u00f6r\u00f0ur'], text:'La giornata pi\u00f9 lunga: partiamo alle 8:00. Passiamo da Reykjav\u00edk e dal tunnel dell\'Hvalfj\u00f6r\u00f0ur, che \u00e8 gratuito, e dopo due ore e tre quarti arriviamo a <strong>B\u00fa\u00f0ir</strong>: una chiesa nera isolata nel campo di lava con lo Sn\u00e6fellsj\u00f6kull dietro, il vulcano da cui Jules Verne faceva cominciare il <em>Viaggio al centro della Terra</em>. Poi le scogliere di <strong>Arnarstapi</strong> con l\'arco di Gatklettur, <strong>Dj\u00fapal\u00f3nssandur</strong> con i resti di un naufragio e le pietre che i pescatori sollevavano per mettersi alla prova, e <strong>Ytri Tunga</strong>, dove le foche si vedono tutto l\'anno: mezz\'ora di sentiero, non illuminato. Chiudiamo al tramonto sul <strong>Kirkjufell</strong> con la cascata davanti, la vista pi\u00f9 fotografata d\'Islanda.', link: placeLink('kirkjufell'), linkLabel:'Vedi il Kirkjufell su Google Maps', highlight:true },
+    { d:7, data:'ven 8 gen', title:'Un giorno intero a Reykjav\u00edk', tags:['Citt\u00e0','Sky Lagoon','Tutto a piedi','Notte: Reykjav\u00edk'], text:'Sveglia presto: alle 7:30 lasciamo Grundarfj\u00f6r\u00f0ur al buio e arriviamo in citt\u00e0 quando comincia la luce. <strong>Hallgr\u00edmskirkja</strong> e la vista dalla torre, poi giriamo tutto a piedi: Sk\u00f3lav\u00f6r\u00f0ust\u00edgur con l\'arcobaleno dipinto sull\'asfalto, Laugavegur fra lana e design, l\'hot dog da <strong>B\u00e6jarins Beztu</strong> (si ordina \u00abeina me\u00f0 \u00f6llu\u00bb, con tutto), <strong>Harpa</strong> e il Sun Voyager, il porto vecchio e Grandi. Niente musei. Alle 18:00 la <strong>Sky Lagoon</strong> con il rituale in sette passaggi, cena in centro e, se il cielo tiene, aurora al <strong>faro di Gr\u00f3tta</strong>.', link: placeLink('hallgrimskirkja'), linkLabel:'Vedi la Hallgr\u00edmskirkja su Google Maps' },
+    { d:8, data:'sab 9 gen', title:'Reykjanes e rientro', tags:['Partenza','Lava recente','~110 km'], text:'Partiamo alle 9:45 e in un\'ora scarsa siamo alla punta della penisola. <strong>Valahn\u00fakur</strong> con le scogliere e il faro di Reykjanesviti, <strong>Gunnuhver</strong> che \u00e8 una sorgente di vapore bollente, e il <strong>ponte fra i continenti</strong> sopra la faglia. Le colate delle eruzioni del 2021-2024 si vedono dalla strada, ma Grind\u00e1vik ha spesso gli accessi chiusi: controlliamo safetravel.is la mattina stessa. <strong>Blue Lagoon</strong> solo se il volo lo permette \u2014 ha il deposito bagagli ed \u00e8 a venti minuti dall\'aeroporto. L\'auto la riconsegniamo col pieno, almeno due ore prima del decollo.', link: placeLink('valahnukur'), linkLabel:'Vedi Valahn\u00fakur su Google Maps' }
   ];
 
   var timeline = document.getElementById('timeline');
@@ -451,7 +451,7 @@
     var det = document.createElement('details');
     det.className = 'day reveal';
     if(idx === 0) det.open = true;
-    var tagsHtml = day.tags.map(function(t){ return '<span class="tag' + (day.highlight ? ' highlight' : '') + '">' + t + '</span>'; }).join('');
+    var tagsHtml = day.tags.map(function(t){ t = t.replace(/^(?:\p{Extended_Pictographic}|\uFE0F|\u200D)+\s*/u, ''); return '<span class="tag' + (day.highlight ? ' highlight' : '') + '">' + t + '</span>'; }).join('');
     det.innerHTML =
       '<summary><span class="daynum">' + day.d + '</span><span class="daytitle">' + day.title + '</span><span class="chevron">▸</span></summary>' +
       '<div class="day-body"><span class="tag">' + day.data + '</span>' + tagsHtml + '<p>' + day.text + '</p>' +
@@ -516,11 +516,11 @@
 
   // ---- Come si spartisce la giornata ----
   var ROUTES = [
-    { name:'07:00 – 11:15 — buio', open:true, note:'Colazione e trasferimenti. Si guida al buio, ed è normale: la gente qui fa così tutto l\'inverno.' },
-    { name:'11:15 – 15:50 — luce', open:true, note:'Le quattro ore e mezza in cui si vedono le cose. Sole sempre basso, luce da alba per tutto il tempo.' },
+    { name:'07:00 – 11:15 — buio', open:true, note:'Colazione e trasferimenti. Guidiamo al buio, ed è normale: la gente qui fa così tutto l\'inverno.' },
+    { name:'11:15 – 15:50 — luce', open:true, note:'Le quattro ore e mezza in cui vediamo le cose. Sole sempre basso, luce da alba per tutto il tempo.' },
     { name:'15:50 – 17:00 — crepuscolo', open:true, note:'Lungo e bellissimo. È ancora abbastanza chiaro per guidare e fotografare.' },
-    { name:'Dalle 20:00 — caccia all\'aurora', open:true, note:'Le ore migliori sono fra le 21 e l\'una. Si controlla la copertura nuvolosa e ci si sposta dove il cielo è pulito.' },
-    { name:'Giro completo dell\'isola', open:false, note:'A gennaio no: nord e altopiani hanno neve, vento e chiusure improvvise. Si fa d\'estate.' }
+    { name:'Dalle 20:00 — caccia all\'aurora', open:true, note:'Le ore migliori sono fra le 21 e l\'una. Controlliamo la copertura nuvolosa e ci spostiamo dove il cielo è pulito.' },
+    { name:'Giro completo dell\'isola', open:false, note:'A gennaio no: nord e altopiani hanno neve, vento e chiusure improvvise. È un giro d\'estate.' }
   ];
   var routeStatus = document.getElementById('route-status');
   if(routeStatus){
@@ -540,36 +540,36 @@
 
   // ---- Cose da non perdere ----
   var FAMILIES = [
-    { sector:'Circolo d\'Oro', name:'Þingvellir', size:'2 ore', level:'Facile', note:'La spaccatura fra le placche americana ed europea, e il luogo del primo parlamento al mondo, anno 930. Si cammina nella gola di Almannagjá.' },
+    { sector:'Circolo d\'Oro', name:'Þingvellir', size:'2 ore', level:'Facile', note:'La spaccatura fra le placche americana ed europea, e il luogo del primo parlamento al mondo, anno 930. Camminiamo nella gola di Almannagjá.' },
     { sector:'Circolo d\'Oro', name:'Geysir e Strokkur', size:'1 ora', level:'Facile', note:'Lo Strokkur erutta ogni 5-10 minuti fino a venti metri. Il Geysir originale, che ha dato il nome a tutti i geyser del mondo, è ormai quasi inattivo.' },
     { sector:'Circolo d\'Oro', name:'Gullfoss', size:'1 ora', level:'Facile', note:'La "cascata d\'oro", due salti in una gola. D\'inverno è in parte ghiacciata e i sentieri sono scivolosi.' },
-    { sector:'Circolo d\'Oro', name:'Friðheimar', size:'1 ora', level:'Facile', note:'Una serra dove coltivano pomodori tutto l\'anno col calore geotermico. Si pranza fra le piante, zuppa di pomodoro e pane fatto da loro. Va prenotato.' },
+    { sector:'Circolo d\'Oro', name:'Friðheimar', size:'1 ora', level:'Facile', note:'Una serra dove coltivano pomodori tutto l\'anno col calore geotermico. Pranziamo fra le piante, zuppa di pomodoro e pane fatto da loro. Lo prenotiamo prima.' },
     { sector:'Circolo d\'Oro', name:'Secret Lagoon', size:'2 ore', level:'Facile', note:'A Flúðir, la piscina naturale più antica d\'Islanda, con le fumarole intorno. Col buio è un\'altra cosa.' },
     { sector:'Circolo d\'Oro', name:'Kerið', size:'30 minuti', level:'Facile', note:'Un cratere di 3.000 anni con un lago sul fondo, d\'inverno ghiacciato. Il giro del bordo si fa in venti minuti. Ingresso a pagamento.' },
-    { sector:'Costa sud', name:'Seljalandsfoss e Gljúfrabúi', size:'1,5 ore', level:'Facile', note:'Dietro Seljalandsfoss d\'inverno non si passa, il sentiero ghiaccia. Gljúfrabúi è cinquecento metri più avanti, nascosta in una gola in cui si entra camminando nel torrente.' },
+    { sector:'Costa sud', name:'Seljalandsfoss e Gljúfrabúi', size:'1,5 ore', level:'Facile', note:'Dietro Seljalandsfoss d\'inverno non si passa, il sentiero ghiaccia. Gljúfrabúi è cinquecento metri più avanti, nascosta in una gola in cui entriamo camminando nel torrente.' },
     { sector:'Costa sud', name:'Skógafoss', size:'1 ora', level:'Facile', note:'Sessanta metri di salto, si arriva fin sotto. I cinquecento gradini laterali portano in cima, d\'inverno con cautela.' },
     { sector:'Costa sud', name:'Relitto del DC-3', size:'2,5 ore', level:'Media', note:'Un aereo della US Navy atterrato d\'emergenza sulla sabbia nera di Sólheimasandur nel 1973: si salvarono tutti. Quattro chilometri a piedi per tratta, piatti ma esposti al vento.' },
     { sector:'Costa sud', name:'Dyrhólaey', size:'1 ora', level:'Facile', note:'Il promontorio con l\'arco di roccia sul mare. Da qui si vedono Reynisfjara e i faraglioni di Vík. La strada chiude col vento forte.' },
-    { sector:'Costa sud', name:'Reynisfjara', size:'1 ora', level:'Attenzione', note:'Spiaggia nera con colonne di basalto e faraglioni. Le onde anomale sono un pericolo reale: si rispetta il semaforo e non si danno mai le spalle al mare.' },
+    { sector:'Costa sud', name:'Reynisfjara', size:'1 ora', level:'Attenzione', note:'Spiaggia nera con colonne di basalto e faraglioni. Le onde anomale sono un pericolo reale: rispettiamo il semaforo e non diamo mai le spalle al mare.' },
     { sector:'Costa sud', name:'Vík', size:'Notte', level:'Facile', note:'Il paese più a sud dell\'Islanda, base naturale per la costa. Poche case, una chiesa rossa su una collina.' },
     { sector:'Ghiacciaio', name:'Fjaðrárgljúfur', size:'1 ora', level:'Facile', note:'Un canyon profondo cento metri, a poca distanza dalla strada. D\'inverno a volte lo chiudono per proteggere il sentiero.' },
     { sector:'Ghiacciaio', name:'Jökulsárlón', size:'2-3 ore', level:'Facile', note:'La laguna glaciale con gli iceberg staccati dal Vatnajökull. Profonda oltre 250 metri, spesso con le foche dentro.' },
     { sector:'Ghiacciaio', name:'Diamond Beach', size:'1 ora', level:'Facile', note:'Di fronte alla laguna: i blocchi di ghiaccio finiscono sulla sabbia nera e sembrano diamanti. Da qui il nome.' },
-    { sector:'Ghiacciaio', name:'Grotta di ghiaccio', size:'3-4 ore', level:'Media', note:'Dentro il Vatnajökull, solo in inverno e solo con guida certificata. Si parte da Jökulsárlón in super-jeep, casco e ramponi forniti. È il momento più bello del viaggio.' },
+    { sector:'Ghiacciaio', name:'Grotta di ghiaccio', size:'3-4 ore', level:'Media', note:'Dentro il Vatnajökull, solo in inverno e solo con guida certificata. Partiamo da Jökulsárlón in super-jeep, casco e ramponi forniti. È il momento più bello del viaggio.' },
     { sector:'Snæfellsnes', name:'Búðakirkja', size:'30 minuti', level:'Facile', note:'Una chiesa nera isolata nel campo di lava, con lo Snæfellsjökull dietro: il vulcano da cui Jules Verne faceva cominciare il Viaggio al centro della Terra.' },
-    { sector:'Snæfellsnes', name:'Arnarstapi e Gatklettur', size:'1 ora', level:'Facile', note:'Scogliere di basalto e un arco di roccia nel mare. Il sentiero verso Hellnar vale il pezzo che si riesce a fare con la luce che c\'è.' },
-    { sector:'Snæfellsnes', name:'Djúpalónssandur', size:'1 ora', level:'Facile', note:'Spiaggia di ciottoli neri con i resti di un naufragio e le pietre che i pescatori sollevavano per mettersi alla prova. Anche qui, lontani dall\'acqua.' },
+    { sector:'Snæfellsnes', name:'Arnarstapi e Gatklettur', size:'1 ora', level:'Facile', note:'Scogliere di basalto e un arco di roccia nel mare. Il sentiero verso Hellnar vale il pezzo che riusciamo a fare con la luce che c\'è.' },
+    { sector:'Snæfellsnes', name:'Djúpalónssandur', size:'1 ora', level:'Facile', note:'Spiaggia di ciottoli neri con i resti di un naufragio e le pietre che i pescatori sollevavano per mettersi alla prova. Anche qui stiamo lontani dall\'acqua.' },
     { sector:'Snæfellsnes', name:'Ytri Tunga', size:'1 ora', level:'Facile', note:'L\'unico posto del giro dove le foche si vedono tutto l\'anno. Il sentiero è di 1,7 km, mezz\'ora fra andata e ritorno, e non è illuminato.' },
     { sector:'Snæfellsnes', name:'Kirkjufell', size:'1 ora', level:'Facile', note:'La montagna a punta con la cascata di Kirkjufellsfoss davanti: la vista più fotografata d\'Islanda, e una delle location di Game of Thrones.' },
-    { sector:'Reykjavík', name:'Hallgrímskirkja', size:'1 ora', level:'Facile', note:'La chiesa che domina la città, 74,5 metri, ispirata alle colonne di basalto. Si sale sulla torre in ascensore per la vista sui tetti colorati.' },
+    { sector:'Reykjavík', name:'Hallgrímskirkja', size:'1 ora', level:'Facile', note:'La chiesa che domina la città, 74,5 metri, ispirata alle colonne di basalto. Saliamo sulla torre in ascensore per la vista sui tetti colorati.' },
     { sector:'Reykjavík', name:'Bæjarins Beztu', size:'10 minuti', level:'Facile', note:'Il chiosco di hot dog aperto dal 1937. Si ordina «eina með öllu», con tutto. Una delle pochissime cose economiche del paese.' },
     { sector:'Reykjavík', name:'Harpa e Sun Voyager', size:'1 ora', level:'Facile', note:'La sala concerti con la facciata di vetro disegnata da Olafur Eliasson, a ingresso gratuito, e la scultura della nave vichinga sul lungomare.' },
     { sector:'Reykjavík', name:'Sky Lagoon', size:'3 ore', level:'Facile', note:'Laguna termale affacciata sull\'oceano, a un quarto d\'ora dal centro, con il rituale in sette passaggi.' },
-    { sector:'Reykjavík', name:'Faro di Grótta', size:'1 ora', level:'Facile', note:'Sulla punta di Seltjarnarnes, il posto più buio raggiungibile dal centro. Ci si va per l\'aurora, non per il faro.' },
-    { sector:'Reykjanes', name:'Valahnúkur', size:'1 ora', level:'Facile', note:'Scogliere sull\'oceano, il faro di Reykjanesviti e le onde che battono sulla lava. Si arriva all\'alba, che qui è verso le undici.' },
-    { sector:'Reykjanes', name:'Gunnuhver', size:'30 minuti', level:'Facile', note:'Una sorgente di vapore bollente che esce dal terreno. Si resta sulle passerelle: il suolo intorno è instabile.' },
+    { sector:'Reykjavík', name:'Faro di Grótta', size:'1 ora', level:'Facile', note:'Sulla punta di Seltjarnarnes, il posto più buio raggiungibile dal centro. Ci andiamo per l\'aurora, non per il faro.' },
+    { sector:'Reykjanes', name:'Valahnúkur', size:'1 ora', level:'Facile', note:'Scogliere sull\'oceano, il faro di Reykjanesviti e le onde che battono sulla lava. Arriviamo all\'alba, che qui è verso le undici.' },
+    { sector:'Reykjanes', name:'Gunnuhver', size:'30 minuti', level:'Facile', note:'Una sorgente di vapore bollente che esce dal terreno. Restiamo sulle passerelle: il suolo intorno è instabile.' },
     { sector:'Reykjanes', name:'Ponte fra i continenti', size:'30 minuti', level:'Facile', note:'Una passerella sopra la faglia fra la placca americana e quella euroasiatica. Si attraversa in un minuto, ma la foto la fanno tutti.' },
-    { sector:'Reykjanes', name:'Blue Lagoon', size:'3 ore', level:'Facile', note:'L\'acqua arriva dalla centrale geotermica di Svartsengi e l\'azzurro latte è la silice. Ha il deposito bagagli ed è a venti minuti dall\'aeroporto: si prenota solo con l\'orario del volo in mano.' }
+    { sector:'Reykjanes', name:'Blue Lagoon', size:'3 ore', level:'Facile', note:'L\'acqua arriva dalla centrale geotermica di Svartsengi e l\'azzurro latte è la silice. Ha il deposito bagagli ed è a venti minuti dall\'aeroporto: la prenotiamo solo con l\'orario del volo in mano.' }
   ];
 
   var famSectors = ['Tutti'].concat(Array.from(new Set(FAMILIES.map(function(f){ return f.sector; }))));

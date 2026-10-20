@@ -8,8 +8,10 @@ import json
 DESTS = [
     {"file": "islanda-trip.html", "suf": "is", "flag": "🇮🇸", "name": "Islanda", "stato": "confermato"},
     {"file": "corea-trip.html", "suf": "kr", "flag": "🇰🇷🇧🇳🇸🇬", "name": "Corea, Brunei e Singapore", "stato": "confermato"},
-    # Non e' una meta: e' la pagina che le cerca. Sta in fondo al selettore.
-    {"file": "prossimo.html", "suf": "nx", "flag": "❓", "name": "Quale sarà il prossimo?", "stato": "idea"},
+    # "Quale sara' il prossimo?" e' fuori dal sito per scelta del gruppo.
+    # La pagina resta in _sources/prossimo.html: per rimetterla in linea
+    # basta questa riga.
+    # {"file": "prossimo.html", "suf": "nx", "flag": "❓", "name": "Quale sarà il prossimo?", "stato": "idea"},
 ]
 
 def extract(tag, content):
@@ -19,72 +21,6 @@ def extract(tag, content):
         raise Exception(f"Could not find <{tag}> block")
     return m.group(0)
 
-
-# ----------------------------------------------------------------------
-# Il contesto della chat.
-#
-# "Chiedi ai Patagucci" (api/chat.js) risponde solo con quello che sul
-# sito c'e' scritto davvero. Il testo glielo passiamo da qui, generato
-# insieme a index.html: se la pagina cambia, cambia anche cio' che la
-# chat sa, senza doversene ricordare.
-# ----------------------------------------------------------------------
-
-def testo_da_html(html):
-    """Il testo che un lettore vedrebbe, senza markup."""
-    for tag in ("script", "style", "svg"):
-        html = re.sub(r"<" + tag + r"\b.*?</" + tag + r">", " ", html, flags=re.S | re.I)
-    html = re.sub(r"<[^>]+>", "\n", html)
-    html = html.replace("&nbsp;", " ").replace("&amp;", "&").replace("&egrave;", "è")
-    html = re.sub(r"[ \t]+", " ", html)
-    righe, pulite = [l.strip() for l in html.split("\n")], []
-    for r in righe:
-        # Il marosello di foto in home duplica ogni voce per scorrere
-        # all'infinito: la seconda copia non aggiunge niente.
-        if r and r not in pulite[-40:]:
-            pulite.append(r)
-    return "\n".join(pulite)
-
-
-def dati_da_script(js):
-    """Le tabelle della pagina (itinerario, tappe, budget) vivono in JS.
-
-    Senza queste la chat non saprebbe dire cosa si fa il quarto giorno:
-    in HTML quelle tabelle sono vuote e vengono riempite dallo script.
-    Prendo le sole dichiarazioni di dati, saltando le liste di sole
-    coordinate — al modello non dicono nulla e pesano.
-    """
-    fuori = []
-    for m in re.finditer(r"^\s*(?:const|var|let)\s+([A-Za-z_$][\w$]*)\s*=\s*([\[{])", js, re.M):
-        i = m.end() - 1
-        apri, chiudi = js[i], "]" if js[i] == "[" else "}"
-        profondita, j, stringa = 0, i, None
-        while j < len(js):
-            c = js[j]
-            if stringa:
-                if c == "\\":
-                    j += 2
-                    continue
-                if c == stringa:
-                    stringa = None
-            elif c in "\"'`":
-                stringa = c
-            elif c == apri:
-                profondita += 1
-            elif c == chiudi:
-                profondita -= 1
-                if profondita == 0:
-                    break
-            j += 1
-        blocco = js[i:j + 1]
-        if len(blocco) < 80:
-            continue
-        if sum(c.isalpha() for c in blocco) / len(blocco) < 0.35:
-            continue
-        fuori.append(f"{m.group(1)} = {blocco}")
-    return "\n\n".join(fuori)
-
-
-contesti = {}
 
 blocks = []
 scripts = []
@@ -113,13 +49,6 @@ for d in DESTS:
     script_m = re.search(r'<script>(.*?)</script>', content, re.DOTALL)
     script_body = script_m.group(1)
 
-    dati = dati_da_script("".join(re.findall(r"<script>(.*?)</script>", content, re.S)))
-    contesti[d["suf"]] = (
-        f"# {d['flag']} {d['name']} — stato: {d['stato']}\n\n"
-        + testo_da_html(hero + main)
-        + (f"\n\n## Dati della pagina (itinerario, tappe, tratte, budget)\n\n{dati}" if dati else "")
-    )
-
     nav = nav.replace(
         '<a href="index.html" class="home-link">🌍 Tutte le mete</a>',
         '<a href="javascript:void(0)" class="home-link" onclick="showHub()">🌍 Tutte le mete</a>'
@@ -144,39 +73,22 @@ for d in DESTS:
     scripts.append(f"<script>\n// ---- {d['name']} ----\n{script_body}\n</script>")
 
 hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
-    <header class="hero" style="min-height:64vh;">
-      <div class="bg" style="background-image:linear-gradient(180deg, rgba(10,14,11,0.35) 0%, rgba(10,14,11,0.6) 55%, rgba(10,14,11,0.94) 100%), url('foto/destinazioni/A_land_enclosed_in_Mountains_-_Hunza_Valley.jpg'); background-position:center 55%;"></div>
+    <header class="hero">
+      <div class="bg" style="background-image:url('foto/destinazioni/A_land_enclosed_in_Mountains_-_Hunza_Valley.jpg'); background-position:center 55%;"></div>
       <div class="content">
         <h1>Patagucci Trips</h1>
-        <p class="tagline">Due viaggi con le date fissate: l'aurora islandese a gennaio, i ciliegi coreani ad aprile. Qui dentro c'è tutto quello che serve per organizzarli — e le due cose che mancano ancora.</p>
-        <div class="scroll-cue">↓ si comincia da quello che manca</div>
+        <p class="tagline">Due viaggi con le date fissate: l'aurora islandese a gennaio, i ciliegi coreani ad aprile. Questo è il nostro quaderno: dove andiamo, giorno per giorno, e cosa ci aspetta.</p>
+        <a class="nota-manca" href="#recap-voli-kr"><span class="nm-num">2<svg class="a-penna" viewBox="0 0 120 100" aria-hidden="true" focusable="false"><path d="M93 17 C 70 3, 27 6, 12 33 C 0 59, 22 92, 62 92 C 101 92, 117 63, 106 37 C 98 17, 73 7, 48 12"/></svg></span><span class="nm-testo">voli ci mancano ancora: Busan → Jeju e Jeju → Seul, ad aprile. Tutto il resto è comprato.</span></a>
+        <div class="scroll-cue">↓ sfogliamo</div>
       </div>
       <div class="photo-credit">Foto: Maqalam97, <a href="https://commons.wikimedia.org/wiki/File:A_land_enclosed_in_Mountains_-_Hunza_Valley.jpg" target="_blank" rel="noopener">CC BY-SA 4.0, Wikimedia Commons</a></div>
     </header>
 
     <main>
-      <section class="panel" id="stato" data-nav>
-        <div class="inner" style="max-width:1060px;">
-          <div class="stato-grid reveal">
-            <a class="stato-manca" href="#recap-voli-kr">
-              <h2 class="sm-titolo"><span class="sm-num">2</span><span class="sm-testa">voli ancora da prenotare</span></h2>
-              <p class="sm-det">Busan → Jeju e Jeju → Seul, i due interni coreani di aprile. Sono le uniche due tratte che mancano: tutto il resto è comprato.</p>
-              <span class="sm-cta">Guarda quali e quando →</span>
-            </a>
-            <div class="stato-fatto">
-              <h3 class="sf-tit">Il resto è a posto</h3>
-              <div class="stat-big"><span class="num">2</span><span class="unit">viaggi con le date fissate</span></div>
-              <div class="stat-big"><span class="num">4</span><span class="unit">paesi, due continenti</span></div>
-              <div class="stat-big"><span class="num">25</span><span class="unit">giorni fra gennaio e aprile 2027</span></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="panel dark" data-nav>
+      <section class="panel alt" data-nav>
         <div class="inner">
           <h2 class="section-title reveal">🔥 I Patagucci</h2>
-          <p class="section-sub reveal">Lo stesso gruppo da sempre, una meta nuova ogni volta. Ecco chi parte.</p>
+          <p class="section-sub reveal">Lo stesso gruppo da sempre, una meta nuova ogni volta. Eccoci.</p>
           <div class="crew-grid">
             <div class="crew-card reveal" data-audio="assets/audio/manu.mp3">
               <img src="foto/32909e5a-8870-4ba2-961d-8baf5bc0c7c8.jpeg" alt="Manu, il logistico, compra le maglie" loading="lazy">
@@ -196,14 +108,14 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
             </div>
           </div>
 
-          <div class="card reveal" style="margin-top:18px; text-align:center; font-style:italic;">
-            <h3 style="margin-top:0; font-style:normal;">📜 I Patagucci</h3>
-            <p style="color:#c7c2b6; font-size:var(--t-base); line-height:1.85; margin:0; max-width:520px; margin-left:auto; margin-right:auto;">
+          <div class="card nota-gruppo reveal">
+            <h3>I Patagucci</h3>
+            <p>
               Quattro amici, uno zaino e un biglietto di sola andata, ogni volta una meta nuova, ogni volta la stessa combriccola scatenata. Manu è il logistico, con lui il viaggio non si perde mai un colpo, ma senza dieci birre al giorno lo vedi diventare uno sconvolto. Kiki è la meteora pazza, sempre pronta a ripartire, ma toglietele il ceviche e la sentirete ruggire: diventa aggressiva, non capisce più niente, datele pesce crudo o scappate immediatamente. Mala è l'enciclopedia vivente del gruppo intero, sa tutto di ogni posto, storia e sentiero, ma se non prende la bumba prima di coricarsi la notte è tutta un rimbombo, meglio non disturbarsi. Bacci è il tecnologico, con lui non ti perdi in un vicolo, ma portatelo in quota e guardate che spettacolo: trema come una foglia al primo metro guadagnato, e giuro che una volta se l'è quasi fatta sotto, poveraccio. Quattro caratteri diversi, un'unica squadra che parte, i Patagucci vanno per il mondo, sempre dalla stessa parte — e ovunque li porti il prossimo volo o il prossimo passo, tornano a casa con una storia in più da raccontare, senza sosta.
             </p>
           </div>
 
-          <h3 style="color:#fff; margin:32px 0 4px;">📸 Insieme in giro per il mondo</h3>
+          <h3>Insieme in giro per il mondo</h3>
           <div class="group-marquee reveal">
             <div class="group-marquee-track">
               <div class="group-marquee-item">
@@ -479,8 +391,8 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
 
       <section class="panel" data-nav>
         <div class="inner" style="max-width:1060px;">
-          <h2 class="section-title reveal">🌍 Tutte le mete</h2>
-          <p class="section-sub reveal">I due viaggi con le date fissate. Ognuno ha la sua pagina: itinerario giorno per giorno, mappa animata, meteo e tutto il resto.</p>
+          <h2 class="section-title reveal">🌍 I nostri due viaggi</h2>
+          <p class="section-sub reveal">Le due partenze con le date fissate. Ognuna ha il suo quaderno: giorno per giorno, la mappa, il meteo e tutto il resto.</p>
 
           <div class="trip-grid reveal">
             <a class="trip-card" href="javascript:void(0)" onclick="showDest('is')">
@@ -508,10 +420,10 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
         </div>
       </section>
 
-      <section class="panel dark" data-nav>
+      <section class="panel alt" data-nav>
         <div class="inner">
-          <h2 class="section-title reveal">🗺️ Viaggi già fatti</h2>
-          <p class="section-sub reveal">Quanto mondo hanno già visto i Patagucci, e dove.</p>
+          <h2 class="section-title reveal">🗺️ Dove siamo già stati</h2>
+          <p class="section-sub reveal">Quanto mondo abbiamo già visto, e dove.</p>
 
           <div class="mondo-wrap reveal">
             <svg id="mondo" viewBox="0 0 950 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mappamondo con i paesi visitati evidenziati">
@@ -541,7 +453,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
           <h3 style="margin-top:30px;">Paese per paese, uno per uno</h3>
 
           <div class="persona-paesi reveal">
-            <div class="pp-nome">🧳 Manu <span class="pp-conto">60<span class="pp-conto-lab">paesi</span></span></div>
+            <div class="pp-nome">Manu <span class="pp-conto">60<span class="pp-conto-lab">paesi</span></span></div>
             <div class="paesi-fatti">
               <span class="paese-fatto"><span class="pf-flag">🇭🇰</span><span class="pf-nome">Hong Kong</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇲🇴</span><span class="pf-nome">Macao</span></span>
@@ -607,7 +519,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
           </div>
 
           <div class="persona-paesi reveal">
-            <div class="pp-nome">🧭 Mala <span class="pp-conto">23<span class="pp-conto-lab">paesi</span></span></div>
+            <div class="pp-nome">Mala <span class="pp-conto">23<span class="pp-conto-lab">paesi</span></span></div>
             <div class="paesi-fatti">
               <span class="paese-fatto"><span class="pf-flag">🇲🇽</span><span class="pf-nome">Messico</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇬🇹</span><span class="pf-nome">Guatemala</span></span>
@@ -636,7 +548,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
           </div>
 
           <div class="persona-paesi reveal">
-            <div class="pp-nome">💻 Bacci <span class="pp-conto">29<span class="pp-conto-lab">paesi</span></span></div>
+            <div class="pp-nome">Bacci <span class="pp-conto">29<span class="pp-conto-lab">paesi</span></span></div>
             <div class="paesi-fatti">
               <span class="paese-fatto"><span class="pf-flag">🇵🇪</span><span class="pf-nome">Perù</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇧🇴</span><span class="pf-nome">Bolivia</span></span>
@@ -671,7 +583,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
           </div>
 
           <div class="persona-paesi reveal">
-            <div class="pp-nome">🌟 Kiki <span class="pp-conto">31<span class="pp-conto-lab">paesi</span></span></div>
+            <div class="pp-nome">Kiki <span class="pp-conto">31<span class="pp-conto-lab">paesi</span></span></div>
             <div class="paesi-fatti">
               <span class="paese-fatto"><span class="pf-flag">🇺🇸</span><span class="pf-nome">Stati Uniti</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇲🇽</span><span class="pf-nome">Messico</span></span>
@@ -724,466 +636,252 @@ with open(DIR + "_sources/mappamondo.svg", encoding="utf-8") as _f:
 
 destination_blocks = "\n\n".join(b["block"] for b in blocks)
 
-# Il contesto della chat, diviso per scheda.
-#
-# In un blocco unico la chat, aperta sull'Islanda, rispondeva della
-# Corea: aveva tutto sotto gli occhi e della pagina aperta sapeva solo
-# per sentito dire. Adesso ogni scheda riceve il proprio viaggio e basta,
-# piu' la home e un indice delle altre per sapere dove mandare chi chiede
-# d'altro. Costa anche meno: un terzo dei token per domanda.
-#
-# Finisce in un modulo JS e non in un .txt perche' cosi' Vercel se lo
-# porta dentro la funzione da solo, come qualsiasi altra dipendenza.
-import datetime
-
-comune = "\n\n".join([
-    "# Patagucci Trips",
-    f"Contenuto del sito, generato da _sources/build.py il {datetime.date.today().isoformat()}.",
-    "Le mete con stato \"confermato\" hanno le date fissate; \"idea\" no.",
-    "## 🌍 La home del sito\n\n" + testo_da_html(hub_html),
-])
-
-indice = "\n".join(
-    f"- {d['flag']} {d['name']} ({d['stato']}) — scheda \"{d['suf']}\""
-    for d in DESTS
-)
-
-contesto = {"comune": comune, "indice": indice, "schede": contesti}
-with open(DIR + "api/contesto.js", "w", encoding="utf-8") as f:
-    f.write(
-        "// Generato da _sources/build.py insieme a index.html. Non modificare a mano.\n"
-        "// Serve a api/chat.js: il contenuto del sito, una voce per scheda.\n"
-        "module.exports = " + json.dumps(contesto) + ";\n"
-    )
-print("Written", DIR + "api/contesto.js",
-      "| comune", len(comune),
-      "| schede:", ", ".join(f"{k}={len(v)}" for k, v in contesti.items()))
-
 stato_per_suf = {d["suf"]: d["stato"] for d in DESTS}
+# Sul telefono le quattro linguette devono starci tutte: nomi corti.
+CORTI = {"is": "Islanda", "kr": "Corea", "nx": "Il prossimo?"}
 switcher_buttons = '\n        '.join(
     f'<button class="switch-btn{" confermato" if stato_per_suf[b["suf"]] == "confermato" else ""}"'
-    f' data-dest="{b["suf"]}" onclick="showDest(\'{b["suf"]}\')">{b["flag"]} {b["name"]}</button>'
+    f' data-dest="{b["suf"]}" onclick="showDest(\'{b["suf"]}\')"><span class="lungo">{b["name"]}</span><span class="corto">{CORTI.get(b["suf"], b["name"])}</span></button>'
     for b in blocks
 )
 
-# ----------------------------------------------------------------------
-# "Chiedi ai Patagucci": il pannello di chat.
-#
-# Sta qui e non in una pagina sorgente perche' e' dell'intero sito, non
-# di una meta: il bottone resta in basso a destra ovunque, e la scheda
-# aperta viene passata alla funzione come contesto della domanda.
-# Il tema (colori, accenti) lo eredita da data-dest come tutto il resto.
-# ----------------------------------------------------------------------
-
-chat_css = '''
-  .pg-chat .sr-only{
-    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
-    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
-  }
-  .pg-chat-fab{
-    position:fixed; right:16px; bottom:16px; z-index:500;
-    display:flex; align-items:center; gap:9px;
-    border:1px solid rgba(var(--accent-rgb),0.5); border-radius:999px;
-    background:linear-gradient(180deg,#1d1d1d,#101010); color:var(--accent);
-    padding:11px 18px; font-family:var(--font-body); font-size:var(--t-small); font-weight:800;
-    cursor:pointer; box-shadow:0 10px 28px rgba(0,0,0,0.45);
-    transition:transform .18s cubic-bezier(.16,1,.3,1), box-shadow .18s ease, background .5s ease;
-  }
-  .pg-chat-fab:hover{ transform:translateY(-2px); box-shadow:0 16px 36px rgba(0,0,0,0.5); }
-  .pg-chat-fab:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
-  .pg-chat-fab .pg-fab-icona{ font-size:var(--t-lead); line-height:1; }
-  .pg-chat-fab[aria-expanded="true"]{ opacity:0; pointer-events:none; }
-
-  .pg-chat{
-    position:fixed; right:16px; bottom:16px; z-index:501;
-    width:min(390px, calc(100vw - 32px)); max-height:min(620px, calc(100vh - 32px));
-    display:flex; flex-direction:column; overflow:hidden;
-    background:linear-gradient(180deg,#1a1a1a,#101010);
-    border:1px solid rgba(var(--accent-rgb),0.28); border-radius:20px;
-    box-shadow:0 30px 70px rgba(0,0,0,0.55);
-    font-family:var(--font-body);
-    animation:pgChatSu .28s cubic-bezier(.16,1,.3,1) both;
-  }
-  .pg-chat[hidden]{ display:none; }
-  @keyframes pgChatSu{ from{ opacity:0; transform:translateY(14px) scale(.98); } to{ opacity:1; transform:none; } }
-
-  .pg-chat-testa{
-    display:flex; align-items:center; justify-content:space-between; gap:10px;
-    padding:13px 16px; border-bottom:1px solid rgba(255,255,255,0.09);
-    background:linear-gradient(180deg, rgba(var(--accent-rgb),0.13), transparent);
-  }
-  .pg-chat-testa strong{ display:block; color:#fdf9f0; font-size:var(--t-base); letter-spacing:0.01em; }
-  .pg-chat-dove{ display:block; font-size:var(--t-micro); color:var(--accent); font-weight:700; margin-top:2px; }
-  .pg-chat-testa button{
-    border:none; background:rgba(255,255,255,0.07); color:#c7c2b6;
-    width:30px; height:30px; border-radius:9px; font-size:var(--t-base); cursor:pointer; flex:0 0 auto;
-  }
-  .pg-chat-testa button:hover{ background:rgba(255,255,255,0.15); color:#fff; }
-
-  .pg-chat-righe{ flex:1 1 auto; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:12px; }
-  .pg-chat-riga{ max-width:88%; font-size:var(--t-small); line-height:1.62; }
-  .pg-chat-riga.io{
-    align-self:flex-end; background:var(--accent); color:#10100e;
-    padding:9px 14px; border-radius:16px 16px 4px 16px; font-weight:600;
-  }
-  .pg-chat-riga.lei{ align-self:flex-start; color:#e4e0d6; }
-  .pg-chat-riga.lei strong{ color:#fdf9f0; }
-  .pg-chat-riga.lei a{ color:var(--accent); }
-  .pg-chat-riga.lei ul{ margin:6px 0; padding-left:18px; }
-  .pg-chat-riga.guasto{ align-self:flex-start; color:#ff9b8a; font-size:var(--t-small); }
-  .pg-chat-fonti{ margin-top:7px; font-size:var(--t-micro); line-height:1.6; color:#8d887d; }
-  .pg-chat-fonti a{ color:var(--accent); text-decoration:none; border-bottom:1px solid rgba(var(--accent-rgb),0.35); }
-  .pg-chat-fonti a:hover{ border-bottom-color:var(--accent); }
-  .pg-chat-stato{ align-self:flex-start; font-size:var(--t-micro); color:var(--accent); opacity:0.85; }
-  .pg-chat-riga .pg-cursore{
-    display:inline-block; width:7px; height:14px; margin-left:2px; vertical-align:-2px;
-    background:var(--accent); animation:pgLampeggia 1s steps(2,start) infinite;
-  }
-  @keyframes pgLampeggia{ 50%{ opacity:0; } }
-
-  .pg-chat-spunti{ display:flex; flex-wrap:wrap; gap:6px; padding:0 16px 12px; }
-  .pg-chat-spunti button{
-    border:1px solid rgba(var(--accent-rgb),0.3); background:rgba(var(--accent-rgb),0.08);
-    color:var(--accent); padding:6px 12px; border-radius:999px;
-    font-size:var(--t-micro); font-weight:600; font-family:var(--font-body); cursor:pointer;
-  }
-  .pg-chat-spunti button:hover{ background:rgba(var(--accent-rgb),0.18); }
-
-  .pg-chat-invio{ display:flex; gap:8px; align-items:flex-end; padding:12px 16px; border-top:1px solid rgba(255,255,255,0.09); }
-  .pg-chat-invio textarea{
-    flex:1 1 auto; resize:none; max-height:120px;
-    background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.14); border-radius:12px;
-    color:#f2efe7; font-family:var(--font-body); font-size:var(--t-small); line-height:1.5; padding:10px 12px;
-  }
-  .pg-chat-invio textarea::placeholder{ color:#8d887d; }
-  .pg-chat-invio textarea:focus{ outline:2px solid var(--accent); outline-offset:0; }
-  .pg-chat-invio button{
-    flex:0 0 auto; width:40px; height:40px; border:none; border-radius:12px; cursor:pointer;
-    background:var(--accent); color:#10100e; font-size:var(--t-lead); font-weight:800;
-  }
-  .pg-chat-invio button:disabled{ opacity:0.4; cursor:not-allowed; }
-
-  @media (max-width:560px){
-    .pg-chat{ right:0; left:0; bottom:0; width:100%; max-height:86vh; border-radius:20px 20px 0 0; }
-    .pg-chat-fab{ right:12px; bottom:12px; padding:12px 16px; }
-    .pg-chat-fab .pg-fab-testo{ display:none; }
-  }
-  @media (prefers-reduced-motion:reduce){
-    .pg-chat{ animation:none; }
-    .pg-chat-riga .pg-cursore{ animation:none; }
-  }
-'''
-
-chat_html = '''
-<button class="pg-chat-fab" id="pg-chat-fab" aria-expanded="false" aria-controls="pg-chat">
-  <span class="pg-fab-icona" aria-hidden="true">💬</span>
-  <span class="pg-fab-testo">Chiedi ai Patagucci</span>
-</button>
-
-<section class="pg-chat" id="pg-chat" role="dialog" aria-label="Chiedi ai Patagucci" hidden>
-  <header class="pg-chat-testa">
-    <div>
-      <strong>💬 Chiedi ai Patagucci</strong>
-      <span class="pg-chat-dove" id="pg-chat-dove"></span>
-    </div>
-    <button type="button" id="pg-chat-chiudi" aria-label="Chiudi">✕</button>
-  </header>
-  <div class="pg-chat-righe" id="pg-chat-righe" aria-live="polite"></div>
-  <div class="pg-chat-spunti" id="pg-chat-spunti"></div>
-  <form class="pg-chat-invio" id="pg-chat-form">
-    <label class="sr-only" for="pg-chat-testo">La tua domanda</label>
-    <textarea id="pg-chat-testo" rows="1" maxlength="1500" placeholder="Scrivi una domanda sui viaggi…"></textarea>
-    <button type="submit" id="pg-chat-manda" aria-label="Manda la domanda">➤</button>
-  </form>
-</section>
-'''
-
-# Nomi leggibili e spunti di partenza: la chat dice alla funzione quale
-# scheda e' aperta, e propone domande che su quella scheda hanno senso.
-NOMI_METE = {"hub": "la home"}
-NOMI_METE.update({d["suf"]: d["name"] for d in DESTS})
-
-SPUNTI = {
-    "hub": ["Serve il visto per queste mete?", "Che vaccinazioni servono?", "Quanto costa l'assicurazione?"],
-    "is": ["Quanto costa l'ingresso alla Blue Lagoon?", "Com'è il meteo adesso in Islanda?", "I vulcani sono attivi in questo momento?"],
-    "kr": ["Cosa si fa in Brunei per quattro giorni?", "Quando fioriscono i ciliegi a Seul?", "Si beve davvero niente in Brunei?"],
-    "nx": ["Dove si vola con poco a gennaio?", "Quali mete sono fuori stagione ad aprile?", "Come funziona la ricerca voli?"],
-}
-
-chat_js = '''
-// ------------------------------------------------------------------
-// "Chiedi ai Patagucci".
-// La pagina non sa niente dei viaggi: manda la domanda, lo storico e la
-// scheda aperta a /api/chat, che risponde in streaming. Il contenuto del
-// sito ce l'ha la funzione, generata insieme a questa pagina.
-// ------------------------------------------------------------------
-(function(){
-  // Servito da Vercel: stessa origine. Aperto in locale col doppio clic
-  // o da GitHub Pages: serve l'indirizzo assoluto del deploy.
-  var API_REMOTA = 'https://patagucci-trip.vercel.app/api/chat';
-  var locale = location.hostname === 'localhost' || location.hostname === '127.0.0.1';
-  var API = (location.protocol.indexOf('http') === 0 && (locale || !API_REMOTA)) ? '/api/chat' : API_REMOTA;
-
-  var NOMI = __NOMI__;
-  var SPUNTI = __SPUNTI__;
-  var CHIAVE_STORICO = 'patagucci-chat-v2';
-
-  var fab = document.getElementById('pg-chat-fab');
-  var pannello = document.getElementById('pg-chat');
-  var righe = document.getElementById('pg-chat-righe');
-  var spunti = document.getElementById('pg-chat-spunti');
-  var form = document.getElementById('pg-chat-form');
-  var campo = document.getElementById('pg-chat-testo');
-  var manda = document.getElementById('pg-chat-manda');
-  var dove = document.getElementById('pg-chat-dove');
-
-  // Una conversazione per scheda, non una sola per tutto il sito: le
-  // domande sull'Islanda non hanno niente da dire su quelle coreane, e
-  // tornando su una scheda si ritrova il discorso lasciato li'.
-  var fili = {};
-  var inCorso = false;
-
-  try {
-    var salvato = sessionStorage.getItem(CHIAVE_STORICO);
-    if(salvato) fili = JSON.parse(salvato) || {};
-  } catch(e){ fili = {}; }
-
-  function metaAttiva(){ return document.documentElement.getAttribute('data-dest') || 'hub'; }
-  function nomeMeta(){ return NOMI[metaAttiva()] || 'la home'; }
-
-  function filo(scheda){
-    var k = scheda || metaAttiva();
-    if(!fili[k]) fili[k] = [];
-    return fili[k];
-  }
-
-  function salva(){
-    try {
-      var corti = {};
-      Object.keys(fili).forEach(function(k){ if(fili[k].length) corti[k] = fili[k].slice(-16); });
-      sessionStorage.setItem(CHIAVE_STORICO, JSON.stringify(corti));
-    } catch(e){}
-  }
-
-  // La risposta arriva come testo semplice. Qui si scappa tutto e poi si
-  // riaccendono le due sole cose che il modello usa: grassetto e righe.
-  function formatta(testo){
-    var s = testo.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-    s = s.replace(/\\*\\*([^*]+)\\*\\*/g, '<strong>$1</strong>');
-    s = s.replace(/\\n/g, '<br>');
-    return s;
-  }
-
-  function aggiungi(ruolo, testo){
-    var el = document.createElement('div');
-    el.className = 'pg-chat-riga ' + (ruolo === 'utente' ? 'io' : ruolo === 'guasto' ? 'guasto' : 'lei');
-    el.innerHTML = formatta(testo);
-    righe.appendChild(el);
-    righe.scrollTop = righe.scrollHeight;
-    return el;
-  }
-
-  // Le pagine citate finiscono sotto la risposta: sono di qualcun altro
-  // e chi legge deve poterci andare. Link e titoli arrivano dal modello,
-  // quindi niente innerHTML e solo http/https come destinazione.
-  function disegnaFonti(el, lista){
-    if(!el || !lista || !lista.length) return;
-    var box = document.createElement('div');
-    box.className = 'pg-chat-fonti';
-    box.appendChild(document.createTextNode('Cercato su: '));
-    lista.forEach(function(f, i){
-      if(!/^https?:\/\//i.test(f.url || '')) return;
-      var a = document.createElement('a');
-      a.href = f.url;
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-      a.textContent = f.titolo || f.url;
-      box.appendChild(a);
-      if(i < lista.length - 1) box.appendChild(document.createTextNode(' · '));
-    });
-    el.appendChild(box);
-  }
-
-  function disegnaSpunti(){
-    var lista = SPUNTI[metaAttiva()] || SPUNTI.hub;
-    spunti.innerHTML = '';
-    if(filo().length) return;   // gli spunti servono solo a rompere il ghiaccio
-    lista.forEach(function(s){
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.textContent = s;
-      b.addEventListener('click', function(){ chiedi(s); });
-      spunti.appendChild(b);
-    });
-  }
-
-  function ridisegna(){
-    righe.innerHTML = '';
-    if(!filo().length){
-      aggiungi('assistente', 'Ciao. Il sito lo leggi da solo: io servo per quello che non c\\'è scritto — prezzi d\\'ingresso, orari, meteo di adesso, visti, cosa conviene prenotare. Vado a cercarlo sul web. Stai guardando **' + nomeMeta() + '**.');
-    } else {
-      filo().forEach(function(m){ disegnaFonti(aggiungi(m.ruolo, m.testo), m.fonti); });
-    }
-    disegnaSpunti();
-  }
-
-  function apri(){
-    pannello.hidden = false;
-    fab.setAttribute('aria-expanded', 'true');
-    dove.textContent = 'stai guardando: ' + nomeMeta();
-    ridisegna();
-    setTimeout(function(){ campo.focus(); }, 60);
-  }
-
-  function chiudi(){
-    pannello.hidden = true;
-    fab.setAttribute('aria-expanded', 'false');
-    fab.focus();
-  }
-
-  fab.addEventListener('click', apri);
-  document.getElementById('pg-chat-chiudi').addEventListener('click', chiudi);
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Escape' && !pannello.hidden) chiudi();
-  });
-
-  // Cambiando scheda si passa all'altra conversazione: quella lasciata
-  // resta dov'era e si ritrova tornando indietro. Se una risposta e'
-  // ancora in arrivo non si cambia filo a meta' — finisce nel suo.
-  window.addEventListener('destinazione-cambiata', function(){
-    if(pannello.hidden) return;
-    dove.textContent = 'stai guardando: ' + nomeMeta();
-    if(!inCorso) ridisegna();
-  });
-
-  campo.addEventListener('input', function(){
-    campo.style.height = 'auto';
-    campo.style.height = Math.min(campo.scrollHeight, 120) + 'px';
-  });
-  campo.addEventListener('keydown', function(e){
-    if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); form.requestSubmit(); }
-  });
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    chiedi(campo.value);
-  });
-
-  function chiedi(domanda){
-    domanda = String(domanda || '').trim();
-    if(!domanda || inCorso) return;
-    // La scheda si fissa adesso: se cambia mentre la risposta arriva,
-    // quella risposta appartiene comunque alla conversazione di qui.
-    var schedaTurno = metaAttiva();
-    var mio = filo(schedaTurno);
-    if(!mio.length) righe.innerHTML = '';
-    inCorso = true;
-    manda.disabled = true;
-    campo.value = '';
-    campo.style.height = 'auto';
-    spunti.innerHTML = '';
-
-    mio.push({ ruolo:'utente', testo: domanda });
-    aggiungi('utente', domanda);
-    salva();
-
-    var el = aggiungi('assistente', '');
-    el.innerHTML = '<span class="pg-cursore"></span>';
-    var risposta = '';
-    var fontiTurno = null;
-    // Mentre cerca sul web non arriva testo per parecchi secondi: senza
-    // questa riga sembra piantato.
-    var stato = document.createElement('div');
-    stato.className = 'pg-chat-riga pg-chat-stato';
-    stato.hidden = true;
-    righe.appendChild(stato);
-
-    function chiudiTurno(){
-      inCorso = false;
-      manda.disabled = false;
-      campo.focus();
-    }
-
-    var taglio = new AbortController();
-    var scadenza = setTimeout(function(){ taglio.abort(); }, 60000);
-
-    fetch(API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messaggi: mio.slice(-16), meta: NOMI[schedaTurno] || 'la home', scheda: schedaTurno }),
-      signal: taglio.signal
-    }).then(function(r){
-      if(!r.ok || !r.body){
-        return r.json().catch(function(){ return {}; }).then(function(d){
-          var guasto = new Error(d.errore || 'Non riesco a rispondere adesso. Riprova fra un attimo.');
-          guasto.gentile = true;
-          throw guasto;
-        });
-      }
-      var lettore = r.body.getReader();
-      var decoder = new TextDecoder();
-      var resto = '';
-
-      function pezzo(){
-        return lettore.read().then(function(res){
-          if(res.done){
-            clearTimeout(scadenza);
-            stato.remove();
-            if(risposta){
-              mio.push({ ruolo:'assistente', testo: risposta, fonti: fontiTurno || undefined });
-              salva();
-            }
-            chiudiTurno();
-            return;
-          }
-          resto += decoder.decode(res.value, { stream:true });
-          var blocchi = resto.split('\\n\\n');
-          resto = blocchi.pop();
-          blocchi.forEach(function(b){
-            var riga = b.split('\\n').filter(function(l){ return l.indexOf('data: ') === 0; })[0];
-            if(!riga) return;
-            var ev;
-            try { ev = JSON.parse(riga.slice(6)); } catch(err){ return; }
-            if(ev.t === 'testo'){
-              risposta += ev.d;
-              stato.hidden = true;
-              el.innerHTML = formatta(risposta) + '<span class="pg-cursore"></span>';
-              righe.scrollTop = righe.scrollHeight;
-            } else if(ev.t === 'stato'){
-              stato.textContent = ev.d;
-              stato.hidden = false;
-              righe.scrollTop = righe.scrollHeight;
-            } else if(ev.t === 'fonti'){
-              fontiTurno = ev.d;
-            } else if(ev.t === 'errore'){
-              el.className = 'pg-chat-riga guasto';
-              el.textContent = ev.d;
-              risposta = '';
-            } else if(ev.t === 'fine'){
-              stato.hidden = true;
-              el.innerHTML = formatta(risposta) + (ev.d && ev.d.troncata ? ' <em>(risposta troncata)</em>' : '');
-              disegnaFonti(el, fontiTurno);
-            }
-          });
-          return pezzo();
-        });
-      }
-      return pezzo();
-    }).catch(function(err){
-      clearTimeout(scadenza);
-      el.className = 'pg-chat-riga guasto';
-      // Solo i messaggi scritti apposta arrivano a schermo: quelli di
-      // rete sono in inglese e non dicono niente a chi legge.
-      el.textContent = err.name === 'AbortError'
-        ? 'Nessuna risposta entro un minuto. Riprova.'
-        : err.gentile ? err.message : 'Non riesco a rispondere adesso. Riprova fra un attimo.';
-      chiudiTurno();
-    });
-  }
-})();
-'''.replace('__NOMI__', json.dumps(NOMI_METE, ensure_ascii=False)).replace('__SPUNTI__', json.dumps(SPUNTI, ensure_ascii=False))
 
 suffissi_js = json.dumps(["hub"] + [d["suf"] for d in DESTS], ensure_ascii=False)
 titoli_js = json.dumps({"hub": "Tutte le mete", **{d["suf"]: d["name"] for d in DESTS}}, ensure_ascii=False)
+
+# ----------------------------------------------------------------------
+# La copertina: la schermata d'ingresso.
+#
+# Il quaderno chiuso, con stampato in copertina il logo dei Patagucci: il
+# cielo verde, la banda rossa, le montagne nere con la cresta bianca, la
+# scritta e l'aereo Royal Brunico. Il logo viene dal progetto
+# "menu cena kiki/logo-animato": cielo, banda e aereo sono i suoi livelli
+# (in assets/logo/), montagne, cresta e lettere sono ridisegnate in
+# vettoriale dai suoi contorni (_sources/logo/forme.json), cosi' restano
+# nitide a qualsiasi grandezza.
+#
+# All'arrivo si accendono il cielo e la banda e l'aereo entra in volo.
+# Premendo "Entra" il resto del logo si compone come nel video (la cresta
+# si disegna dalla vetta, le montagne salgono, la scritta spunta lettera
+# per lettera, l'aereo arriva al suo posto) mentre il logo gira in 3D come
+# un plastico; poi la copertina si apre attorno al dorso (assets/anima.js).
+# La decide lo script in testa alla pagina, prima che si veda qualcosa:
+# chi arriva sulla home da zero la trova, chi apre un link a una meta o a
+# una sezione va dritto li', e nella stessa scheda la si vede una volta
+# sola. Senza JavaScript non compare affatto.
+# ----------------------------------------------------------------------
+with open(SRC_DIR + "logo/forme.json", encoding="utf-8") as _f:
+    LOGO = json.load(_f)
+
+
+def disegna_logo():
+    """Montagne, cresta e lettere del logo come tracciati SVG, in pixel del disegno."""
+    W = LOGO["larghezza"]
+    # La cresta continua oltre i bordi ripetuta a specchio, come nel logo
+    # animato: sugli schermi larghi le montagne non finiscono di colpo.
+    lunga = []
+    for k in (-1, 0, 1):
+        pezzo = [(x + k * W, y) if k % 2 == 0 else ((k + 1) * W - x, y) for x, y in LOGO["linea"]]
+        if k % 2:
+            pezzo.reverse()
+        for x, y in pezzo:
+            if not lunga or x - lunga[-1][0] > 0.5:
+                lunga.append((x, y))
+    n = lambda v: f"{v:.1f}".rstrip("0").rstrip(".")
+    tratto = lambda punti: "M" + " L".join(f"{n(x)} {n(y)}" for x, y in punti)
+    monti = " ".join(f"{n(x)},{n(y)}" for x, y in lunga) + f" {n(lunga[-1][0])},4000 {n(lunga[0][0])},4000"
+    # La cresta si disegna dalla vetta piu' alta verso i due lati.
+    vetta = min((i for i, (x, y) in enumerate(lunga) if 0 <= x <= W), key=lambda i: lunga[i][1])
+    cresta = (tratto(lunga[vetta::-1]), tratto(lunga[vetta:]))
+    # Ogni lettera nel suo riquadro, cosi' puo' spuntare per conto suo.
+    lettere = []
+    for forme in LOGO["lettere"]:
+        punti = [p for forma in forme for p in forma["esterno"]]
+        x0, y0 = min(p[0] for p in punti) - 2, min(p[1] for p in punti) - 2
+        x1, y1 = max(p[0] for p in punti) + 2, max(p[1] for p in punti) + 2
+        d = "".join(tratto(c) + "Z" for forma in forme for c in [forma["esterno"]] + forma["buchi"])
+        lettere.append({"d": d, "vb": f"{n(x0)} {n(y0)} {n(x1 - x0)} {n(y1 - y0)}",
+                        "stile": f"left:{x0 / W * 100:.3f}%;top:{y0 / LOGO['altezza'] * 100:.3f}%;"
+                                 f"width:{(x1 - x0) / W * 100:.3f}%;height:{(y1 - y0) / LOGO['altezza'] * 100:.3f}%"})
+    # Dove sta la vetta nella tavola larga (da -1000 a 2672): da li' la
+    # cresta si scopre verso i due lati.
+    vetta_pct = (lunga[vetta][0] + 1000) / 3672 * 100
+    return monti, cresta, lettere, vetta_pct
+
+
+_monti, _cresta, _lettere, _vetta = disegna_logo()
+# Montagne, cresta e lettere stanno in tre tavole uguali, cosi' ognuna puo'
+# muoversi per conto suo: le montagne salgono, la cresta si disegna, le
+# lettere spuntano, e nel 3D stanno a profondita' diverse.
+_TAVOLA = 'viewBox="-1000 360 3672 3640" preserveAspectRatio="none" focusable="false"'
+
+copertina_testa = """<script>
+  (function(){
+    var radice = document.documentElement;
+    var mostra = !location.hash;
+    try { if(sessionStorage.getItem('patagucci-entrato')) mostra = false; } catch(e){}
+    if(!mostra) return;
+    radice.classList.add('con-copertina');
+    // Il logo si compone premendo "Entra": finche' non lo si preme ne
+    // restano fuori montagne e scritta. Con meno movimento e' gia' intero.
+    if(!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) radice.classList.add('copertina-anima');
+  })();
+</script>"""
+
+copertina_html = """<div class="copertina" id="copertina" role="dialog" aria-modal="true" aria-labelledby="cp-titolo">
+  <div class="cp-ombra" aria-hidden="true"></div>
+  <div class="cp-anta">
+    <p class="sr-only" id="cp-titolo">Patagucci Trips</p>
+    <div class="pl" aria-hidden="true">
+      <div class="pl-cielo"><img src="assets/logo/cielo.webp" alt="" width="1672" height="941" decoding="async" fetchpriority="high"></div>
+      <div class="pl-rossa"><img src="assets/logo/rossa.webp" alt="" width="1672" height="162" decoding="async"></div>
+      <div class="pl-terra pl-monti"><svg """ + _TAVOLA + """><polygon points=\"""" + _monti + """\"/></svg></div>
+      <div class="pl-terra pl-cresta" style="--vetta:""" + f"{_vetta:.3f}%" + """"><svg """ + _TAVOLA + """><path d=\"""" + _cresta[0] + """\"/><path d=\"""" + _cresta[1] + """\"/></svg></div>
+      <div class="pl-lettere">""" + "".join(f'<div class="pl-l" style="{l["stile"]}"><svg viewBox="{l["vb"]}" focusable="false"><path d="{l["d"]}"/></svg></div>' for l in _lettere) + """</div>
+      <div class="pl-aereo"><img src="assets/logo/aereo.webp" alt="" width="342" height="85" decoding="async"></div>
+    </div>
+    <div class="cp-dorso" aria-hidden="true"></div>
+    <div class="cp-basso"><span class="cp-entra-giro"><button type="button" class="cp-entra" id="cp-entra">Entra <svg viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 11 C 13 7, 25 13, 36 9 M29 3 L37 9 L30 16"/></svg></button></span></div>
+    <p class="cp-quadretti" aria-hidden="true">Quadretti 5 mm</p>
+    <button type="button" class="cp-musica" id="cp-musica" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 17.4 C 9.2 13, 8.8 9, 9 5.2 L 19.2 2.8 C 19 7, 19.3 11, 19 15.2"/><ellipse cx="6.5" cy="17.6" rx="2.7" ry="2.1"/><ellipse cx="16.6" cy="15.4" rx="2.7" ry="2.1"/></svg><span>Accendi la musica</span></button>
+  </div>
+</div>
+<script>
+  (function(){
+    var radice = document.documentElement;
+    var copertina = document.getElementById('copertina');
+    if(!radice.classList.contains('con-copertina')){ copertina.remove(); return; }
+
+    var entra = document.getElementById('cp-entra');
+    var spenti = [];
+    var chiusa = false;
+    var daTastiera = false;
+    try { entra.focus({ preventScroll:true }); } catch(e){ entra.focus(); }
+
+    // ---- La canzone dei Patagucci ----
+    // Parte con la copertina e sfuma quando si preme "Entra". Molti
+    // browser non lasciano partire un suono da solo: allora parte al primo
+    // tocco sulla copertina, o col tasto della musica, che serve anche a
+    // spegnerla.
+    var musica = document.getElementById('cp-musica');
+    var scritta = musica.querySelector('span');
+    var canzone = new Audio('assets/audio/patagucci-song.mp3');
+    canzone.loop = true;
+    canzone.preload = 'auto';
+    var spentaApposta = false, sfumando = false, guadagno = null;
+
+    function segna(){
+      var accesa = !canzone.paused && !sfumando;
+      musica.setAttribute('aria-pressed', accesa ? 'true' : 'false');
+      scritta.textContent = accesa ? 'Spegni la musica' : 'Accendi la musica';
+    }
+    function suona(){
+      if(chiusa || sfumando) return;
+      canzone.volume = 1;
+      var p = canzone.play();
+      if(p && p.then) p.then(segna, segna); else segna();
+    }
+    // Su iPhone il volume dell'audio non si cambia da qui: per sfumare la
+    // canzone passa da un nodo di guadagno, collegato solo in quel momento
+    // (dentro il clic, l'unico istante in cui il browser lo permette).
+    function volumeLibero(){
+      var prima = canzone.volume;
+      canzone.volume = prima > 0.5 ? 0.4 : 0.6;
+      var libero = Math.abs(canzone.volume - prima) > 0.05;
+      canzone.volume = prima;
+      return libero;
+    }
+    function sfuma(durata){
+      if(canzone.paused || sfumando) return;
+      sfumando = true;
+      segna();
+      if(!volumeLibero() && !guadagno){
+        try {
+          var C = window.AudioContext || window.webkitAudioContext;
+          var contesto = new C();
+          guadagno = contesto.createGain();
+          contesto.createMediaElementSource(canzone).connect(guadagno);
+          guadagno.connect(contesto.destination);
+          if(contesto.resume) contesto.resume();
+        } catch(e){ guadagno = null; }
+      }
+      var t0 = Date.now();
+      var giro = setInterval(function(){
+        var resto = 1 - Math.min(1, (Date.now() - t0) / durata);
+        if(guadagno) guadagno.gain.value = resto; else canzone.volume = resto;
+        if(resto <= 0){ clearInterval(giro); canzone.pause(); }
+      }, 40);
+    }
+    suona();
+    musica.addEventListener('click', function(){
+      if(canzone.paused){ spentaApposta = false; suona(); }
+      else { spentaApposta = true; canzone.pause(); segna(); }
+    });
+    copertina.addEventListener('pointerdown', function(e){
+      if(canzone.paused && !spentaApposta && !musica.contains(e.target) && !entra.contains(e.target)) suona();
+    });
+    document.addEventListener('keydown', function(e){
+      if(!chiusa && canzone.paused && !spentaApposta && e.key === 'Tab') suona();
+    });
+
+    // Mentre la copertina e' chiusa il resto della pagina non si raggiunge
+    // ne' col tab ne' col lettore di schermo.
+    document.addEventListener('DOMContentLoaded', function(){
+      if(chiusa) return;
+      Array.prototype.forEach.call(document.body.children, function(el){
+        if(el === copertina || el.tagName === 'SCRIPT' || el.inert) return;
+        el.inert = true;
+        spenti.push(el);
+      });
+    });
+
+    // Se Motion non e' arrivato il logo non si comporra': lo si mostra
+    // intero da subito.
+    window.addEventListener('load', function(){
+      if(!window.PatagucciCopertina) radice.classList.remove('copertina-anima');
+    });
+
+    function chiudi(){
+      if(chiusa) return;
+      chiusa = true;
+      // Chi salta l'apertura non deve sentire la musica continuare sotto.
+      if(!canzone.paused && !sfumando) sfuma(400);
+      try { sessionStorage.setItem('patagucci-entrato', '1'); } catch(e){}
+      spenti.forEach(function(el){ el.inert = false; });
+      radice.classList.remove('con-copertina', 'copertina-anima');
+      copertina.remove();
+      // Chi e' entrato con la tastiera riparte dal titolo; col mouse o col
+      // dito il fuoco torna semplicemente all'inizio della pagina.
+      var titolo = daTastiera && document.querySelector('#dest-hub h1');
+      if(titolo){
+        titolo.setAttribute('tabindex', '-1');
+        titolo.addEventListener('blur', function(){ titolo.removeAttribute('tabindex'); }, { once:true });
+        try { titolo.focus({ preventScroll:true }); } catch(e){}
+      }
+    }
+
+    function apri(e){
+      // Un clic da tastiera (Invio, spazio) ha detail 0; Esc non ha evento.
+      daTastiera = !e || e.detail === 0;
+      // La canzone se ne va mentre la copertina si apre.
+      sfuma(1800);
+      // Un secondo colpo mentre si sta aprendo vuol dire "salta".
+      if(copertina.classList.contains('in-volo') || copertina.classList.contains('apri-css')){ chiudi(); return; }
+      if(window.PatagucciCopertina){ window.PatagucciCopertina.apri(copertina, chiudi); return; }
+      // Senza Motion (o con meno movimento): il logo intero, e apre il CSS.
+      var meno = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      radice.classList.remove('copertina-anima');
+      copertina.classList.add('apri-css');
+      setTimeout(chiudi, meno ? 300 : 980);
+    }
+
+    entra.addEventListener('click', apri);
+    document.addEventListener('keydown', function(e){
+      if(!chiusa && e.key === 'Escape') apri();
+    });
+  })();
+</script>"""
+
 
 final_html = f'''<!DOCTYPE html>
 <html lang="it" data-dest="hub">
@@ -1191,55 +889,68 @@ final_html = f'''<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Patagucci Trips</title>
+{copertina_testa}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Patrick+Hand+SC&family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Atkinson+Hyperlegible+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 <style>
   .destination{{ display:none; }}
-  .destination.active{{ display:block; animation:destIn .5s cubic-bezier(.16,1,.3,1) both; }}
-  @keyframes destIn{{ from{{ opacity:0; transform:translateY(10px); }} to{{ opacity:1; transform:none; }} }}
-  /* Una riga sola che scorre, a qualsiasi larghezza.
-     Andando a capo occupava 97px gia' a 1280, 138px su tablet e 302px su
-     telefono: con la barra delle sezioni sotto restava zero schermo per il
-     contenuto. I due margin:auto la tengono centrata quando ci sta e non
-     rendono irraggiungibile il primo bottone quando invece scorre. */
+  .destination.active{{ display:block; }}
+  /* Le linguette del quaderno: una riga sola che scorre, a qualsiasi
+     larghezza. Andando a capo mangiavano un terzo dello schermo sul
+     telefono. I due margin:auto la tengono centrata quando ci sta e non
+     rendono irraggiungibile la prima linguetta quando invece scorre. */
   .site-switcher{{
     position:sticky; top:0; z-index:200;
-    display:flex; gap:6px; justify-content:flex-start; flex-wrap:nowrap;
+    display:flex; gap:4px; justify-content:flex-start; flex-wrap:nowrap;
     overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none;
-    background:linear-gradient(180deg, rgba(var(--accent-rgb),0.12), transparent 60%), linear-gradient(180deg,#181818,#0e0e0e);
-    padding:10px 12px; box-shadow:0 6px 18px rgba(0,0,0,0.35);
-    border-bottom:1px solid rgba(var(--accent-rgb),0.22);
-    transition:background .5s ease, border-color .5s ease;
+    background:var(--paper) var(--riga-mano) repeat-x 0 100% / 240px 9px;
+    padding:9px 12px 12px;
   }}
   .site-switcher::-webkit-scrollbar{{ display:none; }}
   .site-switcher > button:first-child{{ margin-left:auto; }}
   .site-switcher > button:last-child{{ margin-right:auto; }}
+  /* Ogni linguetta ha il suo evidenziatore: un trattino sotto la scritta
+     quando e' chiusa, la passata intera dietro le lettere quando e'
+     aperta. Il trattino sta sotto, non dietro: il grigio matita sopra
+     il rosa scendeva a 3,3:1. */
   .site-switcher button{{
-    flex:0 0 auto; white-space:nowrap;
-    border:1px solid transparent; background:rgba(255,255,255,0.06); color:#cfcfcf;
-    padding:8px 16px; border-radius:999px; font-size:var(--t-micro); font-weight:700; cursor:pointer;
-    text-transform:uppercase; letter-spacing:0.04em; transition:all .2s cubic-bezier(.16,1,.3,1);
+    --dab:#ffe14d;
+    flex:0 0 auto; white-space:nowrap; cursor:pointer;
+    font-family:var(--font-display); font-size:1.08rem; line-height:1.2; letter-spacing:0.01em;
+    color:var(--ink-soft); background-color:transparent; border:0; border-radius:6px;
+    padding:8px 13px 9px;
+    background-image:var(--evid-grana), linear-gradient(var(--dab), var(--dab));
+    background-repeat:no-repeat; background-position:6px 76%, 13px 100%; background-size:0 0, 22px 5px;
+    transition:color .2s ease, background-size .4s cubic-bezier(.16,1,.3,1), background-position .4s cubic-bezier(.16,1,.3,1);
   }}
-  .site-switcher button:hover{{ background:rgba(255,255,255,0.14); transform:translateY(-1px); }}
-  .site-switcher button.active{{ background:var(--accent); color:#10100e; box-shadow:0 4px 14px rgba(var(--accent-rgb),0.4); }}
-  .site-switcher button.home-btn{{ color:var(--accent); border-color:rgba(var(--accent-rgb),0.4); }}
-  .site-switcher button.home-btn.active{{ color:#10100e; }}
+  .site-switcher button[data-dest="is"]{{ --dab:#7deaa0; }}
+  .site-switcher button[data-dest="kr"]{{ --dab:#ff92bb; }}
+  .site-switcher button[data-dest="nx"]{{ --dab:#6de6d2; }}
+  .site-switcher button:hover{{ color:var(--ink); background-size:0 0, calc(100% - 26px) 5px; }}
+  .site-switcher button.active{{ color:var(--ink); background-position:6px 76%, 6px 76%; background-size:calc(100% - 12px) 0.6em, calc(100% - 12px) 0.6em; }}
+  .site-switcher .corto{{ display:none; }}
   @media (max-width:760px){{
-    .site-switcher{{ padding:7px 10px; }}
-    .site-switcher button{{ padding:10px 13px; font-size:var(--t-micro); letter-spacing:0.03em; min-height:44px; }}
+    .site-switcher{{ padding:6px 8px 10px; }}
+    .site-switcher button{{ padding:10px 11px 9px; font-size:1rem; min-height:44px; }}
   }}
-{chat_css}
+  @media (max-width:600px){{
+    .site-switcher .lungo{{ display:none; }}
+    .site-switcher .corto{{ display:inline; }}
+    .site-switcher button{{ padding:10px 8px 9px; }}
+  }}
 </style>
 </head>
 <body>
+
+{copertina_html}
 
 <div class="flagbar" id="flagbar"></div>
 
 
 <div class="site-switcher" id="site-switcher">
-  <button class="home-btn active" data-dest="hub" onclick="showDest('hub')">🌍 Home</button>
+  <button class="home-btn active" data-dest="hub" onclick="showDest('hub')">Home</button>
   {switcher_buttons}
 </div>
 
@@ -1247,14 +958,12 @@ final_html = f'''<!DOCTYPE html>
 
 {destination_blocks}
 
-{chat_html}
-
 <script>
 var SUFFISSI = {suffissi_js};
 var TITOLI = {titoli_js};
 var FLAG_BARS = {{
-  hub: 'linear-gradient(90deg,#141414 0 50%, #FFCE00 50% 100%)',
-  nx: 'linear-gradient(90deg,#FFCE00 0 25%, #2a6b4d 25% 50%, #D21034 50% 75%, #1D2A4D 75% 100%)',
+  hub: 'linear-gradient(90deg,#161616 0 33%, #ffe14d 33% 66%, #ff92bb 66% 100%)',
+  nx: 'linear-gradient(90deg,#ffe14d 0 25%, #7deaa0 25% 50%, #ff92bb 50% 75%, #6de6d2 75% 100%)',
   ug: 'linear-gradient(90deg,#141414 0 33%, #FFCE00 33% 66%, #D21034 66% 100%)',
   pk: 'linear-gradient(90deg,#ffffff 0 25%, #01411C 25% 100%)',
   za: 'linear-gradient(90deg,#DE3831 0 16.6%, #ffffff 16.6% 33.3%, #002395 33.3% 50%, #007A4D 50% 66.6%, #FFB612 66.6% 83.3%, #000000 83.3% 100%)',
@@ -1389,13 +1098,81 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){{
 
 {"".join(scripts)}
 
-<script>
-{chat_js}
-</script>
+<!-- Motion (gia' Framer Motion), la versione senza React: la pagina che si
+     volta, l'evidenziatore che si stende, la penna che disegna. Se non
+     arriva, assets/anima.js se ne accorge e la pagina resta ferma e intera. -->
+<script src="https://cdn.jsdelivr.net/npm/motion@11.11.17/dist/motion.js" defer></script>
+<script src="assets/anima.js" defer></script>
 
 </body>
 </html>
 '''
+
+
+# ----------------------------------------------------------------------
+# Il taccuino.
+#
+# Le pagine sorgente sono nate per il vecchio stile: titoli con un'emoji
+# davanti, foto delle intestazioni scurite per farci stare sopra il
+# testo bianco, pannelli "dark" alternati. Invece di riscriverle tutte,
+# le aggiusto qui, nel punto dove vengono montate: cosi' valgono anche
+# per le mete archiviate, il giorno che tornano in linea.
+# ----------------------------------------------------------------------
+EVIDENZIA = {"Patagucci Trips": "Patagucci", "Corea, Brunei e Singapore": "Corea", "Quale sarà il prossimo?": "prossimo"}
+
+EMOJI = (r"(?:[\U0001F000-\U0001FAFF\u2600-\u27BF\u2B00-\u2BFF\u2300-\u23FF]"
+         r"[\uFE0F\u200D\U0001F3FB-\U0001F3FF]*)+")
+
+def taccuino(html):
+    # Nessuna pagina scura: le "dark" diventano pagine coi quadretti del
+    # colore del paese. Le vecchie regole section.panel.dark nei <style>
+    # delle sorgenti cosi' non trovano piu' niente a cui applicarsi.
+    html = html.replace('class="panel dark"', 'class="panel alt"')
+
+    # Titoli di sezione: via l'emoji davanti, e il testo in uno <span>
+    # su cui passare l'evidenziatore una riga alla volta.
+    def titolo(m):
+        testo = re.sub(r"^\s*" + EMOJI + r"\s*", "", m.group(2))
+        return f'{m.group(1)}<span class="tt">{testo}</span></h2>'
+    html = re.sub(r'(<h2 class="section-title[^"]*"[^>]*>)(.*?)</h2>', titolo, html, flags=re.S)
+
+    # Il titolo della prima pagina di ogni meta: evidenziata una parola
+    # sola, quella che conta. Tutte le righe evidenziate non evidenziano
+    # niente.
+    def titolo_meta(m):
+        testo = m.group(2)
+        parola = EVIDENZIA.get(testo) or testo.split()[0].rstrip(",")
+        return m.group(1) + testo.replace(parola, f'<span class="tt">{parola}</span>', 1) + m.group(3)
+    html = re.sub(r'(<header class="hero"[^>]*>.*?<h1>)(.*?)(</h1>)', titolo_meta, html, flags=re.S)
+
+    # Le emoji davanti ai titoletti e ai link per le mappe facevano da
+    # icone: via, il testo basta.
+    html = re.sub(r'(<h3\b[^>]*>)\s*' + EMOJI + r'\s*', r'\1', html)
+    html = re.sub(r'(class="maps-link"[^>]*>)\s*' + EMOJI + r'\s*', r'\1', html)
+    html = re.sub(r'((?:id="link-full-route[^"]*"|class="export"|class="qp-secondario")[^>]*>)\s*' + EMOJI + r'\s*', r'\1', html)
+    # Alba e tramonto sulla simulazione del sole: scritti, non disegnini.
+    html = html.replace('class="sun-label">🌅 ', 'class="sun-label">alba ').replace('class="sun-label">🌇 ', 'class="sun-label">tramonto ')
+
+    # Sulle cartine le tappe erano emoji: diventano puntine a pennarello,
+    # un cerchio evidenziato nello stesso punto.
+    def puntina(m):
+        x, y, corpo = float(m.group(2)), float(m.group(3)), float(m.group(4))
+        return f'{m.group(1)}<circle class="pin" cx="{x:g}" cy="{y - corpo * 0.35:g}" r="{corpo * 0.3:g}"/>'
+    html = re.sub(r'(<g class="stop-pin[^"]*">\s*)<text x="([\d.]+)" y="([\d.]+)"[^>]*?font-size="([\d.]+)"[^>]*>[^<]*</text>',
+                  puntina, html)
+
+    # La foto dell'intestazione adesso e' una polaroid: niente velo scuro.
+    html = re.sub(r'(class="bg" style="background-image:)\s*linear-gradient\((?:[^()]|\([^()]*\))*\)\s*,\s*',
+                  r'\1', html)
+
+    # Le etichette scritte a mano non hanno l'emoji davanti, e nemmeno
+    # il ritorno alla home nelle linguette.
+    html = re.sub(r'(<(?:span|a) class="badge[^"]*"[^>]*>)\s*' + EMOJI + r'\s*', r'\1', html)
+    html = re.sub(r'(class="home-link"[^>]*>)\s*' + EMOJI + r'\s*', r'\1', html)
+    html = re.sub(r'(<a href="#recap-voli[^"]*">)\s*' + EMOJI + r'\s*', r'\1', html)
+    return html
+
+final_html = taccuino(final_html)
 
 out_path = DIR + "index.html"
 with open(out_path, "w", encoding="utf-8") as f:

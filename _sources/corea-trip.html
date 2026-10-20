@@ -10,13 +10,13 @@
 <link rel="stylesheet" href="assets/style.css">
 <style>
   .route-status{ display:grid; grid-template-columns:1fr auto; gap:10px 14px; align-items:center; }
-  .route-status .r-name{ font-weight:600; color:var(--ink); }
-  section.panel.dark .route-status .r-name{ color:#f4f1ea; }
-  .route-status .r-status{ font-size:var(--t-micro); font-weight:700; padding:4px 10px; border-radius:8px; white-space:nowrap; justify-self:end; }
-  .r-status.open{ background:#1e4a2f; color:#8fe0ac; }
-  .r-status.closed{ background:#4a1c1c; color:#ff9b8a; }
+  .route-status .r-name{ font-weight:700; color:var(--ink); }
+  /* Strada aperta o chiusa: un'etichetta scritta a mano, e il contorno
+     pieno o tratteggiato la distingue anche senza colore. */
+  .route-status .r-status{ font-family:var(--font-hand); font-size:1rem; line-height:1.3; padding:2px 10px 1px; border:1.5px solid var(--ink); border-radius:var(--mano-piccola); white-space:nowrap; justify-self:end; color:var(--ink); }
+  .r-status.open{ background:var(--accent); }
+  .r-status.closed{ background:var(--paper); border-style:dashed; }
   .route-note{ grid-column:1 / -1; font-size:var(--t-small); color:var(--ink-soft); margin:-4px 0 10px; }
-  section.panel.dark .route-note{ color:#c7c2b6; }
 </style>
 </head>
 <body>
@@ -27,7 +27,7 @@
   <div class="bg" style="background-image:linear-gradient(180deg, rgba(11,15,26,0.40) 0%, rgba(11,15,26,0.62) 55%, rgba(11,15,26,0.94) 100%), url('foto/destinazioni/kr-palazzo.jpg');"></div>
   <div class="content">
     <h1>Corea, Brunei e Singapore</h1>
-    <p class="tagline">Palazzi con le tegole all'insù e treni a 300 all'ora, un villaggio dipinto aggrappato a una collina, un vulcano che esce dal mare e i ciliegi in fiore. Poi si scende all'equatore: quattro giorni nel sultanato del Borneo, fra una cupola d'oro e la foresta primaria, e una tappa a Singapore prima di tornare.</p>
+    <p class="tagline">Palazzi con le tegole all'insù e treni a 300 all'ora, un villaggio dipinto aggrappato a una collina, un vulcano che esce dal mare e i ciliegi in fiore. Poi scendiamo all'equatore: quattro giorni nel sultanato del Borneo, fra una cupola d'oro e la foresta primaria, e una tappa a Singapore prima di tornare a casa.</p>
     <div class="badge-row">
       <span class="badge">📅 2–18 aprile 2027 · 17 giorni <em>(confermato)</em></span>
       <span class="badge">🌸 Stagione dei ciliegi</span>
@@ -51,7 +51,7 @@
   <a href="#guida">Guida pratica</a>
   <span class="tab-sep" aria-hidden="true">🇰🇷</span>
   <a href="#ciliegi">I ciliegi</a>
-  <a href="#siti">Cose da non perdere</a>
+  <a href="#siti">Da non perdere</a>
   <a href="#dmz">La DMZ</a>
   <a href="#cibo">Cibo &amp; alcolici</a>
   <a href="#curiosita">Curiosità</a>
@@ -62,7 +62,7 @@
   <span class="tab-sep" aria-hidden="true">🇸🇬</span>
   <a href="#singapore">Singapore</a>
   <span class="tab-sep" aria-hidden="true">·</span>
-  <a href="#faq">FAQ</a>
+  <a href="#faq">Le nostre domande</a>
   <a href="#recap-voli">🎫 I voli</a>
 </nav>
 
@@ -71,21 +71,21 @@
   <div class="paese-divisore" data-paese="">
     <span class="pd-bandiere" aria-hidden="true">🇰🇷🇧🇳🇸🇬</span>
     <h2>Il viaggio</h2>
-    <p>Come è fatto, come ci si muove e che tempo fa. Diciassette giorni che scendono da Seul verso casa, tre paesi di fila senza mai tornare sui propri passi.</p>
+    <p>Com'è fatto il nostro giro, come ci muoviamo e che tempo ci aspetta. Diciassette giorni che scendono da Seul verso casa, tre paesi di fila senza mai tornare sui nostri passi.</p>
     <div class="pd-riga"></div>
   </div>
 
   <section id="itinerario" class="panel" data-nav data-paese="">
     <div class="inner">
       <h2 class="section-title reveal">🗺️ Itinerario — 2/18 aprile: 11 giorni in Corea, 4 in Brunei, 1 a Singapore</h2>
-      <p class="section-sub reveal">Seul di passaggio, poi giù a sud in treno, Jeju in mezzo, ritorno a Seul per la fioritura. Poi il salto verso l'equatore: quattro giorni in Brunei, una tappa a Singapore, e da lì il volo per l'Italia. Ogni giorno ha un link diretto a Google Maps.</p>
+      <p class="section-sub reveal">Prima Seul, di passaggio, poi scendiamo a sud in treno, ci fermiamo a Jeju e torniamo a Seul per la fioritura. Poi facciamo il salto verso l'equatore: quattro giorni in Brunei, una tappa a Singapore, e da lì il volo per l'Italia. Ogni giorno ha un link diretto a Google Maps.</p>
 
       <h3 class="reveal" style="margin-top:6px;">📅 Il colpo d'occhio</h3>
       <div class="cal-legenda reveal">
-        <span><i style="background:#CD2E3A"></i> Corea del Sud</span>
-        <span><i style="background:#F7C331"></i> Brunei</span>
-        <span><i style="background:#EF3340"></i> Singapore</span>
-        <span>✈ giorno di volo</span>
+        <span><i style="background:#ff92bb"></i> Corea del Sud</span>
+        <span><i style="background:#ffc93c"></i> Brunei</span>
+        <span><i style="background:#cdb0ff"></i> Singapore</span>
+        <span><i class="aereo" aria-hidden="true"></i> giorno di volo</span>
       </div>
       <div class="calendario reveal" id="calendario"></div>
       <p class="qp-aiuto reveal" style="font-size:var(--t-micro);">Clicca un giorno per aprirlo qui sotto.</p>
@@ -94,15 +94,15 @@
       <div class="timeline" id="timeline"></div>
 
       <div class="callout reveal">
-        <strong>Le basi sono quattro, non otto.</strong> Seul (3 notti), Busan (2), Jeju (3), Seul di nuovo (2), poi Brunei (4) e Singapore (1). <strong>Gyeongju si fa in giornata</strong> da Busan, mezz'ora di KTX, quindi la valigia resta dov'è. Nei due trasferimenti interni coreani il volo è la sera o la mattina presto, così le giornate restano intere.
+        <strong>Le basi sono quattro, non otto.</strong> Seul (3 notti), Busan (2), Jeju (3), Seul di nuovo (2), poi Brunei (4) e Singapore (1). <strong>A Gyeongju andiamo in giornata</strong> da Busan, mezz'ora di KTX, quindi la valigia resta dov'è. Nei due trasferimenti interni coreani voliamo la sera o la mattina presto, così le giornate restano intere.
       </div>
 
       <div class="callout reveal">
-        <strong>Tre paesi, due portafogli e mezzo.</strong> Il <strong>won</strong> coreano non c'entra niente con gli altri due, ma il <strong>dollaro del Brunei e quello di Singapore valgono uguale</strong> — sono agganciati uno a uno per legge e si spendono indifferentemente in tutti e due i paesi. Quindi quello che avanza in Brunei il 17 si spende a Singapore, e non serve cambiare due volte.
+        <strong>Tre paesi, due portafogli e mezzo.</strong> Il <strong>won</strong> coreano non c'entra niente con gli altri due, ma il <strong>dollaro del Brunei e quello di Singapore valgono uguale</strong> — sono agganciati uno a uno per legge e si spendono indifferentemente in tutti e due i paesi. Quindi quello che ci avanza in Brunei il 17 lo spendiamo a Singapore, e non ci tocca cambiare due volte.
       </div>
 
       <div class="callout warn reveal">
-        <strong>Si cambia clima due volte.</strong> Si parte con la felpa per i ciliegi e il <strong>13 aprile si atterra all'equatore</strong>: da quel momento sono trenta gradi e novanta per cento di umidità fino alla fine. In valigia serve tutto e due le volte, e in Brunei anche spalle e ginocchia coperte per le moschee.
+        <strong>Cambiamo clima due volte.</strong> Partiamo con la felpa per i ciliegi e il <strong>13 aprile atterriamo all'equatore</strong>: da quel momento sono trenta gradi e novanta per cento di umidità fino alla fine. In valigia ci serve tutto e due le volte, e in Brunei anche spalle e ginocchia coperte per le moschee.
       </div>
     </div>
   </section>
@@ -110,7 +110,7 @@
   <section id="mappa" class="panel dark" data-nav data-paese="">
     <div class="inner">
       <h2 class="section-title reveal">📍 Mappa &amp; percorso</h2>
-      <p class="section-sub reveal">Seul, poi il KTX dritto a Busan — Gyeongju è una gita in giornata, sulla stessa linea — il volo per Jeju, il rientro in aereo su Seul e il salto verso l'equatore: Brunei e poi Singapore, in basso a sinistra e <strong>fuori scala</strong>, perché da Seul al Brunei sono 3.700 km e da lì a Singapore altri 1.200. Il mezzo cambia lungo il tracciato.</p>
+      <p class="section-sub reveal">Da Seul prendiamo il KTX dritto fino a Busan — Gyeongju è una gita in giornata, sulla stessa linea — poi voliamo a Jeju, rientriamo in aereo su Seul e facciamo il salto verso l'equatore: Brunei e poi Singapore, in basso a sinistra e <strong>fuori scala</strong>, perché da Seul al Brunei sono 3.700 km e da lì a Singapore altri 1.200. Il mezzo cambia lungo il tracciato.</p>
 
       <div class="jeep-map-wrap reveal">
         <svg id="jeep-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
@@ -210,7 +210,7 @@
   <section id="meteo" class="panel" data-nav data-paese="">
     <div class="inner">
       <h2 class="section-title reveal">🌦️ Meteo — aprile</h2>
-      <p class="section-sub reveal">Primavera vera: mite di giorno, fresca la mattina e la sera. Il mese giusto, ma non ancora caldo.</p>
+      <p class="section-sub reveal">Ci aspetta una primavera vera: mite di giorno, fresca la mattina e la sera. Il mese giusto, ma non ancora caldo.</p>
 
       <div class="weather-cols reveal" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
         <div>
@@ -248,7 +248,7 @@
       </div>
 
       <div class="callout reveal">
-        <strong>Cosa mettere in valigia:</strong> vestirsi a strati. Di giorno si sta in maglietta, la mattina presto e dopo il tramonto servono <strong>felpa e giacca leggera</strong>, e una antipioggia sottile perché aprile porta i primi rovesci. Scarpe comode: a Seul si cammina moltissimo e la metro ha scale ovunque. Dal <strong>13 aprile in poi la felpa non serve più e non servirà mai più</strong>: Brunei e Singapore stanno a pochi gradi dall'equatore, sono <strong>trenta gradi e novanta per cento di umidità</strong> tutti i giorni, con il rovescio del pomeriggio quasi garantito. Servono magliette leggere, un cambio in più perché si suda, l'ombrello, e le spalle e le ginocchia coperte per le moschee del Brunei. Il contrasto è brutale: si parte con i ciliegi e si finisce nella foresta pluviale.
+        <strong>Cosa mettiamo in valigia:</strong> vestiti a strati. Di giorno stiamo in maglietta, la mattina presto e dopo il tramonto ci servono <strong>felpa e giacca leggera</strong>, e una antipioggia sottile perché aprile porta i primi rovesci. Scarpe comode: a Seul camminiamo moltissimo e la metro ha scale ovunque. Dal <strong>13 aprile in poi la felpa non ci serve più e non ci servirà mai più</strong>: Brunei e Singapore stanno a pochi gradi dall'equatore, sono <strong>trenta gradi e novanta per cento di umidità</strong> tutti i giorni, con il rovescio del pomeriggio quasi garantito. Ci servono magliette leggere, un cambio in più perché sudiamo, l'ombrello, e le spalle e le ginocchia coperte per le moschee del Brunei. Il contrasto è brutale: partiamo con i ciliegi e finiamo nella foresta pluviale.
         <div class="source-note">Fonti: climieviaggi.it, dove-e-quando.it, guidacorea.it (Corea); weatherspark.com e climate-data.org (Singapore); bruneitourism.com — verificate a settembre 2026. I valori di Brunei e Singapore sono medie stagionali indicative.</div>
       </div>
     </div>
@@ -262,22 +262,22 @@
         <div class="fallback">🏘️</div>
       </div>
       <h2 class="section-title reveal">🧭 Guida pratica</h2>
-      <p class="section-sub reveal">Documenti, trasporti, valuta. Dati verificati ad agosto 2026 — da riconfermare vicino alla partenza.</p>
+      <p class="section-sub reveal">Documenti, trasporti, valuta. Dati verificati ad agosto 2026 — li riconfermiamo vicino alla partenza.</p>
 
       <div class="callout warn reveal">
-        <strong>Il K-ETA torna obbligatorio dal 1° gennaio 2027.</strong> Per gli italiani l'esenzione vale <strong>solo fino al 31 dicembre 2026</strong>: dal 2027 serve di nuovo l'autorizzazione elettronica, quindi per aprile 2027 <strong>va richiesta</strong>. Costa <strong>10.000 won (~7€)</strong>, si fa online e <strong>vale 3 anni</strong>. Non è un visto: il visto per turismo sotto i 90 giorni continua a non servire.
+        <strong>Il K-ETA torna obbligatorio dal 1° gennaio 2027.</strong> Per gli italiani l'esenzione vale <strong>solo fino al 31 dicembre 2026</strong>: dal 2027 serve di nuovo l'autorizzazione elettronica, quindi per aprile 2027 <strong>dobbiamo richiederla</strong>. Costa <strong>10.000 won (~7€)</strong>, si fa online e <strong>vale 3 anni</strong>. Non è un visto: il visto per turismo sotto i 90 giorni continua a non servire.
         <div class="source-note">Fonti: Consolato Generale della Repubblica di Corea a Milano, viaggiaresicuri.it (scheda Corea aggiornata 30/12/2025), vistonline.it. Da riverificare a gennaio 2027, perché le proroghe sono state annunciate all'ultimo negli anni scorsi.</div>
       </div>
 
       <div class="info-grid">
-        <div class="card reveal"><h3>🛂 Documenti</h3><p>Passaporto valido, nessun visto per turismo fino a 90 giorni, <strong>K-ETA</strong> da richiedere per il 2027. Chi non ha il K-ETA deve compilare la <strong>e-Arrival Card</strong> entro tre giorni dall'arrivo: il modulo cartaceo non esiste più dal 2026.</p></div>
-        <div class="card reveal"><h3>💳 T-money</h3><p>Una tessera ricaricabile che vale su <strong>metro, bus e taxi in tutto il paese</strong>. Si compra in qualsiasi minimarket per pochi euro. È la prima cosa da prendere appena atterrati.</p></div>
-        <div class="card reveal"><h3>🚄 KTX</h3><p>Seul–Busan in <strong>2h15</strong> e Busan–Gyeongju in mezz'ora, sulla stessa linea. Biglietti sull'app Korail. <strong>Il Korail Pass non conviene</strong> su questo giro: due tratte sole, punto a punto costano meno del pass.</p></div>
-        <div class="card reveal"><h3>💱 Won</h3><p>Si paga con carta praticamente ovunque, anche i mercati. Contanti utili per i banchi di street food. Attenzione: le carte straniere non funzionano in tutti gli sportelli — cercate gli ATM con la scritta "Global".</p></div>
-        <div class="card reveal"><h3>📶 Internet</h3><p>Il paese è coperto di wifi pubblico gratuito e veloce. Una eSIM locale costa poco e risolve mappe e traduttore, che servono più di quanto sembri: fuori dalle zone turistiche l'inglese è poco diffuso.</p></div>
-        <div class="card reveal"><h3>🇧🇳 Brunei: Dart e niente alcol</h3><p>Il <strong>dollaro del Brunei</strong> vale uno a uno con quello di Singapore e i due si spendono in entrambi i paesi. <strong>Non c'è trasporto pubblico</strong> utilizzabile: si usa <strong>Dart</strong>, l'app locale, perché Uber e Grab non ci sono. <strong>Vendita e consumo di alcol in pubblico sono vietati.</strong> Niente visto per 90 giorni, ma il passaporto deve avere sei mesi di validità residua.</p></div>
+        <div class="card reveal"><h3>🛂 Documenti</h3><p>Passaporto valido, nessun visto per turismo fino a 90 giorni, e il <strong>K-ETA</strong>, che dobbiamo richiedere per il 2027. Chi non ha il K-ETA deve compilare la <strong>e-Arrival Card</strong> entro tre giorni dall'arrivo: il modulo cartaceo non esiste più dal 2026.</p></div>
+        <div class="card reveal"><h3>💳 T-money</h3><p>Una tessera ricaricabile che vale su <strong>metro, bus e taxi in tutto il paese</strong>. Si compra in qualsiasi minimarket per pochi euro. È la prima cosa che prendiamo appena atterrati.</p></div>
+        <div class="card reveal"><h3>🚄 KTX</h3><p>Seul–Busan in <strong>2h15</strong> e Busan–Gyeongju in mezz'ora, sulla stessa linea. I biglietti li prendiamo sull'app Korail. <strong>Il Korail Pass non ci conviene</strong> su questo giro: due tratte sole, punto a punto costano meno del pass.</p></div>
+        <div class="card reveal"><h3>💱 Won</h3><p>Paghiamo con carta praticamente ovunque, anche ai mercati. I contanti ci servono per i banchi di street food. Attenzione: le carte straniere non funzionano in tutti gli sportelli — cerchiamo gli ATM con la scritta "Global".</p></div>
+        <div class="card reveal"><h3>📶 Internet</h3><p>Il paese è coperto di wifi pubblico gratuito e veloce. Una eSIM locale costa poco e ci risolve mappe e traduttore, che ci serviranno più di quanto sembri: fuori dalle zone turistiche l'inglese è poco diffuso.</p></div>
+        <div class="card reveal"><h3>🇧🇳 Brunei: Dart e niente alcol</h3><p>Il <strong>dollaro del Brunei</strong> vale uno a uno con quello di Singapore e i due si spendono in entrambi i paesi. <strong>Non c'è trasporto pubblico</strong> utilizzabile: ci muoviamo con <strong>Dart</strong>, l'app locale, perché Uber e Grab non ci sono. <strong>Vendita e consumo di alcol in pubblico sono vietati.</strong> Niente visto per 90 giorni, ma il passaporto deve avere sei mesi di validità residua.</p></div>
         <div class="card reveal"><h3>🇸🇬 Singapore: metro e regole</h3><p>Il <strong>dollaro di Singapore</strong>, circa 1,45 per euro. La metropolitana arriva ovunque e parte da dentro Changi: <strong>quaranta minuti</strong> per il centro. Come in Corea, <strong>in metro non si mangia e non si beve</strong>, e la vendita di chewing gum è vietata dal 1992. Niente visto per gli italiani.</p></div>
-        <div class="card reveal"><h3>🗺️ Google Maps non basta</h3><p>Per ragioni di sicurezza nazionale la Corea limita l'export dei dati cartografici, e <strong>Google Maps non dà indicazioni stradali affidabili</strong>. Si usano <strong>Naver Map</strong> o <strong>KakaoMap</strong>: scaricatele prima di partire.</p></div>
+        <div class="card reveal"><h3>🗺️ Google Maps non basta</h3><p>Per ragioni di sicurezza nazionale la Corea limita l'export dei dati cartografici, e <strong>Google Maps non dà indicazioni stradali affidabili</strong>. Usiamo <strong>Naver Map</strong> o <strong>KakaoMap</strong>, e le scarichiamo prima di partire.</p></div>
       </div>
 
       <div class="source-note">Fonti: viaggiaresicuri.it, overseas.mofa.go.kr (consolato coreano di Milano), kkday.com (KTX), VisitKorea — verificate ad agosto 2026. I link "apri su Google Maps" in questa pagina servono a localizzare le tappe, non a farsi guidare: per quello usate Naver o Kakao.</div>
@@ -287,7 +287,7 @@
   <div class="paese-divisore" data-paese="kr">
     <span class="pd-bandiere" aria-hidden="true">🇰🇷</span>
     <h2>Corea del Sud</h2>
-    <p>Undici giorni, il pezzo grosso del viaggio: Seul in apertura e in chiusura, il sud in treno, e l’isola vulcanica in mezzo.</p>
+    <p>Undici giorni, il pezzo grosso del viaggio: apriamo e chiudiamo a Seul, scendiamo a sud in treno, e in mezzo ci fermiamo sull’isola vulcanica.</p>
     <div class="pd-riga"></div>
   </div>
 
@@ -295,25 +295,25 @@
   <section id="ciliegi" class="panel" data-nav data-paese="kr">
     <div class="inner">
       <h2 class="section-title reveal">🌸 I ciliegi</h2>
-      <p class="section-sub reveal">Il <strong>12 aprile</strong> è il giorno, e si può andare <strong>all'alba</strong>: si è a Seul già dalla sera dell'11, quindi niente corse.</p>
+      <p class="section-sub reveal">Il <strong>12 aprile</strong> è il giorno, e possiamo andarci <strong>all'alba</strong>: siamo a Seul già dalla sera dell'11, quindi niente corse.</p>
 
       <div class="callout reveal">
-        <strong>A Seul il pieno cade quasi sempre fra il 3 e il 12 aprile</strong>, con l'inizio intorno al 3 e il picco verso il 10. Il 12 siamo dentro la finestra buona — ma la fioritura si sposta anche di una settimana secondo com'è andato l'inverno, quindi si guarda <strong>la previsione del KMA a fine marzo</strong> e si decide dove andare la mattina stessa. Nel sud, a Busan e Jeju, è finita da un pezzo: lì si fiorisce <strong>fra 9 e 15 giorni prima</strong> di Seul.
+        <strong>A Seul il pieno cade quasi sempre fra il 3 e il 12 aprile</strong>, con l'inizio intorno al 3 e il picco verso il 10. Il 12 siamo dentro la finestra buona — ma la fioritura si sposta anche di una settimana secondo com'è andato l'inverno, quindi guardiamo <strong>la previsione del KMA a fine marzo</strong> e decidiamo dove andare la mattina stessa. Nel sud, a Busan e Jeju, è finita da un pezzo: lì la fioritura arriva <strong>fra 9 e 15 giorni prima</strong> di Seul.
       </div>
 
       <div class="info-grid">
-        <div class="card reveal"><h3>🌸 Seul — dall'11 aprile</h3><p>La settimana in cui siete in città. I posti classici: <strong>Yeouido</strong> lungo il fiume Han, il lago <strong>Seokchon</strong> davanti alla Lotte Tower, e i vialetti attorno a <strong>Gyeongbokgung</strong>. Sono anche molto affollati: presto la mattina fa una differenza enorme.</p></div>
-        <div class="card reveal"><h3>🌸 Jinhae — il più famoso</h3><p>Vicino a Busan, la festa dei ciliegi più grande del paese: un torrente fiancheggiato da alberi che si chiudono a tunnel. Il picco però è <strong>fine marzo / primissimi di aprile</strong>: passando l'8-9 aprile la trovereste sfiorita. Se qualcuno la vuole a tutti i costi, va anticipato il viaggio, non spostato.</p></div>
-        <div class="card reveal"><h3>🌸 Gyeongju</h3><p>Fiorisce intorno al <strong>28 marzo – 5 aprile</strong>. Ci andiamo il <strong>7</strong>, in giornata da Busan: sui tumuli reali la fioritura sarà finita da qualche giorno. Si va per i templi, non per i fiori.</p></div>
-        <div class="card reveal"><h3>⚠️ Nessuno può garantirlo</h3><p>La fioritura dipende dall'inverno e si sposta anche di una settimana. Le date sono <strong>previsioni</strong>, non un calendario. Il viaggio deve reggere anche senza fiori: per questo l'itinerario non è costruito solo su quelli.</p></div>
+        <div class="card reveal"><h3>🌸 Seul — dall'11 aprile</h3><p>La settimana in cui siamo in città. I posti classici: <strong>Yeouido</strong> lungo il fiume Han, il lago <strong>Seokchon</strong> davanti alla Lotte Tower, e i vialetti attorno a <strong>Gyeongbokgung</strong>. Sono anche molto affollati: andarci presto la mattina fa una differenza enorme.</p></div>
+        <div class="card reveal"><h3>🌸 Jinhae — il più famoso</h3><p>Vicino a Busan, la festa dei ciliegi più grande del paese: un torrente fiancheggiato da alberi che si chiudono a tunnel. Il picco però è <strong>fine marzo / primissimi di aprile</strong>: passando l'8-9 aprile la troveremmo sfiorita. Se qualcuno di noi la vuole a tutti i costi, dobbiamo anticipare il viaggio, non spostarlo.</p></div>
+        <div class="card reveal"><h3>🌸 Gyeongju</h3><p>Fiorisce intorno al <strong>28 marzo – 5 aprile</strong>. Ci andiamo il <strong>7</strong>, in giornata da Busan: sui tumuli reali la fioritura sarà finita da qualche giorno. Ci andiamo per i templi, non per i fiori.</p></div>
+        <div class="card reveal"><h3>⚠️ Nessuno può garantirlo</h3><p>La fioritura dipende dall'inverno e si sposta anche di una settimana. Le date sono <strong>previsioni</strong>, non un calendario. Il viaggio deve reggere anche senza fiori: per questo non abbiamo costruito l'itinerario solo su quelli.</p></div>
       </div>
     </div>
   </section>
 
   <section id="siti" class="panel dark" data-nav data-paese="kr">
     <div class="inner">
-      <h2 class="section-title reveal">🏯 Cose da non perdere</h2>
-      <p class="section-sub reveal">Le tappe principali dell'itinerario, filtrabili per città.</p>
+      <h2 class="section-title reveal">🏯 Quello che non vogliamo perderci</h2>
+      <p class="section-sub reveal">Le tappe principali del nostro itinerario, filtrabili per città.</p>
 
       <div class="filter-row reveal" id="family-filters"></div>
       <div class="family-grid" id="family-grid"></div>
@@ -325,17 +325,17 @@
   <section id="dmz" class="panel" data-nav data-paese="kr">
     <div class="inner">
       <h2 class="section-title reveal">🪖 La DMZ — regole precise, nessuna garanzia</h2>
-      <p class="section-sub reveal">La zona demilitarizzata si visita solo con tour autorizzati, e la parte più famosa può saltare all'ultimo momento.</p>
+      <p class="section-sub reveal">Nella zona demilitarizzata entriamo solo con un tour autorizzato, e la parte più famosa può saltare all'ultimo momento.</p>
 
       <div class="info-grid">
         <div class="card reveal"><h3>🎟️ Due tour diversi</h3><p>Il <strong>tour DMZ standard</strong> (Terzo Tunnel d'Infiltrazione, osservatorio di Dora) costa <strong>55.000–75.000 won</strong>, fino a 95.000 con pranzo. Il <strong>JSA / Panmunjom</strong>, dove si sta davvero sulla linea di confine, costa <strong>da 150.000 won</strong> ed è un'altra cosa.</p></div>
-        <div class="card reveal"><h3>⚠️ Il JSA può chiudere</h3><p>Resta soggetto a <strong>chiusure improvvise</strong> per tensioni geopolitiche o direttive del Comando ONU. Gli operatori non possono garantirlo e le cancellazioni arrivano anche la mattina stessa. Prenotate il tour DMZ normale e trattate il JSA come un bonus.</p></div>
-        <div class="card reveal"><h3>🛂 Passaporto vero</h3><p>Serve il <strong>passaporto fisico</strong>, non una fotocopia né la foto sul telefono: ai posti di blocco i militari controllano ogni nome sulla lista consegnata prima. Un passaporto mancante può far tornare indietro l'intero pullman. Per il JSA i dati vanno registrati <strong>almeno 7 giorni prima</strong>.</p></div>
+        <div class="card reveal"><h3>⚠️ Il JSA può chiudere</h3><p>Resta soggetto a <strong>chiusure improvvise</strong> per tensioni geopolitiche o direttive del Comando ONU. Gli operatori non possono garantirlo e le cancellazioni arrivano anche la mattina stessa. Prenotiamo il tour DMZ normale e il JSA lo trattiamo come un bonus.</p></div>
+        <div class="card reveal"><h3>🛂 Passaporto vero</h3><p>Ci serve il <strong>passaporto fisico</strong>, non una fotocopia né la foto sul telefono: ai posti di blocco i militari controllano ogni nome sulla lista consegnata prima. Un passaporto mancante può far tornare indietro l'intero pullman. Per il JSA dobbiamo registrare i dati <strong>almeno 7 giorni prima</strong>.</p></div>
         <div class="card reveal"><h3>👕 C'è un codice di abbigliamento</h3><p>Vietati canottiere, magliette senza colletto, pantaloncini, jeans strappati, vestiti aderenti o trasparenti, capi di foggia militare e infradito. Non è folklore: chi si presenta fuori regola non sale.</p></div>
       </div>
 
       <div class="callout reveal">
-        <strong>Vale la pena?</strong> Sì, ma sapendo cos'è: mezza giornata di pullman, controlli e osservatori, non un'attrazione spettacolare. Quello che colpisce è il contesto — un confine fermo dal 1953 a un'ora dai grattacieli.
+        <strong>Vale la pena?</strong> Sì, ma sapendo cosa ci aspetta: mezza giornata di pullman, controlli e osservatori, non un'attrazione spettacolare. Quello che colpisce è il contesto — un confine fermo dal 1953 a un'ora dai grattacieli.
         <div class="source-note">Fonti: seoultourism.org, trazy.com, vviptravel.com, koreaexperience.com — tutte aggiornate al 2026 e concordi su prezzi e regole.</div>
       </div>
     </div>
@@ -344,19 +344,19 @@
   <section id="cibo" class="panel dark" data-nav data-paese="kr">
     <div class="inner">
       <h2 class="section-title reveal">🍜 Cibo &amp; alcolici</h2>
-      <p class="section-sub reveal">Uno dei motivi principali per andarci. Si mangia benissimo a qualunque prezzo, e i contorni sono gratis e infiniti.</p>
+      <p class="section-sub reveal">Uno dei motivi principali per cui ci andiamo: si mangia benissimo a qualunque prezzo, e i contorni sono gratis e infiniti.</p>
 
       <div class="info-grid">
         <div class="card reveal"><h3>🥬 Banchan</h3><p>I contorni che arrivano insieme al piatto principale: kimchi, germogli, alghe, radici. Sono <strong>compresi nel prezzo e si possono richiedere all'infinito</strong>. Cambiano da locale a locale e sono metà del pasto.</p></div>
         <div class="card reveal"><h3>🔥 Barbecue coreano</h3><p>Si cucina al tavolo su una griglia incassata: <strong>samgyeopsal</strong> (pancetta di maiale) o <strong>galbi</strong> (costine marinate). Si avvolge la carne nella lattuga con aglio e salsa. È il pasto sociale del paese.</p></div>
         <div class="card reveal"><h3>🍲 Bibimbap</h3><p>Riso con verdure, carne, uovo e pasta di peperoncino, servito nella ciotola di pietra rovente che fa la crosta sul fondo. La versione di riferimento è quella di <strong>Jeonju</strong>.</p></div>
-        <div class="card reveal"><h3>🌶️ Tteokbokki</h3><p>Gnocchi di riso cilindrici in salsa di peperoncino dolce-piccante, il cibo di strada per eccellenza. Da provare al mercato <strong>Gwangjang</strong> di Seul insieme ai <em>bindaetteok</em>, le frittelle di fagioli.</p></div>
+        <div class="card reveal"><h3>🌶️ Tteokbokki</h3><p>Gnocchi di riso cilindrici in salsa di peperoncino dolce-piccante, il cibo di strada per eccellenza. Lo proviamo al mercato <strong>Gwangjang</strong> di Seul insieme ai <em>bindaetteok</em>, le frittelle di fagioli.</p></div>
         <div class="card reveal"><h3>🍶 Soju</h3><p>Il distillato nazionale, si beve in bicchierini e costa pochissimo. Regola di galateo: <strong>non ci si versa da soli</strong>, si versa agli altri, e quando un più anziano versa a te si regge il bicchiere con due mani.</p></div>
         <div class="card reveal"><h3>🍺 Somaek e makgeolli</h3><p><strong>Somaek</strong> è soju mescolato alla birra, l'abbinamento più diffuso della sera. Il <strong>makgeolli</strong> è invece un vino di riso torbido e leggermente frizzante, servito in ciotole: tradizionalmente si beve con le frittelle nei giorni di pioggia.</p></div>
       </div>
 
       <div class="callout reveal">
-        <strong>Costa poco davvero.</strong> Un pasto completo in una trattoria di quartiere sta sui 8.000–12.000 won, un barbecue in due sui 30.000. La spesa giornaliera tipica di un viaggiatore è indicata intorno ai <strong>111€</strong>, ma stando attenti si scende <strong>sotto i 60€ a persona</strong>, alloggio incluso. Busan costa meno di Seul.
+        <strong>Costa poco davvero.</strong> Un pasto completo in una trattoria di quartiere sta sui 8.000–12.000 won, un barbecue in due sui 30.000. La spesa giornaliera tipica di un viaggiatore è indicata intorno ai <strong>111€</strong>, ma stando attenti possiamo scendere <strong>sotto i 60€ a persona</strong>, alloggio incluso. Busan costa meno di Seul.
         <div class="source-note">Fonti: zipangu.it, guidacorea.it, ivisitkorea.com — verificate ad agosto 2026.</div>
       </div>
     </div>
@@ -367,10 +367,10 @@
   <section id="curiosita" class="panel" data-nav data-paese="kr">
     <div class="inner">
       <h2 class="section-title reveal">🌍 Stranezze, e il resto</h2>
-      <p class="section-sub reveal">Le cose sorprendenti del paese, più i due reparti speciali del gruppo: la skincare di Kiki e i concerti.</p>
+      <p class="section-sub reveal">Le cose sorprendenti del paese, più i nostri due reparti speciali: la skincare di Kiki e i concerti.</p>
 
       <h3 style="margin-top:0;">☀️ Simulatore del sole — Seul, aprile</h3>
-      <p class="section-sub reveal">Ad aprile a Seul il sole sorge verso le 6 e tramonta verso le 19. Conta per i ciliegi: le foto senza folla si fanno solo all'alba.</p>
+      <p class="section-sub reveal">Ad aprile a Seul il sole sorge verso le 6 e tramonta verso le 19. Per i ciliegi conta: se vogliamo le foto senza folla, ci tocca l'alba.</p>
       <div class="card reveal" style="text-align:center;">
         <div class="sun-sim-wrap">
           <svg id="sun-sim" viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
@@ -386,7 +386,7 @@
             <line class="sun-horizon" x1="0" y1="180" x2="500" y2="180"/>
             <text x="40" y="200" text-anchor="middle" class="sun-label">🌅 ~05:55</text>
             <text x="460" y="200" text-anchor="middle" class="sun-label">🌇 ~19:00</text>
-            <g id="sun-marker"><text x="0" y="0" text-anchor="middle" font-size="30">☀️</text></g>
+            <g id="sun-marker"><circle class="sole" cx="0" cy="-10" r="11"/></g>
           </svg>
           <div class="sun-slider-row">
             <input type="range" id="sun-slider" min="240" max="1320" step="5" value="720" aria-label="Ora del giorno">
@@ -403,14 +403,14 @@
       <h3 class="reveal" style="margin-top:34px;">🧴 Skincare, in due righe</h3>
       <div class="info-grid">
         <div class="card reveal"><h3>🏪 Olive Young</h3><p>La catena che domina il settore: sta a ogni angolo e nei negozi grandi di <strong>Myeongdong</strong> c'è il personale che parla inglese. Le offerte <strong>1+1</strong> sono il grosso del risparmio e valgono più di qualunque saldo.</p></div>
-        <div class="card reveal"><h3>🧾 Rimborso IVA</h3><p>Sopra una certa spesa si recupera l'IVA: si chiede lo scontrino <em>tax free</em> in cassa col passaporto, e si sbriga <strong>in aeroporto prima del check-in</strong>. Con le valigie già imbarcate non si fa più.</p>
+        <div class="card reveal"><h3>🧾 Rimborso IVA</h3><p>Sopra una certa spesa recuperiamo l'IVA: chiediamo lo scontrino <em>tax free</em> in cassa col passaporto, e la pratica la sbrighiamo <strong>in aeroporto prima del check-in</strong>. Con le valigie già imbarcate non si fa più.</p>
         <div class="source-note" style="margin-top:8px;">Il viaggio, dal 2 al 18 aprile, <strong>manca le svendite stagionali</strong>: quella di primavera è a inizio marzo. Restano 1+1 e rimborso IVA.</div></div>
       </div>
 
       <h3 class="reveal" style="margin-top:34px;">🎤 Concerti e music show</h3>
       <div class="info-grid">
-        <div class="card reveal"><h3>📺 Le registrazioni settimanali</h3><p>La cosa che <strong>si può programmare davvero</strong>, perché va in onda ogni settimana: <strong>M Countdown</strong> (giovedì), <strong>Music Bank</strong> (venerdì), <strong>Show! Music Core</strong> (sabato), <strong>Inkigayo</strong> (domenica). Si assiste alle riprese in studio, con più artisti nella stessa serata. Music Bank è <strong>gratuito ma a sorteggio</strong>, con account KBS e passaporto; per M Countdown e Inkigayo ci sono pacchetti per stranieri.</p></div>
-        <div class="card reveal"><h3>🎫 I biglietti dei concerti</h3><p><strong>Interpark Global</strong> è la piattaforma principale in inglese, poi <strong>Weverse</strong>, <strong>Yes24</strong> e <strong>Melon Ticket</strong>. L'account va creato <strong>ed email verificata giorni prima</strong>, con la carta già salvata: la corsa dura secondi. Per aprile 2027 non c'è ancora niente di annunciato, e non ci sarà fino all'inverno.</p></div>
+        <div class="card reveal"><h3>📺 Le registrazioni settimanali</h3><p>La cosa che <strong>possiamo programmare davvero</strong>, perché va in onda ogni settimana: <strong>M Countdown</strong> (giovedì), <strong>Music Bank</strong> (venerdì), <strong>Show! Music Core</strong> (sabato), <strong>Inkigayo</strong> (domenica). Si assiste alle riprese in studio, con più artisti nella stessa serata. Music Bank è <strong>gratuito ma a sorteggio</strong>, con account KBS e passaporto; per M Countdown e Inkigayo ci sono pacchetti per stranieri.</p></div>
+        <div class="card reveal"><h3>🎫 I biglietti dei concerti</h3><p><strong>Interpark Global</strong> è la piattaforma principale in inglese, poi <strong>Weverse</strong>, <strong>Yes24</strong> e <strong>Melon Ticket</strong>. L'account dobbiamo crearlo <strong>e verificare l'email giorni prima</strong>, con la carta già salvata: la corsa dura secondi. Per aprile 2027 non c'è ancora niente di annunciato, e non ci sarà fino all'inverno.</p></div>
       </div>
 
       <div class="card reveal" id="kpop-live">
@@ -429,7 +429,7 @@
   <div class="paese-divisore" data-paese="bn">
     <span class="pd-bandiere" aria-hidden="true">🇧🇳</span>
     <h2>Brunei</h2>
-    <p>Quattro giorni nel sultanato più discreto del mondo: una cupola d’oro, il villaggio sull’acqua più grande che esista, e la foresta del Borneo dietro l’angolo.</p>
+    <p>Passiamo quattro giorni nel sultanato più discreto del mondo: una cupola d’oro, il villaggio sull’acqua più grande che esista, e la foresta del Borneo dietro l’angolo.</p>
     <div class="pd-riga"></div>
   </div>
 
@@ -442,14 +442,14 @@
         <div class="fallback">🕌</div>
       </div>
 
-      <h2 class="section-title reveal">🕌 Cose da non perdere</h2>
-      <p class="section-sub reveal">Quattro giorni, tre zone: la capitale, il fiume e la foresta di Temburong dall'altra parte della baia. Filtrabili per zona.</p>
+      <h2 class="section-title reveal">🕌 Quello che non vogliamo perderci</h2>
+      <p class="section-sub reveal">Ci dividiamo i quattro giorni fra tre zone: la capitale, il fiume e la foresta di Temburong dall'altra parte della baia. Filtrabili per zona.</p>
 
       <div class="filter-row reveal" id="bn-filtri"></div>
       <div class="family-grid" id="bn-griglia"></div>
 
       <div class="callout reveal">
-        <strong>Come si spendono i quattro giorni.</strong> Uno per la capitale — moschea, museo della regalia, Kampong Ayer — uno intero per <strong>Ulu Temburong</strong>, che è lontano e si fa solo con guida, e uno per il fiume e le nasiche. Il quarto è il giorno dell'arrivo, che finisce sul lungofiume al tramonto.
+        <strong>Come spendiamo i quattro giorni.</strong> Uno per la capitale — moschea, museo della regalia, Kampong Ayer — uno intero per <strong>Ulu Temburong</strong>, che è lontano e si fa solo con guida, e uno per il fiume e le nasiche. Il quarto è il giorno dell'arrivo, che chiudiamo sul lungofiume al tramonto.
       </div>
 
       <div class="photo-banner reveal" style="margin-top:20px;">
@@ -460,7 +460,7 @@
 
       <h3 class="reveal" style="margin-top:30px;">🍢 Come si mangia</h3>
       <div class="info-grid">
-        <div class="card reveal"><h3>🥣 Ambuyat</h3><p>Il piatto nazionale: amido di <strong>palma da sago</strong> mescolato con acqua bollente, che viene una massa traslucida e appiccicosa quasi senza sapore. Si arrotola con un bastoncino di bambù a Y, il <em>candas</em>, e si inzuppa nel <em>cacah</em>, la salsa acida e piccante che fa tutto il gusto. <strong>Non si mastica, si ingoia.</strong> Si ordina per il tavolo e si mangia in compagnia: è quello il punto.</p></div>
+        <div class="card reveal"><h3>🥣 Ambuyat</h3><p>Il piatto nazionale: amido di <strong>palma da sago</strong> mescolato con acqua bollente, che viene una massa traslucida e appiccicosa quasi senza sapore. Si arrotola con un bastoncino di bambù a Y, il <em>candas</em>, e si inzuppa nel <em>cacah</em>, la salsa acida e piccante che fa tutto il gusto. <strong>Non si mastica, si ingoia.</strong> Lo ordiniamo per il tavolo e lo mangiamo in compagnia: è quello il punto.</p></div>
         <div class="card reveal"><h3>🍗 Nasi katok</h3><p>Il pasto da pochi spiccioli: riso, pollo fritto e sambal piccante, avvolti nella carta. Il nome vuol dire "riso bussa", perché si andava a bussare alla porta di chi lo vendeva di notte. Si trova ovunque ed è quello che mangiano tutti.</p></div>
         <div class="card reveal"><h3>🌙 Mercato notturno di Gadong</h3><p>Il mercato serale della capitale: banchi di satay, pesce alla griglia, riso in foglia di banana e dolci di riso colorati. È il posto giusto per cenare senza pensarci, e — senza alcolici da nessuna parte — è anche il vero passatempo della sera.</p></div>
       </div>
@@ -472,20 +472,20 @@
   <!-- BRUNEI — PRATICA -->
   <section id="brunei-pratica" class="panel" data-nav data-paese="bn">
     <div class="inner">
-      <h2 class="section-title reveal">⚠️ Brunei — le cose da sapere prima</h2>
-      <p class="section-sub reveal">È un paese musulmano osservante, e non è un dettaglio folkloristico: cambia come si passa la giornata.</p>
+      <h2 class="section-title reveal">⚠️ Brunei — cosa ci conviene sapere prima</h2>
+      <p class="section-sub reveal">È un paese musulmano osservante, e non è un dettaglio folkloristico: cambia come passeremo le giornate.</p>
 
       <div class="info-grid">
         <div class="card reveal"><h3>🚫 Niente alcol</h3><p><strong>Vendita e consumo in pubblico sono vietati.</strong> Non esistono bar, e nei ristoranti non c'è la carta dei vini. I non musulmani maggiorenni possono <strong>importarne per sé</strong> — due bottiglie di vino o superalcolici e dodici lattine di birra — ma vanno <strong>dichiarate in dogana all'arrivo</strong> e si bevono in privato. Per Manu sono quattro giorni di prova.</p></div>
-        <div class="card reveal"><h3>🕌 Venerdì</h3><p>Il venerdì è il giorno della preghiera: fra <strong>mezzogiorno e le 14</strong> chiude quasi tutto, negozi compresi, e le moschee non si visitano. <strong>Il 16 aprile è un venerdì</strong>: quella mattinata va programmata sapendolo, e il pomeriggio è il momento buono per il fiume.</p></div>
-        <div class="card reveal"><h3>🚕 Non c'è trasporto pubblico</h3><p>Niente metro, niente treni, e gli autobus urbani fanno poche corse e <strong>si fermano alle 20</strong>. I taxi in strada sono rarissimi. Si usa <strong>Dart</strong>, l'app locale di ride-hailing, che è l'unica che funziona qui: Uber e Grab non ci sono. Scaricatela prima di partire.</p></div>
-        <div class="card reveal"><h3>💱 Dollaro del Brunei</h3><p>Vale <strong>uno a uno col dollaro di Singapore</strong>, ed è agganciato per legge: i due si spendono indifferentemente in entrambi i paesi. Utile saperlo perché il 17 si va proprio a Singapore — quello che avanza si spende lì.</p></div>
-        <div class="card reveal"><h3>🛂 Documenti</h3><p>Niente visto per gli italiani fino a <strong>90 giorni</strong>, ma il passaporto deve avere <strong>almeno sei mesi di validità residua</strong> dal giorno d'ingresso. Controllatelo adesso, non a marzo.</p></div>
-        <div class="card reveal"><h3>👕 Come ci si veste</h3><p>Spalle e ginocchia coperte nei luoghi pubblici, per tutti. Le donne nelle moschee devono coprire anche i capelli, e il velo lo prestano all'ingresso. Non è una regola scritta ovunque, ma è quello che si fa — e fa la differenza fra essere ospiti e essere turisti.</p></div>
+        <div class="card reveal"><h3>🕌 Venerdì</h3><p>Il venerdì è il giorno della preghiera: fra <strong>mezzogiorno e le 14</strong> chiude quasi tutto, negozi compresi, e le moschee non si visitano. <strong>Il 16 aprile è un venerdì</strong>: quella mattinata la organizziamo sapendolo, e il pomeriggio lo teniamo per il fiume.</p></div>
+        <div class="card reveal"><h3>🚕 Non c'è trasporto pubblico</h3><p>Niente metro, niente treni, e gli autobus urbani fanno poche corse e <strong>si fermano alle 20</strong>. I taxi in strada sono rarissimi. Ci muoviamo con <strong>Dart</strong>, l'app locale di ride-hailing, che è l'unica che funziona qui: Uber e Grab non ci sono. La scarichiamo prima di partire.</p></div>
+        <div class="card reveal"><h3>💱 Dollaro del Brunei</h3><p>Vale <strong>uno a uno col dollaro di Singapore</strong>, ed è agganciato per legge: i due si spendono indifferentemente in entrambi i paesi. Ci torna utile perché il 17 andiamo proprio a Singapore — quello che ci avanza lo spendiamo lì.</p></div>
+        <div class="card reveal"><h3>🛂 Documenti</h3><p>Niente visto per gli italiani fino a <strong>90 giorni</strong>, ma il passaporto deve avere <strong>almeno sei mesi di validità residua</strong> dal giorno d'ingresso. Lo controlliamo adesso, non a marzo.</p></div>
+        <div class="card reveal"><h3>👕 Come ci vestiamo</h3><p>Spalle e ginocchia coperte nei luoghi pubblici, per tutti. Le donne nelle moschee devono coprire anche i capelli, e il velo lo prestano all'ingresso. Non è una regola scritta ovunque, ma è quello che si fa — e fa la differenza fra essere ospiti e essere turisti.</p></div>
       </div>
 
       <div class="callout warn reveal">
-        <strong>Il clima non perdona.</strong> Siamo a cinque gradi dall'equatore: <strong>trenta gradi e umidità altissima</strong> tutti i giorni, con il rovescio del pomeriggio quasi garantito. A Temburong si cammina in foresta con quell'aria lì, quindi acqua, cambio di maglietta e scarpe che possono bagnarsi.
+        <strong>Il clima non perdona.</strong> Siamo a cinque gradi dall'equatore: <strong>trenta gradi e umidità altissima</strong> tutti i giorni, con il rovescio del pomeriggio quasi garantito. A Temburong camminiamo in foresta con quell'aria lì, quindi ci portiamo acqua, cambio di maglietta e scarpe che possono bagnarsi.
       </div>
 
       <div class="source-note">Fonti: bruneitourism.com, dartbrunei.com, mfa.gov.sg (scheda Brunei), travel.gc.ca e travel.state.gov (avvisi di viaggio) — verificate a settembre 2026.</div>
@@ -505,7 +505,7 @@
   <div class="paese-divisore" data-paese="sg">
     <span class="pd-bandiere" aria-hidden="true">🇸🇬</span>
     <h2>Singapore</h2>
-    <p>Un giorno e mezzo per chiudere, dalla foresta del Borneo alla città più ordinata del mondo. Poi il volo per casa.</p>
+    <p>Un giorno e mezzo per chiudere: passiamo dalla foresta del Borneo alla città più ordinata del mondo, e poi prendiamo il volo per casa.</p>
     <div class="pd-riga"></div>
   </div>
 
@@ -519,19 +519,19 @@
       </div>
 
       <h2 class="section-title reveal">🇸🇬 Un giorno e mezzo a Singapore</h2>
-      <p class="section-sub reveal">Si atterra il 17 alle 11:20 e si riparte il 18 alle 21. Sono <strong>trentaquattro ore</strong>: non è una visita, è un assaggio — ma è un assaggio che ci sta tutto, perché qui le distanze sono corte e la metropolitana va dappertutto.</p>
+      <p class="section-sub reveal">Atterriamo il 17 alle 11:20 e ripartiamo il 18 alle 21. Sono <strong>trentaquattro ore</strong>: non è una visita, è un assaggio — ma è un assaggio che ci sta tutto, perché qui le distanze sono corte e la metropolitana va dappertutto.</p>
 
       <div class="info-grid">
-        <div class="card reveal"><h3>🌳 Gardens by the Bay</h3><p>I <strong>Supertree</strong>, alberi artificiali alti fino a cinquanta metri coperti di piante vere. Girare il parco e stare sotto gli alberi è <strong>gratis</strong>; si paga solo per entrare nelle due serre. Lo spettacolo di luci è alle <strong>19:45 e alle 20:45</strong>, dura un quarto d'ora, e si guarda sdraiati sul prato.</p></div>
-        <div class="card reveal"><h3>🍜 Hawker centre</h3><p>Mercati coperti di banchi di cucina, e il posto dove Singapore mangia davvero: <strong>Maxwell</strong>, <strong>Chinatown Complex</strong>, <strong>Tiong Bahru</strong>. Un piatto sta fra <strong>3 e 8 dollari</strong>. Da ordinare: <em>Hainanese chicken rice</em>, il <em>laksa</em> al cocco, il <em>char kway teow</em> saltato nel wok. Si tiene il posto lasciando un pacchetto di fazzoletti sul tavolo: si chiama <em>chope</em> ed è una regola vera.</p></div>
-        <div class="card reveal"><h3>🚇 Dall'aeroporto</h3><p>La metropolitana parte da dentro Changi: circa <strong>quaranta minuti</strong> fino al centro con un cambio. Prima di uscire vale la pena fermarsi al <strong>Jewel</strong>, il centro dentro l'aeroporto con la <strong>cascata coperta più alta del mondo</strong>, quaranta metri: è a dieci minuti a piedi dai terminal e non serve biglietto.</p></div>
-        <div class="card reveal"><h3>🏙️ Marina Bay</h3><p>Lo skyline che tutti conoscono, con la nave appoggiata in cima alle tre torri del Marina Bay Sands. Il giro classico si fa a piedi lungo la baia al tramonto, passando dal <strong>Merlion</strong>, e finisce ai Supertree in tempo per le luci.</p></div>
-        <div class="card reveal"><h3>🌡️ Fa caldo e basta</h3><p>Un grado sopra l'equatore: <strong>26-32°C tutto l'anno</strong>, con il 90% di umidità. Ad aprile è periodo di rovesci pomeridiani, brevi e violenti. Ombrello in borsa, e si programma la metà giornata più calda al chiuso.</p></div>
+        <div class="card reveal"><h3>🌳 Gardens by the Bay</h3><p>I <strong>Supertree</strong>, alberi artificiali alti fino a cinquanta metri coperti di piante vere. Girare il parco e stare sotto gli alberi è <strong>gratis</strong>; si paga solo per entrare nelle due serre. Lo spettacolo di luci è alle <strong>19:45 e alle 20:45</strong>, dura un quarto d'ora, e lo guardiamo sdraiati sul prato.</p></div>
+        <div class="card reveal"><h3>🍜 Hawker centre</h3><p>Mercati coperti di banchi di cucina, e il posto dove Singapore mangia davvero: <strong>Maxwell</strong>, <strong>Chinatown Complex</strong>, <strong>Tiong Bahru</strong>. Un piatto sta fra <strong>3 e 8 dollari</strong>. Cosa ordiniamo: <em>Hainanese chicken rice</em>, il <em>laksa</em> al cocco, il <em>char kway teow</em> saltato nel wok. Si tiene il posto lasciando un pacchetto di fazzoletti sul tavolo: si chiama <em>chope</em> ed è una regola vera.</p></div>
+        <div class="card reveal"><h3>🚇 Dall'aeroporto</h3><p>La metropolitana parte da dentro Changi: circa <strong>quaranta minuti</strong> fino al centro con un cambio. Prima di uscire vale la pena fermarci al <strong>Jewel</strong>, il centro dentro l'aeroporto con la <strong>cascata coperta più alta del mondo</strong>, quaranta metri: è a dieci minuti a piedi dai terminal e non serve biglietto.</p></div>
+        <div class="card reveal"><h3>🏙️ Marina Bay</h3><p>Lo skyline che tutti conoscono, con la nave appoggiata in cima alle tre torri del Marina Bay Sands. Il giro classico lo facciamo a piedi lungo la baia al tramonto, passando dal <strong>Merlion</strong>, e finiamo ai Supertree in tempo per le luci.</p></div>
+        <div class="card reveal"><h3>🌡️ Fa caldo e basta</h3><p>Un grado sopra l'equatore: <strong>26-32°C tutto l'anno</strong>, con il 90% di umidità. Ad aprile è periodo di rovesci pomeridiani, brevi e violenti. Ombrello in borsa, e la metà giornata più calda la passiamo al chiuso.</p></div>
         <div class="card reveal"><h3>⚖️ Le regole</h3><p>Singapore ha la fama di multare tutto, ed è in buona parte meritata: niente cibo e bevande in metropolitana, <strong>niente chewing gum</strong> (la vendita è vietata dal 1992), e le multe per chi butta cartacce sono pesanti. Nessuna di queste è una trappola per turisti: sono regole che rispettano tutti.</p></div>
       </div>
 
       <div class="callout reveal">
-        <strong>Come incastrare trentaquattro ore.</strong> Il 17 si arriva a mezzogiorno: pomeriggio in centro — Chinatown, un hawker centre, Marina Bay — e sera ai Supertree per lo spettacolo delle 19:45. Il 18 resta una giornata intera fino al pomeriggio, e il volo è alle 21: al terminal per le 18, con l'ultima ora al Jewel a guardare la cascata invece che al gate.
+        <strong>Come incastriamo trentaquattro ore.</strong> Il 17 arriviamo a mezzogiorno: pomeriggio in centro — Chinatown, un hawker centre, Marina Bay — e sera ai Supertree per lo spettacolo delle 19:45. Il 18 ci resta una giornata intera fino al pomeriggio, e il volo è alle 21: al terminal per le 18, con l'ultima ora al Jewel a guardare la cascata invece che al gate.
       </div>
 
       <div class="source-note">Fonti: changiairport.com, jewelchangiairport.com, gardensbythebay.com.sg, guide.michelin.com (hawker centre), weatherspark.com e climate-data.org (clima) — verificate a settembre 2026. Gli orari dello spettacolo dei Supertree vanno riconfermati vicino alla data.</div>
@@ -540,46 +540,46 @@
 
   <section id="faq" class="panel dark" data-nav data-paese="">
     <div class="inner">
-      <h2 class="section-title reveal">❓ Domande frequenti</h2>
+      <h2 class="section-title reveal">❓ Le domande che ci facciamo</h2>
 
       <details class="faq reveal">
-        <summary>Serve un visto o un'autorizzazione?</summary>
-        <div class="faq-body">Il visto no, per turismo fino a 90 giorni. Ma il <strong>K-ETA torna obbligatorio dal 1° gennaio 2027</strong> per gli italiani: l'esenzione vale solo fino al 31 dicembre 2026, quindi per aprile 2027 va richiesto. Costa 10.000 won (~7€), si fa online e vale 3 anni. Chi ne è sprovvisto deve comunque compilare la <strong>e-Arrival Card</strong>, perché il modulo cartaceo è stato abolito nel 2026. Le proroghe negli anni scorsi sono state annunciate all'ultimo momento: riverificate a gennaio 2027. Per il <strong>Brunei</strong> niente visto fino a 90 giorni, ma attenzione a una cosa: il passaporto deve avere <strong>almeno sei mesi di validità residua</strong> dal giorno d'ingresso — controllatelo adesso, non a marzo. Per <strong>Singapore</strong> non serve niente.</div>
+        <summary>Ci serve un visto o un'autorizzazione?</summary>
+        <div class="faq-body">Il visto no, per turismo fino a 90 giorni. Ma il <strong>K-ETA torna obbligatorio dal 1° gennaio 2027</strong> per gli italiani: l'esenzione vale solo fino al 31 dicembre 2026, quindi per aprile 2027 dobbiamo richiederlo. Costa 10.000 won (~7€), si fa online e vale 3 anni. Chi ne è sprovvisto deve comunque compilare la <strong>e-Arrival Card</strong>, perché il modulo cartaceo è stato abolito nel 2026. Le proroghe negli anni scorsi sono state annunciate all'ultimo momento: lo riverifichiamo a gennaio 2027. Per il <strong>Brunei</strong> niente visto fino a 90 giorni, ma attenzione a una cosa: il passaporto deve avere <strong>almeno sei mesi di validità residua</strong> dal giorno d'ingresso — lo controlliamo adesso, non a marzo. Per <strong>Singapore</strong> non ci serve niente.</div>
       </details>
 
       <details class="faq reveal">
         <summary>Beccheremo davvero i ciliegi in fiore?</summary>
-        <div class="faq-body">A Seul con buone probabilità sì, almeno in parte: la fioritura parte di solito intorno al 3 aprile e il pieno arriva verso il 10, quindi qualcosa si prende sia all'arrivo sia al ritorno. Quanto, dipende dall'anno — nella sezione sui ciliegi c'è lo storico degli ultimi cinque. Nel sud invece no: Busan e Jeju fioriscono a fine marzo e quando ci arriviamo è finita. Ma il viaggio non è costruito sui fiori: sono il bonus, non il motivo.</div>
+        <div class="faq-body">A Seul con buone probabilità sì, almeno in parte: la fioritura parte di solito intorno al 3 aprile e il pieno arriva verso il 10, quindi qualcosa dovremmo vederlo sia all'arrivo sia al ritorno. Quanto, dipende dall'anno — nella sezione sui ciliegi c'è lo storico degli ultimi cinque. Nel sud invece no: Busan e Jeju fioriscono a fine marzo e quando ci arriviamo è finita. Ma il viaggio non l'abbiamo costruito sui fiori: sono il bonus, non il motivo.</div>
       </details>
 
       <details class="faq reveal">
-        <summary>Davvero non si beve niente per quattro giorni?</summary>
+        <summary>Davvero non beviamo niente per quattro giorni?</summary>
         <div class="faq-body">In pubblico no: in Brunei <strong>vendita e consumo di alcolici sono vietati</strong>, non ci sono bar e nei ristoranti non c'è la carta dei vini. C'è un'eccezione per i non musulmani maggiorenni, che possono <strong>importarne per uso personale</strong> — due bottiglie di vino o superalcolici e dodici lattine di birra a testa — ma vanno <strong>dichiarate in dogana all'arrivo</strong> e si consumano in privato. Chi non dichiara rischia grosso. Per Manu sono quattro giorni di prova.</div>
       </details>
 
       <details class="faq reveal">
-        <summary>Perché non usare Google Maps per girare?</summary>
-        <div class="faq-body">Perché in Corea non funziona bene: per motivi di sicurezza nazionale il paese limita l'esportazione dei dati cartografici, e le indicazioni stradali di Google sono incomplete. Si usano <strong>Naver Map</strong> o <strong>KakaoMap</strong>, che sono ottime. I link Maps di questa pagina servono a localizzare le tappe, non a farsi guidare.</div>
+        <summary>Perché non usiamo Google Maps per girare?</summary>
+        <div class="faq-body">Perché in Corea non funziona bene: per motivi di sicurezza nazionale il paese limita l'esportazione dei dati cartografici, e le indicazioni stradali di Google sono incomplete. Usiamo <strong>Naver Map</strong> o <strong>KakaoMap</strong>, che sono ottime. I link Maps di questa pagina servono a localizzare le tappe, non a farci guidare.</div>
       </details>
 
       <details class="faq reveal">
-        <summary>Conviene il Korail Pass?</summary>
-        <div class="faq-body">Su questo itinerario no. Il pass più economico (2 giorni) sta intorno ai <strong>121.000 won</strong>. Le nostre tratte sono due: <strong>Seul-Busan</strong>, intorno ai 60.000 won, e la gita a <strong>Gyeongju andata e ritorno</strong>, fra i 22.000 e i 36.000 a seconda del treno. In tutto si resta sotto il pass, e senza vincoli di giorni. Il pass conviene da tre tratte lunghe in su.</div>
+        <summary>Ci conviene il Korail Pass?</summary>
+        <div class="faq-body">Su questo itinerario no. Il pass più economico (2 giorni) sta intorno ai <strong>121.000 won</strong>. Le nostre tratte sono due: <strong>Seul-Busan</strong>, intorno ai 60.000 won, e la gita a <strong>Gyeongju andata e ritorno</strong>, fra i 22.000 e i 36.000 a seconda del treno. In tutto restiamo sotto il pass, e senza vincoli di giorni. Il pass conviene da tre tratte lunghe in su.</div>
       </details>
 
       <details class="faq reveal">
-        <summary>Si può visitare la DMZ?</summary>
-        <div class="faq-body">Sì, solo con tour autorizzati. Quello standard (Terzo Tunnel, osservatorio di Dora) costa 55.000-75.000 won. Il <strong>JSA di Panmunjom</strong>, dove si sta sulla linea di confine, costa da 150.000 won, va prenotato con <strong>almeno 7 giorni</strong> di anticipo e <strong>può essere annullato la mattina stessa</strong> per ragioni politiche. Serve il passaporto fisico e c'è un codice di abbigliamento applicato sul serio.</div>
+        <summary>Possiamo visitare la DMZ?</summary>
+        <div class="faq-body">Sì, solo con tour autorizzati. Quello standard (Terzo Tunnel, osservatorio di Dora) costa 55.000-75.000 won. Il <strong>JSA di Panmunjom</strong>, dove si sta sulla linea di confine, costa da 150.000 won, va prenotato con <strong>almeno 7 giorni</strong> di anticipo e <strong>può essere annullato la mattina stessa</strong> per ragioni politiche. Ci serve il passaporto fisico e c'è un codice di abbigliamento applicato sul serio.</div>
       </details>
 
       <details class="faq reveal">
         <summary>Quanto costa stare lì?</summary>
-        <div class="faq-body">In Corea meno di quanto si pensi. La spesa giornaliera tipica indicata è intorno ai <strong>111€</strong> a persona, ma stando attenti si sta <strong>sotto i 60€</strong> compreso l'alloggio. Un pasto in trattoria costa 8.000-12.000 won, i trasporti urbani pochi euro al giorno. Busan è più economica di Seul. Il <strong>Brunei</strong> non è caro da mangiare — un piatto locale sta su pochi euro — ma l'alloggio offre poca scelta e i trasporti costano, perché senza mezzi pubblici si va sempre a chiamata. <strong>Singapore</strong> è la più cara del viaggio per dormire, ma agli <em>hawker centre</em> si mangia benissimo con 3-8 dollari a piatto.</div>
+        <div class="faq-body">In Corea meno di quanto si pensi. La spesa giornaliera tipica indicata è intorno ai <strong>111€</strong> a persona, ma stando attenti restiamo <strong>sotto i 60€</strong> compreso l'alloggio. Un pasto in trattoria costa 8.000-12.000 won, i trasporti urbani pochi euro al giorno. Busan è più economica di Seul. Il <strong>Brunei</strong> non è caro da mangiare — un piatto locale sta su pochi euro — ma l'alloggio offre poca scelta e i trasporti costano, perché senza mezzi pubblici ci muoviamo sempre a chiamata. <strong>Singapore</strong> è la più cara del viaggio per dormire, ma agli <em>hawker centre</em> si mangia benissimo con 3-8 dollari a piatto.</div>
       </details>
 
       <details class="faq reveal">
         <summary>Si parla inglese?</summary>
-        <div class="faq-body">Nelle zone turistiche di Seul abbastanza, fuori molto meno. Le indicazioni della metro e dei treni sono sempre anche in inglese, i menù spesso no. Il traduttore del telefono con la fotocamera risolve quasi tutto: vale la pena avere una eSIM o un wifi portatile.</div>
+        <div class="faq-body">Nelle zone turistiche di Seul abbastanza, fuori molto meno. Le indicazioni della metro e dei treni sono sempre anche in inglese, i menù spesso no. Il traduttore del telefono con la fotocamera risolve quasi tutto: ci conviene avere una eSIM o un wifi portatile.</div>
       </details>
     </div>
   </section>
@@ -588,7 +588,7 @@
   <section id="recap-voli" class="panel" data-nav data-paese="">
     <div class="inner">
       <h2 class="section-title reveal">🎫 I voli, in breve</h2>
-      <p class="section-sub reveal">Il lungo raggio è Etihad, via Abu Dhabi all'andata e al ritorno. In mezzo due tratte Royal Brunei e due voli interni coreani.</p>
+      <p class="section-sub reveal">Sul lungo raggio voliamo Etihad, via Abu Dhabi all'andata e al ritorno. In mezzo due tratte Royal Brunei e due voli interni coreani, questi ancora da prenotare.</p>
 
       <div class="card reveal">
         <h3 style="margin-top:0;">✅ Comprati</h3>
@@ -613,24 +613,24 @@
       </div>
       <p class="qp-aiuto reveal" style="text-align:center; margin-top:-4px;">Il volo lo fa <strong>Royal Brunei</strong>. Questa invece è <strong>Royal Brunico</strong>, che porta in Val Pusteria e non nel Borneo: controllate bene il biglietto.</p>
 
-      <div class="card reveal">
+      <div class="card da-prenotare reveal">
         <h3 style="margin-top:0;">🔜 Ancora da prenotare — i due voli interni coreani</h3>
-        <p style="margin-top:0;">Questi <strong>non sono comprati</strong>: c'è solo un prezzo visto cercando. Sono le uniche due tratte che mancano, e l'orario conta quanto la data.</p>
+        <p style="margin-top:0;">Questi <strong>non li abbiamo ancora comprati</strong>: c'è solo un prezzo visto cercando. Sono le uniche due tratte che ci mancano, e l'orario conta quanto la data.</p>
         <table class="hub-table">
           <thead><tr><th>Tratta</th><th>Quando</th><th>Perché quell'orario</th></tr></thead>
           <tbody>
-            <tr><td><strong>Busan → Jeju</strong></td><td><strong>gio 8 apr</strong><br><span class="wlabel">di sera</span></td><td>L'8 è <strong>l'unica giornata piena a Busan</strong>: con un volo serale resta intera, e si dorme a Jeju.</td></tr>
-            <tr><td><strong>Jeju → Seul Gimpo</strong></td><td><strong>dom 11 apr</strong><br><span class="wlabel">di mattina, il più presto possibile</span></td><td>Più presto si parte, più pomeriggio avanza a Seul. <strong>Gimpo</strong> e non Incheon: sta in città, venti minuti dal centro.</td></tr>
+            <tr><td><strong>Busan → Jeju</strong></td><td><strong>gio 8 apr</strong><br><span class="wlabel">di sera</span></td><td>L'8 è <strong>l'unica giornata piena a Busan</strong>: con un volo serale resta intera, e dormiamo a Jeju.</td></tr>
+            <tr><td><strong>Jeju → Seul Gimpo</strong></td><td><strong>dom 11 apr</strong><br><span class="wlabel">di mattina, il più presto possibile</span></td><td>Più presto partiamo, più pomeriggio ci avanza a Seul. <strong>Gimpo</strong> e non Incheon: sta in città, venti minuti dal centro.</td></tr>
           </tbody>
         </table>
         <div class="source-note">Indicativamente <strong>133 € a persona</strong> per entrambi, a settembre 2026. Le rotte sono servite da parecchie low cost coreane e ci sono molte partenze al giorno, quindi la scelta dell'orario è larga. <strong>Jeju–Gimpo è una delle rotte più trafficate al mondo</strong>: posti non mancano, ma ad aprile conviene non arrivare all'ultimo.</div>
       </div>
       <div class="callout reveal" style="margin-top:-4px;">
-        <strong>I ciliegi non dipendono da questo volo.</strong> Sono all'alba del 12 e la sera dell'11 si è già a Seul comunque: anche prendendo un volo tardi, si perde il pomeriggio dell'11, non i fiori.
+        <strong>I ciliegi non dipendono da questo volo.</strong> Li andiamo a vedere all'alba del 12 e la sera dell'11 siamo già a Seul comunque: anche prendendo un volo tardi, perdiamo il pomeriggio dell'11, non i fiori.
       </div>
 
       <div class="callout warn reveal">
-        <strong>Attenzione alla data di rientro.</strong> Si parte da Singapore la sera di <strong>domenica 18</strong>, ma si atterra a Malpensa alle <strong>06:45 di lunedì 19</strong>. Chi lavora il lunedì se lo segni adesso.
+        <strong>Attenzione alla data di rientro.</strong> Partiamo da Singapore la sera di <strong>domenica 18</strong>, ma atterriamo a Malpensa alle <strong>06:45 di lunedì 19</strong>. Chi di noi lavora il lunedì se lo segni adesso.
       </div>
     </div>
   </section>
@@ -700,23 +700,23 @@
   }
 
   var ITINERARY = [
-    { d:1, data:'2 apr', title:'Volo Milano → Seul, via Abu Dhabi', tags:['Partenza','MXP 11:40'], text:'Si parte da <strong>Malpensa alle 11:40</strong> con Etihad: sei ore fino ad <strong>Abu Dhabi</strong>, due di scalo, e poi altre otto e quaranta verso est. Il fuso è di <strong>sette ore avanti</strong>, quindi si atterra a Incheon <strong>il giorno dopo alle 10:50</strong>: la notte si dorme in aereo e si arriva con una mattinata ancora davanti.', link: placeLink('incheon'), linkLabel:'Vedi l\'aeroporto di Incheon su Google Maps' },
-    { d:2, data:'3 apr', title:'Seul — arrivo, Bukchon e Gwangjang', tags:['Seul','Giornata leggera'], text:'Dall\'aeroporto in treno fino al centro, poi giornata calma per smaltire il fuso: il villaggio hanok di <strong>Bukchon</strong>, i vicoli di Insadong e il mercato <strong>Gwangjang</strong> per la prima cena — tteokbokki, bindaetteok e mandu ai banchi. Se i ciliegi sono in anticipo, qui vedrete i primi fiori aprirsi.', link: placeLink('seul'), linkLabel:'Vedi Seul su Google Maps', highlight:true },
-    { d:3, data:'4 apr', title:'Seul — i palazzi reali', tags:['Seul','UNESCO'], text:'<strong>Gyeongbokgung</strong>, il palazzo principale della dinastia Joseon, con il cambio della guardia; e <strong>Changdeokgung</strong> col suo Giardino Segreto, patrimonio UNESCO, visitabile solo su prenotazione. Chi si presenta in hanbok, il vestito tradizionale noleggiabile lì fuori, entra gratis in entrambi.', link: placeLink('seul'), linkLabel:'Vedi Seul su Google Maps' },
-    { d:4, data:'5 apr', title:'DMZ, e sera a Hongdae', tags:['Mezza giornata','Passaporto'], text:'Tour alla zona demilitarizzata: il Terzo Tunnel d\'Infiltrazione, scavato dal Nord e scoperto nel 1978, e l\'osservatorio di Dora da cui si guarda dentro la Corea del Nord. Passaporto fisico obbligatorio e codice di abbigliamento applicato sul serio. Rientro nel pomeriggio e sera a <strong>Hongdae</strong>, il quartiere universitario: musica dal vivo per strada e il primo somaek.', link: placeLink('dmz'), linkLabel:'Vedi l\'area della DMZ su Google Maps', highlight:true },
-    { d:5, data:'6 apr', title:'Seul → Busan in KTX', tags:['KTX 2h15','Busan'], text:'Treno veloce fino in fondo al paese: <strong>due ore e un quarto</strong> per quattrocento chilometri, e si cambia mondo — dalla capitale ordinata alla città di porto, in salita sulle colline, con i grattacieli che finiscono sulla spiaggia. Si arriva nel pomeriggio: la sera a <strong>Gwangalli</strong>, dove il ponte sulla baia si accende e i locali stanno sulla sabbia con la birra e il pollo fritto.', link: mapsLink('seul','busan'), linkLabel:'Apri il tragitto Seul → Busan', highlight:true },
-    { d:6, data:'7 apr', title:'Gyeongju in giornata', tags:['UNESCO','Gita da Busan'], text:'Mezz\'ora di KTX e mille anni indietro: <strong>Gyeongju</strong> è stata per un millennio la capitale del regno di Silla, ed è una città bassa e verde disseminata di <strong>tumuli reali</strong> — collinette erbose che sono tombe di re. Presto al tempio di <strong>Bulguksa</strong>, patrimonio UNESCO, con le terrazze di pietra dell\'VIII secolo, e su per la montagna alla grotta di <strong>Seokguram</strong>, dove un Buddha di granito guarda verso il mare. Nel pomeriggio il parco dei tumuli di <strong>Daereungwon</strong>, e al tramonto lo stagno di <strong>Donggung</strong>, illuminato. Rientro a Busan la sera, nello stesso albergo.', link: mapsLink('busan','gyeongju'), linkLabel:'Apri il tragitto Busan → Gyeongju', highlight:true },
-    { d:7, data:'8 apr', title:'Busan — il giorno unico, poi volo per Jeju', tags:['Busan','✈️ Volo da prenotare'], text:'È <strong>l\'unica giornata piena a Busan</strong>, e il volo per Jeju è di sera — <strong>quello ancora da comprare</strong> — quindi si comincia presto. Mattina al <strong>villaggio culturale di Gamcheon</strong>: un quartiere di casette dipinte a gradoni sulla collina, nato come baraccopoli di profughi di guerra e diventato un labirinto di colori. Pranzo al mercato del pesce di <strong>Jagalchi</strong>, il più grande della Corea, dove si sceglie il pesce vivo al banco e ve lo cucinano al piano di sopra. Pomeriggio: o si attraversa la città fino a <strong>Haedong Yonggungsa</strong>, il tempio costruito sugli scogli con le onde sotto — una rarità, quasi tutti i templi coreani stanno in montagna — oppure si resta dalla parte dell\'aeroporto con lo <strong>Skywalk di Songdo</strong> e la funivia sulla baia. Poi Gimhae, tredici minuti di metropolitana dal centro, e un\'ora scarsa di volo.', link: mapsLink('busan','jeju'), linkLabel:'Apri il tragitto Busan → Jeju', highlight:true },
-    { d:8, data:'9 apr', title:'Jeju — l\'auto, la grotta di lava e la costa est', tags:['Jeju','Grotta di lava'], text:'Si è atterrati la sera prima: mattinata senza sveglie. Si ritira l\'<strong>auto a noleggio</strong>, perché qui i mezzi pubblici non bastano, e comincia l\'isola vulcanica — muretti a secco di roccia lavica, palme, e i totem di pietra <em>dol hareubang</em> davanti alle case. La grotta di <strong>Manjanggul</strong>, un tunnel lungo chilometri scavato da un\'antica colata, e poi la costa est. <strong>Conviene dormire da questa parte dell\'isola</strong>: domani si va all\'alba, e da Jeju City vorrebbe dire sveglia alle quattro.', link: placeLink('jeju'), linkLabel:'Vedi Jeju su Google Maps', highlight:true },
-    { d:9, data:'10 apr', title:'Seongsan Ilchulbong all\'alba, e Udo', tags:['UNESCO','Alba'], text:'Il "picco del sole nascente": un cratere di tufo emerso dal mare cinquemila anni fa, con il bordo a corona. Il cancello apre <strong>un\'ora prima dell\'alba</strong> e la salita è una ventina di minuti di gradini — il nome non è un caso. Dormendo lì vicino si parte con calma; da Jeju City sarebbe un\'ora di strada al buio. Il resto della giornata in barca all\'isolotto di <strong>Udo</strong>, che si gira in scooter, con le spiagge bianche di corallo tritato.', link: placeLink('jeju'), linkLabel:'Vedi Seongsan Ilchulbong su Google Maps', highlight:true },
-    { d:10, data:'11 apr', title:'Jeju → Seul, e il pomeriggio libero', tags:['✈️ Volo da prenotare','Seul'], text:'Volo di prima mattina e si atterra a <strong>Gimpo</strong>, che sta dentro la città e non a un\'ora come Incheon: in centro in venti minuti di treno. Seconda base a Seul, in un quartiere diverso dai primi giorni, e <strong>il pomeriggio è libero</strong> — è il giorno che serve per la Seul che nei primi tre giorni non ci stava: <strong>Seongsu</strong>, il quartiere delle ex fabbriche diventate caffè; <strong>Dongdaemun</strong> con l\'astronave di Zaha Hadid; <strong>Myeongdong</strong> per lo shopping e il giro della skincare. La sera un <em>jjimjilbang</em>, le terme aperte tutta la notte. Chi preferisce una gita: <strong>Suwon</strong> è a un\'ora di metropolitana, con 5,7 km di mura UNESCO da camminare — ma servono un volo presto e il pomeriggio intero.', link: mapsLink('jeju','seul'), linkLabel:'Apri il tragitto Jeju → Seul', highlight:true },
-    { d:11, data:'12 apr', title:'Seul — i ciliegi', tags:['🌸 Il giorno','Presto la mattina'], text:'Il momento per cui si è scelto aprile, e stavolta senza corse: si è già in città dalla sera prima, quindi si può andare <strong>all\'alba</strong>, che è l\'unico modo di vederli senza mezza Seul davanti. <strong>Yeouido</strong> lungo il fiume Han, con il viale di ciliegi dietro il parlamento, e il lago <strong>Seokchon</strong> con la Lotte Tower sullo sfondo. Il picco a Seul cade di solito intorno al 10: ci siamo dentro in pieno. Il pomeriggio chiude la Corea — l\'ultimo street food, l\'ultimo soju — e domani si vola a sud.', link: placeLink('seul'), linkLabel:'Vedi Seul su Google Maps', highlight:true },
-    { d:12, data:'13 apr', title:'Seul → Brunei', tags:['Volo 11:35','Brunei'], text:'Sveglia presto e a Incheon: il volo Royal Brunei parte alle <strong>11:35</strong> e sono quattro ore e venti verso sud, fino a <strong>Bandar Seri Begawan</strong>. Si scende alle 15:55 in un altro clima e in un altro mondo — dai ciliegi all\'equatore in una mattinata. Pomeriggio per arrivare in albergo e il primo giro sul lungofiume, con la <strong>moschea Omar Ali Saifuddien</strong> che si accende al tramonto dentro la sua laguna.', link: placeLink('brunei'), linkLabel:'Vedi Bandar Seri Begawan su Google Maps', highlight:true },
-    { d:13, data:'14 apr', title:'Brunei — la capitale e il villaggio sull\'acqua', tags:['Brunei','Kampong Ayer'], text:'La capitale si gira in un giorno, e questo è il giorno. La <strong>moschea del 1958</strong> con la cupola d\'oro e la barca cerimoniale di pietra nella laguna; il <strong>Royal Regalia Museum</strong>, gratis, col carro dell\'incoronazione e i regali di stato. Poi il taxi d\'acqua — <strong>un dollaro, si ferma a braccio alzato</strong> — per <strong>Kampong Ayer</strong>, il villaggio su palafitte più grande del mondo, abitato da oltre mille anni: scuole, moschee e pompieri, tutto sull\'acqua, collegato da chilometri di passerelle di legno. Cena con l\'<strong>ambuyat</strong>, che si ingoia e non si mastica.', link: placeLink('kampongayer'), linkLabel:'Vedi Kampong Ayer su Google Maps', highlight:true },
-    { d:14, data:'15 apr', title:'Ulu Temburong — la foresta e la passerella', tags:['Borneo','Giornata intera'], text:'Il giorno del Borneo vero. Si attraversa il <strong>ponte di 30 km</strong> aperto nel 2019, che ha tolto le tre ore di barca di una volta, e in un\'ora si è al parco nazionale di <strong>Ulu Temburong</strong> — foresta primaria, dove si entra <strong>solo con una guida</strong>. Si risale il fiume in barca lunga, poi una scalinata d\'acciaio piantata nella collina porta alla <strong>passerella sospesa a 60 metri</strong>, sopra la volta degli alberi: da lassù la foresta non finisce in nessuna direzione. Il ritorno è in <strong>gommone lungo il fiume</strong>, con l\'acqua fino alle ginocchia.', link: placeLink('temburong'), linkLabel:'Vedi Ulu Temburong su Google Maps', highlight:true },
-    { d:15, data:'16 apr', title:'Brunei — venerdì, e le nasiche sul fiume', tags:['Venerdì','Scimmie nasiche'], text:'<strong>È venerdì</strong>, il giorno della preghiera: fra mezzogiorno e le 14 chiude quasi tutto e le moschee non si visitano, quindi la mattina si va piano — il mercato di Tamu Kianggeh, o la <strong>Jame\' Asr Hassanil Bolkiah</strong>, la moschea grande fuori città, da vedere da fuori. Il pomeriggio è il momento giusto per il fiume: in barca fra le <strong>mangrovie</strong> a cercare le <strong>scimmie nasiche</strong>, quelle col naso a patata che vivono solo nel Borneo, che verso sera scendono a mangiare vicino all\'acqua. Ultima notte nel sultanato.', link: placeLink('brunei'), linkLabel:'Vedi il fiume Brunei su Google Maps' },
-    { d:16, data:'17 apr', title:'Brunei → Singapore', tags:['Volo 09:20','Singapore'], text:'Volo di prima mattina, due ore, e alle <strong>11:20</strong> si è a <strong>Changi</strong>. Prima di uscire vale la pena il <strong>Jewel</strong>, il centro dentro l\'aeroporto con la cascata coperta più alta del mondo — quaranta metri, gratis, a dieci minuti a piedi dai terminal. Poi metropolitana in centro: pomeriggio fra <strong>Chinatown</strong> e un <strong>hawker centre</strong>, e sera a <strong>Gardens by the Bay</strong> per lo spettacolo di luci dei Supertree, che è alle 19:45 e si guarda sdraiati sul prato.', link: placeLink('singapore'), linkLabel:'Vedi Marina Bay su Google Maps', highlight:true },
-    { d:17, data:'18 apr', title:'Singapore, e il volo per casa', tags:['Partenza','Volo 21:00'], text:'Ultima giornata intera: quello che è rimasto fuori ieri — <strong>Little India</strong>, il quartiere coloniale, la baia di giorno con il Merlion, o un\'ora dentro le serre di Gardens by the Bay per scappare dal caldo. In aeroporto per le sei del pomeriggio: il volo Etihad parte alle <strong>21:00</strong>, scalo ad Abu Dhabi nel cuore della notte, e si atterra a <strong>Malpensa alle 06:45 del 19</strong>, che è un lunedì mattina. Buon rientro.', link: placeLink('changi'), linkLabel:'Vedi l\'aeroporto di Changi su Google Maps' }
+    { d:1, data:'2 apr', title:'Volo Milano → Seul, via Abu Dhabi', tags:['Partenza','MXP 11:40'], text:'Partiamo da <strong>Malpensa alle 11:40</strong> con Etihad: sei ore fino ad <strong>Abu Dhabi</strong>, due di scalo, e poi altre otto e quaranta verso est. Il fuso è di <strong>sette ore avanti</strong>, quindi atterriamo a Incheon <strong>il giorno dopo alle 10:50</strong>: la notte dormiamo in aereo e arriviamo con una mattinata ancora davanti.', link: placeLink('incheon'), linkLabel:'Vedi l\'aeroporto di Incheon su Google Maps' },
+    { d:2, data:'3 apr', title:'Seul — arrivo, Bukchon e Gwangjang', tags:['Seul','Giornata leggera'], text:'Dall\'aeroporto prendiamo il treno fino al centro, poi giornata calma per smaltire il fuso: il villaggio hanok di <strong>Bukchon</strong>, i vicoli di Insadong e il mercato <strong>Gwangjang</strong> per la prima cena — tteokbokki, bindaetteok e mandu ai banchi. Se i ciliegi sono in anticipo, qui potremmo vedere i primi fiori aprirsi.', link: placeLink('seul'), linkLabel:'Vedi Seul su Google Maps', highlight:true },
+    { d:3, data:'4 apr', title:'Seul — i palazzi reali', tags:['Seul','UNESCO'], text:'Giornata dei palazzi: <strong>Gyeongbokgung</strong>, il palazzo principale della dinastia Joseon, con il cambio della guardia; e <strong>Changdeokgung</strong> col suo Giardino Segreto, patrimonio UNESCO, visitabile solo su prenotazione. Se ci presentiamo in hanbok, il vestito tradizionale noleggiabile lì fuori, entriamo gratis in entrambi.', link: placeLink('seul'), linkLabel:'Vedi Seul su Google Maps' },
+    { d:4, data:'5 apr', title:'DMZ, e sera a Hongdae', tags:['Mezza giornata','Passaporto'], text:'Facciamo il tour della zona demilitarizzata: il Terzo Tunnel d\'Infiltrazione, scavato dal Nord e scoperto nel 1978, e l\'osservatorio di Dora da cui guardiamo dentro la Corea del Nord. Passaporto fisico obbligatorio e codice di abbigliamento applicato sul serio. Rientriamo nel pomeriggio e la sera andiamo a <strong>Hongdae</strong>, il quartiere universitario: musica dal vivo per strada e il primo somaek.', link: placeLink('dmz'), linkLabel:'Vedi l\'area della DMZ su Google Maps', highlight:true },
+    { d:5, data:'6 apr', title:'Seul → Busan in KTX', tags:['KTX 2h15','Busan'], text:'Saliamo sul KTX e andiamo fino in fondo al paese: <strong>due ore e un quarto</strong> per quattrocento chilometri, e cambiamo mondo — dalla capitale ordinata alla città di porto, in salita sulle colline, con i grattacieli che finiscono sulla spiaggia. Arriviamo nel pomeriggio, e la sera la passiamo a <strong>Gwangalli</strong>, dove il ponte sulla baia si accende e i locali stanno sulla sabbia con la birra e il pollo fritto.', link: mapsLink('seul','busan'), linkLabel:'Apri il tragitto Seul → Busan', highlight:true },
+    { d:6, data:'7 apr', title:'Gyeongju in giornata', tags:['UNESCO','Gita da Busan'], text:'Mezz\'ora di KTX e mille anni indietro: <strong>Gyeongju</strong> è stata per un millennio la capitale del regno di Silla, ed è una città bassa e verde disseminata di <strong>tumuli reali</strong> — collinette erbose che sono tombe di re. Andiamo presto al tempio di <strong>Bulguksa</strong>, patrimonio UNESCO, con le terrazze di pietra dell\'VIII secolo, e saliamo per la montagna fino alla grotta di <strong>Seokguram</strong>, dove un Buddha di granito guarda verso il mare. Nel pomeriggio passiamo al parco dei tumuli di <strong>Daereungwon</strong>, e al tramonto allo stagno di <strong>Donggung</strong>, illuminato. La sera rientriamo a Busan, nello stesso albergo.', link: mapsLink('busan','gyeongju'), linkLabel:'Apri il tragitto Busan → Gyeongju', highlight:true },
+    { d:7, data:'8 apr', title:'Busan — il giorno unico, poi volo per Jeju', tags:['Busan','✈️ Volo da prenotare'], text:'È <strong>l\'unica giornata piena a Busan</strong>, e il volo per Jeju è di sera — <strong>quello che non abbiamo ancora comprato</strong> — quindi cominciamo presto. La mattina andiamo al <strong>villaggio culturale di Gamcheon</strong>: un quartiere di casette dipinte a gradoni sulla collina, nato come baraccopoli di profughi di guerra e diventato un labirinto di colori. Pranziamo al mercato del pesce di <strong>Jagalchi</strong>, il più grande della Corea, dove scegliamo il pesce vivo al banco e ce lo cucinano al piano di sopra. Il pomeriggio: o attraversiamo la città fino a <strong>Haedong Yonggungsa</strong>, il tempio costruito sugli scogli con le onde sotto — una rarità, quasi tutti i templi coreani stanno in montagna — oppure restiamo dalla parte dell\'aeroporto con lo <strong>Skywalk di Songdo</strong> e la funivia sulla baia. Poi Gimhae, tredici minuti di metropolitana dal centro, e un\'ora scarsa di volo.', link: mapsLink('busan','jeju'), linkLabel:'Apri il tragitto Busan → Jeju', highlight:true },
+    { d:8, data:'9 apr', title:'Jeju — l\'auto, la grotta di lava e la costa est', tags:['Jeju','Grotta di lava'], text:'Siamo atterrati la sera prima: mattinata senza sveglie. Ritiriamo l\'<strong>auto a noleggio</strong>, perché qui i mezzi pubblici non bastano, e comincia l\'isola vulcanica — muretti a secco di roccia lavica, palme, e i totem di pietra <em>dol hareubang</em> davanti alle case. La grotta di <strong>Manjanggul</strong>, un tunnel lungo chilometri scavato da un\'antica colata, e poi la costa est. <strong>Ci conviene dormire da questa parte dell\'isola</strong>: domani andiamo all\'alba, e da Jeju City vorrebbe dire sveglia alle quattro.', link: placeLink('jeju'), linkLabel:'Vedi Jeju su Google Maps', highlight:true },
+    { d:9, data:'10 apr', title:'Seongsan Ilchulbong all\'alba, e Udo', tags:['UNESCO','Alba'], text:'Il "picco del sole nascente": un cratere di tufo emerso dal mare cinquemila anni fa, con il bordo a corona. Il cancello apre <strong>un\'ora prima dell\'alba</strong> e la salita è una ventina di minuti di gradini — il nome non è un caso. Dormendo lì vicino partiamo con calma; da Jeju City sarebbe un\'ora di strada al buio. Per il resto della giornata prendiamo la barca per l\'isolotto di <strong>Udo</strong>, che si gira in scooter, con le spiagge bianche di corallo tritato.', link: placeLink('jeju'), linkLabel:'Vedi Seongsan Ilchulbong su Google Maps', highlight:true },
+    { d:10, data:'11 apr', title:'Jeju → Seul, e il pomeriggio libero', tags:['✈️ Volo da prenotare','Seul'], text:'Volo di prima mattina — anche questo ancora da prenotare — e atterriamo a <strong>Gimpo</strong>, che sta dentro la città e non a un\'ora come Incheon: in centro in venti minuti di treno. Seconda base a Seul, in un quartiere diverso dai primi giorni, e <strong>il pomeriggio è libero</strong> — è il giorno che ci serve per la Seul che nei primi tre giorni non ci stava: <strong>Seongsu</strong>, il quartiere delle ex fabbriche diventate caffè; <strong>Dongdaemun</strong> con l\'astronave di Zaha Hadid; <strong>Myeongdong</strong> per lo shopping e il giro della skincare. La sera un <em>jjimjilbang</em>, le terme aperte tutta la notte. Se qualcuno di noi preferisce una gita: <strong>Suwon</strong> è a un\'ora di metropolitana, con 5,7 km di mura UNESCO da camminare — ma ci servono un volo presto e il pomeriggio intero.', link: mapsLink('jeju','seul'), linkLabel:'Apri il tragitto Jeju → Seul', highlight:true },
+    { d:11, data:'12 apr', title:'Seul — i ciliegi', tags:['🌸 Il giorno','Presto la mattina'], text:'Il momento per cui abbiamo scelto aprile, e stavolta senza corse: siamo già in città dalla sera prima, quindi possiamo andare <strong>all\'alba</strong>, che è l\'unico modo di vederli senza mezza Seul davanti. <strong>Yeouido</strong> lungo il fiume Han, con il viale di ciliegi dietro il parlamento, e il lago <strong>Seokchon</strong> con la Lotte Tower sullo sfondo. Il picco a Seul cade di solito intorno al 10: ci siamo dentro in pieno. Il pomeriggio chiude la Corea — l\'ultimo street food, l\'ultimo soju — e domani voliamo a sud.', link: placeLink('seul'), linkLabel:'Vedi Seul su Google Maps', highlight:true },
+    { d:12, data:'13 apr', title:'Seul → Brunei', tags:['Volo 11:35','Brunei'], text:'Sveglia presto e via a Incheon: il nostro volo Royal Brunei parte alle <strong>11:35</strong> e sono quattro ore e venti verso sud, fino a <strong>Bandar Seri Begawan</strong>. Scendiamo alle 15:55 in un altro clima e in un altro mondo — dai ciliegi all\'equatore in una mattinata. Il pomeriggio arriviamo in albergo e facciamo il primo giro sul lungofiume, con la <strong>moschea Omar Ali Saifuddien</strong> che si accende al tramonto dentro la sua laguna.', link: placeLink('brunei'), linkLabel:'Vedi Bandar Seri Begawan su Google Maps', highlight:true },
+    { d:13, data:'14 apr', title:'Brunei — la capitale e il villaggio sull\'acqua', tags:['Brunei','Kampong Ayer'], text:'La capitale la giriamo in un giorno, e questo è il giorno. La <strong>moschea del 1958</strong> con la cupola d\'oro e la barca cerimoniale di pietra nella laguna; il <strong>Royal Regalia Museum</strong>, gratis, col carro dell\'incoronazione e i regali di stato. Poi saliamo sul taxi d\'acqua — <strong>un dollaro, si ferma a braccio alzato</strong> — per <strong>Kampong Ayer</strong>, il villaggio su palafitte più grande del mondo, abitato da oltre mille anni: scuole, moschee e pompieri, tutto sull\'acqua, collegato da chilometri di passerelle di legno. A cena proviamo l\'<strong>ambuyat</strong>, che si ingoia e non si mastica.', link: placeLink('kampongayer'), linkLabel:'Vedi Kampong Ayer su Google Maps', highlight:true },
+    { d:14, data:'15 apr', title:'Ulu Temburong — la foresta e la passerella', tags:['Borneo','Giornata intera'], text:'Il giorno del Borneo vero. Attraversiamo il <strong>ponte di 30 km</strong> aperto nel 2019, che ha tolto le tre ore di barca di una volta, e in un\'ora siamo al parco nazionale di <strong>Ulu Temburong</strong> — foresta primaria, dove si entra <strong>solo con una guida</strong>. Risaliamo il fiume in barca lunga, poi una scalinata d\'acciaio piantata nella collina ci porta alla <strong>passerella sospesa a 60 metri</strong>, sopra la volta degli alberi: da lassù la foresta non finisce in nessuna direzione. Torniamo in <strong>gommone lungo il fiume</strong>, con l\'acqua fino alle ginocchia.', link: placeLink('temburong'), linkLabel:'Vedi Ulu Temburong su Google Maps', highlight:true },
+    { d:15, data:'16 apr', title:'Brunei — venerdì, e le nasiche sul fiume', tags:['Venerdì','Scimmie nasiche'], text:'<strong>È venerdì</strong>, il giorno della preghiera: fra mezzogiorno e le 14 chiude quasi tutto e le moschee non si visitano, quindi la mattina ce la prendiamo con calma — il mercato di Tamu Kianggeh, o la <strong>Jame\' Asr Hassanil Bolkiah</strong>, la moschea grande fuori città, che guardiamo da fuori. Il pomeriggio è il momento giusto per il fiume: andiamo in barca fra le <strong>mangrovie</strong> a cercare le <strong>scimmie nasiche</strong>, quelle col naso a patata che vivono solo nel Borneo, che verso sera scendono a mangiare vicino all\'acqua. Ultima notte nel sultanato.', link: placeLink('brunei'), linkLabel:'Vedi il fiume Brunei su Google Maps' },
+    { d:16, data:'17 apr', title:'Brunei → Singapore', tags:['Volo 09:20','Singapore'], text:'Volo di prima mattina, due ore, e alle <strong>11:20</strong> siamo a <strong>Changi</strong>. Prima di uscire vale la pena fermarci al <strong>Jewel</strong>, il centro dentro l\'aeroporto con la cascata coperta più alta del mondo — quaranta metri, gratis, a dieci minuti a piedi dai terminal. Poi prendiamo la metropolitana per il centro: pomeriggio fra <strong>Chinatown</strong> e un <strong>hawker centre</strong>, e sera a <strong>Gardens by the Bay</strong> per lo spettacolo di luci dei Supertree, che è alle 19:45 e che guardiamo sdraiati sul prato.', link: placeLink('singapore'), linkLabel:'Vedi Marina Bay su Google Maps', highlight:true },
+    { d:17, data:'18 apr', title:'Singapore, e il volo per casa', tags:['Partenza','Volo 21:00'], text:'Ultima giornata intera, per quello che ieri è rimasto fuori — <strong>Little India</strong>, il quartiere coloniale, la baia di giorno con il Merlion, o un\'ora dentro le serre di Gardens by the Bay per scappare dal caldo. In aeroporto ci andiamo per le sei del pomeriggio: il volo Etihad parte alle <strong>21:00</strong>, scalo ad Abu Dhabi nel cuore della notte, e atterriamo a <strong>Malpensa alle 06:45 del 19</strong>, che è un lunedì mattina. Buon rientro.', link: placeLink('changi'), linkLabel:'Vedi l\'aeroporto di Changi su Google Maps' }
   ];
 
   // Il colpo d'occhio: dove si dorme, o dove si passa la giornata.
@@ -733,7 +733,7 @@
     { dove:'Jeju',             paese:'kr' },
     { dove:'Jeju',             paese:'kr' },
     { dove:'Jeju → Seul',      paese:'kr', volo:true, daPrenotare:true },
-    { dove:'Seul 🌸',          paese:'kr' },
+    { dove:'Seul, i ciliegi', paese:'kr' },
     { dove:'Seul → Brunei',    paese:'kr', volo:true },
     { dove:'Brunei',           paese:'bn' },
     { dove:'Ulu Temburong',    paese:'bn' },
@@ -748,7 +748,8 @@
     var det = document.createElement('details');
     det.className = 'day reveal';
     if(idx === 0) det.open = true;
-    var tagsHtml = day.tags.map(function(t){ return '<span class="tag' + (day.highlight ? ' highlight' : '') + '">' + t + '</span>'; }).join('');
+    // Il volo ancora da comprare si scrive a penna rossa, come sul calendario.
+    var tagsHtml = day.tags.map(function(t){ t = t.replace(/^(?:\p{Extended_Pictographic}|\uFE0F|\u200D)+\s*/u, ''); return '<span class="tag' + (day.highlight ? ' highlight' : '') + (/da prenotare/i.test(t) ? ' da-prenotare' : '') + '">' + t + '</span>'; }).join('');
     det.innerHTML =
       '<summary><span class="daynum">' + day.d + '</span><span class="daytitle">' + day.title + '</span><span class="chevron">▸</span></summary>' +
       '<div class="day-body"><span class="tag">' + day.data + '</span>' + tagsHtml + '<p>' + day.text + '</p>' +
@@ -835,7 +836,7 @@
           if(!r.corpo.ricercaFatta){
             html += '<div class="callout warn" style="margin-top:12px;"><strong>Risposta non verificata sul web.</strong> ' +
               'La ricerca dal vivo non è disponibile in questo momento: le date qui sotto possono essere vecchie o sbagliate. ' +
-              '<strong>Vanno controllate</strong> su Interpark Global o Weverse prima di contarci.</div>';
+              '<strong>Le ricontrolliamo</strong> su Interpark Global o Weverse prima di contarci.</div>';
           }
           html += '<div class="callout" style="margin-top:12px;">' + formatta(r.corpo.testo) + '</div>';
 
@@ -974,7 +975,7 @@
   // ---- Cose da non perdere ----
   var FAMILIES = [
     { paese:'kr', sector:'Seul', name:'Gyeongbokgung', size:'Mezza giornata', level:'Facile', note:'Il palazzo reale della dinastia Joseon, col cambio della guardia. In hanbok si entra gratis.' },
-    { paese:'kr', sector:'Seul', name:'Bukchon Hanok', size:'2-3 ore', level:'Facile', note:'Vicoli di case tradizionali fra i due palazzi reali. Ci abita gente: si gira in silenzio.' },
+    { paese:'kr', sector:'Seul', name:'Bukchon Hanok', size:'2-3 ore', level:'Facile', note:'Vicoli di case tradizionali fra i due palazzi reali. Ci abita gente: lo giriamo in silenzio.' },
     { paese:'kr', sector:'Seul', name:'Yeouido e Seokchon', size:'Mattina', level:'Facile', note:'I due posti dei ciliegi a Seul. All\'alba sono un\'altra cosa rispetto a metà mattina.' },
     { paese:'kr', sector:'Seul', name:'Mercato Gwangjang', size:'Serata', level:'Facile', note:'Il mercato di street food storico: bindaetteok, mandu e tteokbokki ai banchi, seduti al bancone.' },
     { paese:'kr', sector:'Seul', name:'Changdeokgung', size:'2-3 ore', level:'Facile', note:'Il palazzo più bello dei cinque, col Giardino Segreto visitabile solo su prenotazione.' },
@@ -984,11 +985,11 @@
     { paese:'kr', sector:'Busan', name:'Gamcheon', size:'Mezza giornata', level:'Facile', note:'Il villaggio dipinto a gradoni sulla collina, nato come baraccopoli di profughi di guerra.' },
     { paese:'kr', sector:'Busan', name:'Mercato Jagalchi', size:'2 ore', level:'Facile', note:'Il più grande mercato del pesce della Corea: si sceglie sotto e si mangia sopra.' },
     { paese:'kr', sector:'Busan', name:'Haedong Yonggungsa', size:'Mezza giornata', level:'Facile', note:'Tempio costruito sugli scogli con le onde sotto: rarissimo, quasi tutti i templi coreani sono in montagna.' },
-    { paese:'kr', sector:'Jeju', name:'Seongsan Ilchulbong', size:'Alba', level:'Media', note:'Cratere di tufo emerso dal mare, 20 minuti di salita. Patrimonio UNESCO, si va per l\'alba.' },
+    { paese:'kr', sector:'Jeju', name:'Seongsan Ilchulbong', size:'Alba', level:'Media', note:'Cratere di tufo emerso dal mare, 20 minuti di salita. Patrimonio UNESCO, ci andiamo per l\'alba.' },
     { paese:'kr', sector:'Jeju', name:'Manjanggul', size:'2 ore', level:'Facile', note:'Tunnel di lava lungo chilometri: si cammina dentro il condotto di un\'antica colata.' },
     { paese:'kr', sector:'Jeju', name:'Isola di Udo', size:'Mezza giornata', level:'Facile', note:'Isolotto davanti a Seongsan, si gira in scooter. Spiagge bianche di corallo tritato.' },
     { paese:'bn', sector:'Capitale', name:'Moschea Omar Ali Saifuddien', size:'1-2 ore', level:'Facile', note:'Cupola d\'oro vero e marmo italiano, in piedi dentro una laguna con una barca cerimoniale di pietra. Chiusa ai non musulmani durante le preghiere.' },
-    { paese:'bn', sector:'Capitale', name:'Kampong Ayer', size:'Mezza giornata', level:'Facile', note:'Il villaggio su palafitte più grande del mondo, abitato da oltre mille anni. Ci si arriva col taxi d\'acqua: un dollaro, si ferma a braccio alzato.' },
+    { paese:'bn', sector:'Capitale', name:'Kampong Ayer', size:'Mezza giornata', level:'Facile', note:'Il villaggio su palafitte più grande del mondo, abitato da oltre mille anni. Ci arriviamo col taxi d\'acqua: un dollaro, si ferma a braccio alzato.' },
     { paese:'bn', sector:'Capitale', name:'Royal Regalia Museum', size:'1 ora', level:'Facile', note:'Il carro dell\'incoronazione, le corone e i regali di stato. È gratis e racconta il paese meglio di qualunque targa.' },
     { paese:'bn', sector:'Capitale', name:'Jame\' Asr Hassanil Bolkiah', size:'1 ora', level:'Facile', note:'La moschea grande fuori città, con ventinove cupole d\'oro: una per ogni sultano fino a quello che l\'ha fatta costruire.' },
     { paese:'bn', sector:'Capitale', name:'Mercato di Gadong', size:'Serata', level:'Facile', note:'Il mercato notturno: satay, pesce alla griglia, riso in foglia di banana. Senza alcolici in giro, è il passatempo della sera.' },
@@ -996,7 +997,7 @@
     { paese:'bn', sector:'Temburong', name:'Passerella sospesa', size:'Giornata intera', level:'Impegnativa', note:'Sessanta metri sopra la volta della foresta primaria, dopo una scalinata d\'acciaio piantata nella collina. Solo con guida autorizzata.' },
     { paese:'bn', sector:'Temburong', name:'Discesa in gommone', size:'Compresa nella gita', level:'Media', note:'Il ritorno lungo il fiume in barca lunga, con l\'acqua che entra: è il mezzo normale da queste parti, non un\'attrazione.' },
     { paese:'bn', sector:'Fiume', name:'Scimmie nasiche', size:'Pomeriggio', level:'Facile', note:'La scimmia col naso a patata, che vive solo nel Borneo. In barca fra le mangrovie: meglio nel tardo pomeriggio, quando scendono verso l\'acqua.' },
-    { paese:'bn', sector:'Fiume', name:'Lungofiume al tramonto', size:'1 ora', level:'Facile', note:'La passeggiata da cui la moschea si vede illuminata riflessa nella laguna. È la cosa da fare la sera dell\'arrivo.' },
+    { paese:'bn', sector:'Fiume', name:'Lungofiume al tramonto', size:'1 ora', level:'Facile', note:'La passeggiata da cui la moschea si vede illuminata riflessa nella laguna. È la nostra passeggiata della sera dell\'arrivo.' },
     { paese:'kr', sector:'Extra', name:'DMZ', size:'Mezza giornata', level:'Facile', note:'Terzo Tunnel e osservatorio di Dora. Passaporto fisico, codice di abbigliamento, JSA a parte e non garantito.' }
   ];
 
@@ -1224,14 +1225,15 @@
     if(totalMinutes < SUNRISE_MIN || totalMinutes > SUNSET_MIN){
       var beforeDawn = totalMinutes < SUNRISE_MIN;
       sunMarker.style.transform = 'translate(' + (beforeDawn ? 40 : 460) + 'px,176px)';
-      sunMarker.querySelector('text').textContent = '🌙';
+      // Di notte il disco e' vuoto: la luna, a pennarello.
+      sunMarker.classList.add('notte');
       sunReadout.textContent = timeLabel + ' — buio, il sole ' + (beforeDawn ? 'non è ancora sorto' : 'è già tramontato');
       return;
     }
     var frac = (totalMinutes - SUNRISE_MIN) / (SUNSET_MIN - SUNRISE_MIN);
     var x = 40 + frac * 420;
     var y = 180 - Math.sin(frac * Math.PI) * 155;
-    sunMarker.querySelector('text').textContent = '☀️';
+    sunMarker.classList.remove('notte');
     sunMarker.style.transform = 'translate(' + x + 'px,' + y + 'px)';
     var phase = frac < 0.06 ? 'sta sorgendo — l\'ora giusta per i ciliegi senza folla'
       : frac > 0.94 ? 'sta tramontando — è il momento dei mercati serali'
