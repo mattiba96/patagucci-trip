@@ -187,7 +187,7 @@ Il sito è un quaderno di scuola italiano a quadretti da 5 mm su cui i quattro P
 
 Le cose non si mettono in scatola, si disegnano. I riquadri hanno un bordo tirato a mano (un SVG usato come border-image) e non fanno ombra, perché l'inchiostro su un foglio non ne fa. L'ombra c'è solo sugli oggetti di carta appoggiati sul quaderno: polaroid, nastro adesivo, il foglio che si volta, la copertina. Le foto non fanno da sfondo, sono polaroid inclinate e attaccate col nastro. Le pagine non diventano mai scure e non si tingono mai di crema: cambia solo il colore dei quadretti.
 
-Il movimento è fatto di gesti di carta, e senza di esso non si perde niente. Ci sono la copertina che si apre attorno al dorso, la pagina che si volta quando si cambia meta, la passata di evidenziatore sulla parola del titolo, la penna rossa che cerchia, le polaroid che si sollevano sotto il mouse. Se Motion non arriva, o chi guarda chiede meno movimento, la pagina è già intera e ferma. Questo mondo sostituisce del tutto quello precedente: niente foto a tutto schermo, niente card arrotondate con ombra, niente pannelli scuri alternati.
+Il movimento è fatto di gesti di carta, e senza di esso non si perde niente. Ci sono l'aereo della copertina che vola fino al quaderno, la pagina che si volta quando si cambia meta, la passata di evidenziatore sulla parola del titolo, la penna rossa che cerchia, le polaroid che si sollevano sotto il mouse. Se Motion non arriva, o chi guarda chiede meno movimento, la pagina è già intera e ferma. Questo mondo sostituisce del tutto quello precedente: niente foto a tutto schermo, niente card arrotondate con ombra, niente pannelli scuri alternati.
 
 **Key Characteristics:**
 - Foglio bianco a quadretti da 22px; la riga rossa del margine compare solo da 1220px in su.
@@ -237,7 +237,7 @@ Una carta e quattro inchiostri restano fissi in tutto il sito. L'unica cosa che 
 
 **La Regola del Paese.** I componenti usano solo i token semantici (`--accent`, `--accent-deep`, `--accent-ink`, `--accent-2`, `--evid-tenue`). La meta si imposta con `data-dest` e `data-paese` sull'elemento `<html>`. Gli unici esadecimali ripetuti fuori dall'astuccio sono gli evidenziatori locali di paese (il divisore di paese, le caselle del calendario, i trattini delle linguette): devono restare identici a quelli dell'astuccio.
 
-**La Regola del Logo a Parte.** I cinque colori del logo stanno sulla copertina e non entrano nel quaderno. Il logo non si ridisegna: i livelli sono le immagini e i contorni del logo vero del gruppo.
+**La Regola del Logo a Parte.** I cinque colori del logo stanno sulla copertina e non entrano nel quaderno. Il logo non si ridisegna: i livelli sono le immagini e i contorni del logo vero del gruppo. L'unico pezzo del logo che entra nel quaderno è l'aereo Royal Brunico, la stessa immagine ritagliata, accanto al titolo della home: ci arriva in volo dalla copertina.
 
 ## Typography
 
@@ -283,7 +283,6 @@ Il sistema è ibrido e la regola che lo divide è materiale. L'inchiostro è pia
 - **Polaroid** (`box-shadow: 0 2px 3px rgba(20,24,30,0.10), 0 22px 34px -18px rgba(20,24,30,0.48)`): foto dell'intestazione, equipaggio, giostra delle foto, cartoline delle mete, striscia fotografica.
 - **Nastro** (`box-shadow: 0 1px 2px rgba(0,0,0,0.08)`): il nastro adesivo sopra la polaroid.
 - **Foglio che si volta** (`box-shadow: inset -40px 0 60px -40px rgba(0,0,0,0.25)`, più un velo che scurisce durante la rotazione): la pagina a quadretti che gira sul bordo sinistro.
-- **Ombra della copertina** (gradiente da `rgba(4,8,6,0.55)` a trasparente): l'ombra che l'anta getta sulla pagina mentre si alza.
 
 ### Named Rules
 
@@ -344,10 +343,17 @@ Ogni giorno è un riquadro a tratto che si apre. Il numero è scritto in pennare
 In home, sotto il sottotitolo, c'è una nota a penna rossa con il tratto rosso tratteggiato, ruotata di −0,8°. Il numero (in pennarello) è cerchiato da un tratto rosso che si disegna da solo quando entra nello schermo (0,9s, curva `[.65,0,.35,1]`). La nota è sempre visibile, ma non è mai la cosa principale della pagina.
 
 ### La copertina (componente firma)
-Il quaderno chiuso, a schermo pieno, con il logo vero del gruppo stampato in copertina. Il logo è fatto a livelli: cielo, banda e aereo sono immagini in `assets/logo/`, montagne, cresta e lettere sono vettori da `_sources/logo/forme.json`. Il disegno si misura in unità del disegno originale (`--u`, su una tavola di 1672×941) e il colore pieno continua oltre i bordi. Sul dorso ci sono i due punti metallici; in basso a destra la scritta «Quadretti 5 mm»; in alto a destra il tasto della musica (bianco, contorno a mano, `aria-pressed`). All'arrivo il cielo si accende, la banda si stende e l'aereo entra in volo e ondeggia. Su «Entra» il logo si compone e gira come un plastico a strati: la cresta si disegna dalla vetta, il nero sale, le lettere spuntano una alla volta. Poi l'anta si apre attorno al dorso (`rotateY(-98deg)`, 1,05s) e sotto arriva la home. La «Patagucci song» suona sulla copertina e sfuma in 1,8s quando si preme «Entra». Senza Motion la copertina si apre con il CSS; con il movimento ridotto si dissolve; senza JavaScript non c'è e il sito è già aperto. Il focus qui è bianco, perché il blu sul verde e sul nero non si vedrebbe.
+Il quaderno chiuso, a schermo pieno, con il logo vero del gruppo stampato in copertina. Il logo è fatto a livelli: cielo, banda e aereo sono immagini in `assets/logo/`, montagne, cresta e lettere sono vettori da `_sources/logo/forme.json`. Il disegno si misura in unità del disegno originale (`--u`, su una tavola di 1672×941) e il colore pieno continua oltre i bordi. Sul dorso ci sono i due punti metallici; in basso a destra la scritta «Quadretti 5 mm»; in alto a destra il tasto della musica (bianco, contorno a mano, `aria-pressed`). All'apertura il logo si stampa da solo, a colpi, come un manifesto (solo CSS, 2,6s): il cielo, la banda, montagne e cresta, la scritta con un tonfo; poi l'aereo Royal Brunico entra in volo, si posa e ondeggia, e compare «Entra». L'intro aspetta che le immagini del logo siano pronte, al massimo 1,5s; Esc la porta subito alla fine.
+
+Su «Entra» parte il volo verso il quaderno (Motion, 2,8s). L'aereo si stacca dal logo e vola verso lo schermo, crescendo fino a 5,2 volte e sfocandosi (0,8s). Cinque sbuffi bianchi si gonfiano dove passa e coprono tutto, poi la nuvola si dirada sul foglio a quadretti. Lo stesso aereo rientra da sinistra, perché era uscito a destra: piccolo, col muso sempre in avanti e senza picchiate. Scende piano fino alla riga del titolo, riprende quota tracciando la scia tratteggiata a matita e si posa accanto a «Patagucci Trips», esattamente sopra l'aereo che sta lì. Il foglio si scopre e sotto c'è la home. Posizione, misura e inclinazione dell'atterraggio vengono dal disegno sulla home, quindi tornano su qualsiasi schermo.
+
+Il disegno sulla home è l'aereo del logo inclinato di −6°, 2,73em di larghezza, con il fondo sulla riga del testo. La sua scia parte dalla riga, subito dopo l'ultima lettera, e sale fino alla coda.
+
+La «Patagucci song» suona sulla copertina e sfuma in 1,8s quando si preme «Entra». Senza Motion la copertina sfuma (0,6s). Con il movimento ridotto il logo è già intero e la copertina si dissolve in 0,25s. Senza JavaScript la copertina non c'è e il sito è già aperto. Il focus qui è bianco, perché il blu sul verde e sul nero non si vedrebbe.
 
 ### Il movimento (assets/anima.js)
-Motion senza React, cinque gesti:
+Motion senza React, sei gesti:
+- Il volo verso il quaderno, all'uscita dalla copertina (vedi sopra).
 - La pagina che si volta: un foglio a quadretti grande quanto lo schermo gira sul bordo sinistro, 0,75s.
 - La polaroid che cade sul foglio.
 - La passata di evidenziatore, solo sulla parola del titolo della meta (0,75s).

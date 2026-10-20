@@ -3,10 +3,10 @@
 //
 // Tutto passa da Motion (gia' Framer Motion, la versione senza React),
 // caricata da index.html prima di questo file. Pochi gesti, tutti di
-// carta: la copertina che si apre all'ingresso, la pagina che si volta
-// quando si cambia meta, l'evidenziatore che si stende sui titoli, la
-// penna rossa che cerchia quello che manca, le polaroid che si sollevano
-// dal foglio sotto il mouse.
+// carta: l'aereo che dalla copertina vola fino al quaderno, la pagina
+// che si volta quando si cambia meta, l'evidenziatore che si stende sui
+// titoli, la penna rossa che cerchia quello che manca, le polaroid che
+// si sollevano dal foglio sotto il mouse.
 //
 // Se Motion non arriva, o se chi guarda ha chiesto meno movimento, non
 // succede niente: la pagina e' gia' intera e ferma, con gli evidenziatori
@@ -137,78 +137,122 @@
     }
   }
 
-  // ---- 6. La copertina d'ingresso ----
-  // Premendo "Entra" il logo si compone come nel video del logo animato:
-  // la cresta bianca si disegna dalla vetta verso i due lati, il nero sale
-  // a riempire le montagne, la scritta spunta lettera per lettera e l'aereo
-  // arriva al suo posto. Intanto il logo gira come un plastico, a strati
-  // (il cielo indietro, la scritta e l'aereo in avanti), e torna piatto.
-  // Poi la copertina si alza attorno al dorso e sotto c'e' la home.
-  // Lo script della copertina (in index.html) chiama questa funzione se
-  // c'e'; altrimenti apre col CSS, col logo gia' intero.
+  // ---- 6. L'uscita dalla copertina: il volo verso il quaderno ----
+  // L'intro del logo la fa il CSS, da solo, all'apertura. Premendo "Entra":
+  // l'aereo Royal Brunico si stacca dal logo e vola verso di te, sempre
+  // piu' grande e mosso; quando ti passa davanti una nuvola bianca copre
+  // tutto e, quando si dirada, sotto c'e' il foglio a quadretti. Lo stesso
+  // aereo ci rientra da sinistra (era uscito a destra), scende, risale
+  // lasciando la scia tratteggiata e si posa accanto al titolo della home,
+  // esattamente sopra l'aereo che sta li'. Poi il foglio si scopre e la
+  // home arriva. Lo script della copertina (in index.html) chiama questa
+  // funzione se c'e'; altrimenti la copertina sfuma col CSS.
   window.PatagucciCopertina = {
     apri: function(copertina, chiudi){
       var $ = function(sel){ return copertina.querySelector(sel); };
-      var pl = $('.pl'), anta = $('.cp-anta'), aereo = $('.pl-aereo img');
-      var r = pl.getBoundingClientRect();
-      var u = r.width / 1672;
-      var px = function(unita){ return (unita * u).toFixed(1) + 'px'; };
-
-      // L'aereo si ferma dov'e' (sta ancora entrando o ondeggia) e da li'
-      // riparte verso il suo posto.
-      var ora = getComputedStyle(aereo).transform;
-      aereo.style.transform = (ora && ora !== 'none') ? ora : 'translate(' + px(-330) + ', ' + px(38) + ')';
+      var vw = window.innerWidth, vh = window.innerHeight;
+      var aereo = $('.pl-aereo');
+      var r = aereo.getBoundingClientRect();
+      var cx = r.left + r.width / 2, cy = r.top + r.height / 2;
       copertina.classList.add('in-volo');
 
       // Il bottone affonda nel suo contorno e si fa da parte.
       animate($('.cp-entra'), { transform: ['translate(0px, 0px)', 'translate(4px, 5px)'] }, { duration: 0.12 });
-      animate($('.cp-basso'), { opacity: [1, 0] }, { duration: 0.35, delay: 0.14 });
+      animate($('.cp-basso'), { opacity: [1, 0] }, { duration: 0.3, delay: 0.1 });
 
-      // Il plastico: il logo gira di lato e torna di fronte, e intanto gli
-      // strati si staccano in profondita' e si richiudono.
-      var giro = { duration: 2, times: [0, 0.4, 1], ease: [0.45, 0, 0.2, 1] };
-      animate(pl, { transform: ['rotateY(0deg) rotateX(0deg) scale(1)', 'rotateY(-16deg) rotateX(7deg) scale(0.9)', 'rotateY(0deg) rotateX(0deg) scale(1)'] }, giro);
-      [['.pl-cielo', -300], ['.pl-rossa', -160], ['.pl-cresta', 8], ['.pl-lettere', 90], ['.pl-aereo', 180]].forEach(function(strato){
-        animate($(strato[0]), { transform: ['translateZ(0px)', 'translateZ(' + px(strato[1]) + ')', 'translateZ(0px)'] }, giro);
+      // 1. L'aereo vola verso di te: accelera, cresce, si inclina e si muove.
+      var vaX = vw * 0.62 - cx, vaY = vh * 0.38 - cy;
+      animate(aereo,
+        { transform: ['translate(0px, 0px) scale(1) rotate(0deg)', 'translate(' + vaX.toFixed(0) + 'px, ' + vaY.toFixed(0) + 'px) scale(5.2) rotate(-8deg)'],
+          filter: ['blur(0px)', 'blur(7px)'] },
+        { duration: 0.8, delay: 0.05, ease: [0.45, 0, 0.75, 0.35] });
+      // la copertina si avvicina un poco: la camera va incontro all'aereo
+      animate($('.pl'), { transform: ['scale(1)', 'scale(1.07)'] }, { duration: 1, ease: [0.4, 0, 0.6, 1] });
+
+      // 2. La nuvola: si apre bianca dove passa l'aereo e copre tutto.
+      var nuvola = $('.cp-nuvola');
+      nuvola.style.setProperty('--nx', (vw * 0.62).toFixed(0) + 'px');
+      nuvola.style.setProperty('--ny', (vh * 0.38).toFixed(0) + 'px');
+      // Ogni sbuffo e' subito pieno e poi si gonfia, uno dopo l'altro; il
+      // primo quando l'aereo e' gia' grande, cosi' lo si vede arrivare.
+      copertina.querySelectorAll('.cp-nuvola i').forEach(function(sbuffo, i){
+        var quando = 0.62 + i * 0.045;
+        animate(sbuffo, { transform: ['scale(0.05)', 'scale(3)'] }, { duration: 0.55, delay: quando, ease: [0.25, 0, 0.2, 1] });
+        animate(sbuffo, { opacity: [0, 1] }, { duration: 0.14, delay: quando });
       });
 
-      // L'aereo arriva: sale presto, si livella e si posa.
-      animate(aereo, { transform: [aereo.style.transform, 'translate(' + px(-140) + ', ' + px(8) + ') rotate(-4deg)', 'translate(0px, 0px) rotate(0deg)'] },
-              { duration: 1.55, times: [0, 0.55, 1], ease: [0.33, 1, 0.68, 1] });
+      // 3. Sotto la nuvola c'e' gia' il foglio; la nuvola si dirada. Il
+      // foglio resta fino all'atterraggio, poi si scopre sulla home: una
+      // sola animazione per tutta la sua vita, perche' Motion ferma la
+      // precedente se se ne avvia un'altra sulla stessa proprieta'.
+      var arrivoHome = 2.35, fine = arrivoHome + 0.45;
+      var carta = $('.cp-carta');
+      var chiusura = animate(carta, { opacity: [0, 0, 1, 1, 0] },
+              { duration: fine, times: [0, 1 / fine, 1.01 / fine, arrivoHome / fine, 1], ease: 'linear' });
+      animate($('.cp-anta'), { opacity: [1, 0] }, { duration: 0.01, delay: 1.05 });
+      animate(nuvola, { opacity: [1, 0] }, { duration: 0.4, delay: 1.1, ease: [0.4, 0, 0.2, 1] });
 
-      // La cresta si scopre dalla vetta verso i due lati, con il passo
-      // misurato sui bordi dello schermo: la tavola e' molto piu' larga, e
-      // il pezzo che sta fuori si scopre di colpo alla fine.
-      var cresta = $('.pl-cresta');
-      var vetta = parseFloat(getComputedStyle(cresta).getPropertyValue('--vetta')) || 54;
-      var tavola = cresta.getBoundingClientRect();
-      var bordoSx = Math.max(0, Math.min(vetta, -tavola.left / tavola.width * 100));
-      var bordoDx = Math.max(0, Math.min(100 - vetta, (tavola.right - anta.clientWidth) / tavola.width * 100));
-      var taglio = function(dx, sx){ return 'inset(0% ' + dx.toFixed(2) + '% 0% ' + sx.toFixed(2) + '%)'; };
-      animate(cresta, { clipPath: [taglio(100 - vetta, vetta), taglio(bordoDx, bordoSx), taglio(0, 0)] },
-              { duration: 0.95, delay: 0.1, times: [0, 0.97, 1], ease: [0.4, 0, 0.4, 1] });
-
-      // Il nero sale a riempire le montagne, partendo dal fondo dello
-      // schermo e non dal fondo del disegno.
-      var fondo = (anta.clientHeight - (r.top - anta.getBoundingClientRect().top)) / u;
-      var parti = Math.max(0, Math.min(100, (fondo - 360) / 3640 * 100));
-      animate($('.pl-monti'), { clipPath: ['inset(' + parti.toFixed(2) + '% 0% 0% 0%)', 'inset(0% 0% 0% 0%)'] },
-              { duration: 0.75, delay: 0.45, ease: [0.3, 0, 0.15, 1] });
-
-      // La scritta spunta lettera per lettera.
-      animate(copertina.querySelectorAll('.pl-l'), { opacity: [0, 1], transform: ['translateY(' + px(44) + ')', 'translateY(0px)'] },
-              { duration: 0.5, delay: M.stagger(0.06, { startDelay: 0.85 }), ease: [0.16, 1, 0.3, 1] });
-
-      // Poi la copertina si alza attorno al dorso; sotto, la home arriva.
-      var apertura = animate(anta,
-        { transform: ['rotateY(0deg)', 'rotateY(-98deg)'], filter: ['brightness(1)', 'brightness(0.72)'] },
-        { duration: 1.05, delay: 2.3, ease: [0.62, 0.02, 0.3, 1] });
-      animate($('.cp-ombra'), { opacity: [0, 0.85, 0] }, { duration: 1.05, delay: 2.3, ease: 'easeInOut' });
+      // 4. L'aereo rientra piccolo: dove si posa, quanto e' grande e com'e'
+      // inclinato lo dice l'aereo disegnato accanto al titolo della home.
       var home = document.getElementById('dest-hub');
-      var titolo = home && home.querySelector('header.hero .tt');
-      if(titolo) titolo.classList.remove('steso');
-      setTimeout(function(){ arrivo(home, 0.15); }, 2400);
-      finito(apertura, chiudi);
+      var sagoma = home && home.querySelector('.aeroplanino .ap-aereo');
+      var traccia = home && home.querySelector('.aeroplanino .ap-scia');
+      var ma = sagoma && traccia && sagoma.getScreenCTM && sagoma.getScreenCTM();
+      if(ma){
+        var volo = $('.cp-volo');
+        volo.querySelector('svg').setAttribute('viewBox', '0 0 ' + vw + ' ' + vh);
+        // Dalle misure del disegno ai pixel dello schermo.
+        var schermo = function(m, x, y){ return { x: m.a * x + m.c * y + m.e, y: m.b * x + m.d * y + m.f }; };
+        var meta = schermo(ma, +sagoma.getAttribute('x') + sagoma.getAttribute('width') / 2,
+                               +sagoma.getAttribute('y') + sagoma.getAttribute('height') / 2);
+        var scala = Math.hypot(ma.a, ma.b);
+        var gradi = Math.atan2(ma.b, ma.a) * 180 / Math.PI;
+        var largo = sagoma.getAttribute('width') * scala;
+        var ms = traccia.getScreenCTM();
+        var n = traccia.getAttribute('d').match(/-?\d*\.?\d+/g).map(Number);
+        var coda = [0, 2, 4, 6].map(function(i){ return schermo(ms, n[i], n[i + 1]); });
+
+        // La rotta, sempre col muso in avanti e senza picchiate: entra da
+        // sinistra poco piu' in alto, scende piano fino alla riga del
+        // titolo, poi riprende quota sulla scia del disegno fino al centro
+        // dell'aereo.
+        var p = function(q){ return q.x.toFixed(1) + ' ' + q.y.toFixed(1); };
+        var dx = coda[0].x + largo * 1.4;
+        var via = { x: -largo * 1.4, y: coda[0].y - Math.min(vh * 0.12, dx * 0.3) };
+        var rotta = 'M' + p(via) +
+          ' C' + p({ x: via.x + dx * 0.4, y: via.y }) + ' ' + p({ x: coda[0].x - dx * 0.4, y: coda[0].y }) + ' ' + p(coda[0]) +
+          ' C' + p(coda[1]) + ' ' + p(coda[2]) + ' ' + p(coda[3]) +
+          ' L' + p(meta);
+        var scia = volo.querySelector('.cp-scia');
+        var scopri = volo.querySelector('.cp-scopri');
+        scia.setAttribute('d', rotta);
+        scopri.setAttribute('d', rotta);
+        var lunga = scia.getTotalLength();
+        var piccolo = volo.querySelector('.cp-aeroplanino');
+        animate(volo, { opacity: [0, 0, 1, 1, 0] },
+                { duration: fine, times: [0, 1.12 / fine, 1.27 / fine, (arrivoHome + 0.1) / fine, 1], ease: 'linear' });
+        animate(0, 1, {
+          duration: 1.35, delay: 1.12, ease: [0.3, 0, 0.25, 1],
+          onUpdate: function(v){
+            var dd = v * lunga;
+            var a = scia.getPointAtLength(dd);
+            var prima = scia.getPointAtLength(Math.max(0, dd - 1)), dopo = scia.getPointAtLength(Math.min(lunga, dd + 1));
+            var verso = Math.atan2(dopo.y - prima.y, dopo.x - prima.x) * 180 / Math.PI;
+            // nell'ultimo tratto il muso prende l'inclinazione del disegno
+            var ultimo = Math.max(0, (v - 0.85) / 0.15);
+            var delta = ((gradi - verso + 540) % 360) - 180;
+            var angolo = verso + delta * ultimo * ultimo;
+            // arriva da davanti, piu' grande, e si posa alla misura del disegno
+            var s = scala * (1 + 1.6 * Math.pow(1 - v, 1.5));
+            piccolo.setAttribute('transform', 'translate(' + a.x.toFixed(2) + ' ' + a.y.toFixed(2) + ') rotate(' + angolo.toFixed(2) + ') scale(' + s.toFixed(4) + ')');
+            scopri.style.strokeDashoffset = (1 - v).toFixed(4);
+          }
+        });
+      }
+
+      // 5. Posato: il foglio si scopre (vedi sopra) e sotto c'e' la home.
+      setTimeout(function(){ arrivo(home, 0.05); }, arrivoHome * 1000);
+      finito(chiusura, chiudi);
       // Qualsiasi cosa succeda all'animazione, la copertina non resta chiusa.
       setTimeout(chiudi, 6000);
     }

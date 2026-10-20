@@ -119,6 +119,12 @@ html[data-dest="kr"][data-paese="bn"]{ --accent:#ffc93c; --accent-rgb:255,201,60
 html[data-dest="kr"][data-paese="sg"]{ --accent:#cdb0ff; --accent-rgb:205,176,255; --accent-deep:#9b6bef; --accent-ink:#5b2ba8; --accent-2:#ffa38f; }
 /* ❓ Il prossimo — turchese, la pagina ancora bianca */
 html[data-dest="nx"]{ --accent:#6de6d2; --accent-rgb:109,230,210; --accent-deep:#14b8a6; --accent-ink:#0f6b60; --accent-2:#ffe14d; }
+/* 🇵🇪🇧🇴🇨🇱 Perù, Bolivia e Cile — il viaggio gia' fatto: arancio, e un
+   evidenziatore per paese mentre si legge il diario. */
+html[data-dest="pb"]{ --accent:#ffab70; --accent-rgb:255,171,112; --accent-deep:#ee7a2a; --accent-ink:#8a3d0a; --accent-2:#73e8d8; }
+html[data-dest="pb"][data-paese="bo"]{ --accent:#ffd25e; --accent-rgb:255,210,94; --accent-deep:#e6a800; --accent-ink:#6f5200; --accent-2:#7deaa0; }
+html[data-dest="pb"][data-paese="cl"]{ --accent:#8ccbff; --accent-rgb:140,203,255; --accent-deep:#3b95e6; --accent-ink:#11558f; --accent-2:#ff9a8f; }
+html[data-dest="pb"][data-paese="pe"]{ --accent:#ff9a8f; --accent-rgb:255,154,143; --accent-deep:#e9604f; --accent-ink:#9c2a1c; --accent-2:#ffd25e; }
 
 /* Le mete archiviate restano in _sources/: se ne torna in linea una,
    ha gia' il suo evidenziatore. */
@@ -181,9 +187,6 @@ html{ scrollbar-color:var(--ink) var(--tint-200); scrollbar-width:thin; }
 ::-webkit-scrollbar{ width:11px; height:11px; }
 ::-webkit-scrollbar-track{ background:var(--tint-200); }
 ::-webkit-scrollbar-thumb{ background:var(--ink); border-radius:8px 4px 9px 5px; border:2px solid var(--tint-200); }
-
-/* Il nastro con la bandiera della meta, in cima: lo cambia il JS. */
-.flagbar{ height:6px; background:linear-gradient(90deg,#161616 0 33%, #ffe14d 33% 66%, #ff92bb 66% 100%); }
 
 /* ---------- Focus da tastiera ----------
    Un anello solo, penna blu, staccato dal foglio da un alone bianco:
@@ -265,6 +268,11 @@ header.hero h1{
   font-size:clamp(2.7rem,6.4vw,5.6rem); line-height:1.02; letter-spacing:0.005em;
   text-wrap:balance;
 }
+/* L'aereo Royal Brunico del logo, decollato dalla fine del titolo: la sua
+   scia a pennarello parte dalla riga del testo e sale fino alla coda. Ci
+   arriva in volo dalla copertina e resta li'. Il fondo del disegno sta
+   sulla riga del testo, dove parte la scia. */
+header.hero h1 .aeroplanino{ display:inline-block; width:2.73em; height:0.84em; margin-left:0.06em; vertical-align:baseline; overflow:visible; }
 header.hero p.tagline{ margin:0; max-width:46ch; font-size:clamp(1.05rem,1.6vw,1.22rem); line-height:1.6; color:var(--ink); }
 .badge-row{ display:flex; gap:8px 10px; flex-wrap:wrap; margin-top:24px; }
 .badge{
@@ -818,6 +826,52 @@ footer a.home-link{ font-family:var(--font-display); font-size:1.15rem; color:va
 .paese-divisore[data-paese="kr"]{ --evid-paese:#ff92bb; }
 .paese-divisore[data-paese="bn"]{ --evid-paese:#ffc93c; }
 .paese-divisore[data-paese="sg"]{ --evid-paese:#cdb0ff; }
+.paese-divisore[data-paese="bo"]{ --evid-paese:#ffd25e; }
+.paese-divisore[data-paese="cl"]{ --evid-paese:#8ccbff; }
+.paese-divisore[data-paese="pe"]{ --evid-paese:#ff9a8f; }
+
+/* ============================================================
+   IL DIARIO DI UN VIAGGIO GIA' FATTO (Perù, Bolivia e Cile)
+   Ogni giorno ha le sue foto in fila, con ora e posto scritti sotto. I
+   giorni ancora da raccontare hanno il cerchio vuoto e l'etichetta
+   tratteggiata: si vede subito cosa manca, senza inventarlo.
+   ============================================================ */
+.foto-giorno{ display:flex; flex-wrap:wrap; gap:16px 14px; margin-top:12px; }
+.foto-giorno .mini-photo{ margin:4px 0 0; width:min(100%, 220px); }
+.foto-giorno .mini-photo:nth-child(even){ transform:rotate(1.2deg); }
+.foto-giorno .mini-photo img{ aspect-ratio:4/3; object-fit:cover; }
+.foto-giorno figcaption{ padding:7px 2px 0; font-family:var(--font-hand); font-size:0.98rem; line-height:1.25; color:var(--ink); text-align:center; }
+details.day .tag.buco{ border-style:dashed; color:var(--ink-soft); }
+details.day.day-buco summary .daynum{ background:var(--paper); border-style:dashed; }
+details.day.day-buco .day-body p{ color:var(--ink-soft); }
+/* Le foto senza data: polaroid come quelle del gruppo in home. */
+figure.crew-card{ margin:0; }
+/* L'etichetta "da finire" in testata: tratteggio a matita, non penna
+   rossa (quella resta ai voli da prenotare). */
+.badge-bozza{ border-style:dashed; color:var(--ink-soft); }
+.badge-bozza:hover{ background:var(--tint-200); }
+/* La cartolina del viaggio fatto, da sola, in home. */
+.trip-grid-uno{ grid-template-columns:minmax(0, 520px); margin-bottom:34px; }
+/* La mappa ricostruita: verticale come il viaggio, con la costa a matita
+   e i tratti che ancora non sappiamo come abbiamo fatto a puntini. */
+/* Le scritte sono in unita' del disegno (908 di larghezza): a 680px di
+   mappa 26 diventano circa 19px veri. */
+.mappa-viaggio{ max-width:720px; }
+.mappa-viaggio svg{ max-width:680px; }
+.jeep-map-wrap .costa{ fill:none; stroke:var(--penna); stroke-width:2.4; stroke-dasharray:1 6; stroke-linecap:round; opacity:0.6; }
+.jeep-map-wrap .mare{ font-family:var(--font-hand); font-size:28px; fill:var(--penna); opacity:0.8; }
+.jeep-map-wrap .route-ignota{ fill:none; stroke:var(--ink-soft); stroke-width:2.6; stroke-dasharray:2 10; stroke-linecap:round; }
+.mappa-viaggio .border-label{ font-size:22px; letter-spacing:0.16em; }
+.mappa-viaggio .stop-label{ font-size:22px; stroke-width:5px; }
+.mappa-viaggio .stop-label.highlight{ font-size:26px; }
+.mappa-viaggio .stop-pin.minor .stop-label{ font-size:20px; }
+/* Sul telefono la mappa sta in 330 pixel: restano solo le tappe grandi,
+   scritte abbastanza grosse da leggersi. */
+@media (max-width:760px){
+  .mappa-viaggio .stop-label, .mappa-viaggio .stop-label.highlight{ font-size:40px; stroke-width:7px; }
+  .mappa-viaggio .mare{ font-size:38px; }
+  .mappa-viaggio .border-label{ display:none; }
+}
 .paese-divisore .pd-bandiere{ display:none; }
 .paese-divisore h2{
   display:inline; margin:0; font-family:var(--font-display); font-weight:400; color:var(--ink);
@@ -907,20 +961,18 @@ details.day[open], .qp-esito.migliore, .cal-giorno:hover{ box-shadow:none; }
 /* ============================================================
    LA COPERTINA (schermata d'ingresso)
    Il quaderno chiuso, col logo dei Patagucci stampato in copertina e i
-   due punti metallici sul dorso. All'arrivo si accendono il cielo e la
-   banda e l'aereo entra in volo; premendo "Entra" il logo si compone e
-   la copertina si apre attorno al dorso (assets/anima.js). Senza Motion
-   il logo e' intero da subito e la copertina si apre col CSS qui sotto.
-   La mostra solo lo script in testa alla pagina: senza JavaScript non
-   c'e' e il sito e' gia' aperto.
+   due punti metallici sul dorso. All'apertura il logo si stampa da solo,
+   a colpi, e alla fine compare "Entra" (tutto CSS, qui sotto). Premendolo
+   l'aereo vola verso lo schermo, una nuvola diventa il foglio a quadretti
+   e lo stesso aereo, piccolo, si posa accanto al titolo della home
+   (assets/anima.js).
+   Senza Motion la copertina sfuma e basta. La mostra solo lo script in
+   testa alla pagina: senza JavaScript non c'e' e il sito e' gia' aperto.
    ============================================================ */
 .copertina{ display:none; }
 html.con-copertina{ overflow:hidden; }
 html.con-copertina .copertina{
   display:block; position:fixed; inset:0; z-index:1000;
-  /* La prospettiva cresce con lo schermo: su un monitor largo il bordo
-     libero della copertina non deve mai arrivare "dietro" all'occhio. */
-  perspective:calc(100vw * 1.6); perspective-origin:24% 50%;
   /* Il logo si misura in pixel del disegno (1672 x 941): --u e' quanto
      vale un pixel del disegno sullo schermo. Riempie lo schermo, ma resta
      sempre intero dalla "p" alla "i" e lascia sotto la scritta il posto
@@ -933,19 +985,11 @@ html.con-copertina .copertina{
 @supports (height:100dvh){
   html.con-copertina .copertina{ --u:min(max(100vw / 1672, 100dvh / 941), (100vw - var(--dorso) - 40px) / 1290, (100dvh - 150px) / 860); }
 }
-/* L'ombra che la copertina getta sulla pagina mentre si alza */
-.cp-ombra{
-  position:absolute; inset:0; pointer-events:none; opacity:0;
-  background:linear-gradient(90deg, rgba(4,8,6,0.55), rgba(4,8,6,0.16) 55%, rgba(4,8,6,0));
-}
 .cp-anta{
   /* clip e non hidden: con hidden la copertina diventa scorrevole, e un
      fuoco o un clic possono farne scivolare il contenuto verso l'alto. */
   position:absolute; inset:0; overflow:hidden; overflow:clip;
-  transform-origin:0 50%; backface-visibility:hidden; will-change:transform;
   background:#060606;
-  /* La profondita' del plastico, quando il logo gira in 3D */
-  perspective:1900px; perspective-origin:50% 42%;
 }
 /* Il riflesso lungo della copertina plastificata */
 .cp-anta::after{
@@ -974,7 +1018,6 @@ html.con-copertina .copertina{
 .pl{
   position:absolute; left:calc(50% + var(--dorso) / 2 - 836 * var(--u)); top:var(--cp-top);
   width:calc(1672 * var(--u)); height:calc(941 * var(--u));
-  transform-style:preserve-3d;
 }
 .pl > *{ position:absolute; }
 .pl img{ display:block; }
@@ -1005,23 +1048,36 @@ html.con-copertina .copertina{
 .pl-aereo{ left:42.883%; top:19.235%; width:20.455%; }
 .pl-aereo img{ width:100%; height:auto; }
 
-/* Prima di "Entra": il cielo si accende, la banda si stende, l'aereo
-   entra in volo e aspetta; montagne, cresta e scritta non ci sono ancora. */
-html.copertina-anima .pl-monti{ clip-path:inset(100% 0 0 0); }
-/* La cresta si scopre dalla vetta verso i due lati: --vetta lo scrive build.py */
-html.copertina-anima .pl-cresta{ clip-path:inset(0 calc(100% - var(--vetta)) 0 var(--vetta)); }
-html.copertina-anima .pl-l{ opacity:0; transform:translateY(calc(var(--u) * 44)); }
-html.copertina-anima .pl-cielo{ animation:cpAccendi 1s ease-out both; }
-html.copertina-anima .pl-rossa{ animation:cpStendi 1.3s .3s cubic-bezier(.65,0,.35,1) both; }
-html.copertina-anima .pl-aereo img{ animation:cpCrociera 5.2s .5s cubic-bezier(.2,.65,.3,1) both, cpOndeggia 3.4s 5.7s ease-in-out infinite; }
-html.copertina-anima .cp-basso{ animation:cpAppare .6s .5s cubic-bezier(.16,1,.3,1) both; }
-.copertina.in-volo .pl-aereo img,
+/* ---------- L'intro, all'apertura ----------
+   Il logo si stampa a colpi, come un manifesto: dal nero il cielo, poi la
+   banda, poi montagne e cresta, poi la scritta con un tonfo; l'aereo entra
+   in volo e si posa, e compare "Entra". Tutto aspetta in pausa finche' lo
+   script non dice che le immagini del logo sono pronte (.via); Esc salta
+   alla fine (.salta). */
+html.copertina-intro .pl{ animation:cpAssesta 2.6s cubic-bezier(.2,.7,.2,1) both; }
+html.copertina-intro .pl-cielo{ animation:cpTimbroCielo .5s cubic-bezier(.2,.9,.25,1) both; }
+html.copertina-intro .pl-rossa{ animation:cpTimbroRossa .42s .3s cubic-bezier(.2,.9,.25,1) both; }
+html.copertina-intro .pl-monti,
+html.copertina-intro .pl-cresta{ animation:cpTimbroMonti .5s .58s cubic-bezier(.3,1.3,.5,1) both; }
+html.copertina-intro .pl-lettere{ animation:cpTimbroLettere .55s .9s cubic-bezier(.3,1.4,.5,1) both; transform-origin:50.2% 78%; }
+html.copertina-intro .pl-aereo img{ animation:cpArrivoAereo 1.4s 1.05s cubic-bezier(.16,.84,.3,1) both; }
+html.copertina-intro .cp-basso{ animation:cpAppare .5s 2.15s cubic-bezier(.16,1,.3,1) both; }
+/* Arrivato, l'aereo ondeggia appena: e' in volo, non incollato. */
+.pl-aereo{ animation:cpOndeggia 3.4s 2.6s ease-in-out infinite; }
+html.copertina-intro .copertina:not(.via) :is(.pl, .pl-cielo, .pl-rossa, .pl-monti, .pl-cresta, .pl-lettere, .pl-aereo, .pl-aereo img, .cp-basso){ animation-play-state:paused; }
+html.copertina-intro .copertina:not(.pronta) .cp-basso{ pointer-events:none; }
+.copertina.salta :is(.pl, .pl-cielo, .pl-rossa, .pl-monti, .pl-cresta, .pl-lettere, .pl-aereo img, .cp-basso){ animation-delay:0s !important; animation-duration:1ms !important; }
+.copertina.in-volo .pl-aereo,
 .copertina.in-volo .cp-basso{ animation:none; }
-@keyframes cpAccendi{ from{ opacity:0; } }
-@keyframes cpStendi{ from{ clip-path:inset(0 100% 0 0); } to{ clip-path:inset(0 0 0 0); } }
-@keyframes cpCrociera{
-  from{ transform:translate(calc(var(--u) * -1100), calc(var(--u) * 45)); }
-  to{ transform:translate(calc(var(--u) * -330), calc(var(--u) * 38)); }
+@keyframes cpAssesta{ from{ transform:scale(1.035); } }
+@keyframes cpTimbroCielo{ from{ opacity:0; transform:scale(1.06); filter:blur(8px); } }
+@keyframes cpTimbroRossa{ from{ opacity:0; transform:translateY(calc(var(--u) * 16)) scaleY(1.3); } }
+@keyframes cpTimbroMonti{ from{ opacity:0; transform:translateY(calc(var(--u) * 46)); } }
+@keyframes cpTimbroLettere{ from{ opacity:0; transform:scale(1.16) rotate(-2deg); filter:blur(3px); } }
+@keyframes cpArrivoAereo{
+  0%{ opacity:0; transform:translate(calc(var(--u) * -1250), calc(var(--u) * 60)) rotate(-4deg); }
+  12%{ opacity:1; }
+  100%{ opacity:1; transform:none; }
 }
 @keyframes cpOndeggia{ 50%{ translate:0 calc(var(--u) * -5); } }
 @keyframes cpAppare{ from{ opacity:0; translate:0 10px; } }
@@ -1085,12 +1141,45 @@ html.copertina-anima .cp-basso{ animation:cpAppare .6s .5s cubic-bezier(.16,1,.3
 .cp-musica:focus-visible{ outline:3px solid #fff; outline-offset:4px; box-shadow:none; }
 .copertina.in-volo .cp-musica, .copertina.apri-css .cp-musica{ opacity:0; transition:opacity .4s ease; pointer-events:none; }
 
-/* Senza Motion la copertina si apre lo stesso: qui. */
-.copertina.apri-css .cp-anta{ transform:rotateY(-98deg); transition:transform .95s cubic-bezier(.62,.02,.3,1); }
-.copertina.apri-css .cp-ombra{ opacity:0.7; transition:opacity .45s ease; }
+/* ---------- L'uscita (assets/anima.js) ----------
+   La nuvola in cui passa l'aereo, il foglio a quadretti che c'e' sotto
+   (gli stessi quadretti della pagina, allineati), e l'aereo Royal Brunico
+   che ci rientra piccolo con la sua scia, sopra a tutto. */
+.cp-nuvola, .cp-carta, .cp-volo{ position:absolute; inset:0; pointer-events:none; }
+/* La nuvola sta sopra il foglio: quando si dirada, sotto ci sono gia' i quadretti. */
+.cp-nuvola{ z-index:4; overflow:hidden; }
+/* Cinque sbuffi bianchi: ognuno diventa subito pieno e cresce dal suo
+   centro, e insieme fanno una nuvola che si gonfia fino a coprire tutto.
+   Il bordo resta morbido senza filtri pesanti. */
+.cp-nuvola i{
+  position:absolute; inset:0; opacity:0;
+  background:radial-gradient(circle 34vmax at var(--x) var(--y), #fff 0, #fff 62%, rgba(255,255,255,0.88) 78%, rgba(255,255,255,0) 100%);
+  transform-origin:var(--x) var(--y); transform:scale(0.05);
+}
+.cp-nuvola i:nth-child(1){ --x:var(--nx, 60%); --y:var(--ny, 40%); }
+.cp-nuvola i:nth-child(2){ --x:calc(var(--nx, 60%) - 9vw); --y:calc(var(--ny, 40%) + 8vh); }
+.cp-nuvola i:nth-child(3){ --x:calc(var(--nx, 60%) + 8vw); --y:calc(var(--ny, 40%) - 7vh); }
+.cp-nuvola i:nth-child(4){ --x:calc(var(--nx, 60%) - 15vw); --y:calc(var(--ny, 40%) - 11vh); }
+.cp-nuvola i:nth-child(5){ --x:calc(var(--nx, 60%) + 13vw); --y:calc(var(--ny, 40%) + 12vh); }
+.cp-carta{
+  z-index:3; opacity:0; background-color:#fff;
+  background-image:linear-gradient(var(--quadretto) 1px, transparent 1px), linear-gradient(90deg, var(--quadretto) 1px, transparent 1px);
+  background-size:22px 22px;
+}
+/* Il riquadro HTML attorno al disegno fa sfumare il volo col motore del
+   browser: su un svg Motion lo farebbe pixel per pixel. */
+.cp-volo{ z-index:5; opacity:0; }
+.cp-volo svg{ position:absolute; inset:0; width:100%; height:100%; overflow:visible; }
+.cp-scia, .aeroplanino .ap-scia{
+  fill:none; stroke:var(--ink-soft); stroke-width:2.2; stroke-linecap:round; stroke-dasharray:7 9;
+  vector-effect:non-scaling-stroke;
+}
+.cp-scopri{ fill:none; stroke:#fff; stroke-width:18; stroke-dasharray:1 2; stroke-dashoffset:1; }
+
+/* Senza Motion, o con meno movimento, la copertina sfuma e basta. */
+.copertina.apri-css{ opacity:0; transition:opacity .6s ease; }
 @media (prefers-reduced-motion:reduce){
-  .copertina.apri-css .cp-anta{ transform:none; opacity:0; transition:opacity .25s ease; }
-  .copertina.apri-css .cp-ombra{ opacity:0; }
+  .copertina.apri-css{ transition-duration:.25s; }
 }
 @media (max-width:560px){
   .cp-quadretti{ font-size:1rem; }
@@ -1205,7 +1294,7 @@ html.copertina-anima .cp-basso{ animation:cpAppare .6s .5s cubic-bezier(.16,1,.3
 /* In stampa: niente quadretti, niente ombre, tutto aperto. */
 @media print{
   body, section.panel.alt{ background:#fff !important; }
-  .site-switcher, nav.tabs, .flagbar, .voltapagina{ display:none !important; }
+  .site-switcher, nav.tabs, .voltapagina{ display:none !important; }
   .card, details.day, .callout{ box-shadow:none; break-inside:avoid; }
   main::before{ display:none; }
 }

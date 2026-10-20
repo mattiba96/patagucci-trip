@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Patagucci Trips</title>
+<link rel="icon" href="assets/icona.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icona-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icona-180.png">
 <script>
   (function(){
     var radice = document.documentElement;
@@ -11,9 +14,9 @@
     try { if(sessionStorage.getItem('patagucci-entrato')) mostra = false; } catch(e){}
     if(!mostra) return;
     radice.classList.add('con-copertina');
-    // Il logo si compone premendo "Entra": finche' non lo si preme ne
-    // restano fuori montagne e scritta. Con meno movimento e' gia' intero.
-    if(!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) radice.classList.add('copertina-anima');
+    // Il logo si stampa da solo all'apertura; con meno movimento e' gia'
+    // intero, e "Entra" c'e' da subito.
+    if(!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) radice.classList.add('copertina-intro');
   })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,6 +57,7 @@
   .site-switcher button[data-dest="is"]{ --dab:#7deaa0; }
   .site-switcher button[data-dest="kr"]{ --dab:#ff92bb; }
   .site-switcher button[data-dest="nx"]{ --dab:#6de6d2; }
+  .site-switcher button[data-dest="pb"]{ --dab:#ffab70; }
   .site-switcher button:hover{ color:var(--ink); background-size:0 0, calc(100% - 26px) 5px; }
   .site-switcher button.active{ color:var(--ink); background-position:6px 76%, 6px 76%; background-size:calc(100% - 12px) 0.6em, calc(100% - 12px) 0.6em; }
   .site-switcher .corto{ display:none; }
@@ -71,7 +75,6 @@
 <body>
 
 <div class="copertina" id="copertina" role="dialog" aria-modal="true" aria-labelledby="cp-titolo">
-  <div class="cp-ombra" aria-hidden="true"></div>
   <div class="cp-anta">
     <p class="sr-only" id="cp-titolo">Patagucci Trips</p>
     <div class="pl" aria-hidden="true">
@@ -87,6 +90,13 @@
     <p class="cp-quadretti" aria-hidden="true">Quadretti 5 mm</p>
     <button type="button" class="cp-musica" id="cp-musica" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 17.4 C 9.2 13, 8.8 9, 9 5.2 L 19.2 2.8 C 19 7, 19.3 11, 19 15.2"/><ellipse cx="6.5" cy="17.6" rx="2.7" ry="2.1"/><ellipse cx="16.6" cy="15.4" rx="2.7" ry="2.1"/></svg><span>Accendi la musica</span></button>
   </div>
+  <div class="cp-nuvola" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="cp-carta" aria-hidden="true"></div>
+  <div class="cp-volo" aria-hidden="true"><svg focusable="false">
+    <defs><mask id="cp-maschera-volo" maskUnits="userSpaceOnUse" x="-1000" y="-1000" width="8000" height="8000"><path class="cp-scopri" pathLength="1"/></mask></defs>
+    <path class="cp-scia" mask="url(#cp-maschera-volo)"/>
+    <g class="cp-aeroplanino" transform="translate(-300 -300)"><image href="assets/logo/aereo.webp" x="-70" y="-17.4" width="140" height="34.8"/></g>
+  </svg></div>
 </div>
 <script>
   (function(){
@@ -98,7 +108,30 @@
     var spenti = [];
     var chiusa = false;
     var daTastiera = false;
-    try { entra.focus({ preventScroll:true }); } catch(e){ entra.focus(); }
+
+    // ---- L'intro del logo ----
+    // La fa il CSS, ma aspetta le immagini del logo: senza, il cielo si
+    // "stamperebbe" vuoto. Alla fine "Entra" diventa premibile e prende il
+    // fuoco. Con meno movimento e' tutto pronto da subito.
+    function pronta(){
+      if(copertina.classList.contains('pronta')) return;
+      copertina.classList.add('via', 'pronta');
+      try { entra.focus({ preventScroll:true }); } catch(e){ entra.focus(); }
+    }
+    if(radice.classList.contains('copertina-intro')){
+      var parti = function(){
+        if(copertina.classList.contains('via')) return;
+        copertina.classList.add('via');
+        setTimeout(pronta, 2350);
+      };
+      Promise.all(Array.prototype.map.call(copertina.querySelectorAll('.pl img'), function(img){
+        return img.decode ? img.decode().catch(function(){}) : null;
+      })).then(parti, parti);
+      // se le immagini tardano, l'intro parte comunque
+      setTimeout(parti, 1500);
+    } else {
+      pronta();
+    }
 
     // ---- La canzone dei Patagucci ----
     // Parte con la copertina e sfuma quando si preme "Entra". Molti
@@ -177,12 +210,6 @@
       });
     });
 
-    // Se Motion non e' arrivato il logo non si comporra': lo si mostra
-    // intero da subito.
-    window.addEventListener('load', function(){
-      if(!window.PatagucciCopertina) radice.classList.remove('copertina-anima');
-    });
-
     function chiudi(){
       if(chiusa) return;
       chiusa = true;
@@ -190,7 +217,7 @@
       if(!canzone.paused && !sfumando) sfuma(400);
       try { sessionStorage.setItem('patagucci-entrato', '1'); } catch(e){}
       spenti.forEach(function(el){ el.inert = false; });
-      radice.classList.remove('con-copertina', 'copertina-anima');
+      radice.classList.remove('con-copertina', 'copertina-intro');
       copertina.remove();
       // Chi e' entrato con la tastiera riparte dal titolo; col mouse o col
       // dito il fuoco torna semplicemente all'inizio della pagina.
@@ -210,34 +237,34 @@
       // Un secondo colpo mentre si sta aprendo vuol dire "salta".
       if(copertina.classList.contains('in-volo') || copertina.classList.contains('apri-css')){ chiudi(); return; }
       if(window.PatagucciCopertina){ window.PatagucciCopertina.apri(copertina, chiudi); return; }
-      // Senza Motion (o con meno movimento): il logo intero, e apre il CSS.
+      // Senza Motion (o con meno movimento) la copertina sfuma e basta.
       var meno = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      radice.classList.remove('copertina-anima');
       copertina.classList.add('apri-css');
-      setTimeout(chiudi, meno ? 300 : 980);
+      setTimeout(chiudi, meno ? 300 : 650);
     }
 
     entra.addEventListener('click', apri);
     document.addEventListener('keydown', function(e){
-      if(!chiusa && e.key === 'Escape') apri();
+      if(chiusa || e.key !== 'Escape') return;
+      // Durante l'intro Esc la fa finire; dopo, entra.
+      if(!copertina.classList.contains('pronta')){ copertina.classList.add('salta'); pronta(); }
+      else apri();
     });
   })();
 </script>
-
-<div class="flagbar" id="flagbar"></div>
-
 
 <div class="site-switcher" id="site-switcher">
   <button class="home-btn active" data-dest="hub" onclick="showDest('hub')">Home</button>
   <button class="switch-btn confermato" data-dest="is" onclick="showDest('is')"><span class="lungo">Islanda</span><span class="corto">Islanda</span></button>
         <button class="switch-btn confermato" data-dest="kr" onclick="showDest('kr')"><span class="lungo">Corea, Brunei e Singapore</span><span class="corto">Corea</span></button>
+        <button class="switch-btn" data-dest="pb" onclick="showDest('pb')"><span class="lungo">Perù, Bolivia e Cile</span><span class="corto">Sudamerica</span></button>
 </div>
 
   <div class="destination active" id="dest-hub" data-dest="hub">
     <header class="hero">
       <div class="bg" style="background-image:url('foto/destinazioni/A_land_enclosed_in_Mountains_-_Hunza_Valley.jpg'); background-position:center 55%;"></div>
       <div class="content">
-        <h1><span class="tt">Patagucci</span> Trips</h1>
+        <h1><span class="tt">Patagucci</span> Trips<svg class="aeroplanino" viewBox="0 0 260 80" aria-hidden="true" focusable="false"><path class="ap-scia" d="M2 78 C 40 78, 84 35.5, 126 30"/><image class="ap-aereo" href="assets/logo/aereo.webp" x="116" y="6" width="140" height="34.8" transform="rotate(-6 186 23.4)"/></svg></h1>
         <p class="tagline">Due viaggi con le date fissate: l'aurora islandese a gennaio, i ciliegi coreani ad aprile. Questo è il nostro quaderno: dove andiamo, giorno per giorno, e cosa ci aspetta.</p>
         <a class="nota-manca" href="#recap-voli-kr"><span class="nm-num">2<svg class="a-penna" viewBox="0 0 120 100" aria-hidden="true" focusable="false"><path d="M93 17 C 70 3, 27 6, 12 33 C 0 59, 22 92, 62 92 C 101 92, 117 63, 106 37 C 98 17, 73 7, 48 12"/></svg></span><span class="nm-testo">voli ci mancano ancora: Busan → Jeju e Jeju → Seul, ad aprile. Tutto il resto è comprato.</span></a>
         <div class="scroll-cue">↓ sfogliamo</div>
@@ -304,8 +331,8 @@
                 <div class="crew-caption">Cusco, Perù</div>
               </div>
               <div class="group-marquee-item">
-                <img src="foto/IMG_6840.JPG" alt="Al mercato locale, Perù" loading="lazy">
-                <div class="crew-caption">Mercato locale, Perù</div>
+                <img src="foto/IMG_6840.JPG" alt="Al mercato, La Paz, Bolivia" loading="lazy">
+                <div class="crew-caption">Al mercato, La Paz, Bolivia</div>
               </div>
               <div class="group-marquee-item">
                 <img src="foto/group-van-bolivia.jpeg" alt="In viaggio sul van tra un trasferimento e l'altro, Bolivia" loading="lazy">
@@ -437,7 +464,7 @@
               </div>
               <div class="group-marquee-item" aria-hidden="true">
                 <img src="foto/IMG_6840.JPG" alt="" loading="lazy">
-                <div class="crew-caption">Mercato locale, Perù</div>
+                <div class="crew-caption">Al mercato, La Paz, Bolivia</div>
               </div>
               <div class="group-marquee-item" aria-hidden="true">
                 <img src="foto/group-van-bolivia.jpeg" alt="" loading="lazy">
@@ -585,6 +612,19 @@
         <div class="inner">
           <h2 class="section-title reveal"><span class="tt">Dove siamo già stati</span></h2>
           <p class="section-sub reveal">Quanto mondo abbiamo già visto, e dove.</p>
+
+          <div class="trip-grid trip-grid-uno reveal">
+            <a class="trip-card" href="javascript:void(0)" onclick="showDest('pb')">
+              <img src="foto/IMG_4173.JPG" alt="Il gruppo con la vista classica su Machu Picchu" loading="lazy">
+              <div class="overlay"></div>
+              <div class="content">
+                <div class="flag">🇵🇪🇧🇴🇨🇱</div>
+                <div class="title">Perù, Bolivia e Cile</div>
+                <div class="meta">18 aprile – 2 maggio 2026 · il diario</div>
+                <p class="tagline">La Paz, il Salar di Uyuni, l'altopiano fino al Cile, Machu Picchu e Lima. Il diario è ancora da finire.</p>
+              </div>
+            </a>
+          </div>
 
           <div class="mondo-wrap reveal">
             <svg id="mondo" viewBox="0 0 950 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mappamondo con i paesi visitati evidenziati">
@@ -2438,28 +2478,274 @@
 </footer>
   </div>
 
+  <div class="destination" id="dest-pb" data-dest="pb">
+<header class="hero">
+  <div class="bg" style="background-image:url('foto/IMG_4173.JPG'); background-position:center 40%;"></div>
+  <div class="content">
+    <h1><span class="tt">Perù</span>, Bolivia e Cile</h1>
+    <p class="tagline">Quindici giorni fra aprile e maggio 2026: La Paz, il Salar di Uyuni, l'altopiano fino al Cile, poi Cusco, Machu Picchu e Lima. Il diario lo stiamo ricostruendo dalle nostre foto: dove manca un pezzo, c'è scritto.</p>
+    <div class="badge-row">
+      <span class="badge">18 aprile – 2 maggio 2026</span>
+      <span class="badge">Tutti e quattro</span>
+      <span class="badge">Bolivia · Cile · Perù</span>
+      <a class="badge badge-bozza" href="#da-raccontare-pb">Diario ancora da finire</a>
+    </div>
+    <div class="scroll-cue">↓ sfogliamo</div>
+  </div>
+  <div class="photo-credit">Foto: i Patagucci, Machu Picchu, 29 aprile 2026</div>
+</header>
+
+<nav class="tabs" id="tabs-pb">
+  <a href="javascript:void(0)" class="home-link" onclick="showHub()">Tutte le mete</a>
+  <a href="#diario-pb">Il diario</a>
+  <a href="#bolivia-pb">Bolivia</a>
+  <a href="#cile-pb">Cile</a>
+  <a href="#peru-pb">Perù</a>
+  <a href="#mappa-pb">La mappa</a>
+  <a href="#foto-pb">Le foto</a>
+  <a href="#da-raccontare-pb">Da raccontare</a>
+</nav>
+
+<main>
+  <section id="diario-pb" class="panel" data-nav data-paese="">
+    <div class="inner">
+      <h2 class="section-title reveal"><span class="tt">Il diario, giorno per giorno</span></h2>
+      <p class="section-sub reveal">Ogni giorno qui sotto è un giorno di cui abbiamo una foto: data, ora e quota vengono dalla foto stessa, il resto lo scriviamo noi. I giorni ancora bianchi sono segnati, e si riempiono man mano che ce li ricordiamo.</p>
+      <div class="source-note reveal">Date e ore sono quelle locali registrate dalle foto; le quote sono quelle del telefono, quindi indicative.</div>
+    </div>
+  </section>
+
+  <div class="paese-divisore" data-paese="bo">
+    <h2>Bolivia</h2>
+    <p>Da La Paz giù fino al Salar di Uyuni e all'altopiano delle lagune, sempre fra i 3.500 e i 4.100 metri delle foto.</p>
+  </div>
+
+  <section id="bolivia-pb" class="panel" data-nav data-paese="bo">
+    <div class="inner timeline">
+    <details class="day reveal">
+      <summary><span class="daynum">18</span><span class="daytitle">La Paz — il mercato</span><span class="chevron">▸</span></summary>
+      <div class="day-body">
+        <span class="tag">sab 18 aprile</span><span class="tag">La Paz</span>
+        <p>Il primo giorno di cui abbiamo una foto: sabato pomeriggio, verso le tre, eravamo al mercato di La Paz. Come ci siamo arrivati, e da quando eravamo in città, è una pagina ancora bianca.</p>
+        <div class="foto-giorno"><figure class="mini-photo"><img src="foto/IMG_6840.JPG" alt="Al mercato, La Paz" loading="lazy"><figcaption>Al mercato, ore 15:07</figcaption></figure></div>
+      </div>
+    </details>
+    <details class="day reveal">
+      <summary><span class="daynum">19</span><span class="daytitle">La Paz, poi su verso El Alto</span><span class="chevron">▸</span></summary>
+      <div class="day-body">
+        <span class="tag">dom 19 aprile</span><span class="tag">La Paz</span><span class="tag">4.067 m</span>
+        <p>Il pomeriggio in macchina per La Paz, con un cane a bordo. La sera siamo saliti in alto, verso El Alto: la foto è a 4.067 metri, a un evento che ancora non abbiamo raccontato.</p>
+        <div class="foto-giorno"><figure class="mini-photo"><img src="foto/IMG_6903.JPG" alt="In macchina con un cane, La Paz" loading="lazy"><figcaption>In macchina, ore 15:12</figcaption></figure><figure class="mini-photo"><img src="foto/IMG_6970.JPG" alt="Una serata a un evento, El Alto" loading="lazy"><figcaption>La sera, a 4.067 m</figcaption></figure></div>
+      </div>
+    </details>
+    <details class="day reveal">
+      <summary><span class="daynum">20</span><span class="daytitle">Valle de las Ánimas e il bus notturno</span><span class="chevron">▸</span></summary>
+      <div class="day-body">
+        <span class="tag">lun 20 aprile</span><span class="tag">La Paz</span><span class="tag">3.880 m</span>
+        <p>La mattina fra le guglie di roccia della Valle de las Ánimas, a 3.880 metri sopra il livello del mare. La sera, poco prima delle nove, il selfie sul bus notturno ancora a La Paz: verso sud siamo partiti di notte.</p>
+        <div class="foto-giorno"><figure class="mini-photo"><img src="foto/IMG_2748.JPG" alt="Tra le guglie della Valle de las Ánimas" loading="lazy"><figcaption>Valle de las Ánimas, ore 11:17</figcaption></figure><figure class="mini-photo"><img src="foto/IMG_0283.jpeg" alt="Selfie di gruppo sul bus notturno" loading="lazy"><figcaption>Sul bus, ore 20:52</figcaption></figure></div>
+      </div>
+    </details>
+    <details class="day reveal">
+      <summary><span class="daynum">21</span><span class="daytitle">Uyuni e il Salar</span><span class="chevron">▸</span></summary>
+      <div class="day-body">
+        <span class="tag">mar 21 aprile</span><span class="tag">Uyuni</span><span class="tag">3.665 m</span>
+        <p>Scesi dal bus, alle undici eravamo sul relitto di un treno al cimitero dei treni di Uyuni. Poi il fuoristrada sul Salar, le foto in prospettiva nel bianco, e il tramonto accanto alla macchina verso le sei e venti.</p>
+        <div class="foto-giorno"><figure class="mini-photo"><img src="foto/IMG_0300.JPG" alt="Sul relitto di un treno, Uyuni" loading="lazy"><figcaption>Cimitero dei treni, ore 11:06</figcaption></figure><figure class="mini-photo"><img src="foto/IMG_0343.jpeg" alt="Davanti al fuoristrada sul Salar" loading="lazy"><figcaption>Sul Salar, ore 14:05</figcaption></figure><figure class="mini-photo"><img src="foto/IMG_0420.jpeg" alt="Gioco di prospettiva col cappello" loading="lazy"><figcaption>Prospettive, ore 16:15</figcaption></figure><figure class="mini-photo"><img src="foto/IMG_3185.JPG" alt="Tramonto accanto al fuoristrada" loading="lazy"><figcaption>Tramonto, ore 18:21</figcaption></figure></div>
+      </div>
+    </details>
+    <details class="day reveal">
+      <summary><span class="daynum">22</span><span class="daytitle">I binari nel deserto di sale, una laguna</span><span class="chevron">▸</span></summary>
+      <div class="day-body">
+        <span class="tag">mer 22 aprile</span><span class="tag">Altopiano</span><span class="tag">4.140 m</span>
+        <p>Alle otto di mattina eravamo sui binari che attraversano il deserto di sale, a 3.700 metri. Passata l'una, davanti a una laguna colorata, a 4.140 metri.</p>
+        <div class="foto-giorno"><figure class="mini-photo"><img src="foto/IMG_7193.JPG" alt="Sui binari nel deserto di sale" loading="lazy"><figcaption>I binari, ore 8:16</figcaption></figure><figure class="mini-photo"><img src="foto/IMG_0589.jpeg" alt="Davanti a una laguna colorata" loading="lazy"><figcaption>La laguna, ore 13:07</figcaption></figure></div>
+      </div>
+    </details>
+    <details class="day reveal day-buco">
+      <summary><span class="daynum">23</span><span class="daytitle">Un giorno ancora da scrivere</span><span class="chevron">▸</span></summary>
+      <div class="day-body">
+        <span class="tag">gio 23 aprile</span><span class="tag">Altopiano</span><span class="tag buco">da raccontare</span>
+        <p>Di questo giorno non abbiamo foto con la data. Le foto dei geyser e dell'altopiano non hanno né data né posizione: potrebbero essere di oggi.</p>
+      </div>
+    </details>
+    </div>
+  </section>
+
+  <div class="paese-divisore" data-paese="cl">
+    <h2>Cile</h2>
+    <p>Scesi dall'altopiano: San Pedro de Atacama e Calama, nel deserto.</p>
+  </div>
+
+  <section id="cile-pb" class="panel alt" data-nav data-paese="cl">
+    <div class="inner timeline">
+    <details class="day reveal">
+      <summary><span class="daynum">24</span><span class="daytitle">San Pedro de Atacama</span><span class="chevron">▸</span></summary>
+      <div class="day-body">
+        <span class="tag">ven 24 aprile</span><span class="tag">Cile</span><span class="tag">2.439 m</span>
+        <p>Siamo in Cile: la mattina, souvenir a San Pedro de Atacama, a 2.439 metri, più di 1.700 metri sotto la laguna di due giorni prima.</p>
+        <div class="foto-giorno"><figure class="mini-photo"><img src="foto/IMG_0683.jpeg" alt="Souvenir a San Pedro de Atacama" loading="lazy"><figcaption>San Pedro, ore 11:21</figcaption></figure></div>
+      </div>
+    </details>
+    <details class="day reveal">
+      <summary><span class="daynum">25</span><span class="daytitle">Calama</span><span class="chevron">▸</span></summary>
+      <div class="day-body">
+        <span class="tag">sab 25 aprile</span><span class="tag">Cile</span><span class="tag">2.266 m</span>
+        <p>La sera a Calama: prima al ristorante, poi un fast food in un centro commerciale.</p>
+        <div class="foto-giorno"><figure class="mini-photo"><img src="foto/IMG_3759.JPG" alt="Una sera al ristorante, Calama" loading="lazy"><figcaption>Al ristorante, ore 18:49</figcaption></figure><figure class="mini-photo"><img src="foto/IMG_3979.JPG" alt="Fast food in un centro commerciale, Calama" loading="lazy"><figcaption>Fast food, ore 20:35</figcaption></figure></div>
+      </div>
+    </details>
+    <details class="day reveal day-buco">
+      <summary><span class="daynum">26</span><span class="daytitle">Dal Cile al Perù</span><span class="chevron">▸</span></summary>
+      <div class="day-body">
+        <span class="tag">dom 26 aprile</span><span class="tag">Cile → Perù</span><span class="tag buco">da raccontare</span>
+        <p>Di oggi non abbiamo foto. Il giorno dopo siamo in Perù, a sud-est di Cusco: come ci siamo arrivati è ancora da scrivere.</p>
+      </div>
+    </details>
+    </div>
+  </section>
+
+  <div class="paese-divisore" data-paese="pe">
+    <h2>Perù</h2>
+    <p>Il trekking più alto del viaggio, Machu Picchu, la Valle Sacra, Cusco, e l'ultima sera a Lima.</p>
+  </div>
+
+  <section id="peru-pb" class="panel" data-nav data-paese="pe">
+    <div class="inner timeline">
+    <details class="day reveal">
+      <summary><span class="daynum">27</span><span class="daytitle">Trekking a 4.843 metri</span><span class="chevron">▸</span></summary>
+      <div class="day-body">
+        <span class="tag">lun 27 aprile</span><span class="tag">Perù</span><span class="tag">4.843 m</span>
+        <p>Alle undici e venti eravamo a 4.843 metri, su un sentiero a sud-est di Cusco: il punto più alto di tutte le foto del viaggio. Quale montagna fosse lo scriviamo appena qualcuno se lo ricorda.</p>
+        <div class="foto-giorno"><figure class="mini-photo"><img src="foto/IMG_0821.jpeg" alt="Trekking in alta quota" loading="lazy"><figcaption>Trekking, ore 11:20</figcaption></figure></div>
+      </div>
+    </details>
+    <details class="day reveal">
+      <summary><span class="daynum">28</span><span class="daytitle">Verso Machu Picchu</span><span class="chevron">▸</span></summary>
+      <div class="day-body">
+        <span class="tag">mar 28 aprile</span><span class="tag">Aguas Calientes</span><span class="tag">1.787 m</span>
+        <p>All'una e mezza eravamo all'ingresso del Santuario Storico di Machu Picchu, giù vicino al fiume a 1.787 metri; poi lungo la ferrovia verso Aguas Calientes.</p>
+        <div class="foto-giorno"><figure class="mini-photo"><img src="foto/IMG_4070.JPG" alt="All'ingresso del Santuario Storico di Machu Picchu" loading="lazy"><figcaption>L'ingresso, ore 13:39</figcaption></figure><figure class="mini-photo"><img src="foto/IMG_4089.JPG" alt="Lungo la ferrovia verso Aguas Calientes" loading="lazy"><figcaption>La ferrovia, ore 14:21</figcaption></figure></div>
+      </div>
+    </details>
+    <details class="day reveal">
+      <summary><span class="daynum">29</span><span class="daytitle">Machu Picchu</span><span class="chevron">▸</span></summary>
+      <div class="day-body">
+        <span class="tag">mer 29 aprile</span><span class="tag">Machu Picchu</span><span class="tag">2.471 m</span>
+        <p>Le otto e venti: la vista classica su Machu Picchu, tutti e quattro, a 2.471 metri.</p>
+        <div class="foto-giorno"><figure class="mini-photo"><img src="foto/IMG_4173.JPG" alt="Il gruppo con la vista classica su Machu Picchu" loading="lazy"><figcaption>Machu Picchu, ore 8:20</figcaption></figure></div>
+      </div>
+    </details>
+    <details class="day reveal">
+      <summary><span class="daynum">30</span><span class="daytitle">Le saline di Maras, poi Cusco</span><span class="chevron">▸</span></summary>
+      <div class="day-body">
+        <span class="tag">gio 30 aprile</span><span class="tag">Maras</span><span class="tag">Cusco</span><span class="tag">3.415 m</span>
+        <p>La mattina alle terrazze saline di Maras, a 3.001 metri. La sera tardi eravamo a Cusco, in un centro commerciale.</p>
+        <div class="foto-giorno"><figure class="mini-photo"><img src="foto/IMG_4746.JPG" alt="Alle terrazze saline di Maras" loading="lazy"><figcaption>Maras, ore 11:44</figcaption></figure><figure class="mini-photo"><img src="foto/IMG_4786.JPG" alt="In un centro commerciale, Cusco" loading="lazy"><figcaption>Cusco, ore 22:18</figcaption></figure></div>
+      </div>
+    </details>
+    <details class="day reveal day-buco">
+      <summary><span class="daynum">1</span><span class="daytitle">Un giorno ancora da scrivere</span><span class="chevron">▸</span></summary>
+      <div class="day-body">
+        <span class="tag">ven 1 maggio</span><span class="tag">Perù</span><span class="tag buco">da raccontare</span>
+        <p>Di questo giorno non abbiamo foto: lo racconteremo.</p>
+      </div>
+    </details>
+    <details class="day reveal">
+      <summary><span class="daynum">2</span><span class="daytitle">Lima</span><span class="chevron">▸</span></summary>
+      <div class="day-body">
+        <span class="tag">sab 2 maggio</span><span class="tag">Lima</span>
+        <p>L'ultima foto del viaggio: la cena a Lima, alle undici e mezza di sera.</p>
+        <div class="foto-giorno"><figure class="mini-photo"><img src="foto/IMG_1169.jpeg" alt="Cena di gruppo, Lima" loading="lazy"><figcaption>Lima, ore 23:28</figcaption></figure></div>
+      </div>
+    </details>
+    </div>
+  </section>
+
+  <section id="mappa-pb" class="panel alt" data-nav data-paese="">
+    <div class="inner">
+      <h2 class="section-title reveal"><span class="tt">La mappa</span></h2>
+      <p class="section-sub reveal">Il percorso disegnato dalle posizioni delle foto. I tratti a puntini sono quelli che non sappiamo ancora come abbiamo fatto: dal Cile al Perù, e da Cusco a Lima.</p>
+      <div class="jeep-map-wrap mappa-viaggio reveal">
+        <svg viewBox="0 0 908 1001" role="img" aria-label="Il percorso ricostruito dalle foto">
+          <title>Il percorso ricostruito dalle foto: La Paz, Uyuni, l'altopiano fino a San Pedro de Atacama e Calama, poi in Peru' il trekking, Machu Picchu, Maras, Cusco e Lima.</title>
+          <polyline class="costa" points="23.5,16.4 35.2,57.4 105.6,188.6 195.5,328.0 351.9,410.0 437.9,459.2 488.8,512.5 569.3,579.7 582.6,722.4 578.7,876.6 559.2,959.4"/>
+          <text class="mare" x="156" y="476" text-anchor="middle">Oceano Pacifico</text>
+          <text class="border-label" x="266" y="262" text-anchor="middle">Perù</text>
+          <text class="border-label" x="860" y="574" text-anchor="end">Bolivia</text>
+          <text class="border-label" x="618" y="836" text-anchor="middle">Cile</text>
+          <polyline class="route-shadow" points="740.3,417.8 841.6,744.8 829.3,737.1 796.8,728.3 786.3,752.2 749.0,795.2 745.8,838.4 735.1,944.0 678.1,906.5"/>
+          <polyline class="route-shadow" points="496.1,216.5 393.9,145.5 395.4,144.7 425.8,156.0 440.0,173.4"/>
+          <polyline class="route-line" points="740.3,417.8 841.6,744.8 829.3,737.1 796.8,728.3 786.3,752.2 749.0,795.2 745.8,838.4 735.1,944.0 678.1,906.5"/>
+          <polyline class="route-line" points="496.1,216.5 393.9,145.5 395.4,144.7 425.8,156.0 440.0,173.4"/>
+          <polyline class="route-ignota" points="678.1,906.5 496.1,216.5"/>
+          <polyline class="route-ignota" points="440.0,173.4 44.5,59.5"/>
+          <g class="stop-pin"><circle class="pin" cx="740.3" cy="417.8" r="8"/><text class="stop-label highlight" x="754.3" y="411.8" text-anchor="start">La Paz</text></g>
+          <g class="stop-pin"><circle class="pin" cx="841.6" cy="744.8" r="8"/><text class="stop-label highlight" x="868" y="790" text-anchor="end">Uyuni</text></g>
+          <g class="stop-pin minor"><circle class="pin" cx="829.3" cy="737.1" r="6"/><text class="stop-label" x="815.3" y="727.1" text-anchor="end">Salar de Uyuni</text></g>
+          <g class="stop-pin minor"><circle class="pin" cx="745.8" cy="838.4" r="6"/><text class="stop-label" x="759.8" y="842.4" text-anchor="start">Laguna, 4.140 m</text></g>
+          <g class="stop-pin"><circle class="pin" cx="735.1" cy="944.0" r="8"/><text class="stop-label highlight" x="758" y="986" text-anchor="end">San Pedro de Atacama</text></g>
+          <g class="stop-pin"><circle class="pin" cx="678.1" cy="906.5" r="8"/><text class="stop-label highlight" x="664.1" y="910.5" text-anchor="end">Calama</text></g>
+          <g class="stop-pin minor"><circle class="pin" cx="496.1" cy="216.5" r="6"/><text class="stop-label" x="510.1" y="222.5" text-anchor="start">Trekking, 4.843 m</text></g>
+          <g class="stop-pin"><circle class="pin" cx="395.4" cy="144.7" r="8"/><text class="stop-label highlight" x="381.4" y="134.7" text-anchor="end">Machu Picchu</text></g>
+          <g class="stop-pin minor"><circle class="pin" cx="425.8" cy="156.0" r="6"/><text class="stop-label" x="411.8" y="182.0" text-anchor="end">Maras</text></g>
+          <g class="stop-pin"><circle class="pin" cx="440.0" cy="173.4" r="8"/><text class="stop-label highlight" x="454.0" y="179.4" text-anchor="start">Cusco</text></g>
+          <g class="stop-pin"><circle class="pin" cx="44.5" cy="59.5" r="8"/><text class="stop-label highlight" x="58.5" y="51.5" text-anchor="start">Lima</text></g>
+        </svg>
+      </div>
+      <div class="source-note reveal">Le tappe sono le posizioni registrate dalle foto; la costa è disegnata a mano, indicativa.</div>
+    </div>
+  </section>
+
+  <section id="foto-pb" class="panel" data-nav data-paese="">
+    <div class="inner">
+      <h2 class="section-title reveal"><span class="tt">Le foto senza data</span></h2>
+      <p class="section-sub reveal">Queste foto non dicono né quando né dove sono state scattate. Appena sappiamo il giorno, finiscono nel diario.</p>
+      <div class="crew-grid">
+      <figure class="crew-card reveal"><img src="foto/group-geyser-bolivia.jpeg" alt="Il gruppo tra i fumi dei geyser, Bolivia" loading="lazy"><figcaption class="crew-caption">Geyser Sol de Mañana, Bolivia</figcaption></figure>
+      <figure class="crew-card reveal"><img src="foto/group-altopiano-boliviano.jpeg" alt="Pranzo di gruppo con vista sulla laguna" loading="lazy"><figcaption class="crew-caption">Altopiano boliviano</figcaption></figure>
+      <figure class="crew-card reveal"><img src="foto/group-van-bolivia.jpeg" alt="In viaggio sul van" loading="lazy"><figcaption class="crew-caption">In viaggio, Bolivia</figcaption></figure>
+      <figure class="crew-card reveal"><img src="foto/group-notte-ande.jpeg" alt="Il gruppo di notte tra le nuvole" loading="lazy"><figcaption class="crew-caption">Notte in quota, Ande</figcaption></figure>
+      <figure class="crew-card reveal"><img src="foto/group-cusco-peru.jpeg" alt="Il gruppo di notte tra i vicoli di Cusco" loading="lazy"><figcaption class="crew-caption">Cusco, di notte</figcaption></figure>
+      <figure class="crew-card reveal"><img src="foto/dd148649-09ef-45bd-8b5e-313dff562db8.jpeg" alt="Il gruppo al completo a Machu Picchu" loading="lazy"><figcaption class="crew-caption">Machu Picchu</figcaption></figure>
+      <figure class="crew-card reveal"><img src="foto/group-relax-maschere.jpeg" alt="Relax con maschera viso dopo il trekking" loading="lazy"><figcaption class="crew-caption">Relax dopo il trek</figcaption></figure>
+      <figure class="crew-card reveal"><img src="foto/group-barbiere.jpeg" alt="Dal barbiere durante il viaggio" loading="lazy"><figcaption class="crew-caption">Un taglio di capelli</figcaption></figure>
+      <figure class="crew-card reveal"><img src="foto/group-notte-strada.jpeg" alt="Passeggiata notturna vicino a un distributore" loading="lazy"><figcaption class="crew-caption">Passeggiata notturna</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="da-raccontare-pb" class="panel alt" data-nav data-paese="">
+    <div class="inner">
+      <h2 class="section-title reveal"><span class="tt">Pagine ancora bianche</span></h2>
+      <p class="section-sub reveal">Le cose che dobbiamo ancora scrivere. Appena ce le ricordiamo, entrano nel diario.</p>
+      <div class="card reveal">
+        <ul class="rule-list">
+          <li>Come e quando siamo arrivati a La Paz, e dove dormivamo.</li>
+          <li>L'evento della sera di domenica 19 aprile, sopra La Paz.</li>
+          <li>Il bus notturno per Uyuni e il giro del Salar e dell'altopiano: con chi, quanti giorni, dove abbiamo dormito.</li>
+          <li>Giovedì 23 aprile: i geyser, le lagune, il confine?</li>
+          <li>Domenica 26 aprile, e come siamo passati dal Cile al Perù.</li>
+          <li>Il nome del trekking di lunedì 27 aprile, e chi ha patito la quota.</li>
+          <li>Come siamo arrivati a Machu Picchu, e dove abbiamo dormito.</li>
+          <li>Venerdì 1 maggio, e la cena di Lima.</li>
+          <li>Il ritorno a casa.</li>
+          <li>Un momento a testa: Manu, Kiki, Mala e Bacci.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  Perù, Bolivia e Cile, aprile–maggio 2026 — un viaggio di <a href="javascript:void(0)" class="home-link" onclick="showHub()">Patagucci Trips</a>.
+  <div class="credits">Tutte le foto sono nostre. Date, ore, posizioni e quote vengono dai dati delle foto.</div>
+</footer>
+  </div>
+
 <script>
-var SUFFISSI = ["hub", "is", "kr"];
-var TITOLI = {"hub": "Tutte le mete", "is": "Islanda", "kr": "Corea, Brunei e Singapore"};
-var FLAG_BARS = {
-  hub: 'linear-gradient(90deg,#161616 0 33%, #ffe14d 33% 66%, #ff92bb 66% 100%)',
-  nx: 'linear-gradient(90deg,#ffe14d 0 25%, #7deaa0 25% 50%, #ff92bb 50% 75%, #6de6d2 75% 100%)',
-  ug: 'linear-gradient(90deg,#141414 0 33%, #FFCE00 33% 66%, #D21034 66% 100%)',
-  pk: 'linear-gradient(90deg,#ffffff 0 25%, #01411C 25% 100%)',
-  za: 'linear-gradient(90deg,#DE3831 0 16.6%, #ffffff 16.6% 33.3%, #002395 33.3% 50%, #007A4D 50% 66.6%, #FFB612 66.6% 83.3%, #000000 83.3% 100%)',
-  np: 'linear-gradient(90deg,#DC143C 0 25%, #003893 25% 50%, #FF9933 50% 75%, #FFB612 75% 100%)',
-  uk: 'linear-gradient(90deg,#0099B5 0 50%, #1EB53A 50% 100%)',
-  gl: 'linear-gradient(90deg,#ffffff 0 50%, #C60C30 50% 100%)',
-  ge: 'linear-gradient(90deg,#ffffff 0 20%, #DA291C 20% 40%, #ffffff 40% 60%, #DA291C 60% 80%, #ffffff 80% 100%)',
-  in: 'linear-gradient(90deg,#FF9933 0 33%, #ffffff 33% 66%, #138808 66% 100%)',
-  tz: 'linear-gradient(90deg,#1EB53A 0 30%, #FCD116 30% 40%, #000000 40% 60%, #FCD116 60% 70%, #00A3DD 70% 100%)',
-  cx: 'linear-gradient(90deg,#0067C6 0 20%, #ffffff 20% 33%, #002B7F 33% 46%, #CE1126 46% 60%, #ffffff 60% 73%, #D21034 73% 86%, #005293 86% 100%)',
-  kr: 'linear-gradient(90deg,#ffffff 0 12%, #CD2E3A 12% 22%, #0047A0 22% 33%, #F7E017 33% 55%, #000000 55% 66%, #EF3340 66% 88%, #ffffff 88% 100%)',
-  'kr-kr': 'linear-gradient(90deg,#ffffff 0 32%, #CD2E3A 32% 47%, #0047A0 47% 62%, #ffffff 62% 100%)',
-  'kr-bn': 'linear-gradient(90deg,#F7E017 0 55%, #ffffff 55% 68%, #000000 68% 82%, #F7E017 82% 100%)',
-  'kr-sg': 'linear-gradient(90deg,#EF3340 0 50%, #ffffff 50% 100%)',
-  is: 'linear-gradient(90deg,#02529C 0 30%, #ffffff 30% 38%, #DC1E35 38% 47%, #ffffff 47% 55%, #02529C 55% 100%)'
-};
+var SUFFISSI = ["hub", "is", "kr", "pb"];
+var TITOLI = {"hub": "Tutte le mete", "is": "Islanda", "kr": "Corea, Brunei e Singapore", "pb": "Perù, Bolivia e Cile"};
 function showDest(name, daCronologia){
   document.documentElement.setAttribute('data-dest', name);
   document.documentElement.removeAttribute('data-paese');
@@ -2474,8 +2760,6 @@ function showDest(name, daCronologia){
     // attiva puo' restare fuori schermo.
     btn.scrollIntoView({ behavior:'smooth', block:'nearest', inline:'center' });
   }
-  var flagbar = document.getElementById('flagbar');
-  if(flagbar && FLAG_BARS[name]) flagbar.style.background = FLAG_BARS[name];
   window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   target.querySelectorAll('.reveal').forEach(function(el){ el.classList.add('visible'); });
   // Un indirizzo per ogni meta: senza questo "guarda i voli" diventa
@@ -2521,18 +2805,12 @@ window.addEventListener('hashchange', function(){ applicaFrammento(true); });
 document.addEventListener('DOMContentLoaded', function(){ if(location.hash) applicaFrammento(false); });
 
 // Una meta che attraversa piu' paesi tinge la pagina col paese che si sta
-// guardando: la scheda chiama questa passando 'kr-tw', 'kr-hk' e simili,
-// oppure niente per tornare alla bandiera unita della meta.
+// guardando: la scheda chiama questa passando il paese ('bn', 'sg'),
+// oppure niente per tornare all'evidenziatore della meta.
 function tingiPaese(paese){
   var radice = document.documentElement;
-  var meta = radice.getAttribute('data-dest');
   if(paese) radice.setAttribute('data-paese', paese);
   else radice.removeAttribute('data-paese');
-  var flagbar = document.getElementById('flagbar');
-  if(!flagbar) return;
-  var chiave = paese ? meta + '-' + paese : meta;
-  var sfondo = FLAG_BARS[chiave] || FLAG_BARS[meta];
-  if(sfondo) flagbar.style.background = sfondo;
 }
 
 // Le due tab della home: confermati / in programma.
@@ -3518,6 +3796,53 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
     sunSlider.addEventListener('input', function(){ renderSun(Number(sunSlider.value)); });
   }
 
+})();
+
+</script><script>
+// ---- Perù, Bolivia e Cile ----
+
+(function(){
+  // ---- Il menu delle sezioni segue la lettura ----
+  var navLinks = document.querySelectorAll('nav.tabs a[href^="#"]');
+  var sections = document.querySelectorAll('section[data-nav]');
+  var linkBySection = {};
+  navLinks.forEach(function(a){ linkBySection[a.getAttribute('href').slice(1)] = a; });
+  var spyObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        navLinks.forEach(function(a){ a.classList.remove('active'); });
+        var link = linkBySection[entry.target.id];
+        if(link){
+          link.classList.add('active');
+          link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(function(s){ spyObserver.observe(s); });
+
+  // ---- L'evidenziatore cambia col paese che si sta leggendo ----
+  var zonePaese = [].slice.call(document.querySelectorAll('section[data-paese], .paese-divisore[data-paese]'));
+  var paeseCorrente = false;
+  function aggiornaPaese(){
+    if(document.documentElement.getAttribute('data-dest') !== 'pb') return;
+    var linea = window.innerHeight * 0.35;
+    var attuale = '';
+    zonePaese.forEach(function(el){
+      var r = el.getBoundingClientRect();
+      if(r.height && r.top <= linea && r.bottom > 0) attuale = el.getAttribute('data-paese');
+    });
+    if(attuale === paeseCorrente) return;
+    paeseCorrente = attuale;
+    if(typeof tingiPaese === 'function') tingiPaese(attuale || null);
+  }
+  var attesa = false;
+  window.addEventListener('scroll', function(){
+    if(attesa) return;
+    attesa = true;
+    requestAnimationFrame(function(){ attesa = false; aggiornaPaese(); });
+  }, { passive: true });
+  window.addEventListener('destinazione-cambiata', function(){ paeseCorrente = false; aggiornaPaese(); });
 })();
 
 </script>

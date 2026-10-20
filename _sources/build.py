@@ -12,6 +12,8 @@ DESTS = [
     # La pagina resta in _sources/prossimo.html: per rimetterla in linea
     # basta questa riga.
     # {"file": "prossimo.html", "suf": "nx", "flag": "❓", "name": "Quale sarà il prossimo?", "stato": "idea"},
+    # Un viaggio gia' fatto: il diario, ricostruito dalle foto.
+    {"file": "perubolivia-trip.html", "suf": "pb", "flag": "🇵🇪🇧🇴🇨🇱", "name": "Perù, Bolivia e Cile", "stato": "fatto"},
 ]
 
 def extract(tag, content):
@@ -76,7 +78,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
     <header class="hero">
       <div class="bg" style="background-image:url('foto/destinazioni/A_land_enclosed_in_Mountains_-_Hunza_Valley.jpg'); background-position:center 55%;"></div>
       <div class="content">
-        <h1>Patagucci Trips</h1>
+        <h1>Patagucci Trips<svg class="aeroplanino" viewBox="0 0 260 80" aria-hidden="true" focusable="false"><path class="ap-scia" d="M2 78 C 40 78, 84 35.5, 126 30"/><image class="ap-aereo" href="assets/logo/aereo.webp" x="116" y="6" width="140" height="34.8" transform="rotate(-6 186 23.4)"/></svg></h1>
         <p class="tagline">Due viaggi con le date fissate: l'aurora islandese a gennaio, i ciliegi coreani ad aprile. Questo è il nostro quaderno: dove andiamo, giorno per giorno, e cosa ci aspetta.</p>
         <a class="nota-manca" href="#recap-voli-kr"><span class="nm-num">2<svg class="a-penna" viewBox="0 0 120 100" aria-hidden="true" focusable="false"><path d="M93 17 C 70 3, 27 6, 12 33 C 0 59, 22 92, 62 92 C 101 92, 117 63, 106 37 C 98 17, 73 7, 48 12"/></svg></span><span class="nm-testo">voli ci mancano ancora: Busan → Jeju e Jeju → Seul, ad aprile. Tutto il resto è comprato.</span></a>
         <div class="scroll-cue">↓ sfogliamo</div>
@@ -143,8 +145,8 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
                 <div class="crew-caption">Cusco, Perù</div>
               </div>
               <div class="group-marquee-item">
-                <img src="foto/IMG_6840.JPG" alt="Al mercato locale, Perù" loading="lazy">
-                <div class="crew-caption">Mercato locale, Perù</div>
+                <img src="foto/IMG_6840.JPG" alt="Al mercato, La Paz, Bolivia" loading="lazy">
+                <div class="crew-caption">Al mercato, La Paz, Bolivia</div>
               </div>
               <div class="group-marquee-item">
                 <img src="foto/group-van-bolivia.jpeg" alt="In viaggio sul van tra un trasferimento e l'altro, Bolivia" loading="lazy">
@@ -276,7 +278,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               </div>
               <div class="group-marquee-item" aria-hidden="true">
                 <img src="foto/IMG_6840.JPG" alt="" loading="lazy">
-                <div class="crew-caption">Mercato locale, Perù</div>
+                <div class="crew-caption">Al mercato, La Paz, Bolivia</div>
               </div>
               <div class="group-marquee-item" aria-hidden="true">
                 <img src="foto/group-van-bolivia.jpeg" alt="" loading="lazy">
@@ -424,6 +426,19 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
         <div class="inner">
           <h2 class="section-title reveal">🗺️ Dove siamo già stati</h2>
           <p class="section-sub reveal">Quanto mondo abbiamo già visto, e dove.</p>
+
+          <div class="trip-grid trip-grid-uno reveal">
+            <a class="trip-card" href="javascript:void(0)" onclick="showDest('pb')">
+              <img src="foto/IMG_4173.JPG" alt="Il gruppo con la vista classica su Machu Picchu" loading="lazy">
+              <div class="overlay"></div>
+              <div class="content">
+                <div class="flag">🇵🇪🇧🇴🇨🇱</div>
+                <div class="title">Perù, Bolivia e Cile</div>
+                <div class="meta">18 aprile – 2 maggio 2026 · il diario</div>
+                <p class="tagline">La Paz, il Salar di Uyuni, l'altopiano fino al Cile, Machu Picchu e Lima. Il diario è ancora da finire.</p>
+              </div>
+            </a>
+          </div>
 
           <div class="mondo-wrap reveal">
             <svg id="mondo" viewBox="0 0 950 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mappamondo con i paesi visitati evidenziati">
@@ -638,7 +653,7 @@ destination_blocks = "\n\n".join(b["block"] for b in blocks)
 
 stato_per_suf = {d["suf"]: d["stato"] for d in DESTS}
 # Sul telefono le quattro linguette devono starci tutte: nomi corti.
-CORTI = {"is": "Islanda", "kr": "Corea", "nx": "Il prossimo?"}
+CORTI = {"is": "Islanda", "kr": "Corea", "nx": "Il prossimo?", "pb": "Sudamerica"}
 switcher_buttons = '\n        '.join(
     f'<button class="switch-btn{" confermato" if stato_per_suf[b["suf"]] == "confermato" else ""}"'
     f' data-dest="{b["suf"]}" onclick="showDest(\'{b["suf"]}\')"><span class="lungo">{b["name"]}</span><span class="corto">{CORTI.get(b["suf"], b["name"])}</span></button>'
@@ -660,11 +675,13 @@ titoli_js = json.dumps({"hub": "Tutte le mete", **{d["suf"]: d["name"] for d in 
 # vettoriale dai suoi contorni (_sources/logo/forme.json), cosi' restano
 # nitide a qualsiasi grandezza.
 #
-# All'arrivo si accendono il cielo e la banda e l'aereo entra in volo.
-# Premendo "Entra" il resto del logo si compone come nel video (la cresta
-# si disegna dalla vetta, le montagne salgono, la scritta spunta lettera
-# per lettera, l'aereo arriva al suo posto) mentre il logo gira in 3D come
-# un plastico; poi la copertina si apre attorno al dorso (assets/anima.js).
+# All'apertura il logo si stampa da solo, a colpi, come un manifesto: il
+# cielo, la banda, le montagne con la cresta, la scritta; poi l'aereo entra
+# in volo e compare "Entra" (lo fa il CSS). Premendo "Entra" l'aereo si
+# stacca dal logo e vola verso lo schermo, una nuvola bianca copre tutto e
+# diventa il foglio a quadretti; lo stesso aereo Royal Brunico rientra da
+# sinistra, piccolo, tracciando la scia a pennarello, e si posa accanto al
+# titolo della home, dove resta con la sua scia (assets/anima.js).
 # La decide lo script in testa alla pagina, prima che si veda qualcosa:
 # chi arriva sulla home da zero la trova, chi apre un link a una meta o a
 # una sezione va dritto li', e nella stessa scheda la si vede una volta
@@ -722,14 +739,13 @@ copertina_testa = """<script>
     try { if(sessionStorage.getItem('patagucci-entrato')) mostra = false; } catch(e){}
     if(!mostra) return;
     radice.classList.add('con-copertina');
-    // Il logo si compone premendo "Entra": finche' non lo si preme ne
-    // restano fuori montagne e scritta. Con meno movimento e' gia' intero.
-    if(!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) radice.classList.add('copertina-anima');
+    // Il logo si stampa da solo all'apertura; con meno movimento e' gia'
+    // intero, e "Entra" c'e' da subito.
+    if(!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) radice.classList.add('copertina-intro');
   })();
 </script>"""
 
 copertina_html = """<div class="copertina" id="copertina" role="dialog" aria-modal="true" aria-labelledby="cp-titolo">
-  <div class="cp-ombra" aria-hidden="true"></div>
   <div class="cp-anta">
     <p class="sr-only" id="cp-titolo">Patagucci Trips</p>
     <div class="pl" aria-hidden="true">
@@ -745,6 +761,13 @@ copertina_html = """<div class="copertina" id="copertina" role="dialog" aria-mod
     <p class="cp-quadretti" aria-hidden="true">Quadretti 5 mm</p>
     <button type="button" class="cp-musica" id="cp-musica" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 17.4 C 9.2 13, 8.8 9, 9 5.2 L 19.2 2.8 C 19 7, 19.3 11, 19 15.2"/><ellipse cx="6.5" cy="17.6" rx="2.7" ry="2.1"/><ellipse cx="16.6" cy="15.4" rx="2.7" ry="2.1"/></svg><span>Accendi la musica</span></button>
   </div>
+  <div class="cp-nuvola" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="cp-carta" aria-hidden="true"></div>
+  <div class="cp-volo" aria-hidden="true"><svg focusable="false">
+    <defs><mask id="cp-maschera-volo" maskUnits="userSpaceOnUse" x="-1000" y="-1000" width="8000" height="8000"><path class="cp-scopri" pathLength="1"/></mask></defs>
+    <path class="cp-scia" mask="url(#cp-maschera-volo)"/>
+    <g class="cp-aeroplanino" transform="translate(-300 -300)"><image href="assets/logo/aereo.webp" x="-70" y="-17.4" width="140" height="34.8"/></g>
+  </svg></div>
 </div>
 <script>
   (function(){
@@ -756,7 +779,30 @@ copertina_html = """<div class="copertina" id="copertina" role="dialog" aria-mod
     var spenti = [];
     var chiusa = false;
     var daTastiera = false;
-    try { entra.focus({ preventScroll:true }); } catch(e){ entra.focus(); }
+
+    // ---- L'intro del logo ----
+    // La fa il CSS, ma aspetta le immagini del logo: senza, il cielo si
+    // "stamperebbe" vuoto. Alla fine "Entra" diventa premibile e prende il
+    // fuoco. Con meno movimento e' tutto pronto da subito.
+    function pronta(){
+      if(copertina.classList.contains('pronta')) return;
+      copertina.classList.add('via', 'pronta');
+      try { entra.focus({ preventScroll:true }); } catch(e){ entra.focus(); }
+    }
+    if(radice.classList.contains('copertina-intro')){
+      var parti = function(){
+        if(copertina.classList.contains('via')) return;
+        copertina.classList.add('via');
+        setTimeout(pronta, 2350);
+      };
+      Promise.all(Array.prototype.map.call(copertina.querySelectorAll('.pl img'), function(img){
+        return img.decode ? img.decode().catch(function(){}) : null;
+      })).then(parti, parti);
+      // se le immagini tardano, l'intro parte comunque
+      setTimeout(parti, 1500);
+    } else {
+      pronta();
+    }
 
     // ---- La canzone dei Patagucci ----
     // Parte con la copertina e sfuma quando si preme "Entra". Molti
@@ -835,12 +881,6 @@ copertina_html = """<div class="copertina" id="copertina" role="dialog" aria-mod
       });
     });
 
-    // Se Motion non e' arrivato il logo non si comporra': lo si mostra
-    // intero da subito.
-    window.addEventListener('load', function(){
-      if(!window.PatagucciCopertina) radice.classList.remove('copertina-anima');
-    });
-
     function chiudi(){
       if(chiusa) return;
       chiusa = true;
@@ -848,7 +888,7 @@ copertina_html = """<div class="copertina" id="copertina" role="dialog" aria-mod
       if(!canzone.paused && !sfumando) sfuma(400);
       try { sessionStorage.setItem('patagucci-entrato', '1'); } catch(e){}
       spenti.forEach(function(el){ el.inert = false; });
-      radice.classList.remove('con-copertina', 'copertina-anima');
+      radice.classList.remove('con-copertina', 'copertina-intro');
       copertina.remove();
       // Chi e' entrato con la tastiera riparte dal titolo; col mouse o col
       // dito il fuoco torna semplicemente all'inizio della pagina.
@@ -868,16 +908,18 @@ copertina_html = """<div class="copertina" id="copertina" role="dialog" aria-mod
       // Un secondo colpo mentre si sta aprendo vuol dire "salta".
       if(copertina.classList.contains('in-volo') || copertina.classList.contains('apri-css')){ chiudi(); return; }
       if(window.PatagucciCopertina){ window.PatagucciCopertina.apri(copertina, chiudi); return; }
-      // Senza Motion (o con meno movimento): il logo intero, e apre il CSS.
+      // Senza Motion (o con meno movimento) la copertina sfuma e basta.
       var meno = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      radice.classList.remove('copertina-anima');
       copertina.classList.add('apri-css');
-      setTimeout(chiudi, meno ? 300 : 980);
+      setTimeout(chiudi, meno ? 300 : 650);
     }
 
     entra.addEventListener('click', apri);
     document.addEventListener('keydown', function(e){
-      if(!chiusa && e.key === 'Escape') apri();
+      if(chiusa || e.key !== 'Escape') return;
+      // Durante l'intro Esc la fa finire; dopo, entra.
+      if(!copertina.classList.contains('pronta')){ copertina.classList.add('salta'); pronta(); }
+      else apri();
     });
   })();
 </script>"""
@@ -889,6 +931,9 @@ final_html = f'''<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Patagucci Trips</title>
+<link rel="icon" href="assets/icona.svg" type="image/svg+xml">
+<link rel="icon" href="assets/icona-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="assets/icona-180.png">
 {copertina_testa}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -928,6 +973,7 @@ final_html = f'''<!DOCTYPE html>
   .site-switcher button[data-dest="is"]{{ --dab:#7deaa0; }}
   .site-switcher button[data-dest="kr"]{{ --dab:#ff92bb; }}
   .site-switcher button[data-dest="nx"]{{ --dab:#6de6d2; }}
+  .site-switcher button[data-dest="pb"]{{ --dab:#ffab70; }}
   .site-switcher button:hover{{ color:var(--ink); background-size:0 0, calc(100% - 26px) 5px; }}
   .site-switcher button.active{{ color:var(--ink); background-position:6px 76%, 6px 76%; background-size:calc(100% - 12px) 0.6em, calc(100% - 12px) 0.6em; }}
   .site-switcher .corto{{ display:none; }}
@@ -946,9 +992,6 @@ final_html = f'''<!DOCTYPE html>
 
 {copertina_html}
 
-<div class="flagbar" id="flagbar"></div>
-
-
 <div class="site-switcher" id="site-switcher">
   <button class="home-btn active" data-dest="hub" onclick="showDest('hub')">Home</button>
   {switcher_buttons}
@@ -961,25 +1004,6 @@ final_html = f'''<!DOCTYPE html>
 <script>
 var SUFFISSI = {suffissi_js};
 var TITOLI = {titoli_js};
-var FLAG_BARS = {{
-  hub: 'linear-gradient(90deg,#161616 0 33%, #ffe14d 33% 66%, #ff92bb 66% 100%)',
-  nx: 'linear-gradient(90deg,#ffe14d 0 25%, #7deaa0 25% 50%, #ff92bb 50% 75%, #6de6d2 75% 100%)',
-  ug: 'linear-gradient(90deg,#141414 0 33%, #FFCE00 33% 66%, #D21034 66% 100%)',
-  pk: 'linear-gradient(90deg,#ffffff 0 25%, #01411C 25% 100%)',
-  za: 'linear-gradient(90deg,#DE3831 0 16.6%, #ffffff 16.6% 33.3%, #002395 33.3% 50%, #007A4D 50% 66.6%, #FFB612 66.6% 83.3%, #000000 83.3% 100%)',
-  np: 'linear-gradient(90deg,#DC143C 0 25%, #003893 25% 50%, #FF9933 50% 75%, #FFB612 75% 100%)',
-  uk: 'linear-gradient(90deg,#0099B5 0 50%, #1EB53A 50% 100%)',
-  gl: 'linear-gradient(90deg,#ffffff 0 50%, #C60C30 50% 100%)',
-  ge: 'linear-gradient(90deg,#ffffff 0 20%, #DA291C 20% 40%, #ffffff 40% 60%, #DA291C 60% 80%, #ffffff 80% 100%)',
-  in: 'linear-gradient(90deg,#FF9933 0 33%, #ffffff 33% 66%, #138808 66% 100%)',
-  tz: 'linear-gradient(90deg,#1EB53A 0 30%, #FCD116 30% 40%, #000000 40% 60%, #FCD116 60% 70%, #00A3DD 70% 100%)',
-  cx: 'linear-gradient(90deg,#0067C6 0 20%, #ffffff 20% 33%, #002B7F 33% 46%, #CE1126 46% 60%, #ffffff 60% 73%, #D21034 73% 86%, #005293 86% 100%)',
-  kr: 'linear-gradient(90deg,#ffffff 0 12%, #CD2E3A 12% 22%, #0047A0 22% 33%, #F7E017 33% 55%, #000000 55% 66%, #EF3340 66% 88%, #ffffff 88% 100%)',
-  'kr-kr': 'linear-gradient(90deg,#ffffff 0 32%, #CD2E3A 32% 47%, #0047A0 47% 62%, #ffffff 62% 100%)',
-  'kr-bn': 'linear-gradient(90deg,#F7E017 0 55%, #ffffff 55% 68%, #000000 68% 82%, #F7E017 82% 100%)',
-  'kr-sg': 'linear-gradient(90deg,#EF3340 0 50%, #ffffff 50% 100%)',
-  is: 'linear-gradient(90deg,#02529C 0 30%, #ffffff 30% 38%, #DC1E35 38% 47%, #ffffff 47% 55%, #02529C 55% 100%)'
-}};
 function showDest(name, daCronologia){{
   document.documentElement.setAttribute('data-dest', name);
   document.documentElement.removeAttribute('data-paese');
@@ -994,8 +1018,6 @@ function showDest(name, daCronologia){{
     // attiva puo' restare fuori schermo.
     btn.scrollIntoView({{ behavior:'smooth', block:'nearest', inline:'center' }});
   }}
-  var flagbar = document.getElementById('flagbar');
-  if(flagbar && FLAG_BARS[name]) flagbar.style.background = FLAG_BARS[name];
   window.scrollTo({{ top: 0, left: 0, behavior: 'instant' }});
   target.querySelectorAll('.reveal').forEach(function(el){{ el.classList.add('visible'); }});
   // Un indirizzo per ogni meta: senza questo "guarda i voli" diventa
@@ -1041,18 +1063,12 @@ window.addEventListener('hashchange', function(){{ applicaFrammento(true); }});
 document.addEventListener('DOMContentLoaded', function(){{ if(location.hash) applicaFrammento(false); }});
 
 // Una meta che attraversa piu' paesi tinge la pagina col paese che si sta
-// guardando: la scheda chiama questa passando 'kr-tw', 'kr-hk' e simili,
-// oppure niente per tornare alla bandiera unita della meta.
+// guardando: la scheda chiama questa passando il paese ('bn', 'sg'),
+// oppure niente per tornare all'evidenziatore della meta.
 function tingiPaese(paese){{
   var radice = document.documentElement;
-  var meta = radice.getAttribute('data-dest');
   if(paese) radice.setAttribute('data-paese', paese);
   else radice.removeAttribute('data-paese');
-  var flagbar = document.getElementById('flagbar');
-  if(!flagbar) return;
-  var chiave = paese ? meta + '-' + paese : meta;
-  var sfondo = FLAG_BARS[chiave] || FLAG_BARS[meta];
-  if(sfondo) flagbar.style.background = sfondo;
 }}
 
 // Le due tab della home: confermati / in programma.
@@ -1141,9 +1157,11 @@ def taccuino(html):
     # niente.
     def titolo_meta(m):
         testo = m.group(2)
-        parola = EVIDENZIA.get(testo) or testo.split()[0].rstrip(",")
-        return m.group(1) + testo.replace(parola, f'<span class="tt">{parola}</span>', 1) + m.group(3)
-    html = re.sub(r'(<header class="hero"[^>]*>.*?<h1>)(.*?)(</h1>)', titolo_meta, html, flags=re.S)
+        parola = EVIDENZIA.get(testo.strip()) or testo.split()[0].rstrip(",")
+        return m.group(1) + testo.replace(parola, f'<span class="tt">{parola}</span>', 1)
+    # Solo il testo del titolo: un disegno dentro l'h1 (l'aeroplanino della
+    # home) resta fuori dall'evidenziatore.
+    html = re.sub(r'(<header class="hero"[^>]*>.*?<h1>)([^<]*)', titolo_meta, html, flags=re.S)
 
     # Le emoji davanti ai titoletti e ai link per le mappe facevano da
     # icone: via, il testo basta.

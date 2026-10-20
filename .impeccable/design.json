@@ -561,14 +561,19 @@
         "purpose": "Bottoni, filtri, caselle del calendario al passaggio del mouse."
       },
       {
-        "name": "copertina-apre",
-        "value": "1.05s cubic-bezier(.62,.02,.3,1), ritardo 2.3s",
-        "purpose": "L'anta gira sul dorso a rotateY(-98deg) dopo che il logo si e' composto (2s)."
+        "name": "copertina-intro",
+        "value": "2.6s in tutto (CSS), aspetta le immagini del logo al massimo 1.5s",
+        "purpose": "All'apertura il logo si stampa a colpi: cielo, banda, montagne e cresta, la scritta con un tonfo; l'aereo entra in volo, si posa e ondeggia; poi compare Entra. Esc porta alla fine."
+      },
+      {
+        "name": "copertina-volo",
+        "value": "2.8s in tutto (Motion): aereo verso lo schermo .8s cubic-bezier(.45,0,.75,.35); nuvola da .62s; volo dell'aereo piccolo 1.35s cubic-bezier(.3,0,.25,1) da 1.12s; il foglio si scopre da 2.35s",
+        "purpose": "Su Entra l'aereo Royal Brunico vola verso lo schermo (fino a 5,2 volte, sfocato), cinque sbuffi bianchi coprono tutto e si diradano sul foglio a quadretti; lo stesso aereo rientra da sinistra, scende piano, riprende quota con la scia tratteggiata e si posa sull'aereo accanto al titolo della home."
       },
       {
         "name": "copertina-css",
-        "value": ".95s cubic-bezier(.62,.02,.3,1)",
-        "purpose": "Apertura della copertina senza Motion; con movimento ridotto dissolvenza .25s."
+        "value": ".6s ease",
+        "purpose": "Senza Motion la copertina sfuma; con movimento ridotto il logo e' gia' intero e la copertina si dissolve in .25s."
       },
       {
         "name": "canzone-sfuma",
@@ -688,7 +693,7 @@
   ],
   "narrative": {
     "northStar": "Il taccuino a pennarello",
-    "overview": "Il sito è un quaderno di scuola italiano a quadretti da 5 mm su cui i quattro Patagucci prendono appunti di viaggio. Il foglio è bianco, con i quadretti azzurrini (22px) e, dove lo schermo è largo, la riga rossa del margine. Sopra ci sono quattro strumenti, e ognuno ha un compito solo: il pennarello nero scrive i titoli e i numeri, la matita grigia il testo di contorno, la penna Bic blu i link e i comandi, la penna rossa soltanto quello che manca da prenotare. In più c'è l'evidenziatore, e il suo colore cambia con il paese che si sta leggendo.\n\nLe cose non si mettono in scatola, si disegnano. I riquadri hanno un bordo tirato a mano (un SVG usato come border-image) e non fanno ombra, perché l'inchiostro su un foglio non ne fa. L'ombra c'è solo sugli oggetti di carta appoggiati sul quaderno: polaroid, nastro adesivo, il foglio che si volta, la copertina. Le foto non fanno da sfondo, sono polaroid inclinate e attaccate col nastro. Le pagine non diventano mai scure e non si tingono mai di crema: cambia solo il colore dei quadretti.\n\nIl movimento è fatto di gesti di carta, e senza di esso non si perde niente. Ci sono la copertina che si apre attorno al dorso, la pagina che si volta quando si cambia meta, la passata di evidenziatore sulla parola del titolo, la penna rossa che cerchia, le polaroid che si sollevano sotto il mouse. Se Motion non arriva, o chi guarda chiede meno movimento, la pagina è già intera e ferma. Questo mondo sostituisce del tutto quello precedente: niente foto a tutto schermo, niente card arrotondate con ombra, niente pannelli scuri alternati.",
+    "overview": "Il sito è un quaderno di scuola italiano a quadretti da 5 mm su cui i quattro Patagucci prendono appunti di viaggio. Il foglio è bianco, con i quadretti azzurrini (22px) e, dove lo schermo è largo, la riga rossa del margine. Sopra ci sono quattro strumenti, e ognuno ha un compito solo: il pennarello nero scrive i titoli e i numeri, la matita grigia il testo di contorno, la penna Bic blu i link e i comandi, la penna rossa soltanto quello che manca da prenotare. In più c'è l'evidenziatore, e il suo colore cambia con il paese che si sta leggendo.\n\nLe cose non si mettono in scatola, si disegnano. I riquadri hanno un bordo tirato a mano (un SVG usato come border-image) e non fanno ombra, perché l'inchiostro su un foglio non ne fa. L'ombra c'è solo sugli oggetti di carta appoggiati sul quaderno: polaroid, nastro adesivo, il foglio che si volta, la copertina. Le foto non fanno da sfondo, sono polaroid inclinate e attaccate col nastro. Le pagine non diventano mai scure e non si tingono mai di crema: cambia solo il colore dei quadretti.\n\nIl movimento è fatto di gesti di carta, e senza di esso non si perde niente. Ci sono l'aereo della copertina che vola fino al quaderno, la pagina che si volta quando si cambia meta, la passata di evidenziatore sulla parola del titolo, la penna rossa che cerchia, le polaroid che si sollevano sotto il mouse. Se Motion non arriva, o chi guarda chiede meno movimento, la pagina è già intera e ferma. Questo mondo sostituisce del tutto quello precedente: niente foto a tutto schermo, niente card arrotondate con ombra, niente pannelli scuri alternati.",
     "keyCharacteristics": [
       "Foglio bianco a quadretti da 22px; la riga rossa del margine compare solo da 1220px in su.",
       "Tre mani tipografiche: pennarello (Permanent Marker), stampatello a mano (Patrick Hand SC), testo leggibile (Atkinson Hyperlegible Next), più il mono per codici e orari.",
@@ -721,7 +726,7 @@
       },
       {
         "name": "La Regola del Logo a Parte",
-        "body": "I cinque colori del logo stanno sulla copertina e non entrano nel quaderno. Il logo non si ridisegna: i livelli sono le immagini e i contorni del logo vero del gruppo.",
+        "body": "I cinque colori del logo stanno sulla copertina e non entrano nel quaderno. Il logo non si ridisegna: i livelli sono le immagini e i contorni del logo vero del gruppo. L'unico pezzo del logo che entra nel quaderno è l'aereo Royal Brunico, la stessa immagine ritagliata, accanto al titolo della home: ci arriva in volo dalla copertina.",
         "section": "colors"
       },
       {
