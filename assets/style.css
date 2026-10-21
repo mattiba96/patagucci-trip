@@ -437,6 +437,16 @@ p[style*="text-align:center"]{ margin-left:auto; margin-right:auto; }
 .nm-num svg{ position:absolute; inset:-16% -20%; width:140%; height:132%; overflow:visible; pointer-events:none; }
 .nm-num svg path{ fill:none; stroke:var(--rosso); stroke-width:4.5; stroke-linecap:round; stroke-linejoin:round; }
 .nm-testo{ max-width:42ch; }
+/* Lo stesso cerchio a penna rossa attorno alle parole di quello che manca
+   da prenotare, dentro un titolo: un giro storto che si chiude passando
+   oltre l'inizio, come fatto a mano, e che si disegna da solo come quello
+   del "2" in home. Sborda di un terzo di lettera per parte, per non
+   finire sulle parole accanto, e la riga si fa un po' piu' alta: se il
+   titolo va a capo il giro non passa sulla riga di sopra, dove
+   sembrerebbe una cancellatura. Il disegno si allunga quanto le parole. */
+.cerchiato{ position:relative; display:inline-block; white-space:nowrap; margin:0.3em 0.18em; }
+.cerchiato svg{ position:absolute; left:-0.38em; top:50%; width:calc(100% + 0.76em); height:1.85em; transform:translateY(-52%) rotate(-1.5deg); overflow:visible; pointer-events:none; }
+.cerchiato svg path{ fill:none; stroke:var(--rosso); stroke-width:3.2; stroke-linecap:round; stroke-linejoin:round; }
 
 /* ============================================================
    POLAROID: i quattro, la giostra delle foto, le mete
@@ -525,6 +535,9 @@ details.day:nth-child(even) summary .daynum{ transform:rotate(3deg); border-radi
 details.day summary .daytitle{ flex:1; font-family:var(--font-hand); font-size:var(--t-title-lg); line-height:1.2; letter-spacing:0.01em; }
 details.day summary .chevron{ color:var(--ink-soft); font-size:var(--t-small); transition:transform .25s cubic-bezier(.16,1,.3,1); }
 details.day[open] summary .chevron{ transform:rotate(90deg); color:var(--ink); }
+/* Mentre il giorno si ripiega la freccia torna subito a destra: dice gia'
+   dove sta andando. */
+details.day[open].si-chiude summary .chevron{ transform:none; color:var(--ink-soft); }
 details.day .day-body{ padding:2px 22px 20px 76px; font-size:var(--t-base); color:var(--ink); }
 details.day .day-body p{ margin:0 0 10px; }
 details.day .tag{
@@ -860,6 +873,7 @@ footer a.home-link{ font-family:var(--font-display); font-size:1.15rem; color:va
 .paese-divisore[data-paese="kr"]{ --evid-paese:#ff92bb; }
 .paese-divisore[data-paese="bn"]{ --evid-paese:#ffc93c; }
 .paese-divisore[data-paese="sg"]{ --evid-paese:#cdb0ff; }
+.paese-divisore[data-paese="jp"]{ --evid-paese:#86e0d4; }
 .paese-divisore[data-paese="bo"]{ --evid-paese:#ffd25e; }
 .paese-divisore[data-paese="cl"]{ --evid-paese:#8ccbff; }
 .paese-divisore[data-paese="pe"]{ --evid-paese:#ff9a8f; }
@@ -871,7 +885,6 @@ footer a.home-link{ font-family:var(--font-display); font-size:1.15rem; color:va
    tratteggiata: si vede subito cosa manca, senza inventarlo.
    ============================================================ */
 .foto-giorno{ display:flex; flex-wrap:wrap; gap:16px 14px; margin-top:12px; }
-.paese-divisore[data-paese="jp"]{ --evid-paese:#86e0d4; }
 .foto-giorno .mini-photo{ margin:4px 0 0; width:min(100%, 220px); }
 .foto-giorno .mini-photo:nth-child(even){ transform:rotate(1.2deg); }
 .foto-giorno .mini-photo img{ aspect-ratio:4/3; object-fit:cover; }
@@ -938,6 +951,7 @@ figure.crew-card{ margin:0; }
 .cal-giorno[data-paese="kr"]{ --evid-giorno:#ff92bb; }
 .cal-giorno[data-paese="bn"]{ --evid-giorno:#ffc93c; }
 .cal-giorno[data-paese="sg"]{ --evid-giorno:#cdb0ff; }
+.cal-giorno[data-paese="jp"]{ --evid-giorno:#86e0d4; }
 /* Il giorno di volo ha l'aeroplanino di carta; quello da comprare lo ha
    in rosso. */
 .cal-giorno[data-volo="1"] .cal-dove::after,
@@ -949,9 +963,9 @@ figure.crew-card{ margin:0; }
 .cal-giorno[data-prenotato="no"] .cal-dove::after{ background:var(--rosso); }
 .cal-giorno[data-prenotato="no"] .cal-n::after{ content:' \00b7 da prenotare'; color:var(--rosso); }
 .cal-legenda{ display:flex; flex-wrap:wrap; gap:14px; font-size:var(--t-small); color:var(--ink-soft); margin-bottom:6px; }
-.cal-giorno[data-paese="jp"]{ --evid-giorno:#86e0d4; }
 .cal-legenda span{ display:inline-flex; align-items:center; gap:7px; }
 .cal-legenda i{ width:22px; height:10px; display:inline-block; font-style:normal; border-radius:3px 6px 2px 5px; }
+.cal-legenda i.da-prenotare{ height:12px; background:transparent; border:2px dashed var(--rosso); }
 
 /* ============================================================
    LA PAGINA CHE SI VOLTA (vedi assets/anima.js)
@@ -963,7 +977,6 @@ figure.crew-card{ margin:0; }
    ============================================================ */
 .voltapagina{
   position:fixed; inset:0; z-index:90; pointer-events:none;
-.cal-legenda i.da-prenotare{ height:12px; background:transparent; border:2px dashed var(--rosso); }
   transform-origin:0 50%; backface-visibility:hidden;
   background-color:#fff;
   background-image:
@@ -977,6 +990,21 @@ figure.crew-card{ margin:0; }
 .voltapagina.indietro{ transform-origin:100% 50%; box-shadow:inset 40px 0 60px -40px rgba(0,0,0,0.25); }
 .voltapagina.indietro::after{ background:linear-gradient(270deg, rgba(0,0,0,0), rgba(0,0,0,0.16)); }
 @keyframes ombraPagina{ from{ opacity:0; } }
+
+/* ============================================================
+   I PETALI DEI CILIEGI (vedi assets/anima.js)
+   Sulla pagina dei ciliegi della Corea passa una folata di petali:
+   evidenziatore rosa con il contorno a pennarello, come le puntine delle
+   cartine. Stanno sopra lo scritto ma non si toccano, e la pagina li
+   taglia ai bordi. Lo script li crea e li toglie; senza script non c'e'
+   niente.
+   ============================================================ */
+.petali{ position:absolute; inset:0; z-index:2; overflow:hidden; pointer-events:none; }
+.petalo{ position:absolute; left:0; top:0; display:block; }
+.petalo svg{ display:block; width:100%; height:auto; overflow:visible; }
+.petalo path{ fill:var(--accent); stroke:var(--ink); stroke-width:1.1; stroke-linejoin:round; }
+.petalo.chiaro path{ fill:color-mix(in srgb, var(--accent) 45%, #fff); }
+.petalo path.vena{ fill:none; stroke-width:0.9; stroke-linecap:round; opacity:0.55; }
 
 /* ============================================================
    IL TRATTO A PENNARELLO

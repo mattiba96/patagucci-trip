@@ -345,10 +345,145 @@
     }
   };
 
+  // ---- 7. I petali dei ciliegi ----
+  // Sulla pagina dei ciliegi della Corea (la sezione con data-petali),
+  // quando arriva nello schermo, passa una folata di petali: cadono girando
+  // su se stessi, ondeggiano nel vento e spariscono prima di toccare il
+  // fondo. Una folata sola ogni volta che la pagina arriva, una decina di
+  // secondi al massimo; quando la pagina esce dallo schermo i petali se ne
+  // vanno con lei.
+  var PETALO = '<svg viewBox="0 0 20 24" focusable="false">' +
+    '<path d="M10 23 C 3.5 17.5, 1 10.5, 3 4.6 C 4.4 1.2, 7.4 1.4, 8.8 3.8 L 10 5.6 L 11.2 3.8 C 12.6 1.4, 15.6 1.2, 17 4.6 C 19 10.5, 16.5 17.5, 10 23 Z"/>' +
+    '<path class="vena" d="M10 8 C 9.6 11.5, 9.8 14.5, 10 17.5"/></svg>';
+  function folata(pagina){
+    var cielo = pagina.querySelector(':scope > .petali');
+    if(cielo && cielo.childElementCount) return;
+    if(!cielo){
+      cielo = document.createElement('div');
+      cielo.className = 'petali';
+      cielo.setAttribute('aria-hidden', 'true');
+      pagina.appendChild(cielo);
+    }
+    var caso = Math.random;
+    var largo = pagina.clientWidth, alto = pagina.clientHeight;
+    var vh = window.innerHeight, r = pagina.getBoundingClientRect();
+    // Cadono dentro quello che si vede: dal bordo alto dello schermo, o
+    // da quello della pagina se e' piu' in basso.
+    var cima = Math.max(-30, -r.top - 30);
+    // Uno ogni 70px di larghezza: una decina sul telefono, venti al massimo.
+    var quanti = Math.round(Math.min(20, Math.max(9, largo / 70)));
+    cielo.__movimenti = [];
+    for(var i = 0; i < quanti; i++){
+      var el = document.createElement('span');
+      el.className = 'petalo' + (i % 3 === 0 ? ' chiaro' : '');
+      el.innerHTML = PETALO;
+      el.style.width = (12 + caso() * 10).toFixed(1) + 'px';
+      cielo.appendChild(el);
+      var x0 = caso() * largo;
+      var fondo = Math.min(alto - 20, cima + vh * (0.65 + caso() * 0.45));
+      var vento = (caso() < 0.5 ? -1 : 1) * (30 + caso() * 90);
+      var onda = 14 + caso() * 26, fase = caso() * 6.28, volte = 1.2 + caso() * 1.2;
+      var giro0 = caso() * 360, giro = (caso() < 0.5 ? -1 : 1) * (160 + caso() * 260);
+      var passi = [], luce = [];
+      for(var k = 0; k <= 12; k++){
+        var f = k / 12;
+        var x = x0 + vento * f + Math.sin(fase + f * Math.PI * 2 * volte) * onda;
+        var y = cima + (fondo - cima) * f;
+        // si volta e mostra l'altro lato, senza diventare mai una riga
+        var lato = Math.cos(fase + f * Math.PI * 2 * (volte + 0.6));
+        var sx = (lato < 0 ? -1 : 1) * Math.max(0.25, Math.abs(lato));
+        passi.push('translate(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px) rotate(' + (giro0 + giro * f).toFixed(1) + 'deg) scaleX(' + sx.toFixed(3) + ')');
+        luce.push(f < 0.08 ? f / 0.08 : f > 0.84 ? (1 - f) / 0.16 : 1);
+      }
+      var volo = animate(el, { transform: passi, opacity: luce },
+        { duration: 5 + caso() * 2.5, delay: i * (3 / quanti) + caso() * 0.4, ease: 'linear' });
+      cielo.__movimenti.push(volo);
+      finito(volo, (function(p){ return function(){ p.remove(); }; })(el));
+    }
+  }
+  function viaPetali(pagina){
+    var cielo = pagina.querySelector(':scope > .petali');
+    if(!cielo) return;
+    (cielo.__movimenti || []).forEach(function(a){ try { a.stop(); } catch(e){} });
+    cielo.__movimenti = [];
+    cielo.textContent = '';
+  }
+  function osservaPetali(){
+    if(!('IntersectionObserver' in window)) return;
+    var soglie = [];
+    for(var s = 0; s <= 20; s++) soglie.push(s / 20);
+    document.querySelectorAll('[data-petali]').forEach(function(pagina){
+      if(pagina.__petali) return;
+      pagina.__petali = true;
+      new IntersectionObserver(function(voci){
+        voci.forEach(function(v){
+          if(!v.isIntersecting){ viaPetali(pagina); return; }
+          // arrivata: ne vedi almeno meta' schermo, o un terzo se e' corta
+          var visto = v.intersectionRect.height;
+          if(visto >= Math.min(window.innerHeight * 0.5, v.boundingClientRect.height * 0.35)) folata(pagina);
+        });
+      }, { threshold: soglie }).observe(pagina);
+    });
+  }
+
+  // ---- 8. I giorni che si aprono ----
+  // Un giorno si apre come un foglio piegato che si spiega: il riquadro si
+  // allunga e lo scritto compare al suo posto; si ripiega piu' svelto. Solo
+  // quando lo apre chi legge, col mouse, col dito o con la tastiera: le
+  // aperture dello script (il primo giorno, il calendario) restano subito.
+  // Un secondo clic a meta' strada torna indietro da dove si trova.
+  function piega(giorno, apri){
+    var corpo = giorno.querySelector(':scope > .day-body');
+    if(!corpo){ giorno.open = apri; return; }
+    if(giorno.__piega){ try { giorno.__piega.stop(); } catch(e){} }
+    // da dove parte: quello che si vede adesso
+    var aperto = giorno.open;
+    var cs = getComputedStyle(corpo);
+    var da = aperto ? [corpo.getBoundingClientRect().height, parseFloat(cs.paddingTop), parseFloat(cs.paddingBottom), parseFloat(cs.opacity)] : [0, 0, 0, 0];
+    // dove arriva: il riquadro intero, misurato senza i ritocchi
+    if(!aperto) giorno.open = true;
+    ['height', 'paddingTop', 'paddingBottom', 'opacity', 'overflow'].forEach(function(p){ corpo.style[p] = ''; });
+    var cs2 = getComputedStyle(corpo);
+    var a = apri ? [corpo.getBoundingClientRect().height, parseFloat(cs2.paddingTop), parseFloat(cs2.paddingBottom), 1] : [0, 0, 0, 0];
+    giorno.classList.toggle('si-chiude', !apri);
+    // Altezza, margini e inchiostro vanno con un orologio solo, scritto qui
+    // a ogni fotogramma: fermandolo a meta' resta esattamente quello che si
+    // vede, e il passo dopo riparte da li'.
+    corpo.style.overflow = 'hidden';
+    var metti = function(t){
+      var v = function(i){ return da[i] + (a[i] - da[i]) * t; };
+      corpo.style.height = v(0).toFixed(1) + 'px';
+      corpo.style.paddingTop = v(1).toFixed(1) + 'px';
+      corpo.style.paddingBottom = v(2).toFixed(1) + 'px';
+      corpo.style.opacity = v(3).toFixed(3);
+    };
+    // il punto di partenza subito, prima che il browser disegni
+    metti(0);
+    var questa = animate(0, 1, apri
+      ? { duration: 0.34, ease: POSA, onUpdate: metti }
+      : { duration: 0.24, ease: [0.4, 0, 0.2, 1], onUpdate: metti });
+    giorno.__piega = questa;
+    finito(questa, function(){
+      if(giorno.__piega !== questa) return;
+      giorno.__piega = null;
+      if(!apri){ giorno.open = false; giorno.classList.remove('si-chiude'); }
+      ['height', 'paddingTop', 'paddingBottom', 'opacity', 'overflow'].forEach(function(p){ corpo.style[p] = ''; });
+    });
+  }
+  document.addEventListener('click', function(e){
+    if(e.defaultPrevented || e.button) return;
+    var sommario = e.target.closest && e.target.closest('details.day > summary');
+    if(!sommario) return;
+    var giorno = sommario.parentNode;
+    e.preventDefault();
+    piega(giorno, !giorno.open || giorno.classList.contains('si-chiude'));
+  });
+
   function prepara(){
     stendiTitoli();
     preparaPenna();
     preparaPolaroid();
+    osservaPetali();
   }
   // Senza copertina (link diretto, o gia' entrati in questa scheda) il
   // titolo della pagina aperta parte gia' evidenziato: la passata si vede

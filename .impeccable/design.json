@@ -548,7 +548,7 @@
       {
         "name": "penna-rossa",
         "value": "0.9s cubic-bezier(.65,0,.35,1)",
-        "purpose": "strokeDashoffset 1 -> 0 con pathLength=1, quando il disegno entra nello schermo."
+        "purpose": "strokeDashoffset 1 -> 0 con pathLength=1, una volta, quando il disegno entra nello schermo: il cerchio attorno al «2» della nota in home e quello attorno alle parole da prenotare nel titolo del riquadro dei biglietti della Corea (.cerchiato)."
       },
       {
         "name": "polaroid-inclinata",
@@ -589,6 +589,16 @@
         "name": "striscia-foto",
         "value": "scroll-snap; frecce: scrollBy 80% della larghezza, smooth (auto con movimento ridotto)",
         "purpose": "Le foto del gruppo stanno ferme in una striscia che si scorre a mano: col dito, con le frecce o con la tastiera."
+      },
+      {
+        "name": "giorno-si-spiega",
+        "value": "apertura 0.34s cubic-bezier(.16,1,.3,1); chiusura 0.24s cubic-bezier(.4,0,.2,1)",
+        "purpose": "Il giorno dell'itinerario si apre come un foglio piegato che si spiega: altezza, margini interni e inchiostro da zero al pieno, con un orologio solo; si ripiega piu' svelto e la freccia torna subito a destra. Solo ai clic di chi legge; le aperture dello script restano immediate. Un secondo clic a meta' strada riparte da dove si trova."
+      },
+      {
+        "name": "petali-ciliegi",
+        "value": "5-7.5s linear per petalo, partenze scaglionate in 3s; folata finita in circa 10s",
+        "purpose": "Sulla pagina dei ciliegi della Corea (data-petali), quando arriva nello schermo: una folata di petali rosa evidenziatore col contorno a pennarello (uno ogni 70px, da 9 a 20), che cadono girando e ondeggiando e spariscono prima del fondo. Una sola per arrivo; via quando la pagina esce. Niente con movimento ridotto o senza Motion."
       }
     ],
     "breakpoints": [
