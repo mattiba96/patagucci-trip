@@ -263,7 +263,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
 
       <section class="panel" data-nav>
         <div class="inner" style="max-width:1060px;">
-          <h2 class="section-title reveal">🌍 I nostri due viaggi</h2>
+          <h2 class="section-title reveal">🌍 I viaggi da fare</h2>
           <p class="section-sub reveal">Le due partenze con le date fissate. Ognuna ha il suo quaderno: giorno per giorno, la mappa, il meteo e tutto il resto.</p>
 
           <div class="trip-grid reveal">
@@ -294,8 +294,8 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
 
       <section class="panel alt" data-nav>
         <div class="inner">
-          <h2 class="section-title reveal">🗺️ Dove siamo già stati</h2>
-          <p class="section-sub reveal">Quanto mondo abbiamo già visto, e dove.</p>
+          <h2 class="section-title reveal">🗺️ I viaggi fatti</h2>
+          <p class="section-sub reveal">Il diario dei viaggi che abbiamo già fatto, e quanto mondo abbiamo visto finora.</p>
 
           <div class="trip-grid trip-grid-uno reveal">
             <a class="trip-card" href="javascript:void(0)" onclick="showDest('pb')">
@@ -524,11 +524,23 @@ destination_blocks = "\n\n".join(b["block"] for b in blocks)
 stato_per_suf = {d["suf"]: d["stato"] for d in DESTS}
 # Sul telefono le quattro linguette devono starci tutte: nomi corti.
 CORTI = {"is": "Islanda", "kr": "Corea", "nx": "Il prossimo?", "pb": "Sudamerica"}
-switcher_buttons = '\n        '.join(
-    f'<button class="switch-btn{" confermato" if stato_per_suf[b["suf"]] == "confermato" else ""}"'
-    f' data-dest="{b["suf"]}" onclick="showDest(\'{b["suf"]}\')"><span class="lungo">{b["name"]}</span><span class="corto">{CORTI.get(b["suf"], b["name"])}</span></button>'
-    for b in blocks
-)
+def linguetta(b):
+    return (f'<button class="switch-btn{" confermato" if stato_per_suf[b["suf"]] == "confermato" else ""}"'
+            f' data-dest="{b["suf"]}" onclick="showDest(\'{b["suf"]}\')"><span class="lungo">{b["name"]}</span><span class="corto">{CORTI.get(b["suf"], b["name"])}</span></button>')
+
+# Le linguette in due gruppi: i viaggi da fare e quelli gia' fatti, con
+# un'etichetta scritta a mano davanti a ciascun gruppo.
+def gruppo(etichetta, descrizione, elenco):
+    if not elenco:
+        return ''
+    return (f'<div class="sw-gruppo" role="group" aria-label="{descrizione}">'
+            f'<span class="sw-etichetta" aria-hidden="true">{etichetta}</span>'
+            + ''.join(linguetta(b) for b in elenco) + '</div>')
+
+switcher_buttons = '\n  '.join(filter(None, [
+    gruppo("da fare", "Viaggi da fare", [b for b in blocks if stato_per_suf[b["suf"]] != "fatto"]),
+    gruppo("fatti", "Viaggi fatti", [b for b in blocks if stato_per_suf[b["suf"]] == "fatto"]),
+]))
 
 
 suffissi_js = json.dumps(["hub"] + [d["suf"] for d in DESTS], ensure_ascii=False)
@@ -907,8 +919,16 @@ final_html = f'''<!DOCTYPE html>
     padding:9px 12px 12px;
   }}
   .site-switcher::-webkit-scrollbar{{ display:none; }}
-  .site-switcher > button:first-child{{ margin-left:auto; }}
-  .site-switcher > button:last-child{{ margin-right:auto; }}
+  .site-switcher > :first-child{{ margin-left:auto; }}
+  .site-switcher > :last-child{{ margin-right:auto; }}
+  /* Da fare | fatti: un trattino a matita fra i gruppi, e davanti a
+     ciascuno la sua etichetta scritta a mano. */
+  .sw-gruppo{{ flex:0 0 auto; display:flex; align-items:center; gap:4px; }}
+  .sw-gruppo::before{{
+    content:""; flex:0 0 auto; width:2px; height:22px; margin:0 8px 0 6px;
+    background:var(--ink-soft); border-radius:2px; transform:rotate(8deg);
+  }}
+  .sw-etichetta{{ font-family:var(--font-hand); font-size:0.95rem; letter-spacing:0.03em; color:var(--ink-soft); padding:0 2px 0 0; white-space:nowrap; }}
   /* Ogni linguetta ha il suo evidenziatore: un trattino sotto la scritta
      quando e' chiusa, la passata intera dietro le lettere quando e'
      aperta. Il trattino sta sotto, non dietro: il grigio matita sopra
@@ -937,7 +957,11 @@ final_html = f'''<!DOCTYPE html>
   @media (max-width:600px){{
     .site-switcher .lungo{{ display:none; }}
     .site-switcher .corto{{ display:inline; }}
-    .site-switcher button{{ padding:10px 8px 9px; }}
+    .site-switcher button{{ padding:10px 6px 9px; }}
+    /* Sul telefono tutte le linguette devono stare nello schermo: restano
+       i trattini fra i gruppi, le etichette scritte no. */
+    .sw-gruppo::before{{ margin:0 4px 0 2px; }}
+    .sw-etichetta{{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }}
   }}
 </style>
 </head>
