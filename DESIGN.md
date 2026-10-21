@@ -155,12 +155,6 @@ components:
     textColor: "{colors.pennarello}"
     rounded: "{rounded.mano-tonda}"
     size: "44px"
-  nota-manca:
-    backgroundColor: "{colors.carta}"
-    textColor: "{colors.penna-rossa}"
-    typography: "{typography.label}"
-    rounded: "{rounded.cornice}"
-    padding: "8px 16px 8px 10px"
   copertina-entra:
     backgroundColor: "{colors.evid-casa}"
     textColor: "{colors.pennarello}"
@@ -168,12 +162,12 @@ components:
     rounded: "{rounded.mano-piccola}"
     padding: "12px 30px 11px 34px"
     height: "58px"
-  copertina-musica:
-    backgroundColor: "transparent"
-    textColor: "{colors.carta}"
+  tasto-musica:
+    backgroundColor: "{colors.carta}"
+    textColor: "{colors.pennarello}"
     typography: "{typography.label}"
     rounded: "{rounded.mano-piccola}"
-    padding: "6px 14px 5px 11px"
+    padding: "7px 14px 6px 10px"
     height: "44px"
 ---
 
@@ -187,7 +181,7 @@ Il sito è un quaderno di scuola italiano a quadretti da 5 mm su cui i quattro P
 
 Le cose non si mettono in scatola, si disegnano. I riquadri hanno un bordo tirato a mano (un SVG usato come border-image) e non fanno ombra, perché l'inchiostro su un foglio non ne fa. L'ombra c'è solo sugli oggetti di carta appoggiati sul quaderno: polaroid, nastro adesivo, il foglio che si volta, la copertina. Le foto non fanno da sfondo, sono polaroid inclinate e attaccate col nastro. Le pagine non diventano mai scure e non si tingono mai di crema: cambia solo il colore dei quadretti.
 
-Il movimento è fatto di gesti di carta, e senza di esso non si perde niente. Ci sono l'aereo della copertina che vola fino al quaderno, la pagina che si volta quando si cambia meta, la passata di evidenziatore sulla parola del titolo, la penna rossa che cerchia, le polaroid che si sollevano sotto il mouse. Se Motion non arriva, o chi guarda chiede meno movimento, la pagina è già intera e ferma. Questo mondo sostituisce del tutto quello precedente: niente foto a tutto schermo, niente card arrotondate con ombra, niente pannelli scuri alternati.
+Il movimento è fatto di gesti di carta, e senza di esso non si perde niente. Ci sono l'aereo della copertina che fa il giro dei ricordi e vola fino al quaderno, la pagina che si volta quando si cambia meta, la passata di evidenziatore sulla parola del titolo, la penna rossa che cerchia, le polaroid che si sollevano sotto il mouse. Se Motion non arriva, o chi guarda chiede meno movimento, la pagina è già intera e ferma. Questo mondo sostituisce del tutto quello precedente: niente foto a tutto schermo, niente card arrotondate con ombra, niente pannelli scuri alternati.
 
 **Key Characteristics:**
 - Foglio bianco a quadretti da 22px; la riga rossa del margine compare solo da 1220px in su.
@@ -196,7 +190,7 @@ Il movimento è fatto di gesti di carta, e senza di esso non si perde niente. Ci
 - Riquadri a tratto di pennarello, e niente ombra sull'inchiostro.
 - Polaroid con il nastro strappato per le foto, l'equipaggio e le mete.
 - Penna rossa riservata a «da prenotare».
-- Ingresso dalla copertina del quaderno, con il logo vero del gruppo e la «Patagucci song».
+- Ingresso dalla copertina del quaderno, con il logo vero del gruppo e la «Patagucci song», che continua dentro il sito finché non la si spegne.
 
 ## Colors
 
@@ -339,27 +333,30 @@ Bordo bianco (12px, e 54px in basso nell'intestazione), angoli da 3px, ombra da 
 ### Il numero del giorno e l'itinerario (componente firma)
 Ogni giorno è un riquadro a tratto che si apre. Il numero è scritto in pennarello dentro un cerchio storto evidenziato (44×42px, 38×36px sul telefono). Il titolo è in stampatello a mano, e la freccia ruota di 90° all'apertura. Aprendolo, il giorno si spiega come un foglio piegato: il riquadro si allunga e lo scritto compare (0,34s, curva `[.16,1,.3,1]`); si ripiega più svelto (0,24s), e la freccia torna subito a destra. Un secondo clic a metà strada torna indietro da dove si trova. Le aperture fatte dallo script (il primo giorno, la casella del calendario) restano immediate. Il calendario a colpo d'occhio ha una casella per giorno: la data è passata con l'evidenziatore del paese, il giorno di volo ha l'aeroplanino di carta, il volo da comprare ha il tratto rosso tratteggiato e la scritta «da prenotare».
 
-### La nota di quello che manca
-In home, sotto il sottotitolo, c'è una nota a penna rossa con il tratto rosso tratteggiato, ruotata di −0,8°. Il numero (in pennarello) è cerchiato da un tratto rosso che si disegna da solo, una volta, quando entra nello schermo (0,9s, curva `[.65,0,.35,1]`). Dopo la copertina è l'ultimo colpo dell'arrivo sulla home: cerchia i voli da prenotare quando la polaroid è caduta e la passata si è stesa. La nota è sempre visibile, ma non è mai la cosa principale della pagina.
+### La home
+La home racconta noi, non le cose da fare. Si apre col titolo, con un sottotitolo che dice chi siamo (i quattro soprannomi, i paesi visti fra tutti, il Sud America fatto insieme) e con la nostra polaroid a Machu Picchu. Poi vengono «I Patagucci» e «I viaggi fatti», col mappamondo e i paesi di ognuno. I viaggi da fare si aprono dalle linguette in alto, e quello che manca da prenotare sta nella loro pagina, a penna rossa.
 
 ### La copertina (componente firma)
-Il quaderno chiuso, a schermo pieno, con il logo vero del gruppo stampato in copertina. Il logo è fatto a livelli: cielo, banda e aereo sono immagini in `assets/logo/`, montagne, cresta e lettere sono vettori da `_sources/logo/forme.json`. Il disegno si misura in unità del disegno originale (`--u`, su una tavola di 1672×941) e il colore pieno continua oltre i bordi. Sul dorso ci sono i due punti metallici; in basso a destra la scritta «Quadretti 5 mm»; in alto a destra il tasto della musica (bianco, contorno a mano, dice quello che fa: «Accendi la musica» o «Spegni la musica»). All'apertura il logo si stampa da solo, a colpi, come un manifesto (solo CSS, 2,6s): il cielo, la banda, montagne e cresta, la scritta con un tonfo; poi l'aereo Royal Brunico entra in volo, si posa e ondeggia, e compare «Entra». Ogni colpo rallenta e si posa, senza rimbalzi e senza sfocature. L'intro aspetta che le immagini del logo siano pronte, al massimo 1,5s; Esc, o un tocco sulla copertina, la porta subito alla fine. «Entra» è inerte finché non ha finito di comparire (fine dell'animazione `cpAppare`): il tab non raggiunge un bottone che non si vede. Il resto della pagina invece è inerte finché c'è la copertina, ogni pezzo da quando arriva: su una rete lenta il tab non scivola dietro la copertina. Aspetta anche lo script del volo, al massimo 2,5s in più, così su una rete lenta non si cade sulla dissolvenza di riserva solo perché lo script era in ritardo. Motion è una copia del pacchetto ufficiale in `assets/vendor/`, e i due script stanno in testa alla pagina, rimandati.
+Il quaderno chiuso, a schermo pieno, con il logo vero del gruppo stampato in copertina. Il logo è fatto a livelli: cielo, banda e aereo sono immagini in `assets/logo/`, montagne, cresta e lettere sono vettori da `_sources/logo/forme.json`. Il disegno si misura in unità del disegno originale (`--u`, su una tavola di 1672×941) e il colore pieno continua oltre i bordi. Sul dorso ci sono i due punti metallici, e basta: sulla copertina non ci sono scritte né tasti oltre a «Entra». All'apertura il logo si stampa da solo, a colpi, come un manifesto (solo CSS, 3,7s): il cielo, la banda, montagne e cresta, la scritta con un tonfo; poi l'aereo Royal Brunico entra in volo, si posa e ondeggia, e compare «Entra». Ogni colpo rallenta e si posa, senza rimbalzi e senza sfocature. L'intro aspetta che le immagini del logo siano pronte, al massimo 1,5s; Esc, o un tocco sulla copertina, la porta subito alla fine. «Entra» è inerte finché non ha finito di comparire (fine dell'animazione `cpAppare`): il tab non raggiunge un bottone che non si vede. Il resto della pagina invece è inerte finché c'è la copertina, ogni pezzo da quando arriva: su una rete lenta il tab non scivola dietro la copertina. Aspetta anche lo script del volo, al massimo 2,5s in più, così su una rete lenta non si cade sulla dissolvenza di riserva solo perché lo script era in ritardo. Motion è una copia del pacchetto ufficiale in `assets/vendor/`, e i due script stanno in testa alla pagina, rimandati.
 
-Su «Entra» parte il volo verso il quaderno (Motion, 2,6s). L'aereo si stacca dal logo e vola verso lo schermo: accelera, cresce fino a 4 volte, si inclina di −8° e ti passa oltre (0,8s), e intanto la copertina gli va incontro di un 5%. Niente sfocature: la velocità la dice la crescita. Il cielo diventa il foglio: le righe orizzontali dei quadretti corrono da sinistra a destra, poi quelle verticali dall'alto in basso (0,4s ciascuna, come tirate col righello), e sotto il verde si fa bianco. Lo stesso aereo rientra da sinistra, perché era uscito a destra: piccolo, col muso sempre in avanti e senza picchiate. Scende piano fino alla riga del titolo, riprende quota tracciando la scia tratteggiata a matita e si posa accanto a «Patagucci Trips», esattamente sopra l'aereo che sta lì. Mentre arriva, il foglio si scopre (0,6s) e sotto c'è la home, che lo accoglie con il suo arrivo: la polaroid cade, la passata si stende e per ultima la penna rossa cerchia i voli da prenotare. Posizione, misura e inclinazione dell'atterraggio vengono dal disegno sulla home, quindi tornano su qualsiasi schermo. Le righe crescono in scala, non ritagliate, così il volo resta fluido anche su un telefono.
+Su «Entra» parte il volo verso il quaderno (Motion, circa 5,5s). Tutti i tempi del volo sono moltiplicati per un solo numero, `LENTO`, oggi 1,5: per allungarlo o accorciarlo si cambia quello. L'aereo si stacca dal logo e vola verso lo schermo: accelera, cresce fino a 4 volte, si inclina di −8° e ti passa oltre (1,2s), e intanto la copertina gli va incontro di un 5%. Niente sfocature: la velocità la dice la crescita. Il cielo diventa il foglio: le righe orizzontali dei quadretti corrono da sinistra a destra, poi quelle verticali dall'alto in basso (0,6s ciascuna, come tirate col righello), e sotto il verde si fa bianco. Lo stesso aereo rientra da sinistra, perché era uscito a destra, e fa il giro dei ricordi. Sono cinque cose viste in quattro in Sud America: Machu Picchu, il Salar di Uyuni, i fenicotteri delle lagune, i geyser del Sol de Mañana e Palccoyo. Sono disegnate a pennarello sul foglio, in giro in senso orario, in due colonne sul telefono. L'aereo ci passa sopra una per una a velocità costante (3,15s in tutto), lasciando la scia tratteggiata a matita, e ognuna si disegna mentre arriva. Prima compare la macchia d'evidenziatore del suo paese (salmone per il Perù, oro per la Bolivia), poi i tratti uno dopo l'altro, poi il nome con la sua passata. I disegni sono leggermente storti, non tutti dalla stessa parte. L'aereo è visto di fianco: guarda dalla parte in cui va e si inclina al massimo di 40°. Quando il giro lo porta indietro si volta, stringendosi come un aereo che vira, invece di finire a testa in giù. Finito il giro scende verso il titolo alla stessa velocità, rallenta e si posa accanto a «Patagucci Trips», esattamente sopra l'aereo che sta lì. Mentre scende, il foglio si scopre coi ricordi sopra (0,8s) e sotto c'è la home, che lo accoglie col suo arrivo: la polaroid cade e la passata si stende. Posizione, misura e inclinazione dell'atterraggio vengono dal disegno sulla home, quindi tornano su qualsiasi schermo. Le righe crescono in scala, non ritagliate, così il volo resta fluido anche su un telefono.
 
-Il volo si può saltare: un secondo «Entra» premuto entro 0,6s è un doppio clic e non conta, dopo invece salta. Saltano anche Esc e un cambio di misura della finestra a volo iniziato. Saltando, i movimenti del volo si fermano, la copertina svanisce in 0,2s e la home fa subito il suo arrivo, una volta sola. Chi è entrato da tastiera (Invio o Esc) si ritrova col focus sul titolo della pagina. Una rete di sicurezza chiude comunque la copertina dopo 6s.
+Il volo si può saltare: un secondo «Entra» premuto entro 0,6s è un doppio clic e non conta, dopo invece salta. Saltano anche Esc e un cambio di misura della finestra a volo iniziato. Saltando, i movimenti del volo si fermano, la copertina svanisce in 0,2s e la home fa subito il suo arrivo, una volta sola. Chi è entrato da tastiera (Invio o Esc) si ritrova col focus sul titolo della pagina. Una rete di sicurezza chiude comunque la copertina dopo 9s.
 
 Il disegno sulla home è l'aereo del logo inclinato di −6°, 2,73em di larghezza, con il fondo sulla riga del testo. La sua scia parte dalla riga, subito dopo l'ultima lettera, e sale fino alla coda.
 
-La «Patagucci song» suona sulla copertina e sfuma in 1,8s quando si preme «Entra». Senza Motion la copertina sfuma (0,6s). Con il movimento ridotto il logo è già intero e la copertina si dissolve in 0,25s. Senza JavaScript la copertina non c'è e il sito è già aperto. Il focus qui è bianco, perché il blu sul verde e sul nero non si vedrebbe.
+La «Patagucci song» parte con la copertina e continua dentro il sito: sulla copertina non c'è un tasto per spegnerla. Se il browser non la lascia partire da sola, parte al primo tocco sulla copertina, anche quello su «Entra». Con la tastiera non parte, e dentro il sito c'è il tasto. Senza Motion la copertina sfuma (0,6s). Con il movimento ridotto il logo è già intero e la copertina si dissolve in 0,25s. Senza JavaScript la copertina non c'è e il sito è già aperto. Il focus qui è bianco, perché il blu sul verde e sul nero non si vedrebbe.
+
+### Il tasto della musica
+Dentro il sito il tasto sta fisso in basso a destra. È un'etichetta di carta col contorno a pennarello e il tratto ripassato (spostato di 3px e 4px), ruotata di −1,5°, con la nota disegnata. Dice quello che fa, «Spegni la musica» o «Accendi la musica», senza un secondo stato «premuto». Quando la musica è accesa prende l'evidenziatore della meta aperta. Sul telefono resta solo la nota (44×44px), e la scritta la legge il lettore di schermo. Il tasto sta sopra la pagina che si volta e sotto la copertina, e non si può usare finché c'è la copertina. Chi arriva da un link diretto trova la canzone ferma e il tasto pronto ad accenderla. Mentre parla uno di noi (le foto dell'equipaggio sotto il mouse) la canzone si abbassa al 20%.
 
 ### Il movimento (assets/anima.js)
 Motion senza React, otto gesti:
-- Il volo verso il quaderno, all'uscita dalla copertina (vedi sopra).
+- Il volo verso il quaderno col giro dei ricordi, all'uscita dalla copertina (vedi sopra).
 - La pagina che si volta: un foglio a quadretti grande quanto lo schermo gira sul bordo sinistro in 0,55s, partendo deciso e rallentando. Tornando a una meta che viene prima gira sul bordo destro. Passa sotto le linguette, che restano ferme e dicono dove si è. Si volta solo quando la meta cambia davvero: non per un link a una sezione della stessa meta, non ripremendo la linguetta aperta, e una volta sola con Indietro e Avanti.
 - La polaroid che cade sul foglio.
 - La passata di evidenziatore, solo sulla parola del titolo della meta (0,75s). Riparte da vuota senza che la si veda ritirarsi.
-- La penna rossa che si disegna, una volta, quando entra nello schermo: attorno al «2» della nota in home, e attorno alle parole da prenotare nel titolo del riquadro dei biglietti della Corea (`.cerchiato`: un giro storto che sborda di un terzo di lettera per parte e allarga un poco la riga, così sul telefono, se il titolo va a capo, non passa sulla riga di sopra come una cancellatura).
+- La penna rossa che si disegna, una volta, quando entra nello schermo, attorno alle parole da prenotare nel titolo del riquadro dei biglietti della Corea (`.cerchiato`: un giro storto che sborda di un terzo di lettera per parte e allarga un poco la riga, così sul telefono, se il titolo va a capo, non passa sulla riga di sopra come una cancellatura).
 - Le polaroid che si inclinano sotto il mouse.
 - I giorni che si spiegano come un foglio piegato (vedi l'itinerario).
 - I petali dei ciliegi, sulla pagina dei ciliegi della Corea: quando la pagina arriva nello schermo passa una folata di petali, evidenziatore rosa col contorno a pennarello come le puntine delle cartine (uno ogni 70px di larghezza: da nove sul telefono a venti sullo schermo largo, da 12 a 22px). Cadono girando su se stessi e mostrando l'altro lato, ondeggiano nel vento e spariscono prima del fondo: la folata finisce in una decina di secondi. Passano sopra lo scritto senza toccarsi, e ripartono solo quando si torna sulla pagina; quando la pagina esce dallo schermo i petali se ne vanno con lei. È l'unico movimento della pagina che non risponde a un gesto di chi legge: per questo è uno solo, breve, e non torna da solo.

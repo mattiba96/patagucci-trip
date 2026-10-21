@@ -562,18 +562,18 @@
       },
       {
         "name": "copertina-intro",
-        "value": "2.6s in tutto (CSS), aspetta le immagini del logo al massimo 1.5s",
+        "value": "3.7s in tutto (CSS), aspetta le immagini del logo al massimo 1.5s",
         "purpose": "All'apertura il logo si stampa a colpi, senza rimbalzi e senza sfocature: cielo, banda, montagne e cresta, la scritta con un tonfo; l'aereo entra in volo, si posa e ondeggia; poi compare Entra, inerte finche' non ha finito di comparire e finche' non c'e' lo script del volo (al massimo 2.5s in piu'). Esc o un tocco sulla copertina portano alla fine."
       },
       {
         "name": "copertina-volo",
-        "value": "2.6s in tutto (Motion): aereo verso lo schermo .8s cubic-bezier(.45,0,.75,.35) fino a scale(4) rotate(-8deg); righe dei quadretti da .42s e .58s (scaleX/scaleY .4s); foglio bianco da .45s; volo dell'aereo piccolo 1.35s cubic-bezier(.3,0,.25,1) da .95s; arrivo della home da 1.6s; il foglio si scopre da 1.75s (.6s)",
-        "purpose": "Su Entra l'aereo Royal Brunico vola verso lo schermo crescendo e ti passa oltre, senza sfocature; il cielo si riga a quadretti e diventa il foglio; lo stesso aereo rientra da sinistra, scende piano, riprende quota con la scia tratteggiata e si posa sull'aereo accanto al titolo della home, che intanto fa il suo arrivo (polaroid, passata, penna rossa per ultima)."
+        "value": "circa 5.5s (Motion), tutti i tempi per LENTO = 1.5: aereo verso lo schermo 1.2s cubic-bezier(.45,0,.75,.35) fino a scale(4) rotate(-8deg); righe dei quadretti da .63s e .87s (scaleX/scaleY .6s); foglio bianco da .68s; giro dei ricordi da 1.28s, 3.15s a velocita' costante; discesa al titolo che rallenta (quadratica, stessa velocita' all'inizio); il foglio si scopre da 4.35s (.83s)",
+        "purpose": "Su Entra l'aereo Royal Brunico vola verso lo schermo crescendo e ti passa oltre, senza sfocature; il cielo si riga a quadretti e diventa il foglio; lo stesso aereo rientra da sinistra e fa il giro dei cinque ricordi del Sud America, che si disegnano a pennarello mentre ci passa sopra (macchia d'evidenziatore, tratti, nome con la passata). Visto di fianco, guarda dove va, si inclina al massimo di 40 gradi e quando torna indietro si volta stringendosi. Poi scende e si posa sull'aereo accanto al titolo della home, che intanto fa il suo arrivo (polaroid, passata)."
       },
       {
         "name": "copertina-salta",
         "value": ".2s ease",
-        "purpose": "Saltare il volo: un secondo Entra dopo .6s (prima e' un doppio clic e non conta), Esc, o un cambio di misura della finestra. I movimenti del volo si fermano, la copertina svanisce e la home fa subito il suo arrivo, una volta sola. Rete di sicurezza: la copertina si chiude comunque dopo 6s."
+        "purpose": "Saltare il volo: un secondo Entra dopo .6s (prima e' un doppio clic e non conta), Esc, o un cambio di misura della finestra. I movimenti del volo si fermano, la copertina svanisce e la home fa subito il suo arrivo, una volta sola. Rete di sicurezza: la copertina si chiude comunque dopo 9s."
       },
       {
         "name": "copertina-css",
@@ -581,9 +581,9 @@
         "purpose": "Senza Motion la copertina sfuma; con movimento ridotto il logo e' gia' intero, l'aereo non ondeggia e la copertina si dissolve in .25s."
       },
       {
-        "name": "canzone-sfuma",
-        "value": "1800ms",
-        "purpose": "La Patagucci song sfuma premendo Entra."
+        "name": "canzone",
+        "value": "continua dentro il sito; volume 0.2 mentre parla uno di noi",
+        "purpose": "La Patagucci song parte con la copertina, anche al primo tocco se il browser la ferma, e continua dentro il sito; la spegne e la riaccende il tasto della musica in basso a destra."
       },
       {
         "name": "striscia-foto",
@@ -690,20 +690,20 @@
       "css": "@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Patrick+Hand+SC&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap'); .ds-polaroid { position:relative; width:200px; margin:30px 20px; background:#fff; padding:10px 10px 0; border-radius:3px; box-shadow:0 2px 3px rgba(20,24,30,0.10), 0 22px 34px -18px rgba(20,24,30,0.48); transform:rotate(-2deg); transition:transform .35s cubic-bezier(.16,1,.3,1); } .ds-polaroid:hover { transform:perspective(900px) rotate(-2deg) rotateX(4deg) rotateY(-6deg) translateZ(16px); } .ds-polaroid::before { content:''; position:absolute; top:-18px; left:50%; width:96px; height:28px; transform:translateX(-50%) rotate(-4deg); background:color-mix(in srgb, #ffe14d 62%, rgba(255,255,255,0.35)); opacity:0.9; box-shadow:0 1px 2px rgba(0,0,0,0.08); } .ds-foto { aspect-ratio:4/5; background:linear-gradient(160deg,#a8deff,#7deaa0); } .ds-polaroid figcaption { padding:10px 4px 12px; text-align:center; font-family:'Patrick Hand SC','Marker Felt','Comic Sans MS',cursive; font-size:1.12rem; color:#161616; }"
     },
     {
-      "name": "Nota di quello che manca",
-      "kind": "custom",
-      "refersTo": "nota-manca",
-      "description": "In home: il numero cerchiato a penna rossa e la nota tratteggiata. Sempre visibile, mai protagonista.",
-      "html": "<a class=\"ds-nota\" href=\"#\"><span class=\"ds-num\">2<svg viewBox=\"0 0 120 100\" aria-hidden=\"true\"><path d=\"M93 17 C 70 3, 27 6, 12 33 C 0 59, 22 92, 62 92 C 101 92, 117 63, 106 37 C 98 17, 73 7, 48 12\"/></svg></span><span>voli ci mancano ancora: Busan &rarr; Jeju e Jeju &rarr; Seul.</span></a>",
-      "css": "@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Patrick+Hand+SC&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap'); .ds-nota { display:inline-flex; align-items:center; gap:12px; padding:8px 16px 8px 10px; color:#c8102e; text-decoration:none; background:#fff; font-family:'Patrick Hand SC','Marker Felt','Comic Sans MS',cursive; font-size:1.12rem; line-height:1.3; border:2px solid transparent; border-radius:4px; border-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23c8102e' stroke-linecap='round' stroke-width='2.4' stroke-dasharray='7 4'%3E%3Cpath d='M3.4 5.4 C 30 4.2, 60 6.2, 90 4.8 S 112 4.6, 117.2 5'/%3E%3Cpath d='M115 2.6 C 116.2 30, 114 60, 115.4 90 S 115 112, 115.2 117.6'/%3E%3Cpath d='M117.4 114.8 C 90 116, 60 114, 30 115.4 S 8 115.2, 2.4 114.6'/%3E%3Cpath d='M5 117.8 C 3.8 90, 6 60, 4.6 30 S 5 8, 4.8 2.2'/%3E%3C/g%3E%3C/svg%3E\") 16 / 16px / 4px round; transform:rotate(-0.8deg); } .ds-nota:hover { background:color-mix(in srgb, #c8102e 6%, #fff); } .ds-nota:focus-visible { outline:3px solid #1d3fa8; outline-offset:2px; box-shadow:0 0 0 6px rgba(255,255,255,0.92); } .ds-num { position:relative; display:inline-grid; place-items:center; width:1.6em; height:1.45em; font-family:'Permanent Marker','Marker Felt','Comic Sans MS',cursive; font-size:1.6rem; line-height:1; } .ds-num svg { position:absolute; inset:-16% -20%; width:140%; height:132%; overflow:visible; } .ds-num path { fill:none; stroke:#c8102e; stroke-width:4.5; stroke-linecap:round; }"
-    },
-    {
       "name": "Entra (copertina)",
       "kind": "button",
       "refersTo": "copertina-entra",
       "description": "Il bottone della copertina: giallo, contorno ripassato in crema del logo, affonda nel contorno quando si preme.",
       "html": "<div class=\"ds-cop\"><span class=\"ds-giro\"><button class=\"ds-entra\">Entra <svg viewBox=\"0 0 40 20\" aria-hidden=\"true\"><path d=\"M2 11 C 13 7, 25 13, 36 9 M29 3 L37 9 L30 16\"/></svg></button></span></div>",
       "css": "@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Patrick+Hand+SC&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap'); .ds-cop { background:#09442d; padding:36px 40px; display:flex; justify-content:center; } .ds-giro { position:relative; z-index:0; display:inline-block; transform:rotate(-1.2deg); } .ds-giro::before { content:''; position:absolute; inset:0; transform:translate(4px,5px); z-index:-1; border:2.5px solid #fcf8ec; border-radius:12px 7px 14px 8px / 8px 13px 7px 12px; } .ds-entra { display:inline-flex; align-items:center; gap:12px; min-height:58px; font-family:'Permanent Marker','Marker Felt','Comic Sans MS',cursive; font-size:1.95rem; line-height:1; color:#161616; background:#ffe14d; border:2.5px solid #161616; border-radius:12px 7px 14px 8px / 8px 13px 7px 12px; padding:12px 30px 11px 34px; cursor:pointer; transition:transform .2s cubic-bezier(.16,1,.3,1); } .ds-entra svg { width:40px; height:20px; overflow:visible; } .ds-entra path { fill:none; stroke:#161616; stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round; } .ds-entra:hover { transform:translate(-1px,-2px); } .ds-entra:active { transform:translate(4px,5px); } .ds-entra:focus-visible { outline:3px solid #fff; outline-offset:7px; }"
+    },
+    {
+      "name": "Tasto della musica",
+      "kind": "button",
+      "refersTo": "tasto-musica",
+      "description": "Dentro il sito, fisso in basso a destra: etichetta di carta col contorno a pennarello e il tratto ripassato. Dice quello che fa; accesa prende l'evidenziatore della meta. Sul telefono resta la nota sola.",
+      "html": "<div class=\"ds-mus-giro\"><button class=\"ds-mus ds-accesa\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M9 17.4 C 9.2 13, 8.8 9, 9 5.2 L 19.2 2.8 C 19 7, 19.3 11, 19 15.2\"/><ellipse cx=\"6.5\" cy=\"17.6\" rx=\"2.7\" ry=\"2.1\"/><ellipse cx=\"16.6\" cy=\"15.4\" rx=\"2.7\" ry=\"2.1\"/></svg><span>Spegni la musica</span></button></div>",
+      "css": "@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand+SC&display=swap'); .ds-mus-giro { position:relative; display:inline-block; margin:20px; transform:rotate(-1.5deg); } .ds-mus-giro::before { content:''; position:absolute; inset:0; transform:translate(3px,4px); z-index:-1; border:1.5px solid #161616; border-radius:12px 7px 14px 8px / 8px 13px 7px 12px; } .ds-mus { position:relative; display:flex; align-items:center; gap:8px; min-height:44px; cursor:pointer; font-family:'Patrick Hand SC','Marker Felt','Comic Sans MS',cursive; font-size:1.05rem; letter-spacing:0.03em; line-height:1; color:#161616; background:#fff; border:1.5px solid #161616; border-radius:12px 7px 14px 8px / 8px 13px 7px 12px; padding:7px 14px 6px 10px; } .ds-mus.ds-accesa { background:#ffe14d; } .ds-mus svg { width:22px; height:22px; } .ds-mus svg path { fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; } .ds-mus svg ellipse { fill:currentColor; }"
     }
   ],
   "narrative": {
@@ -716,7 +716,7 @@
       "Riquadri a tratto di pennarello, e niente ombra sull'inchiostro.",
       "Polaroid con il nastro strappato per le foto, l'equipaggio e le mete.",
       "Penna rossa riservata a «da prenotare».",
-      "Ingresso dalla copertina del quaderno, con il logo vero del gruppo e la «Patagucci song»."
+      "Ingresso dalla copertina del quaderno, con il logo vero del gruppo e la «Patagucci song», che continua dentro il sito finché non la si spegne."
     ],
     "rules": [
       {

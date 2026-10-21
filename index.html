@@ -97,6 +97,43 @@
 </head>
 <body>
 
+<div class="musica-giro"><button type="button" class="musica" id="musica"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 17.4 C 9.2 13, 8.8 9, 9 5.2 L 19.2 2.8 C 19 7, 19.3 11, 19 15.2"/><ellipse cx="6.5" cy="17.6" rx="2.7" ry="2.1"/><ellipse cx="16.6" cy="15.4" rx="2.7" ry="2.1"/></svg><span class="musica-scritta">Accendi la musica</span></button></div>
+<script>
+  (function(){
+    var tasto = document.getElementById('musica');
+    var scritta = tasto.querySelector('span');
+    // Non la si scarica in anticipo: sono 3,9 MB, e su una rete lenta
+    // toglievano la strada agli script del volo. Si comincia a scaricarla
+    // solo quando suona.
+    var canzone = new Audio();
+    canzone.preload = 'none';
+    canzone.loop = true;
+    canzone.src = 'assets/audio/patagucci-song.mp3';
+    // Il tasto dice quello che fa ("Accendi" o "Spegni"): una scritta
+    // sola, senza un secondo stato "premuto" che il lettore di schermo
+    // annuncerebbe insieme e al contrario.
+    function segna(){
+      var accesa = !canzone.paused;
+      tasto.classList.toggle('accesa', accesa);
+      scritta.textContent = accesa ? 'Spegni la musica' : 'Accendi la musica';
+    }
+    canzone.addEventListener('play', segna);
+    canzone.addEventListener('pause', segna);
+    function suona(){
+      var p = canzone.play();
+      if(p && p.then) p.then(segna, segna);
+    }
+    tasto.addEventListener('click', function(){
+      if(canzone.paused) suona(); else canzone.pause();
+    });
+    window.PatagucciMusica = {
+      suona: function(){ if(canzone.paused) suona(); },
+      // Mentre parla uno di noi (le foto del gruppo) la canzone si abbassa.
+      abbassa: function(si){ canzone.volume = si ? 0.2 : 1; }
+    };
+  })();
+</script>
+
 <div class="copertina" id="copertina" role="dialog" aria-modal="true" aria-labelledby="cp-titolo">
   <div class="cp-anta">
     <p class="sr-only" id="cp-titolo">Patagucci Trips</p>
@@ -110,10 +147,8 @@
     </div>
     <div class="cp-dorso" aria-hidden="true"></div>
     <div class="cp-basso" inert><span class="cp-entra-giro"><button type="button" class="cp-entra" id="cp-entra">Entra <svg viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 11 C 13 7, 25 13, 36 9 M29 3 L37 9 L30 16"/></svg></button></span></div>
-    <p class="cp-quadretti" aria-hidden="true">Quadretti 5 mm</p>
-    <button type="button" class="cp-musica" id="cp-musica"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 17.4 C 9.2 13, 8.8 9, 9 5.2 L 19.2 2.8 C 19 7, 19.3 11, 19 15.2"/><ellipse cx="6.5" cy="17.6" rx="2.7" ry="2.1"/><ellipse cx="16.6" cy="15.4" rx="2.7" ry="2.1"/></svg><span>Accendi la musica</span></button>
   </div>
-  <div class="cp-foglio" aria-hidden="true"><div class="cp-carta"></div><i class="cp-righe cp-righe-o"></i><i class="cp-righe cp-righe-v"></i></div>
+  <div class="cp-foglio" aria-hidden="true"><div class="cp-carta"></div><i class="cp-righe cp-righe-o"></i><i class="cp-righe cp-righe-v"></i><div class="cp-ricordi"><figure class="cp-ricordo" data-paese="pe"><svg viewBox="0 0 120 90" focusable="false"><path class="cp-r-evid" d="M14 58 C 10 38, 36 24, 64 28 C 94 32, 112 46, 106 64 C 100 82, 52 86, 28 80 C 18 76, 15 68, 14 58 Z"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M6 70 C 18 66, 26 54, 36 52 C 44 50, 48 44, 56 44 C 62 44, 64 30, 72 16 C 76 9, 84 8, 88 18 C 92 30, 96 46, 104 56 C 108 62, 112 66, 116 70"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M20 70 L 20 64 L 34 64 L 34 59 L 48 59 L 48 54 L 60 54"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M64 70 L 64 62 L 70 58 L 76 62 L 76 70 M80 70 L 80 63 L 85 60 L 90 63 L 90 70"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M4 76 C 36 74, 84 78, 116 75"/></svg><figcaption><i class="cp-r-passata"></i>Machu Picchu</figcaption></figure><figure class="cp-ricordo" data-paese="bo"><svg viewBox="0 0 120 90" focusable="false"><path class="cp-r-evid" d="M14 58 C 10 38, 36 24, 64 28 C 94 32, 112 46, 106 64 C 100 82, 52 86, 28 80 C 18 76, 15 68, 14 58 Z"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M6 44 C 40 43, 80 45, 114 43"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M22 58 L 32 53 L 46 53 L 56 58 L 46 63 L 32 63 Z"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M62 58 L 72 53 L 86 53 L 96 58 L 86 63 L 72 63 Z"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M38 73 L 50 67 L 68 67 L 80 73 L 68 79 L 50 79 Z"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M38 30 C 32 30, 31 22, 38 21 C 40 13, 52 12, 55 19 C 61 16, 68 20, 66 26 C 70 28, 68 32, 63 31 Z"/></svg><figcaption><i class="cp-r-passata"></i>Salar di Uyuni</figcaption></figure><figure class="cp-ricordo" data-paese="bo"><svg viewBox="0 0 120 90" focusable="false"><path class="cp-r-evid" d="M14 58 C 10 38, 36 24, 64 28 C 94 32, 112 46, 106 64 C 100 82, 52 86, 28 80 C 18 76, 15 68, 14 58 Z"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M44 46 C 42 38, 56 36, 70 40 C 80 43, 88 44, 96 40 C 92 50, 82 58, 66 60 C 54 62, 44 56, 44 46 Z"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M46 44 C 36 40, 32 32, 40 25 C 48 18, 50 12, 44 8 C 40 5, 34 8, 34 13 C 33 18, 36 21, 39 18"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M62 60 L 62 82 M58 60 L 51 70 L 60 75"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M34 84 C 48 82, 74 86, 92 83 M44 89 C 54 88, 64 90, 74 89"/></svg><figcaption><i class="cp-r-passata"></i>I fenicotteri</figcaption></figure><figure class="cp-ricordo" data-paese="bo"><svg viewBox="0 0 120 90" focusable="false"><path class="cp-r-evid" d="M14 58 C 10 38, 36 24, 64 28 C 94 32, 112 46, 106 64 C 100 82, 52 86, 28 80 C 18 76, 15 68, 14 58 Z"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M6 82 C 40 80, 80 84, 114 81"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M34 82 C 42 72, 78 72, 86 82"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M54 75 C 50 62, 56 54, 48 44 C 40 36, 44 24, 36 18"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M66 75 C 70 62, 64 54, 72 44 C 80 36, 76 24, 84 18"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M36 18 C 32 10, 42 4, 48 9 C 52 2, 66 2, 70 9 C 76 4, 88 10, 84 18"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M30 52 C 23 48, 25 39, 32 37 M90 56 C 97 52, 95 43, 88 41"/></svg><figcaption><i class="cp-r-passata"></i>Sol de Mañana</figcaption></figure><figure class="cp-ricordo" data-paese="pe"><svg viewBox="0 0 120 90" focusable="false"><path class="cp-r-evid" d="M14 58 C 10 38, 36 24, 64 28 C 94 32, 112 46, 106 64 C 100 82, 52 86, 28 80 C 18 76, 15 68, 14 58 Z"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M4 76 L 30 38 L 46 54 L 70 22 L 116 76"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M62 33 C 66 31, 70 34, 74 31 C 76 33, 78 33, 79 35"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M54 44 C 64 50, 80 50, 88 44 M44 58 C 62 66, 88 66, 100 58 M34 70 C 58 78, 92 78, 110 70"/><path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="M20 52 C 26 55, 32 54, 37 49"/></svg><figcaption><i class="cp-r-passata"></i>Palccoyo</figcaption></figure></div></div>
   <div class="cp-volo" aria-hidden="true"><svg focusable="false">
     <defs><mask id="cp-maschera-volo" maskUnits="userSpaceOnUse" x="-1000" y="-1000" width="8000" height="8000"><path class="cp-scopri" pathLength="1"/></mask></defs>
     <path class="cp-scia" mask="url(#cp-maschera-volo)"/>
@@ -160,7 +195,7 @@
       var parti = function(){
         if(copertina.classList.contains('via')) return;
         copertina.classList.add('via');
-        setTimeout(pronta, 3500);
+        setTimeout(pronta, 5000);
       };
       Promise.all(Array.prototype.map.call(copertina.querySelectorAll('.pl img'), function(img){
         return img.decode ? img.decode().catch(function(){}) : null;
@@ -172,80 +207,19 @@
     }
 
     // ---- La canzone dei Patagucci ----
-    // Parte con la copertina e sfuma quando si preme "Entra". Molti
-    // browser non lasciano partire un suono da solo: allora parte al primo
-    // tocco sulla copertina, o col tasto della musica, che serve anche a
-    // spegnerla. Non la si scarica in anticipo: sono 3,9 MB, e su una rete
-    // lenta toglievano la strada agli script del volo. Si comincia a
-    // scaricarla solo quando suona, e dopo che gli script sono arrivati.
-    var musica = document.getElementById('cp-musica');
-    var scritta = musica.querySelector('span');
-    var canzone = new Audio();
-    canzone.preload = 'none';
-    canzone.loop = true;
-    canzone.src = 'assets/audio/patagucci-song.mp3';
-    var spentaApposta = false, sfumando = false, guadagno = null;
-
-    // Il tasto dice quello che fa ("Accendi" o "Spegni"): una scritta
-    // sola, senza un secondo stato "premuto" che il lettore di schermo
-    // annuncerebbe insieme e al contrario.
-    function segna(){
-      var accesa = !canzone.paused && !sfumando;
-      musica.classList.toggle('accesa', accesa);
-      scritta.textContent = accesa ? 'Spegni la musica' : 'Accendi la musica';
-    }
-    // A copertina chiusa la canzone non serve piu': si libera la memoria.
-    function libera(){
-      try { canzone.removeAttribute('src'); canzone.load(); } catch(e){}
-    }
-    function suona(){
-      if(chiusa || sfumando) return;
-      canzone.volume = 1;
-      var p = canzone.play();
-      if(p && p.then) p.then(segna, segna); else segna();
-    }
-    // Su iPhone il volume dell'audio non si cambia da qui: per sfumare la
-    // canzone passa da un nodo di guadagno, collegato solo in quel momento
-    // (dentro il clic, l'unico istante in cui il browser lo permette).
-    function volumeLibero(){
-      var prima = canzone.volume;
-      canzone.volume = prima > 0.5 ? 0.4 : 0.6;
-      var libero = Math.abs(canzone.volume - prima) > 0.05;
-      canzone.volume = prima;
-      return libero;
-    }
-    function sfuma(durata){
-      if(canzone.paused || sfumando) return;
-      sfumando = true;
-      segna();
-      if(!volumeLibero() && !guadagno){
-        try {
-          var C = window.AudioContext || window.webkitAudioContext;
-          var contesto = new C();
-          guadagno = contesto.createGain();
-          contesto.createMediaElementSource(canzone).connect(guadagno);
-          guadagno.connect(contesto.destination);
-          if(contesto.resume) contesto.resume();
-        } catch(e){ guadagno = null; }
-      }
-      var t0 = Date.now();
-      var giro = setInterval(function(){
-        var resto = 1 - Math.min(1, (Date.now() - t0) / durata);
-        if(guadagno) guadagno.gain.value = resto; else canzone.volume = resto;
-        if(resto <= 0){ clearInterval(giro); canzone.pause(); if(chiusa) libera(); }
-      }, 40);
-    }
-    musica.addEventListener('click', function(){
-      if(canzone.paused){ spentaApposta = false; suona(); }
-      else { spentaApposta = true; canzone.pause(); segna(); }
-    });
+    // Il tasto e la canzone stanno fuori dalla copertina (musica_html,
+    // qui sopra): qui la si fa solo partire. Molti browser non
+    // lasciano partire un suono da solo: allora parte al primo tocco sulla
+    // copertina, anche quello su "Entra", e da li' continua dentro il sito.
+    var musica = window.PatagucciMusica;
+    function suona(){ if(musica && !chiusa) musica.suona(); }
     // Un tocco sulla copertina accende la canzone, se il browser l'aveva
     // fermata, e porta l'intro alla fine: chi tocca ha gia' voglia di
     // entrare. La tastiera invece non accende niente: chi usa il tab o un
-    // lettore di schermo non deve trovarsi la musica sopra la voce.
-    copertina.addEventListener('pointerdown', function(e){
-      if(musica.contains(e.target) || entra.contains(e.target)) return;
-      if(canzone.paused && !spentaApposta) suona();
+    // lettore di schermo non deve trovarsi la musica sopra la voce, e
+    // dentro il sito ha il tasto per accenderla.
+    copertina.addEventListener('pointerdown', function(){
+      suona();
       if(copertina.classList.contains('via') && !copertina.classList.contains('pronta')){ copertina.classList.add('salta'); pronta(); }
     });
 
@@ -275,9 +249,6 @@
     function chiudi(){
       if(chiusa) return;
       chiusa = true;
-      // Chi salta l'apertura non deve sentire la musica continuare sotto.
-      if(canzone.paused) libera();
-      else if(!sfumando) sfuma(400);
       try { sessionStorage.setItem('patagucci-entrato', '1'); } catch(e){}
       if(guardia) guardia.disconnect();
       spenti.forEach(function(el){ el.inert = false; });
@@ -318,8 +289,6 @@
       }
       daTastiera = tastiera;
       tApri = Date.now();
-      // La canzone se ne va mentre la copertina si apre.
-      sfuma(1800);
       if(window.PatagucciCopertina){
         volo = window.PatagucciCopertina.apri(copertina, chiudi);
         // Se la finestra cambia misura (o il telefono gira) a volo in
@@ -359,14 +328,12 @@
 
   <div class="destination active" id="dest-hub" data-dest="hub">
     <header class="hero">
-      <div class="bg" style="background-image:url('foto/destinazioni/A_land_enclosed_in_Mountains_-_Hunza_Valley.jpg'); background-position:center 55%;"></div>
+      <div class="bg" role="img" aria-label="Noi quattro a Machu Picchu" style="background-image:url('foto/dd148649-09ef-45bd-8b5e-313dff562db8.jpeg'); background-position:center 40%;"></div>
       <div class="content">
         <h1><span class="tt">Patagucci</span> Trips<svg class="aeroplanino" viewBox="0 0 260 80" aria-hidden="true" focusable="false"><path class="ap-scia" d="M2 78 C 40 78, 84 35.5, 126 30"/><image class="ap-aereo" href="assets/logo/aereo.webp" x="116" y="6" width="140" height="34.8" transform="rotate(-6 186 23.4)"/></svg></h1>
-        <p class="tagline">Due viaggi con le date fissate: l'aurora islandese a gennaio, i ciliegi coreani ad aprile. Questo è il nostro quaderno: dove andiamo, giorno per giorno, e cosa ci aspetta.</p>
-        <a class="nota-manca" href="#recap-voli-kr"><span class="nm-num">3<svg class="a-penna" viewBox="0 0 120 100" aria-hidden="true" focusable="false"><path d="M93 17 C 70 3, 27 6, 12 33 C 0 59, 22 92, 62 92 C 101 92, 117 63, 106 37 C 98 17, 73 7, 48 12"/></svg></span><span class="nm-testo">biglietti ci mancano ancora: il treno Seul → Busan e le due navi per Tsushima, ad aprile. I voli sono tutti comprati.</span></a>
+        <p class="tagline">Manu, Kiki, Mala e Bacci. Fra tutti e quattro abbiamo visto 76 paesi in cinque continenti, e il Sud America l'abbiamo girato insieme: diciassette giorni, da La Paz a Lima. Questo è il nostro quaderno: chi siamo, dove siamo stati e dove andiamo.</p>
         <div class="scroll-cue">↓ sfogliamo</div>
       </div>
-      <div class="photo-credit">Foto: Maqalam97, <a href="https://commons.wikimedia.org/wiki/File:A_land_enclosed_in_Mountains_-_Hunza_Valley.jpg" target="_blank" rel="noopener">CC BY-SA 4.0, Wikimedia Commons</a></div>
     </header>
 
     <main>
@@ -545,37 +512,6 @@
       </section>
 
       <section class="panel" data-nav>
-        <div class="inner" style="max-width:1060px;">
-          <h2 class="section-title reveal"><span class="tt">I viaggi da fare</span></h2>
-          <p class="section-sub reveal">Le due partenze con le date fissate. Ognuna ha il suo quaderno: giorno per giorno, la mappa, il meteo e tutto il resto.</p>
-
-          <div class="trip-grid reveal">
-            <a class="trip-card" href="javascript:void(0)" onclick="showDest('is')">
-              <img src="foto/destinazioni/is-kirkjufell.jpg" alt="Aurora boreale sul Kirkjufell, Islanda" loading="lazy">
-              <div class="overlay"></div>
-              <div class="content">
-                <div class="flag">🇮🇸</div>
-                <div class="title">Islanda</div>
-                <div class="meta">2-9 gennaio 2027 · 8 giorni</div>
-                <p class="tagline">Aurora, grotte di ghiaccio e la laguna glaciale, con quattro ore di luce al giorno.</p>
-              </div>
-            </a>
-
-            <a class="trip-card" href="javascript:void(0)" onclick="showDest('kr')">
-              <img src="foto/destinazioni/kr-ciliegi.jpg" alt="Ciliegi in fiore in Corea del Sud" loading="lazy">
-              <div class="overlay"></div>
-              <div class="content">
-                <div class="flag">🇰🇷🇯🇵🇧🇳🇸🇬</div>
-                <div class="title">Corea, Brunei e Singapore</div>
-                <div class="meta">2-18 aprile 2027 · 17 giorni</div>
-                <p class="tagline">Busan in KTX, una notte in Giappone a Tsushima, il vulcano di Jeju e i ciliegi di Seul, poi la foresta del Borneo e una tappa a Singapore.</p>
-              </div>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <section class="panel alt" data-nav>
         <div class="inner">
           <h2 class="section-title reveal"><span class="tt">I viaggi fatti</span></h2>
           <p class="section-sub reveal">Il diario dei viaggi che abbiamo già fatto, e quanto mondo abbiamo visto finora.</p>
@@ -1283,11 +1219,11 @@
      transform="matrix(2.6916761,0,0,1.4510755,-993.95652,-140.79008)" />
             </svg>
             <div class="mondo-stat">
-              <div class="ms-box"><span class="ms-num">38<span class="ms-pct">%</span></span><span class="ms-lab">del mondo</span></div>
-              <div class="ms-box"><span class="ms-num">75</span><span class="ms-lab">paesi</span></div>
+              <div class="ms-box"><span class="ms-num">39<span class="ms-pct">%</span></span><span class="ms-lab">del mondo</span></div>
+              <div class="ms-box"><span class="ms-num">76</span><span class="ms-lab">paesi</span></div>
               <div class="ms-box"><span class="ms-num">5</span><span class="ms-lab">continenti</span></div>
             </div>
-            <div class="source-note">Il <strong>38%</strong> è 75 paesi sui <strong>195 stati membri dell'ONU</strong>. Contando anche territori e regioni autonome il numero sarebbe diverso: fuori dal conteggio restano <strong>Taiwan</strong>, <strong>Kosovo</strong>, <strong>Hong Kong</strong>, <strong>Macao</strong>, il <strong>Vaticano</strong>, le <strong>Canarie</strong> (che sono Spagna) e la <strong>Transnistria</strong>, che non sono stati membri ONU ma sono stati visti lo stesso. Bandiera della Transnistria: Wikimedia Commons, pubblico dominio. Mappa: Al MacDonald (@F1LT3R), <a href="https://commons.wikimedia.org/wiki/File:World_map_-_low_resolution.svg" target="_blank" rel="noopener">CC BY-SA 3.0</a>. Hong Kong, Macao, Singapore, Kosovo, San Marino, il Vaticano, le Seychelles, il Liechtenstein, il Lussemburgo, Monaco e Vanuatu sono troppo piccoli per essere colorati a questa scala, e la <strong>Lettonia</strong> non è proprio disegnata nella mappa d'origine: nel conteggio ci sono, sulla cartina no.</div>
+            <div class="source-note">Il <strong>39%</strong> è 76 paesi sui <strong>195 stati membri dell'ONU</strong>. Contando anche territori e regioni autonome il numero sarebbe diverso: fuori dal conteggio restano <strong>Taiwan</strong>, <strong>Kosovo</strong>, <strong>Hong Kong</strong>, <strong>Macao</strong>, il <strong>Vaticano</strong>, le <strong>Canarie</strong> (che sono Spagna) e la <strong>Transnistria</strong>, che non sono stati membri ONU ma sono stati visti lo stesso. Bandiera della Transnistria: Wikimedia Commons, pubblico dominio. Mappa: Al MacDonald (@F1LT3R), <a href="https://commons.wikimedia.org/wiki/File:World_map_-_low_resolution.svg" target="_blank" rel="noopener">CC BY-SA 3.0</a>. Hong Kong, Macao, Singapore, Kosovo, San Marino, il Vaticano, le Seychelles, il Liechtenstein, il Lussemburgo, Monaco e Vanuatu sono troppo piccoli per essere colorati a questa scala, e la <strong>Lettonia</strong> non è proprio disegnata nella mappa d'origine: nel conteggio ci sono, sulla cartina no.</div>
           </div>
 
           <h3 style="margin-top:30px;">Chi c'era, viaggio per viaggio</h3>
@@ -1306,7 +1242,7 @@
           <h3 style="margin-top:30px;">Paese per paese, uno per uno</h3>
 
           <div class="persona-paesi reveal">
-            <div class="pp-nome">Manu <span class="pp-conto">60<span class="pp-conto-lab">paesi</span></span></div>
+            <div class="pp-nome">Manu <span class="pp-conto">62<span class="pp-conto-lab">paesi</span></span></div>
             <div class="paesi-fatti">
               <span class="paese-fatto"><span class="pf-flag">🇭🇰</span><span class="pf-nome">Hong Kong</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇲🇴</span><span class="pf-nome">Macao</span></span>
@@ -1355,6 +1291,8 @@
               <span class="paese-fatto"><span class="pf-flag">🇷🇸</span><span class="pf-nome">Serbia</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇧🇦</span><span class="pf-nome">Bosnia ed Erzegovina</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇲🇪</span><span class="pf-nome">Montenegro</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇲🇰</span><span class="pf-nome">Macedonia del Nord</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇽🇰</span><span class="pf-nome">Kosovo</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇷🇴</span><span class="pf-nome">Romania</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇭🇺</span><span class="pf-nome">Ungheria</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇨🇿</span><span class="pf-nome">Cechia</span></span>
@@ -1372,7 +1310,7 @@
           </div>
 
           <div class="persona-paesi reveal">
-            <div class="pp-nome">Mala <span class="pp-conto">23<span class="pp-conto-lab">paesi</span></span></div>
+            <div class="pp-nome">Mala <span class="pp-conto">25<span class="pp-conto-lab">paesi</span></span></div>
             <div class="paesi-fatti">
               <span class="paese-fatto"><span class="pf-flag">🇲🇽</span><span class="pf-nome">Messico</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇬🇹</span><span class="pf-nome">Guatemala</span></span>
@@ -1396,12 +1334,14 @@
               <span class="paese-fatto"><span class="pf-flag">🇪🇸</span><span class="pf-nome">Spagna</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇮🇪</span><span class="pf-nome">Irlanda</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇷🇴</span><span class="pf-nome">Romania</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇲🇰</span><span class="pf-nome">Macedonia del Nord</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇽🇰</span><span class="pf-nome">Kosovo</span></span>
               <span class="paese-fatto"><span class="pf-flag"><svg viewBox="0 0 1200 600" width="24" height="12" role="img" aria-label="Bandiera della Transnistria" style="display:block;border-radius:2px;"><path fill="#de0000" d="M0 0h1200v600H0z"/><path fill="#093" d="M0 225h1200v150H0z"/><path fill="gold" d="m150 30-6.735 20.73h-21.797l17.634 12.81-6.736 20.73L150 71.46l17.634 12.812-6.736-20.73 17.633-12.812h-21.796zm0 10.8 4.31 13.267h13.95l-11.285 8.2 4.31 13.266-11.285-8.2-11.285 8.2 4.31-13.267-11.285-8.2h13.95z"/><g fill="gold"><path d="m101.839 138.547 14.93 14.993 14.078-13.945c21.415 22.909 43.877 44.991 65.126 67.988a8.22 8.22 0 0 0 11.603.04 8.168 8.168 0 0 0 .04-11.573c-22.808-21.463-45.687-43.102-68.502-64.644l18.967-18.787-26.388-3.644z"/><path d="M150 90c12.281 6.899 21.606 16.8 27.106 27.15 5.575 10.49 8.025 21.44 8.075 30.197.104 17.953-14.592 32.508-32.593 32.508-9.605 0-18.24-4.143-24.205-10.736l-3.3 2.77a4.931 4.931 0 0 0-5.519 1.412 6.181 6.181 0 0 0-5.069 4.178c-2.48 4.964-6.834 8.857-12.102 10.64-.05.017-.095.039-.139.061-2.436.89-4.877 2.498-6.956 4.58-4.11 4.134-6.117 9.423-4.987 13.135-.111.322-.169.66-.17 1.002a3.107 3.107 0 0 0 4.36 2.838c3.715.835 8.76-1.22 12.706-5.178 2.237-2.25 3.913-4.913 4.735-7.524 1.834-5.228 5.776-9.487 10.782-11.882.12-.058.216-.117.303-.177a6.173 6.173 0 0 0 3.344-4.116c7.678 9.035 19.194 14.804 32.068 15.106 23.612.554 41.261-16.781 42.077-41.709.411-12.545-4.455-28.721-15.545-41.988C176.496 102.127 164.07 93.71 150 90z"/></g></svg></span><span class="pf-nome">Transnistria</span></span>
             </div>
           </div>
 
           <div class="persona-paesi reveal">
-            <div class="pp-nome">Bacci <span class="pp-conto">29<span class="pp-conto-lab">paesi</span></span></div>
+            <div class="pp-nome">Bacci <span class="pp-conto">31<span class="pp-conto-lab">paesi</span></span></div>
             <div class="paesi-fatti">
               <span class="paese-fatto"><span class="pf-flag">🇵🇪</span><span class="pf-nome">Perù</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇧🇴</span><span class="pf-nome">Bolivia</span></span>
@@ -1428,6 +1368,8 @@
               <span class="paese-fatto"><span class="pf-flag">🇬🇧</span><span class="pf-nome">Regno Unito</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇬🇷</span><span class="pf-nome">Grecia</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇭🇷</span><span class="pf-nome">Croazia</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇲🇰</span><span class="pf-nome">Macedonia del Nord</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇽🇰</span><span class="pf-nome">Kosovo</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇭🇺</span><span class="pf-nome">Ungheria</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇷🇴</span><span class="pf-nome">Romania</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇲🇩</span><span class="pf-nome">Moldavia</span></span>
@@ -2760,14 +2702,19 @@ window.addEventListener('load', syncSwitcherHeight);
 document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){
   var audio = new Audio(card.getAttribute('data-audio'));
   audio.preload = 'none';
+  // Mentre parla, la canzone si abbassa; torna su quando ha finito.
+  var abbassa = function(si){ if(window.PatagucciMusica) window.PatagucciMusica.abbassa(si); };
   card.addEventListener('mouseenter', function(){
     audio.currentTime = 0;
-    audio.play().catch(function(){});
+    abbassa(true);
+    audio.play().catch(function(){ abbassa(false); });
   });
   card.addEventListener('mouseleave', function(){
     audio.pause();
     audio.currentTime = 0;
+    abbassa(false);
   });
+  audio.addEventListener('ended', function(){ abbassa(false); });
 });
 
 // La striscia delle foto del gruppo: ferma, si scorre di lato col dito,

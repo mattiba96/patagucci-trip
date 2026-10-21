@@ -18,7 +18,7 @@ Tenere in un posto solo un viaggio già deciso, nel dettaglio che serve per orga
 
 Funziona quando il gruppo riesce a pianificare e prenotare senza andare a ricercare altrove quello che è già stato cercato una volta.
 
-Da ottobre 2026 il sito **si legge come il diario di viaggio del gruppo**, non come un promemoria di cose da fare: stessa struttura e stessi fatti, ma la voce è un racconto in prima persona plurale («partiamo», «dormiamo», «ci serve»). Quello che manca da prenotare resta visibile, ma come nota a margine, non come apertura della home.
+Da ottobre 2026 il sito **si legge come il diario di viaggio del gruppo**, non come un promemoria di cose da fare: stessa struttura e stessi fatti, ma la voce è un racconto in prima persona plurale («partiamo», «dormiamo», «ci serve»). Quello che manca da prenotare resta visibile nella pagina del suo viaggio, a penna rossa. **La home racconta il gruppo**, non le cose da fare: chi siamo, i paesi visti, il viaggio fatto insieme, con la nostra foto a Machu Picchu in copertina.
 
 ## Positioning
 
@@ -56,10 +56,11 @@ Non è un pianificatore di viaggi generico: è il registro di *questi* viaggi. O
 
 - **Voli comprati**, con numeri reali: Etihad `7GJHW8` (EY 82/822 all'andata, EY 499/81 al ritorno), Royal Brunei `BI 652` e `BI 421`. I due voli interni coreani sono comprati, ma di loro abbiamo solo data e orario (arrivo a Jeju alle 11:00 del 7, volo per Seul alle 20:45 del 9): compagnia e numero mancano.
 - **Foto** in `foto/destinazioni/`, da Wikimedia Commons, ognuna con autore e licenza citati nel piè di pagina della scheda.
-- Eccezione nota: `bn-royalbrunico.jpg` è un fotomontaggio fornito dal gruppo, **senza autore né licenza noti** — non ha crediti perché non ne esistono. Ogni altra immagine di provenienza esterna porta autore e licenza nel piè di pagina della sua scheda, compresa quella dell'intestazione della home (Hunza Valley, Maqalam97, CC BY-SA 4.0).
-- **Elenchi dei paesi visitati** per persona, dai registri del gruppo. Quello di Manu potrebbe essere incompleto.
+- Eccezione nota: `bn-royalbrunico.jpg` è un fotomontaggio fornito dal gruppo, **senza autore né licenza noti** — non ha crediti perché non ne esistono. Ogni altra immagine di provenienza esterna porta autore e licenza nel piè di pagina della sua scheda. L'intestazione della home ha una foto del gruppo, che non ha crediti come tutte le foto del gruppo.
+- **Elenchi dei paesi visitati** per persona, dai registri del gruppo. Quello di Manu potrebbe essere incompleto. A ottobre 2026 Bacci ha aggiunto Macedonia del Nord e Kosovo per sé, Mala e Manu.
+- **I cinque ricordi della copertina** (Machu Picchu, Salar di Uyuni, i fenicotteri, Sol de Mañana, Palccoyo) vengono dal diario del Sud America, l'unico viaggio fatto in quattro, e li ha scelti il gruppo.
 - **Logo a livelli** in `assets/logo/` (cielo, banda rossa, aereo come immagini; montagne, cresta e lettere come contorni in `_sources/logo/forme.json`), presi dal logo animato del gruppo: nessuna generazione.
-- **«Patagucci song»** (`assets/audio/patagucci-song.mp3`), fornita dal gruppo: suona sulla copertina d'ingresso e sfuma premendo «Entra».
+- **«Patagucci song»** (`assets/audio/patagucci-song.mp3`), fornita dal gruppo: parte con la copertina d'ingresso e continua dentro il sito, dove un tasto la spegne e la riaccende. Sulla copertina il tasto non c'è, per scelta del gruppo.
 - Non esistono testimonianze, clienti, prezzi di vendita o metriche: non è un prodotto commerciale e non deve inventarseli.
 
 ## Product Principles

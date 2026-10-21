@@ -416,31 +416,10 @@ p[style*="text-align:center"]{ margin-left:auto; margin-right:auto; }
 .stat-line{ font-size:var(--t-base); color:var(--ink-soft); margin:0 0 18px; }
 
 /* ============================================================
-   IL PROMEMORIA DEI VOLI (home)
-   Il quaderno si apre col racconto, non con la lista: quello che manca
-   e' una nota a penna rossa sotto il sottotitolo, col numero cerchiato.
-   Sempre visibile, mai protagonista.
-   ============================================================ */
-.nota-manca{
-  display:inline-flex; align-items:center; gap:12px; margin-top:22px; padding:8px 16px 8px 10px;
-  color:var(--rosso); text-decoration:none; background:var(--paper);
-  font-family:var(--font-hand); font-size:1.12rem; line-height:1.3;
-  border:2px solid transparent; border-radius:4px;
-  border-image:var(--tratto-rosso) 16 / 16px / 4px round;
-  transform:rotate(-0.8deg);
-}
-.nota-manca:hover{ background:color-mix(in srgb, var(--rosso) 6%, #fff); }
-.nm-num{
-  position:relative; flex:0 0 auto; display:inline-grid; place-items:center;
-  width:1.6em; height:1.45em; font-family:var(--font-display); font-size:1.6rem; line-height:1;
-}
-.nm-num svg{ position:absolute; inset:-16% -20%; width:140%; height:132%; overflow:visible; pointer-events:none; }
-.nm-num svg path{ fill:none; stroke:var(--rosso); stroke-width:4.5; stroke-linecap:round; stroke-linejoin:round; }
-.nm-testo{ max-width:42ch; }
-/* Lo stesso cerchio a penna rossa attorno alle parole di quello che manca
-   da prenotare, dentro un titolo: un giro storto che si chiude passando
-   oltre l'inizio, come fatto a mano, e che si disegna da solo come quello
-   del "2" in home. Sborda di un terzo di lettera per parte, per non
+   LA PENNA ROSSA NEI TITOLI
+   Il cerchio a penna rossa attorno alle parole di quello che manca da
+   prenotare, dentro un titolo: un giro storto che si chiude passando
+   oltre l'inizio, come fatto a mano, e che si disegna da solo. Sborda di un terzo di lettera per parte, per non
    finire sulle parole accanto, e la riga si fa un po' piu' alta: se il
    titolo va a capo il giro non passa sulla riga di sopra, dove
    sembrerebbe una cancellatura. Il disegno si allunga quanto le parole. */
@@ -1131,16 +1110,16 @@ html.con-copertina .copertina{
    premibile quando cpAppare finisce: i tempi stanno solo qui. Ogni colpo
    rallenta e si posa: niente rimbalzi, il tonfo della scritta e' la
    scala che scende di colpo e si ferma. */
-html.copertina-intro .pl{ animation:cpAssesta 2.6s cubic-bezier(.2,.7,.2,1) both; }
-html.copertina-intro .pl-cielo{ animation:cpTimbroCielo .5s cubic-bezier(.2,.9,.25,1) both; }
-html.copertina-intro .pl-rossa{ animation:cpTimbroRossa .42s .3s cubic-bezier(.2,.9,.25,1) both; }
+html.copertina-intro .pl{ animation:cpAssesta 3.8s cubic-bezier(.2,.7,.2,1) both; }
+html.copertina-intro .pl-cielo{ animation:cpTimbroCielo .7s cubic-bezier(.2,.9,.25,1) both; }
+html.copertina-intro .pl-rossa{ animation:cpTimbroRossa .55s .45s cubic-bezier(.2,.9,.25,1) both; }
 html.copertina-intro .pl-monti,
-html.copertina-intro .pl-cresta{ animation:cpTimbroMonti .5s .58s cubic-bezier(.2,.9,.25,1) both; }
-html.copertina-intro .pl-lettere{ animation:cpTimbroLettere .45s .9s cubic-bezier(.16,1,.3,1) both; transform-origin:50.2% 78%; }
-html.copertina-intro .pl-aereo img{ animation:cpArrivoAereo 1.4s 1.05s cubic-bezier(.16,.84,.3,1) both; }
-html.copertina-intro .cp-basso{ animation:cpAppare .4s 2.15s cubic-bezier(.16,1,.3,1) both; }
+html.copertina-intro .pl-cresta{ animation:cpTimbroMonti .65s .85s cubic-bezier(.2,.9,.25,1) both; }
+html.copertina-intro .pl-lettere{ animation:cpTimbroLettere .6s 1.35s cubic-bezier(.16,1,.3,1) both; transform-origin:50.2% 78%; }
+html.copertina-intro .pl-aereo img{ animation:cpArrivoAereo 2s 1.55s cubic-bezier(.16,.84,.3,1) both; }
+html.copertina-intro .cp-basso{ animation:cpAppare .5s 3.2s cubic-bezier(.16,1,.3,1) both; }
 /* Arrivato, l'aereo ondeggia appena: e' in volo, non incollato. */
-.pl-aereo{ animation:cpOndeggia 3.4s 2.6s ease-in-out infinite; }
+.pl-aereo{ animation:cpOndeggia 3.4s 3.6s ease-in-out infinite; }
 html.copertina-intro .copertina:not(.via) :is(.pl, .pl-cielo, .pl-rossa, .pl-monti, .pl-cresta, .pl-lettere, .pl-aereo, .pl-aereo img, .cp-basso){ animation-play-state:paused; }
 html.copertina-intro .copertina:not(.pronta) .cp-basso{ pointer-events:none; }
 .copertina.salta :is(.pl, .pl-cielo, .pl-rossa, .pl-monti, .pl-cresta, .pl-lettere, .pl-aereo img, .cp-basso){ animation-delay:0s !important; animation-duration:1ms !important; }
@@ -1188,36 +1167,6 @@ html.copertina-intro .copertina:not(.pronta) .cp-basso{ pointer-events:none; }
 /* Sul verde e sul nero l'anello blu della penna non si vedrebbe: qui e' bianco. */
 .cp-entra:focus-visible{ outline:3px solid #fff; outline-offset:7px; box-shadow:none; border-radius:var(--mano-piccola); }
 
-/* Come i quaderni veri, la copertina dice che rigatura c'e' dentro. */
-.cp-quadretti{
-  position:absolute; z-index:2; right:clamp(16px,3vw,40px); bottom:clamp(14px,3vh,30px); margin:0;
-  display:flex; align-items:center; gap:10px;
-  font-family:var(--font-hand); font-size:1.15rem; letter-spacing:0.04em; color:#fff;
-}
-.cp-quadretti::before{
-  content:""; width:26px; height:26px; border:1.5px solid #fff; border-radius:3px;
-  background-image:linear-gradient(rgba(255,255,255,0.85) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.85) 1px, transparent 1px);
-  background-size:6px 6px; background-position:-1px -1px;
-}
-
-/* Il tasto della musica: stesso bianco della scritta in basso, in alto a
-   destra. Accende la canzone quando il browser non l'ha fatta partire da
-   sola, e la spegne per chi non la vuole. */
-.cp-musica{
-  position:absolute; z-index:3; right:clamp(16px,3vw,40px); top:clamp(14px,3vh,30px);
-  display:flex; align-items:center; gap:9px; min-height:44px; cursor:pointer;
-  font-family:var(--font-hand); font-size:1.12rem; letter-spacing:0.03em; color:#fff;
-  background:transparent; border:1.5px solid rgba(255,255,255,0.85); border-radius:var(--mano-piccola);
-  padding:6px 14px 5px 11px;
-}
-.cp-musica svg{ width:22px; height:22px; flex:0 0 auto; }
-.cp-musica svg path{ fill:none; stroke:#fff; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
-.cp-musica svg ellipse{ fill:#fff; }
-.cp-musica:hover{ background:rgba(255,255,255,0.12); }
-.cp-musica.accesa{ background:rgba(255,255,255,0.16); }
-.cp-musica:focus-visible{ outline:3px solid #fff; outline-offset:4px; box-shadow:none; }
-.copertina.in-volo .cp-musica, .copertina.apri-css .cp-musica{ opacity:0; transition:opacity .4s ease; pointer-events:none; }
-
 /* ---------- L'uscita (assets/anima.js) ----------
    Il foglio del quaderno che prende il posto del cielo, e l'aereo Royal
    Brunico che ci rientra piccolo con la sua scia, sopra a tutto. Il foglio
@@ -1246,6 +1195,37 @@ html.copertina-intro .copertina:not(.pronta) .cp-basso{ pointer-events:none; }
 }
 .cp-scopri{ fill:none; stroke:#fff; stroke-width:18; stroke-dasharray:1 2; stroke-dashoffset:1; }
 
+/* I ricordi sul foglio: cinque cose viste in quattro, disegnate a
+   pennarello mentre l'aereo ci passa sopra. Restano nascosti finche'
+   assets/anima.js non li mette al loro posto (.al-posto); senza il volo
+   non si vedono mai. Ognuno si isola: la passata d'evidenziatore sotto il
+   nome resta dietro la scritta ma sopra la carta. Gli evidenziatori sono
+   quelli della pagina del Sud America: Peru' salmone, Bolivia oro. */
+.cp-ricordi{ position:absolute; inset:0; }
+.cp-ricordo{
+  position:absolute; left:0; top:0; margin:0; width:clamp(104px,14vw,190px);
+  translate:-50% -50%; visibility:hidden; isolation:isolate; text-align:center;
+  --evid:#ffd25e;
+}
+.cp-ricordo[data-paese="pe"]{ --evid:#ff9a8f; }
+/* Come fatti a mano: nessuno dritto, e non tutti storti dalla stessa parte. */
+.cp-ricordo:nth-child(odd){ rotate:-2.5deg; }
+.cp-ricordo:nth-child(even){ rotate:1.8deg; }
+.cp-ricordo.al-posto{ visibility:visible; }
+.cp-ricordo svg{ display:block; width:100%; height:auto; overflow:visible; }
+.cp-r-evid{ fill:var(--evid); opacity:0; transform-box:fill-box; transform-origin:center; }
+.cp-r-tratto{ fill:none; stroke:var(--ink); stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round; }
+.cp-ricordo figcaption{
+  position:relative; display:inline-block; margin-top:2px; padding:0 4px;
+  font-family:var(--font-hand); font-size:clamp(1rem,1.5vw,1.3rem); letter-spacing:0.03em; line-height:1.2;
+  color:var(--ink); white-space:nowrap; opacity:0;
+}
+.cp-r-passata{
+  position:absolute; left:0; right:0; bottom:0.08em; height:0.6em; z-index:-1;
+  background:var(--evid); border-radius:var(--mano-piccola);
+  transform:scaleX(0); transform-origin:0 50%;
+}
+
 /* Senza Motion, o con meno movimento, la copertina sfuma e basta. Con meno
    movimento il logo e' gia' intero e l'aereo sta fermo dov'e'. */
 .copertina.apri-css{ opacity:0; transition:opacity .6s ease; }
@@ -1253,10 +1233,43 @@ html.copertina-intro .copertina:not(.pronta) .cp-basso{ pointer-events:none; }
   .copertina.apri-css{ transition-duration:.25s; }
   .pl-aereo{ animation:none; }
 }
-@media (max-width:560px){
-  .cp-quadretti{ font-size:1rem; }
-  .cp-quadretti::before{ width:22px; height:22px; }
+
+/* ============================================================
+   LA MUSICA
+   Il tasto della canzone, fisso in basso a destra: un'etichetta di carta
+   col contorno a pennarello e il tratto ripassato, come i bottoni. Accesa,
+   prende l'evidenziatore della meta aperta. Sta sopra la pagina che si
+   volta (90) e sotto la copertina (1000), che lo copre finche' c'e'. Il
+   tratto ripassato sta sul contenitore: il tasto e' fisso, e su di lui
+   finirebbe sopra la carta invece che dietro. Sul telefono resta la nota
+   sola; la scritta la legge comunque il lettore di schermo.
+   ============================================================ */
+.musica-giro{
+  position:fixed; z-index:120; right:clamp(14px,2.4vw,28px); bottom:clamp(14px,2.4vw,28px);
+  transform:rotate(-1.5deg);
 }
+.musica-giro::before{
+  content:""; position:absolute; inset:0; transform:translate(3px,4px); z-index:-1; pointer-events:none;
+  border:1.5px solid var(--ink); border-radius:var(--mano-piccola);
+}
+.musica{
+  position:relative; display:flex; align-items:center; gap:8px; min-height:44px; cursor:pointer;
+  font-family:var(--font-hand); font-size:1.05rem; letter-spacing:0.03em; line-height:1; color:var(--ink);
+  background:var(--paper); border:1.5px solid var(--ink); border-radius:var(--mano-piccola);
+  padding:7px 14px 6px 10px;
+  transition:transform .2s cubic-bezier(.16,1,.3,1), background-color .2s ease;
+}
+.musica svg{ width:22px; height:22px; flex:0 0 auto; }
+.musica svg path{ fill:none; stroke:currentColor; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
+.musica svg ellipse{ fill:currentColor; }
+.musica:hover{ transform:translate(-1px,-1px); }
+.musica:active{ transform:translate(3px,4px); }
+.musica.accesa{ background:var(--accent); }
+@media (max-width:600px){
+  .musica{ min-width:44px; justify-content:center; padding:8px 10px; }
+  .musica-scritta{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }
+}
+@media print{ .musica-giro{ display:none; } }
 
 /* ============================================================
    MOBILE (<=760px)
