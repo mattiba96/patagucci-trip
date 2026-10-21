@@ -225,8 +225,8 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
                 <div class="crew-caption">Salinas de Maras, Perù</div>
               </div>
               <div class="striscia-foto-item">
-                <img src="foto/IMG_4786.JPG" alt="Pausa pranzo in un centro commerciale" loading="lazy">
-                <div class="crew-caption">Pausa pranzo in centro commerciale</div>
+                <img src="foto/IMG_4786.JPG" alt="La cena di sushi nikkei, Cusco" loading="lazy">
+                <div class="crew-caption">Sushi nikkei, Cusco</div>
               </div>
               <div class="striscia-foto-item">
                 <img src="foto/IMG_6903.JPG" alt="In viaggio in auto con un cane a bordo" loading="lazy">
@@ -304,8 +304,8 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               <div class="content">
                 <div class="flag">🇵🇪🇧🇴🇨🇱</div>
                 <div class="title">Perù, Bolivia e Cile</div>
-                <div class="meta">18 aprile – 2 maggio 2026 · il diario</div>
-                <p class="tagline">La Paz, il Salar di Uyuni, l'altopiano fino al Cile, Machu Picchu e Lima. Il diario è ancora da finire.</p>
+                <div class="meta">17 aprile – 3 maggio 2026 · il diario</div>
+                <p class="tagline">La Paz, il Salar di Uyuni, l'altopiano fino al Cile, Machu Picchu e Lima, giorno per giorno.</p>
               </div>
             </a>
           </div>

@@ -886,8 +886,8 @@ figure.crew-card{ margin:0; }
 .trip-grid-uno{ grid-template-columns:minmax(0, 520px); margin-bottom:34px; }
 /* La mappa ricostruita: verticale come il viaggio, con la costa a matita
    e i tratti che ancora non sappiamo come abbiamo fatto a puntini. */
-/* Le scritte sono in unita' del disegno (908 di larghezza): a 680px di
-   mappa 26 diventano circa 19px veri. */
+/* Le scritte sono in unita' del disegno (962 di larghezza): a 680px di
+   mappa 26 diventano circa 18px veri. */
 .mappa-viaggio{ max-width:720px; }
 .mappa-viaggio svg{ max-width:680px; }
 .jeep-map-wrap .costa{ fill:none; stroke:var(--penna); stroke-width:2.4; stroke-dasharray:1 6; stroke-linecap:round; opacity:0.6; }
