@@ -599,9 +599,9 @@ musica_html = """<div class="musica-giro"><button type="button" class="musica" i
   (function(){
     var tasto = document.getElementById('musica');
     var scritta = tasto.querySelector('span');
-    // Non la si scarica in anticipo: sono 3,9 MB, e su una rete lenta
-    // toglievano la strada agli script del volo. Si comincia a scaricarla
-    // solo quando suona.
+    // Sono 3,9 MB: si scaricano solo se servono. Con la copertina servono
+    // subito (prepara), cosi' al primo tocco la canzone e' gia' pronta; a
+    // chi arriva da un link diretto li scarica il tasto.
     var canzone = new Audio();
     canzone.preload = 'none';
     canzone.loop = true;
@@ -624,6 +624,7 @@ musica_html = """<div class="musica-giro"><button type="button" class="musica" i
       if(canzone.paused) suona(); else canzone.pause();
     });
     window.PatagucciMusica = {
+      prepara: function(){ if(canzone.preload !== 'auto'){ canzone.preload = 'auto'; canzone.load(); } },
       suona: function(){ if(canzone.paused) suona(); },
       // Mentre parla uno di noi (le foto del gruppo) la canzone si abbassa.
       abbassa: function(si){ canzone.volume = si ? 0.2 : 1; }
@@ -733,20 +734,24 @@ copertina_html = """<div class="copertina" id="copertina" role="dialog" aria-mod
 
     // ---- La canzone dei Patagucci ----
     // Il tasto e la canzone stanno fuori dalla copertina (musica_html,
-    // qui sopra): qui la si fa solo partire. Molti browser non
-    // lasciano partire un suono da solo: allora parte al primo tocco sulla
-    // copertina, anche quello su "Entra", e da li' continua dentro il sito.
+    // qui sopra): qui la si fa solo partire, e subito, senza aspettare il
+    // resto della pagina.
     var musica = window.PatagucciMusica;
     function suona(){ if(musica && !chiusa) musica.suona(); }
-    // Un tocco sulla copertina accende la canzone, se il browser l'aveva
-    // fermata, e porta l'intro alla fine: chi tocca ha gia' voglia di
-    // entrare. La tastiera invece non accende niente: chi usa il tab o un
-    // lettore di schermo non deve trovarsi la musica sopra la voce, e
-    // dentro il sito ha il tasto per accenderla.
+    if(musica){ musica.prepara(); suona(); }
+    // Molti browser non lasciano partire un suono da solo: allora parte al
+    // primo tocco sulla copertina, e da li' continua dentro il sito. Sul
+    // telefono il browser lo permette solo quando il dito si stacca (il
+    // clic), non quando appoggia: per questo prova a tutti e due. Anche
+    // "Entra" la fa partire, col dito, col mouse o con la tastiera; il tab
+    // da solo no, perche' chi gira col lettore di schermo non deve trovarsi
+    // la musica sopra la voce prima di aver scelto di entrare. Il tocco
+    // porta anche l'intro alla fine: chi tocca ha gia' voglia di entrare.
     copertina.addEventListener('pointerdown', function(){
       suona();
       if(copertina.classList.contains('via') && !copertina.classList.contains('pronta')){ copertina.classList.add('salta'); pronta(); }
     });
+    copertina.addEventListener('click', suona);
 
     // Mentre la copertina e' chiusa il resto della pagina non si raggiunge
     // ne' col tab ne' col lettore di schermo. Ogni pezzo si blocca appena
@@ -762,13 +767,10 @@ copertina_html = """<div class="copertina" id="copertina" role="dialog" aria-mod
       liste.forEach(function(l){ Array.prototype.forEach.call(l.addedNodes, blocca); });
     }) : null;
     if(guardia) guardia.observe(document.body, { childList: true });
-    // A pagina pronta sono arrivati anche gli script del volo: solo allora
-    // parte la canzone.
     document.addEventListener('DOMContentLoaded', function(){
       if(guardia) guardia.disconnect();
       if(chiusa) return;
       Array.prototype.forEach.call(document.body.children, blocca);
-      suona();
     });
 
     function chiudi(){
