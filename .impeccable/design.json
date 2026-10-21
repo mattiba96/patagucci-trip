@@ -562,8 +562,8 @@
       },
       {
         "name": "copertina-intro",
-        "value": "3.7s in tutto (CSS), aspetta le immagini del logo al massimo 1.5s",
-        "purpose": "All'apertura il logo si stampa a colpi, senza rimbalzi e senza sfocature: cielo, banda, montagne e cresta, la scritta con un tonfo; l'aereo entra in volo, si posa e ondeggia; poi compare Entra, inerte finche' non ha finito di comparire e finche' non c'e' lo script del volo (al massimo 2.5s in piu'). Esc o un tocco sulla copertina portano alla fine."
+        "value": "4.2s in tutto (CSS), aspetta le immagini del logo al massimo 1.5s; lettere da 1.3s, una ogni .14s (.42s ciascuna)",
+        "purpose": "All'apertura il logo si stampa a colpi, senza rimbalzi e senza sfocature: cielo, banda, montagne e cresta, la scritta una lettera alla volta, da sinistra; l'aereo entra in volo, si posa e ondeggia; poi compare Entra, inerte finche' non ha finito di comparire e finche' non c'e' lo script del volo (al massimo 2.5s in piu'). Esc o un tocco sulla copertina portano alla fine."
       },
       {
         "name": "copertina-volo",

@@ -666,7 +666,7 @@ copertina_html = """<div class="copertina" id="copertina" role="dialog" aria-mod
       <div class="pl-rossa"><img src="assets/logo/rossa.webp" alt="" width="1672" height="162" decoding="async"></div>
       <div class="pl-terra pl-monti"><svg """ + _TAVOLA + """><polygon points=\"""" + _monti + """\"/></svg></div>
       <div class="pl-terra pl-cresta"><svg """ + _TAVOLA + """><path d=\"""" + _cresta[0] + """\"/><path d=\"""" + _cresta[1] + """\"/></svg></div>
-      <div class="pl-lettere">""" + "".join(f'<div class="pl-l" style="{l["stile"]}"><svg viewBox="{l["vb"]}" focusable="false"><path d="{l["d"]}"/></svg></div>' for l in _lettere) + """</div>
+      <div class="pl-lettere">""" + "".join(f'<div class="pl-l" style="{l["stile"]};--i:{k}"><svg viewBox="{l["vb"]}" focusable="false"><path d="{l["d"]}"/></svg></div>' for k, l in enumerate(_lettere)) + """</div>
       <div class="pl-aereo"><img src="assets/logo/aereo.webp" alt="" width="342" height="85" decoding="async"></div>
     </div>
     <div class="cp-dorso" aria-hidden="true"></div>
@@ -719,7 +719,7 @@ copertina_html = """<div class="copertina" id="copertina" role="dialog" aria-mod
       var parti = function(){
         if(copertina.classList.contains('via')) return;
         copertina.classList.add('via');
-        setTimeout(pronta, 5000);
+        setTimeout(pronta, 6000);
       };
       Promise.all(Array.prototype.map.call(copertina.querySelectorAll('.pl img'), function(img){
         return img.decode ? img.decode().catch(function(){}) : null;
