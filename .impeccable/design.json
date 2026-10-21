@@ -506,7 +506,7 @@
       {
         "name": "polaroid",
         "value": "0 2px 3px rgba(20,24,30,0.10), 0 22px 34px -18px rgba(20,24,30,0.48)",
-        "purpose": "Polaroid: intestazione, equipaggio, giostra, cartoline delle mete, striscia fotografica."
+        "purpose": "Polaroid: intestazione, equipaggio, striscia delle foto del gruppo, cartoline delle mete, striscia fotografica."
       },
       {
         "name": "nastro",
@@ -516,7 +516,7 @@
       {
         "name": "foglio-che-si-volta",
         "value": "inset -40px 0 60px -40px rgba(0,0,0,0.25)",
-        "purpose": "La pagina a quadretti che gira sul bordo sinistro al cambio di meta."
+        "purpose": "La pagina a quadretti che gira sul bordo sinistro al cambio di meta (sul destro tornando a una meta che viene prima)."
       },
       {
         "name": "anello-focus",
@@ -533,12 +533,12 @@
       {
         "name": "passata-evidenziatore",
         "value": ".75s cubic-bezier(.22,1,.36,1)",
-        "purpose": "background-size della passata, solo sulla parola del titolo della meta."
+        "purpose": "background-size della passata, solo sulla parola del titolo della meta. La transizione vale solo dopo il primo disegno (html.pronto): ripartendo da vuota la passata non si vede ritirarsi."
       },
       {
         "name": "pagina-che-si-volta",
-        "value": "0.75s cubic-bezier(.55,.05,.35,1)",
-        "purpose": "rotateY 0 -> -100deg in perspective(2400px), brightness 1 -> .78."
+        "value": "0.55s cubic-bezier(.3,.5,.2,1)",
+        "purpose": "rotateY 0 -> -90deg in perspective(2400px) sul bordo sinistro (+90deg sul destro tornando a una meta che viene prima), sotto le linguette; una sfumatura scura cresce sul lato che si alza. Solo quando la meta cambia davvero; l'arrivo della meta parte dopo .2s."
       },
       {
         "name": "polaroid-cade",
@@ -552,8 +552,8 @@
       },
       {
         "name": "polaroid-inclinata",
-        "value": "0.35s cubic-bezier(.16,1,.3,1); ritorno spring visualDuration .55 bounce .18",
-        "purpose": "Inclinazione 3D sotto un mouse vero (rotateX +-6deg, rotateY +-7deg, translateZ 16px)."
+        "value": "0.35s cubic-bezier(.16,1,.3,1); ritorno 0.55s cubic-bezier(.16,1,.3,1), senza rimbalzo",
+        "purpose": "Inclinazione 3D sotto un mouse vero (rotateX +-6deg, rotateY +-7deg, translateZ 16px), al massimo un movimento per fotogramma. Al 40% e 6px per le foto che non si aprono (intestazione, striscia delle foto del gruppo); ferma mentre la polaroid cade."
       },
       {
         "name": "stato-comando",
@@ -563,17 +563,22 @@
       {
         "name": "copertina-intro",
         "value": "2.6s in tutto (CSS), aspetta le immagini del logo al massimo 1.5s",
-        "purpose": "All'apertura il logo si stampa a colpi: cielo, banda, montagne e cresta, la scritta con un tonfo; l'aereo entra in volo, si posa e ondeggia; poi compare Entra. Esc porta alla fine."
+        "purpose": "All'apertura il logo si stampa a colpi, senza rimbalzi e senza sfocature: cielo, banda, montagne e cresta, la scritta con un tonfo; l'aereo entra in volo, si posa e ondeggia; poi compare Entra, inerte finche' non ha finito di comparire e finche' non c'e' lo script del volo (al massimo 2.5s in piu'). Esc o un tocco sulla copertina portano alla fine."
       },
       {
         "name": "copertina-volo",
-        "value": "2.8s in tutto (Motion): aereo verso lo schermo .8s cubic-bezier(.45,0,.75,.35); nuvola da .62s; volo dell'aereo piccolo 1.35s cubic-bezier(.3,0,.25,1) da 1.12s; il foglio si scopre da 2.35s",
-        "purpose": "Su Entra l'aereo Royal Brunico vola verso lo schermo (fino a 5,2 volte, sfocato), cinque sbuffi bianchi coprono tutto e si diradano sul foglio a quadretti; lo stesso aereo rientra da sinistra, scende piano, riprende quota con la scia tratteggiata e si posa sull'aereo accanto al titolo della home."
+        "value": "2.6s in tutto (Motion): aereo verso lo schermo .8s cubic-bezier(.45,0,.75,.35) fino a scale(4) rotate(-8deg); righe dei quadretti da .42s e .58s (scaleX/scaleY .4s); foglio bianco da .45s; volo dell'aereo piccolo 1.35s cubic-bezier(.3,0,.25,1) da .95s; arrivo della home da 1.6s; il foglio si scopre da 1.75s (.6s)",
+        "purpose": "Su Entra l'aereo Royal Brunico vola verso lo schermo crescendo e ti passa oltre, senza sfocature; il cielo si riga a quadretti e diventa il foglio; lo stesso aereo rientra da sinistra, scende piano, riprende quota con la scia tratteggiata e si posa sull'aereo accanto al titolo della home, che intanto fa il suo arrivo (polaroid, passata, penna rossa per ultima)."
+      },
+      {
+        "name": "copertina-salta",
+        "value": ".2s ease",
+        "purpose": "Saltare il volo: un secondo Entra dopo .6s (prima e' un doppio clic e non conta), Esc, o un cambio di misura della finestra. I movimenti del volo si fermano, la copertina svanisce e la home fa subito il suo arrivo, una volta sola. Rete di sicurezza: la copertina si chiude comunque dopo 6s."
       },
       {
         "name": "copertina-css",
         "value": ".6s ease",
-        "purpose": "Senza Motion la copertina sfuma; con movimento ridotto il logo e' gia' intero e la copertina si dissolve in .25s."
+        "purpose": "Senza Motion la copertina sfuma; con movimento ridotto il logo e' gia' intero, l'aereo non ondeggia e la copertina si dissolve in .25s."
       },
       {
         "name": "canzone-sfuma",
@@ -581,9 +586,9 @@
         "purpose": "La Patagucci song sfuma premendo Entra."
       },
       {
-        "name": "giostra-foto",
-        "value": "90s linear infinite",
-        "purpose": "Scorrimento della giostra delle foto del gruppo, ferma sotto il mouse e con movimento ridotto."
+        "name": "striscia-foto",
+        "value": "scroll-snap; frecce: scrollBy 80% della larghezza, smooth (auto con movimento ridotto)",
+        "purpose": "Le foto del gruppo stanno ferme in una striscia che si scorre a mano: col dito, con le frecce o con la tastiera."
       }
     ],
     "breakpoints": [
@@ -778,7 +783,7 @@
       "Don't evidenziare più di una parola nel titolo della meta, né animare l'entrata di ogni titolo di sezione.",
       "Don't usare emoji o caratteri come icone. Le bandiere e il veicolo sulla cartina sono dati, non decorazione.",
       "Don't usare foto a tutto schermo con un velo scuro sotto il testo, né card arrotondate in modo uniforme con l'ombra.",
-      "Don't portare i colori del logo dentro il quaderno, né ridisegnare il logo.",
+      "Don't portare i colori del logo dentro il quaderno, né ridisegnare il logo. L'unica eccezione è l'aereo Royal Brunico accanto al titolo della home, dove la copertina lo fa posare.",
       "Don't scendere sotto 0.8rem per qualsiasi testo."
     ]
   }

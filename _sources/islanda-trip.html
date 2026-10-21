@@ -378,7 +378,7 @@
         var link = linkBySection[entry.target.id];
         if(link){
           link.classList.add('active');
-          link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          link.scrollIntoView({ behavior: window.ridottoMovimento ? 'auto' : 'smooth', block: 'nearest', inline: 'center' });
         }
       }
     });
@@ -497,21 +497,37 @@
       if(routeMarker.textContent !== tratta.mezzo) routeMarker.textContent = tratta.mezzo;
     };
 
-    var DURATA = 20000, avvio = null;
-
-    // L'animazione parte al caricamento della pagina, non quando si apre la
-    // meta: senza questo, arrivando qui dopo un po' si trova il mezzo gia' a
-    // meta' percorso e sembra che il viaggio cominci da li'.
-    window.addEventListener('destinazione-cambiata', function(){ avvio = null; });
+    // Il mezzo fa il viaggio quando la cartina e' sullo schermo: un giro
+    // intero, poi si ferma all'arrivo. Tornando a guardarla riparte da capo;
+    // fuori dallo schermo, o con la meta chiusa, non consuma niente. Insieme
+    // al viaggio l'alone attorno alla partenza pulsa tre volte.
+    var DURATA = 20000, avvio = null, giro = null;
+    var cartina = routePath.ownerSVGElement;
+    var alone = cartina && cartina.querySelector('.pulse');
 
     var muovi = function(ts){
       if(avvio === null) avvio = ts;
-      posiziona(((ts - avvio) % DURATA) / DURATA);
-      requestAnimationFrame(muovi);
+      var frazione = Math.min(1, (ts - avvio) / DURATA);
+      posiziona(frazione);
+      giro = frazione < 1 ? requestAnimationFrame(muovi) : null;
     };
+    var parti = function(){
+      if(giro) return;
+      avvio = null;
+      giro = requestAnimationFrame(muovi);
+      if(alone){ alone.classList.remove('pulsa'); void alone.getBoundingClientRect(); alone.classList.add('pulsa'); }
+    };
+    var ferma = function(){ if(giro){ cancelAnimationFrame(giro); giro = null; } };
 
     var ridotto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if(ridotto) posiziona(0); else requestAnimationFrame(muovi);
+    if(ridotto) posiziona(0);
+    else if(cartina && 'IntersectionObserver' in window){
+      posiziona(0);
+      new IntersectionObserver(function(voci){
+        voci.forEach(function(v){ if(v.isIntersecting) parti(); else ferma(); });
+      }, { threshold: 0.35 }).observe(cartina);
+    }
+    else parti();
   }
 
   // ---- Come si spartisce la giornata ----

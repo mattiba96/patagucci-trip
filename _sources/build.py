@@ -118,273 +118,143 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
           </div>
 
           <h3>Insieme in giro per il mondo</h3>
-          <div class="group-marquee reveal">
-            <div class="group-marquee-track">
-              <div class="group-marquee-item">
+          <div class="striscia-foto reveal">
+            <div class="striscia-foto-binario" id="striscia-foto" tabindex="0" role="region" aria-label="Le foto del gruppo, da scorrere di lato">
+              <div class="striscia-foto-item">
                 <img src="foto/dd148649-09ef-45bd-8b5e-313dff562db8.jpeg" alt="Il gruppo al completo a Machu Picchu, Perù" loading="lazy">
                 <div class="crew-caption">Machu Picchu, Perù</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_1590.JPG" alt="Il gruppo sui binari nel deserto di sale, Bolivia/Cile" loading="lazy">
                 <div class="crew-caption">Deserto di sale, Bolivia/Cile</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_7193.JPG" alt="Il gruppo sui binari del treno, Salar de Uyuni, Bolivia" loading="lazy">
                 <div class="crew-caption">Salar de Uyuni, Bolivia</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/group-geyser-bolivia.jpeg" alt="Il gruppo tra i fumi dei geyser, Bolivia" loading="lazy">
                 <div class="crew-caption">Geyser Sol de Mañana, Bolivia</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/group-altopiano-boliviano.jpeg" alt="Pranzo di gruppo con vista sulla laguna, altopiano boliviano" loading="lazy">
                 <div class="crew-caption">Altopiano boliviano</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/group-cusco-peru.jpeg" alt="Il gruppo di notte tra i vicoli di Cusco, Perù" loading="lazy">
                 <div class="crew-caption">Cusco, Perù</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_6840.JPG" alt="Al mercato, La Paz, Bolivia" loading="lazy">
                 <div class="crew-caption">Al mercato, La Paz, Bolivia</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/group-van-bolivia.jpeg" alt="In viaggio sul van tra un trasferimento e l'altro, Bolivia" loading="lazy">
                 <div class="crew-caption">In viaggio, Bolivia</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/group-notte-ande.jpeg" alt="Il gruppo di notte tra le nuvole, Ande" loading="lazy">
                 <div class="crew-caption">Notte in quota, Ande</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_0283.jpeg" alt="Selfie di gruppo sul bus notturno" loading="lazy">
                 <div class="crew-caption">Notte in bus, on the road</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_0300.JPG" alt="Sul relitto di un treno al cimitero dei treni di Uyuni, Bolivia" loading="lazy">
                 <div class="crew-caption">Cimitero dei treni, Uyuni, Bolivia</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_0343.jpeg" alt="Il gruppo davanti al fuoristrada sul Salar de Uyuni, Bolivia" loading="lazy">
                 <div class="crew-caption">Il fuoristrada sul Salar de Uyuni, Bolivia</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_0420.jpeg" alt="Effetto prospettiva con il cappello, Salar de Uyuni" loading="lazy">
                 <div class="crew-caption">Giochi di prospettiva, Salar de Uyuni</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_0422.jpeg" alt="Altro effetto prospettiva, Salar de Uyuni" loading="lazy">
                 <div class="crew-caption">Ancora prospettiva, Salar de Uyuni</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_0589.jpeg" alt="Il gruppo davanti a una laguna colorata, altopiano boliviano" loading="lazy">
                 <div class="crew-caption">Lagune colorate dell'altopiano, Bolivia</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_0683.jpeg" alt="Shopping di souvenir a San Pedro de Atacama, Cile" loading="lazy">
                 <div class="crew-caption">Shopping a San Pedro de Atacama, Cile</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_0821.jpeg" alt="Trekking in alta quota tra le montagne, Perù" loading="lazy">
                 <div class="crew-caption">Trekking in alta quota, Perù</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_1169.jpeg" alt="Cena di gruppo in un ristorante, Lima, Perù" loading="lazy">
                 <div class="crew-caption">Cena gourmet, Lima, Perù</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_2748.JPG" alt="Tra le guglie di roccia della Valle de las Ánimas, La Paz, Bolivia" loading="lazy">
                 <div class="crew-caption">Valle de las Ánimas, La Paz, Bolivia</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_3185.JPG" alt="Tramonto accanto al fuoristrada, Salar de Uyuni, Bolivia" loading="lazy">
                 <div class="crew-caption">Tramonto sul Salar de Uyuni, Bolivia</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_3759.JPG" alt="Una sera tra amici al ristorante" loading="lazy">
                 <div class="crew-caption">Una sera tra amici</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_3979.JPG" alt="Pausa fast food in centro commerciale, Cile" loading="lazy">
                 <div class="crew-caption">Pausa fast food, Cile</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_4070.JPG" alt="All'ingresso del Santuario Storico di Machu Picchu, Perù" loading="lazy">
                 <div class="crew-caption">Ingresso a Machu Picchu, Perù</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_4089.JPG" alt="Lungo la ferrovia verso Aguas Calientes, Perù" loading="lazy">
                 <div class="crew-caption">Lungo i binari di Aguas Calientes, Perù</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_4173.JPG" alt="Il gruppo con la vista classica su Machu Picchu, Perù" loading="lazy">
                 <div class="crew-caption">Machu Picchu, la vista classica</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_4746.JPG" alt="Il gruppo alle terrazze saline di Maras, Perù" loading="lazy">
                 <div class="crew-caption">Salinas de Maras, Perù</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_4786.JPG" alt="Pausa pranzo in un centro commerciale" loading="lazy">
                 <div class="crew-caption">Pausa pranzo in centro commerciale</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_6903.JPG" alt="In viaggio in auto con un cane a bordo" loading="lazy">
                 <div class="crew-caption">In viaggio con il cane</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_6970.JPG" alt="Una serata di gruppo a un evento" loading="lazy">
                 <div class="crew-caption">Serata a un evento</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/IMG_7186.JPG" alt="Verso la ferrovia del Salar de Uyuni, Bolivia" loading="lazy">
                 <div class="crew-caption">Ferrovia di Uyuni, Bolivia</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/group-barbiere.jpeg" alt="Dal barbiere durante il viaggio" loading="lazy">
                 <div class="crew-caption">Un taglio di capelli</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/group-notte-strada.jpeg" alt="Passeggiata notturna vicino a un distributore" loading="lazy">
                 <div class="crew-caption">Passeggiata notturna, on the road</div>
               </div>
-              <div class="group-marquee-item">
+              <div class="striscia-foto-item">
                 <img src="foto/group-relax-maschere.jpeg" alt="Relax con maschera viso dopo il trekking" loading="lazy">
                 <div class="crew-caption">Relax dopo il trek</div>
               </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/dd148649-09ef-45bd-8b5e-313dff562db8.jpeg" alt="" loading="lazy">
-                <div class="crew-caption">Machu Picchu, Perù</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_1590.JPG" alt="" loading="lazy">
-                <div class="crew-caption">Deserto di sale, Bolivia/Cile</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_7193.JPG" alt="" loading="lazy">
-                <div class="crew-caption">Salar de Uyuni, Bolivia</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/group-geyser-bolivia.jpeg" alt="" loading="lazy">
-                <div class="crew-caption">Geyser Sol de Mañana, Bolivia</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/group-altopiano-boliviano.jpeg" alt="" loading="lazy">
-                <div class="crew-caption">Altopiano boliviano</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/group-cusco-peru.jpeg" alt="" loading="lazy">
-                <div class="crew-caption">Cusco, Perù</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_6840.JPG" alt="" loading="lazy">
-                <div class="crew-caption">Al mercato, La Paz, Bolivia</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/group-van-bolivia.jpeg" alt="" loading="lazy">
-                <div class="crew-caption">In viaggio, Bolivia</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/group-notte-ande.jpeg" alt="" loading="lazy">
-                <div class="crew-caption">Notte in quota, Ande</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_0283.jpeg" alt="" loading="lazy">
-                <div class="crew-caption">Notte in bus, on the road</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_0300.JPG" alt="" loading="lazy">
-                <div class="crew-caption">Cimitero dei treni, Uyuni, Bolivia</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_0343.jpeg" alt="" loading="lazy">
-                <div class="crew-caption">Il fuoristrada sul Salar de Uyuni, Bolivia</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_0420.jpeg" alt="" loading="lazy">
-                <div class="crew-caption">Giochi di prospettiva, Salar de Uyuni</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_0422.jpeg" alt="" loading="lazy">
-                <div class="crew-caption">Ancora prospettiva, Salar de Uyuni</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_0589.jpeg" alt="" loading="lazy">
-                <div class="crew-caption">Lagune colorate dell'altopiano, Bolivia</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_0683.jpeg" alt="" loading="lazy">
-                <div class="crew-caption">Shopping a San Pedro de Atacama, Cile</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_0821.jpeg" alt="" loading="lazy">
-                <div class="crew-caption">Trekking in alta quota, Perù</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_1169.jpeg" alt="" loading="lazy">
-                <div class="crew-caption">Cena gourmet, Lima, Perù</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_2748.JPG" alt="" loading="lazy">
-                <div class="crew-caption">Valle de las Ánimas, La Paz, Bolivia</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_3185.JPG" alt="" loading="lazy">
-                <div class="crew-caption">Tramonto sul Salar de Uyuni, Bolivia</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_3759.JPG" alt="" loading="lazy">
-                <div class="crew-caption">Una sera tra amici</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_3979.JPG" alt="" loading="lazy">
-                <div class="crew-caption">Pausa fast food, Cile</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_4070.JPG" alt="" loading="lazy">
-                <div class="crew-caption">Ingresso a Machu Picchu, Perù</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_4089.JPG" alt="" loading="lazy">
-                <div class="crew-caption">Lungo i binari di Aguas Calientes, Perù</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_4173.JPG" alt="" loading="lazy">
-                <div class="crew-caption">Machu Picchu, la vista classica</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_4746.JPG" alt="" loading="lazy">
-                <div class="crew-caption">Salinas de Maras, Perù</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_4786.JPG" alt="" loading="lazy">
-                <div class="crew-caption">Pausa pranzo in centro commerciale</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_6903.JPG" alt="" loading="lazy">
-                <div class="crew-caption">In viaggio con il cane</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_6970.JPG" alt="" loading="lazy">
-                <div class="crew-caption">Serata a un evento</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/IMG_7186.JPG" alt="" loading="lazy">
-                <div class="crew-caption">Ferrovia di Uyuni, Bolivia</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/group-barbiere.jpeg" alt="" loading="lazy">
-                <div class="crew-caption">Un taglio di capelli</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/group-notte-strada.jpeg" alt="" loading="lazy">
-                <div class="crew-caption">Passeggiata notturna, on the road</div>
-              </div>
-              <div class="group-marquee-item" aria-hidden="true">
-                <img src="foto/group-relax-maschere.jpeg" alt="" loading="lazy">
-                <div class="crew-caption">Relax dopo il trek</div>
-              </div>
             </div>
+            <button type="button" class="striscia-foto-freccia indietro" aria-controls="striscia-foto" aria-label="Foto precedenti"><svg viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 11 C 13 7, 25 13, 36 9 M29 3 L37 9 L30 16"/></svg></button>
+            <button type="button" class="striscia-foto-freccia avanti" aria-controls="striscia-foto" aria-label="Foto successive"><svg viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 11 C 13 7, 25 13, 36 9 M29 3 L37 9 L30 16"/></svg></button>
           </div>
 
           <p class="section-sub reveal" style="margin-top:18px;">Machu Picchu, i geyser boliviani a 5.000 metri, Rio, le notti in bus sull'altopiano — e adesso l'inverno artico e la primavera coreana. Direi che siamo pronti per qualsiasi cosa.</p>
@@ -720,16 +590,13 @@ def disegna_logo():
         lettere.append({"d": d, "vb": f"{n(x0)} {n(y0)} {n(x1 - x0)} {n(y1 - y0)}",
                         "stile": f"left:{x0 / W * 100:.3f}%;top:{y0 / LOGO['altezza'] * 100:.3f}%;"
                                  f"width:{(x1 - x0) / W * 100:.3f}%;height:{(y1 - y0) / LOGO['altezza'] * 100:.3f}%"})
-    # Dove sta la vetta nella tavola larga (da -1000 a 2672): da li' la
-    # cresta si scopre verso i due lati.
-    vetta_pct = (lunga[vetta][0] + 1000) / 3672 * 100
-    return monti, cresta, lettere, vetta_pct
+    return monti, cresta, lettere
 
 
-_monti, _cresta, _lettere, _vetta = disegna_logo()
-# Montagne, cresta e lettere stanno in tre tavole uguali, cosi' ognuna puo'
-# muoversi per conto suo: le montagne salgono, la cresta si disegna, le
-# lettere spuntano, e nel 3D stanno a profondita' diverse.
+_monti, _cresta, _lettere = disegna_logo()
+# Montagne, cresta e lettere stanno in tavole uguali, cosi' ognuna puo'
+# muoversi per conto suo nell'intro: montagne e cresta salgono insieme, le
+# lettere arrivano dopo, come un timbro.
 _TAVOLA = 'viewBox="-1000 360 3672 3640" preserveAspectRatio="none" focusable="false"'
 
 copertina_testa = """<script>
@@ -752,17 +619,16 @@ copertina_html = """<div class="copertina" id="copertina" role="dialog" aria-mod
       <div class="pl-cielo"><img src="assets/logo/cielo.webp" alt="" width="1672" height="941" decoding="async" fetchpriority="high"></div>
       <div class="pl-rossa"><img src="assets/logo/rossa.webp" alt="" width="1672" height="162" decoding="async"></div>
       <div class="pl-terra pl-monti"><svg """ + _TAVOLA + """><polygon points=\"""" + _monti + """\"/></svg></div>
-      <div class="pl-terra pl-cresta" style="--vetta:""" + f"{_vetta:.3f}%" + """"><svg """ + _TAVOLA + """><path d=\"""" + _cresta[0] + """\"/><path d=\"""" + _cresta[1] + """\"/></svg></div>
+      <div class="pl-terra pl-cresta"><svg """ + _TAVOLA + """><path d=\"""" + _cresta[0] + """\"/><path d=\"""" + _cresta[1] + """\"/></svg></div>
       <div class="pl-lettere">""" + "".join(f'<div class="pl-l" style="{l["stile"]}"><svg viewBox="{l["vb"]}" focusable="false"><path d="{l["d"]}"/></svg></div>' for l in _lettere) + """</div>
       <div class="pl-aereo"><img src="assets/logo/aereo.webp" alt="" width="342" height="85" decoding="async"></div>
     </div>
     <div class="cp-dorso" aria-hidden="true"></div>
-    <div class="cp-basso"><span class="cp-entra-giro"><button type="button" class="cp-entra" id="cp-entra">Entra <svg viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 11 C 13 7, 25 13, 36 9 M29 3 L37 9 L30 16"/></svg></button></span></div>
+    <div class="cp-basso" inert><span class="cp-entra-giro"><button type="button" class="cp-entra" id="cp-entra">Entra <svg viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 11 C 13 7, 25 13, 36 9 M29 3 L37 9 L30 16"/></svg></button></span></div>
     <p class="cp-quadretti" aria-hidden="true">Quadretti 5 mm</p>
-    <button type="button" class="cp-musica" id="cp-musica" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 17.4 C 9.2 13, 8.8 9, 9 5.2 L 19.2 2.8 C 19 7, 19.3 11, 19 15.2"/><ellipse cx="6.5" cy="17.6" rx="2.7" ry="2.1"/><ellipse cx="16.6" cy="15.4" rx="2.7" ry="2.1"/></svg><span>Accendi la musica</span></button>
+    <button type="button" class="cp-musica" id="cp-musica"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 17.4 C 9.2 13, 8.8 9, 9 5.2 L 19.2 2.8 C 19 7, 19.3 11, 19 15.2"/><ellipse cx="6.5" cy="17.6" rx="2.7" ry="2.1"/><ellipse cx="16.6" cy="15.4" rx="2.7" ry="2.1"/></svg><span>Accendi la musica</span></button>
   </div>
-  <div class="cp-nuvola" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-  <div class="cp-carta" aria-hidden="true"></div>
+  <div class="cp-foglio" aria-hidden="true"><div class="cp-carta"></div><i class="cp-righe cp-righe-o"></i><i class="cp-righe cp-righe-v"></i></div>
   <div class="cp-volo" aria-hidden="true"><svg focusable="false">
     <defs><mask id="cp-maschera-volo" maskUnits="userSpaceOnUse" x="-1000" y="-1000" width="8000" height="8000"><path class="cp-scopri" pathLength="1"/></mask></defs>
     <path class="cp-scia" mask="url(#cp-maschera-volo)"/>
@@ -776,24 +642,40 @@ copertina_html = """<div class="copertina" id="copertina" role="dialog" aria-mod
     if(!radice.classList.contains('con-copertina')){ copertina.remove(); return; }
 
     var entra = document.getElementById('cp-entra');
+    var basso = copertina.querySelector('.cp-basso');
     var spenti = [];
     var chiusa = false;
     var daTastiera = false;
+    var volo = null, tApri = 0, suRidimensiona = null;
 
     // ---- L'intro del logo ----
     // La fa il CSS, ma aspetta le immagini del logo: senza, il cielo si
-    // "stamperebbe" vuoto. Alla fine "Entra" diventa premibile e prende il
-    // fuoco. Con meno movimento e' tutto pronto da subito.
+    // "stamperebbe" vuoto. "Entra" diventa premibile, e prende il fuoco,
+    // quando ha finito di comparire: fino ad allora e' inerte, cosi' il tab
+    // non raggiunge un bottone che ancora non si vede. Aspetta anche, per
+    // poco, lo script del volo: su una rete lenta, premendo prima che
+    // arrivi, si avrebbe solo la dissolvenza di riserva. Con meno
+    // movimento e' tutto pronto da subito.
+    var attesa = 0;
     function pronta(){
       if(copertina.classList.contains('pronta')) return;
+      if(!window.PatagucciAnima && radice.classList.contains('copertina-intro')){
+        attesa = attesa || Date.now();
+        if(Date.now() - attesa < 2500){ setTimeout(pronta, 100); return; }
+      }
       copertina.classList.add('via', 'pronta');
+      basso.inert = false;
       try { entra.focus({ preventScroll:true }); } catch(e){ entra.focus(); }
     }
     if(radice.classList.contains('copertina-intro')){
+      // La fine dell'animazione di "Entra" dice quando e' pronta: i tempi
+      // stanno solo nel CSS. Il timer e' una rete, se l'animazione non
+      // arrivasse alla fine (scheda in secondo piano).
+      basso.addEventListener('animationend', function(e){ if(e.animationName === 'cpAppare') pronta(); });
       var parti = function(){
         if(copertina.classList.contains('via')) return;
         copertina.classList.add('via');
-        setTimeout(pronta, 2350);
+        setTimeout(pronta, 3500);
       };
       Promise.all(Array.prototype.map.call(copertina.querySelectorAll('.pl img'), function(img){
         return img.decode ? img.decode().catch(function(){}) : null;
@@ -808,18 +690,28 @@ copertina_html = """<div class="copertina" id="copertina" role="dialog" aria-mod
     // Parte con la copertina e sfuma quando si preme "Entra". Molti
     // browser non lasciano partire un suono da solo: allora parte al primo
     // tocco sulla copertina, o col tasto della musica, che serve anche a
-    // spegnerla.
+    // spegnerla. Non la si scarica in anticipo: sono 3,9 MB, e su una rete
+    // lenta toglievano la strada agli script del volo. Si comincia a
+    // scaricarla solo quando suona, e dopo che gli script sono arrivati.
     var musica = document.getElementById('cp-musica');
     var scritta = musica.querySelector('span');
-    var canzone = new Audio('assets/audio/patagucci-song.mp3');
+    var canzone = new Audio();
+    canzone.preload = 'none';
     canzone.loop = true;
-    canzone.preload = 'auto';
+    canzone.src = 'assets/audio/patagucci-song.mp3';
     var spentaApposta = false, sfumando = false, guadagno = null;
 
+    // Il tasto dice quello che fa ("Accendi" o "Spegni"): una scritta
+    // sola, senza un secondo stato "premuto" che il lettore di schermo
+    // annuncerebbe insieme e al contrario.
     function segna(){
       var accesa = !canzone.paused && !sfumando;
-      musica.setAttribute('aria-pressed', accesa ? 'true' : 'false');
+      musica.classList.toggle('accesa', accesa);
       scritta.textContent = accesa ? 'Spegni la musica' : 'Accendi la musica';
+    }
+    // A copertina chiusa la canzone non serve piu': si libera la memoria.
+    function libera(){
+      try { canzone.removeAttribute('src'); canzone.load(); } catch(e){}
     }
     function suona(){
       if(chiusa || sfumando) return;
@@ -855,41 +747,62 @@ copertina_html = """<div class="copertina" id="copertina" role="dialog" aria-mod
       var giro = setInterval(function(){
         var resto = 1 - Math.min(1, (Date.now() - t0) / durata);
         if(guadagno) guadagno.gain.value = resto; else canzone.volume = resto;
-        if(resto <= 0){ clearInterval(giro); canzone.pause(); }
+        if(resto <= 0){ clearInterval(giro); canzone.pause(); if(chiusa) libera(); }
       }, 40);
     }
-    suona();
     musica.addEventListener('click', function(){
       if(canzone.paused){ spentaApposta = false; suona(); }
       else { spentaApposta = true; canzone.pause(); segna(); }
     });
+    // Un tocco sulla copertina accende la canzone, se il browser l'aveva
+    // fermata, e porta l'intro alla fine: chi tocca ha gia' voglia di
+    // entrare. La tastiera invece non accende niente: chi usa il tab o un
+    // lettore di schermo non deve trovarsi la musica sopra la voce.
     copertina.addEventListener('pointerdown', function(e){
-      if(canzone.paused && !spentaApposta && !musica.contains(e.target) && !entra.contains(e.target)) suona();
-    });
-    document.addEventListener('keydown', function(e){
-      if(!chiusa && canzone.paused && !spentaApposta && e.key === 'Tab') suona();
+      if(musica.contains(e.target) || entra.contains(e.target)) return;
+      if(canzone.paused && !spentaApposta) suona();
+      if(copertina.classList.contains('via') && !copertina.classList.contains('pronta')){ copertina.classList.add('salta'); pronta(); }
     });
 
     // Mentre la copertina e' chiusa il resto della pagina non si raggiunge
-    // ne' col tab ne' col lettore di schermo.
+    // ne' col tab ne' col lettore di schermo. Ogni pezzo si blocca appena
+    // il browser lo aggiunge, senza aspettare la fine: su una rete lenta la
+    // pagina arriva dopo che "Entra" e' gia' pronto, e il tab ci finirebbe.
+    function blocca(el){
+      if(el.nodeType !== 1 || el === copertina || el.tagName === 'SCRIPT' || el.inert) return;
+      el.inert = true;
+      spenti.push(el);
+    }
+    Array.prototype.forEach.call(document.body.children, blocca);
+    var guardia = window.MutationObserver ? new MutationObserver(function(liste){
+      liste.forEach(function(l){ Array.prototype.forEach.call(l.addedNodes, blocca); });
+    }) : null;
+    if(guardia) guardia.observe(document.body, { childList: true });
+    // A pagina pronta sono arrivati anche gli script del volo: solo allora
+    // parte la canzone.
     document.addEventListener('DOMContentLoaded', function(){
+      if(guardia) guardia.disconnect();
       if(chiusa) return;
-      Array.prototype.forEach.call(document.body.children, function(el){
-        if(el === copertina || el.tagName === 'SCRIPT' || el.inert) return;
-        el.inert = true;
-        spenti.push(el);
-      });
+      Array.prototype.forEach.call(document.body.children, blocca);
+      suona();
     });
 
     function chiudi(){
       if(chiusa) return;
       chiusa = true;
       // Chi salta l'apertura non deve sentire la musica continuare sotto.
-      if(!canzone.paused && !sfumando) sfuma(400);
+      if(canzone.paused) libera();
+      else if(!sfumando) sfuma(400);
       try { sessionStorage.setItem('patagucci-entrato', '1'); } catch(e){}
+      if(guardia) guardia.disconnect();
       spenti.forEach(function(el){ el.inert = false; });
       radice.classList.remove('con-copertina', 'copertina-intro');
       copertina.remove();
+      // Niente resta in ascolto per una copertina che non c'e' piu'.
+      document.removeEventListener('keydown', suEsc);
+      if(suRidimensiona) window.removeEventListener('resize', suRidimensiona);
+      // assets/anima.js rimette in osservazione quello che aspettava.
+      window.dispatchEvent(new CustomEvent('copertina-chiusa'));
       // Chi e' entrato con la tastiera riparte dal titolo; col mouse o col
       // dito il fuoco torna semplicemente all'inizio della pagina.
       var titolo = daTastiera && document.querySelector('#dest-hub h1');
@@ -900,27 +813,56 @@ copertina_html = """<div class="copertina" id="copertina" role="dialog" aria-mod
       }
     }
 
+    // Saltare il volo: la copertina sfuma in un attimo e sotto la home e'
+    // gia' pronta. Il volo ferma i suoi tempi, cosi' niente riparte dopo.
+    function salta(){
+      if(chiusa || copertina.classList.contains('svanisce')) return;
+      if(volo && volo.salta) volo.salta();
+      copertina.classList.add('svanisce');
+      setTimeout(chiudi, 220);
+    }
+
     function apri(e){
       // Un clic da tastiera (Invio, spazio) ha detail 0; Esc non ha evento.
-      daTastiera = !e || e.detail === 0;
+      var tastiera = !e || e.detail === 0;
+      if(copertina.classList.contains('in-volo') || copertina.classList.contains('apri-css')){
+        // Un secondo colpo vuol dire "salta", ma non quello di un doppio
+        // clic fatto per abitudine: conta solo dopo 0,6 secondi.
+        if(Date.now() - tApri > 600) salta();
+        return;
+      }
+      daTastiera = tastiera;
+      tApri = Date.now();
       // La canzone se ne va mentre la copertina si apre.
       sfuma(1800);
-      // Un secondo colpo mentre si sta aprendo vuol dire "salta".
-      if(copertina.classList.contains('in-volo') || copertina.classList.contains('apri-css')){ chiudi(); return; }
-      if(window.PatagucciCopertina){ window.PatagucciCopertina.apri(copertina, chiudi); return; }
+      if(window.PatagucciCopertina){
+        volo = window.PatagucciCopertina.apri(copertina, chiudi);
+        // Se la finestra cambia misura (o il telefono gira) a volo in
+        // corso, l'atterraggio calcolato non torna piu': meglio saltare.
+        var w = window.innerWidth, h = window.innerHeight;
+        suRidimensiona = function(){
+          if(Math.abs(window.innerWidth - w) > 40 || Math.abs(window.innerHeight - h) > 40) salta();
+        };
+        window.addEventListener('resize', suRidimensiona);
+        return;
+      }
       // Senza Motion (o con meno movimento) la copertina sfuma e basta.
       var meno = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       copertina.classList.add('apri-css');
       setTimeout(chiudi, meno ? 300 : 650);
     }
 
-    entra.addEventListener('click', apri);
-    document.addEventListener('keydown', function(e){
+    // Durante l'intro Esc la fa finire; a copertina pronta entra; durante
+    // il volo lo salta.
+    function suEsc(e){
       if(chiusa || e.key !== 'Escape') return;
-      // Durante l'intro Esc la fa finire; dopo, entra.
       if(!copertina.classList.contains('pronta')){ copertina.classList.add('salta'); pronta(); }
+      else if(copertina.classList.contains('in-volo')) salta();
       else apri();
-    });
+    }
+
+    entra.addEventListener('click', apri);
+    document.addEventListener('keydown', suEsc);
   })();
 </script>"""
 
@@ -939,6 +881,17 @@ final_html = f'''<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Patrick+Hand+SC&family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Atkinson+Hyperlegible+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
+<!-- Motion (gia' Framer Motion), la versione senza React: il volo della
+     copertina, la pagina che si volta, l'evidenziatore, la penna rossa.
+     E' una copia del pacchetto ufficiale motion@11.11.17 (dist/motion.js,
+     sha256 61b3a38dabf65a31778bc7fa9e71936bfa36ec2f567e50de261b958a3037e84e,
+     licenza MIT in assets/vendor/motion-LICENSE.md): servito da qui non
+     dipende da un sito esterno e non si puo' alterare per strada. Tutti e
+     due gli script stanno in testa, rimandati: si scaricano subito, prima
+     delle foto e della canzone, e girano a pagina letta. Se non arrivano,
+     assets/anima.js se ne accorge e la pagina resta ferma e intera. -->
+<script src="assets/vendor/motion-11.11.17.js" defer fetchpriority="high"></script>
+<script src="assets/anima.js" defer fetchpriority="high"></script>
 <style>
   .destination{{ display:none; }}
   .destination.active{{ display:block; }}
@@ -1004,9 +957,15 @@ final_html = f'''<!DOCTYPE html>
 <script>
 var SUFFISSI = {suffissi_js};
 var TITOLI = {titoli_js};
+// Il frammento gia' messo in pagina: popstate e hashchange arrivano tutti
+// e due per lo stesso salto, e il secondo deve trovarlo gia' fatto.
+var ultimoFrammento = null;
+var ridottoMovimento = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function showDest(name, daCronologia){{
+  var prima = document.documentElement.getAttribute('data-dest');
+  var cambia = prima !== name;
   document.documentElement.setAttribute('data-dest', name);
-  document.documentElement.removeAttribute('data-paese');
+  if(cambia) document.documentElement.removeAttribute('data-paese');
   document.querySelectorAll('.destination').forEach(function(el){{ el.classList.remove('active'); }});
   var target = document.getElementById(name === 'hub' ? 'dest-hub' : 'dest-' + name);
   if(target) target.classList.add('active');
@@ -1016,8 +975,10 @@ function showDest(name, daCronologia){{
     btn.classList.add('active');
     // Su mobile il selettore e' una riga che scorre: senza questo la meta
     // attiva puo' restare fuori schermo.
-    btn.scrollIntoView({{ behavior:'smooth', block:'nearest', inline:'center' }});
+    btn.scrollIntoView({{ behavior: ridottoMovimento ? 'auto' : 'smooth', block:'nearest', inline:'center' }});
   }}
+  // Una meta nuova si legge dall'inizio; la linguetta della meta gia'
+  // aperta riporta in cima, ma senza voltare pagina.
   window.scrollTo({{ top: 0, left: 0, behavior: 'instant' }});
   target.querySelectorAll('.reveal').forEach(function(el){{ el.classList.add('visible'); }});
   // Un indirizzo per ogni meta: senza questo "guarda i voli" diventa
@@ -1027,8 +988,11 @@ function showDest(name, daCronologia){{
     var nuovo = name === 'hub' ? location.pathname : location.pathname + '#' + name;
     if(location.hash.slice(1) !== name) history.pushState({{ meta: name }}, '', nuovo);
   }}
-  // Fa ripartire da capo le mappe animate della meta appena aperta.
-  window.dispatchEvent(new CustomEvent('destinazione-cambiata'));
+  ultimoFrammento = location.hash;
+  // Solo quando la meta cambia davvero: assets/anima.js volta la pagina
+  // (in avanti o indietro, secondo l'ordine delle linguette) e le cartine
+  // della meta nuova ripartono.
+  if(cambia) window.dispatchEvent(new CustomEvent('destinazione-cambiata', {{ detail: {{ da: prima, a: name }} }}));
   if(typeof syncSwitcherHeight === 'function') setTimeout(syncSwitcherHeight, 0);
 }}
 function showHub(){{ showDest('hub'); }}
@@ -1047,8 +1011,15 @@ function metaDaFrammento(frammento){{
   return null;
 }}
 function applicaFrammento(daCronologia){{
+  // Lo stesso salto annunciato due volte (popstate e poi hashchange): il
+  // secondo lo trova gia' fatto e non fa niente.
+  if(location.hash === ultimoFrammento) return;
+  ultimoFrammento = location.hash;
   var trovato = metaDaFrammento(location.hash.slice(1));
   if(!trovato){{ showDest('hub', true); return; }}
+  // Una sezione della meta gia' aperta e' solo un salto dentro la pagina:
+  // lo fa il browser, senza voltare pagina e senza passare dalla cima.
+  if(trovato.sezione && trovato.meta === document.documentElement.getAttribute('data-dest')) return;
   showDest(trovato.meta, true);
   if(trovato.sezione){{
     var el = document.getElementById(trovato.sezione);
@@ -1110,15 +1081,37 @@ document.querySelectorAll('.crew-card[data-audio]').forEach(function(card){{
     audio.currentTime = 0;
   }});
 }});
+
+// La striscia delle foto del gruppo: ferma, si scorre di lato col dito,
+// col mouse o con le due frecce disegnate; col tab prende il fuoco e
+// scorre con le frecce della tastiera. Una freccia si spegne quando da
+// quella parte non c'e' piu' niente.
+(function(){{
+  var binario = document.getElementById('striscia-foto');
+  if(!binario) return;
+  var cornice = binario.parentNode;
+  var indietro = cornice.querySelector('.striscia-foto-freccia.indietro');
+  var avanti = cornice.querySelector('.striscia-foto-freccia.avanti');
+  function aggiorna(){{
+    var fine = binario.scrollWidth - binario.clientWidth - 2;
+    indietro.disabled = binario.scrollLeft <= 2;
+    avanti.disabled = fine <= 0 || binario.scrollLeft >= fine;
+  }}
+  function sposta(verso){{
+    binario.scrollBy({{ left: verso * binario.clientWidth * 0.8, behavior: ridottoMovimento ? 'auto' : 'smooth' }});
+  }}
+  indietro.addEventListener('click', function(){{ sposta(-1); }});
+  avanti.addEventListener('click', function(){{ sposta(1); }});
+  binario.addEventListener('scroll', aggiorna, {{ passive: true }});
+  window.addEventListener('resize', aggiorna);
+  window.addEventListener('load', aggiorna);
+  // Aprendo il sito su un'altra meta la striscia non ha ancora misure.
+  window.addEventListener('destinazione-cambiata', function(){{ setTimeout(aggiorna, 0); }});
+  aggiorna();
+}})();
 </script>
 
 {"".join(scripts)}
-
-<!-- Motion (gia' Framer Motion), la versione senza React: la pagina che si
-     volta, l'evidenziatore che si stende, la penna che disegna. Se non
-     arriva, assets/anima.js se ne accorge e la pagina resta ferma e intera. -->
-<script src="https://cdn.jsdelivr.net/npm/motion@11.11.17/dist/motion.js" defer></script>
-<script src="assets/anima.js" defer></script>
 
 </body>
 </html>

@@ -52,6 +52,10 @@
 
   <section id="bolivia" class="panel" data-nav data-paese="bo">
     <div class="inner timeline">
+    <div class="card tratta reveal">
+      <h3>L'andata</h3>
+      <p>Siamo partiti da Venezia e abbiamo fatto scalo a Madrid e a Bogotá prima di atterrare a La Paz. In che giorni e con quali voli, è ancora da scrivere.</p>
+    </div>
     <details class="day reveal">
       <summary><span class="daynum">18</span><span class="daytitle">La Paz — il mercato</span><span class="chevron">▸</span></summary>
       <div class="day-body">
@@ -189,6 +193,10 @@
         <div class="foto-giorno"><figure class="mini-photo"><img src="foto/IMG_1169.jpeg" alt="Cena di gruppo, Lima" loading="lazy"><figcaption>Lima, ore 23:28</figcaption></figure></div>
       </div>
     </details>
+    <div class="card tratta reveal">
+      <h3>Il ritorno</h3>
+      <p>Da Lima siamo tornati passando per Bogotá e Francoforte, fino a Venezia. Anche qui mancano i giorni e i voli.</p>
+    </div>
     </div>
   </section>
 
@@ -251,7 +259,8 @@
       <p class="section-sub reveal">Le cose che dobbiamo ancora scrivere. Appena ce le ricordiamo, entrano nel diario.</p>
       <div class="card reveal">
         <ul class="rule-list">
-          <li>Come e quando siamo arrivati a La Paz, e dove dormivamo.</li>
+          <li>I giorni dei voli, all'andata (Venezia, Madrid, Bogotá, La Paz) e al ritorno (Lima, Bogotá, Francoforte, Venezia).</li>
+          <li>Dove dormivamo a La Paz.</li>
           <li>L'evento della sera di domenica 19 aprile, sopra La Paz.</li>
           <li>Il bus notturno per Uyuni e il giro del Salar e dell'altopiano: con chi, quanti giorni, dove abbiamo dormito.</li>
           <li>Giovedì 23 aprile: i geyser, le lagune, il confine?</li>
@@ -259,7 +268,6 @@
           <li>Il nome del trekking di lunedì 27 aprile, e chi ha patito la quota.</li>
           <li>Come siamo arrivati a Machu Picchu, e dove abbiamo dormito.</li>
           <li>Venerdì 1 maggio, e la cena di Lima.</li>
-          <li>Il ritorno a casa.</li>
           <li>Un momento a testa: Manu, Kiki, Mala e Bacci.</li>
         </ul>
       </div>
@@ -286,7 +294,7 @@
         var link = linkBySection[entry.target.id];
         if(link){
           link.classList.add('active');
-          link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          link.scrollIntoView({ behavior: window.ridottoMovimento ? 'auto' : 'smooth', block: 'nearest', inline: 'center' });
         }
       }
     });

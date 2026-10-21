@@ -280,9 +280,9 @@ Il sistema è ibrido e la regola che lo divide è materiale. L'inchiostro è pia
 
 ### Shadow Vocabulary
 - **Carta su carta** (`box-shadow: 0 1px 1px rgba(20,24,30,0.06), 0 12px 22px -16px rgba(20,24,30,0.38)`): la foto piccola dentro un giorno, i riquadri delle pagine sorgente più vecchie che non hanno il tratto.
-- **Polaroid** (`box-shadow: 0 2px 3px rgba(20,24,30,0.10), 0 22px 34px -18px rgba(20,24,30,0.48)`): foto dell'intestazione, equipaggio, giostra delle foto, cartoline delle mete, striscia fotografica.
+- **Polaroid** (`box-shadow: 0 2px 3px rgba(20,24,30,0.10), 0 22px 34px -18px rgba(20,24,30,0.48)`): foto dell'intestazione, equipaggio, striscia delle foto del gruppo, cartoline delle mete, striscia fotografica.
 - **Nastro** (`box-shadow: 0 1px 2px rgba(0,0,0,0.08)`): il nastro adesivo sopra la polaroid.
-- **Foglio che si volta** (`box-shadow: inset -40px 0 60px -40px rgba(0,0,0,0.25)`, più un velo che scurisce durante la rotazione): la pagina a quadretti che gira sul bordo sinistro.
+- **Foglio che si volta** (`box-shadow: inset -40px 0 60px -40px rgba(0,0,0,0.25)`, più una sfumatura che scurisce il lato che si alza mentre gira): la pagina a quadretti che gira sul bordo sinistro, o sul destro tornando a una meta che viene prima.
 
 ### Named Rules
 
@@ -334,18 +334,20 @@ Anche le icone sono disegnate e si applicano come maschere SVG colorate con il c
 - **Nastro della bandiera:** una striscia da 6px in cima, con i colori della bandiera della meta. È un dato, non una decorazione del sistema.
 
 ### Polaroid (componente firma)
-Bordo bianco (12px, e 54px in basso nell'intestazione), angoli da 3px, ombra da polaroid, inclinazione propria in `--gira`. Nell'intestazione c'è il nastro strappato, tinto con l'evidenziatore al 62%. Con un mouse vero si inclina in 3D seguendo il puntatore (fino a ±6° in verticale e ±7° in orizzontale, sollevata di 16px) e torna giù con una molla morbida (0,55s, rimbalzo 0,18). Quando arriva una meta, la polaroid cade sul foglio (`rotateX(32deg)` → 0, da −46px, 0,85s). Le cartoline delle mete e le foto dell'equipaggio sono polaroid, con la didascalia in stampatello a mano.
+Bordo bianco (12px, e 54px in basso nell'intestazione), angoli da 3px, ombra da polaroid, inclinazione propria in `--gira`. Nell'intestazione c'è il nastro strappato, tinto con l'evidenziatore al 62%. Con un mouse vero si inclina in 3D seguendo il puntatore (fino a ±6° in verticale e ±7° in orizzontale, sollevata di 16px) e torna giù in 0,55s rallentando, senza rimbalzo. L'inclinazione piena spetta alle foto che si aprono (cartoline delle mete, equipaggio); quelle che non si aprono (l'intestazione, la striscia delle foto del gruppo) si sollevano appena, al 40% e di 6px, perché un'inclinazione piena sembrerebbe un invito al clic. Quando arriva una meta, la polaroid cade sul foglio (`rotateX(32deg)` → 0, da −46px, 0,85s), e intanto non segue il mouse. Le cartoline delle mete e le foto dell'equipaggio sono polaroid, con la didascalia in stampatello a mano.
 
 ### Il numero del giorno e l'itinerario (componente firma)
 Ogni giorno è un riquadro a tratto che si apre. Il numero è scritto in pennarello dentro un cerchio storto evidenziato (44×42px, 38×36px sul telefono). Il titolo è in stampatello a mano, e la freccia ruota di 90° all'apertura. Il calendario a colpo d'occhio ha una casella per giorno: la data è passata con l'evidenziatore del paese, il giorno di volo ha l'aeroplanino di carta, il volo da comprare ha il tratto rosso tratteggiato e la scritta «da prenotare».
 
 ### La nota di quello che manca
-In home, sotto il sottotitolo, c'è una nota a penna rossa con il tratto rosso tratteggiato, ruotata di −0,8°. Il numero (in pennarello) è cerchiato da un tratto rosso che si disegna da solo quando entra nello schermo (0,9s, curva `[.65,0,.35,1]`). La nota è sempre visibile, ma non è mai la cosa principale della pagina.
+In home, sotto il sottotitolo, c'è una nota a penna rossa con il tratto rosso tratteggiato, ruotata di −0,8°. Il numero (in pennarello) è cerchiato da un tratto rosso che si disegna da solo, una volta, quando entra nello schermo (0,9s, curva `[.65,0,.35,1]`). Dopo la copertina è l'ultimo colpo dell'arrivo sulla home: cerchia i voli da prenotare quando la polaroid è caduta e la passata si è stesa. La nota è sempre visibile, ma non è mai la cosa principale della pagina.
 
 ### La copertina (componente firma)
-Il quaderno chiuso, a schermo pieno, con il logo vero del gruppo stampato in copertina. Il logo è fatto a livelli: cielo, banda e aereo sono immagini in `assets/logo/`, montagne, cresta e lettere sono vettori da `_sources/logo/forme.json`. Il disegno si misura in unità del disegno originale (`--u`, su una tavola di 1672×941) e il colore pieno continua oltre i bordi. Sul dorso ci sono i due punti metallici; in basso a destra la scritta «Quadretti 5 mm»; in alto a destra il tasto della musica (bianco, contorno a mano, `aria-pressed`). All'apertura il logo si stampa da solo, a colpi, come un manifesto (solo CSS, 2,6s): il cielo, la banda, montagne e cresta, la scritta con un tonfo; poi l'aereo Royal Brunico entra in volo, si posa e ondeggia, e compare «Entra». L'intro aspetta che le immagini del logo siano pronte, al massimo 1,5s; Esc la porta subito alla fine.
+Il quaderno chiuso, a schermo pieno, con il logo vero del gruppo stampato in copertina. Il logo è fatto a livelli: cielo, banda e aereo sono immagini in `assets/logo/`, montagne, cresta e lettere sono vettori da `_sources/logo/forme.json`. Il disegno si misura in unità del disegno originale (`--u`, su una tavola di 1672×941) e il colore pieno continua oltre i bordi. Sul dorso ci sono i due punti metallici; in basso a destra la scritta «Quadretti 5 mm»; in alto a destra il tasto della musica (bianco, contorno a mano, dice quello che fa: «Accendi la musica» o «Spegni la musica»). All'apertura il logo si stampa da solo, a colpi, come un manifesto (solo CSS, 2,6s): il cielo, la banda, montagne e cresta, la scritta con un tonfo; poi l'aereo Royal Brunico entra in volo, si posa e ondeggia, e compare «Entra». Ogni colpo rallenta e si posa, senza rimbalzi e senza sfocature. L'intro aspetta che le immagini del logo siano pronte, al massimo 1,5s; Esc, o un tocco sulla copertina, la porta subito alla fine. «Entra» è inerte finché non ha finito di comparire (fine dell'animazione `cpAppare`): il tab non raggiunge un bottone che non si vede. Il resto della pagina invece è inerte finché c'è la copertina, ogni pezzo da quando arriva: su una rete lenta il tab non scivola dietro la copertina. Aspetta anche lo script del volo, al massimo 2,5s in più, così su una rete lenta non si cade sulla dissolvenza di riserva solo perché lo script era in ritardo. Motion è una copia del pacchetto ufficiale in `assets/vendor/`, e i due script stanno in testa alla pagina, rimandati.
 
-Su «Entra» parte il volo verso il quaderno (Motion, 2,8s). L'aereo si stacca dal logo e vola verso lo schermo, crescendo fino a 5,2 volte e sfocandosi (0,8s). Cinque sbuffi bianchi si gonfiano dove passa e coprono tutto, poi la nuvola si dirada sul foglio a quadretti. Lo stesso aereo rientra da sinistra, perché era uscito a destra: piccolo, col muso sempre in avanti e senza picchiate. Scende piano fino alla riga del titolo, riprende quota tracciando la scia tratteggiata a matita e si posa accanto a «Patagucci Trips», esattamente sopra l'aereo che sta lì. Il foglio si scopre e sotto c'è la home. Posizione, misura e inclinazione dell'atterraggio vengono dal disegno sulla home, quindi tornano su qualsiasi schermo.
+Su «Entra» parte il volo verso il quaderno (Motion, 2,6s). L'aereo si stacca dal logo e vola verso lo schermo: accelera, cresce fino a 4 volte, si inclina di −8° e ti passa oltre (0,8s), e intanto la copertina gli va incontro di un 5%. Niente sfocature: la velocità la dice la crescita. Il cielo diventa il foglio: le righe orizzontali dei quadretti corrono da sinistra a destra, poi quelle verticali dall'alto in basso (0,4s ciascuna, come tirate col righello), e sotto il verde si fa bianco. Lo stesso aereo rientra da sinistra, perché era uscito a destra: piccolo, col muso sempre in avanti e senza picchiate. Scende piano fino alla riga del titolo, riprende quota tracciando la scia tratteggiata a matita e si posa accanto a «Patagucci Trips», esattamente sopra l'aereo che sta lì. Mentre arriva, il foglio si scopre (0,6s) e sotto c'è la home, che lo accoglie con il suo arrivo: la polaroid cade, la passata si stende e per ultima la penna rossa cerchia i voli da prenotare. Posizione, misura e inclinazione dell'atterraggio vengono dal disegno sulla home, quindi tornano su qualsiasi schermo. Le righe crescono in scala, non ritagliate, così il volo resta fluido anche su un telefono.
+
+Il volo si può saltare: un secondo «Entra» premuto entro 0,6s è un doppio clic e non conta, dopo invece salta. Saltano anche Esc e un cambio di misura della finestra a volo iniziato. Saltando, i movimenti del volo si fermano, la copertina svanisce in 0,2s e la home fa subito il suo arrivo, una volta sola. Chi è entrato da tastiera (Invio o Esc) si ritrova col focus sul titolo della pagina. Una rete di sicurezza chiude comunque la copertina dopo 6s.
 
 Il disegno sulla home è l'aereo del logo inclinato di −6°, 2,73em di larghezza, con il fondo sulla riga del testo. La sua scia parte dalla riga, subito dopo l'ultima lettera, e sale fino alla coda.
 
@@ -354,13 +356,15 @@ La «Patagucci song» suona sulla copertina e sfuma in 1,8s quando si preme «En
 ### Il movimento (assets/anima.js)
 Motion senza React, sei gesti:
 - Il volo verso il quaderno, all'uscita dalla copertina (vedi sopra).
-- La pagina che si volta: un foglio a quadretti grande quanto lo schermo gira sul bordo sinistro, 0,75s.
+- La pagina che si volta: un foglio a quadretti grande quanto lo schermo gira sul bordo sinistro in 0,55s, partendo deciso e rallentando. Tornando a una meta che viene prima gira sul bordo destro. Passa sotto le linguette, che restano ferme e dicono dove si è. Si volta solo quando la meta cambia davvero: non per un link a una sezione della stessa meta, non ripremendo la linguetta aperta, e una volta sola con Indietro e Avanti.
 - La polaroid che cade sul foglio.
-- La passata di evidenziatore, solo sulla parola del titolo della meta (0,75s).
-- La penna rossa che si disegna.
+- La passata di evidenziatore, solo sulla parola del titolo della meta (0,75s). Riparte da vuota senza che la si veda ritirarsi.
+- La penna rossa che si disegna, una volta.
 - Le polaroid che si inclinano sotto il mouse.
 
-Il cambio di colore della meta scorre in 0,6s grazie a @property. Con il movimento ridotto, o senza Motion, non si muove niente: gli evidenziatori sono già stesi, la giostra delle foto è ferma e i colori cambiano di colpo.
+L'arrivo su una meta, dopo la copertina o dopo la pagina che si volta, è un regista solo e fa un gesto alla volta: prima cade la polaroid, 0,35s dopo si stende la passata, 0,4s dopo ancora la penna rossa cerchia quello che manca, se si vede. Sulle cartine il veicolo fa il viaggio quando la cartina entra nello schermo: un giro intero in 20s, poi si ferma all'arrivo, e intanto l'alone attorno alla partenza pulsa tre volte. Tornando a guardarla riparte da capo; fuori dallo schermo non si muove niente. Le foto del gruppo stanno ferme in una striscia che si scorre a mano, col dito, con le frecce o con la tastiera.
+
+Il cambio di colore della meta scorre in 0,6s grazie a @property. Con il movimento ridotto, o senza Motion, non si muove niente: gli evidenziatori sono già stesi, l'aereo della copertina non ondeggia, sulle cartine il veicolo resta alla partenza e l'alone non pulsa, la striscia delle foto e i salti di pagina scorrono senza scivolare e i colori cambiano di colpo.
 
 ## Do's and Don'ts
 
@@ -382,5 +386,5 @@ Il cambio di colore della meta scorre in 0,6s grazie a @property. Con il movimen
 - **Don't** evidenziare più di una parola nel titolo della meta, né animare l'entrata di ogni titolo di sezione.
 - **Don't** usare emoji o caratteri come icone. Le bandiere e il veicolo sulla cartina sono dati, non decorazione.
 - **Don't** usare foto a tutto schermo con un velo scuro sotto il testo, né card arrotondate in modo uniforme con l'ombra.
-- **Don't** portare i colori del logo dentro il quaderno, né ridisegnare il logo.
+- **Don't** portare i colori del logo dentro il quaderno, né ridisegnare il logo. L'unica eccezione è l'aereo Royal Brunico accanto al titolo della home, dove la copertina lo fa posare.
 - **Don't** scendere sotto 0.8rem per qualsiasi testo.

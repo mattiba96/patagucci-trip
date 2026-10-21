@@ -156,6 +156,9 @@ html[data-dest="ge"]{ --accent:#ff9f93; --accent-rgb:255,159,147; --accent-deep:
    ============================================================ */
 *{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
+/* Lo spazio della barra di scorrimento resta riservato anche quando la
+   copertina la toglie: chiudendola, la pagina non scatta di lato. */
+html{ scrollbar-gutter:stable; }
 html,body{ margin:0; padding:0; }
 body{
   font-family:var(--font-body);
@@ -335,8 +338,11 @@ h2.section-title{
   background-repeat:no-repeat; background-position:0 86%; background-size:100% 0.46em;
   -webkit-box-decoration-break:clone; box-decoration-break:clone;
   padding:0 0.12em;
-  transition:background-size .75s cubic-bezier(.22,1,.36,1);
 }
+/* La passata si stende solo dopo il primo disegno, come i colori: quando
+   lo script la svuota all'apertura non deve vedersi ritirare, nemmeno
+   sotto la copertina. */
+html.pronto .tt{ transition:background-size .75s cubic-bezier(.22,1,.36,1); }
 /* Il titolo della meta: con l'animazione attiva la passata parte vuota e
    si stende dopo che la pagina si e' voltata. I titoli di sezione sono
    gia' evidenziati: un'entrata uguale su ogni sezione stanca. */
@@ -459,16 +465,37 @@ p[style*="text-align:center"]{ margin-left:auto; margin-right:auto; }
 .nota-gruppo p{ margin:0; max-width:68ch; line-height:1.75; }
 .nota-gruppo + h3{ margin-top:40px; }
 
-.group-marquee{ position:relative; overflow:hidden; margin-top:18px; padding:26px 0 30px;
-  -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
-.group-marquee-track{ display:flex; gap:26px; width:max-content; animation:groupMarquee 90s linear infinite; }
-.group-marquee:hover .group-marquee-track{ animation-play-state:paused; }
-.group-marquee-item{ position:relative; flex:0 0 auto; width:300px; background:#fff; padding:9px 9px 0; border-radius:3px; box-shadow:var(--shadow-lg); --gira:-1.6deg; transform:rotate(var(--gira)); }
-.group-marquee-item:nth-child(even){ --gira:1.8deg; }
-.group-marquee-item:nth-child(3n){ --gira:-0.6deg; }
-.group-marquee-item img{ width:100%; height:200px; object-fit:cover; }
-.group-marquee-item .crew-caption{ font-size:1rem; padding:8px 4px 10px; }
-@keyframes groupMarquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+/* La striscia delle foto del gruppo: polaroid in fila, ferme, da scorrere
+   di lato col dito, col mouse o con le due frecce. I bordi sfumano per
+   dire che la fila continua. */
+.striscia-foto{ position:relative; margin-top:18px; }
+.striscia-foto-binario{
+  display:flex; gap:26px; overflow-x:auto; overscroll-behavior-x:contain;
+  scroll-snap-type:x proximity; scroll-padding-inline:56px;
+  padding:26px 56px 30px;
+  scrollbar-width:thin; scrollbar-color:var(--ink-soft) transparent;
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 40px, #000 calc(100% - 40px), transparent);
+  mask-image:linear-gradient(90deg, transparent, #000 40px, #000 calc(100% - 40px), transparent);
+}
+.striscia-foto-item{ position:relative; flex:0 0 auto; width:300px; background:#fff; padding:9px 9px 0; border-radius:3px; box-shadow:var(--shadow-lg); --gira:-1.6deg; transform:rotate(var(--gira)); scroll-snap-align:start; }
+.striscia-foto-item:nth-child(even){ --gira:1.8deg; }
+.striscia-foto-item:nth-child(3n){ --gira:-0.6deg; }
+.striscia-foto-item img{ width:100%; height:200px; object-fit:cover; }
+.striscia-foto-item .crew-caption{ font-size:1rem; padding:8px 4px 10px; }
+/* Le frecce: la stessa freccia a mano di "Entra", su un'etichetta di carta. */
+.striscia-foto-freccia{
+  position:absolute; top:calc(50% - 22px); z-index:1;
+  display:flex; align-items:center; justify-content:center; width:44px; height:44px; padding:0; cursor:pointer;
+  background:var(--paper); border:1.5px solid var(--ink); border-radius:var(--mano-piccola);
+  transition:transform .2s cubic-bezier(.16,1,.3,1), opacity .2s ease;
+}
+.striscia-foto-freccia svg{ width:26px; height:14px; overflow:visible; }
+.striscia-foto-freccia svg path{ fill:none; stroke:var(--ink); stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round; }
+.striscia-foto-freccia.indietro{ left:4px; }
+.striscia-foto-freccia.indietro svg{ transform:scaleX(-1); }
+.striscia-foto-freccia.avanti{ right:4px; }
+.striscia-foto-freccia:hover:not(:disabled){ transform:translate(-1px,-1px) rotate(-1deg); }
+.striscia-foto-freccia:disabled{ opacity:0.3; cursor:default; }
 
 /* ============================================================
    L'ITINERARIO: i giorni cerchiati
@@ -645,8 +672,13 @@ details.day .mini-photo img{ width:100%; }
 /* Sotto la rotta, la passata di evidenziatore; sopra, il tratteggio a penna. */
 .jeep-map-wrap .route-shadow{ fill:none; stroke:var(--accent); stroke-width:11; stroke-linecap:round; stroke-linejoin:round; opacity:0.85; }
 .jeep-map-wrap .route-line{ fill:none; stroke:var(--ink); stroke-width:2.4; stroke-dasharray:3 7; stroke-linecap:round; }
-.jeep-map-wrap .pulse{ fill:var(--accent-deep); opacity:0.35; animation:pulse 1.8s ease-out infinite; }
-@keyframes pulse{ 0%{ r:8; opacity:0.5; } 100%{ r:26; opacity:0; } }
+/* L'alone attorno alla partenza: tre impulsi quando la cartina entra
+   nello schermo (la classe la mette lo script della cartina), poi fermo.
+   Cresce con una scala, non col raggio, cosi' non si ridisegna a ogni
+   fotogramma. */
+.jeep-map-wrap .pulse{ fill:var(--accent-deep); opacity:0.35; transform-box:fill-box; transform-origin:center; }
+.jeep-map-wrap .pulse.pulsa{ animation:pulse 1.8s ease-out 3; }
+@keyframes pulse{ 0%{ transform:scale(1); opacity:0.5; } 100%{ transform:scale(3.25); opacity:0; } }
 .jeep-map-wrap .stop-label{ font-family:var(--font-body); font-size:10.5px; fill:var(--ink); font-weight:700; paint-order:stroke; stroke:#fff; stroke-width:3.5px; stroke-linejoin:round; }
 .jeep-map-wrap .stop-label.highlight{ font-size:11.5px; fill:var(--ink); }
 .jeep-map-wrap .pin{ fill:var(--accent); stroke:var(--ink); stroke-width:2.2; }
@@ -920,10 +952,13 @@ figure.crew-card{ margin:0; }
 /* ============================================================
    LA PAGINA CHE SI VOLTA (vedi assets/anima.js)
    Un foglio a quadretti grande quanto lo schermo copre la meta appena
-   aperta e si gira attorno al bordo sinistro, come in un quaderno.
+   aperta e si gira attorno al bordo sinistro, come in un quaderno; si
+   torna a una meta precedente girandolo sul bordo destro. Sta sotto le
+   linguette (100 e 200), che restano ferme e dicono dove si e'. Mentre
+   gira, il bordo che si alza si scurisce un poco: e' carta, non un velo.
    ============================================================ */
 .voltapagina{
-  position:fixed; inset:0; z-index:400; pointer-events:none;
+  position:fixed; inset:0; z-index:90; pointer-events:none;
   transform-origin:0 50%; backface-visibility:hidden;
   background-color:#fff;
   background-image:
@@ -933,7 +968,10 @@ figure.crew-card{ margin:0; }
   background-size:100% 100%, 22px 22px, 22px 22px;
   box-shadow:inset -40px 0 60px -40px rgba(0,0,0,0.25);
 }
-.voltapagina::after{ content:""; position:absolute; inset:0; background:linear-gradient(90deg, rgba(0,0,0,0), rgba(0,0,0,0.18)); opacity:var(--ombra-pagina, 0); }
+.voltapagina::after{ content:""; position:absolute; inset:0; background:linear-gradient(90deg, rgba(0,0,0,0), rgba(0,0,0,0.16)); animation:ombraPagina .55s cubic-bezier(.3,.5,.2,1) both; }
+.voltapagina.indietro{ transform-origin:100% 50%; box-shadow:inset 40px 0 60px -40px rgba(0,0,0,0.25); }
+.voltapagina.indietro::after{ background:linear-gradient(270deg, rgba(0,0,0,0), rgba(0,0,0,0.16)); }
+@keyframes ombraPagina{ from{ opacity:0; } }
 
 /* ============================================================
    IL TRATTO A PENNARELLO
@@ -963,8 +1001,8 @@ details.day[open], .qp-esito.migliore, .cal-giorno:hover{ box-shadow:none; }
    Il quaderno chiuso, col logo dei Patagucci stampato in copertina e i
    due punti metallici sul dorso. All'apertura il logo si stampa da solo,
    a colpi, e alla fine compare "Entra" (tutto CSS, qui sotto). Premendolo
-   l'aereo vola verso lo schermo, una nuvola diventa il foglio a quadretti
-   e lo stesso aereo, piccolo, si posa accanto al titolo della home
+   l'aereo vola verso lo schermo, il cielo si riga a quadretti e diventa il
+   foglio, e lo stesso aereo, piccolo, si posa accanto al titolo della home
    (assets/anima.js).
    Senza Motion la copertina sfuma e basta. La mostra solo lo script in
    testa alla pagina: senza JavaScript non c'e' e il sito e' gia' aperto.
@@ -972,7 +1010,9 @@ details.day[open], .qp-esito.migliore, .cal-giorno:hover{ box-shadow:none; }
 .copertina{ display:none; }
 html.con-copertina{ overflow:hidden; }
 html.con-copertina .copertina{
-  display:block; position:fixed; inset:0; z-index:1000;
+  /* 100vw comprende lo spazio riservato alla barra di scorrimento: la
+     copertina copre anche quello. */
+  display:block; position:fixed; inset:0; width:100vw; z-index:1000;
   /* Il logo si misura in pixel del disegno (1672 x 941): --u e' quanto
      vale un pixel del disegno sullo schermo. Riempie lo schermo, ma resta
      sempre intero dalla "p" alla "i" e lascia sotto la scritta il posto
@@ -991,10 +1031,11 @@ html.con-copertina .copertina{
   position:absolute; inset:0; overflow:hidden; overflow:clip;
   background:#060606;
 }
-/* Il riflesso lungo della copertina plastificata */
+/* Il riflesso lungo della copertina plastificata: leggero, perche' i colori
+   del logo restino i suoi anche sul lato in ombra. */
 .cp-anta::after{
   content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
-  background:linear-gradient(112deg, rgba(255,255,255,0.09), rgba(255,255,255,0) 36%, rgba(0,0,0,0) 64%, rgba(0,0,0,0.16));
+  background:linear-gradient(112deg, rgba(255,255,255,0.05), rgba(255,255,255,0) 36%, rgba(0,0,0,0) 64%, rgba(0,0,0,0.05));
 }
 /* Il dorso, con i due punti metallici dei quaderni di scuola */
 .cp-dorso{
@@ -1052,16 +1093,19 @@ html.con-copertina .copertina{
    Il logo si stampa a colpi, come un manifesto: dal nero il cielo, poi la
    banda, poi montagne e cresta, poi la scritta con un tonfo; l'aereo entra
    in volo e si posa, e compare "Entra". Tutto aspetta in pausa finche' lo
-   script non dice che le immagini del logo sono pronte (.via); Esc salta
-   alla fine (.salta). */
+   script non dice che le immagini del logo sono pronte (.via); Esc, o un
+   tocco sulla copertina, salta alla fine (.salta). "Entra" diventa
+   premibile quando cpAppare finisce: i tempi stanno solo qui. Ogni colpo
+   rallenta e si posa: niente rimbalzi, il tonfo della scritta e' la
+   scala che scende di colpo e si ferma. */
 html.copertina-intro .pl{ animation:cpAssesta 2.6s cubic-bezier(.2,.7,.2,1) both; }
 html.copertina-intro .pl-cielo{ animation:cpTimbroCielo .5s cubic-bezier(.2,.9,.25,1) both; }
 html.copertina-intro .pl-rossa{ animation:cpTimbroRossa .42s .3s cubic-bezier(.2,.9,.25,1) both; }
 html.copertina-intro .pl-monti,
-html.copertina-intro .pl-cresta{ animation:cpTimbroMonti .5s .58s cubic-bezier(.3,1.3,.5,1) both; }
-html.copertina-intro .pl-lettere{ animation:cpTimbroLettere .55s .9s cubic-bezier(.3,1.4,.5,1) both; transform-origin:50.2% 78%; }
+html.copertina-intro .pl-cresta{ animation:cpTimbroMonti .5s .58s cubic-bezier(.2,.9,.25,1) both; }
+html.copertina-intro .pl-lettere{ animation:cpTimbroLettere .45s .9s cubic-bezier(.16,1,.3,1) both; transform-origin:50.2% 78%; }
 html.copertina-intro .pl-aereo img{ animation:cpArrivoAereo 1.4s 1.05s cubic-bezier(.16,.84,.3,1) both; }
-html.copertina-intro .cp-basso{ animation:cpAppare .5s 2.15s cubic-bezier(.16,1,.3,1) both; }
+html.copertina-intro .cp-basso{ animation:cpAppare .4s 2.15s cubic-bezier(.16,1,.3,1) both; }
 /* Arrivato, l'aereo ondeggia appena: e' in volo, non incollato. */
 .pl-aereo{ animation:cpOndeggia 3.4s 2.6s ease-in-out infinite; }
 html.copertina-intro .copertina:not(.via) :is(.pl, .pl-cielo, .pl-rossa, .pl-monti, .pl-cresta, .pl-lettere, .pl-aereo, .pl-aereo img, .cp-basso){ animation-play-state:paused; }
@@ -1070,10 +1114,10 @@ html.copertina-intro .copertina:not(.pronta) .cp-basso{ pointer-events:none; }
 .copertina.in-volo .pl-aereo,
 .copertina.in-volo .cp-basso{ animation:none; }
 @keyframes cpAssesta{ from{ transform:scale(1.035); } }
-@keyframes cpTimbroCielo{ from{ opacity:0; transform:scale(1.06); filter:blur(8px); } }
+@keyframes cpTimbroCielo{ from{ opacity:0; transform:scale(1.06); } }
 @keyframes cpTimbroRossa{ from{ opacity:0; transform:translateY(calc(var(--u) * 16)) scaleY(1.3); } }
 @keyframes cpTimbroMonti{ from{ opacity:0; transform:translateY(calc(var(--u) * 46)); } }
-@keyframes cpTimbroLettere{ from{ opacity:0; transform:scale(1.16) rotate(-2deg); filter:blur(3px); } }
+@keyframes cpTimbroLettere{ from{ opacity:0; transform:scale(1.16) rotate(-2deg); } }
 @keyframes cpArrivoAereo{
   0%{ opacity:0; transform:translate(calc(var(--u) * -1250), calc(var(--u) * 60)) rotate(-4deg); }
   12%{ opacity:1; }
@@ -1137,35 +1181,28 @@ html.copertina-intro .copertina:not(.pronta) .cp-basso{ pointer-events:none; }
 .cp-musica svg path{ fill:none; stroke:#fff; stroke-width:1.9; stroke-linecap:round; stroke-linejoin:round; }
 .cp-musica svg ellipse{ fill:#fff; }
 .cp-musica:hover{ background:rgba(255,255,255,0.12); }
-.cp-musica[aria-pressed="true"]{ background:rgba(255,255,255,0.16); }
+.cp-musica.accesa{ background:rgba(255,255,255,0.16); }
 .cp-musica:focus-visible{ outline:3px solid #fff; outline-offset:4px; box-shadow:none; }
 .copertina.in-volo .cp-musica, .copertina.apri-css .cp-musica{ opacity:0; transition:opacity .4s ease; pointer-events:none; }
 
 /* ---------- L'uscita (assets/anima.js) ----------
-   La nuvola in cui passa l'aereo, il foglio a quadretti che c'e' sotto
-   (gli stessi quadretti della pagina, allineati), e l'aereo Royal Brunico
-   che ci rientra piccolo con la sua scia, sopra a tutto. */
-.cp-nuvola, .cp-carta, .cp-volo{ position:absolute; inset:0; pointer-events:none; }
-/* La nuvola sta sopra il foglio: quando si dirada, sotto ci sono gia' i quadretti. */
-.cp-nuvola{ z-index:4; overflow:hidden; }
-/* Cinque sbuffi bianchi: ognuno diventa subito pieno e cresce dal suo
-   centro, e insieme fanno una nuvola che si gonfia fino a coprire tutto.
-   Il bordo resta morbido senza filtri pesanti. */
-.cp-nuvola i{
-  position:absolute; inset:0; opacity:0;
-  background:radial-gradient(circle 34vmax at var(--x) var(--y), #fff 0, #fff 62%, rgba(255,255,255,0.88) 78%, rgba(255,255,255,0) 100%);
-  transform-origin:var(--x) var(--y); transform:scale(0.05);
-}
-.cp-nuvola i:nth-child(1){ --x:var(--nx, 60%); --y:var(--ny, 40%); }
-.cp-nuvola i:nth-child(2){ --x:calc(var(--nx, 60%) - 9vw); --y:calc(var(--ny, 40%) + 8vh); }
-.cp-nuvola i:nth-child(3){ --x:calc(var(--nx, 60%) + 8vw); --y:calc(var(--ny, 40%) - 7vh); }
-.cp-nuvola i:nth-child(4){ --x:calc(var(--nx, 60%) - 15vw); --y:calc(var(--ny, 40%) - 11vh); }
-.cp-nuvola i:nth-child(5){ --x:calc(var(--nx, 60%) + 13vw); --y:calc(var(--ny, 40%) + 12vh); }
-.cp-carta{
-  z-index:3; opacity:0; background-color:#fff;
-  background-image:linear-gradient(var(--quadretto) 1px, transparent 1px), linear-gradient(90deg, var(--quadretto) 1px, transparent 1px);
-  background-size:22px 22px;
-}
+   Il foglio del quaderno che prende il posto del cielo, e l'aereo Royal
+   Brunico che ci rientra piccolo con la sua scia, sopra a tutto. Il foglio
+   e' fatto di tre strati: la carta, che dal verde si fa bianca, e le righe
+   orizzontali e verticali, che si tirano una volta per verso come col
+   righello. Sono gli stessi quadretti della pagina, nello stesso punto:
+   quando il foglio si scopre sulla home non si vede la giunta. */
+.cp-foglio, .cp-carta, .cp-righe, .cp-volo{ position:absolute; inset:0; pointer-events:none; }
+.cp-foglio{ z-index:3; }
+.cp-carta{ opacity:0; background-color:var(--tint-100); }
+.cp-righe{ background-size:22px 22px; }
+/* Le righe si allungano con una scala lungo il loro verso: allungare una
+   riga orizzontale in orizzontale non la deforma, e il browser la muove
+   senza ridisegnarla. */
+.cp-righe-o{ background-image:linear-gradient(var(--quadretto) 1px, transparent 1px); transform:scaleX(0); transform-origin:0 50%; }
+.cp-righe-v{ background-image:linear-gradient(90deg, var(--quadretto) 1px, transparent 1px); transform:scaleY(0); transform-origin:50% 0; }
+/* Saltando il volo la copertina sfuma in un attimo. */
+.copertina.svanisce{ opacity:0; transition:opacity .2s ease; }
 /* Il riquadro HTML attorno al disegno fa sfumare il volo col motore del
    browser: su un svg Motion lo farebbe pixel per pixel. */
 .cp-volo{ z-index:5; opacity:0; }
@@ -1176,10 +1213,12 @@ html.copertina-intro .copertina:not(.pronta) .cp-basso{ pointer-events:none; }
 }
 .cp-scopri{ fill:none; stroke:#fff; stroke-width:18; stroke-dasharray:1 2; stroke-dashoffset:1; }
 
-/* Senza Motion, o con meno movimento, la copertina sfuma e basta. */
+/* Senza Motion, o con meno movimento, la copertina sfuma e basta. Con meno
+   movimento il logo e' gia' intero e l'aereo sta fermo dov'e'. */
 .copertina.apri-css{ opacity:0; transition:opacity .6s ease; }
 @media (prefers-reduced-motion:reduce){
   .copertina.apri-css{ transition-duration:.25s; }
+  .pl-aereo{ animation:none; }
 }
 @media (max-width:560px){
   .cp-quadretti{ font-size:1rem; }
@@ -1256,8 +1295,9 @@ html.copertina-intro .copertina:not(.pronta) .cp-basso{ pointer-events:none; }
 
   .filter-row{ gap:6px; }
   .filter-row button, .flight-links button, .map-actions a, .map-actions button, .qp-secondario, .bf-track-btn{ min-height:44px; }
-  .group-marquee-item{ width:210px; }
-  .group-marquee-item img{ height:145px; }
+  .striscia-foto-item{ width:210px; }
+  .striscia-foto-item img{ height:145px; }
+  .striscia-foto-binario{ padding:22px 50px 26px; scroll-padding-inline:50px; }
   .crew-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px 14px; }
   .crew-caption{ font-size:1rem; }
   .weather-stats{ grid-template-columns:1fr 1fr; gap:10px; }
@@ -1281,13 +1321,14 @@ html.copertina-intro .copertina:not(.pronta) .cp-basso{ pointer-events:none; }
   .crew-grid{ gap:16px 10px; }
 }
 
-/* Movimento ridotto: niente giostra, niente evidenziatore che si stende,
-   niente colori che scorrono. Tutto e' gia' al suo posto. */
+/* Movimento ridotto: niente alone sulle cartine, niente evidenziatore che
+   si stende, niente colori che scorrono, niente barre che crescono. Tutto
+   e' gia' al suo posto. */
 @media (prefers-reduced-motion:reduce){
-  .group-marquee-track{ animation:none !important; }
-  .jeep-map-wrap .pulse{ animation:none; }
+  .jeep-map-wrap .pulse, .jeep-map-wrap .pulse.pulsa{ animation:none; }
   html{ transition:none !important; }
   .tt{ transition:none !important; }
+  .rain-chart .bar, .elev-chart .elev-bar{ transition:none !important; }
   *{ scroll-behavior:auto !important; }
 }
 
