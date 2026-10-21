@@ -567,13 +567,13 @@
       },
       {
         "name": "copertina-volo",
-        "value": "circa 5.5s (Motion), tutti i tempi per LENTO = 1.5: aereo verso lo schermo 1.2s cubic-bezier(.45,0,.75,.35) fino a scale(4) rotate(-8deg); righe dei quadretti da .63s e .87s (scaleX/scaleY .6s); foglio bianco da .68s; giro dei ricordi da 1.28s, 3.15s a velocita' costante; discesa al titolo che rallenta (quadratica, stessa velocita' all'inizio); il foglio si scopre da 4.35s (.83s)",
-        "purpose": "Su Entra l'aereo Royal Brunico vola verso lo schermo crescendo e ti passa oltre, senza sfocature; il cielo si riga a quadretti e diventa il foglio; lo stesso aereo rientra da sinistra e fa il giro dei cinque ricordi del Sud America, che si disegnano a pennarello mentre ci passa sopra (macchia d'evidenziatore, tratti, nome con la passata). Visto di fianco, guarda dove va, si inclina al massimo di 40 gradi e quando torna indietro si volta stringendosi. Poi scende e si posa sull'aereo accanto al titolo della home, che intanto fa il suo arrivo (polaroid, passata)."
+        "value": "circa 4.6s (Motion), tutti i tempi per LENTO = 1.8: aereo verso lo schermo 1.44s cubic-bezier(.45,0,.75,.35) fino a scale(4) rotate(-8deg); righe dei quadretti da .76s e 1.04s (scaleX/scaleY .72s); foglio bianco da .81s; volo dell'aereo piccolo 2.43s cubic-bezier(.3,0,.25,1) da 1.71s; arrivo della home da 2.88s; il foglio si scopre da 3.15s (1.08s)",
+        "purpose": "Su Entra l'aereo Royal Brunico vola verso lo schermo crescendo e ti passa oltre, senza sfocature; il cielo si riga a quadretti e diventa il foglio; lo stesso aereo rientra da sinistra, scende piano, riprende quota con la scia tratteggiata e si posa sull'aereo accanto al titolo della home, che intanto fa il suo arrivo (polaroid, passata)."
       },
       {
         "name": "copertina-salta",
         "value": ".2s ease",
-        "purpose": "Saltare il volo: un secondo Entra dopo .6s (prima e' un doppio clic e non conta), Esc, o un cambio di misura della finestra. I movimenti del volo si fermano, la copertina svanisce e la home fa subito il suo arrivo, una volta sola. Rete di sicurezza: la copertina si chiude comunque dopo 9s."
+        "purpose": "Saltare il volo: un secondo Entra dopo .6s (prima e' un doppio clic e non conta), Esc, o un cambio di misura della finestra. I movimenti del volo si fermano, la copertina svanisce e la home fa subito il suo arrivo, una volta sola. Rete di sicurezza: la copertina si chiude comunque dopo 11s."
       },
       {
         "name": "copertina-css",

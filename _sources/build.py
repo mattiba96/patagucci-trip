@@ -630,51 +630,22 @@ musica_html = """<div class="musica-giro"><button type="button" class="musica" i
   })();
 </script>"""
 
-# I ricordi del giro: cinque cose viste in quattro nel viaggio in Sud
-# America, ognuna con la sua foto di gruppo nel diario. Uscendo dalla
-# copertina l'aereo ci passa sopra una per una, e si disegnano a
-# pennarello mentre arriva (assets/anima.js). Ogni disegno e' una tavola
-# 120 x 90: la macchia d'evidenziatore dietro, poi i tratti, nell'ordine
-# in cui si stendono.
-RICORDI = [
-    {"nome": "Machu Picchu", "paese": "pe", "tratti": [
-        "M6 70 C 18 66, 26 54, 36 52 C 44 50, 48 44, 56 44 C 62 44, 64 30, 72 16 C 76 9, 84 8, 88 18 C 92 30, 96 46, 104 56 C 108 62, 112 66, 116 70",
-        "M20 70 L 20 64 L 34 64 L 34 59 L 48 59 L 48 54 L 60 54",
-        "M64 70 L 64 62 L 70 58 L 76 62 L 76 70 M80 70 L 80 63 L 85 60 L 90 63 L 90 70",
-        "M4 76 C 36 74, 84 78, 116 75"]},
-    {"nome": "Salar di Uyuni", "paese": "bo", "tratti": [
-        "M6 44 C 40 43, 80 45, 114 43",
-        "M22 58 L 32 53 L 46 53 L 56 58 L 46 63 L 32 63 Z",
-        "M62 58 L 72 53 L 86 53 L 96 58 L 86 63 L 72 63 Z",
-        "M38 73 L 50 67 L 68 67 L 80 73 L 68 79 L 50 79 Z",
-        "M38 30 C 32 30, 31 22, 38 21 C 40 13, 52 12, 55 19 C 61 16, 68 20, 66 26 C 70 28, 68 32, 63 31 Z"]},
-    {"nome": "I fenicotteri", "paese": "bo", "tratti": [
-        "M44 46 C 42 38, 56 36, 70 40 C 80 43, 88 44, 96 40 C 92 50, 82 58, 66 60 C 54 62, 44 56, 44 46 Z",
-        "M46 44 C 36 40, 32 32, 40 25 C 48 18, 50 12, 44 8 C 40 5, 34 8, 34 13 C 33 18, 36 21, 39 18",
-        "M62 60 L 62 82 M58 60 L 51 70 L 60 75",
-        "M34 84 C 48 82, 74 86, 92 83 M44 89 C 54 88, 64 90, 74 89"]},
-    {"nome": "Sol de Mañana", "paese": "bo", "tratti": [
-        "M6 82 C 40 80, 80 84, 114 81",
-        "M34 82 C 42 72, 78 72, 86 82",
-        "M54 75 C 50 62, 56 54, 48 44 C 40 36, 44 24, 36 18",
-        "M66 75 C 70 62, 64 54, 72 44 C 80 36, 76 24, 84 18",
-        "M36 18 C 32 10, 42 4, 48 9 C 52 2, 66 2, 70 9 C 76 4, 88 10, 84 18",
-        "M30 52 C 23 48, 25 39, 32 37 M90 56 C 97 52, 95 43, 88 41"]},
-    {"nome": "Palccoyo", "paese": "pe", "tratti": [
-        "M4 76 L 30 38 L 46 54 L 70 22 L 116 76",
-        "M62 33 C 66 31, 70 34, 74 31 C 76 33, 78 33, 79 35",
-        "M54 44 C 64 50, 80 50, 88 44 M44 58 C 62 66, 88 66, 100 58 M34 70 C 58 78, 92 78, 110 70",
-        "M20 52 C 26 55, 32 54, 37 49"]},
-]
-_MACCHIA = "M14 58 C 10 38, 36 24, 64 28 C 94 32, 112 46, 106 64 C 100 82, 52 86, 28 80 C 18 76, 15 68, 14 58 Z"
-_ricordi_html = '<div class="cp-ricordi">' + "".join(
-    f'<figure class="cp-ricordo" data-paese="{r["paese"]}"><svg viewBox="0 0 120 90" focusable="false">'
-    f'<path class="cp-r-evid" d="{_MACCHIA}"/>'
-    + "".join(f'<path class="cp-r-tratto" pathLength="1" stroke-dasharray="1 2" stroke-dashoffset="1" d="{t}"/>' for t in r["tratti"])
-    + f'</svg><figcaption><i class="cp-r-passata"></i>{r["nome"]}</figcaption></figure>'
-    for r in RICORDI) + '</div>'
-
 copertina_testa = """<script>
+  // Ricaricando si riparte dalla home. L'indirizzo di una meta ("#kr")
+  // serve a mandarla a qualcuno e a tornarci con Indietro, non a restarci
+  // dopo un aggiornamento. Gira per primo, prima che qualcuno legga
+  // l'indirizzo; e la pagina riparte dalla cima, non dal punto della meta.
+  (function(){
+    try {
+      var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+      var ricarica = nav ? nav.type === 'reload' : (performance.navigation && performance.navigation.type === 1);
+      if(!ricarica || !location.hash) return;
+      history.replaceState(null, '', location.pathname + location.search);
+      if('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    } catch(e){}
+  })();
+</script>
+<script>
   (function(){
     var radice = document.documentElement;
     var mostra = !location.hash;
@@ -701,7 +672,7 @@ copertina_html = """<div class="copertina" id="copertina" role="dialog" aria-mod
     <div class="cp-dorso" aria-hidden="true"></div>
     <div class="cp-basso" inert><span class="cp-entra-giro"><button type="button" class="cp-entra" id="cp-entra">Entra <svg viewBox="0 0 40 20" aria-hidden="true" focusable="false"><path d="M2 11 C 13 7, 25 13, 36 9 M29 3 L37 9 L30 16"/></svg></button></span></div>
   </div>
-  <div class="cp-foglio" aria-hidden="true"><div class="cp-carta"></div><i class="cp-righe cp-righe-o"></i><i class="cp-righe cp-righe-v"></i>""" + _ricordi_html + """</div>
+  <div class="cp-foglio" aria-hidden="true"><div class="cp-carta"></div><i class="cp-righe cp-righe-o"></i><i class="cp-righe cp-righe-v"></i></div>
   <div class="cp-volo" aria-hidden="true"><svg focusable="false">
     <defs><mask id="cp-maschera-volo" maskUnits="userSpaceOnUse" x="-1000" y="-1000" width="8000" height="8000"><path class="cp-scopri" pathLength="1"/></mask></defs>
     <path class="cp-scia" mask="url(#cp-maschera-volo)"/>

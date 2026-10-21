@@ -35,6 +35,7 @@ Non è un pianificatore di viaggi generico: è il registro di *questi* viaggi. O
 ## Capabilities and Constraints
 
 - Sito statico generato da `_sources/build.py`, che unisce una pagina HTML per meta in un unico `index.html`; le mete si cambiano senza ricaricare.
+- Ogni meta ha il suo indirizzo (`#kr`, `#pb`), per mandarla a qualcuno o tornarci con Indietro. **Ricaricando la pagina si torna alla home**, per scelta del gruppo.
 - Pubblicato su Vercel da GitHub, con funzioni serverless in `api/`: ricerca voli e ricerca concerti. La chat «Chiedi ai Patagucci» è stata tolta a ottobre 2026, perché non serviva più: niente pannello in pagina e niente funzione.
 - **Il repository è pubblico**: nessuna chiave può stare nel codice, vivono come variabili d'ambiente.
 - **L'architettura a file unico senza framework non è un vincolo**: è l'implementazione attuale, che l'utente ha scelto di non vincolare.
@@ -58,7 +59,6 @@ Non è un pianificatore di viaggi generico: è il registro di *questi* viaggi. O
 - **Foto** in `foto/destinazioni/`, da Wikimedia Commons, ognuna con autore e licenza citati nel piè di pagina della scheda.
 - Eccezione nota: `bn-royalbrunico.jpg` è un fotomontaggio fornito dal gruppo, **senza autore né licenza noti** — non ha crediti perché non ne esistono. Ogni altra immagine di provenienza esterna porta autore e licenza nel piè di pagina della sua scheda. L'intestazione della home ha una foto del gruppo, che non ha crediti come tutte le foto del gruppo.
 - **Elenchi dei paesi visitati** per persona, dai registri del gruppo. Quello di Manu potrebbe essere incompleto. A ottobre 2026 Bacci ha aggiunto Macedonia del Nord e Kosovo per sé, Mala e Manu.
-- **I cinque ricordi della copertina** (Machu Picchu, Salar di Uyuni, i fenicotteri, Sol de Mañana, Palccoyo) vengono dal diario del Sud America, l'unico viaggio fatto in quattro, e li ha scelti il gruppo.
 - **Logo a livelli** in `assets/logo/` (cielo, banda rossa, aereo come immagini; montagne, cresta e lettere come contorni in `_sources/logo/forme.json`), presi dal logo animato del gruppo: nessuna generazione.
 - **«Patagucci song»** (`assets/audio/patagucci-song.mp3`), fornita dal gruppo: parte con la copertina d'ingresso e continua dentro il sito, dove un tasto la spegne e la riaccende. Sulla copertina il tasto non c'è, per scelta del gruppo.
 - Non esistono testimonianze, clienti, prezzi di vendita o metriche: non è un prodotto commerciale e non deve inventarseli.

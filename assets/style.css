@@ -1195,37 +1195,6 @@ html.copertina-intro .copertina:not(.pronta) .cp-basso{ pointer-events:none; }
 }
 .cp-scopri{ fill:none; stroke:#fff; stroke-width:18; stroke-dasharray:1 2; stroke-dashoffset:1; }
 
-/* I ricordi sul foglio: cinque cose viste in quattro, disegnate a
-   pennarello mentre l'aereo ci passa sopra. Restano nascosti finche'
-   assets/anima.js non li mette al loro posto (.al-posto); senza il volo
-   non si vedono mai. Ognuno si isola: la passata d'evidenziatore sotto il
-   nome resta dietro la scritta ma sopra la carta. Gli evidenziatori sono
-   quelli della pagina del Sud America: Peru' salmone, Bolivia oro. */
-.cp-ricordi{ position:absolute; inset:0; }
-.cp-ricordo{
-  position:absolute; left:0; top:0; margin:0; width:clamp(104px,14vw,190px);
-  translate:-50% -50%; visibility:hidden; isolation:isolate; text-align:center;
-  --evid:#ffd25e;
-}
-.cp-ricordo[data-paese="pe"]{ --evid:#ff9a8f; }
-/* Come fatti a mano: nessuno dritto, e non tutti storti dalla stessa parte. */
-.cp-ricordo:nth-child(odd){ rotate:-2.5deg; }
-.cp-ricordo:nth-child(even){ rotate:1.8deg; }
-.cp-ricordo.al-posto{ visibility:visible; }
-.cp-ricordo svg{ display:block; width:100%; height:auto; overflow:visible; }
-.cp-r-evid{ fill:var(--evid); opacity:0; transform-box:fill-box; transform-origin:center; }
-.cp-r-tratto{ fill:none; stroke:var(--ink); stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round; }
-.cp-ricordo figcaption{
-  position:relative; display:inline-block; margin-top:2px; padding:0 4px;
-  font-family:var(--font-hand); font-size:clamp(1rem,1.5vw,1.3rem); letter-spacing:0.03em; line-height:1.2;
-  color:var(--ink); white-space:nowrap; opacity:0;
-}
-.cp-r-passata{
-  position:absolute; left:0; right:0; bottom:0.08em; height:0.6em; z-index:-1;
-  background:var(--evid); border-radius:var(--mano-piccola);
-  transform:scaleX(0); transform-origin:0 50%;
-}
-
 /* Senza Motion, o con meno movimento, la copertina sfuma e basta. Con meno
    movimento il logo e' gia' intero e l'aereo sta fermo dov'e'. */
 .copertina.apri-css{ opacity:0; transition:opacity .6s ease; }

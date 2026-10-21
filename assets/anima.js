@@ -209,20 +209,19 @@
   // piu' grande, finche' ti passa oltre. Intanto il cielo si riga a
   // quadretti, come se una penna li tirasse col righello, e diventa bianco:
   // e' il foglio del quaderno. Lo stesso aereo ci rientra da sinistra (era
-  // uscito a destra) e fa il giro dei ricordi: cinque cose viste in quattro
-  // in Sud America, che si disegnano a pennarello mentre ci passa sopra.
-  // Finito il giro si posa accanto al titolo della home, esattamente sopra
-  // l'aereo che sta li'. Mentre arriva il foglio si scopre, e la home lo
-  // accoglie: la polaroid cade e la passata si stende. Lo script della
-  // copertina (in index.html) chiama questa funzione se c'e', e tiene
-  // quello che restituisce per poter saltare il volo; senza, la copertina
-  // sfuma col CSS.
+  // uscito a destra), scende, risale lasciando la scia tratteggiata e si
+  // posa accanto al titolo della home, esattamente sopra l'aereo che sta
+  // li'. Mentre arriva il foglio si scopre, e la home lo accoglie: la
+  // polaroid cade e la passata si stende. Lo script della copertina (in
+  // index.html) chiama questa funzione se c'e', e tiene quello che
+  // restituisce per poter saltare il volo; senza, la copertina sfuma col
+  // CSS.
   window.PatagucciCopertina = {
     apri: function(copertina, chiudi){
       var tempi = [], movimenti = [], arrivato = false;
       // Tutto il volo dura LENTO volte i tempi scritti qui sotto: per
       // allungarlo o accorciarlo basta cambiare questo numero.
-      var LENTO = 1.5;
+      var LENTO = 1.8;
       var dopo = function(s, fn){ tempi.push(setTimeout(fn, s * LENTO * 1000)); };
       var muovi = function(el, chiavi, opzioni){
         var o = Object.assign({}, opzioni);
@@ -269,16 +268,15 @@
       muovi($('.cp-righe-v'), { transform: ['scaleY(0)', 'scaleY(1)'] }, { duration: 0.4, delay: 0.58, ease: [0.3, 0, 0.2, 1] });
       muovi($('.cp-carta'), { opacity: [0, 1] }, { duration: 0.55, delay: 0.45, ease: [0.4, 0, 0.2, 1] });
       muovi($('.cp-anta'), { opacity: [1, 0] }, { duration: 0.01, delay: 1.0 });
+      // 3. Mentre l'aereo arriva, il foglio si scopre e sotto c'e' la home:
+      // l'aereo si posa accanto a un titolo che si vede gia'.
+      var chiusura = muovi($('.cp-foglio'), { opacity: [1, 0] }, { duration: 0.6, delay: 1.75, ease: [0.4, 0, 0.2, 1] });
+      // La home lo accoglie: a foglio ancora pieno la polaroid si prepara a
+      // cadere; cade quando il foglio se n'e' andato.
+      dopo(1.6, function(){ arriva(0.75 * LENTO); });
 
-      // Il foglio si scopre quando l'aereo comincia la discesa verso il
-      // titolo: SCOPRE e' quel momento. Senza il disegno della home non c'e'
-      // il giro, e il foglio si scopre subito dopo essersi rigato.
-      var SCOPRE = 1.75;
-      var chiusura = null;
-
-      // 3. L'aereo rientra piccolo e fa il giro dei ricordi. Dove si posa,
-      // quanto e' grande e com'e' inclinato lo dice l'aereo disegnato
-      // accanto al titolo della home.
+      // 4. L'aereo rientra piccolo: dove si posa, quanto e' grande e com'e'
+      // inclinato lo dice l'aereo disegnato accanto al titolo della home.
       var sagoma = home && home.querySelector('.aeroplanino .ap-aereo');
       var traccia = home && home.querySelector('.aeroplanino .ap-scia');
       var ma = sagoma && traccia && sagoma.getScreenCTM && sagoma.getScreenCTM();
@@ -296,128 +294,49 @@
         var n = traccia.getAttribute('d').match(/-?\d*\.?\d+/g).map(Number);
         var coda = [0, 2, 4, 6].map(function(i){ return schermo(ms, n[i], n[i + 1]); });
 
-        // I ricordi al loro posto, in giro sul foglio in senso orario:
-        // largo sullo schermo orizzontale, in due colonne sul telefono.
-        // L'aereo passa appena sopra ognuno.
-        var ricordi = Array.prototype.slice.call(copertina.querySelectorAll('.cp-ricordo'));
-        var posti = vw >= vh
-          ? [[0.2, 0.32], [0.5, 0.24], [0.8, 0.32], [0.72, 0.72], [0.32, 0.74]]
-          : [[0.28, 0.26], [0.72, 0.2], [0.74, 0.48], [0.7, 0.76], [0.3, 0.64]];
-        var tappe = ricordi.map(function(el, i){
-          var q = posti[i % posti.length];
-          var x = q[0] * vw, y = q[1] * vh;
-          el.style.left = x.toFixed(0) + 'px';
-          el.style.top = y.toFixed(0) + 'px';
-          el.classList.add('al-posto');
-          return { x: x, y: y - el.offsetHeight * 0.62 };
-        });
-
-        // La rotta: entra da sinistra, passa sopra i ricordi con una curva
-        // morbida che tocca ognuno, e arriva all'inizio della scia del
-        // disegno gia' lanciata nel suo verso; poi la segue fino al centro
+        // La rotta, sempre col muso in avanti e senza picchiate: entra da
+        // sinistra poco piu' in alto, scende piano fino alla riga del
+        // titolo, poi riprende quota sulla scia del disegno fino al centro
         // dell'aereo.
         var p = function(q){ return q.x.toFixed(1) + ' ' + q.y.toFixed(1); };
+        var dx = coda[0].x + largo * 1.4;
+        var via = { x: -largo * 1.4, y: coda[0].y - Math.min(vh * 0.12, dx * 0.3) };
+        var rotta = 'M' + p(via) +
+          ' C' + p({ x: via.x + dx * 0.4, y: via.y }) + ' ' + p({ x: coda[0].x - dx * 0.4, y: coda[0].y }) + ' ' + p(coda[0]) +
+          ' C' + p(coda[1]) + ' ' + p(coda[2]) + ' ' + p(coda[3]) +
+          ' L' + p(meta);
         var scia = volo.querySelector('.cp-scia');
         var scopri = volo.querySelector('.cp-scopri');
-        var punti = [{ x: -largo * 1.6, y: (tappe.length ? tappe[0].y : coda[0].y) + vh * 0.14 }].concat(tappe, [coda[0]]);
-        var ultimo = punti.length - 1;
-        var tangenti = punti.map(function(q, i){
-          if(i === 0) return { x: punti[1].x - q.x, y: (punti[1].y - q.y) * 0.3 };
-          if(i === ultimo){
-            var lx = coda[1].x - q.x, ly = coda[1].y - q.y, l = Math.hypot(lx, ly) || 1;
-            var d = Math.hypot(q.x - punti[i - 1].x, q.y - punti[i - 1].y);
-            return { x: lx / l * d, y: ly / l * d };
-          }
-          return { x: (punti[i + 1].x - punti[i - 1].x) / 2, y: (punti[i + 1].y - punti[i - 1].y) / 2 };
-        });
-        var rotta = 'M' + p(punti[0]);
-        var alleTappe = [];
-        for(var i = 1; i <= ultimo; i++){
-          rotta += ' C' + p({ x: punti[i - 1].x + tangenti[i - 1].x / 3, y: punti[i - 1].y + tangenti[i - 1].y / 3 }) +
-                   ' ' + p({ x: punti[i].x - tangenti[i].x / 3, y: punti[i].y - tangenti[i].y / 3 }) + ' ' + p(punti[i]);
-          scia.setAttribute('d', rotta);
-          alleTappe.push(scia.getTotalLength());
-        }
-        var giro = alleTappe[alleTappe.length - 1];
-        rotta += ' C' + p(coda[1]) + ' ' + p(coda[2]) + ' ' + p(coda[3]) + ' L' + p(meta);
         scia.setAttribute('d', rotta);
         scopri.setAttribute('d', rotta);
         var lunga = scia.getTotalLength();
         var piccolo = volo.querySelector('.cp-aeroplanino');
-
-        // I tempi del giro: entra a ENTRA, va a velocita' costante fino
-        // all'inizio della scia (GIRO), poi rallenta e si posa. La discesa
-        // parte alla stessa velocita' del giro: niente scatti.
-        var ENTRA = 0.85, GIRO = 2.1;
-        var veloce = giro / GIRO;
-        var POSA_T = Math.max(0.3, Math.min(0.8, 2 * (lunga - giro) / veloce));
-        var DURA = GIRO + POSA_T;
-        SCOPRE = ENTRA + GIRO - 0.05;
-
-        // Ogni ricordo si disegna mentre l'aereo arriva: la macchia
-        // d'evidenziatore, poi i tratti uno dopo l'altro, poi il nome.
-        ricordi.forEach(function(el, i){
-          var quando = ENTRA + alleTappe[i] / veloce;
-          muovi(el.querySelector('.cp-r-evid'), { opacity: [0, 0.8], transform: ['scale(0.85)', 'scale(1)'] }, { duration: 0.35, delay: quando - 0.3, ease: POSA });
-          el.querySelectorAll('.cp-r-tratto').forEach(function(t, k){
-            muovi(t, { strokeDashoffset: [1, 0] }, { duration: 0.45, delay: quando - 0.25 + k * 0.07, ease: [0.65, 0, 0.35, 1] });
-          });
-          muovi(el.querySelector('figcaption'), { opacity: [0, 1] }, { duration: 0.25, delay: quando, ease: POSA });
-          muovi(el.querySelector('.cp-r-passata'), { transform: ['scaleX(0)', 'scaleX(1)'] }, { duration: 0.35, delay: quando + 0.05, ease: POSA });
-        });
-
         // Una sola animazione per tutta la vita del livello: Motion ferma la
         // precedente se se ne avvia un'altra sulla stessa proprieta'.
-        var fine = ENTRA + DURA + 0.25;
+        var fine = 2.55;
         chiusura = muovi(volo, { opacity: [0, 0, 1, 1, 0] },
-                         { duration: fine, times: [0, ENTRA / fine, (ENTRA + 0.15) / fine, (ENTRA + DURA) / fine, 1], ease: 'linear' });
-        // Visto di fianco, l'aereo guarda dalla parte in cui va e si
-        // inclina solo un poco: quando il giro lo porta indietro si volta,
-        // stringendosi come un aereo che vira, invece di finire a testa in
-        // giu'.
-        var faccia = 1, inclina = null, prima = 0;
-        muovi(0, DURA, {
-          duration: DURA, delay: ENTRA, ease: 'linear',
-          onUpdate: function(t){
-            var passo = Math.max(0, t - prima); prima = t;
-            var u = t <= GIRO ? 0 : Math.min(1, (t - GIRO) / POSA_T);
-            var dd = t <= GIRO ? Math.min(giro, veloce * t) : giro + (lunga - giro) * (1 - (1 - u) * (1 - u));
+                         { duration: fine, times: [0, 0.95 / fine, 1.1 / fine, 2.3 / fine, 1], ease: 'linear' });
+        muovi(0, 1, {
+          duration: 1.35, delay: 0.95, ease: [0.3, 0, 0.25, 1],
+          onUpdate: function(v){
+            var dd = v * lunga;
             var a = scia.getPointAtLength(dd);
-            var p0 = scia.getPointAtLength(Math.max(0, dd - 2)), p1 = scia.getPointAtLength(Math.min(lunga, dd + 2));
-            var vx = p1.x - p0.x, vy = p1.y - p0.y;
-            var verso = Math.abs(vx) > Math.abs(vy) * 0.25 ? (vx < 0 ? -1 : 1) : (faccia < 0 ? -1 : 1);
-            var gira = passo / 0.22 * 2;
-            faccia = faccia < verso ? Math.min(verso, faccia + gira) : Math.max(verso, faccia - gira);
-            var h = Math.atan2(vy, vx) * 180 / Math.PI;
-            if(faccia < 0) h -= 180;
-            h = ((h + 540) % 360) - 180;
-            h = Math.max(-40, Math.min(40, h));
-            inclina = inclina == null ? h : inclina + (h - inclina) * Math.min(1, passo / 0.12);
+            var prima = scia.getPointAtLength(Math.max(0, dd - 1)), dopoP = scia.getPointAtLength(Math.min(lunga, dd + 1));
+            var verso = Math.atan2(dopoP.y - prima.y, dopoP.x - prima.x) * 180 / Math.PI;
             // nell'ultimo tratto il muso prende l'inclinazione del disegno
-            var k = Math.max(0, (u - 0.3) / 0.7);
-            var angolo = inclina + (gradi - inclina) * k * k;
-            // arriva da davanti, piu' grande, gira alla sua misura e si posa
-            // a quella del disegno
-            var s = scala * (t <= GIRO
-              ? 1.1 + 0.9 * Math.pow(Math.max(0, 1 - t / (0.3 * GIRO)), 2)
-              : 1 + 0.1 * Math.pow(1 - u, 1.5));
-            var sx = s * (Math.abs(faccia) < 0.12 ? (faccia < 0 ? -0.12 : 0.12) : faccia);
-            piccolo.setAttribute('transform', 'translate(' + a.x.toFixed(2) + ' ' + a.y.toFixed(2) + ') rotate(' + angolo.toFixed(2) + ') scale(' + sx.toFixed(4) + ' ' + s.toFixed(4) + ')');
-            scopri.style.strokeDashoffset = (1 - dd / lunga).toFixed(4);
+            var ultimo = Math.max(0, (v - 0.85) / 0.15);
+            var delta = ((gradi - verso + 540) % 360) - 180;
+            var angolo = verso + delta * ultimo * ultimo;
+            // arriva da davanti, piu' grande, e si posa alla misura del disegno
+            var s = scala * (1 + 1.6 * Math.pow(1 - v, 1.5));
+            piccolo.setAttribute('transform', 'translate(' + a.x.toFixed(2) + ' ' + a.y.toFixed(2) + ') rotate(' + angolo.toFixed(2) + ') scale(' + s.toFixed(4) + ')');
+            scopri.style.strokeDashoffset = (1 - v).toFixed(4);
           }
         });
         // La scia lunga se ne va prima che la home sia scoperta del tutto:
         // non deve passare sopra il titolo. Resta solo quella del disegno.
-        muovi(1, 0, { duration: 0.3, delay: SCOPRE + 0.1, ease: [0.4, 0, 0.2, 1], onUpdate: function(o){ scia.style.opacity = o.toFixed(3); } });
+        muovi(1, 0, { duration: 0.35, delay: 2.05, ease: [0.4, 0, 0.2, 1], onUpdate: function(o){ scia.style.opacity = o.toFixed(3); } });
       }
-
-      // 4. Mentre l'aereo scende verso il titolo il foglio si scopre, coi
-      // ricordi sopra, e sotto c'e' la home: l'aereo si posa accanto a un
-      // titolo che si vede gia'. A foglio ancora pieno la polaroid si
-      // prepara a cadere; cade quando il foglio se n'e' andato.
-      var scoperta = muovi($('.cp-foglio'), { opacity: [1, 0] }, { duration: 0.55, delay: SCOPRE, ease: [0.4, 0, 0.2, 1] });
-      if(!chiusura) chiusura = scoperta;
-      dopo(SCOPRE - 0.15, function(){ arriva(0.7 * LENTO); });
 
       // 5. Posato: la copertina se ne va quando il volo ha finito.
       finito(chiusura, chiudi);
