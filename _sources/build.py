@@ -305,13 +305,14 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
           <h3 style="margin-top:30px;">Paese per paese, uno per uno</h3>
 
           <div class="persona-paesi reveal">
-            <div class="pp-nome">Manu <span class="pp-conto">62<span class="pp-conto-lab">paesi</span></span></div>
+            <div class="pp-nome">Manu <span class="pp-conto">64<span class="pp-conto-lab">paesi</span></span></div>
             <div class="paesi-fatti">
               <span class="paese-fatto"><span class="pf-flag">🇭🇰</span><span class="pf-nome">Hong Kong</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇲🇴</span><span class="pf-nome">Macao</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇹🇼</span><span class="pf-nome">Taiwan</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇨🇳</span><span class="pf-nome">Cina</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇰🇷</span><span class="pf-nome">Corea del Sud</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇯🇵</span><span class="pf-nome">Giappone</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇻🇳</span><span class="pf-nome">Vietnam</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇱🇦</span><span class="pf-nome">Laos</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇰🇭</span><span class="pf-nome">Cambogia</span></span>
@@ -357,6 +358,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               <span class="paese-fatto"><span class="pf-flag">🇲🇰</span><span class="pf-nome">Macedonia del Nord</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇽🇰</span><span class="pf-nome">Kosovo</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇷🇴</span><span class="pf-nome">Romania</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇲🇩</span><span class="pf-nome">Moldavia</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇭🇺</span><span class="pf-nome">Ungheria</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇨🇿</span><span class="pf-nome">Cechia</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇸🇰</span><span class="pf-nome">Slovacchia</span></span>
@@ -373,7 +375,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
           </div>
 
           <div class="persona-paesi reveal">
-            <div class="pp-nome">Mala <span class="pp-conto">25<span class="pp-conto-lab">paesi</span></span></div>
+            <div class="pp-nome">Mala <span class="pp-conto">26<span class="pp-conto-lab">paesi</span></span></div>
             <div class="paesi-fatti">
               <span class="paese-fatto"><span class="pf-flag">🇲🇽</span><span class="pf-nome">Messico</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇬🇹</span><span class="pf-nome">Guatemala</span></span>
@@ -397,6 +399,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               <span class="paese-fatto"><span class="pf-flag">🇪🇸</span><span class="pf-nome">Spagna</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇮🇪</span><span class="pf-nome">Irlanda</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇷🇴</span><span class="pf-nome">Romania</span></span>
+              <span class="paese-fatto"><span class="pf-flag">🇲🇩</span><span class="pf-nome">Moldavia</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇲🇰</span><span class="pf-nome">Macedonia del Nord</span></span>
               <span class="paese-fatto"><span class="pf-flag">🇽🇰</span><span class="pf-nome">Kosovo</span></span>
               <span class="paese-fatto"><span class="pf-flag"><svg viewBox="0 0 1200 600" width="24" height="12" role="img" aria-label="Bandiera della Transnistria" style="display:block;border-radius:2px;"><path fill="#de0000" d="M0 0h1200v600H0z"/><path fill="#093" d="M0 225h1200v150H0z"/><path fill="gold" d="m150 30-6.735 20.73h-21.797l17.634 12.81-6.736 20.73L150 71.46l17.634 12.812-6.736-20.73 17.633-12.812h-21.796zm0 10.8 4.31 13.267h13.95l-11.285 8.2 4.31 13.266-11.285-8.2-11.285 8.2 4.31-13.267-11.285-8.2h13.95z"/><g fill="gold"><path d="m101.839 138.547 14.93 14.993 14.078-13.945c21.415 22.909 43.877 44.991 65.126 67.988a8.22 8.22 0 0 0 11.603.04 8.168 8.168 0 0 0 .04-11.573c-22.808-21.463-45.687-43.102-68.502-64.644l18.967-18.787-26.388-3.644z"/><path d="M150 90c12.281 6.899 21.606 16.8 27.106 27.15 5.575 10.49 8.025 21.44 8.075 30.197.104 17.953-14.592 32.508-32.593 32.508-9.605 0-18.24-4.143-24.205-10.736l-3.3 2.77a4.931 4.931 0 0 0-5.519 1.412 6.181 6.181 0 0 0-5.069 4.178c-2.48 4.964-6.834 8.857-12.102 10.64-.05.017-.095.039-.139.061-2.436.89-4.877 2.498-6.956 4.58-4.11 4.134-6.117 9.423-4.987 13.135-.111.322-.169.66-.17 1.002a3.107 3.107 0 0 0 4.36 2.838c3.715.835 8.76-1.22 12.706-5.178 2.237-2.25 3.913-4.913 4.735-7.524 1.834-5.228 5.776-9.487 10.782-11.882.12-.058.216-.117.303-.177a6.173 6.173 0 0 0 3.344-4.116c7.678 9.035 19.194 14.804 32.068 15.106 23.612.554 41.261-16.781 42.077-41.709.411-12.545-4.455-28.721-15.545-41.988C176.496 102.127 164.07 93.71 150 90z"/></g></svg></span><span class="pf-nome">Transnistria</span></span>
