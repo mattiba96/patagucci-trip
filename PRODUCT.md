@@ -39,7 +39,7 @@ Non è un pianificatore di viaggi generico: è il registro di *questi* viaggi. O
 - **Il repository è pubblico**: nessuna chiave può stare nel codice, vivono come variabili d'ambiente.
 - **L'architettura a file unico senza framework non è un vincolo**: è l'implementazione attuale, che l'utente ha scelto di non vincolare.
 - Tensione da tenere presente: il sito è pensato per quattro persone, ma l'indirizzo Vercel è **raggiungibile da chiunque lo conosca**. Non è protetto da password.
-- Due voli interni coreani (Busan–Jeju, Jeju–Seul) **non sono prenotati**: il sito deve continuare a distinguere ciò che è comprato da ciò che non lo è.
+- In Corea, da ottobre 2026, il programma ha una notte in Giappone (Tsushima, 4–5 aprile) e i due voli interni (Busan–Jeju il 7, Jeju–Seul il 9) **sono comprati**. **Non sono prenotati** il treno Seul–Busan del 3 e le due navi per Tsushima, e la nave della sera del 4 non risulta negli orari trovati: il sito deve continuare a distinguere ciò che è comprato da ciò che non lo è, e dichiarare quello che non torna.
 
 ## Brand Commitments
 
@@ -54,7 +54,7 @@ Non è un pianificatore di viaggi generico: è il registro di *questi* viaggi. O
 
 ## Evidence on Hand
 
-- **Voli comprati**, con numeri reali: Etihad `7GJHW8` (EY 82/822 all'andata, EY 499/81 al ritorno), Royal Brunei `BI 652` e `BI 421`.
+- **Voli comprati**, con numeri reali: Etihad `7GJHW8` (EY 82/822 all'andata, EY 499/81 al ritorno), Royal Brunei `BI 652` e `BI 421`. I due voli interni coreani sono comprati, ma di loro abbiamo solo data e orario (arrivo a Jeju alle 11:00 del 7, volo per Seul alle 20:45 del 9): compagnia e numero mancano.
 - **Foto** in `foto/destinazioni/`, da Wikimedia Commons, ognuna con autore e licenza citati nel piè di pagina della scheda.
 - Eccezione nota: `bn-royalbrunico.jpg` è un fotomontaggio fornito dal gruppo, **senza autore né licenza noti** — non ha crediti perché non ne esistono. Ogni altra immagine di provenienza esterna porta autore e licenza nel piè di pagina della sua scheda, compresa quella dell'intestazione della home (Hunza Valley, Maqalam97, CC BY-SA 4.0).
 - **Elenchi dei paesi visitati** per persona, dai registri del gruppo. Quello di Manu potrebbe essere incompleto.

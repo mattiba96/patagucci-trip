@@ -80,7 +80,7 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
       <div class="content">
         <h1>Patagucci Trips<svg class="aeroplanino" viewBox="0 0 260 80" aria-hidden="true" focusable="false"><path class="ap-scia" d="M2 78 C 40 78, 84 35.5, 126 30"/><image class="ap-aereo" href="assets/logo/aereo.webp" x="116" y="6" width="140" height="34.8" transform="rotate(-6 186 23.4)"/></svg></h1>
         <p class="tagline">Due viaggi con le date fissate: l'aurora islandese a gennaio, i ciliegi coreani ad aprile. Questo è il nostro quaderno: dove andiamo, giorno per giorno, e cosa ci aspetta.</p>
-        <a class="nota-manca" href="#recap-voli-kr"><span class="nm-num">2<svg class="a-penna" viewBox="0 0 120 100" aria-hidden="true" focusable="false"><path d="M93 17 C 70 3, 27 6, 12 33 C 0 59, 22 92, 62 92 C 101 92, 117 63, 106 37 C 98 17, 73 7, 48 12"/></svg></span><span class="nm-testo">voli ci mancano ancora: Busan → Jeju e Jeju → Seul, ad aprile. Tutto il resto è comprato.</span></a>
+        <a class="nota-manca" href="#recap-voli-kr"><span class="nm-num">3<svg class="a-penna" viewBox="0 0 120 100" aria-hidden="true" focusable="false"><path d="M93 17 C 70 3, 27 6, 12 33 C 0 59, 22 92, 62 92 C 101 92, 117 63, 106 37 C 98 17, 73 7, 48 12"/></svg></span><span class="nm-testo">biglietti ci mancano ancora: il treno Seul → Busan e le due navi per Tsushima, ad aprile. I voli sono tutti comprati.</span></a>
         <div class="scroll-cue">↓ sfogliamo</div>
       </div>
       <div class="photo-credit">Foto: Maqalam97, <a href="https://commons.wikimedia.org/wiki/File:A_land_enclosed_in_Mountains_-_Hunza_Valley.jpg" target="_blank" rel="noopener">CC BY-SA 4.0, Wikimedia Commons</a></div>
@@ -282,10 +282,10 @@ hub_html = '''  <div class="destination active" id="dest-hub" data-dest="hub">
               <img src="foto/destinazioni/kr-ciliegi.jpg" alt="Ciliegi in fiore in Corea del Sud" loading="lazy">
               <div class="overlay"></div>
               <div class="content">
-                <div class="flag">🇰🇷🇧🇳🇸🇬</div>
+                <div class="flag">🇰🇷🇯🇵🇧🇳🇸🇬</div>
                 <div class="title">Corea, Brunei e Singapore</div>
                 <div class="meta">2-18 aprile 2027 · 17 giorni</div>
-                <p class="tagline">Seul e Busan in KTX, il vulcano di Jeju e i ciliegi in fiore, poi la foresta del Borneo e una tappa a Singapore.</p>
+                <p class="tagline">Busan in KTX, una notte in Giappone a Tsushima, il vulcano di Jeju e i ciliegi di Seul, poi la foresta del Borneo e una tappa a Singapore.</p>
               </div>
             </a>
           </div>

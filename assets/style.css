@@ -117,6 +117,8 @@ html[data-dest="kr"]{ --accent:#ff92bb; --accent-rgb:255,146,187; --accent-deep:
 html[data-dest="kr"][data-paese="bn"]{ --accent:#ffc93c; --accent-rgb:255,201,60; --accent-deep:#e09c00; --accent-ink:#7a5200; --accent-2:#7deaa0; }
 /* 🇸🇬 Singapore — il lilla dei Supertree di notte */
 html[data-dest="kr"][data-paese="sg"]{ --accent:#cdb0ff; --accent-rgb:205,176,255; --accent-deep:#9b6bef; --accent-ink:#5b2ba8; --accent-2:#ffa38f; }
+/* 🇯🇵 Tsushima — il verde acqua dello stretto, una notte sola */
+html[data-dest="kr"][data-paese="jp"]{ --accent:#86e0d4; --accent-rgb:134,224,212; --accent-deep:#1aa593; --accent-ink:#0b5f54; --accent-2:#ff92bb; }
 /* ❓ Il prossimo — turchese, la pagina ancora bianca */
 html[data-dest="nx"]{ --accent:#6de6d2; --accent-rgb:109,230,210; --accent-deep:#14b8a6; --accent-ink:#0f6b60; --accent-2:#ffe14d; }
 /* 🇵🇪🇧🇴🇨🇱 Perù, Bolivia e Cile — il viaggio gia' fatto: arancio, e un
@@ -869,6 +871,7 @@ footer a.home-link{ font-family:var(--font-display); font-size:1.15rem; color:va
    tratteggiata: si vede subito cosa manca, senza inventarlo.
    ============================================================ */
 .foto-giorno{ display:flex; flex-wrap:wrap; gap:16px 14px; margin-top:12px; }
+.paese-divisore[data-paese="jp"]{ --evid-paese:#86e0d4; }
 .foto-giorno .mini-photo{ margin:4px 0 0; width:min(100%, 220px); }
 .foto-giorno .mini-photo:nth-child(even){ transform:rotate(1.2deg); }
 .foto-giorno .mini-photo img{ aspect-ratio:4/3; object-fit:cover; }
@@ -946,6 +949,7 @@ figure.crew-card{ margin:0; }
 .cal-giorno[data-prenotato="no"] .cal-dove::after{ background:var(--rosso); }
 .cal-giorno[data-prenotato="no"] .cal-n::after{ content:' \00b7 da prenotare'; color:var(--rosso); }
 .cal-legenda{ display:flex; flex-wrap:wrap; gap:14px; font-size:var(--t-small); color:var(--ink-soft); margin-bottom:6px; }
+.cal-giorno[data-paese="jp"]{ --evid-giorno:#86e0d4; }
 .cal-legenda span{ display:inline-flex; align-items:center; gap:7px; }
 .cal-legenda i{ width:22px; height:10px; display:inline-block; font-style:normal; border-radius:3px 6px 2px 5px; }
 
@@ -959,6 +963,7 @@ figure.crew-card{ margin:0; }
    ============================================================ */
 .voltapagina{
   position:fixed; inset:0; z-index:90; pointer-events:none;
+.cal-legenda i.da-prenotare{ height:12px; background:transparent; border:2px dashed var(--rosso); }
   transform-origin:0 50%; backface-visibility:hidden;
   background-color:#fff;
   background-image:
