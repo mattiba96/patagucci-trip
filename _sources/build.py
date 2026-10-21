@@ -4,6 +4,7 @@ DIR = "/Users/mattiabacileri/Library/Mobile Documents/com~apple~CloudDocs/proget
 SRC_DIR = DIR + "_sources/"
 
 import json
+import hashlib
 
 DESTS = [
     {"file": "islanda-trip.html", "suf": "is", "flag": "🇮🇸", "name": "Islanda", "stato": "confermato"},
@@ -1181,6 +1182,19 @@ def taccuino(html):
     return html
 
 final_html = taccuino(final_html)
+
+# Il browser tiene da parte stile e script fino a un'ora (vercel.json),
+# mentre la pagina la chiede sempre nuova: senza questo, dopo ogni
+# pubblicazione la pagina nuova girava con lo stile e le animazioni di
+# prima. A ogni file si attacca un'impronta del suo contenuto: se il file
+# cambia cambia anche il suo indirizzo, e il browser lo riscarica subito.
+def impronta(percorso):
+    with open(DIR + percorso, "rb") as f:
+        return hashlib.sha256(f.read()).hexdigest()[:10]
+for percorso in ("assets/style.css", "assets/anima.js"):
+    for attr in ("href", "src"):
+        final_html = final_html.replace(f'{attr}="{percorso}"', f'{attr}="{percorso}?v={impronta(percorso)}"')
+assert final_html.count("assets/style.css?v=") == 1 and final_html.count("assets/anima.js?v=") == 1
 
 out_path = DIR + "index.html"
 with open(out_path, "w", encoding="utf-8") as f:
